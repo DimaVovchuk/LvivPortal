@@ -4,4 +4,13 @@
   <artifactId>LvivPortal</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.google.maps</groupId>
+      <artifactId>google-maps-services</artifactId>
+      <version>(insert latest version)</version>
+    </dependency>
+  </dependencies>
+
 </project>
