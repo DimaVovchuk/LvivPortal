@@ -23,7 +23,7 @@ public class TryMapServlet extends HttpServlet {
         GeocodingResult[] resultsTo = new GeocodingResult[0];
         try {
             resultsFrom = GeocodingApi.geocode(context, "Lviv, Svobody Prospect").await();
-            resultsTo = GeocodingApi.geocode(context, "Stryiii").await();
+            resultsTo = GeocodingApi.geocode(context, "Stryi").await();
         } catch (Exception e) {
             e.printStackTrace();
         }
