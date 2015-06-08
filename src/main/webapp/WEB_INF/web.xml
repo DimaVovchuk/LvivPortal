@@ -10,10 +10,19 @@
         <servlet-name>TryMapServlet</servlet-name>
         <servlet-class>com.lab.epam.servlet.TryMapServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ServletOlol</servlet-name>
+        <servlet-class>com.lab.epam.servlet.ServletOlol</servlet-class>
+    </servlet>
 
     <servlet-mapping>
         <servlet-name>TryMapServlet</servlet-name>
         <url-pattern></url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>TryMapServlet</servlet-name>
+        <url-pattern>/ololo</url-pattern>
     </servlet-mapping>
 
 </web-app>
