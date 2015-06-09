@@ -1,4 +1,4 @@
-package com.epam.lab.model;
+package com.lab.epam.entity;
 
 /**
  * Created by Oleguk on 09.06.2015.
