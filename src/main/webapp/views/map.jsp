@@ -109,8 +109,8 @@
 <div id="map-canvas" style="float:left;width:70%;height:100%;"></div>
 <div id="control_panel" style="float:right;width:30%;text-align:left;padding-top:20px">
     <div style="margin:20px;border-width:2px;">
-        <b>Start:</b>
-        <select id="start"> <br>
+        <b>Start:</b> <br>
+        <select id="start">
             <option value="Lviv dvirceva 1">Rainway Station</option>
             <option value="Lviv stryjska 109">Bus station</option>
         </select>
@@ -124,8 +124,8 @@
             <option value="Lviv Mechnikova 33">Lychakiv Cemetery</option>
         </select>
         <br>
-        <b>End:</b>
-        <select id="end"> <br>
+        <b>End:</b> <br>
+        <select id="end">
             <option value="Lviv stryjska 109">Bus station</option>
             <option value="Lviv dvirceva 1">Rainway Station</option>
         </select>
@@ -136,7 +136,7 @@
             <option value="WALKING">Walking</option>
             <option value="BICYCLING">Bicycling</option>
             <option value="TRANSIT">Transit</option>
-        </select>
+        </select><br>
         <input type="button" value="Way" onclick="calcRoute();">
     </div>
     <div id="directions_panel" style="margin:20px;background-color:#FFEE77;"></div>
