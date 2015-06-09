@@ -31,13 +31,13 @@ a:hover {
 
 .logo {
     float: left;
-    width: 50%;
+    width: 40%;
     margin: 0.7em 0em 0em 0em;
 }
 
 .head-right {
     float: right;
-    width: 50%;
+    width: 60%;
 }
 
 .top-nav {
@@ -64,8 +64,23 @@ a:hover {
     display: block;
 }
 
+.top-nav ul li a#login {
+    font-size: 1.1em;
+    font-weight: 400;
+    color: #0ab2d2;
+    text-decoration: none;
+    padding: 2em 1em 2em 1em;
+    font-family: 'Lora', serif;
+    display: block;
+}
+
 .top-nav ul li a:hover, .top-nav ul li a.active {
     background: #0ab2d2;
+}
+
+.top-nav ul li a#login:hover {
+    background: #0ab2d2;
+    color: #fff;
 }
 
 span.menu {
@@ -235,8 +250,8 @@ span.menu {
 
 .banner-main {
     background: rgba(0, 0, 0, 0.65);
-    margin-top: 10%;
-    margin-left: 60%;
+    margin: 10% 10% 10% 50%;
+    height: 40%;
     width: 40%;
     padding: 1em 1em 1em 1em;
     text-align: center;
@@ -253,7 +268,7 @@ span.menu {
 .banner-main p {
     font-size: 1.8em;
     font-weight: 600;
-    color: #0ab2d2;
+    color: #fff;
     font-family: 'Lora', serif;
     font-style: italic;
 }
