@@ -33,6 +33,17 @@
             });
         });
     </script>
+    <script>
+        $(function() {
+            $('a.page-scroll').bind('click', function(event) {
+                var $anchor = $(this);
+                $('html, body').stop().animate({
+                    scrollTop: $($anchor.attr('href')).offset().top
+                }, 1500, 'easeInOutExpo');
+                event.preventDefault();
+            });
+        });
+    </script>
 </head>
 
 <body>
@@ -47,10 +58,11 @@
                 <div class="top-nav">
                     <span class="menu"> <img src="/resources/images/icon.png" alt=""/></span>
                     <ul class="res">
-                        <li><a class="active" href="index.html">Home</a></li>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="blog.html">Blog</a></li>
-                        <li><a href="contact.html">Contact</a></li>
+                        <li><a class="active" href="/views/index.jsp">Home</a></li>
+                        <li><a class="page-scroll" href="#places">Places</a></li>
+                        <li><a href="http://www.booking.com">Hotels</a></li>
+                         <li><a href="#">Plan trip</a></li>
+                        <li><a href="#" id="login">Sign in</a></li>
                         <div class="clearfix"> </div>
                     </ul>
                     <!-- script-for-menu -->
@@ -61,14 +73,6 @@
                             });
                         });
                     </script>
-                </div>
-
-                <div class="social">
-                    <ul >
-                        <li><a class="fa" href="#"> </a></li>
-                        <li><a class="tw" href="#"> </a></li>
-                        <li><a class="p" href="#"> </a></li>
-                    </ul>
                 </div>
 
                 <div class="search-box">
