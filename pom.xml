@@ -18,6 +18,18 @@
             <artifactId>google-api-services-mapsengine</artifactId>
             <version>v1-rev60-1.20.0</version>
         </dependency>
+        <dependency>
+            <groupId>org.ldaptive</groupId>
+            <artifactId>ldaptive-netscape</artifactId>
+            <version>1.0.6</version>
+        </dependency>
+        <dependency>
+            <groupId>com.googlecode.json-simple</groupId>
+            <artifactId>json-simple</artifactId>
+            <version>1.1</version>
+        </dependency>
+
+
 
 
         <dependency>
@@ -54,6 +66,23 @@
             <artifactId>jstl</artifactId>
             <version>1.2</version>
         </dependency>
+        <dependency>
+            <groupId>com.google.android</groupId>
+            <artifactId>android</artifactId>
+            <version>4.1.1.4</version>
+        </dependency>
+        <dependency>
+            <groupId>de.quist.apps.maps</groupId>
+            <artifactId>android-maps-abstraction</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.api-client</groupId>
+            <artifactId>google-api-client</artifactId>
+            <version>1.20.0</version>
+        </dependency>
+
+
     </dependencies>
     <build>
         <finalName>LvivPortal</finalName>
