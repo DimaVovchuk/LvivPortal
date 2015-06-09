@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+<web-app version="3.1" id="WebApp_ID" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <welcome-file-list>
         <welcome-file></welcome-file>
     </welcome-file-list>
@@ -11,10 +9,29 @@
         <servlet-class>com.lab.epam.servlet.TryMapServlet</servlet-class>
     </servlet>
 
+    <servlet>
+        <servlet-name>TryTimeServlet</servlet-name>
+        <servlet-class>com.lab.epam.servlet.TryTimeServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>TimeApiServlet</servlet-name>
+        <servlet-class>com.lab.epam.servlet.TimeApiServlet</servlet-class>
+    </servlet>
+
 
     <servlet-mapping>
         <servlet-name>TryMapServlet</servlet-name>
         <url-pattern></url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>TryTimeServlet</servlet-name>
+        <url-pattern>/time</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>TimeApiServlet</servlet-name>
+        <url-pattern>/timeapi</url-pattern>
     </servlet-mapping>
 
 </web-app>
