@@ -1,6 +1,6 @@
-function language(lang) {
+function language() {
     var xhr = new XMLHttpRequest();
-    xhr.open("GET", "views?command=locale&lang=" + lang, true);
+    xhr.open("POST", "view?command=locale", true);
     xhr.onreadystatechange = function () {
         if (xhr.readyState == 4) {
             location.reload();
