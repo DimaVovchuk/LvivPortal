@@ -88,7 +88,8 @@ span.menu {
 }
 
 .local {
-    float: left;
+    float: right;
+    margin-right: 45px;
 }
 
 .local ul {
