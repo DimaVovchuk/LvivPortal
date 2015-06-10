@@ -1,19 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="cdg" uri="customtags" %>
 <!DOCTYPE HTML>
-<html>
 
-<head>
-  <link href="/css/style.css" rel="stylesheet" type="text/css" media="all"/>
-  <link href="/css/flexslider.css" rel="stylesheet" type="text/css" media="screen" />
-
-  <!--Google Fonts-->
-  <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900' rel='stylesheet' type='text/css'>
-  <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet'
-        type='text/css'>
-</head>
-
-<body>
 <div class="footer">
   <div class="copyright">
     <div class="container">
@@ -36,5 +24,3 @@
     </div>
   </div>
 </div>
-</body>
-</html>
