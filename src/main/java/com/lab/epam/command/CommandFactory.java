@@ -12,6 +12,7 @@ public class CommandFactory {
 
     static {
         commands.put("showMap", new ShowMap());
+        commands.put("index", new Index());
     }
 
     public static Command createCommand(HttpServletRequest request) {
@@ -23,6 +24,9 @@ public class CommandFactory {
             return commands.get("showMap");
         }
 
+        if (command.equals("index")) {
+            return commands.get("index");
+        }
         return null;
     }
 }

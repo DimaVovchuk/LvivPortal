@@ -37,7 +37,7 @@ public class ControllerServlet extends HttpServlet {
         String resultURL = command.execute(request, response);
 
         if(!resultURL.equals("")){
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/views/" + resultURL+".jsp");
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/views/pages/" + resultURL+".jsp");
             dispatcher.forward(request, response);
 
         } else {

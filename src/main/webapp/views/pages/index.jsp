@@ -12,8 +12,8 @@
 <link href="../../resources/css/style.css" rel="stylesheet" type="text/css" media="all"/>
 <link rel="stylesheet" href="../../resources/css/flexslider.css" type="text/css" media="screen" />
 
-<jsp:include page="elements/header.jsp" />
-<jsp:include page="elements/banner.jsp" />
+<jsp:include page="../elements/header.jsp" />
+<jsp:include page="../elements/banner.jsp" />
 
 <!--services start here-->
 <div class="services" id="places">
@@ -27,7 +27,7 @@
         <div class="row">
           <div class="col-sm-6 col-md-4 ser">
             <div class="thumbnail">
-              <a href="single.html"><img src="../resources/images/g2.jpg" alt=""></a>
+              <a href="single.html"><img src="../../resources/images/g2.jpg" alt=""></a>
               <div class="caption">
                 <a href="single.html"><h3>Praesentium voluptatum</h3></a>
                 <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
@@ -36,7 +36,7 @@
           </div>
           <div class="col-sm-6 col-md-4 ser">
             <div class="thumbnail">
-              <a href="single.html"><img src="../resources/images/g3.jpg" alt=""></a>
+              <a href="single.html"><img src="../../resources/images/g3.jpg" alt=""></a>
               <div class="caption">
                 <a href="single.html"> <h3>Accusantium doloremque</h3></a>
                 <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
@@ -45,7 +45,7 @@
           </div>
           <div class="col-sm-6 col-md-4 ser">
             <div class="thumbnail">
-              <a href="single.html"><img src="../resources/images/g4.jpg" alt=""></a>
+              <a href="single.html"><img src="../../resources/images/g4.jpg" alt=""></a>
               <div class="caption">
                 <a href="single.html"><h3>Thumbnail label</h3></a>
                 <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
@@ -57,7 +57,7 @@
         <div class="row">
           <div class="col-sm-6 col-md-4 ser">
             <div class="thumbnail">
-              <a href="single.html"><img src="../resources/images/g5.jpg" alt=""></a>
+              <a href="single.html"><img src="../../resources/images/g5.jpg" alt=""></a>
               <div class="caption">
                 <a href="single.html"><h3>Lorem ipsum dolor</h3></a>
                 <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
@@ -66,7 +66,7 @@
           </div>
           <div class="col-sm-6 col-md-4 ser">
             <div class="thumbnail">
-              <a href="single.html"> <img src="../resources/images/g6.jpg" alt=""></a>
+              <a href="single.html"> <img src="../../resources/images/g6.jpg" alt=""></a>
               <div class="caption">
                 <a href="single.html"> <h3>Established fact</h3></a>
                 <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
@@ -75,7 +75,7 @@
           </div>
           <div class="col-sm-6 col-md-4 ser">
             <div class="thumbnail">
-              <a href="single.html"><img src="../resources/images/g7.jpg" alt=""></a>
+              <a href="single.html"><img src="../../resources/images/g7.jpg" alt=""></a>
               <div class="caption">
                 <a href="single.html"><h3>Neque porro quisquam</h3></a>
                 <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
@@ -102,7 +102,7 @@
         <h3>Recents Posts</h3>
         <div class="ftr-sub-gd">
           <div class="col-md-4 ftr-gd2-img">
-            <a href="#"><img src="../resources/images/s1.jpg" alt=""></a>
+            <a href="#"><img src="../../resources/images/s1.jpg" alt=""></a>
           </div>
           <div class="col-md-8 ftr-gd2-text">
             <a href="#"><h4>How to Have The Best Vacation</h4></a>
@@ -112,7 +112,7 @@
         </div>
         <div class="ftr-sub-gd">
           <div class="col-md-4 ftr-gd2-img">
-            <a href="#"><img src="../resources/images/s2.jpg" alt=""></a>
+            <a href="#"><img src="../../resources/images/s2.jpg" alt=""></a>
           </div>
           <div class="col-md-8 ftr-gd2-text">
             <a href="#"><h4>How to Have The Best Vacation</h4></a>
@@ -122,7 +122,7 @@
         </div>
         <div class="ftr-sub-gd">
           <div class="col-md-4 ftr-gd2-img">
-            <a href="#"><img src="../resources/images/s3.jpg" alt=""></a>
+            <a href="#"><img src="../../resources/images/s3.jpg" alt=""></a>
           </div>
           <div class="col-md-8 ftr-gd2-text">
             <a href="#"><h4>How to Have The Best Vacation</h4></a>
@@ -144,24 +144,24 @@
       <div class="col-md-3 footer-grid">
         <h3>Recent Projects</h3>
         <div class="ftr-gd4-img">
-          <div class="col-md-3 ftr-gd4-1"><a href="#"><img src="../resources/images/f1.jpg" alt=""></a></div>
-          <div class="col-md-3 ftr-gd4-1"><a href="#"><img src="../resources/images/f2.jpg" alt=""></a></div>
-          <div class="col-md-3 ftr-gd4-1"><a href="#"><img src="../resources/images/f3.jpg" alt=""></a></div>
-          <div class="col-md-3 ftr-gd4-1"><a href="#"><img src="../resources/images/f4.jpg" alt=""></a></div>
+          <div class="col-md-3 ftr-gd4-1"><a href="#"><img src="../../resources/images/f1.jpg" alt=""></a></div>
+          <div class="col-md-3 ftr-gd4-1"><a href="#"><img src="../../resources/images/f2.jpg" alt=""></a></div>
+          <div class="col-md-3 ftr-gd4-1"><a href="#"><img src="../../resources/images/f3.jpg" alt=""></a></div>
+          <div class="col-md-3 ftr-gd4-1"><a href="#"><img src="../../resources/images/f4.jpg" alt=""></a></div>
           <div class="clearfix"> </div>
         </div>
         <div class="ftr-gd4-img">
-          <div class="col-md-3 ftr-gd4-1"><a href="#"><img src="../resources/images/f5.jpg" alt=""></a></div>
-          <div class="col-md-3 ftr-gd4-1"><a href="#"><img src="../resources/images/f6.jpg" alt=""></a></div>
-          <div class="col-md-3 ftr-gd4-1"><a href="#"><img src="../resources/images/f7.jpg" alt=""></a></div>
-          <div class="col-md-3 ftr-gd4-1"><a href="#"><img src="../resources/images/f8.jpg" alt=""></a></div>
+          <div class="col-md-3 ftr-gd4-1"><a href="#"><img src="../../resources/images/f5.jpg" alt=""></a></div>
+          <div class="col-md-3 ftr-gd4-1"><a href="#"><img src="../../resources/images/f6.jpg" alt=""></a></div>
+          <div class="col-md-3 ftr-gd4-1"><a href="#"><img src="../../resources/images/f7.jpg" alt=""></a></div>
+          <div class="col-md-3 ftr-gd4-1"><a href="#"><img src="../../resources/images/f8.jpg" alt=""></a></div>
           <div class="clearfix"> </div>
         </div>
         <div class="ftr-gd4-img">
-          <div class="col-md-3 ftr-gd4-1"><a href="#"><img src="../resources/images/f9.jpg" alt=""></a></div>
-          <div class="col-md-3 ftr-gd4-1"><a href="#"><img src="../resources/images/f10.jpg" alt=""></a></div>
-          <div class="col-md-3 ftr-gd4-1"><a href="#"><img src="../resources/images/f11.jpg" alt=""></a></div>
-          <div class="col-md-3 ftr-gd4-1"><a href="#"><img src="../resources/images/f12.jpg" alt=""></a></div>
+          <div class="col-md-3 ftr-gd4-1"><a href="#"><img src="../../resources/images/f9.jpg" alt=""></a></div>
+          <div class="col-md-3 ftr-gd4-1"><a href="#"><img src="../../resources/images/f10.jpg" alt=""></a></div>
+          <div class="col-md-3 ftr-gd4-1"><a href="#"><img src="../../resources/images/f11.jpg" alt=""></a></div>
+          <div class="col-md-3 ftr-gd4-1"><a href="#"><img src="../../resources/images/f12.jpg" alt=""></a></div>
           <div class="clearfix"> </div>
         </div>
       </div>

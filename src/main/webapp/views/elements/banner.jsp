@@ -9,14 +9,12 @@
           <h3><cdg:l18n key="Travel guide"/></h3>
           <p><cdg:l18n key="Plan itinerary for your trip in 5 minutes"/></p>
               <div class="bann-btn">
-                  <a href="./views/pages/map.jsp">Plan trip</a>
+                     <a href="view?command=showMap">Plan trip</a>
               </div>
           </div>
     </div>
   </div>
 </div>
-
 </div>
-
 </body>
 </html>

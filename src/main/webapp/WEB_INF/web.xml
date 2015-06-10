@@ -5,7 +5,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
     <welcome-file-list>
-        <welcome-file>/views/index.jsp</welcome-file>
+        <welcome-file>/views/pages/index.jsp</welcome-file>
     </welcome-file-list>
 
     <jsp-config>

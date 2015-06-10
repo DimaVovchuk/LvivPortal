@@ -53,13 +53,13 @@
     <div class="container">
         <div class="header-main">
             <div class="logo">
-                <a href="../index.jsp"> <img src="../../resources/images/logo.png" alt="" title=""> </a>
+                <a href="view?command=index"> <img src="../../resources/images/logo.png" alt="" title=""> </a>
             </div>
             <div class="head-right">
                 <div class="top-nav">
                     <span class="menu"> <img src="../../resources/images/icon.png" alt=""/></span>
                     <ul class="res">
-                        <li><a href="../index.jsp"><cdg:l18n key="header.home"/></a></li>
+                        <li><a href="../pages/index.jsp"><cdg:l18n key="header.home"/></a></li>
                         <li><a href="../views/index.jsp#places"><cdg:l18n key="header.places"/></a></li>
                         <li><a href="http://www.booking.com"><cdg:l18n key="header.hotels"/></a></li>
                         <li><a href="../views/pages/map.jsp"><cdg:l18n key="header.plan"/></a></li>
