@@ -5,7 +5,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
     <welcome-file-list>
-        <welcome-file>/views/index.jsp</welcome-file>
+        <welcome-file></welcome-file>
     </welcome-file-list>
 
     <jsp-config>
@@ -16,12 +16,21 @@
     </jsp-config>
 
     <servlet>
-        <servlet-name>ControllerServlet</servlet-name>
-        <servlet-class>com.lab.epam.servlet.ControllerServlet</servlet-class>
+        <servlet-name>WelcomeServlet</servlet-name>
+        <servlet-class>com.lab.epam.servlet.WelcomeServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LocalizationServlet</servlet-name>
+        <servlet-class>com.lab.epam.servlet.LocalizationServlet</servlet-class>
+    </servlet>
+
     <servlet-mapping>
-        <servlet-name>ControllerServlet</servlet-name>
-        <url-pattern>/view/*</url-pattern>
+        <servlet-name>WelcomeServlet</servlet-name>
+        <url-pattern></url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LocalizationServlet</servlet-name>
+        <url-pattern>/local</url-pattern>
     </servlet-mapping>
 
     <listener>
