@@ -1,5 +1,6 @@
 package com.lab.epam.entity;
 
+import com.lab.epam.dao.Identified;
 import com.lab.epam.transformer.Column;
 import com.lab.epam.transformer.Table;
 
@@ -7,7 +8,7 @@ import com.lab.epam.transformer.Table;
  * Created by Admin on 10.06.2015.
  */
 @Table("place")
-public class Place {
+public class Place implements Identified<Integer> {
     @Column("id")
     private Integer id;
     @Column("name")
@@ -29,7 +30,7 @@ public class Place {
     @Column("deleted")
     private Boolean deleted;
 
-    public Place(Integer id,String name, String description, String adress, String latitude, String longitude, Integer rating,  String visible, Integer category_id, Boolean deleted) {
+    public Place(Integer id,String name, String description, String adress, String latitude, String longitude, Integer category_id, Integer rating,  String visible, Boolean deleted) {
         this.id = id;
         this.rating = rating;
         this.name = name;

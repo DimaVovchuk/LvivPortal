@@ -1,5 +1,6 @@
 package com.lab.epam.entity;
 
+import com.lab.epam.dao.Identified;
 import com.lab.epam.transformer.Column;
 import com.lab.epam.transformer.Table;
 
@@ -7,7 +8,7 @@ import com.lab.epam.transformer.Table;
  * Created by Admin on 10.06.2015.
  */
 @Table("way")
-public class Way {
+public class Way implements Identified<Integer> {
     @Column("id")
     private Integer id;
     @Column("rating")
