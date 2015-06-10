@@ -1290,12 +1290,22 @@ span.blog-clr {
     font-weight: 700;
 }
 
+.blog-detail {
+    width: 100%;
+    display: table;
+}
+
 .blog-detail p {
     font-size: 1em;
     font-weight: 400;
     color: #95928d;
     line-height: 1.6em;
     width: 90%;
+}
+
+.blog-image {
+    float: left;
+    margin: 0px 10px;
 }
 
 .blog-btn {
