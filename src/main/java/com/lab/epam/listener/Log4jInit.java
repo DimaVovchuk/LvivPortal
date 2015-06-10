@@ -11,9 +11,7 @@ import java.io.File;
 
 public class Log4jInit implements ServletContextListener {
     public void contextInitialized(ServletContextEvent event) {
-        String homeDir = event.getServletContext().getRealPath("/");
-        File propertiesFile = new File(homeDir,
-                "./resources/log4j/log4j.properties");
+        File propertiesFile = new File("D:\\Eclipse_Luna\\gitProject\\LvivPortal\\src\\main\\resource\\log4j.properties");
         PropertyConfigurator.configure(propertiesFile.toString());
     }
 
