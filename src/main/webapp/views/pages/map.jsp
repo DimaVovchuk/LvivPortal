@@ -103,8 +103,8 @@
 </head>
 <body>
 
-<jsp:include page="elements/header.jsp" />
-<jsp:include page="elements/sidebar.jsp" />
+<jsp:include page="../elements/header.jsp" />
+<jsp:include page="../elements/sidebar.jsp" />
 
 <div id="map-canvas" style="float:left;width:70%;height:100%;"></div>
 <div id="control_panel" style="float:right;width:30%;text-align:left;padding-top:20px">

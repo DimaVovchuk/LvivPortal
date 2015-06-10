@@ -31,13 +31,13 @@ a:hover {
 
 .logo {
     float: left;
-    width: 40%;
+    width: 30%;
     margin: 0.7em 0em 0em 0em;
 }
 
 .head-right {
     float: right;
-    width: 60%;
+    width: 70%;
 }
 
 .top-nav {
@@ -87,48 +87,45 @@ span.menu {
     display: none;
 }
 
-.social {
+.local {
     float: left;
 }
 
-.social ul {
-    margin: 2.3em 0em 0em 0em;
+.local ul {
+    margin: 2.0em 0em 0em 0em;
     list-style: none;
 }
 
-.social ul li {
+.local ul li {
     display: inline-block;
     margin: 0px 10px 0px 0px;
 }
 
-.social ul li a {
-    background: url(../images/social-sprit.png) no-repeat;
-    width: 20px;
-    height: 20px;
+.local ul li a {
     display: inline-block;
 }
 
-.social ul li a.fa {
+.local ul li a.fa {
     background-position: 5px 0px;
 }
 
-.social ul li a.tw {
+.local ul li a.tw {
     background-position: -18px 0px;
 }
 
-.social ul li a.p {
+.local ul li a.p {
     background-position: -39px 0px;
 }
 
-.social ul li a.fa:hover {
+.local ul li a.fa:hover {
     background-position: 5px -25px;
 }
 
-.social ul li a.tw:hover {
+.local ul li a.tw:hover {
     background-position: -18px -25px;
 }
 
-.social ul li a.p:hover {
+.local ul li a.p:hover {
     background-position: -39px -25px;
 }
 
@@ -1945,7 +1942,7 @@ span.calen:hover {
         padding: 1em 0em 1em 0em;
     }
 
-    .social ul {
+    .local ul {
         margin: 0.6em 0em 0em 0em;
     }
 
@@ -2794,7 +2791,7 @@ span.calen:hover {
         width: 75%;
     }
 
-    .social ul {
+    .local ul {
         padding: 0px 0px 0px 10px;
     }
 
@@ -3040,11 +3037,11 @@ span.calen:hover {
         width: 90%;
     }
 
-    .social {
+    .local {
         float: right;
     }
 
-    .social ul {
+    .local ul {
         margin: 0.5em 0em 0em 0em;
     }
 

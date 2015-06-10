@@ -1,10 +1,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="cdg" uri="customtags" %>
 <!DOCTYPE HTML>
 <html>
 
 <head>
-    <title>Lviv tourism portal</title>
+    <title><cdg:l18n key="header.title" /></title>
 
     <link href="../../resources/css/bootstrap.css" rel="stylesheet" type="text/css" media="all"/>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -53,18 +54,17 @@
     <div class="container">
         <div class="header-main">
             <div class="logo">
-                <a href="../index.jsp"> <img src="../../resources/images/logo.png" alt="" title=""> </a>
+                <a href="../views/index.jsp"> <img src="../../resources/images/logo.png" alt="" title=""> </a>
             </div>
             <div class="head-right">
                 <div class="top-nav">
                     <span class="menu"> <img src="../../resources/images/icon.png" alt=""/></span>
                     <ul class="res">
-                        <li><a class="active" href="../index.jsp">Home</a></li>
-                        <li><a class="page-scroll" href="../index.jsp#places">Places</a></li>
-                        <li><a href="http://www.booking.com">Hotels</a></li>
-                         <li><a href="#">Plan trip</a></li>
-                        <li><a href="#" id="login">Sign in</a></li>
-                        <%--<div class="clearfix"> </div>--%>
+                        <li><a href="../index.jsp"><cdg:l18n key="header.home"/></a></li>
+                        <li><a href="../views/index.jsp#places"><cdg:l18n key="header.places"/></a></li>
+                        <li><a href="http://www.booking.com"><cdg:l18n key="header.hotels"/></a></li>
+                        <li><a href="../views/pages/map.jsp"><cdg:l18n key="header.plan"/></a></li>
+                        <li><a href="#" id="login"><cdg:l18n key="header.sign"/></a></li>
                     </ul>
                     <!-- script-for-menu -->
                     <script>
@@ -76,10 +76,17 @@
                     </script>
                 </div>
 
+                <div class="local">
+                    <ul >
+                        <li><a href="/local?lang=EN"><img src="../../resources/images/localization/EN.png"></a></li>
+                        <li><a href="/local?lang=UA"><img src="../../resources/images/localization/UA.png"></a></li>
+                    </ul>
+                </div>
+
                 <div class="search-box">
                     <div id="sb-search" class="sb-search">
                         <form>
-                            <input class="sb-search-input" placeholder="Search" type="search" name="search" id="search">
+                            <input class="sb-search-input" placeholder='<cdg:l18n key="header.search"/>' type="search" name="search" id="search">
                             <input class="sb-search-submit" type="submit" value="">
                             <span class="sb-icon-search"> </span>
                         </form>
