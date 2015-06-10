@@ -26,9 +26,9 @@ public class WelcomeServlet extends HttpServlet {
         if (locale == null) {
             locale = new Locale("EN");
         }
-        ResourceBundle bundle = ResourceBundle.getBundle("/resources/localization/bundle", locale);
+        ResourceBundle bundle = ResourceBundle.getBundle("localization/bundle", locale);
         HttpSession session = request.getSession();
-        //session.setAttribute("bundle", bundle);
+        session.setAttribute("bundle", bundle);
         response.setContentType("text/html; charset=windows-1251");
         request.getRequestDispatcher("views/index.jsp").forward(request, response);
     }
