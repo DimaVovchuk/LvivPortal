@@ -22,6 +22,7 @@ public class CommandFactory {
 
     public static void createCommand(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String command = request.getParameter("command");
+        System.out.println(command);
         Command commamdExecute = commands.get(command);
         commamdExecute.execute(request,response);
     }

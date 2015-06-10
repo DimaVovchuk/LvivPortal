@@ -5,20 +5,21 @@
 <html>
 
 <head>
-    <link href="${pageContext.request.contextPath}/css/bootstrap.css" rel="stylesheet" type="text/css" media="all"/>
-    <script src="${pageContext.request.contextPath}/js/jquery-1.11.3.min.js"></script>
-    <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-    <script src="${pageContext.request.contextPath}/js/language.js"></script>
-    <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet" type="text/css" media="all"/>
-    <link href="${pageContext.request.contextPath}/css/flexslider.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="/css/bootstrap.css" rel="stylesheet" type="text/css" media="all"/>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="/js/jquery-1.11.3.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <!-- Custom Theme files -->
+    <link href="/css/style.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="/css/flexslider.css" rel="stylesheet" type="text/css" media="screen" />
 
     <!--Google Fonts-->
     <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
     <!-- smoth-scrolling -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/js/move-top.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/js/easing.js"></script>
+    <script type="text/javascript" src="/js/move-top.js"></script>
+    <script type="text/javascript" src="/js/easing.js"></script>
 
     <script type="text/javascript">
         jQuery(document).ready(function($) {
@@ -59,16 +60,16 @@
     <div class="container">
         <div class="header-main">
             <div class="logo">
-                <a href="views?command=index"> <img src="${pageContext.request.contextPath}/images/logo.png" alt="" title=""> </a>
+                <a href="view?command=index"> <img src="/images/logo.png" alt="" title=""> </a>
             </div>
             <div class="head-right">
                 <div class="top-nav">
-                    <span class="menu"> <img src="${pageContext.request.contextPath}/images/icon.png" alt=""/></span>
+                    <span class="menu"> <img src="/images/icon.png" alt=""/></span>
                     <ul class="res">
-                        <li><a href="${pageContext.request.contextPath}/views/pages/index.jsp"><cdg:l18n key="header.home"/></a></li>
-                        <li><a href="${pageContext.request.contextPath}/views/pages/index.jsp#places"><cdg:l18n key="header.places"/></a></li>
+                        <li><a href="view?command=index"><cdg:l18n key="header.home"/></a></li>
+                        <li><a href="/views/pages/index.jsp#places"><cdg:l18n key="header.places"/></a></li>
                         <li><a href="http://www.booking.com"><cdg:l18n key="header.hotels"/></a></li>
-                        <li><a href="${pageContext.request.contextPath}/views/pages/map.jsp"><cdg:l18n key="header.plan"/></a></li>
+                        <li><a href="/views/pages/map.jsp"><cdg:l18n key="header.plan"/></a></li>
                         <li><a href="#" id="login"><cdg:l18n key="header.sign"/></a></li>
                     </ul>
                     <!-- script-for-menu -->
@@ -82,10 +83,8 @@
 
                 <div class="local">
                     <ul >
-                        <button onclick="language('ua')">ua</button>
-                        <button onclick="language('en')">en</button>
-                        <li><a href="views?command=locale"><img src="${pageContext.request.contextPath}/images/localization/EN.png"></a></li>
-                        <li><a href="views?command=locale&lang=UA"><img src="${pageContext.request.contextPath}/images/localization/UA.png"></a></li>
+                        <li><a href="/local?lang=EN"><img src="/images/localization/EN.png"></a></li>
+                        <li><a href="/local?lang=UA"><img src="/images/localization/UA.png"></a></li>
                     </ul>
                 </div>
 
