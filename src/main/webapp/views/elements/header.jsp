@@ -5,12 +5,13 @@
 
 <head>
     <title>Lviv tourism portal</title>
-    <link href="/resources/css/bootstrap.css" rel="stylesheet" type="text/css" media="all">
+
+    <link href="../../resources/css/bootstrap.css" rel="stylesheet" type="text/css" media="all"/>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="/resources/js/jquery-1.11.0.min.js"></script>
+    <script src="../../resources/js/jquery-1.11.0.min.js"></script>
     <!-- Custom Theme files -->
-    <link href="/resources/css/style.css" rel="stylesheet" type="text/css" media="all"/>
-    <link rel="stylesheet" href="/resources/css/flexslider.css" type="text/css" media="screen" />
+    <link href="../../resources/css/style.css" rel="stylesheet" type="text/css" media="all"/>
+    <link rel="stylesheet" href="../../resources/css/flexslider.css" type="text/css" media="screen" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -23,8 +24,8 @@
     <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
     <!-- smoth-scrolling -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script type="text/javascript" src="/resources/js/move-top.js"></script>
-    <script type="text/javascript" src="/resources/js/easing.js"></script>
+    <script type="text/javascript" src="../../resources/js/move-top.js"></script>
+    <script type="text/javascript" src="../../resources/js/easing.js"></script>
     <script type="text/javascript">
         jQuery(document).ready(function($) {
             $(".scroll").click(function(event){
@@ -52,18 +53,18 @@
     <div class="container">
         <div class="header-main">
             <div class="logo">
-                <a href="/views/index.jsp"> <img src="/resources/images/logo.png" alt="" title=""> </a>
+                <a href="../index.jsp"> <img src="../../resources/images/logo.png" alt="" title=""> </a>
             </div>
             <div class="head-right">
                 <div class="top-nav">
-                    <span class="menu"> <img src="/resources/images/icon.png" alt=""/></span>
+                    <span class="menu"> <img src="../../resources/images/icon.png" alt=""/></span>
                     <ul class="res">
-                        <li><a class="active" href="/views/index.jsp">Home</a></li>
-                        <li><a class="page-scroll" href="#places">Places</a></li>
+                        <li><a class="active" href="../index.jsp">Home</a></li>
+                        <li><a class="page-scroll" href="../index.jsp#places">Places</a></li>
                         <li><a href="http://www.booking.com">Hotels</a></li>
                          <li><a href="#">Plan trip</a></li>
                         <li><a href="#" id="login">Sign in</a></li>
-                        <div class="clearfix"> </div>
+                        <%--<div class="clearfix"> </div>--%>
                     </ul>
                     <!-- script-for-menu -->
                     <script>
@@ -86,8 +87,8 @@
                 </div>
                 <div class="clearfix"> </div>
                 <!-- search-scripts -->
-                <script src="/resources/js/classie.js"></script>
-                <script src="/resources/js/uisearch.js"></script>
+                <script src="../../resources/js/classie.js"></script>
+                <script src="../../resources/js/uisearch.js"></script>
                 <script>
                     new UISearch( document.getElementById( 'sb-search' ) );
                 </script>
