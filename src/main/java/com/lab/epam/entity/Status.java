@@ -7,33 +7,33 @@ import com.lab.epam.transformer.Table;
 /**
  * Created by Admin on 10.06.2015.
  */
-@Table("role")
-public class Role implements Identified<Integer> {
+@Table("status")
+public class Status implements Identified<Integer> {
 
     @Column("id")
     private Integer id;
-    @Column("role")
-    private String role;
+    @Column("status")
+    private String status;
     @Column("deleted")
     private Boolean deleted;
 
-    public Role(Integer id, String role, Boolean deleted){
+    public Status(Integer id, String status, Boolean deleted){
         this.id = id;
-        this.role = role;
+        this.status = status;
         this.deleted = deleted;
     }
 
-    public Role(){
+    public Status(){
         this.id = null;
-        this.role = null;
+        this.status = null;
         this.deleted = null;
     }
 
     @Override
     public String toString() {
-        return "Role{" +
+        return "Status{" +
                 "id=" + id +
-                ", role=" + role +
+                ", status=" + status +
                 ", deleted='" + deleted +
                 '}';
     }
@@ -46,12 +46,12 @@ public class Role implements Identified<Integer> {
         this.id = id;
     }
 
-    public String getRole() {
-        return role;
+    public String getStatus() {
+        return status;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public Boolean getDeleted() {
@@ -60,7 +60,7 @@ public class Role implements Identified<Integer> {
 
     public void setDeleted(Boolean deleted) {
         this.deleted = deleted;
-    }
 
+    }
 
 }

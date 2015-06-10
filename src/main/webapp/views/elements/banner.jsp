@@ -10,7 +10,7 @@
             <p><cdg:l18n key="banner.text"/></p>
 
             <div class="bann-btn">
-                <a href="/views/pages/map.jsp"><cdg:l18n key="header.plan"/></a>
+                <a href="view?command=showMap"><cdg:l18n key="header.plan"/></a>
             </div>
         </div>
     </div>

@@ -1,20 +1,36 @@
 package com.lab.epam.entity;
 
+import com.lab.epam.dao.Identified;
+import com.lab.epam.transformer.Column;
+import com.lab.epam.transformer.Table;
+
 /**
  * Created by Oleguk on 09.06.2015.
  */
-public class User {
+@Table("user")
+public class User implements Identified<Integer> {
 
+    @Column("id")
     private Integer id;
+    @Column("rating")
     private Integer rating;
+    @Column("name")
     private String name;
+    @Column("surname")
     private String surname;
+    @Column("login")
     private String login;
+    @Column("mail")
     private String mail;
+    @Column("password")
     private String password;
+    @Column("phone")
     private String phone;
+    @Column("status")
     private String status;
+    @Column("role_id")
     private Integer role_id;
+    @Column("deleted")
     private Boolean deleted;
 
     public User(Integer id, Integer rating, String name, String surname, String login, String mail, String password, String phone, String status, Integer role_id, Boolean deleted) {

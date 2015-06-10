@@ -1,15 +1,26 @@
 package com.lab.epam.entity;
 
+import com.lab.epam.dao.Identified;
+import com.lab.epam.transformer.Column;
+import com.lab.epam.transformer.Table;
+
 /**
  * Created by Admin on 10.06.2015.
  */
-public class PlaceResponse {
+@Table("place_response")
+public class PlaceResponse implements Identified<Integer> {
 
+    @Column("id")
     private Integer id;
+    @Column("description")
     private String description;
+    @Column("rating")
     private Integer rating;
+    @Column("user_id")
     private Integer user_id;
+    @Column("place_id")
     private Integer place_id;
+    @Column("deleted")
     private Boolean deleted;
 
     public PlaceResponse(Integer id, String description, Integer rating,  Integer user_id, Integer place_id, Boolean deleted) {

@@ -1,13 +1,23 @@
 package com.lab.epam.entity;
 
+import com.lab.epam.dao.Identified;
+import com.lab.epam.transformer.Column;
+import com.lab.epam.transformer.Table;
+
 /**
  * Created by Admin on 10.06.2015.
  */
-public class Way {
+@Table("way")
+public class Way implements Identified<Integer> {
+    @Column("id")
     private Integer id;
+    @Column("rating")
     private Integer rating;
+    @Column("name")
     private String name;
+    @Column("visible")
     private String visible;
+    @Column("deleted")
     private Boolean deleted;
 
     public Way(Integer id, Integer rating, String name, String visible, Boolean deleted){

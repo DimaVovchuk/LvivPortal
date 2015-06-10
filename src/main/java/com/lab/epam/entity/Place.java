@@ -1,21 +1,36 @@
 package com.lab.epam.entity;
 
+import com.lab.epam.dao.Identified;
+import com.lab.epam.transformer.Column;
+import com.lab.epam.transformer.Table;
+
 /**
  * Created by Admin on 10.06.2015.
  */
-public class Place {
+@Table("place")
+public class Place implements Identified<Integer> {
+    @Column("id")
     private Integer id;
+    @Column("name")
     private String name;
+    @Column("description")
     private String description;
+    @Column("adress")
     private String adress;
+    @Column("latitude")
     private String latitude;
+    @Column("longitude")
     private String longitude;
+    @Column("visible")
     private String visible;
+    @Column("rating")
     private Integer rating;
+    @Column("category_id")
     private Integer category_id;
+    @Column("deleted")
     private Boolean deleted;
 
-    public Place(Integer id,String name, String description, String adress, String latitude, String longitude, Integer rating,  String visible, Integer category_id, Boolean deleted) {
+    public Place(Integer id,String name, String description, String adress, String latitude, String longitude, Integer category_id, Integer rating,  String visible, Boolean deleted) {
         this.id = id;
         this.rating = rating;
         this.name = name;

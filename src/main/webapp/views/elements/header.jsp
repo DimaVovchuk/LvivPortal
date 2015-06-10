@@ -6,13 +6,13 @@
     <div class="container">
         <div class="header-main">
             <div class="logo">
-                <a href="/views/pages/index.jsp"> <img src="/images/logo.png" alt="" title=""> </a>
+                <a href="view?command=index"> <img src="/images/logo.png" alt="" title=""> </a>
             </div>
             <div class="head-right">
                 <div class="top-nav">
                     <span class="menu"> <img src="/images/icon.png" alt=""/></span>
                     <ul class="res">
-                        <li><a href="/views/pages/index.jsp"><cdg:l18n key="header.home"/></a></li>
+                        <li><a href="view?command=index"><cdg:l18n key="header.home"/></a></li>
                         <li><a href="/views/pages/index.jsp#places"><cdg:l18n key="header.places"/></a></li>
                         <li><a href="http://www.booking.com"><cdg:l18n key="header.hotels"/></a></li>
                         <li><a href="/views/pages/map.jsp"><cdg:l18n key="header.plan"/></a></li>
