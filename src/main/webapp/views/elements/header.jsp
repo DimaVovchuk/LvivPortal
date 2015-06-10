@@ -1,11 +1,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="cdg" uri="customtags" %>
 <!DOCTYPE HTML>
 <html>
 
 <head>
-    <title><cdg:l18n key="header.title" /></title>
+    <title>Lviv tourism portal</title>
 
     <link href="../../resources/css/bootstrap.css" rel="stylesheet" type="text/css" media="all"/>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -54,7 +53,7 @@
     <div class="container">
         <div class="header-main">
             <div class="logo">
-                <a href="../views/index.jsp"> <img src="../../resources/images/logo.png" alt="" title=""> </a>
+                <a href="../index.jsp"> <img src="../../resources/images/logo.png" alt="" title=""> </a>
             </div>
             <div class="head-right">
                 <div class="top-nav">
@@ -86,7 +85,7 @@
                 <div class="search-box">
                     <div id="sb-search" class="sb-search">
                         <form>
-                            <input class="sb-search-input" placeholder='<cdg:l18n key="header.search"/>' type="search" name="search" id="search">
+                            <input class="sb-search-input" placeholder='Search' type="search" name="search" id="search">
                             <input class="sb-search-submit" type="submit" value="">
                             <span class="sb-icon-search"> </span>
                         </form>

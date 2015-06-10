@@ -3,6 +3,14 @@
 <html>
 
 <body>
+<title>Lviv tourism portal</title>
+
+<link href="../../resources/css/bootstrap.css" rel="stylesheet" type="text/css" media="all"/>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="../../resources/js/jquery-1.11.0.min.js"></script>
+<!-- Custom Theme files -->
+<link href="../../resources/css/style.css" rel="stylesheet" type="text/css" media="all"/>
+<link rel="stylesheet" href="../../resources/css/flexslider.css" type="text/css" media="screen" />
 
 <jsp:include page="elements/header.jsp" />
 <jsp:include page="elements/banner.jsp" />
