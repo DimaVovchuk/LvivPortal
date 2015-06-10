@@ -1,18 +1,32 @@
 package com.lab.epam.entity;
 
+import com.lab.epam.transformer.Column;
+import com.lab.epam.transformer.Table;
+
 /**
  * Created by Admin on 10.06.2015.
  */
+@Table("place")
 public class Place {
+    @Column("id")
     private Integer id;
+    @Column("name")
     private String name;
+    @Column("description")
     private String description;
+    @Column("adress")
     private String adress;
+    @Column("latitude")
     private String latitude;
+    @Column("longitude")
     private String longitude;
+    @Column("visible")
     private String visible;
+    @Column("rating")
     private Integer rating;
+    @Column("category_id")
     private Integer category_id;
+    @Column("deleted")
     private Boolean deleted;
 
     public Place(Integer id,String name, String description, String adress, String latitude, String longitude, Integer rating,  String visible, Integer category_id, Boolean deleted) {

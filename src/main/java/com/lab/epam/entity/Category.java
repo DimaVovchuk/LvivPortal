@@ -1,12 +1,19 @@
 package com.lab.epam.entity;
 
+import com.lab.epam.transformer.Column;
+import com.lab.epam.transformer.Table;
+
 /**
  * Created by Admin on 10.06.2015.
  */
+@Table("category")
 public class Category {
 
+        @Column("id")
         private Integer id;
+        @Column("category")
         private String category;
+        @Column("deleted")
         private Boolean deleted;
 
         public Category(Integer id, String category, Boolean deleted){
