@@ -83,8 +83,18 @@
 
                 <div class="local">
                     <ul >
-                        <li><a href="/local?lang=EN"><img src="/images/localization/EN.png"></a></li>
-                        <li><a href="/local?lang=UA"><img src="/images/localization/UA.png"></a></li>
+                        <form class="form-inline" action="view?command=locale" method="post">
+                            <%--<button type="submit" name="lang" value="en">en</button>--%>
+                            <%--<button type="submit" name="lang" value="ua">ua</button>--%>
+
+                            <%--<button onclick="language('ua')">ua</button>--%>
+                            <%--<button onclick="language('en')">en</button>--%>
+                            <li>
+                                <button type="submit" name="lang" value="en"><img
+                                        src="${pageContext.request.contextPath}/images/localization/EN.png"></button>
+                            </li>
+                            <li><button type="submit" name="lang" value="ua"><img src="/images/localization/UA.png"></button></li>
+                        </form>
                     </ul>
                 </div>
 
