@@ -16,52 +16,33 @@
     </jsp-config>
 
     <servlet>
-        <servlet-name>WelcomeServlet</servlet-name>
-        <servlet-class>com.lab.epam.servlet.WelcomeServlet</servlet-class>
+        <servlet-name>TryMapServlet</servlet-name>
+        <servlet-class>com.lab.epam.servlet.TryMapServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>TryTimeServlet</servlet-name>
+        <servlet-class>com.lab.epam.servlet.TryTimeServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>LocalizationServlet</servlet-name>
-        <servlet-class>com.lab.epam.servlet.LocalizationServlet</servlet-class>
+        <servlet-name>TimeApiServlet</servlet-name>
+        <servlet-class>com.lab.epam.servlet.TimeApiServlet</servlet-class>
     </servlet>
 
+
     <servlet-mapping>
-        <servlet-name>WelcomeServlet</servlet-name>
+        <servlet-name>TryMapServlet</servlet-name>
         <url-pattern></url-pattern>
     </servlet-mapping>
+
     <servlet-mapping>
-        <servlet-name>LocalizationServlet</servlet-name>
-        <url-pattern>/local</url-pattern>
+        <servlet-name>TryTimeServlet</servlet-name>
+        <url-pattern>/time</url-pattern>
     </servlet-mapping>
 
-
-<!--        <servlet>
-            <servlet-name>TryMapServlet</servlet-name>
-            <servlet-class>com.lab.epam.servlet.TryMapServlet</servlet-class>
-        </servlet>
-
-        <servlet>
-            <servlet-name>TryTimeServlet</servlet-name>
-            <servlet-class>com.lab.epam.servlet.TryTimeServlet</servlet-class>
-        </servlet>
-        <servlet>
-            <servlet-name>TimeApiServlet</servlet-name>
-            <servlet-class>com.lab.epam.servlet.TimeApiServlet</servlet-class>
-        </servlet>
-
-
-        <servlet-mapping>
-            <servlet-name>TryMapServlet</servlet-name>
-            <url-pattern></url-pattern>
-        </servlet-mapping>
-
-        <servlet-mapping>
-            <servlet-name>TryTimeServlet</servlet-name>
-            <url-pattern>/time</url-pattern>
-        </servlet-mapping>
-
-        <servlet-mapping>
-            <servlet-name>TimeApiServlet</servlet-name>
-            <url-pattern>/timeapi</url-pattern>
-        </servlet-mapping>-->
+    <servlet-mapping>
+        <servlet-name>TimeApiServlet</servlet-name>
+        <url-pattern>/timeapi</url-pattern>
+    </servlet-mapping>
 
 </web-app>
