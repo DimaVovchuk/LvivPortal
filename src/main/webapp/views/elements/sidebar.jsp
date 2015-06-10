@@ -3,7 +3,7 @@
 <html>
 
 <head>
-<link href="/resources/css/simple-sidebar.css" rel="stylesheet">
+<link href="../../css/simple-sidebar.css" rel="stylesheet">
 </head>
 
 <body>
@@ -35,10 +35,10 @@
   </div>
 
 <!-- jQuery -->
-<script src="/resources/js/jquery.js"></script>
+<script src="../../js/jquery.js"></script>
 
 <!-- Bootstrap Core JavaScript -->
-<script src="/resources/js/bootstrap.min.js"></script>
+<script src="../../js/bootstrap.min.js"></script>
 
 <!-- Menu Toggle Script -->
 <script>

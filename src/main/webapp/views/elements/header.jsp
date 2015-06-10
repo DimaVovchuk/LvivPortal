@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="cdg" uri="customtags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE HTML>
 <html>
@@ -6,12 +7,12 @@
 <head>
     <title>Lviv tourism portal</title>
 
-    <link href="../../resources/css/bootstrap.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="../../css/bootstrap.css" rel="stylesheet" type="text/css" media="all"/>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="../../resources/js/jquery-1.11.0.min.js"></script>
+    <script src="../../js/jquery-1.11.0.min.js"></script>
     <!-- Custom Theme files -->
-    <link href="../../resources/css/style.css" rel="stylesheet" type="text/css" media="all"/>
-    <link rel="stylesheet" href="../../resources/css/flexslider.css" type="text/css" media="screen" />
+    <link href="../../css/style.css" rel="stylesheet" type="text/css" media="all"/>
+    <link rel="stylesheet" href="../../css/flexslider.css" type="text/css" media="screen" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -24,8 +25,8 @@
     <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
     <!-- smoth-scrolling -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script type="text/javascript" src="../../resources/js/move-top.js"></script>
-    <script type="text/javascript" src="../../resources/js/easing.js"></script>
+    <script type="text/javascript" src="../../js/move-top.js"></script>
+    <script type="text/javascript" src="../../js/easing.js"></script>
     <script type="text/javascript">
         jQuery(document).ready(function($) {
             $(".scroll").click(function(event){
@@ -53,16 +54,16 @@
     <div class="container">
         <div class="header-main">
             <div class="logo">
-                <a href="view?command=index"> <img src="../../resources/images/logo.png" alt="" title=""> </a>
+                <a href="view?command=index"> <img src="../../images/logo.png" alt="" title=""> </a>
             </div>
             <div class="head-right">
                 <div class="top-nav">
-                    <span class="menu"> <img src="../../resources/images/icon.png" alt=""/></span>
+                    <span class="menu"> <img src="../../images/icon.png" alt=""/></span>
                     <ul class="res">
                         <li><a href="../pages/index.jsp"><cdg:l18n key="header.home"/></a></li>
-                        <li><a href="../views/index.jsp#places"><cdg:l18n key="header.places"/></a></li>
+                        <li><a href="../pages/index.jsp#places"><cdg:l18n key="header.places"/></a></li>
                         <li><a href="http://www.booking.com"><cdg:l18n key="header.hotels"/></a></li>
-                        <li><a href="../views/pages/map.jsp"><cdg:l18n key="header.plan"/></a></li>
+                        <li><a href="../pages/map.jsp"><cdg:l18n key="header.plan"/></a></li>
                         <li><a href="#" id="login"><cdg:l18n key="header.sign"/></a></li>
                     </ul>
                     <!-- script-for-menu -->
@@ -77,8 +78,8 @@
 
                 <div class="local">
                     <ul >
-                        <li><a href="/local?lang=EN"><img src="../../resources/images/localization/EN.png"></a></li>
-                        <li><a href="/local?lang=UA"><img src="../../resources/images/localization/UA.png"></a></li>
+                        <li><a href="/local?lang=EN"><img src="../../images/localization/EN.png"></a></li>
+                        <li><a href="/local?lang=UA"><img src="../../images/localization/UA.png"></a></li>
                     </ul>
                 </div>
 
@@ -93,8 +94,8 @@
                 </div>
                 <div class="clearfix"> </div>
                 <!-- search-scripts -->
-                <script src="../../resources/js/classie.js"></script>
-                <script src="../../resources/js/uisearch.js"></script>
+                <script src="../../js/classie.js"></script>
+                <script src="../../js/uisearch.js"></script>
                 <script>
                     new UISearch( document.getElementById( 'sb-search' ) );
                 </script>

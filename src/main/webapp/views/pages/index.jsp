@@ -5,12 +5,12 @@
 <body>
 <title>Lviv tourism portal</title>
 
-<link href="../../resources/css/bootstrap.css" rel="stylesheet" type="text/css" media="all"/>
+<link href="../../css/bootstrap.css" rel="stylesheet" type="text/css" media="all"/>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="../../resources/js/jquery-1.11.0.min.js"></script>
+<script src="../../js/jquery-1.11.0.min.js"></script>
 <!-- Custom Theme files -->
-<link href="../../resources/css/style.css" rel="stylesheet" type="text/css" media="all"/>
-<link rel="stylesheet" href="../../resources/css/flexslider.css" type="text/css" media="screen" />
+<link href="../../css/style.css" rel="stylesheet" type="text/css" media="all"/>
+<link rel="stylesheet" href="../../css/flexslider.css" type="text/css" media="screen" />
 
 <jsp:include page="../elements/header.jsp" />
 <jsp:include page="../elements/banner.jsp" />
@@ -27,7 +27,7 @@
         <div class="row">
           <div class="col-sm-6 col-md-4 ser">
             <div class="thumbnail">
-              <a href="single.html"><img src="../../resources/images/g2.jpg" alt=""></a>
+              <a href="single.html"><img src="../../images/g2.jpg" alt=""></a>
               <div class="caption">
                 <a href="single.html"><h3>Praesentium voluptatum</h3></a>
                 <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
@@ -36,7 +36,7 @@
           </div>
           <div class="col-sm-6 col-md-4 ser">
             <div class="thumbnail">
-              <a href="single.html"><img src="../../resources/images/g3.jpg" alt=""></a>
+              <a href="single.html"><img src="../../images/g3.jpg" alt=""></a>
               <div class="caption">
                 <a href="single.html"> <h3>Accusantium doloremque</h3></a>
                 <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
@@ -45,7 +45,7 @@
           </div>
           <div class="col-sm-6 col-md-4 ser">
             <div class="thumbnail">
-              <a href="single.html"><img src="../../resources/images/g4.jpg" alt=""></a>
+              <a href="single.html"><img src="../../images/g4.jpg" alt=""></a>
               <div class="caption">
                 <a href="single.html"><h3>Thumbnail label</h3></a>
                 <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
@@ -57,7 +57,7 @@
         <div class="row">
           <div class="col-sm-6 col-md-4 ser">
             <div class="thumbnail">
-              <a href="single.html"><img src="../../resources/images/g5.jpg" alt=""></a>
+              <a href="single.html"><img src="../../images/g5.jpg" alt=""></a>
               <div class="caption">
                 <a href="single.html"><h3>Lorem ipsum dolor</h3></a>
                 <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
@@ -66,7 +66,7 @@
           </div>
           <div class="col-sm-6 col-md-4 ser">
             <div class="thumbnail">
-              <a href="single.html"> <img src="../../resources/images/g6.jpg" alt=""></a>
+              <a href="single.html"> <img src="../../images/g6.jpg" alt=""></a>
               <div class="caption">
                 <a href="single.html"> <h3>Established fact</h3></a>
                 <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
@@ -75,7 +75,7 @@
           </div>
           <div class="col-sm-6 col-md-4 ser">
             <div class="thumbnail">
-              <a href="single.html"><img src="../../resources/images/g7.jpg" alt=""></a>
+              <a href="single.html"><img src="../../images/g7.jpg" alt=""></a>
               <div class="caption">
                 <a href="single.html"><h3>Neque porro quisquam</h3></a>
                 <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>

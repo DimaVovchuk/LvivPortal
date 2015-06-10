@@ -14,6 +14,7 @@ public class Log4jInit implements ServletContextListener {
         String homeDir = event.getServletContext().getRealPath("/");
         File propertiesFile = new File(homeDir,
                 "./resources/log4j/log4j.properties");
+        System.out.println(propertiesFile.toString());
         PropertyConfigurator.configure(propertiesFile.toString());
     }
 
