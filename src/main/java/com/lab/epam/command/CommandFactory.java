@@ -13,21 +13,13 @@ public class CommandFactory {
     static {
         commands.put("showMap", new ShowMap());
         commands.put("index", new Index());
+        commands.put("locale", new LocaleCommand());
     }
 
     public static Command createCommand(HttpServletRequest request) {
         String command = request.getParameter("command");
-
-        System.out.println("Comand is : " + command);
-
-        if (command.equals("showMap")) {
-            return commands.get("showMap");
-        }
-
-        if (command.equals("index")) {
-            return commands.get("index");
-        }
-        return null;
+        return commands.get(command);
     }
+
 }
 

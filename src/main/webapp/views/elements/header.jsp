@@ -10,6 +10,7 @@
     <link href="../../css/bootstrap.css" rel="stylesheet" type="text/css" media="all"/>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="../../js/jquery-1.11.0.min.js"></script>
+    <script src="../../js/language.js"></script>
     <!-- Custom Theme files -->
     <link href="../../css/style.css" rel="stylesheet" type="text/css" media="all"/>
     <link rel="stylesheet" href="../../css/flexslider.css" type="text/css" media="screen" />
@@ -78,8 +79,10 @@
 
                 <div class="local">
                     <ul >
-                        <li><a href="/local?lang=EN"><img src="../../images/localization/EN.png"></a></li>
-                        <li><a href="/local?lang=UA"><img src="../../images/localization/UA.png"></a></li>
+                        <button onclick="language('ua')">ua</button>
+                        <button onclick="language('en')">en</button>
+                        <li><a href="language('en')"><img src="../../images/localization/EN.png"></a></li>
+                        <li><a href="language('ua')"><img src="../../images/localization/UA.png"></a></li>
                     </ul>
                 </div>
 

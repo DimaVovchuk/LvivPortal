@@ -18,6 +18,7 @@ public class I18NFilter implements Filter {
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws ServletException, IOException {
         HttpServletRequest request = (HttpServletRequest) req;
         HttpSession session = request.getSession();
+
         ResourceBundle bundle = (ResourceBundle) session.getAttribute("bundle");
         if(bundle == null){
             Cookie[] cookies = request.getCookies();
@@ -35,7 +36,7 @@ public class I18NFilter implements Filter {
             bundle = ResourceBundle.getBundle("localization/bundle", locale);
             session.setAttribute("bundle", bundle);
         }
-
+        System.out.println(bundle.getLocale());
         chain.doFilter(req, resp);
     }
 
