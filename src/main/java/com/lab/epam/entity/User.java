@@ -14,10 +14,10 @@ public class User {
     private String password;
     private String phone;
     private String status;
-    private String role;
+    private Integer role_id;
     private Boolean deleted;
 
-    public User(Integer id, Integer rating, String name, String surname, String login, String mail, String password, String phone, String status, String role, Boolean deleted) {
+    public User(Integer id, Integer rating, String name, String surname, String login, String mail, String password, String phone, String status, Integer role_id, Boolean deleted) {
         this.id = id;
         this.rating = rating;
         this.name = name;
@@ -27,8 +27,22 @@ public class User {
         this.password = password;
         this.phone = phone;
         this.status = status;
-        this.role = role;
+        this.role_id = role_id;
         this.deleted = deleted;
+    }
+
+    public User(){
+        this.id = null;
+        this.rating = null;
+        this.name = null;
+        this.surname = null;
+        this.login = null;
+        this.mail = null;
+        this.password = null;
+        this.phone = null;
+        this.status = null;
+        this.role_id = null;
+        this.deleted = null;
     }
 
     @Override
@@ -43,7 +57,7 @@ public class User {
                 ", password='" + password + '\'' +
                 ", phone='" + phone + '\'' +
                 ", status='" + status + '\'' +
-                ", role='" + role + '\'' +
+                ", role='" + role_id + '\'' +
                 ", deleted=" + deleted +
                 '}';
     }
@@ -52,7 +66,7 @@ public class User {
         return id;
     }
 
-    public void setId(Integer id) {
+    protected void setId(Integer id) {
         this.id = id;
     }
 
@@ -120,12 +134,12 @@ public class User {
         this.status = status;
     }
 
-    public String getRole() {
-        return role;
+    public Integer getRoleID() {
+        return role_id;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setRoleID(Integer role_id) {
+        this.role_id = role_id;
     }
 
     public Boolean getDeleted() {
