@@ -3,7 +3,11 @@ package com.lab.epam.command;
 /**
  * Created by Vasyl on 09.06.2015.
  */
+
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,10 +20,10 @@ public class CommandFactory {
         commands.put("locale", new LocaleCommand());
     }
 
-    public static Command createCommand(HttpServletRequest request) {
+    public static void createCommand(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String command = request.getParameter("command");
-        return commands.get(command);
+        Command commamdExecute = commands.get(command);
+        commamdExecute.execute(request,response);
     }
-
 }
 
