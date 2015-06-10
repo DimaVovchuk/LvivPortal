@@ -241,7 +241,7 @@ span.menu {
 /*--header end here--*/
 /*--banner start here--*/
 .banner {
-    background: url(../images/ban.jpg) no-repeat;
+    background: url(../images/banner.jpg) no-repeat;
     min-height: 700px;
     background-size: cover;
 }
@@ -329,6 +329,19 @@ span.menu {
 .bann-strip-btn a:hover {
     background: #ffffff;
     color: #000;
+}
+
+.places-dropdown {
+    background: #0ab2d2;
+    font-size: 1em;
+    color: #fff;
+    padding: 0.5em 1.5em;
+    border-radius: 6px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    -o-border-radius: 6px;
+    text-decoration: none;
+    font-family: 'Lora', serif;
 }
 
 /*--- slider-css --*/
