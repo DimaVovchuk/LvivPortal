@@ -52,7 +52,6 @@ public class MySqlPlaceResponseDao extends AbstractJDBCDao<PlaceResponse, Intege
         return "UPDATE `" + tableName + "` SET deleted = false WHERE id= ?;";
     }
 
-    @Override
     public PlaceResponse create(PlaceResponse obj) throws PersistException {
         return persist((PlaceResponse)obj);
     }
