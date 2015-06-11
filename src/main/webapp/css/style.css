@@ -64,7 +64,7 @@ a:hover {
     display: block;
 }
 
-.top-nav ul li a#login {
+.top-nav ul li a#sign {
     font-size: 1.1em;
     font-weight: 400;
     color: #0ab2d2;
@@ -78,7 +78,7 @@ a:hover {
     background: #0ab2d2;
 }
 
-.top-nav ul li a#login:hover {
+.top-nav ul li a#sign:hover {
     background: #0ab2d2;
     color: #fff;
 }
@@ -102,8 +102,14 @@ span.menu {
     margin: 0px 10px 0px 0px;
 }
 
+.local ul li button {
+    border: 0px;
+    background-color: #252e38;
+    padding: 0px 0px 0px 0px;
+}
+
 .local ul li a {
-    display: inline-block;
+     display: inline-block;
 }
 
 .local ul li a.fa {
@@ -128,6 +134,11 @@ span.menu {
 
 .local ul li a.p:hover {
     background-position: -39px -25px;
+}
+
+.pop-up-menu {
+    padding: 10px;
+    margin: 0px 0px 0px 0px;
 }
 
 /*--search--*/
@@ -241,17 +252,16 @@ span.menu {
 /*--header end here--*/
 /*--banner start here--*/
 .banner {
-    background: url(../images/banner.jpg) no-repeat;
+    background: url(../images/banner.jpg)no-repeat;
     min-height: 700px;
     background-size: cover;
 }
 
 .banner-main {
     background: rgba(0, 0, 0, 0.65);
-    margin: 10% 10% 10% 50%;
-    height: 40%;
-    width: 40%;
-    padding: 1em 1em 1em 1em;
+    margin: 60px 60px;
+    width: 30%;
+    padding: 10px 10px 20px 10px;
     text-align: center;
     position: relative;
 }
@@ -274,6 +284,19 @@ span.menu {
 .bann-btn {
     float: center;
     margin: 2em 0em 0em 0em;
+}
+
+.form-btn {
+    background: #0ab2d2;
+    font-size: 1em;
+    color: #fff;
+    padding: 0.5em 1.5em;
+    border-radius: 6px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    -o-border-radius: 6px;
+    text-decoration: none;
+    font-family: 'Lora', serif;
 }
 
 .bann-btn a {
@@ -1290,12 +1313,22 @@ span.blog-clr {
     font-weight: 700;
 }
 
+.blog-detail {
+    width: 100%;
+    display: table;
+}
+
 .blog-detail p {
     font-size: 1em;
     font-weight: 400;
     color: #95928d;
     line-height: 1.6em;
     width: 90%;
+}
+
+.blog-image {
+    float: left;
+    margin: 0px 10px;
 }
 
 .blog-btn {

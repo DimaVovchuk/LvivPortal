@@ -18,7 +18,7 @@ import java.util.Map;
  */
 public class MySqlPlaceResponseDao extends AbstractJDBCDao<PlaceResponse, Integer> {
 
-    private class PersistGroup extends Category {
+    private class PersistGroup extends PlaceResponse {
         public void setId(int id) {
             super.setId(id);
         }

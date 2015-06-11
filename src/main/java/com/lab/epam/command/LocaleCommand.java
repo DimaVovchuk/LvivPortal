@@ -19,14 +19,16 @@ public class LocaleCommand implements Command {
     private static final Logger loger = LogManager.getLogger(ClassName.getCurrentClassName());
 
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        System.out.println(request.getParameterMap());
         loger.info("Command LocaleCommand.");
         String lang = request.getParameter("lang");
+        System.out.println(lang);
         Locale locale = new Locale(lang);
-        ResourceBundle bundle = ResourceBundle.getBundle("locale/messages", locale);
+        ResourceBundle bundle = ResourceBundle.getBundle("localization/bundle", locale);
         HttpSession session = request.getSession();
         session.setAttribute("bundle", bundle);
         Cookie cookie = new Cookie("lang", lang);
         response.addCookie(cookie);
-        response.sendRedirect("/");
+
     }
 }
