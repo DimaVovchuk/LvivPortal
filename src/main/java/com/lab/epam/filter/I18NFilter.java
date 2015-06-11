@@ -19,10 +19,10 @@ public class I18NFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) req;
         HttpSession session = request.getSession();
         ResourceBundle bundle = (ResourceBundle) session.getAttribute("bundle");
-        if(bundle == null){
+        if (bundle == null) {
             Cookie[] cookies = request.getCookies();
             Locale locale = null;
-            if (cookies != null) {
+            if (cookies.length > 0) {
                 for (Cookie cookie : cookies) {
                     if (cookie.getName().equals("lang")) {
                         locale = new Locale(cookie.getValue());

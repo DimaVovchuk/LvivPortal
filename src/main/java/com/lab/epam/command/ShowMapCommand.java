@@ -10,14 +10,14 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Created by Галинка on 10.06.2015.
+ * Created by Vasyl on 09.06.2015.
  */
-public class Index implements Command{
-    private static final Logger loger = LogManager.getLogger(ClassName.getCurrentClassName());
+public class ShowMapCommand implements Command{
+        private static final Logger loger = LogManager.getLogger(ClassName.getCurrentClassName());
 
     public void execute(HttpServletRequest request,
                           HttpServletResponse response) throws ServletException, IOException {
-        loger.info("Command Index.");
-        request.getRequestDispatcher("/views/pages/index.jsp").forward(request, response);
+        loger.info("Command ShowMapCommand.");
+        request.getRequestDispatcher("/views/pages/map.jsp").forward(request, response);
     }
 }

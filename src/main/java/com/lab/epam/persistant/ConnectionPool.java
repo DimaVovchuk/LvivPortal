@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.Properties;
@@ -19,8 +20,10 @@ public class ConnectionPool {
 
     public ConnectionPool(int initConnCnt) {
         Properties props = new Properties();
+
         try {
-            File configFile = new File("C:\\Users\\Admin\\Desktop\\LvivPortalnew\\LvivPortal\\src\\main\\webapp\\WEB_INF\\persistant.xml");
+            URL location = getClass().getProtectionDomain().getCodeSource().getLocation();
+            File configFile = new File(location.getFile(),"persistent.xml");
             InputStream stream = new FileInputStream(configFile);
             props.loadFromXML(stream);
         } catch (IOException e) {
@@ -78,4 +81,5 @@ public class ConnectionPool {
     public int getAvailableConnsCnt() {
         return availableConns.size();
     }
+
 }

@@ -14,9 +14,9 @@
                 <div class="top-nav">
                     <span class="menu"> <img src="${pageContext.request.contextPath}/images/icon.png" alt=""/></span>
                     <ul class="res">
-                        <li><a href="${pageContext.request.contextPath}/views/pages/index.jsp"><cdg:l18n
+                        <li><a href="view?command=index"><cdg:l18n
                                 key="header.home"/></a></li>
-                        <li><a href="${pageContext.request.contextPath}/views/pages/places.jsp"><cdg:l18n
+                        <li><a href="view?command=place"><cdg:l18n
                                 key="header.places"/></a></li>
                         <li><a href="http://www.booking.com"><cdg:l18n key="header.hotels"/></a></li>
                         <li><a href="${pageContext.request.contextPath}/views/pages/map.jsp"><cdg:l18n
@@ -28,17 +28,7 @@
                                    role="button" aria-expanded="false"><cdg:l18n key="header.sign"/></a>
 
                                 <form class="dropdown-menu pop-up-menu" role="menu" aria-labelledby="sign">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" id="login"
-                                               placeholder='<cdg:l18n key="header.login"/>'>
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="password" class="form-control" id="password"
-                                               placeholder='<cdg:l18n key="header.password"/>'>
-                                    </div>
-                                    <div class="divider"></div>
-                                    <button type="submit" class="form-btn btn btn-default"><cdg:l18n
-                                            key="header.sign"/></button>
+                                    <jsp:include page="/views/pages/signUp.jsp"/>
                                 </form>
                             </div>
                         </li>

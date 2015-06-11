@@ -15,9 +15,11 @@ public class CommandFactory {
     private static final Map<String, Command> commands = new HashMap<String, Command>();
 
     static {
-        commands.put("showMap", new ShowMap());
-        commands.put("index", new Index());
+        commands.put("showMap", new ShowMapCommand());
+        commands.put("index", new IndexCommand());
         commands.put("locale", new LocaleCommand());
+        commands.put("signUp", new SignUpCommand());
+        commands.put("place", new PlaceCommand());
     }
 
     public static void createCommand(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
