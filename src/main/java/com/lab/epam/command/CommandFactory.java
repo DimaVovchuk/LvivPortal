@@ -18,11 +18,11 @@ public class CommandFactory {
         commands.put("showMap", new ShowMap());
         commands.put("index", new Index());
         commands.put("locale", new LocaleCommand());
+        commands.put("place", new PlaceCommand());
     }
 
     public static void createCommand(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String command = request.getParameter("command");
-        System.out.println(command);
         Command commamdExecute = commands.get(command);
         commamdExecute.execute(request,response);
     }

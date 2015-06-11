@@ -2,6 +2,8 @@ package com.lab.epam.dao;
 
 import com.lab.epam.persistant.ConnectionPool;
 
+import java.sql.Connection;
+
 /**
  * Created by Admin on 10.06.2015.
  */
@@ -12,8 +14,8 @@ public interface DaoFactory<Context> {
     }
 
     /** Возвращает подключение к базе данных */
-    public Context getContext() throws PersistException;
+    public ConnectionPool getContext() throws PersistException;
 
     /** Возвращает объект для управления персистентным состоянием объекта */
-    public GenericDao getDao(Context context, Class dtoClass) throws PersistException;
+    public GenericDao getDao(ConnectionPool connection, Class dtoClass) throws PersistException;
 }
