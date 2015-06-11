@@ -10,7 +10,7 @@
     <meta name="keywords" content=""/>
 </head>
 
-<jsp:include page="/views/elements/head.jsp" />
+<jsp:include page="/views/elements/head.jsp"/>
 
 <body>
 
@@ -28,7 +28,7 @@
 
                     <div class="col-sm-6 col-md-4 ser">
                         <div class="thumbnail">
-                            <a href="#"><img src="/images/places1.jpg" alt=""></a>
+                            <a href="#"><img src="${pageContext.request.contextPath}/images/places1.jpg" alt=""></a>
 
                             <div class="caption">
                                 <a href="#"><h3><cdg:l18n key="index.architecture"/></h3></a>
@@ -54,7 +54,7 @@
 
                     <div class="col-sm-6 col-md-4 ser">
                         <div class="thumbnail">
-                            <a href="#"><img src="/images/places2.jpg" alt=""></a>
+                            <a href="#"><img src="${pageContext.request.contextPath}/images/places2.jpg" alt=""></a>
 
                             <div class="caption">
                                 <a href="#"><h3><cdg:l18n key="index.culture"/></h3></a>
@@ -80,7 +80,7 @@
 
                     <div class="col-sm-6 col-md-4 ser">
                         <div class="thumbnail">
-                            <a href="#"><img src="/images/places3.jpg" alt=""></a>
+                            <a href="#"><img src="${pageContext.request.contextPath}/images/places3.jpg" alt=""></a>
 
                             <div class="caption">
                                 <a href="#"><h3><cdg:l18n key="index.food"/></h3></a>
@@ -113,7 +113,7 @@
     </div>
 </div>
 
-<jsp:include page="/views/elements/footer.jsp" />
+<jsp:include page="/views/elements/footer.jsp"/>
 
 </body>
 </html>

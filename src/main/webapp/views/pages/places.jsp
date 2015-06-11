@@ -28,10 +28,12 @@
                 <div class="blog-grids">
                     <div class="blog-detail">
                         <div class="blog-image">
-                        <a href="#"><img src="/images/opera_sm.jpg" alt=""></a>
+                            <a href="#"><img src="${pageContext.request.contextPath}/images/opera_sm.jpg" alt=""></a>
                         </div>
                         <a href="#"><h3>Opera theatre</h3></a>
+
                         <p>Some information</p>
+
                         <div class="blog-btn"><a href="#">Read More</a></div>
                     </div>
                 </div>
@@ -39,10 +41,12 @@
                 <div class="blog-grids">
                     <div class="blog-detail">
                         <div class="blog-image">
-                            <a href="#"><img src="/images/opera_sm.jpg" alt=""></a>
+                            <a href="#"><img src="${pageContext.request.contextPath}/images/opera_sm.jpg" alt=""></a>
                         </div>
                         <a href="#"><h3>Opera theatre</h3></a>
+
                         <p>Some information</p>
+
                         <div class="blog-btn"><a href="#">Read More</a></div>
                     </div>
                 </div>
@@ -50,10 +54,12 @@
                 <div class="blog-grids">
                     <div class="blog-detail">
                         <div class="blog-image">
-                            <a href="#"><img src="/images/opera_sm.jpg" alt=""></a>
+                            <a href="#"><img src="${pageContext.request.contextPath}/images/opera_sm.jpg" alt=""></a>
                         </div>
                         <a href="#"><h3>Opera theatre</h3></a>
+
                         <p>Some information</p>
+
                         <div class="blog-btn"><a href="#">Read More</a></div>
                     </div>
                 </div>

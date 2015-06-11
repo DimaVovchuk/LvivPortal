@@ -21,10 +21,11 @@
         <div class="blog-main">
             <div class="col-md-9 blog-left">
                 <div class="blog-grids">
-                    <img src="/images/opera.jpg" alt="">
+                    <img src="${pageContext.request.contextPath}/images/opera.jpg" alt="">
 
                     <div class="blog-detail">
                         <h3>Opera theatre</h3>
+
                         <p>Some information</p>
                     </div>
 
@@ -50,10 +51,11 @@
 
                     <div class="single-commemts">
                         <div class="col-md-2 user">
-                            <a href="#"><img src="/images/user.png" alt=""/></a>
+                            <a href="#"><img src="${pageContext.request.contextPath}/images/user.png" alt=""/></a>
                         </div>
                         <div class="col-md-10 user-comment">
                             <a href="#"><h4>Some user</h4></a>
+
                             <p>Comment</p>
                             <a class="comme" href="#">On December 14, 2014 18:05</a>
                         </div>

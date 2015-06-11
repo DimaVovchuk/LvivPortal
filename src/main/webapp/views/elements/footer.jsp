@@ -3,24 +3,27 @@
 <!DOCTYPE HTML>
 
 <div class="footer">
-  <div class="copyright">
-    <div class="container">
-      <div class="copy-main">
-        <div class="copy-left">
-          <p>Design By<a href="http://w3layouts.com/" target="-blank"> W3layouts</a></p>
+    <div class="copyright">
+        <div class="container">
+            <div class="copy-main">
+                <div class="copy-left">
+                    <p>Design By<a href="http://w3layouts.com/" target="-blank"> W3layouts</a></p>
+                </div>
+                <div class="copy-right">
+                    <ul>
+                        <li><a href="${pageContext.request.contextPath}/views/pages/index.jsp"><cdg:l18n
+                                key="header.home"/></a></li>
+                        /
+                        <li><a href="${pageContext.request.contextPath}/views/pages/index.jsp#places"><cdg:l18n
+                                key="header.places"/></a></li>
+                        /
+                        <li><a href="http://www.booking.com"><cdg:l18n key="header.hotels"/></a></li>
+                        /
+                        <li><a href="${pageContext.request.contextPath}/views/pages/map.jsp"><cdg:l18n
+                                key="header.plan"/></a></li>
+                    </ul>
+                </div>
+            </div>
         </div>
-        <div class="copy-right">
-          <ul>
-            <li><a href="/views/pages/index.jsp"><cdg:l18n key="header.home"/></a></li>
-            /
-            <li><a href="/views/pages/index.jsp#places"><cdg:l18n key="header.places"/></a></li>
-            /
-            <li><a href="http://www.booking.com"><cdg:l18n key="header.hotels"/></a></li>
-            /
-            <li><a href="/views/pages/map.jsp"><cdg:l18n key="header.plan"/></a></li>
-          </ul>
-        </div>
-      </div>
     </div>
-  </div>
 </div>

@@ -2,7 +2,7 @@
 <%@ taglib prefix="cdg" uri="customtags" %>
 <!DOCTYPE HTML>
 
-<div class="banner">
+<div class="banner" style="background-image: '${pageContext.request.contextPath}/images/banner.jsp'">
     <div class="container">
         <div class="banner-main">
             <h3><cdg:l18n key="banner.head"/></h3>
