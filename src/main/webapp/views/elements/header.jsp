@@ -14,23 +14,15 @@
                 <div class="top-nav">
                     <span class="menu"> <img src="${pageContext.request.contextPath}/images/icon.png" alt=""/></span>
                     <ul class="res">
-                        <li><a href="view?command=index"><cdg:l18n
+                        <li><a href="${pageContext.request.contextPath}/views/pages/index.jsp"><cdg:l18n
                                 key="header.home"/></a></li>
-                        <li><a href="view?command=place"><cdg:l18n
+                        <li><a href="${pageContext.request.contextPath}/views/pages/places.jsp"><cdg:l18n
                                 key="header.places"/></a></li>
                         <li><a href="http://www.booking.com"><cdg:l18n key="header.hotels"/></a></li>
                         <li><a href="${pageContext.request.contextPath}/views/pages/map.jsp"><cdg:l18n
                                 key="header.plan"/></a></li>
                         <li>
-                            <div class="dropdown">
-                                <a id="sign" data-target="#" href="#" data-toggle="dropdown"
-                                   aria-haspopup="true"
-                                   role="button" aria-expanded="false"><cdg:l18n key="header.sign"/></a>
-
-                                <form class="dropdown-menu pop-up-menu" role="menu" aria-labelledby="sign">
-                                    <jsp:include page="/views/pages/signUp.jsp"/>
-                                </form>
-                            </div>
+                            <a id="sign" data-toggle="modal" href="#loginform"><cdg:l18n key="header.sign"/></a>
                         </li>
                     </ul>
                     <!-- script-for-menu -->
@@ -45,11 +37,6 @@
                 <div class="local">
                     <ul>
                         <form class="form-inline" action="view?command=locale" method="post">
-                            <%--<button type="submit" name="lang" value="en">en</button>--%>
-                            <%--<button type="submit" name="lang" value="ua">ua</button>--%>
-
-                            <%--<button onclick="language('ua')">ua</button>--%>
-                            <%--<button onclick="language('en')">en</button>--%>
                             <li>
                                 <button onclick="language('en')"><img
                                         src="${pageContext.request.contextPath}/images/localization/EN.png"></button>
@@ -83,4 +70,8 @@
             <div class="clearfix"></div>
         </div>
     </div>
+</div>
+
+<div class="modal fade" id="loginform">
+    <jsp:include page="/views/elements/login.jsp"/>
 </div>

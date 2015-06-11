@@ -252,7 +252,7 @@ span.menu {
 /*--header end here--*/
 /*--banner start here--*/
 .banner {
-    background: url(../images/banner.jpg)no-repeat;
+    background: url(/images/banner.jpg)no-repeat;
     min-height: 700px;
     background-size: cover;
 }

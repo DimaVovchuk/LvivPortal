@@ -1,0 +1,174 @@
+.login-form {
+    position: relative;
+    background: #ffffff;
+    width: 500px;
+    margin: 10% auto;
+    padding: 40px;
+    border-top: 5px solid #33b5e5;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.15);
+    -moz-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.15);
+    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.15);
+}
+.login-form .switch {
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: #33b5e5;
+    width: auto;
+    height: auto;
+    margin: -5px 0 0;
+    -webkit-border-radius: 0 3px 0 3px;
+    -moz-border-radius: 0 3px 0 3px;
+    border-radius: 0 3px 0 3px;
+    color: #ffffff;
+    font-size: 12px;
+    line-height: 30px;
+    text-align: center;
+    padding: 10px 10px 5px 10px;
+}
+.login-form .switch .tooltip {
+    position: absolute;
+    top: 5px;
+    right: -65px;
+    display: block;
+    background: rgba(0, 0, 0, 0.6);
+    width: auto;
+    padding: 5px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 1;
+    text-align: left;
+    text-transform: uppercase;
+}
+.login-form .switch .tooltip:before {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: -5px;
+    display: block;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-right: 5px solid rgba(0, 0, 0, 0.6);
+}
+.login-form .register {
+    display: none;
+}
+.login-form h2 {
+    margin: 0 0 20px;
+    line-height: 1;
+    color: #33b5e5;
+    font-size: 18px;
+    font-weight: 400;
+}
+.login-form .alert {
+    position: relative;
+    background: #f3f3f3;
+    color: #666666;
+    font-size: 12px;
+    margin-bottom: 20px;
+    padding: 15px;
+    text-align: left;
+}
+.login-form .alert .fa-times-circle {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    display: block;
+    width: 16px;
+    height: 16px;
+    line-height: 16px;
+    margin-top: -8px;
+    float: right;
+}
+.login-form input {
+    outline: none;
+    display: block;
+    width: 100%;
+    margin: 0 0 20px;
+    padding: 10px 15px;
+    border: 1px solid #d9d9d9;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    color: #ccc;
+    font-family: "Roboto";
+    -webkti-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    font-size: 14px;
+    font-wieght: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-transition: all 0.3s linear 0s;
+    -moz-transition: all 0.3s linear 0s;
+    -ms-transition: all 0.3s linear 0s;
+    -o-transition: all 0.3s linear 0s;
+    transition: all 0.3s linear 0s;
+}
+.login-form .half-left {
+    float: left;
+    width: 48%;
+}
+.login-form .half-right {
+    float: right;
+    width: 48%;
+}
+.login-form input:focus {
+    color: #333333;
+    border: 1px solid #33b5e5;
+}
+.login-form button {
+    cursor: pointer;
+    background: #33b5e5;
+    width: 100%;
+    padding: 10px 15px;
+    margin-bottom: 25px;
+    border: 0;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    color: #ffffff;
+    font-family: "Roboto";
+    font-size: 14px;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-transition: all 0.3s linear 0s;
+    -moz-transition: all 0.3s linear 0s;
+    -ms-transition: all 0.3s linear 0s;
+    -o-transition: all 0.3s linear 0s;
+    transition: all 0.3s linear 0s;
+}
+.login-form button:hover {
+    background: #1a9bcb;
+}
+.login-form .login-footer {
+    background: #f2f2f2;
+    width: 500px;
+    padding: 15px 40px;
+    margin: 0 0 -40px -40px;
+    -webkit-border-radius: 0 0 3px 3px;
+    -moz-border-radius: 0 0 3px 3px;
+    border-radius: 0 0 3px 3px;
+    color: #666666;
+    font-size: 15px;
+    text-align: center;
+}
+.login-form .login-footer a {
+    width: 285px;
+    color: #333333;
+    text-decoration: none;
+}
+
+.sign {
+    font-size: 20px;
+}
