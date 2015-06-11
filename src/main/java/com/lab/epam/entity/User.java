@@ -48,17 +48,6 @@ public class User implements Identified<Integer> {
     }
 
     public User(){
-        this.id = null;
-        this.rating = null;
-        this.name = null;
-        this.surname = null;
-        this.login = null;
-        this.mail = null;
-        this.password = null;
-        this.phone = null;
-        this.status = null;
-        this.role_id = null;
-        this.deleted = null;
     }
 
     @Override

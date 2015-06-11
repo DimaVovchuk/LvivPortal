@@ -46,6 +46,16 @@
         <url-pattern>/view/*</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>map</servlet-name>
+        <jsp-file>/views/pages/map.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>map</servlet-name>
+        <url-pattern>/view/showMap</url-pattern>
+    </servlet-mapping>
+
+
     <listener>
         <listener-class>com.lab.epam.listener.Log4jInit</listener-class>
     </listener>
