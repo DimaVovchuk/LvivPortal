@@ -10,11 +10,7 @@ import com.lab.epam.transformer.Table;
 @Table("place")
 public class Place implements Identified<Integer> {
     @Column("id")
-    private Integer id;
-    @Column("name")
-    private String name;
-    @Column("description")
-    private String description;
+    private Integer id = null;
     @Column("adress")
     private String adress;
     @Column("latitude")
@@ -28,40 +24,24 @@ public class Place implements Identified<Integer> {
     @Column("category_id")
     private Integer category_id;
     @Column("deleted")
-    private Boolean deleted;
+    private Boolean deleted = true;
 
-    public Place(Integer id,String name, String description, String adress, String latitude, String longitude, Integer category_id, Integer rating,  String visible, Boolean deleted) {
-        this.id = id;
+    public Place(String adress, String latitude, String longitude, Integer category_id, Integer rating,  String visible) {
         this.rating = rating;
-        this.name = name;
-        this.description = description;
         this.adress = adress;
         this.latitude = latitude;
         this.longitude = longitude;
         this.visible = visible;
         this.category_id = category_id;
-        this.deleted = deleted;
     }
 
     public Place(){
-        this.id = null;
-        this.rating = null;
-        this.name = null;
-        this.description = null;
-        this.adress = null;
-        this.latitude = null;
-        this.longitude = null;
-        this.visible = null;
-        this.category_id = null;
-        this.deleted = null;
     }
 
     @Override
     public String toString() {
         return "Place{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
                 ", adress='" + adress + '\'' +
                 ", latitude='" + latitude + '\'' +
                 ", longitude='" + longitude + '\'' +
@@ -85,22 +65,6 @@ public class Place implements Identified<Integer> {
 
     public void setRating(Integer rating) {
         this.rating = rating;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public String getAdress() {

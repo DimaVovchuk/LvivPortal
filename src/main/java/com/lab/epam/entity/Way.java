@@ -10,7 +10,7 @@ import com.lab.epam.transformer.Table;
 @Table("way")
 public class Way implements Identified<Integer> {
     @Column("id")
-    private Integer id;
+    private Integer id = null;
     @Column("rating")
     private Integer rating;
     @Column("name")
@@ -18,22 +18,15 @@ public class Way implements Identified<Integer> {
     @Column("visible")
     private String visible;
     @Column("deleted")
-    private Boolean deleted;
+    private Boolean deleted = true;
 
-    public Way(Integer id, Integer rating, String name, String visible, Boolean deleted){
-        this.id = id;
+    public Way(Integer rating, String name, String visible){
         this.rating = rating;
         this.name = name;
         this.visible = visible;
-        this.deleted = deleted;
     }
 
     public Way(){
-        this.id = null;
-        this.rating = null;
-        this.name = null;
-        this.visible = null;
-        this.deleted = null;
     }
 
     @Override

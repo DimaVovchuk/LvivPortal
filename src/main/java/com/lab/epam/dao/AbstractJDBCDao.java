@@ -94,7 +94,7 @@ public abstract class AbstractJDBCDao<T extends Identified<PK>, PK extends Integ
     }
 
     @Override
-    public T create(T object) throws PersistException {
+    public void create(T object) throws PersistException {
         T persistInstance;
         // Добавляем запись
         String sql = prepareStatementForInsert(object);//getCreateQuery();
@@ -102,29 +102,16 @@ public abstract class AbstractJDBCDao<T extends Identified<PK>, PK extends Integ
         try (PreparedStatement statement = conn.prepareStatement(sql)) {
            // prepareStatementForInsert(statement, object);
             int count = statement.executeUpdate();
-            System.out.println(count);
             if (count != 1) {
                 throw new PersistException("On persist modify more then 1 record: " + count);
+            } else {
+                System.out.println("Create is succesfule");
             }
         } catch (Exception e) {
             throw new PersistException(e);
         }
 
-        Integer id = object.getId();
-        // Получаем только что вставленную запись
-        sql = getSelectQueryWithOutDeleted() + " WHERE id = " + id + ";";
-        try (PreparedStatement statement = conn.prepareStatement(sql)) {
-            ResultSet rs = statement.executeQuery();
-            List<T> list = parseResultSet(rs);
-            if ((list == null) || (list.size() != 1)) {
-                throw new PersistException("Exception on findByPK new persist data.");
-            }
-            persistInstance = list.iterator().next();
-        } catch (Exception e) {
-            throw new PersistException(e);
-        }
         connection.putback(conn);
-        return persistInstance;
     }
 
     @Override

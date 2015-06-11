@@ -11,22 +11,19 @@ import com.lab.epam.transformer.Table;
 public class Role implements Identified<Integer> {
 
     @Column("id")
-    private Integer id;
+    private Integer id = null;
     @Column("role")
     private String role;
     @Column("deleted")
-    private Boolean deleted;
+    private Boolean deleted = true;
 
-    public Role(Integer id, String role, Boolean deleted){
+    public Role(String role){
         this.id = id;
         this.role = role;
         this.deleted = deleted;
     }
 
     public Role(){
-        this.id = null;
-        this.role = null;
-        this.deleted = null;
     }
 
     @Override

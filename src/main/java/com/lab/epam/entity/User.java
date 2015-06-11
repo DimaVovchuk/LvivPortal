@@ -11,7 +11,7 @@ import com.lab.epam.transformer.Table;
 public class User implements Identified<Integer> {
 
     @Column("id")
-    private Integer id;
+    private Integer id = null;
     @Column("rating")
     private Integer rating;
     @Column("name")
@@ -31,9 +31,9 @@ public class User implements Identified<Integer> {
     @Column("role_id")
     private Integer role_id;
     @Column("deleted")
-    private Boolean deleted;
+    private Boolean deleted = true;
 
-    public User(Integer id, Integer rating, String name, String surname, String login, String mail, String password, String phone, String status, Integer role_id, Boolean deleted) {
+    public User(Integer rating, String name, String surname, String login, String mail, String password, String phone, String status, Integer role_id) {
         this.id = id;
         this.rating = rating;
         this.name = name;
@@ -48,17 +48,6 @@ public class User implements Identified<Integer> {
     }
 
     public User(){
-        this.id = null;
-        this.rating = null;
-        this.name = null;
-        this.surname = null;
-        this.login = null;
-        this.mail = null;
-        this.password = null;
-        this.phone = null;
-        this.status = null;
-        this.role_id = null;
-        this.deleted = null;
     }
 
     @Override

@@ -11,7 +11,7 @@ import com.lab.epam.transformer.Table;
 public class PlaceResponse implements Identified<Integer> {
 
     @Column("id")
-    private Integer id;
+    private Integer id = null;
     @Column("description")
     private String description;
     @Column("rating")
@@ -21,24 +21,16 @@ public class PlaceResponse implements Identified<Integer> {
     @Column("place_id")
     private Integer place_id;
     @Column("deleted")
-    private Boolean deleted;
+    private Boolean deleted = true;
 
-    public PlaceResponse(Integer id, String description, Integer rating,  Integer user_id, Integer place_id, Boolean deleted) {
-        this.id = id;
+    public PlaceResponse(String description, Integer rating,  Integer user_id, Integer place_id) {
         this.rating = rating;
         this.description = description;
         this.user_id = user_id;
         this.place_id = place_id;
-        this.deleted = deleted;
     }
 
     public PlaceResponse(){
-        this.id = null;
-        this.rating = null;
-        this.description = null;
-        this.user_id = null;
-        this.place_id = null;
-        this.deleted = null;
     }
 
     @Override

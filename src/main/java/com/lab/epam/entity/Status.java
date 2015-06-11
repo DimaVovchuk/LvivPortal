@@ -7,26 +7,21 @@ import com.lab.epam.transformer.Table;
 /**
  * Created by Admin on 10.06.2015.
  */
-@Table("status")
+@Table("user_status")
 public class Status implements Identified<Integer> {
 
     @Column("id")
-    private Integer id;
+    private Integer id = null;
     @Column("status")
     private String status;
     @Column("deleted")
-    private Boolean deleted;
+    private Boolean deleted = true;
 
-    public Status(Integer id, String status, Boolean deleted){
-        this.id = id;
+    public Status(String status){
         this.status = status;
-        this.deleted = deleted;
     }
 
     public Status(){
-        this.id = null;
-        this.status = null;
-        this.deleted = null;
     }
 
     @Override

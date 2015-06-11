@@ -17,16 +17,11 @@ public class Category implements Identified<Integer> {
         @Column("deleted")
         private Boolean deleted = true;
 
-        public Category(Integer id, String category, Boolean deleted){
-           this.id = id;
+        public Category(String category){
             this.category = category;
-            this.deleted = deleted;
         }
 
         public Category(){
-            this.id = null;
-            this.category = null;
-            this.deleted = null;
         }
 
         @Override
