@@ -27,6 +27,7 @@ public class Transformer<T> {
 	public String getTableName() {
 		String tableName = null;
 		try {
+			System.out.println(clazz);
 			Annotation annotation = clazz.getAnnotation(Table.class);
 			tableName = annotation.annotationType().getMethod("value")
 					.invoke(annotation).toString();

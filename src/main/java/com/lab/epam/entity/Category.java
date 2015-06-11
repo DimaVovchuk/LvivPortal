@@ -11,14 +11,14 @@ import com.lab.epam.transformer.Table;
 public class Category implements Identified<Integer> {
 
         @Column("id")
-        private Integer id;
+        private Integer id = null;
         @Column("category")
         private String category;
         @Column("deleted")
-        private Boolean deleted;
+        private Boolean deleted = true;
 
         public Category(Integer id, String category, Boolean deleted){
-            this.id = id;
+           this.id = id;
             this.category = category;
             this.deleted = deleted;
         }

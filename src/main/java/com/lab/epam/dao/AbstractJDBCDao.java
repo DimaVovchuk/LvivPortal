@@ -1,43 +1,100 @@
 package com.lab.epam.dao;
 
+import com.lab.epam.dao.imp.MySqlDaoFactory;
+import com.lab.epam.entity.Category;
 import com.lab.epam.persistant.ConnectionManager;
 import com.lab.epam.persistant.ConnectionPool;
+import com.lab.epam.transformer.Transformer;
 
 import java.sql.Connection;
 import java.io.Serializable;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Admin on 10.06.2015.
  */
-public abstract class AbstractJDBCDao<T extends Identified<PK>, PK extends Integer> implements GenericDao<T, PK> {
+public abstract class AbstractJDBCDao<T extends Identified<PK>, PK extends Integer> implements GenericDao<T, PK>, ClassNameInterface {
 
     private ConnectionPool connection;
 
-    public abstract String getSelectQuery();
+    Class<T> clazz;
+    Transformer<T> transformer;
 
-    public abstract String getCreateQuery();
+    public String getSelectQuery(){
+        String tableName = transformer.getTableName();
+        return "SELECT * FROM `" + tableName + "` WHERE deleted= true;";
+    }
 
-    public abstract String getUpdateQuery();
+    public String getSelectQueryWithOutDeleted(){
+        String tableName = transformer.getTableName();
+        return "SELECT * FROM `" + tableName + "`";
+    }
 
-    public abstract String getDeleteQuery();
+    public String getDeleteQuery() {
+        String tableName = transformer.getTableName();
+        return "UPDATE `" + tableName + "` SET deleted = false WHERE id= ?;";
+    }
 
-    protected abstract List<T> parseResultSet(ResultSet rs) throws PersistException;
+
+    protected List<T> parseResultSet(ResultSet rs) throws PersistException{
+            List<T> result = new LinkedList<T>();
+            result = transformer.rowToObject(rs);
+            return result;
+        }
 
     /**
      * Устанавливает аргументы insert запроса в соответствии со значением полей объекта object.
      */
-    protected abstract String prepareStatementForInsert(T object) throws PersistException;
+    protected String prepareStatementForInsert(T object) throws PersistException{
+        List<String> setRow = new ArrayList<>();
+        String query = new String();
+        try{
+            setRow = transformer.setRowInDB(object);
+            String tableName = transformer.getTableName();
+
+            query = "INSERT INTO `" + tableName + "` ("
+                    + setRow.get(0) + ") VALUES (" + setRow.get(1) + ")";
+        } catch (Exception e) {
+            throw new PersistException(e);
+        }
+        return query;
+    }
 
     /**
      * Устанавливает аргументы update запроса в соответствии со значением полей объекта object.
      */
-    protected abstract String prepareStatementForUpdate(T object) throws PersistException;
+    protected String prepareStatementForUpdate(T object) throws PersistException{
+        Map<String, Object> objectColumns = transformer.getObjectColumns(object);
+        String field = "";
+        for (Map.Entry<String, Object> entry : objectColumns.entrySet()) {
+            if (entry.getKey().equals("id")) {
+                continue;
+            }
+            if (entry.getKey().equals("password")) {
+                entry.setValue(entry.getValue());
+            }
+            if (entry.getValue().getClass() == String.class) {
+                field += entry.getKey() + " = '" + entry.getValue() + "',";
+            } else {
+                field += entry.getKey() + " = " + entry.getValue() + ",";
+            }
+        }
+        String substring = field.substring(0, field.length() - 1);
+        field = substring;
+        String tableName = transformer.getTableName();
+        String query = "UPDATE `" + tableName + "` SET " + field
+                + " WHERE id = " + object.getId();
+        return query;
+
+    }
 
     @Override
-    public T persist(T object) throws PersistException {
+    public T create(T object) throws PersistException {
         T persistInstance;
         // Добавляем запись
         String sql = prepareStatementForInsert(object);//getCreateQuery();
@@ -51,9 +108,11 @@ public abstract class AbstractJDBCDao<T extends Identified<PK>, PK extends Integ
             }
         } catch (Exception e) {
             throw new PersistException(e);
-        } Integer id = object.getId();
+        }
+
+        Integer id = object.getId();
         // Получаем только что вставленную запись
-        sql = getSelectQuery() + " WHERE id = " + id +";";
+        sql = getSelectQueryWithOutDeleted() + " WHERE id = " + id + ";";
         try (PreparedStatement statement = conn.prepareStatement(sql)) {
             ResultSet rs = statement.executeQuery();
             List<T> list = parseResultSet(rs);
@@ -71,7 +130,7 @@ public abstract class AbstractJDBCDao<T extends Identified<PK>, PK extends Integ
     @Override
     public T getByPK(Integer key) throws PersistException {
         List<T> list;
-        String sql = getSelectQuery();
+        String sql = getSelectQueryWithOutDeleted();
         sql += " WHERE id = ?";
         Connection conn = connection.retrieve();
         try (PreparedStatement statement = conn.prepareStatement(sql)) {
@@ -130,7 +189,7 @@ public abstract class AbstractJDBCDao<T extends Identified<PK>, PK extends Integ
     }
 
     @Override
-    public List<T> getAll() throws PersistException {
+    public List<T> getAllWithoutDeleted() throws PersistException {
         List<T> list;
         String sql = getSelectQuery();
         Connection conn = connection.retrieve();
@@ -144,6 +203,32 @@ public abstract class AbstractJDBCDao<T extends Identified<PK>, PK extends Integ
         return list;
     }
 
+    @Override
+    public List<T> getAll() throws PersistException {
+        List<T> list;
+        String sql = getSelectQueryWithOutDeleted();
+        Connection conn = connection.retrieve();
+        try (PreparedStatement statement = conn.prepareStatement(sql)) {
+            ResultSet rs = statement.executeQuery();
+            list = parseResultSet(rs);
+            connection.putback(conn);
+        } catch (Exception e) {
+            throw new PersistException(e);
+        }
+        return list;
+    }
+
+    public AbstractJDBCDao() {
+        MySqlDaoFactory daoFactory  = new MySqlDaoFactory();;
+        ConnectionPool con = null;
+        try {
+            this.connection = daoFactory.getContext();
+        }catch(PersistException e){
+            e.printStackTrace();
+        }
+        clazz = this.getClassModel();
+        transformer = new Transformer(clazz);
+    }
     public AbstractJDBCDao(ConnectionPool connection) {
         this.connection = connection;
     }

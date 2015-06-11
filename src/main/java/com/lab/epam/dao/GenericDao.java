@@ -11,9 +11,6 @@ public interface GenericDao<T extends Identified<PK>, PK extends Serializable> {
     /** Создает новую запись и соответствующий ей объект */
     public T create(T object) throws PersistException;
 
-    /** Создает новую запись, соответствующую объекту object */
-    public T persist(T object)  throws PersistException;
-
     /** Возвращает объект соответствующий записи с первичным ключом key или null */
     public T getByPK(PK key) throws PersistException;
 
@@ -25,4 +22,7 @@ public interface GenericDao<T extends Identified<PK>, PK extends Serializable> {
 
     /** Возвращает список объектов соответствующих всем записям в базе данных */
     public List<T> getAll() throws PersistException;
+
+    /** Возвращает список объектов соответствующих всем записям в базе данных даже удленных */
+    public List<T> getAllWithoutDeleted() throws PersistException;
 }
