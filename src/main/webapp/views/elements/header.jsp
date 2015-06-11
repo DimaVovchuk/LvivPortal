@@ -28,17 +28,7 @@
                                    role="button" aria-expanded="false"><cdg:l18n key="header.sign"/></a>
 
                                 <form class="dropdown-menu pop-up-menu" role="menu" aria-labelledby="sign">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" id="login"
-                                               placeholder='<cdg:l18n key="header.login"/>'>
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="password" class="form-control" id="password"
-                                               placeholder='<cdg:l18n key="header.password"/>'>
-                                    </div>
-                                    <div class="divider"></div>
-                                    <button type="submit" class="form-btn btn btn-default"><cdg:l18n
-                                            key="header.sign"/></button>
+                                    <jsp:include page="/views/pages/signUp.jsp"/>
                                 </form>
                             </div>
                         </li>
