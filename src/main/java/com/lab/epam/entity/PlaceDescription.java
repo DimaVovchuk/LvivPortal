@@ -35,7 +35,7 @@ public class PlaceDescription implements Identified<Integer>{
 
         @Override
         public String toString() {
-            return "Place{" +
+            return "PlaceDescription{" +
                     "id=" + id +
                     ", place_id='" + place_id + '\'' +
                     ", locale='" + locale + '\'' +
@@ -52,9 +52,9 @@ public class PlaceDescription implements Identified<Integer>{
             this.id = id;
         }
 
-        public Integer getPlaceId() { return place_id;}
+        public Integer getPlace_id() { return place_id;}
 
-        public void setPlaceId(Integer id) {
+        public void setPlace_id(Integer id) {
         this.place_id = place_id;
     }
 
