@@ -41,8 +41,14 @@ public class UserService {
     }
 
     public boolean checkEmail(String email){
-        boolean b = mySqlUserDao.checkEmail(email);
-        return b;
+        return mySqlUserDao.checkEmail(email);
     }
 
+    public boolean checkPhone(String phone){
+        return mySqlUserDao.checkPhone(phone);
+    }
+
+    public boolean checkLogin(String login){
+        return mySqlUserDao.checkLogin(login);
+    }
 }

@@ -9,6 +9,7 @@ import org.apache.log4j.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
@@ -37,13 +38,23 @@ public class SignUpCommand implements Command {
         user.setStatus(1);
         user.setRoleID(2);
 
-
         UserService userService = new UserService();
         boolean checkEmail = userService.checkEmail(email);
+        boolean checkPhone = userService.checkEmail(phone);
+        boolean checkLogin = userService.checkEmail(login);
 
-        loger.info("aftter check");
-        System.out.println(checkEmail);
-        if(checkEmail){
+        HttpSession session = request.getSession();
+
+        if(!checkEmail){
+            session.setAttribute("emailError", 1);
+            loger.warn("Such email is exist");
+        } else if(!checkPhone){
+            session.setAttribute("phoneError", 1);
+            loger.warn("Such phone is exist");
+        } else if(!checkLogin){
+            session.setAttribute("loginError", 1);
+            loger.warn("Such login is exist");
+        } else {
             try {
                 userService.create(user);
                 loger.info("New user was added");
@@ -53,8 +64,6 @@ public class SignUpCommand implements Command {
                 loger.info("Adding new user was failed");
                 loger.error(e.getMessage());
             }
-        }else{
-           // session.setAttribute("loginError",1);
         }
     }
 }
