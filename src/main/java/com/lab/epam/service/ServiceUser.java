@@ -1,9 +1,7 @@
 package com.lab.epam.service;
 
 import com.lab.epam.dao.PersistException;
-import com.lab.epam.dao.imp.MySqlCategoryDao;
 import com.lab.epam.dao.imp.MySqlUserDao;
-import com.lab.epam.entity.Category;
 import com.lab.epam.entity.User;
 
 import java.util.List;
@@ -37,6 +35,9 @@ public class ServiceUser {
 
     public List<User> getAllWithoutDeleted() throws PersistException{
         return mySqlUserDao.getAllWithoutDeleted();
+    }
+    public User geUserByLogin(String login){
+        return mySqlUserDao.getUserByLogin(login);
     }
 
 }

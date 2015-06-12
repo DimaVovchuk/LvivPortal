@@ -20,12 +20,11 @@ public class CommandFactory {
         commands.put("locale", new LocaleCommand());
         commands.put("signUp", new SignUpCommand());
         commands.put("place", new PlaceCommand());
-        commands.put("login", new LoginCommand());
+        commands.put("signIn", new SignInCommand());
     }
 
     public static void createCommand(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String command = request.getParameter("command");
-        System.out.println(command);
         Command commamdExecute = commands.get(command);
         commamdExecute.execute(request,response);
     }
