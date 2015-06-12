@@ -17,8 +17,6 @@ public class MySqlUserDao extends AbstractJDBCDao<User, Integer> {
     public static final String getUserByLoginAndPassSQL = "login=?";
     private ConnectionPool connection = ConnectionManager.getConnection();
 
-    ConnectionPool connection = ConnectionManager.getConnection();
-
     private class PersistGroup extends Category {
         public void setId(int id) {
             super.setId(id);
@@ -41,7 +39,7 @@ public class MySqlUserDao extends AbstractJDBCDao<User, Integer> {
         try (PreparedStatement statement = conn.prepareStatement(sql)) {
             statement.setString(1, login);
             ResultSet rs = statement.executeQuery();
-            user = (User) parseResultSet(rs).get(0);
+            user = parseResultSet(rs).get(0);
 
         } catch (Exception e) {
 
