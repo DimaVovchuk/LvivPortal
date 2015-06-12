@@ -33,6 +33,6 @@ public class SignInCommand implements Command{
             session.setAttribute("loginError",1);
             loger.info("login or password is incorrect");
         }
-        request.getRequestDispatcher("/views/pages/dashboard.jsp").forward(request,response);
+        request.getRequestDispatcher("/views/pages/dashboard.jsp");
     }
 }
