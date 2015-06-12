@@ -7,7 +7,7 @@
     <div class="container">
         <div class="header-main">
             <div class="logo">
-                <a href="view?command=index"> <img src="${pageContext.request.contextPath}/images/logo.png" alt=""
+                <a href="portal?command=index"> <img src="${pageContext.request.contextPath}/images/logo.png" alt=""
                                                    title=""> </a>
             </div>
             <div class="head-right">
@@ -36,7 +36,7 @@
 
                 <div class="local">
                     <ul>
-                        <form class="form-inline" action="view?command=locale" method="post">
+                        <form class="form-inline" action="portal?command=locale" method="post">
                             <li>
                                 <button onclick="language('en')"><img
                                         src="${pageContext.request.contextPath}/images/localization/EN.png"></button>
