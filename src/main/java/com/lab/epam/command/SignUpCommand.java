@@ -11,17 +11,33 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by Vasyl on 11.06.2015.
  */
 public class SignUpCommand implements Command {
     private static final Logger loger = LogManager.getLogger(ClassName.getCurrentClassName());
+    private static final String CHECK_NAME = "\\w+";
+    private static final String CHECK_SURNAME = "\\w+";
+    private static final String CHECK_LOGIN = "([A-Za-z0-9]+)";
+    private static final String CHECK_EMAIL = "(\\w+@[a-zA-Z_]+?\\.[a-zA-Z]{2,6})";
+    private static final String CHECK_PASSWORD = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,15})";
+    private static final String CHECK_PHONE = "([0-9]{6,15})";
+
+    private static boolean checkData(String testString, String pattern){
+        Pattern p = Pattern.compile(pattern);
+        Matcher m = p.matcher(testString);
+        return m.matches();
+    }
     public void execute(HttpServletRequest request,
                         HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
         loger.info("Command SignUpCommand.");
-        String name = request.getParameter("name");
-        String surname = request.getParameter("surname");
+        boolean errorFlag = false;
+        String name = request.getParameter("first");
+        String surname = request.getParameter("last");
         String login = request.getParameter("login");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
@@ -43,18 +59,79 @@ public class SignUpCommand implements Command {
         boolean checkPhone = userService.checkEmail(phone);
         boolean checkLogin = userService.checkEmail(login);
 
-        HttpSession session = request.getSession();
+        if(checkData(name,CHECK_NAME)){
+            session.setAttribute("loginError", 1);
+            errorFlag = true;
+            loger.warn("Name is pattern error");
+        }
+
+        if(checkData(surname,CHECK_SURNAME)){
+            session.setAttribute("loginError", 1);
+            errorFlag = true;
+            loger.warn("Surname is pattern error");
+        }
+
+        if(checkData(login,CHECK_LOGIN)){
+            session.setAttribute("loginError", 1);
+            errorFlag = true;
+            loger.warn("Login is pattern error");
+        }
+
+        if(checkData(email,CHECK_EMAIL)){
+            session.setAttribute("loginError", 1);
+            errorFlag = true;
+            loger.warn("Emain is pattern error");
+        }
+
+        if(checkData(password,CHECK_PASSWORD)){
+            session.setAttribute("loginError", 1);
+            errorFlag = true;
+            loger.warn("Password is pattern error");
+        }
+
+        if(checkData(phone,CHECK_PHONE)){
+            session.setAttribute("loginError", 1);
+            errorFlag = true;
+            loger.warn("Phone is pattern error");
+        }
+
+        if(login ==""){
+            session.setAttribute("loginError", 1);
+            errorFlag = true;
+            loger.warn("Login is empty");
+        }
+
+        if(phone ==""){
+            session.setAttribute("phoneError", 1);
+            errorFlag = true;
+            loger.warn("Phone is empty");
+        }
+        if(email ==""){
+            session.setAttribute("emailError", 1);
+            errorFlag = true;
+            loger.warn("Email is empty");
+        }
 
         if(!checkEmail){
             session.setAttribute("emailError", 1);
+            errorFlag = true;
             loger.warn("Such email is exist");
-        } else if(!checkPhone){
+        }
+
+        if(!checkPhone){
             session.setAttribute("phoneError", 1);
+            errorFlag = true;
             loger.warn("Such phone is exist");
-        } else if(!checkLogin){
+        }
+
+        if(!checkLogin){
             session.setAttribute("loginError", 1);
+            errorFlag = true;
             loger.warn("Such login is exist");
-        } else {
+        }
+
+        if(errorFlag){}
+        else{
             try {
                 userService.create(user);
                 loger.info("New user was added");
