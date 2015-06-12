@@ -126,7 +126,7 @@
     color: #333333;
     border: 1px solid #33b5e5;
 }
-.login-form button {
+.login-form input[type=submit] {
     cursor: pointer;
     background: #33b5e5;
     width: 100%;
