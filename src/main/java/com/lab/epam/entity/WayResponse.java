@@ -21,7 +21,7 @@ public class WayResponse implements Identified<Integer> {
     @Column("way_id")
     private Integer way_id;
     @Column("deleted")
-    private Boolean deleted = true;
+    private Boolean deleted = false;
 
     public WayResponse(String description, Integer rating,  Integer user_id, Integer way_id) {
         this.rating = rating;

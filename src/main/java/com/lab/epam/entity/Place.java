@@ -24,7 +24,7 @@ public class Place implements Identified<Integer> {
     @Column("category_id")
     private Integer category_id;
     @Column("deleted")
-    private Boolean deleted = true;
+    private Boolean deleted = false;
 
     public Place(String adress, String latitude, String longitude, Integer category_id, Integer rating,  String visible) {
         this.rating = rating;

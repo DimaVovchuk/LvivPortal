@@ -18,7 +18,7 @@ public class Way implements Identified<Integer> {
     @Column("visible")
     private String visible;
     @Column("deleted")
-    private Boolean deleted = true;
+    private Boolean deleted = false;
 
     public Way(Integer rating, String name, String visible){
         this.rating = rating;

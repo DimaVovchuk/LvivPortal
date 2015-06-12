@@ -20,6 +20,8 @@ public class PlaceDescription implements Identified<Integer>{
         private String name;
         @Column("description")
         private String description;
+        @Column("deleted")
+        private Boolean deleted = false;
 
         public PlaceDescription(Integer place_id, String locale, String name, String descriptione) {
             this.place_id = place_id;

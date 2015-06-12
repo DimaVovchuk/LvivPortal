@@ -15,7 +15,7 @@ public class Category implements Identified<Integer> {
         @Column("category")
         private String category;
         @Column("deleted")
-        private Boolean deleted = true;
+        private Boolean deleted = false;
 
         public Category(String category){
             this.category = category;

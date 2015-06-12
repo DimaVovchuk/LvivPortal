@@ -21,7 +21,7 @@ public class PlaceResponse implements Identified<Integer> {
     @Column("place_id")
     private Integer place_id;
     @Column("deleted")
-    private Boolean deleted = true;
+    private Boolean deleted = false;
 
     public PlaceResponse(String description, Integer rating,  Integer user_id, Integer place_id) {
         this.rating = rating;

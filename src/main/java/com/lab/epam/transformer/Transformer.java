@@ -72,6 +72,7 @@ public class Transformer<T> {
 			field += entry.getKey() + ",";
 			if (entry.getValue().getClass() == String.class) {
 				values += "'" + entry.getValue() + "',";
+
 			} else {
 				values += entry.getValue() + ",";
 			}

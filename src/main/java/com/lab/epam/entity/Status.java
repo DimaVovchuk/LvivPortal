@@ -15,7 +15,7 @@ public class Status implements Identified<Integer> {
     @Column("status")
     private String status;
     @Column("deleted")
-    private Boolean deleted = true;
+    private Boolean deleted = false;
 
     public Status(String status){
         this.status = status;
