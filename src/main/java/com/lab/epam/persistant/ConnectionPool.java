@@ -24,7 +24,7 @@ public class ConnectionPool {
         try {
             URL location = getClass().getProtectionDomain().getCodeSource().getLocation();
             File configFile = new File(location.getFile(),"persistent.xml");
-            InputStream stream = new FileInputStream("D:\\Eclipse_Luna\\gitProject\\LvivPortal\\LvivPortal\\src\\main\\resources\\persistent.xml");
+            InputStream stream = new FileInputStream("D:\\JAVA\\Git\\LvivPortal\\src\\main\\resources\\persistent.xml");
             props.loadFromXML(stream);
         } catch (IOException e) {
             e.printStackTrace();

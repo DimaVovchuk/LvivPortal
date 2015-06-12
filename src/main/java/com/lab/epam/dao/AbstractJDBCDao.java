@@ -1,14 +1,12 @@
 package com.lab.epam.dao;
 
 import com.lab.epam.dao.imp.MySqlDaoFactory;
-import com.lab.epam.entity.Category;
 import com.lab.epam.entity.Decoder;
 import com.lab.epam.persistant.ConnectionManager;
 import com.lab.epam.persistant.ConnectionPool;
 import com.lab.epam.transformer.Transformer;
 
 import java.sql.Connection;
-import java.io.Serializable;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -34,7 +32,7 @@ public abstract class AbstractJDBCDao<T extends Identified<PK>, PK extends Integ
 
     public String getSelectQueryWithOutDeleted(){
         String tableName = transformer.getTableName();
-        return "SELECT * FROM `" + tableName + "`";
+        return "SELECT * FROM `" + tableName + "` WHERE ";
     }
 
     public String getDeleteQuery() {

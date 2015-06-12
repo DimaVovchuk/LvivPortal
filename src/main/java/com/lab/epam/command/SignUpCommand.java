@@ -38,14 +38,14 @@ public class SignUpCommand implements Command {
         user.setRoleID(2);
 
 
-        UserService serviceUser = new UserService();
-        boolean checkEmail = serviceUser.checkEmail(email);
+        UserService userService = new UserService();
+        boolean checkEmail = userService.checkEmail(email);
 
         loger.info("aftter check");
         System.out.println(checkEmail);
         if(checkEmail){
             try {
-                serviceUser.create(user);
+                userService.create(user);
                 loger.info("New user was added");
                 request.getRequestDispatcher("/views/pages/dashboard.jsp").forward(request, response);
             } catch (Exception e) {
