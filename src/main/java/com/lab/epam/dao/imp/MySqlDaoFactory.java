@@ -97,5 +97,12 @@ public class MySqlDaoFactory implements DaoFactory<ConnectionPool> {
                 return new MySqlPlaceDescriptionDao();
             }
         });
+
+        creators.put(PlaceImage.class, new DaoCreator<ConnectionPool>() {
+            @Override
+            public GenericDao create(ConnectionPool connection) {
+                return new MySqlPlaceImageDao();
+            }
+        });
     }
 }

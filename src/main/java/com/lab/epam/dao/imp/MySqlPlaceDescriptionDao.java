@@ -35,7 +35,7 @@ public class MySqlPlaceDescriptionDao extends AbstractJDBCDao<PlaceDescription, 
     }
 
     public Class getClassModel() {
-        return Place.class;
+        return PlaceDescription.class;
     }
 
     public PlaceDescription getPlaceDescriptionByIdPlace(Integer place_id, String locale) throws PersistException {
