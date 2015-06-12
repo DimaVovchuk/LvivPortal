@@ -26,7 +26,7 @@ public class Sender {
         props.put("mail.smtp.port", "465");
     }
 
-    public void send(String subject, String text, String fromEmail, String toEmail) {
+    public void send(String subject, String text, String toEmail) {
         Session session = Session.getDefaultInstance(props, new Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication(username, password);

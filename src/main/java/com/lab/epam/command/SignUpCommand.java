@@ -3,6 +3,7 @@ package com.lab.epam.command;
 import com.lab.epam.entity.User;
 import com.lab.epam.helper.ClassName;
 import com.lab.epam.service.UserService;
+import com.lab.epam.smtp.SendEmail;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ResourceBundle;
 
 /**
  * Created by Vasyl on 11.06.2015.
@@ -57,6 +59,13 @@ public class SignUpCommand implements Command {
         } else {
             try {
                 userService.create(user);
+                ResourceBundle bundle = (ResourceBundle) session.getAttribute("bundle");
+                if(bundle.getLocale().toString().equalsIgnoreCase("ua")){
+                    SendEmail.sender("Lviv Portal","Привіт. Вітаємо на нашому сайті. Будь ласка, підтвердіть ваш email " +
+                            "Для підтвердження перейдіть по посиланню -> <a href=''></a>! ",email);
+                }else{
+                    SendEmail.sender("Lviv Portal","Hello. Welcome in out site. Please confirm your email!",email);
+                }
                 loger.info("New user was added");
                 request.getRequestDispatcher("/views/pages/dashboard.jsp").forward(request, response);
             } catch (Exception e) {
