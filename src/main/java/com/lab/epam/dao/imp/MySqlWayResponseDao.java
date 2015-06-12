@@ -4,6 +4,7 @@ import com.lab.epam.dao.AbstractJDBCDao;
 import com.lab.epam.dao.PersistException;
 import com.lab.epam.entity.Category;
 import com.lab.epam.entity.WayResponse;
+import com.lab.epam.persistant.ConnectionManager;
 import com.lab.epam.persistant.ConnectionPool;
 import com.lab.epam.transformer.Transformer;
 
@@ -18,6 +19,8 @@ import java.util.Map;
  */
 public class MySqlWayResponseDao extends AbstractJDBCDao<WayResponse, Integer> {
 
+    ConnectionPool connection = ConnectionManager.getConnection();
+
     private class PersistGroup extends Category {
         public void setId(int id) {
             super.setId(id);
@@ -25,10 +28,6 @@ public class MySqlWayResponseDao extends AbstractJDBCDao<WayResponse, Integer> {
     }
 
     public MySqlWayResponseDao() {
-    }
-
-    public MySqlWayResponseDao(ConnectionPool connection) {
-        super(connection);
     }
 
     public Class getClassModel() {

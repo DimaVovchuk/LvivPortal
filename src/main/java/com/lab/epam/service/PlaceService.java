@@ -1,9 +1,7 @@
 package com.lab.epam.service;
 
 import com.lab.epam.dao.PersistException;
-import com.lab.epam.dao.imp.MySqlCategoryDao;
 import com.lab.epam.dao.imp.MySqlPlaceDao;
-import com.lab.epam.entity.Category;
 import com.lab.epam.entity.Place;
 import com.lab.epam.helper.ClassName;
 import org.apache.log4j.LogManager;
@@ -12,9 +10,10 @@ import org.apache.log4j.Logger;
 import java.util.List;
 
 /**
- * Created by Admin on 11.06.2015.
+ * Created by Admin on 12.06.2015.
  */
-public class ServicePlace {
+public class PlaceService {
+
     MySqlPlaceDao mySqlPlaceDao = new MySqlPlaceDao();
     private static final Logger loger = LogManager.getLogger(ClassName.getCurrentClassName());
 
@@ -82,4 +81,5 @@ public class ServicePlace {
 
         return places;
     }
+
 }

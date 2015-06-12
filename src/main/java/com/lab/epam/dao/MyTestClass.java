@@ -2,8 +2,8 @@ package com.lab.epam.dao;
 
 import com.lab.epam.dao.imp.*;
 import com.lab.epam.entity.*;
-import com.lab.epam.service.ServiceCategory;
-import com.lab.epam.service.ServiceUser;
+import com.lab.epam.service.CategoryService;
+import com.lab.epam.service.UserService;
 
 /**
  * Created by Admin on 10.06.2015.
@@ -15,8 +15,8 @@ public class MyTestClass {
 
 
         MySqlCategoryDao mc = new MySqlCategoryDao();
-        ServiceCategory sc = new ServiceCategory();
-        ServiceUser su = new ServiceUser();
+        CategoryService sc = new CategoryService();
+        UserService su = new UserService();
        /* MySqlPlaceDao mp = new MySqlPlaceDao();
         MySqlPlaceResponseDao mpr = new MySqlPlaceResponseDao();
         MySqlRoleDao mr = new MySqlRoleDao();
@@ -37,7 +37,7 @@ public class MyTestClass {
         System.out.println(mu.getAll());
         System.out.println(mw.getAll());*/
        // sc.create(new Category("sdvfsd"));
-       su.create(new User.Builder("Подгорная","Ольга","niceapple91","olya.podgornayaoi@gmail.com","password","0982713501",2).rating(2).status(1).build());
+      // su.create(new User.Builder("Подгорная","Ольга","niceapple9116","olya.podgornayaoiop@gmail.com","password","0982713503",2).rating(2).status(1).build());
         System.out.println(su.getByPK(8));
     }
 }

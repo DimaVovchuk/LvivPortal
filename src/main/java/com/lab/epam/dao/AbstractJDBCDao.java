@@ -111,9 +111,11 @@ public abstract class AbstractJDBCDao<T extends Identified<PK>, PK extends Integ
             }
         } catch (Exception e) {
             throw new PersistException(e);
+        } finally {
+            connection.putback(conn);
         }
 
-        connection.putback(conn);
+
     }
 
     @Override
@@ -126,9 +128,10 @@ public abstract class AbstractJDBCDao<T extends Identified<PK>, PK extends Integ
             statement.setInt(1, key);
             ResultSet rs = statement.executeQuery();
             list = parseResultSet(rs);
-            connection.putback(conn);
         } catch (Exception e) {
             throw new PersistException(e);
+        } finally {
+            connection.putback(conn);
         }
         if (list == null || list.size() == 0) {
             throw new PersistException("Record with PK = " + key + " not found.");
@@ -144,14 +147,14 @@ public abstract class AbstractJDBCDao<T extends Identified<PK>, PK extends Integ
         String sql = prepareStatementForUpdate(object);
         Connection conn = connection.retrieve();
         try (PreparedStatement statement = conn.prepareStatement(sql);) {
-           // prepareStatementForUpdate(statement, object); // заполнение аргументов запроса оставим на совесть потомков
             int count = statement.executeUpdate();
             if (count != 1) {
                 throw new PersistException("On update modify more then 1 record: " + count);
             }
-            connection.putback(conn);
         } catch (Exception e) {
             throw new PersistException(e);
+        } finally {
+            connection.putback(conn);
         }
 
     }
@@ -171,9 +174,10 @@ public abstract class AbstractJDBCDao<T extends Identified<PK>, PK extends Integ
                 throw new PersistException("On delete modify more then 1 record: " + count);
             }
             statement.close();
-            connection.putback(conn);
         } catch (Exception e) {
             throw new PersistException(e);
+        } finally {
+            connection.putback(conn);
         }
     }
 
@@ -185,9 +189,11 @@ public abstract class AbstractJDBCDao<T extends Identified<PK>, PK extends Integ
         try (PreparedStatement statement = conn.prepareStatement(sql)) {
             ResultSet rs = statement.executeQuery();
             list = parseResultSet(rs);
-            connection.putback(conn);
+
         } catch (Exception e) {
             throw new PersistException(e);
+        } finally {
+            connection.putback(conn);
         }
         return list;
     }
@@ -200,26 +206,21 @@ public abstract class AbstractJDBCDao<T extends Identified<PK>, PK extends Integ
         try (PreparedStatement statement = conn.prepareStatement(sql)) {
             ResultSet rs = statement.executeQuery();
             list = parseResultSet(rs);
-            connection.putback(conn);
         } catch (Exception e) {
             throw new PersistException(e);
+        } finally {
+            connection.putback(conn);
         }
         return list;
     }
 
     public AbstractJDBCDao() {
         MySqlDaoFactory daoFactory  = new MySqlDaoFactory();;
-        ConnectionPool con = null;
-        try {
-            this.connection = daoFactory.getContext();
-        }catch(PersistException e){
-            e.printStackTrace();
-        }
+        connection  = ConnectionManager.getConnection();
         clazz = this.getClassModel();
         transformer = new Transformer(clazz);
     }
-    public AbstractJDBCDao(ConnectionPool connection) {
-        this.connection = connection;
-    }
+
+
 
 }

@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by Admin on 11.06.2015.
  */
-public class ServiceWayResponse {
+public class WayResponseService {
 
     MySqlWayResponseDao mySqlWayResponseDao = new MySqlWayResponseDao();
 

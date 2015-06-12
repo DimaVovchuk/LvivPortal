@@ -16,11 +16,11 @@ public class Way implements Identified<Integer> {
     @Column("name")
     private String name;
     @Column("visible")
-    private String visible;
+    private Boolean visible;
     @Column("deleted")
     private Boolean deleted = false;
 
-    public Way(Integer rating, String name, String visible){
+    public Way(Integer rating, String name, Boolean visible){
         this.rating = rating;
         this.name = name;
         this.visible = visible;
@@ -64,11 +64,11 @@ public class Way implements Identified<Integer> {
         this.name = name;
     }
 
-    public String getVisible() {
+    public Boolean getVisible() {
         return visible;
     }
 
-    public void setVisible(String visible) {
+    public void setVisible(Boolean visible) {
         this.visible = visible;
     }
 

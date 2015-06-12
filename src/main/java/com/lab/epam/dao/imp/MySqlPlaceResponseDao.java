@@ -4,6 +4,7 @@ import com.lab.epam.dao.AbstractJDBCDao;
 import com.lab.epam.dao.PersistException;
 import com.lab.epam.entity.Category;
 import com.lab.epam.entity.PlaceResponse;
+import com.lab.epam.persistant.ConnectionManager;
 import com.lab.epam.persistant.ConnectionPool;
 import com.lab.epam.transformer.Transformer;
 
@@ -18,6 +19,8 @@ import java.util.Map;
  */
 public class MySqlPlaceResponseDao extends AbstractJDBCDao<PlaceResponse, Integer> {
 
+    ConnectionPool connection = ConnectionManager.getConnection();
+
     private class PersistGroup extends PlaceResponse {
         public void setId(int id) {
             super.setId(id);
@@ -25,10 +28,6 @@ public class MySqlPlaceResponseDao extends AbstractJDBCDao<PlaceResponse, Intege
     }
 
     public MySqlPlaceResponseDao() {
-    }
-
-    public MySqlPlaceResponseDao(ConnectionPool connection) {
-        super(connection);
     }
 
     public Class getClassModel() {

@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Created by Admin on 11.06.2015.
  */
-public class ServiceRole {
+public class RoleService {
 
     MySqlRoleDao mySqlRoleDao = new MySqlRoleDao();
 

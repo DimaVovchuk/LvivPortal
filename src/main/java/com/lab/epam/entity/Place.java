@@ -4,6 +4,8 @@ import com.lab.epam.dao.Identified;
 import com.lab.epam.transformer.Column;
 import com.lab.epam.transformer.Table;
 
+import java.util.Comparator;
+
 /**
  * Created by Admin on 10.06.2015.
  */
@@ -18,7 +20,7 @@ public class Place implements Identified<Integer> {
     @Column("longitude")
     private String longitude;
     @Column("visible")
-    private String visible;
+    private Boolean visible;
     @Column("rating")
     private Integer rating;
     @Column("category_id")
@@ -26,7 +28,7 @@ public class Place implements Identified<Integer> {
     @Column("deleted")
     private Boolean deleted = false;
 
-    public Place(String adress, String latitude, String longitude, Integer category_id, Integer rating,  String visible) {
+    public Place(String adress, String latitude, String longitude, Integer category_id, Integer rating,  Boolean visible) {
         this.rating = rating;
         this.adress = adress;
         this.latitude = latitude;
@@ -99,12 +101,11 @@ public class Place implements Identified<Integer> {
         this.category_id = category_id;
     }
 
-
-    public String getVisible() {
+    public Boolean setVisible() {
         return visible;
     }
 
-    public void setVisible(String visible) {
+    public void setVisible(Boolean visible) {
         this.visible = visible;
     }
 
@@ -115,6 +116,14 @@ public class Place implements Identified<Integer> {
     public void setDeleted(Boolean deleted) {
         this.deleted = deleted;
     }
+
+
+   public static class PlaceComparator implements Comparator<Object> {
+        public int compare(Object cC1, Object cC2) {
+            return ((Place)cC1).rating.compareTo(((Place)cC2).rating);
+        }
+    }
+
 }
 
 

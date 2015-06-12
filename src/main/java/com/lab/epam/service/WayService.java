@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Created by Admin on 11.06.2015.
  */
-public class ServiceWay {
+public class WayService {
 
     MySqlWayDao mySqlWayDao = new MySqlWayDao();
 

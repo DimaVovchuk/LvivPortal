@@ -39,55 +39,62 @@ public class MySqlDaoFactory implements DaoFactory<ConnectionPool> {
         creators.put(Way.class, new DaoCreator<ConnectionPool>() {
             @Override
             public GenericDao create(ConnectionPool connection) {
-                return new MySqlWayDao(connection);
+                return new MySqlWayDao();
             }
         });
         creators.put(Category.class, new DaoCreator<ConnectionPool>() {
             @Override
             public GenericDao create(ConnectionPool connection) {
-                return new MySqlCategoryDao(connection);
+                return new MySqlCategoryDao();
             }
         });
 
         creators.put(Place.class, new DaoCreator<ConnectionPool>() {
             @Override
             public GenericDao create(ConnectionPool connection) {
-                return new MySqlPlaceDao(connection);
+                return new MySqlPlaceDao();
             }
         });
 
         creators.put(PlaceResponse.class, new DaoCreator<ConnectionPool>() {
             @Override
             public GenericDao create(ConnectionPool connection) {
-                return new MySqlPlaceResponseDao(connection);
+                return new MySqlPlaceResponseDao();
             }
         });
 
         creators.put(Role.class, new DaoCreator<ConnectionPool>() {
             @Override
             public GenericDao create(ConnectionPool connection) {
-                return new MySqlRoleDao(connection);
+                return new MySqlRoleDao();
             }
         });
 
         creators.put(Status.class, new DaoCreator<ConnectionPool>() {
             @Override
             public GenericDao create(ConnectionPool connection) {
-                return new MySqlStatusDao(connection);
+                return new MySqlStatusDao();
             }
         });
 
         creators.put(User.class, new DaoCreator<ConnectionPool>() {
             @Override
             public GenericDao create(ConnectionPool connection) {
-                return new MySqlUserDao(connection);
+                return new MySqlUserDao();
             }
         });
 
         creators.put(WayResponse.class, new DaoCreator<ConnectionPool>() {
             @Override
             public GenericDao create(ConnectionPool connection) {
-                return new MySqlWayResponseDao(connection);
+                return new MySqlWayResponseDao();
+            }
+        });
+
+        creators.put(PlaceDescription.class, new DaoCreator<ConnectionPool>() {
+            @Override
+            public GenericDao create(ConnectionPool connection) {
+                return new MySqlPlaceDescriptionDao();
             }
         });
     }
