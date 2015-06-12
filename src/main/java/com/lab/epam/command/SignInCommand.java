@@ -6,6 +6,7 @@ import com.lab.epam.md5.MD5Creator;
 import com.lab.epam.service.UserService;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import com.lab.epam.service.UserService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -23,16 +24,18 @@ public class SignInCommand implements Command{
         String login = request.getParameter("login");
         String password = request.getParameter("password");
         UserService serviceUser = new UserService();
+        User user = serviceUser.getUserByLogin(login);
+        UserService serviceUser = new UserService();
         User user = serviceUser.geUserByLogin(login);
         HttpSession session = request.getSession();
         if(user != null && user.getPassword() != MD5Creator.getMD5(password + login)){
             session.setAttribute("login",login);
             session.setAttribute("role",user.getRoleID());
-            loger.info("User " + login + "is singing in");
         }else{
             session.setAttribute("loginError",1);
             loger.info("login or password is incorrect");
         }
+        request.getRequestDispatcher("/views/pages/dashboard.jsp").forward(request, response);
         request.getRequestDispatcher("/views/pages/dashboard.jsp").forward(request,response);
     }
 }

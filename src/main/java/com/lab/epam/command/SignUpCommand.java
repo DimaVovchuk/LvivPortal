@@ -1,9 +1,8 @@
 package com.lab.epam.command;
 
-import com.lab.epam.dao.PersistException;
-import com.lab.epam.dao.imp.MySqlUserDao;
 import com.lab.epam.entity.User;
 import com.lab.epam.helper.ClassName;
+import com.lab.epam.service.UserService;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -36,17 +35,26 @@ public class SignUpCommand implements Command {
         user.setPassword(password);
         user.setPhone(phone);
         user.setStatus(1);
-        user.setRoleID(20);
+        user.setRoleID(2);
 
-        MySqlUserDao mu = new MySqlUserDao();
-        try {
-            mu.create(user);
-            loger.info("New user was added");
-            request.getRequestDispatcher("/views/pages/dashboard.jsp").forward(request, response);
-        } catch (PersistException e) {
-            e.printStackTrace();
-            loger.info("Adding new user was failed");
-            loger.error(e.getMessage());
+
+        UserService serviceUser = new UserService();
+        boolean checkEmail = serviceUser.checkEmail(email);
+
+        loger.info("aftter check");
+        System.out.println(checkEmail);
+        if(checkEmail){
+            try {
+                serviceUser.create(user);
+                loger.info("New user was added");
+                request.getRequestDispatcher("/views/pages/dashboard.jsp").forward(request, response);
+            } catch (Exception e) {
+                e.printStackTrace();
+                loger.info("Adding new user was failed");
+                loger.error(e.getMessage());
+            }
+        }else{
+           // session.setAttribute("loginError",1);
         }
     }
 }

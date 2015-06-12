@@ -36,7 +36,7 @@
 
                 <div class="local">
                     <ul>
-                        <form class="form-inline" action="portal?command=locale" method="post">
+                        <form class="form-inline" action="view?command=locale" method="post">
                             <li>
                                 <button onclick="language('en')"><img
                                         src="${pageContext.request.contextPath}/images/localization/EN.png"></button>
