@@ -15,7 +15,7 @@ public class Role implements Identified<Integer> {
     @Column("role")
     private String role;
     @Column("deleted")
-    private Boolean deleted = true;
+    private Boolean deleted = false;
 
     public Role(String role){
         this.id = id;

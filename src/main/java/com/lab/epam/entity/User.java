@@ -26,25 +26,24 @@ public class User implements Identified<Integer> {
     private String password;
     @Column("phone")
     private String phone;
-    @Column("status")
-    private String status;
+    @Column("status_id")
+    private Integer status;
     @Column("role_id")
     private Integer role_id;
     @Column("deleted")
-    private Boolean deleted = true;
+    private Boolean deleted = false;
 
-    public User(Integer rating, String name, String surname, String login, String mail, String password, String phone, String status, Integer role_id) {
-        this.id = id;
-        this.rating = rating;
-        this.name = name;
-        this.surname = surname;
-        this.login = login;
-        this.mail = mail;
-        this.password = password;
-        this.phone = phone;
-        this.status = status;
-        this.role_id = role_id;
-        this.deleted = deleted;
+    public User(Builder builder) {
+
+        rating = builder.rating;
+        name = builder.name;
+        surname = builder.surname;
+        login = builder.login;
+        mail = builder.mail;
+        password = builder.password;
+        phone = builder.phone;
+        status = builder.status;
+        role_id = builder.role_id;
     }
 
     public User(){
@@ -131,11 +130,11 @@ public class User implements Identified<Integer> {
         this.phone = phone;
     }
 
-    public String getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
@@ -154,4 +153,44 @@ public class User implements Identified<Integer> {
     public void setDeleted(Boolean deleted) {
         this.deleted = deleted;
     }
+
+
+    public static class Builder {
+        private String name;
+        private String surname;
+        private String login;
+        private String mail;
+        private String password;
+        private String phone;
+        private Integer role_id;
+
+        private Integer rating;
+        private Integer status;
+
+        public Builder(String name, String surname, String login, String mail, String password, String phone, Integer role_id) {
+            this.name = name;
+            this.surname = surname;
+            this.login = login;
+            this.mail = mail;
+            this.password = password;
+            this.phone = phone;
+            this.role_id = role_id;
+        }
+
+        public Builder rating(int val) {
+            rating = val;
+            return this;
+        }
+
+        public Builder status(int val) {
+            status = val;
+            return this;
+        }
+
+        public User build() {
+            return new User(this);
+        }
+    }
+
+
 }

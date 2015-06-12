@@ -2,6 +2,7 @@ package com.lab.epam.dao;
 
 import com.lab.epam.dao.imp.MySqlDaoFactory;
 import com.lab.epam.entity.Category;
+import com.lab.epam.entity.Decoder;
 import com.lab.epam.persistant.ConnectionManager;
 import com.lab.epam.persistant.ConnectionPool;
 import com.lab.epam.transformer.Transformer;
@@ -21,6 +22,7 @@ import java.util.Map;
 public abstract class AbstractJDBCDao<T extends Identified<PK>, PK extends Integer> implements GenericDao<T, PK>, ClassNameInterface {
 
     private ConnectionPool connection;
+    private Decoder dec;
 
     Class<T> clazz;
     Transformer<T> transformer;

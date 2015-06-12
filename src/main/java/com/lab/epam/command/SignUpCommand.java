@@ -35,7 +35,7 @@ public class SignUpCommand implements Command {
         user.setMail(email);
         user.setPassword(password);
         user.setPhone(phone);
-        user.setStatus("notective");
+        user.setStatus(1);
         user.setRoleID(20);
 
         MySqlUserDao mu = new MySqlUserDao();
