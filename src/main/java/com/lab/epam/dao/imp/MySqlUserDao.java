@@ -15,9 +15,8 @@ import java.sql.ResultSet;
  */
 public class MySqlUserDao extends AbstractJDBCDao<User, Integer> {
     public static final String getUserByLoginAndPassSQL = "login=?";
+    public static final String checkMailSQL = "email=?";
     private ConnectionPool connection = ConnectionManager.getConnection();
-
-    ConnectionPool connection = ConnectionManager.getConnection();
 
     private class PersistGroup extends Category {
         public void setId(int id) {
@@ -49,5 +48,28 @@ public class MySqlUserDao extends AbstractJDBCDao<User, Integer> {
             connection.putback(conn);
         }
         return user;
+    }
+
+    public boolean checkEmail(String email) {
+        System.out.println("in userDao");
+        User user = null;
+        String sql = getSelectQueryWithOutDeleted();
+        sql += checkMailSQL;
+        Connection conn = connection.retrieve();
+        try (PreparedStatement statement = conn.prepareStatement(sql)) {
+            statement.setString(1, email);
+            ResultSet rs = statement.executeQuery();
+            user = parseResultSet(rs).get(0);
+            if (user == null) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception e) {
+            System.out.println("check email error");
+        } finally {
+            connection.putback(conn);
+        }
+        return false;
     }
 }

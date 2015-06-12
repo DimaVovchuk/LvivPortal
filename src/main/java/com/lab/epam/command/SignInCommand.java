@@ -2,7 +2,7 @@ package com.lab.epam.command;
 
 import com.lab.epam.entity.User;
 import com.lab.epam.md5.MD5Creator;
-import com.lab.epam.service.ServiceUser;
+import com.lab.epam.service.UserService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -18,8 +18,8 @@ public class SignInCommand implements Command{
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String login = request.getParameter("login");
         String password = request.getParameter("password");
-        ServiceUser serviceUser = new ServiceUser();
-        User user = serviceUser.geUserByLogin(login);
+        UserService serviceUser = new UserService();
+        User user = serviceUser.getUserByLogin(login);
         HttpSession session = request.getSession();
         if(user != null || user.getPassword()!= MD5Creator.getMD5(password + login)){
             session.setAttribute("login",login);
@@ -27,6 +27,6 @@ public class SignInCommand implements Command{
         }else{
             session.setAttribute("loginError",1);
         }
-        request.getRequestDispatcher("/views/pages/dashboard.jsp");
+        request.getRequestDispatcher("/views/pages/dashboard.jsp").forward(request, response);
     }
 }

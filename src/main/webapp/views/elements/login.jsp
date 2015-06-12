@@ -24,7 +24,7 @@
         <form action="/portal/signUp" method="post">
             <input type="hidden" name="command" value="signUp">
             <input class="half-left" placeholder='<cdg:l18n key="login.firstname"/>' type='text' name="first"
-                   pattern="">
+                   >
             <input class="half-right" placeholder='<cdg:l18n key="login.lastname"/>' type='text' name="last">
             <input placeholder='<cdg:l18n key="login.login"/>' type='text' name="login">
             <input placeholder='<cdg:l18n key="login.email"/>' type='email' name="email">
