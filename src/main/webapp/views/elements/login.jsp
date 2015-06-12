@@ -20,7 +20,8 @@
     <div class='register'>
         <h2><cdg:l18n key="login.createtxt"/></h2>
 
-        <form action="#" method="post">
+        <form action="/view/signUp" method="post">
+            <input type="hidden" name="command" value="signUp">
             <input class="half-left" placeholder='<cdg:l18n key="login.firstname"/>' type='text' name="first"
                    pattern="">
             <input class="half-right" placeholder='<cdg:l18n key="login.lastname"/>' type='text' name="last">
