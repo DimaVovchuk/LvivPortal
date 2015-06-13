@@ -60,12 +60,10 @@ public class PlaceService {
         List<Place> places = null;
         try {
             places = mySqlPlaceDao.getAll();
-
         } catch (PersistException e) {
             e.printStackTrace();
             loger.warn("Cant get all places");
         }
-
         return places;
     }
 

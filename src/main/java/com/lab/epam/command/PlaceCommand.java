@@ -39,7 +39,6 @@ public class PlaceCommand implements Command{
         List<Place> places = null;
 
         String category = request.getParameter("category");
-        System.out.println(category + "Category");
         if (category != null){
             switch(category){
                 case "sights": places = servicePlace.getPlaceByCategory(1);
@@ -58,7 +57,6 @@ public class PlaceCommand implements Command{
         } else {
             places = servicePlace.getAll();
         }
-
         List<PlaceDescription> placeDescriptions = new ArrayList<>();
         List<PlaceImage> placeImages = new ArrayList<>();
 

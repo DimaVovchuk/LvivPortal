@@ -22,7 +22,7 @@ public class I18NFilter implements Filter {
         if (bundle == null) {
             Cookie[] cookies = request.getCookies();
             Locale locale = null;
-            if (cookies.length > 0) {
+            if (cookies != null) {
                 for (Cookie cookie : cookies) {
                     if (cookie.getName().equals("lang")) {
                         locale = new Locale(cookie.getValue());
