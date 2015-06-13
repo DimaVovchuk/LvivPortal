@@ -26,7 +26,7 @@ public class PlaceDescriptionService {
             mySqlPlaceDescriptionDao.create(object);
         } catch (PersistException e) {
             e.printStackTrace();
-            loger.warn("Cant get all places");
+            loger.warn("Cant create place description");
         }
     }
 
@@ -37,7 +37,7 @@ public class PlaceDescriptionService {
 
         } catch (PersistException e) {
             e.printStackTrace();
-            loger.warn("Cant get all places");
+            loger.warn("Cant get place description by id");
         }
         return placesDescription;
     }
@@ -47,7 +47,7 @@ public class PlaceDescriptionService {
             mySqlPlaceDescriptionDao.update(object);
         } catch (PersistException e) {
             e.printStackTrace();
-            loger.warn("Cant get all places");
+            loger.warn("Cant update place description");
         }
     }
 
@@ -56,7 +56,7 @@ public class PlaceDescriptionService {
             mySqlPlaceDescriptionDao.delete(object);
         } catch (PersistException e) {
             e.printStackTrace();
-            loger.warn("Cant get all places");
+            loger.warn("Cant delete place description");
         }
     }
 
@@ -67,7 +67,7 @@ public class PlaceDescriptionService {
 
         } catch (PersistException e) {
             e.printStackTrace();
-            loger.warn("Cant get all places");
+            loger.warn("Cant get all place description");
         }
 
         return placesDescription;
@@ -80,7 +80,7 @@ public class PlaceDescriptionService {
 
         } catch (PersistException e) {
             e.printStackTrace();
-            loger.warn("Cant get all places");
+            loger.warn("Cant get all place description");
         }
 
         return placesDescription;
@@ -93,7 +93,7 @@ public class PlaceDescriptionService {
 
         } catch (PersistException e) {
             e.printStackTrace();
-            loger.warn("Cant get all places");
+            loger.warn("Cant get place description by place_id = " + place_id);
         }
 
         return placeDescription;

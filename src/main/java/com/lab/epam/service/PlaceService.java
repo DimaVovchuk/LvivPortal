@@ -95,4 +95,17 @@ public class PlaceService {
         return places;
     }
 
+    public List<Place> getPlaceByUserId(Integer user_id){
+        List<Place> places = null;
+        try {
+            places = mySqlPlaceDao.getPlaceByUserId(user_id);
+
+        } catch (PersistException e) {
+            e.printStackTrace();
+            loger.warn("Cant get place by user with id " + user_id);
+        }
+
+        return places;
+    }
+
 }

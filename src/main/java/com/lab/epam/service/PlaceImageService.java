@@ -25,7 +25,7 @@ public class PlaceImageService {
             mySqlPlaceImageDao.create(object);
         } catch (PersistException e) {
             e.printStackTrace();
-            loger.warn("Cant get all places");
+            loger.warn("Cant create place images");
         }
     }
 
@@ -36,7 +36,7 @@ public class PlaceImageService {
 
         } catch (PersistException e) {
             e.printStackTrace();
-            loger.warn("Cant get all places");
+            loger.warn("Cant get place images by id");
         }
         return placeImage;
     }
@@ -46,7 +46,7 @@ public class PlaceImageService {
             mySqlPlaceImageDao.update(object);
         } catch (PersistException e) {
             e.printStackTrace();
-            loger.warn("Cant get all places");
+            loger.warn("Cant update place images");
         }
     }
 
@@ -55,7 +55,7 @@ public class PlaceImageService {
             mySqlPlaceImageDao.delete(object);
         } catch (PersistException e) {
             e.printStackTrace();
-            loger.warn("Cant get all places");
+            loger.warn("Cant delete place images");
         }
     }
 
@@ -66,23 +66,23 @@ public class PlaceImageService {
 
         } catch (PersistException e) {
             e.printStackTrace();
-            loger.warn("Cant get all places");
+            loger.warn("Cant get all place images");
         }
 
         return placeImage;
     }
 
     public List<PlaceImage> getAllWithoutDeleted(){
-        List<PlaceImage> placesDescription = null;
+        List<PlaceImage> placeImage = null;
         try {
-            placesDescription = mySqlPlaceImageDao.getAllWithoutDeleted();;
+            placeImage = mySqlPlaceImageDao.getAllWithoutDeleted();;
 
         } catch (PersistException e) {
             e.printStackTrace();
-            loger.warn("Cant get all places");
+            loger.warn("Cant get all place images");
         }
 
-        return placesDescription;
+        return placeImage;
     }
 
     public PlaceImage getPlaceImageByPlaceId(Integer place_id){

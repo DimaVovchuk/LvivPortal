@@ -22,9 +22,7 @@ public class ConnectionPool {
         Properties props = new Properties();
 
         try {
-            URL location = getClass().getProtectionDomain().getCodeSource().getLocation();
-            File configFile = new File(location.getFile(),"persistent.xml");
-            InputStream stream = new FileInputStream("D:\\JAVA\\Git\\LvivPortal\\src\\main\\resources\\persistent.xml");
+            InputStream stream = new FileInputStream("C:\\Users\\Admin\\Desktop\\LvivPortalnew\\LvivPortal\\src\\main\\resources\\persistent.xml");
             props.loadFromXML(stream);
         } catch (IOException e) {
             e.printStackTrace();

@@ -32,7 +32,7 @@ public abstract class AbstractJDBCDao<T extends Identified<PK>, PK extends Integ
 
     public String getSelectQueryWithOutDeleted(){
         String tableName = transformer.getTableName();
-        return "SELECT * FROM `" + tableName + "` WHERE ";
+        return "SELECT * FROM `" + tableName + "`;";
     }
 
     public String getDeleteQuery() {
