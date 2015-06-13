@@ -25,45 +25,22 @@
             </div>
 
             <div class="col-md-9 blog-left">
-
+                <c:forEach var="placeDescriptions" items="${placeDescriptions}">
                 <div class="blog-grids">
                     <div class="blog-detail">
                         <div class="blog-image">
                             <a href="#"><img src="${pageContext.request.contextPath}/images/opera_sm.jpg" alt=""></a>
                         </div>
-                        <a href="#"><h3>Opera theatre</h3></a>
-
-                        <p>Some information</p>
-
+                        <a href="#"><h3><c:out value="${placeDescriptions.name}"/></h3></a>
+                        <c:forEach var="places" items="${places}">
+                            <c:if test="${places.id==placeDescriptions.place_id}">
+                                <c:out value="${places.adress}"/>
+                            </c:if>
+                        </c:forEach>
                         <div class="blog-btn"><a href="#">Read More</a></div>
                     </div>
                 </div>
-
-                <div class="blog-grids">
-                    <div class="blog-detail">
-                        <div class="blog-image">
-                            <a href="#"><img src="${pageContext.request.contextPath}/images/opera_sm.jpg" alt=""></a>
-                        </div>
-                        <a href="#"><h3>Opera theatre</h3></a>
-
-                        <p>Some information</p>
-
-                        <div class="blog-btn"><a href="#">Read More</a></div>
-                    </div>
-                </div>
-
-                <div class="blog-grids">
-                    <div class="blog-detail">
-                        <div class="blog-image">
-                            <a href="#"><img src="${pageContext.request.contextPath}/images/opera_sm.jpg" alt=""></a>
-                        </div>
-                        <a href="#"><h3>Opera theatre</h3></a>
-
-                        <p>Some information</p>
-
-                        <div class="blog-btn"><a href="#">Read More</a></div>
-                    </div>
-                </div>
+                </c:forEach>
 
             </div>
 
@@ -71,11 +48,11 @@
                 <div class="blog-cate">
                     <h3><cdg:l18n key="places.categories"/></h3>
                     <ul>
-                        <li><a href="#">Architectural sights</a></li>
-                        <li><a href="#">Churches</a></li>
-                        <li><a href="#">Theatres</a></li>
-                        <li><a href="#">Hotels</a></li>
-                        <li><a href="#">Restaurants</a></li>
+                        <li><a href="portal?command=place&category=churches">Churches</a></li>
+                        <li><a href="portal?command=place&category=theatres">Theatres</a></li>
+                        <li><a href="portal?command=place&category=hotels">Hotels</a></li>
+                        <li><a href="portal?command=place&category=restaurants">Restaurants</a></li>
+                        <li><a href="portal?command=place">All</a></li>
                     </ul>
                 </div>
             </div>

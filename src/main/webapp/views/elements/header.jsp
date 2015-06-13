@@ -14,9 +14,9 @@
                 <div class="top-nav">
                     <span class="menu"> <img src="${pageContext.request.contextPath}/images/icon.png" alt=""/></span>
                     <ul class="res">
-                        <li><a href="${pageContext.request.contextPath}/views/pages/index.jsp"><cdg:l18n
+                        <li><a href="portal?command=index"><cdg:l18n
                                 key="header.home"/></a></li>
-                        <li><a href="${pageContext.request.contextPath}/views/pages/places.jsp"><cdg:l18n
+                        <li><a href="portal?command=place"><cdg:l18n
                                 key="header.places"/></a></li>
                         <li><a href="http://www.booking.com"><cdg:l18n key="header.hotels"/></a></li>
                         <li><a href="${pageContext.request.contextPath}/views/pages/map.jsp"><cdg:l18n

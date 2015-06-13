@@ -82,4 +82,17 @@ public class PlaceService {
         return places;
     }
 
+    public List<Place> getPlaceByCategory(Integer category_id){
+        List<Place> places = null;
+        try {
+            places = mySqlPlaceDao.getPlaceByCategory(category_id);
+
+        } catch (PersistException e) {
+            e.printStackTrace();
+            loger.warn("Cant get all places");
+        }
+
+        return places;
+    }
+
 }
