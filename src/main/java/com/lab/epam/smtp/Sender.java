@@ -42,7 +42,7 @@ public class Sender {
             //Subject
             message.setSubject(subject);
             //Text
-            message.setText(text);
+            message.setText(text,"UTF-8", "html");
 
             Transport.send(message);
         } catch (MessagingException e) {

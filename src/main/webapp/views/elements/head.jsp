@@ -22,7 +22,6 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/move-top.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/easing.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/js/category.js"></script>
     <!-- change localization -->
     <script src="${pageContext.request.contextPath}/js/language.js"></script>
     <!-- login form -->
