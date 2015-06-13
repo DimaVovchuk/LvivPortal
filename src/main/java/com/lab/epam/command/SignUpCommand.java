@@ -22,9 +22,9 @@ import java.util.regex.Pattern;
  */
 public class SignUpCommand implements Command {
     private static final Logger loger = LogManager.getLogger(ClassName.getCurrentClassName());
-    private static final String CHECK_NAME = "\\w+";
-    private static final String CHECK_SURNAME = "\\w+";
-    private static final String CHECK_LOGIN = "([A-Za-z0-9]+)";
+    private static final String CHECK_NAME = "^[^<>/{}\\s?!;]+$";
+    private static final String CHECK_SURNAME = "^[^<>/{}\\s?!;]+$";
+    private static final String CHECK_LOGIN = "^[^<>/{}\\s?!;]+$";
     private static final String CHECK_EMAIL = "(\\w+@[a-zA-Z_]+?\\.[a-zA-Z]{2,6})";
     private static final String CHECK_PASSWORD = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,15})";
     private static final String CHECK_PHONE = "([0-9]{6,15})";
@@ -141,14 +141,8 @@ public class SignUpCommand implements Command {
                 userService.create(user);
                 ResourceBundle bundle = (ResourceBundle) session.getAttribute("bundle");
                 String md5phone = MD5Creator.getMD5(phone);
-                if (bundle.getLocale().toString().equalsIgnoreCase("ua")) {
-                    String s = "Доброго дня! Вітаємо вас на нашому сайті. для підтвердження email " +
-                            "натисніть, будь ласка, -> <a href='http://localhost:8080/portal?command=confirm&user=" + login + "&param=" + md5phone + "'>?????????</a>! ";
-                    System.out.println(s);
-                    SendEmail.sender("Lviv Portal",s, email);
-                } else {
-                    SendEmail.sender("Lviv Portal", "Hello. Welcome in out site. Please confirm your email! <a href='http://localhost:8080/portal?command=confirm&user=" + login + "&param=" + md5phone + "'>click for confirm</a> ", email);
-                }
+                String s = new String(bundle.getString("confirm.message").getBytes("ISO-8859-1"), "windows-1251") + " -> <a href = 'http://localhost:8080/portal?command=confirm&user=" + login + "&param=" + md5phone + "'> http://localhost:8080/portal?command=confirm&user=" + login + "&param=" + md5phone + " <a>";
+                SendEmail.sender("Lviv Portal", s, email);
                 loger.info("New user was added");
                 request.getRequestDispatcher("/views/pages/dashboard.jsp").forward(request, response);
             } catch (Exception e) {
