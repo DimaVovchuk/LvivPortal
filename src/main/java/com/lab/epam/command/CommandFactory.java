@@ -22,6 +22,9 @@ public class CommandFactory {
         commands.put("place", new PlaceCommand());
         commands.put("signIn", new SignInCommand());
         commands.put("userCabinet", new UserCabinetCommand());
+        commands.put("confirm", new ConfirmEmailCommand());
+        commands.put("placeInformation", new PlaceInfortmationCommand());
+
     }
 
     public static void createCommand(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

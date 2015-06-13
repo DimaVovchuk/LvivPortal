@@ -10,7 +10,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -32,7 +31,7 @@ public abstract class AbstractJDBCDao<T extends Identified<PK>, PK extends Integ
 
     public String getSelectQueryWithOutDeleted(){
         String tableName = transformer.getTableName();
-        return "SELECT * FROM `" + tableName + "`;";
+        return "SELECT * FROM `" + tableName + "`";
     }
 
     public String getDeleteQuery() {
@@ -42,7 +41,7 @@ public abstract class AbstractJDBCDao<T extends Identified<PK>, PK extends Integ
 
 
     protected List<T> parseResultSet(ResultSet rs) throws PersistException{
-            List<T> result = new LinkedList<T>();
+            List<T> result = new ArrayList<>();
             result = transformer.rowToObject(rs);
             return result;
         }

@@ -5,7 +5,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
+import java.security.ProtectionDomain;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.Properties;
@@ -22,7 +22,11 @@ public class ConnectionPool {
         Properties props = new Properties();
 
         try {
+
             InputStream stream = new FileInputStream("C:\\Users\\Admin\\Desktop\\LvivPortalnew\\LvivPortal\\src\\main\\resources\\persistent.xml");
+            ProtectionDomain location = getClass().getProtectionDomain();
+            File configFile = new File("persistent.xml");
+            System.out.println(configFile.getCanonicalPath());
             props.loadFromXML(stream);
         } catch (IOException e) {
             e.printStackTrace();

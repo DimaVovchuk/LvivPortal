@@ -2,7 +2,9 @@ package com.lab.epam.command;
 
 import com.lab.epam.entity.User;
 import com.lab.epam.helper.ClassName;
+import com.lab.epam.md5.MD5Creator;
 import com.lab.epam.service.UserService;
+import com.lab.epam.smtp.SendEmail;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -11,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -26,11 +29,13 @@ public class SignUpCommand implements Command {
     private static final String CHECK_PASSWORD = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,15})";
     private static final String CHECK_PHONE = "([0-9]{6,15})";
 
-    private static boolean checkData(String testString, String pattern){
+    private static boolean checkData(String testString, String pattern) {
         Pattern p = Pattern.compile(pattern);
         Matcher m = p.matcher(testString);
-        return m.matches();
+        boolean matches = !m.matches();
+        return matches;
     }
+
     public void execute(HttpServletRequest request,
                         HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
@@ -59,81 +64,91 @@ public class SignUpCommand implements Command {
         boolean checkPhone = userService.checkEmail(phone);
         boolean checkLogin = userService.checkEmail(login);
 
-        if(checkData(name,CHECK_NAME)){
+        if (checkData(name, CHECK_NAME)) {
             session.setAttribute("loginError", 1);
             errorFlag = true;
             loger.warn("Name is pattern error");
         }
 
-        if(checkData(surname,CHECK_SURNAME)){
+        if (checkData(surname, CHECK_SURNAME)) {
             session.setAttribute("loginError", 1);
             errorFlag = true;
             loger.warn("Surname is pattern error");
         }
 
-        if(checkData(login,CHECK_LOGIN)){
+        if (checkData(login, CHECK_LOGIN)) {
             session.setAttribute("loginError", 1);
             errorFlag = true;
             loger.warn("Login is pattern error");
         }
 
-        if(checkData(email,CHECK_EMAIL)){
+        if (checkData(email, CHECK_EMAIL)) {
             session.setAttribute("loginError", 1);
             errorFlag = true;
             loger.warn("Emain is pattern error");
         }
 
-        if(checkData(password,CHECK_PASSWORD)){
+        if (checkData(password, CHECK_PASSWORD)) {
             session.setAttribute("loginError", 1);
             errorFlag = true;
             loger.warn("Password is pattern error");
         }
 
-        if(checkData(phone,CHECK_PHONE)){
+        if (checkData(phone, CHECK_PHONE)) {
             session.setAttribute("loginError", 1);
             errorFlag = true;
             loger.warn("Phone is pattern error");
         }
 
-        if(login ==""){
+        if (login == "") {
             session.setAttribute("loginError", 1);
             errorFlag = true;
             loger.warn("Login is empty");
         }
 
-        if(phone ==""){
+        if (phone == "") {
             session.setAttribute("phoneError", 1);
             errorFlag = true;
             loger.warn("Phone is empty");
         }
-        if(email ==""){
+        if (email == "") {
             session.setAttribute("emailError", 1);
             errorFlag = true;
             loger.warn("Email is empty");
         }
 
-        if(!checkEmail){
+        if (!checkEmail) {
             session.setAttribute("emailError", 1);
             errorFlag = true;
             loger.warn("Such email is exist");
         }
 
-        if(!checkPhone){
+        if (!checkPhone) {
             session.setAttribute("phoneError", 1);
             errorFlag = true;
             loger.warn("Such phone is exist");
         }
 
-        if(!checkLogin){
+        if (!checkLogin) {
             session.setAttribute("loginError", 1);
             errorFlag = true;
             loger.warn("Such login is exist");
         }
 
-        if(errorFlag){}
-        else{
+        if (errorFlag) {
+        } else {
             try {
                 userService.create(user);
+                ResourceBundle bundle = (ResourceBundle) session.getAttribute("bundle");
+                String md5phone = MD5Creator.getMD5(phone);
+                if (bundle.getLocale().toString().equalsIgnoreCase("ua")) {
+                    String s = "Доброго дня! Вітаємо вас на нашому сайті. для підтвердження email " +
+                            "натисніть, будь ласка, -> <a href='http://localhost:8080/portal?command=confirm&user=" + login + "&param=" + md5phone + "'>?????????</a>! ";
+                    System.out.println(s);
+                    SendEmail.sender("Lviv Portal",s, email);
+                } else {
+                    SendEmail.sender("Lviv Portal", "Hello. Welcome in out site. Please confirm your email! <a href='http://localhost:8080/portal?command=confirm&user=" + login + "&param=" + md5phone + "'>click for confirm</a> ", email);
+                }
                 loger.info("New user was added");
                 request.getRequestDispatcher("/views/pages/dashboard.jsp").forward(request, response);
             } catch (Exception e) {
