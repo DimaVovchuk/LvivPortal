@@ -78,7 +78,7 @@ a:hover {
     background: #0ab2d2;
 }
 
-.top-nav ul li a#sign:hover {
+.top-nav ul li a#sign:hover, .top-nav ul li a#sign:focus {
     background: #0ab2d2;
     color: #fff;
 }
