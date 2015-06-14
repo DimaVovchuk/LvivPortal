@@ -76,7 +76,7 @@ $("#sign-up-form").validate({
         },
         phone: {
             required: "Please enter phone number",
-            regex: "Wrong phone number format"
+            regex: "Wrong phone number format",
         }
     }
 });

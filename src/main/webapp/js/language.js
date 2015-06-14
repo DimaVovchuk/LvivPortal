@@ -1,3 +1,4 @@
+/* Change localization language */
 function language(lang) {
     var xhr = new XMLHttpRequest();
     xhr.open("GET", "portal?command=locale&lang="+lang, true);

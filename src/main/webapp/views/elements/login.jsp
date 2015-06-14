@@ -57,11 +57,19 @@
         <a href="#"><cdg:l18n key="login.forgot"/></a>
     </div>
 </div>
+
 <script>
     $("#sign-in-form").validate();
     $("#sign-up-form").validate();
 </script>
+<script>
+    $('.switch').click(function(){
+        $(this).children('i').toggleClass('fa-pencil');
+        $('.login').animate({height: "toggle", opacity: "toggle"}, "slow");
+        $('.register').animate({height: "toggle", opacity: "toggle"}, "slow");
+        $('.sign').toggle();
+    });
+</script>
 
-<script src="${pageContext.request.contextPath}/js/login.js"></script>
 <script src="${pageContext.request.contextPath}/js/jquery.validate.min.js"></script>
 <script src='${pageContext.request.contextPath}/js/<cdg:l18n key="validator.js"/>'></script>

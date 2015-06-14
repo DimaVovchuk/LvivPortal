@@ -200,6 +200,10 @@ span.menu {
     color: #ffffff;
 }
 
+#search {
+    -webkit-box-sizing: inherit;
+}
+
 .sb-icon-search, .sb-search-submit {
     width: 30px;
     height: 40px;
