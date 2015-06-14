@@ -7,9 +7,13 @@
     <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
     <!--- Material Angular -->
     <link href="https://ajax.googleapis.com/ajax/libs/angular_material/0.9.4/angular-material.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-aria.min.js"></script>
     <!-- Custom Theme files -->
     <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet" type="text/css" media="all">
     <link href="${pageContext.request.contextPath}/css/flexslider.css" rel="stylesheet" type="text/css" media="screen">
+    <link href="${pageContext.request.contextPath}/css/simple-sidebar.css" rel="stylesheet">
     <!-- Login form files -->
     <link href="${pageContext.request.contextPath}/css/login.css" rel="stylesheet">
     <link href='http://daneden.github.io/animate.css/animate.min.css' rel='stylesheet prefetch'>

@@ -3,10 +3,8 @@
 
 <div class='login-form aniamted bounceIn'>
     <div class='switch'>
-        <i class='fa fa-pencil fa-times'>
             <div class="sign"><cdg:l18n key="login.signup"/></div>
             <div class="sign" style="display: none"><cdg:l18n key="login.signin"/></div>
-        </i>
     </div>
     <div class='login'>
         <h2><cdg:l18n key="login.logintxt"/></h2>
@@ -64,7 +62,6 @@
 </script>
 <script>
     $('.switch').click(function(){
-        $(this).children('i').toggleClass('fa-pencil');
         $('.login').animate({height: "toggle", opacity: "toggle"}, "slow");
         $('.register').animate({height: "toggle", opacity: "toggle"}, "slow");
         $('.sign').toggle();

@@ -8,7 +8,7 @@
         <div class="header-main">
             <div class="logo">
                 <a href="portal?command=index"> <img src="${pageContext.request.contextPath}/images/logo.png" alt=""
-                                                   title=""> </a>
+                                                     title=""> </a>
             </div>
             <div class="head-right">
                 <div class="top-nav">
@@ -22,7 +22,25 @@
                         <li><a href="${pageContext.request.contextPath}/views/pages/map.jsp"><cdg:l18n
                                 key="header.plan"/></a></li>
                         <li>
-                            <a id="sign" data-toggle="modal" href="#loginform"><cdg:l18n key="header.sign"/></a>
+                            <a class="login" data-toggle="modal" href="#loginform"><cdg:l18n key="header.sign"/></a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="login dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> username<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a class="dropdown" href="#"><i class="fa fa-university fa-fw"></i> My places</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown" href="#"><i class="fa fa-bus fa-fw"></i> Routes</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown" href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
+                                </li>
+                                <li class="dropdown divider"></li>
+                                <li>
+                                    <a class="dropdown" href="#"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                                </li>
+                            </ul>
                         </li>
                     </ul>
                     <!-- script-for-menu -->

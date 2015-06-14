@@ -6,9 +6,6 @@
     <div class="copyright">
         <div class="container">
             <div class="copy-main">
-                <div class="copy-left">
-                    <p>Design By<a href="http://w3layouts.com/" target="-blank"> W3layouts</a></p>
-                </div>
                 <div class="copy-right">
                     <ul>
                         <li><a href="${pageContext.request.contextPath}/views/pages/index.jsp"><cdg:l18n

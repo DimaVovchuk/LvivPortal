@@ -49,6 +49,15 @@ a:hover {
     list-style: none;
 }
 
+.top-nav ul.dropdown-menu li a {
+    color: #333;
+    padding: 10px;
+}
+
+.top-nav ul.dropdown-menu li {
+    width: 100%;
+}
+
 .top-nav ul li {
     display: inline-block;
     float: left;
@@ -64,21 +73,15 @@ a:hover {
     display: block;
 }
 
-.top-nav ul li a#sign {
-    font-size: 1.1em;
-    font-weight: 400;
+.top-nav ul li a.login {
     color: #0ab2d2;
-    text-decoration: none;
-    padding: 2em 1em 2em 1em;
-    font-family: 'Lora', serif;
-    display: block;
 }
 
 .top-nav ul li a:hover, .top-nav ul li a.active {
     background: #0ab2d2;
 }
 
-.top-nav ul li a#sign:hover, .top-nav ul li a#sign:focus {
+.top-nav ul li a.login:hover, .top-nav ul li a#sign:focus {
     background: #0ab2d2;
     color: #fff;
 }

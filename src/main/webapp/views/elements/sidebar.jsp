@@ -1,52 +1,54 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE HTML>
-<html>
 
-<head>
-    <link href="../../css/simple-sidebar.css" rel="stylesheet">
-</head>
-
-<body>
-
-<div id="sidebar-wrapper">
+<div id="sidebar-icon">
     <ul class="sidebar-nav">
         <li>
-            <a href="#">Dashboard</a>
+            <a href="#" id="menu-toggle-first"><i class="fa fa-university fa-fx"></i></a>
         </li>
         <li>
-            <a href="#">Shortcuts</a>
+            <a href="#" id="menu-toggle-second"><i class="fa fa-university fa-fw"></i></a>
         </li>
         <li>
-            <a href="#">Overview</a>
-        </li>
-        <li>
-            <a href="#">Events</a>
-        </li>
-        <li>
-            <a href="#">About</a>
-        </li>
-        <li>
-            <a href="#">Services</a>
-        </li>
-        <li>
-            <a href="#">Contact</a>
+            <a href="#" id="menu-toggle-third"><i class="fa fa-university fa-fw"></i> </a>
         </li>
     </ul>
 </div>
 
-<!-- jQuery -->
-<script src="../../js/jquery.js"></script>
+<div id="sidebar-wrapper">
+    <ul class="sidebar-nav">
+        <li>
+            <a id="menu-first" href="#">First</a>
+        </li>
+        <li>
+            <a id="menu-second" href="#">Second</a>
+        </li>
+        <li>
+            <a id="menu-third" href="#">Third</a>
+        </li>
+    </ul>
+</div>
 
-<!-- Bootstrap Core JavaScript -->
-<script src="../../js/bootstrap.min.js"></script>
+<div id="sidebar-info">
+    Information
+</div>
 
-<!-- Menu Toggle Script -->
 <script>
-    $("#menu-toggle").click(function (e) {
+    $("#menu-toggle-first").hover(function (e) {
         e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
+        $("#sidebar-wrapper").toggleClass("toggled");
+        $("#menu-first").toggleClass("hovered");
+    });
+
+    $("#menu-toggle-second").hover(function (e) {
+        e.preventDefault();
+        $("#sidebar-wrapper").toggleClass("toggled");
+        $("#menu-second").toggleClass("hovered");
+    });
+
+    $("#menu-toggle-third").hover(function (e) {
+        e.preventDefault();
+        $("#sidebar-wrapper").toggleClass("toggled");
+        $("#menu-third").toggleClass("hovered");
     });
 </script>
-
-</body>
-</html>
