@@ -9,7 +9,7 @@
     <div class='login'>
         <h2><cdg:l18n key="login.logintxt"/></h2>
 
-        <form id="sign-in-form" action="#" method="post">
+        <form id="sign-in-form" action="portal?command=signIn" method="post">
             <div class="form">
                 <input placeholder='<cdg:l18n key="login.login"/>' type='text' name="login">
             </div>
@@ -24,7 +24,7 @@
     <div class='register'>
         <h2><cdg:l18n key="login.createtxt"/></h2>
 
-        <form id="sign-up-form" action="#" method="post">
+        <form id="sign-up-form" action="portal?command=signUp" method="post">
             <div class="form">
                 <input id="first" placeholder='<cdg:l18n key="login.firstname"/>' type='text' name="first">
             </div>
@@ -52,7 +52,7 @@
         </form>
     </div>
     <div class="login-footer">
-        <a href="#"><cdg:l18n key="login.forgot"/></a>
+        <a href="portal?command=resetEmail"><cdg:l18n key="login.forgot"/></a>
     </div>
 </div>
 

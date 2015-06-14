@@ -47,7 +47,7 @@ public abstract class AbstractJDBCDao<T extends Identified<PK>, PK extends Integ
         }
 
     /**
-     * Устанавливает аргументы insert запроса в соответствии со значением полей объекта object.
+     * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ insert пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ object.
      */
     protected String prepareStatementForInsert(T object) throws PersistException{
         List<String> setRow = new ArrayList<>();
@@ -65,7 +65,7 @@ public abstract class AbstractJDBCDao<T extends Identified<PK>, PK extends Integ
     }
 
     /**
-     * Устанавливает аргументы update запроса в соответствии со значением полей объекта object.
+     * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ update пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ object.
      */
     protected String prepareStatementForUpdate(T object) throws PersistException{
         Map<String, Object> objectColumns = transformer.getObjectColumns(object);
@@ -95,7 +95,7 @@ public abstract class AbstractJDBCDao<T extends Identified<PK>, PK extends Integ
     @Override
     public void create(T object) throws PersistException {
         T persistInstance;
-        // Добавляем запись
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
         String sql = prepareStatementForInsert(object);//getCreateQuery();
         Connection conn = connection.retrieve();
         try (PreparedStatement statement = conn.prepareStatement(sql)) {
@@ -143,7 +143,7 @@ public abstract class AbstractJDBCDao<T extends Identified<PK>, PK extends Integ
     public void update(T object) throws PersistException {
         String sql = prepareStatementForUpdate(object);
         Connection conn = connection.retrieve();
-        try (PreparedStatement statement = conn.prepareStatement(sql);) {
+        try (PreparedStatement statement = conn.prepareStatement(sql)) {
             int count = statement.executeUpdate();
             if (count != 1) {
                 throw new PersistException("On update modify more then 1 record: " + count);

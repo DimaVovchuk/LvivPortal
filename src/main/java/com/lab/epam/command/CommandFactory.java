@@ -4,6 +4,8 @@ package com.lab.epam.command;
  * Created by Vasyl on 09.06.2015.
  */
 
+import com.lab.epam.command.email.*;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,6 +27,10 @@ public class CommandFactory {
         commands.put("confirm", new ConfirmEmailCommand());
         commands.put("placeInformation", new PlaceInfortmationCommand());
         commands.put("upLoad", new UpLoadPictureCommand());
+        commands.put("sendEmail", new SendChangePassMailCommand());
+        commands.put("checkTime", new CheckChangePassTimeCommand());
+        commands.put("confirmReset", new ConfirmChangePassCommand());
+        commands.put("resetEmail", new ResetEmail());
 
     }
 

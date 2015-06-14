@@ -17,6 +17,7 @@ import java.sql.SQLException;
  */
 public class MySqlUserDao extends AbstractJDBCDao<User, Integer> {
     public static final String getUserByLoginAndPassSQL = "SELECT *FROM USER WHERE login=?";
+    public static final String getUserByEmailSQL = "SELECT *FROM USER WHERE mail=?";
     public static final String checkMailSQL = "SELECT * FROM USER WHERE mail=?";
     public static final String checkPhoneSQL = "SELECT * FROM USER WHERE phone=?";
     public static final String checkLoginSQL = "SELECT * FROM USER WHERE login=?";
@@ -42,6 +43,19 @@ public class MySqlUserDao extends AbstractJDBCDao<User, Integer> {
         Connection conn = connection.retrieve();
         try (PreparedStatement statement = conn.prepareStatement(sql)) {
             statement.setString(1, login);
+            ResultSet rs = statement.executeQuery();
+            user = parseResultSet(rs).get(0);
+        } catch (Exception e) {
+        } finally {
+            connection.putback(conn);
+        }
+        return user;
+    }
+    public User getUserByEmail(String email) {
+        User user = new User();
+        Connection conn = connection.retrieve();
+        try (PreparedStatement statement = conn.prepareStatement(getUserByEmailSQL)) {
+            statement.setString(1, email);
             ResultSet rs = statement.executeQuery();
             user = parseResultSet(rs).get(0);
         } catch (Exception e) {
