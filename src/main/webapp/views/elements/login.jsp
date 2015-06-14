@@ -11,7 +11,7 @@
     <div class='login'>
         <h2><cdg:l18n key="login.logintxt"/></h2>
 
-        <form action="#" method="post">
+        <form id="sign-in-form" action="#" method="post">
             <div class="form">
                 <input placeholder='<cdg:l18n key="login.login"/>' type='text' name="login">
             </div>
@@ -58,6 +58,7 @@
     </div>
 </div>
 <script>
+    $("#sign-in-form").validate();
     $("#sign-up-form").validate();
 </script>
 
