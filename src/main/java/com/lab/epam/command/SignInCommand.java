@@ -18,6 +18,7 @@ import java.io.IOException;
  */
 public class SignInCommand implements Command{
     private static final Logger loger = LogManager.getLogger(ClassName.getCurrentClassName());
+
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String login = request.getParameter("login");
@@ -33,6 +34,6 @@ public class SignInCommand implements Command{
             session.setAttribute("loginError",1);
             loger.info("login or password is incorrect");
         }
-        request.getRequestDispatcher("/views/pages/dashboard.jsp");
+        request.getRequestDispatcher("/views/pages/usercabinet.jsp").forward(request, response);
     }
 }

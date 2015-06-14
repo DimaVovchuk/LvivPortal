@@ -24,11 +24,23 @@ public class CommandFactory {
         commands.put("userCabinet", new UserCabinetCommand());
         commands.put("confirm", new ConfirmEmailCommand());
         commands.put("placeInformation", new PlaceInfortmationCommand());
+        commands.put("upLoad", new UpLoadPictureCommand());
 
     }
 
     public static void createCommand(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         String command = request.getParameter("command");
+
+//        boolean isMultipart = ServletFileUpload.isMultipartContent(request);
+//        if(command==null && isMultipart){
+//            command = "upLoad";
+//        }
+
+        if (request.getContentType() != null && request.getContentType().toLowerCase().indexOf("multipart/form-data") > -1 ){
+            command = "upLoad";
+        }
+
         System.out.println(command);
         Command commamdExecute = commands.get(command);
         commamdExecute.execute(request,response);

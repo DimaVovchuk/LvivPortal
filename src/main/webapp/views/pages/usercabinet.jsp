@@ -20,6 +20,6 @@
 <jsp:include page="/views/elements/head.jsp"/>
 <body>
 <jsp:include page="/views/elements/footer.jsp"/>
-
+<jsp:include page="/views/pages/uploadTest.jsp"/>
 </body>
 </html>
