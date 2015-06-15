@@ -1,6 +1,8 @@
 package com.lab.epam.command;
 
+import com.lab.epam.entity.UserImage;
 import com.lab.epam.helper.ClassName;
+import com.lab.epam.service.UserImageService;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -11,6 +13,7 @@ import org.apache.log4j.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -31,11 +34,11 @@ public class UpLoadPictureCommand implements Command{
             //Список загружаемых файлов
             List files = new ArrayList();
             //Список обычных параметров из HTML-формы
-            Map params = new HashMap();
+            Map params = new HashMap<String, String>();
             //Инициализируем структуры files и params
             init(request, params, files);
             //Сохраняем файл на сервере
-            save(files, params);
+            save(request,files, params);
             loger.info("File is successfully uploaded");
 
             response.setContentType("text/html; charset=windows-1251");
@@ -60,18 +63,18 @@ public class UpLoadPictureCommand implements Command{
     /**
      * Сохраняет загружаемые файлы на диске сервера
      */
-    private void save(List files, Map params) throws IOException {
+    private void save(HttpServletRequest request,List files, Map params) throws IOException {
         try {
             for (Iterator i = files.iterator(); i.hasNext();) {
                 FileItem item = (FileItem) i.next();
                 String imageName = item.getName();
-
                 //запись в базу даних ссылки на изображение
-//                int usedID = (int) params.get("usedID");
-//                UserImageService userImageService = new UserImageService();
-//                UserImage userImage = new UserImage(usedID,imageName);
-//                userImageService.create(userImage);
-//                loger.info("File is successfully uploaded in database");
+                HttpSession session = request.getSession();
+                int usedID = (int) session.getAttribute("usedID");
+                UserImageService userImageService = new UserImageService();
+                UserImage userImage = new UserImage(usedID,imageName);
+                userImageService.create(userImage);
+                loger.info("File is successfully uploaded in database");
 
                 //Файл, в который нужно произвести запись
                 final File file = new File("D:\\Eclipse_Luna\\gitProject\\LvivPortal\\LvivPortal\\src\\main\\webapp\\upload\\photo" + File.separator + imageName);
@@ -113,7 +116,7 @@ public class UpLoadPictureCommand implements Command{
             if (item.isFormField()) {
                 params.put(item.getFieldName(), item.getString());
             }
-            //... если нет, то конструируем объект AttachmentDataSource и
+           //... если нет, то конструируем объект AttachmentDataSource и
             //помещаем его в список прикрепленных файлов
             else {
                 if (item.getSize() <= 0) continue;

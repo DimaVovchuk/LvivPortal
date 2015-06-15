@@ -9,7 +9,8 @@
     <div class='login'>
         <h2><cdg:l18n key="login.logintxt"/></h2>
 
-        <form id="sign-in-form" action="#" method="post">
+        <form id="sign-in-form" action="portal/signIn" method="post">
+            <input type="hidden" name="command" value="signIn">
             <div class="form">
                 <input placeholder='<cdg:l18n key="login.login"/>' type='text' name="login">
             </div>

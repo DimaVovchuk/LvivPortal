@@ -64,6 +64,7 @@
   </div>
 </div>
 <jsp:include page="/views/elements/footer.jsp"/>
-<jsp:include page="/views/pages/uploadTest.jsp"/>
+<jsp:include page="/views/pages/uploadImage.jsp"/>
+<jsp:include page="/views/pages/showManyMarkers.jsp"/>
 </body>
 </html>

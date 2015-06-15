@@ -28,6 +28,7 @@ public class SignInCommand implements Command{
         HttpSession session = request.getSession();
         if(user != null && user.getPassword().equals(MD5Creator.getMD5(password + login))){
             session.setAttribute("login",login);
+            session.setAttribute("usedID",user.getId());
             session.setAttribute("role",user.getRoleID());
             loger.info("User " +login+ " signing in ");
         }else{

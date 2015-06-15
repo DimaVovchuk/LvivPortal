@@ -49,5 +49,4 @@
     <listener>
         <listener-class>com.lab.epam.listener.Log4jInit</listener-class>
     </listener>
-
 </web-app>
