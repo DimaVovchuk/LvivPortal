@@ -85,14 +85,26 @@ public class UserImageService {
         return userImage;
     }
 
-    public List<UserImage> getUserImageByUserId(Integer place_id){
+    public List<UserImage> getUserImageByUserId(Integer user_id){
         List<UserImage> userImage = null;
         try {
-            userImage =  mySqlUserImageDao.getUserImageByUserId(place_id);
+            userImage =  mySqlUserImageDao.getUserImageByUserId(user_id);
 
         } catch (PersistException e) {
             e.printStackTrace();
             loger.warn("Cant get user images from DB");
+        }
+        return userImage;
+    }
+
+    public UserImage getUserImageByUserIdOne(Integer user_id){
+        UserImage userImage = null;
+        try {
+            userImage =  mySqlUserImageDao.getUserImageByUserIdOne(user_id);
+
+        } catch (PersistException e) {
+            e.printStackTrace();
+            loger.warn("Cant get user image from DB");
         }
         return userImage;
     }

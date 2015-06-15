@@ -3,6 +3,9 @@ package com.lab.epam.service;
 import com.lab.epam.dao.PersistException;
 import com.lab.epam.dao.imp.MySqlUserDao;
 import com.lab.epam.entity.User;
+import com.lab.epam.helper.ClassName;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import java.util.List;
 
@@ -11,14 +14,25 @@ import java.util.List;
  */
 public class UserService {
 
+    private static final Logger loger = LogManager.getLogger(ClassName.getCurrentClassName());
+
     MySqlUserDao mySqlUserDao = new MySqlUserDao();
 
     public void create(User object) throws PersistException {
         mySqlUserDao.create(object);
     }
 
-    public User getByPK(Integer key) throws PersistException{
-        return mySqlUserDao.getByPK(key);
+    public User getByPK(Integer key){
+        User user = null;
+        try {
+            user = mySqlUserDao.getByPK(key);
+
+        } catch (PersistException e) {
+            e.printStackTrace();
+            loger.warn("Cant get user by id " + key);
+        }
+
+        return user;
     }
 
     public void update(User object) throws PersistException{
