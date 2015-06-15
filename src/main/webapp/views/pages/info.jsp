@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="cdg" uri="customtags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -24,10 +25,30 @@
                     <img src="${pageContext.request.contextPath}/images/opera.jpg" alt="">
 
                     <div class="blog-detail">
-                        <h3>Opera theatre</h3>
+                        <h3>${placeDescription.name}</h3>
 
-                        <p>Some information</p>
-                    </div>
+                        ${placeDescription.description}<br>
+
+                        <c:if test="${placeDescription.phone!=null}">
+                            <div class="blog-btn">
+                                <h4>Phone</h4>
+                                <c:forEach var="infoPlacePhone" items="${infoPlacePhone}">
+                                <c:out value="${infoPlacePhone}"/>
+                            </c:forEach>
+                            </div>
+                        </c:if>
+                        <c:if test="${placeDescription.price!=null}">
+                            <div class="blog-btn">
+                                <h4>Price</h4>
+                                <c:forEach var="infoPlacePrice" items="${infoPlacePrice}">
+                                    <c:out value="${infoPlacePrice}"/><br>
+                                </c:forEach>
+                            </div>
+                        </c:if>
+                        <div class="blog-btn">
+                            <h4>Adress</h4>
+                            ${place.adress}
+                        </div>
 
                     <div class="data-line">
                         <ul>
@@ -48,28 +69,38 @@
                                 <span class="calen">Premalink</span></a></li>
                         </ul>
                     </div>
+                    <c:forEach var="users" items="${users}">
+                        <c:forEach var="placeResponse" items="${placeResponse}">
+                                <c:if test="${users.id==placeResponse.user_id}">
 
-                    <div class="single-commemts">
-                        <div class="col-md-2 user">
-                            <a href="#"><img src="${pageContext.request.contextPath}/images/user.png" alt=""/></a>
-                        </div>
-                        <div class="col-md-10 user-comment">
-                            <a href="#"><h4>Some user</h4></a>
+                                        <div class="single-commemts">
+                                            <div class="col-md-2 user">
+                                                <a href="#"><img src="${pageContext.request.contextPath}/images/user.png" alt=""/></a>
+                                            </div>
+                                            <div class="col-md-10 user-comment">
+                                                <a href="#"><h4><c:out value="${users.login}"/></h4></a>
 
-                            <p>Comment</p>
-                            <a class="comme" href="#">On December 14, 2014 18:05</a>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
+                                                <p><c:out value="${placeResponse.description}"/></p>
+                                                <a class="comme" href="#">On December 14, 2014 18:05</a>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </c:if>
+
+                            </c:forEach>
+                        </c:forEach>
 
                     <div class="magsingle-contact">
                         <h3>Leave A Comment</h3>
+                        <form action="portal/placeInformation&place_id=${places.id}" method="post">
+                            <input type="hidden" name="command" value="placeInformation">
                         <input type="text" value="Name" onfocus="this.value = '';"
                                onblur="if (this.value == '') {this.value = 'Name';}"/>
                         <input type="text" class="no-mar" value="Email" onfocus="this.value = '';"
                                onblur="if (this.value == '') {this.value = 'Email';}"/>
-                        <textarea onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Message';}">Message</textarea>
+                        <textarea value="Message" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Message';}">Message</textarea>
                         <input type="submit" value="Submit Comment"/>
+                            </form>
                     </div>
                 </div>
 

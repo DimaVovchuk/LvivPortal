@@ -16,7 +16,7 @@ import java.io.IOException;
 /**
  * Created by Vasyl on 12.06.2015.
  */
-public class SignInCommand implements Command {
+public class SignInCommand implements Command{
     private static final Logger loger = LogManager.getLogger(ClassName.getCurrentClassName());
 
     @Override
@@ -32,8 +32,10 @@ public class SignInCommand implements Command {
         }
         UserService serviceUser = new UserService();
         User user = serviceUser.geUserByLogin(login);
+        HttpSession session = request.getSession();
         if (user.getPassword()!= null && user.getPassword().equals(MD5Creator.getMD5(password + login))) {
             session.setAttribute("login", login);
+            session.setAttribute("usedID",user.getId());
             session.setAttribute("role", user.getRoleID());
             loger.info("User " + login + " signing in ");
             request.getRequestDispatcher("/views/pages/usercabinet.jsp").forward(request, response);
