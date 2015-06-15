@@ -28,7 +28,11 @@
 
                     <div class="col-sm-6 col-md-4 ser">
                         <div class="thumbnail">
-                            <a href="#"><img src="${pageContext.request.contextPath}/images/places1.jpg" alt=""></a>
+                            <a href="#">
+                                <div class="hover-image">
+                                    <img src="${pageContext.request.contextPath}/images/places1.jpg" alt="">
+                                </div>
+                            </a>
 
                             <div class="caption">
                                 <a href="#"><h3><cdg:l18n key="index.architecture"/></h3></a>
@@ -54,7 +58,11 @@
 
                     <div class="col-sm-6 col-md-4 ser">
                         <div class="thumbnail">
-                            <a href="#"><img src="${pageContext.request.contextPath}/images/places2.jpg" alt=""></a>
+                            <a href="#">
+                                <div class="hover-image">
+                                    <img src="${pageContext.request.contextPath}/images/places2.jpg" alt="">
+                                </div>
+                            </a>
 
                             <div class="caption">
                                 <a href="#"><h3><cdg:l18n key="index.culture"/></h3></a>
@@ -80,7 +88,11 @@
 
                     <div class="col-sm-6 col-md-4 ser">
                         <div class="thumbnail">
-                            <a href="#"><img src="${pageContext.request.contextPath}/images/places3.jpg" alt=""></a>
+                            <a href="#">
+                                <div class="hover-image">
+                                    <img src="${pageContext.request.contextPath}/images/places3.jpg" alt="">
+                                </div>
+                            </a>
 
                             <div class="caption">
                                 <a href="#"><h3><cdg:l18n key="index.food"/></h3></a>

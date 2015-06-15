@@ -81,7 +81,7 @@ a:hover {
     background: #0ab2d2;
 }
 
-.top-nav ul li a.login:hover, .top-nav ul li a#sign:focus {
+.top-nav ul li a.login:hover, .top-nav ul li a.login:focus {
     background: #0ab2d2;
     color: #fff;
 }
@@ -112,7 +112,7 @@ span.menu {
 }
 
 .local ul li a {
-     display: inline-block;
+    display: inline-block;
 }
 
 .local ul li a.fa {
@@ -259,7 +259,7 @@ span.menu {
 /*--header end here--*/
 /*--banner start here--*/
 .banner {
-    background: url(/images/banner.jpg)no-repeat;
+    background: url(/images/banner.jpg) no-repeat;
     min-height: 700px;
     background-size: cover;
 }
@@ -542,6 +542,53 @@ a.morebtn:hover {
 .thumbnail .caption {
     padding: 0px;
     color: #333;
+}
+
+.hover-image {
+    background: rgba(255, 255, 255, 0.7);
+    transition: all 1s;
+    -webkit-transition: all 1s;
+    height: inherit;
+    position: relative;
+}
+
+.hover-image img {
+    width: 100%;
+}
+
+.hover-image-left, .hover-image-right {
+    z-index: 10;
+    width: 50%;
+    height: 100%;
+    position: absolute;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Lora', serif;
+    font-size: 20px;
+    font-weight: 900;
+    background: #fff;
+    color: #000;
+    border: ridge;
+    border-width: 1px;
+    opacity: 0.5;
+}
+
+.hover-image-right {
+    left: 50%;
+}
+
+.hover-image-left:hover, .hover-image-right:hover {
+    opacity: 0.9;
+}
+
+.hover-image img:hover {
+    opacity: 0.5;
 }
 
 .caption p {
