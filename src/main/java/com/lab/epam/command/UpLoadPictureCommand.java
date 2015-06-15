@@ -77,7 +77,7 @@ public class UpLoadPictureCommand implements Command{
                 loger.info("File is successfully uploaded in database");
 
                 //Файл, в который нужно произвести запись
-                final File file = new File("D:\\Eclipse_Luna\\gitProject\\LvivPortal\\LvivPortal\\src\\main\\webapp\\upload\\photo" + File.separator + imageName);
+                final File file = new File("C:\\Users\\Admin\\Desktop\\LvivPortalnew\\LvivPortal\\src\\main\\webapp\\upload\\photo" + File.separator + imageName);
                 FileOutputStream fos = new FileOutputStream(file);
                 fos.write(item.get());
                 fos.close();

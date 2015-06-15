@@ -75,13 +75,17 @@
 
                                         <div class="single-commemts">
                                             <div class="col-md-2 user">
-                                                <a href="#"><img src="${pageContext.request.contextPath}/images/user.png" alt=""/></a>
+                                                <c:forEach var="userImages" items="${userImages}">
+                                                    <c:if test="${users.id==userImages.user_id}">
+                                                        <a href="#"><img src="${pageContext.request.contextPath}/upload/photo/${userImages.reference}" alt="" height="100" width="100"/></a>
+                                                    </c:if>
+                                                </c:forEach>
                                             </div>
                                             <div class="col-md-10 user-comment">
                                                 <a href="#"><h4><c:out value="${users.login}"/></h4></a>
 
                                                 <p><c:out value="${placeResponse.description}"/></p>
-                                                <a class="comme" href="#">On December 14, 2014 18:05</a>
+                                                <a class="comme" href="#"> Rating is ${placeResponse.rating}</a>
                                             </div>
                                             <div class="clearfix"></div>
                                         </div>
@@ -92,13 +96,14 @@
 
                     <div class="magsingle-contact">
                         <h3>Leave A Comment</h3>
-                        <form action="portal/placeInformation&place_id=${places.id}" method="post">
+                        <form action="portal/placeInformation" method="get">
                             <input type="hidden" name="command" value="placeInformation">
-                        <input type="text" value="Name" onfocus="this.value = '';"
-                               onblur="if (this.value == '') {this.value = 'Name';}"/>
-                        <input type="text" class="no-mar" value="Email" onfocus="this.value = '';"
-                               onblur="if (this.value == '') {this.value = 'Email';}"/>
-                        <textarea value="Message" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Message';}">Message</textarea>
+                            <input type="hidden" name="place_id" value="${place_id}">
+                            ${not_login}
+                            <textarea name="message" value="${message}" placeholder="Message"></textarea>
+                            <input type="radio" name="rating" value="1">1
+                            <br>
+                            <input type="radio" name="rating" value="-1">-1<br>
                         <input type="submit" value="Submit Comment"/>
                             </form>
                     </div>

@@ -31,7 +31,11 @@
                          <div class="blog-grids">
                             <div class="blog-detail">
                                 <div class="blog-image">
-                                    <a href="portal?command=placeInformation&place_id=${places.id}"><img src="${pageContext.request.contextPath}/images/opera_sm.jpg" alt=""></a>
+                        <c:forEach var="placeImages" items="${placeImages}">
+                            <c:if test="${placeImages.place_id == places.id}">
+                                    <a href="portal?command=placeInformation&place_id=${places.id}"><img src="${pageContext.request.contextPath}/upload/photo/${placeImages.reference}" alt="" height="100" width="100"></a>
+                            </c:if>
+                        </c:forEach>
                                 </div>
                                 <a href="portal?command=placeInformation&place_id=${places.id}"><h3><c:out value="${placeDescriptions.name}"/></h3></a>
 

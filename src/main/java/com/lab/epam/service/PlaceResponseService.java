@@ -20,8 +20,14 @@ public class PlaceResponseService {
 
     MySqlPlaceResponseDao mySqlPlaceResponseDao = new MySqlPlaceResponseDao();
 
-    public void create(PlaceResponse object) throws PersistException {
-        mySqlPlaceResponseDao.create(object);
+    public void create(PlaceResponse object) {
+        try {
+            mySqlPlaceResponseDao.create(object);
+
+        } catch (PersistException e) {
+            e.printStackTrace();
+            loger.warn("Cant create place response");
+        }
     }
 
     public PlaceResponse getByPK(Integer key) throws PersistException{
@@ -51,7 +57,7 @@ public class PlaceResponseService {
 
         } catch (PersistException e) {
             e.printStackTrace();
-            loger.warn("Cant get all place description");
+            loger.warn("Cant get response by place response");
         }
 
         return placesDescription;

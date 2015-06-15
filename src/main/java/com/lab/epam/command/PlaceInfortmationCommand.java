@@ -26,13 +26,20 @@ public class PlaceInfortmationCommand implements Command{
     public void execute(HttpServletRequest request,
                         HttpServletResponse response) throws ServletException, IOException {
 
-        String message = request.getParameter("Message");
+        String message = request.getParameter("message");
         loger.info("Message is " + message);
-        String email = request.getParameter("Email");
-        loger.info("Email is " + email);
-        String login = request.getParameter("Name");
-        loger.info("Login is " + login);
 
+        Integer rating = 0;
+        String ratingString = request.getParameter("rating");
+
+        if (ratingString != null){
+            rating = Integer.parseInt(ratingString);
+        }
+
+        String place_idString = request.getParameter("place_id");
+        request.setAttribute("place_id", place_idString);
+        Integer place_id = Integer.parseInt(place_idString);
+        loger.info("Place with id " + place_id);
 
         PlaceService servicePlace = new PlaceService();
         PlaceResponseService placeResponseService = new PlaceResponseService();
@@ -44,14 +51,24 @@ public class PlaceInfortmationCommand implements Command{
 
         HttpSession session = request.getSession();
 
+        String login = (String)session.getAttribute("login");
+        String not_login = null;
+        if (message != null && login == null){
+            not_login = "You are logout. Please login and than leave a comment";
+        }
+        request.setAttribute("not_login", not_login);
+
+        if (login != null && message != null){
+            User user = userService.geUserByLogin(login);
+            loger.info("User, who send comment has login " + login);
+            if (user != null){
+                placeResponseService.create(new PlaceResponse(message, rating, user.getId(),place_id));
+            }
+        }
+
         ResourceBundle resourceBandle = (ResourceBundle)session.getAttribute("bundle");
         Locale locale = resourceBandle.getLocale();
         String language = locale.getLanguage();
-
-        String place_idString = request.getParameter("place_id");
-        Integer place_id = Integer.parseInt(place_idString);
-
-        loger.info("Place with id " + place_id);
 
         Place place = servicePlace.getByPK(place_id);
 
@@ -60,11 +77,13 @@ public class PlaceInfortmationCommand implements Command{
         PlaceDescription placeDescription;
         PlaceImage placeImage;
         User user;
-        UserImage userImage;
+        UserImage userImage = null;
         List<PlaceResponse> placeResponse;
         List<UserImage> userImages = new ArrayList<>();
         List<User> users = new ArrayList<>();
         Integer user_id;
+        Boolean isInUserArray = false;
+        Boolean isInUserImageArray = false;
 
         place_id = place.getId();
         String[] infoPlacePhone = null;
@@ -89,7 +108,7 @@ public class PlaceInfortmationCommand implements Command{
         }
 
         placeResponse = placeResponseService.getPlaceResponseByPlace(place_id);
-
+        loger.info("Place responses for place_id " + place_id + " is " + placeResponse);
         if (placeResponse == null){
             loger.info("Not place response for place_id " + place_id);
         } else{
@@ -99,16 +118,34 @@ public class PlaceInfortmationCommand implements Command{
                 user = userService.getByPK(user_id);
                 loger.info("User " + user);
                 if (user != null) {
-                    users.add(user);
-                    userImage = userImageService.getUserImageByUserIdOne(user.getId());
-                    if (userImage != null){
-                        userImages.add(userImage);
+                    if (users != null) {
+                        for (User us:users){
+                            if(us.getId() == user.getId()){
+                                isInUserArray = true;
+                            }
+                        }
+                        if (!isInUserArray){
+                            users.add(user);
+                        }
+
                     }
-                }
+
+                        userImage = userImageService.getUserImageByUserIdOne(user.getId());
+                    }
+                    if (userImage != null){
+                        for (UserImage im:userImages){
+                            if(im.getId() == userImage.getId()){
+                                isInUserImageArray = true;
+                            }
+                        }
+                        if (!isInUserImageArray) {
+                            userImages.add(userImage);
+                        }
+                    }
             }
         }
 
-
+        loger.info("Images " + userImages);
 
         request.setAttribute("place", place);
         request.setAttribute("placeDescription", placeDescription);

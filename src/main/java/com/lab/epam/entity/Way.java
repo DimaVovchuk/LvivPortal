@@ -15,15 +15,21 @@ public class Way implements Identified<Integer> {
     private Integer rating;
     @Column("name")
     private String name;
+    @Column("way_days")
+    private Integer way_days;
+    @Column("way_time")
+    private Integer way_time;
     @Column("visible")
     private Boolean visible;
     @Column("deleted")
     private Boolean deleted = false;
 
-    public Way(Integer rating, String name, Boolean visible){
+    public Way(Integer rating, String name, Boolean visible, Integer way_days, Integer way_time){
         this.rating = rating;
         this.name = name;
         this.visible = visible;
+        this.way_days = way_days;
+        this.way_time = way_time;
     }
 
     public Way(){

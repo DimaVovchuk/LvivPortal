@@ -49,7 +49,7 @@ public class PlaceImage implements Identified<Integer> {
         return place_id;
     }
 
-    public void setPlace_id(Integer Place_id) {
+    public void setPlace_id(Integer place_id) {
         this.place_id = place_id;
     }
 
@@ -57,7 +57,7 @@ public class PlaceImage implements Identified<Integer> {
         return reference;
     }
 
-    public void setReference(String Place_id) {
+    public void setReference(String reference) {
         this.reference = reference;
     }
 

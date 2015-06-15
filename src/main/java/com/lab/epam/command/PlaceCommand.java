@@ -70,11 +70,16 @@ public class PlaceCommand implements Command{
             placeDescription = placeDescriptionService.getPlaceDescriptionByIdPlace(place_id,language);
             placeDescriptions.add(placeDescription);
             placeImage = placeImageService.getPlaceImageByPlaceId(place_id);
+            if (placeImage == null) {
+                placeImage = new PlaceImage(place_id,"default_building.jpg");
+            }
             placeImages.add(placeImage);
         }
 
         request.setAttribute("places", places);
         request.setAttribute("placeDescriptions", placeDescriptions);
+        loger.info("placeImages = " + placeImages);
+        request.setAttribute("placeImages", placeImages);
 
         loger.info("Command Place.");
         request.getRequestDispatcher("/views/pages/places.jsp").forward(request, response);
