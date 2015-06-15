@@ -32,7 +32,6 @@ public class SignInCommand implements Command{
         }
         UserService serviceUser = new UserService();
         User user = serviceUser.geUserByLogin(login);
-        HttpSession session = request.getSession();
         if (user.getPassword()!= null && user.getPassword().equals(MD5Creator.getMD5(password + login))) {
             session.setAttribute("login", login);
             session.setAttribute("usedID",user.getId());

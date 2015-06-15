@@ -25,14 +25,11 @@ public class SendChangePassMailCommand implements Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String email = request.getParameter("email");
-        System.out.println(email);
         UserService userService = new UserService();
         User user = userService.geUserByEmail(email);
-        System.out.println(user);
         HttpSession session = request.getSession();
         ResourceBundle bundle = (ResourceBundle) session.getAttribute("bundle");
         long timeMillis = System.currentTimeMillis();
-        System.out.println(timeMillis);
         String s = new String(bundle.getString("reset.password").getBytes("ISO-8859-1"), "windows-1251") + " -> <a href = 'http://localhost:8080/portal?command=checkTime&user=" + email + "&param=" + timeMillis + "'> http://localhost:8080/portal?command=command=resetPass&user=" + email + "&param=" + timeMillis + "' <a>";
         if(user.getPassword() != null){
             SendEmail.sender("Change password",s,email);

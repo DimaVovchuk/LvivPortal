@@ -4,6 +4,7 @@ import com.lab.epam.command.Command;
 import com.lab.epam.dao.PersistException;
 import com.lab.epam.entity.User;
 import com.lab.epam.helper.ClassName;
+import com.lab.epam.md5.MD5Creator;
 import com.lab.epam.service.UserService;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -28,8 +29,8 @@ public class ConfirmChangePassCommand implements Command {
         UserService userService = new UserService();
         User user = userService.geUserByLogin(login);
         String password = request.getParameter("password");
-        //String md5 = MD5Creator.getMD5(password);
-        user.setPassword(password);
+        String md5 = MD5Creator.getMD5(password+login);
+        user.setPassword(md5);
         try {
             userService.update(user);
         } catch (PersistException e) {
