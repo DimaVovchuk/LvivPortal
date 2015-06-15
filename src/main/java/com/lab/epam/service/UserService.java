@@ -11,17 +11,28 @@ import java.util.List;
  */
 public class UserService {
 
+    private static final Logger loger = LogManager.getLogger(ClassName.getCurrentClassName());
+
     MySqlUserDao mySqlUserDao = new MySqlUserDao();
 
     public void create(User object) throws PersistException {
         mySqlUserDao.create(object);
     }
 
-    public User getByPK(Integer key) throws PersistException{
-        return mySqlUserDao.getByPK(key);
+    public User getByPK(Integer key){
+        User user = null;
+        try {
+            user = mySqlUserDao.getByPK(key);
+
+        } catch (PersistException e) {
+            e.printStackTrace();
+            loger.warn("Cant get user by id " + key);
+        }
+
+        return user;
     }
 
-    public void update(User object) throws PersistException{
+    public void update(User object) throws PersistException {
         mySqlUserDao.update(object);
     }
 
@@ -29,26 +40,30 @@ public class UserService {
         mySqlUserDao.delete(object);
     }
 
-    public List<User> getAll() throws PersistException{
+    public List<User> getAll() throws PersistException {
         return mySqlUserDao.getAll();
     }
 
-    public List<User> getAllWithoutDeleted() throws PersistException{
+    public List<User> getAllWithoutDeleted() throws PersistException {
         return mySqlUserDao.getAllWithoutDeleted();
     }
     public User geUserByLogin(String login){
         return mySqlUserDao.getUserByLogin(login);
     }
 
-    public boolean checkEmail(String email){
+    public User geUserByEmail(String email) {
+        return mySqlUserDao.getUserByEmail(email);
+    }
+
+    public boolean checkEmail(String email) {
         return mySqlUserDao.checkEmail(email);
     }
 
-    public boolean checkPhone(String phone){
+    public boolean checkPhone(String phone) {
         return mySqlUserDao.checkPhone(phone);
     }
 
-    public boolean checkLogin(String login){
+    public boolean checkLogin(String login) {
         return mySqlUserDao.checkLogin(login);
     }
 }

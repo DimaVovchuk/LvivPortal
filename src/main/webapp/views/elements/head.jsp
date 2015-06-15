@@ -31,6 +31,8 @@
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/easing.js"></script>
     <!-- Change localization -->
     <script src="${pageContext.request.contextPath}/js/language.js"></script>
+    <!-- login form -->
+    <script src="${pageContext.request.contextPath}/js/login.js"></script>
 
     <script src="${pageContext.request.contextPath}/js/jquery.custom.js"></script>
 

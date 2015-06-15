@@ -19,7 +19,52 @@
 </head>
 <jsp:include page="/views/elements/head.jsp"/>
 <body>
+
+<div class="blog">
+  <div class="container">
+    <div class="blog-main">
+      <div class="blog-top">
+        <h3><cdg:l18n key="places.head"/></h3>
+      </div>
+
+      <div class="col-md-9 blog-left">
+        <p>${user.name} ${user.surname}</p>
+          <div class="blog-grids">
+            <div class="blog-detail">
+              <div class="blog-image">
+                <a href="#"><img src="${pageContext.request.contextPath}/images/opera_sm.jpg" alt=""></a>
+              </div>
+              <div class="blog-btn">
+              <c:forEach var="placeDescription" items="${placeDescription}">
+                <h6><c:out value="${placeDescription.name}"/></h6><br>
+              </c:forEach><br><br>
+            </div>
+              <div class="blog-btn">
+              <c:forEach var="userImage" items="${userImage}">
+                  <c:out value="${userImage.reference}"/><br><br>
+              </c:forEach>
+              </div>
+              <div class="blog-btn">
+                <c:forEach var="ways" items="${ways}">
+                  <c:out value="${ways.name}"/><br><br>
+                </c:forEach>
+              </div>
+            </div>
+          </div>
+
+      </div>
+
+      <div class="col-md-3 blog-right">
+        <div class="blog-cate">
+          <h3><cdg:l18n key="places.categories"/></h3>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</div>
 <jsp:include page="/views/elements/footer.jsp"/>
-<jsp:include page="/views/pages/uploadTest.jsp"/>
+<jsp:include page="/views/pages/uploadImage.jsp"/>
+<jsp:include page="/views/pages/showManyMarkers.jsp"/>
 </body>
 </html>

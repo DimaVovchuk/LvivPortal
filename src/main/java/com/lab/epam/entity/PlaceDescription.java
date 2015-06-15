@@ -22,12 +22,16 @@ public class PlaceDescription implements Identified<Integer>{
         private String description;
         @Column("deleted")
         private Boolean deleted = false;
+        @Column("phone")
+        private String phone;
+        @Column("price")
+        private String price;
 
-        public PlaceDescription(Integer place_id, String locale, String name, String descriptione) {
-            this.place_id = place_id;
-            this.name = name;
-            this.locale = locale;
-            this.description = description;
+        public PlaceDescription(Builder builder) {
+            this.place_id = builder.place_id;
+            this.name = builder.name;
+            this.locale = builder.locale;
+            this.description = builder.description;
         }
 
         public PlaceDescription(){
@@ -76,7 +80,55 @@ public class PlaceDescription implements Identified<Integer>{
             return description;
         }
 
-        public void setdDscription(String description) {
+        public void setdDescription(String description) {
             this.description = description;
         }
+
+        public String getPrice() {
+        return price;
+    }
+
+        public void setPrice(String price) {
+        this.price = price;
+    }
+
+        public String getPhone() {
+        return phone;
+    }
+
+        public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public static class Builder {
+        private Integer place_id;
+        private String locale;
+        private String name;
+        private String description;
+
+        private String phone;
+        private String price;
+
+        public Builder(Integer place_id, String locale, String name, String description) {
+            this.place_id = place_id;
+            this.name = name;
+            this.locale = locale;
+            this.description = description;
+        }
+
+        public Builder phone(String val) {
+            phone = val;
+            return this;
+        }
+
+        public Builder price(String val) {
+            price = val;
+            return this;
+        }
+
+        public PlaceDescription build() {
+            return new PlaceDescription(this);
+        }
+    }
+
 }

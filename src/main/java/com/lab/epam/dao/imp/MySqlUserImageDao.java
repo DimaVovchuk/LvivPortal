@@ -63,5 +63,30 @@ public class MySqlUserImageDao extends AbstractJDBCDao<UserImage, Integer> {
 
     }
 
+    public UserImage getUserImageByUserIdOne(Integer user_id) throws PersistException {
+        List<UserImage> list;
+        Connection conn = connection.retrieve();
+        try (PreparedStatement statement = conn.prepareStatement(GET_IMAGE_BY_USER_ID)) {
+            statement.setInt(1, user_id);
+            ResultSet rs = statement.executeQuery();
+            loger.info("Get images from user_images is succesfull " + rs);
+            list = parseResultSet(rs);
+            loger.info("Parse result with Transformer is succesfull list = " + list);
+            if (list.size() <= 0){
+                loger.info("DB has any user_images with " + user_id + " user_id");
+                return null;
+            }
+        } catch (Exception e) {
+            loger.warn("Cant get images from user_images with " + user_id + " user_id");
+            throw new PersistException(e);
+        } finally {
+            connection.putback(conn);
+        }
+        return list.iterator().next();
+
+
+
+    }
+
 
 }

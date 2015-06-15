@@ -5,6 +5,9 @@ import com.lab.epam.dao.imp.MySqlCategoryDao;
 import com.lab.epam.dao.imp.MySqlPlaceResponseDao;
 import com.lab.epam.entity.Category;
 import com.lab.epam.entity.PlaceResponse;
+import com.lab.epam.helper.ClassName;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import java.util.List;
 
@@ -13,10 +16,18 @@ import java.util.List;
  */
 public class PlaceResponseService {
 
+    private static final Logger loger = LogManager.getLogger(ClassName.getCurrentClassName());
+
     MySqlPlaceResponseDao mySqlPlaceResponseDao = new MySqlPlaceResponseDao();
 
-    public void create(PlaceResponse object) throws PersistException {
-        mySqlPlaceResponseDao.create(object);
+    public void create(PlaceResponse object) {
+        try {
+            mySqlPlaceResponseDao.create(object);
+
+        } catch (PersistException e) {
+            e.printStackTrace();
+            loger.warn("Cant create place response");
+        }
     }
 
     public PlaceResponse getByPK(Integer key) throws PersistException{
@@ -38,4 +49,18 @@ public class PlaceResponseService {
     public List<PlaceResponse> getAllWithoutDeleted() throws PersistException{
         return mySqlPlaceResponseDao.getAllWithoutDeleted();
     }
+
+    public List<PlaceResponse> getPlaceResponseByPlace(Integer place_id){
+        List<PlaceResponse> placesDescription = null;
+        try {
+            placesDescription = mySqlPlaceResponseDao.getPlaceResponseByPlace(place_id);
+
+        } catch (PersistException e) {
+            e.printStackTrace();
+            loger.warn("Cant get response by place response");
+        }
+
+        return placesDescription;
+    }
+
 }

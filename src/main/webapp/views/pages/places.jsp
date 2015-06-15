@@ -26,20 +26,27 @@
 
             <div class="col-md-9 blog-left">
                 <c:forEach var="placeDescriptions" items="${placeDescriptions}">
-                <div class="blog-grids">
-                    <div class="blog-detail">
-                        <div class="blog-image">
-                            <a href="#"><img src="${pageContext.request.contextPath}/images/opera_sm.jpg" alt=""></a>
-                        </div>
-                        <a href="#"><h3><c:out value="${placeDescriptions.name}"/></h3></a>
-                        <c:forEach var="places" items="${places}">
-                            <c:if test="${places.id==placeDescriptions.place_id}">
-                                <c:out value="${places.adress}"/>
+                    <c:forEach var="places" items="${places}">
+                        <c:if test="${places.id==placeDescriptions.place_id}">
+                         <div class="blog-grids">
+                            <div class="blog-detail">
+                                <div class="blog-image">
+                        <c:forEach var="placeImages" items="${placeImages}">
+                            <c:if test="${placeImages.place_id == places.id}">
+                                    <a href="portal?command=placeInformation&place_id=${places.id}"><img src="${pageContext.request.contextPath}/upload/photo/${placeImages.reference}" alt="" height="100" width="100"></a>
                             </c:if>
                         </c:forEach>
-                        <div class="blog-btn"><a href="#">Read More</a></div>
-                    </div>
-                </div>
+                                </div>
+                                <a href="portal?command=placeInformation&place_id=${places.id}"><h3><c:out value="${placeDescriptions.name}"/></h3></a>
+
+
+                                    <c:out value="${places.adress}"/>
+                                    <div class="blog-btn"><a href="portal?command=placeInformation&place_id=${places.id}">Read More</a></div>
+
+
+                             </div>
+                         </div></c:if>
+                    </c:forEach>
                 </c:forEach>
 
             </div>

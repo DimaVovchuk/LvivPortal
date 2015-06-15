@@ -19,7 +19,6 @@ public class ConnectionPool {
 
     public ConnectionPool(int initConnCnt) {
         Properties props = new Properties();
-
         try {
             ClassLoader classLoader = getClass().getClassLoader();
             File file = new File(classLoader.getResource("persistent.xml").getFile());

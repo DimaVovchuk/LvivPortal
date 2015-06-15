@@ -69,19 +69,19 @@ public class PlaceResponse implements Identified<Integer> {
         this.description = description;
     }
 
-    public Integer getUserID() {
+    public Integer getUser_id() {
         return user_id;
     }
 
-    public void setUserID(Integer user_id) {
+    public void setUser_id(Integer user_id) {
         this.user_id = user_id;
     }
 
-    public Integer getPlaceID() {
+    public Integer getPlace_id() {
         return place_id;
     }
 
-    public void setPlaceID(Integer place_id) {
+    public void setPlace_id(Integer place_id) {
         this.place_id = place_id;
     }
 

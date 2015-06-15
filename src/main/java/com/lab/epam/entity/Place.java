@@ -24,17 +24,20 @@ public class Place implements Identified<Integer> {
     @Column("rating")
     private Integer rating;
     @Column("category_id")
+    private Integer place_time;
+    @Column("place_time")
     private Integer category_id;
     @Column("deleted")
     private Boolean deleted = false;
 
-    public Place(String adress, String latitude, String longitude, Integer category_id, Integer rating,  Boolean visible) {
+    public Place(String adress, String latitude, String longitude, Integer category_id, Integer rating,  Boolean visible, Integer place_time) {
         this.rating = rating;
         this.adress = adress;
         this.latitude = latitude;
         this.longitude = longitude;
         this.visible = visible;
         this.category_id = category_id;
+        this.place_time = place_time;
     }
 
     public Place(){
@@ -50,6 +53,7 @@ public class Place implements Identified<Integer> {
                 ", category_id='" + category_id + '\'' +
                 ", rating=" + rating +
                 ", visible='" + visible + '\'' +
+                ", place_time='" + place_time + '\'' +
                 ", deleted=" + deleted +
                 '}';
     }
@@ -93,11 +97,11 @@ public class Place implements Identified<Integer> {
         this.longitude = longitude;
     }
 
-    public Integer getCategoryID() {
+    public Integer getCategory_id() {
         return category_id;
     }
 
-    public void setCategoryID(Integer category_id) {
+    public void setCategory_id(Integer category_id) {
         this.category_id = category_id;
     }
 
@@ -115,6 +119,14 @@ public class Place implements Identified<Integer> {
 
     public void setDeleted(Boolean deleted) {
         this.deleted = deleted;
+    }
+
+    public Integer getPlace_time() {
+        return place_time;
+    }
+
+    public void setPlace_time(Integer place_time) {
+        this.place_time = place_time;
     }
 
 

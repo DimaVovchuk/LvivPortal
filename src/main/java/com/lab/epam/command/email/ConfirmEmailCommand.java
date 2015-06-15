@@ -1,5 +1,6 @@
-package com.lab.epam.command;
+package com.lab.epam.command.email;
 
+import com.lab.epam.command.Command;
 import com.lab.epam.dao.PersistException;
 import com.lab.epam.dao.imp.MySqlUserDao;
 import com.lab.epam.entity.User;
@@ -17,7 +18,7 @@ import java.io.IOException;
 /**
  * Created by Dima on 13-Jun-15.
  */
-public class ConfirmEmailCommand implements Command{
+public class ConfirmEmailCommand implements Command {
 private static final Logger loger = LogManager.getLogger(ClassName.getCurrentClassName());
 
 
@@ -29,6 +30,10 @@ private static final Logger loger = LogManager.getLogger(ClassName.getCurrentCla
         User userByLogin = mySqlUserDao.getUserByLogin(login);
         String md5Phone = MD5Creator.getMD5(userByLogin.getPhone());
         if(md5Phone.equals(param)){
+            if(userByLogin.getStatus() == 3){
+                response.sendRedirect("portal?command=index");
+                return;
+            }
             userByLogin.setStatus(2);
             loger.info("User " +login+ " is activated");
         }

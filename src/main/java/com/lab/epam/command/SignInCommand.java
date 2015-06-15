@@ -23,17 +23,27 @@ public class SignInCommand implements Command{
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String login = request.getParameter("login");
         String password = request.getParameter("password");
+        HttpSession session = request.getSession();
+        if (login == null) {
+            session.setAttribute("loginError", 1);
+            loger.info("login or password is incorrect");
+            response.sendRedirect("");
+            return;
+        }
         UserService serviceUser = new UserService();
         User user = serviceUser.geUserByLogin(login);
         HttpSession session = request.getSession();
-        if(user != null && user.getPassword().equals(MD5Creator.getMD5(password + login))){
-            session.setAttribute("login",login);
-            session.setAttribute("role",user.getRoleID());
-            loger.info("User " +login+ " signing in ");
-        }else{
-            session.setAttribute("loginError",1);
+        if (user.getPassword()!= null && user.getPassword().equals(MD5Creator.getMD5(password + login))) {
+            session.setAttribute("login", login);
+            session.setAttribute("usedID",user.getId());
+            session.setAttribute("role", user.getRoleID());
+            loger.info("User " + login + " signing in ");
+            request.getRequestDispatcher("/views/pages/usercabinet.jsp").forward(request, response);
+        } else {
+            session.setAttribute("loginError", 1);
             loger.info("login or password is incorrect");
+            response.sendRedirect("");
         }
-        request.getRequestDispatcher("/views/pages/usercabinet.jsp").forward(request, response);
+
     }
 }
