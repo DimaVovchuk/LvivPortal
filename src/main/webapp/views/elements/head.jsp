@@ -32,6 +32,8 @@
     <!-- Change localization -->
     <script src="${pageContext.request.contextPath}/js/language.js"></script>
 
+    <script src="${pageContext.request.contextPath}/js/jquery.custom.js"></script>
+
     <script type="text/javascript">
         jQuery(document).ready(function ($) {
             $(".scroll").click(function (event) {
@@ -56,4 +58,5 @@
             });
         });
     </script>
+
 </head>
