@@ -25,8 +25,8 @@ public class Place implements Identified<Integer> {
     private Integer rating;
     @Column("category_id")
     private Integer place_time;
-    @Column("place_time")
-    private Integer category_id;
+//    @Column("place_time")
+//    private Integer category_id;
     @Column("deleted")
     private Boolean deleted = false;
 
@@ -36,7 +36,7 @@ public class Place implements Identified<Integer> {
         this.latitude = latitude;
         this.longitude = longitude;
         this.visible = visible;
-        this.category_id = category_id;
+      //  this.category_id = category_id;
         this.place_time = place_time;
     }
 
@@ -50,7 +50,7 @@ public class Place implements Identified<Integer> {
                 ", adress='" + adress + '\'' +
                 ", latitude='" + latitude + '\'' +
                 ", longitude='" + longitude + '\'' +
-                ", category_id='" + category_id + '\'' +
+               // ", category_id='" + category_id + '\'' +
                 ", rating=" + rating +
                 ", visible='" + visible + '\'' +
                 ", place_time='" + place_time + '\'' +
@@ -97,13 +97,13 @@ public class Place implements Identified<Integer> {
         this.longitude = longitude;
     }
 
-    public Integer getCategory_id() {
-        return category_id;
-    }
-
-    public void setCategory_id(Integer category_id) {
-        this.category_id = category_id;
-    }
+//    public Integer getCategory_id() {
+//        return category_id;
+//    }
+//
+//    public void setCategory_id(Integer category_id) {
+//        this.category_id = category_id;
+//    }
 
     public Boolean setVisible() {
         return visible;

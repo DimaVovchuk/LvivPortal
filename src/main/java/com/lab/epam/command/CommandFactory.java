@@ -31,6 +31,7 @@ public class CommandFactory {
         commands.put("checkTime", new CheckChangePassTimeCommand());
         commands.put("confirmReset", new ConfirmChangePassCommand());
         commands.put("resetEmail", new ResetEmail());
+        commands.put("geotag", new GeotegPhotoCommand());
 
     }
 
