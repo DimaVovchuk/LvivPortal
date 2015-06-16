@@ -22,6 +22,22 @@ public class UserWay {
     public UserWay() {
     }
 
+    public UserWay(Integer wayId, String wayName, Integer wayDays, Integer wayTime, String address, String latitude, String longitude, Integer categoryId, Integer rating, Integer placeTime, String reference, String description, String placeName) {
+        this.wayId = wayId;
+        this.wayName = wayName;
+        this.wayDays = wayDays;
+        this.wayTime = wayTime;
+        this.address = address;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.categoryId = categoryId;
+        this.rating = rating;
+        this.placeTime = placeTime;
+        this.reference = reference;
+        this.description = description;
+        this.placeName = placeName;
+    }
+
     public Integer getWayId() {
         return wayId;
     }

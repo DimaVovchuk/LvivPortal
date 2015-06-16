@@ -1,5 +1,7 @@
 package com.lab.epam.entity;
 
+import com.lab.epam.dao.Identified;
+
 /**
  * Created by Dima on 16-Jun-15.
  */

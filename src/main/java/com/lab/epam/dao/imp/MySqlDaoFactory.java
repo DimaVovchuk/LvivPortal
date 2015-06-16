@@ -111,5 +111,6 @@ public class MySqlDaoFactory implements DaoFactory<ConnectionPool> {
                 return new MySqlUserImageDao();
             }
         });
+
     }
 }

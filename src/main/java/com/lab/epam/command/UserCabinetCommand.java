@@ -107,7 +107,9 @@ public class UserCabinetCommand implements Command{
             way_id = way.getId();
             way_place_list = placeService.getPlaceByWayId(way_id);
             if (way_place_list != null && !way_place_list.isEmpty()){
+                loger.info(" way_place_list are " + way_place_list + " way_id" + way_id);
                 way_placeDescription_list = getPlaceDescriptionByPlace(way_place_list);
+                loger.info(" way_placeDescription_list are " + way_placeDescription_list);
                 way_place.put(way_id, way_placeDescription_list);
                 wayPlaceImages.put(way_id, getPlaceImageByPlace(way_place_list));
             }
@@ -121,6 +123,7 @@ public class UserCabinetCommand implements Command{
     private List<PlaceDescription> getPlaceDescriptionByPlace(List<Place> places){
         Integer place_id;
         PlaceDescription placeDescription;
+        List <PlaceDescription> placeDescriptions = new ArrayList<>();
         for (Place place : places) {
             place_id = place.getId();
             placeDescription = placeDescriptionService.getPlaceDescriptionByIdPlace(place_id, language);

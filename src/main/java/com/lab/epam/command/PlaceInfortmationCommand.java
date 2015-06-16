@@ -41,8 +41,8 @@ public class PlaceInfortmationCommand implements Command{
         Integer place_id = Integer.parseInt(place_idString);
         loger.info("Place with id " + place_id);
 
-        String place_reference = request.getParameter("place_reference");
-        loger.info("place_reference is " + place_reference);
+        //String place_reference = request.getParameter("place_reference");
+       // loger.info("place_reference is " + place_reference);
 
         PlaceService servicePlace = new PlaceService();
         PlaceResponseService placeResponseService = new PlaceResponseService();
@@ -51,6 +51,13 @@ public class PlaceInfortmationCommand implements Command{
         PlaceImageService placeImageService = new PlaceImageService();
         UserService userService = new UserService();
         UserImageService userImageService = new UserImageService();
+        String place_reference = null;
+
+        if (place_id != null) {
+            PlaceImage im = placeImageService.getPlaceImageByPlaceId(place_id);
+            place_reference = im.getReference();
+            loger.info("place_reference is " + place_reference);
+        }
 
         HttpSession session = request.getSession();
 

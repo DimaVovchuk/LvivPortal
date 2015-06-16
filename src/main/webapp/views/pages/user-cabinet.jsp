@@ -24,24 +24,33 @@
             </div>
             <div class="about-text">
                 <c:forEach var="ways" items="${ways}">
+                    <c:forEach items="${wayPlaceImages}" var="wayPlaceImages">
+                    <c:forEach items="${way_place}" var="way_place">
+                    <c:if test="${ways.id == way_place.key}">
+                    <c:if test="${ways.id == wayPlaceImages.key}">
                     <div class="col-md-4 about-text-left">
-                        <c:forEach items="${wayPlaceImages}" var="wayPlaceImages">
-                        <div class="hover-image">
-                            <a class="hover-image-left" href="#">
-                                <cdg:l18n key="usercab.edit"/>
-                            </a>
-                            <a class="hover-image-right" href="#">
-                                <cdg:l18n key="usercab.delete"/>
-                            </a>
-                            <c:if test="${ways.id == wayPlaceImages.key}">
-                                <img src="${pageContext.request.contextPath}/upload/photo/${image.value.reference}" alt="">
-                            </c:if>
-                        </div>
-                        <a href="#"><h5>Itinerary name</h5></a>
 
-                        <p>Some information</p>
-                        </c:forEach>
+                                    <div class="hover-image">
+                                        <a class="hover-image-left" href="#">
+                                            <cdg:l18n key="usercab.edit"/>
+                                        </a>
+                                        <a class="hover-image-right" href="#">
+                                            <cdg:l18n key="usercab.delete"/>
+                                        </a>
+                                        <img src="${pageContext.request.contextPath}/upload/photo/${wayPlaceImages.value.reference}" alt="">
+
+                                    </div>
+
+                        <c:forEach items="${way_place.value}" var="place">
+                                    <a href="portal?command=placeInformation&place_id=${place.place_id}"><h5>${place.name}</h5></a><i class="fa fa-arrow-right"></i>
+                                    </c:forEach>
+
+
                     </div>
+                        </c:if>
+                        </c:if>
+                        </c:forEach>
+                        </c:forEach>
                 </c:forEach>
                 <div class="clearfix">
                 </div>
