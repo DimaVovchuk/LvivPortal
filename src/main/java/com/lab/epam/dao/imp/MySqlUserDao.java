@@ -21,6 +21,12 @@ public class MySqlUserDao extends AbstractJDBCDao<User, Integer> {
     public static final String checkMailSQL = "SELECT * FROM USER WHERE mail=?";
     public static final String checkPhoneSQL = "SELECT * FROM USER WHERE phone=?";
     public static final String checkLoginSQL = "SELECT * FROM USER WHERE login=?";
+    public static final String WAYS = "select W.id, W.name, W.way_days,W.way_time,P.adress,P.latitude,P.longitude,P.category_id,P.rating,\n" +
+            "P.place_time,PI.reference,PD.description, PD.name from user U join user_way UW on U.id=UW.user_id\n" +
+            " join way W on UW.way_id=W.id join place_way PW on W.id=PW.id\n" +
+            " join place P on PW.place_id= P.id join place_image PI on P.id=PI.place_id\n" +
+            " join place_description PD on P.id=PD.description";
+
     private ConnectionPool connection = ConnectionManager.getConnection();
 
     private class PersistGroup extends Category {
