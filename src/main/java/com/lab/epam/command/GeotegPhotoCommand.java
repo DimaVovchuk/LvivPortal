@@ -43,6 +43,7 @@ public class GeotegPhotoCommand implements Command {
             PlaceImage placeImage = placeImageService.getPlaceImageByPlaceId(place.getId());
             placeMarkerWithPhotos.add(new PlaceMarkerWithPhoto(place.getId(), placeDescription.getName(), place.getLatitude(), place.getLongitude(), placeImage.getReference(), placeDescription.getDescription()));
         }
+        request.setAttribute("language",bundle.getLocale().toString());
         request.setAttribute("places", placeMarkerWithPhotos);
         loger.info("Command GeotegPhotoCommand.");
         request.getRequestDispatcher("/views/pages/geotegPhoto.jsp").forward(request, response);
