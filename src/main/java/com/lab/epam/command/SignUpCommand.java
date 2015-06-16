@@ -61,8 +61,8 @@ public class SignUpCommand implements Command {
 
         UserService userService = new UserService();
         boolean checkEmail = userService.checkEmail(email);
-        boolean checkPhone = userService.checkEmail(phone);
-        boolean checkLogin = userService.checkEmail(login);
+        boolean checkPhone = userService.checkPhone(phone);
+        boolean checkLogin = userService.checkLogin(login);
 
         if (checkData(name, CHECK_NAME)) {
             session.setAttribute("loginError", 1);

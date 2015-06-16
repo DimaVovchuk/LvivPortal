@@ -22,7 +22,7 @@ public class MySqlWayDao extends AbstractJDBCDao<Way, Integer> {
 
     ConnectionPool connection = ConnectionManager.getConnection();
     private static final Logger loger = LogManager.getLogger(ClassName.getCurrentClassName());
-    private static final String GET_WAY_BY_USER_ID = "SELECT w.id, w.rating, w.name, w.visible, w.deleted FROM way AS w JOIN user_way AS uw JOIN user AS u WHERE uw.user_id = u.id AND uw.way_id = w.id AND u.id = ?";
+    private static final String GET_WAY_BY_USER_ID = "SELECT w.id, w.rating, w.name, w.visible, w.way_days, w.way_time ,w.deleted FROM way AS w JOIN user_way AS uw JOIN user AS u WHERE uw.user_id = u.id AND uw.way_id = w.id AND u.id = ?";
 
 
     private class PersistGroup extends Category {

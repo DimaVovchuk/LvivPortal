@@ -29,7 +29,9 @@ public class MySqlPlaceDao extends AbstractJDBCDao<Place, Integer> {
     private static final Logger loger = LogManager.getLogger(ClassName.getCurrentClassName());
 
     private static final String GET_PLACE_BY_CATEGORY = "SELECT * FROM place WHERE category_id = ?";
-    private static final String GET_PLACE_BY_USER_ID = "SELECT p.id, p.adress, p.latitude, p.longitude, p.category_id, p.rating, p.visible, p.deleted FROM place AS p JOIN user_place AS up JOIN user AS u WHERE up.user_id = u.id AND up.place_id = p.id AND u.id = ?";
+    private static final String GET_PLACE_BY_USER_ID = "SELECT p.id, p.adress, p.latitude, p.longitude, p.category_id, p.rating, p.visible, p.place_time, p.deleted FROM place AS p JOIN user_place AS up JOIN user AS u WHERE up.user_id = u.id AND up.place_id = p.id AND u.id = ?";
+    private static final String GET_PLACE_BY_WAY_ID = "SELECT p.id, p.adress, p.latitude, p.longitude, p.category_id, p.rating, p.visible, p.place_time, p.deleted FROM place AS p JOIN place_way AS pw JOIN way AS w WHERE pw.way_id = w.id AND pw.place_id = p.id AND w.id = ?";
+
 
     private class PersistGroup extends Place {
         public void setId(int id) {
@@ -83,10 +85,31 @@ public class MySqlPlaceDao extends AbstractJDBCDao<Place, Integer> {
             connection.putback(conn);
         }
         return list;
-
-
-
     }
+
+
+    public List<Place> getPlaceByWayId(Integer way_id) throws PersistException {
+        List<Place> list;
+        Connection conn = connection.retrieve();
+        try (PreparedStatement statement = conn.prepareStatement(GET_PLACE_BY_WAY_ID)) {
+            statement.setInt(1, way_id);
+            ResultSet rs = statement.executeQuery();
+            loger.info("Get places from way with id" + way_id + " is succesfull " + rs);
+            list = parseResultSet(rs);
+            loger.info("Parse result with Transformer is succesfull list = " + list);
+            if (list.size() <= 0){
+                loger.info("DB has any place from way with " + way_id + " way_id");
+                return null;
+            }
+        } catch (Exception e) {
+            loger.warn("Cant get places from way with " + way_id + " way_id");
+            throw new PersistException(e);
+        } finally {
+            connection.putback(conn);
+        }
+        return list;
+    }
+
 
 }
 

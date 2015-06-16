@@ -5,36 +5,37 @@ import com.lab.epam.transformer.Column;
 import com.lab.epam.transformer.Table;
 
 /**
- * Created by Admin on 10.06.2015.
+ * Created by Admin on 15.06.2015.
  */
-@Table("place_response")
-public class PlaceResponse implements Identified<Integer> {
+
+@Table("place_rating")
+public class PlaceRating implements Identified<Integer> {
 
     @Column("id")
     private Integer id = null;
-    @Column("description")
-    private String description;
     @Column("user_id")
     private Integer user_id;
     @Column("place_id")
     private Integer place_id;
+    @Column("rating")
+    private Integer rating;
     @Column("deleted")
     private Boolean deleted = false;
 
-    public PlaceResponse(String description,  Integer user_id, Integer place_id) {
-        this.description = description;
+    public PlaceRating(Integer user_id, Integer place_id, Integer rating) {
+        this.rating = rating;
         this.user_id = user_id;
         this.place_id = place_id;
     }
 
-    public PlaceResponse(){
+    public PlaceRating(){
     }
 
     @Override
     public String toString() {
         return "PlaceResponse{" +
                 "id=" + id +
-                ", description='" + description + '\'' +
+                ", rating='" + rating + '\'' +
                 ", user_id='" + user_id + '\'' +
                 ", place_id='" + place_id + '\'' +
                 ", deleted=" + deleted +
@@ -49,12 +50,12 @@ public class PlaceResponse implements Identified<Integer> {
         this.id = id;
     }
 
-    public String getDescription() {
-        return description;
+    public Integer getRating() {
+        return rating;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setRating(Integer rating) {
+        this.rating = rating;
     }
 
     public Integer getUser_id() {
