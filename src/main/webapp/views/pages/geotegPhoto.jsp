@@ -1,4 +1,3 @@
-<%@ page import="java.util.ResourceBundle" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -37,21 +36,24 @@
                     '</div>';
 
             var infowindow = new google.maps.InfoWindow({
-                content: contentString
+                content: contentString,
             });
 
             var image = {
                 url: "${pageContext.request.contextPath}/upload/photo/${place.imageReference}",
-                scaledSize: new google.maps.Size(50, 40), // scaled size
-                origin: new google.maps.Point(0, 0), // origin
-                anchor: new google.maps.Point(0, 0) // anchor
+                scaledSize: new google.maps.Size(60, 40),
+                origin: new google.maps.Point(0, 0),
+                anchor: new google.maps.Point(0, 0),
             }
+
             var myLatLng = new google.maps.LatLng(${place.latitude}, ${place.longitude});
+
 
             var marker = new google.maps.Marker({
                 position: myLatLng,
                 info: contentString,
-                icon: image
+                animation: google.maps.Animation.DROP,
+                icon: image,
             });
             markers.push(marker);
 
@@ -59,6 +61,7 @@
                 infowindow.setContent(this.info);
                 infowindow.open(map, this);
             });
+
             </c:forEach>
 
             markerClusterer = new MarkerClusterer(map, markers,
@@ -73,6 +76,7 @@
             zoom: 15,
             center: new google.maps.LatLng(49.8426, 24.0278)
         }
+
 
 
         google.maps.event.addDomListener(window, 'load', initialize);
