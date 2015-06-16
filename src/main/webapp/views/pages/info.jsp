@@ -22,7 +22,7 @@
         <div class="blog-main">
             <div class="col-md-9 blog-left">
                 <div class="blog-grids">
-                    <img src="${pageContext.request.contextPath}/images/opera.jpg" alt="">
+                    <img src="${pageContext.request.contextPath}/upload/photo/${place_reference}" alt="">
 
                     <div class="blog-detail">
                         <h3>${placeDescription.name}</h3>
@@ -85,7 +85,7 @@
                                                 <a href="#"><h4><c:out value="${users.login}"/></h4></a>
 
                                                 <p><c:out value="${placeResponse.description}"/></p>
-                                                <a class="comme" href="#"> Rating is ${placeResponse.rating}</a>
+                                                <a class="comme" href="#"><cdg:l18n key=""/> Rating is ${placeResponse.rating}</a>
                                             </div>
                                             <div class="clearfix"></div>
                                         </div>
@@ -96,7 +96,7 @@
 
                     <div class="magsingle-contact">
                         <h3>Leave A Comment</h3>
-                        <form action="portal/placeInformation" method="get">
+                        <form action="portal/placeInformation" method="post">
                             <input type="hidden" name="command" value="placeInformation">
                             <input type="hidden" name="place_id" value="${place_id}">
                             ${not_login}

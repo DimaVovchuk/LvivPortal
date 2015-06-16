@@ -41,6 +41,9 @@ public class PlaceInfortmationCommand implements Command{
         Integer place_id = Integer.parseInt(place_idString);
         loger.info("Place with id " + place_id);
 
+        String place_reference = request.getParameter("place_reference");
+        loger.info("place_reference is " + place_reference);
+
         PlaceService servicePlace = new PlaceService();
         PlaceResponseService placeResponseService = new PlaceResponseService();
 
@@ -62,7 +65,7 @@ public class PlaceInfortmationCommand implements Command{
             User user = userService.geUserByLogin(login);
             loger.info("User, who send comment has login " + login);
             if (user != null){
-                placeResponseService.create(new PlaceResponse(message, rating, user.getId(),place_id));
+                placeResponseService.create(new PlaceResponse(message, user.getId(),place_id));
             }
         }
 
@@ -155,6 +158,7 @@ public class PlaceInfortmationCommand implements Command{
         request.setAttribute("users", users);
         request.setAttribute("infoPlacePhone", infoPlacePhone);
         request.setAttribute("infoPlacePrice", infoPlacePrice);
+        request.setAttribute("place_reference", place_reference);
 
         loger.info("Command Place Info.");
         request.getRequestDispatcher("/views/pages/info.jsp").forward(request, response);

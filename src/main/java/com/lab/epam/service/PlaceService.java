@@ -106,4 +106,17 @@ public class PlaceService {
         return places;
     }
 
+    public List<Place> getPlaceByWayId(Integer way_id){
+        List<Place> places = null;
+        try {
+            places = mySqlPlaceDao.getPlaceByWayId(way_id);
+
+        } catch (PersistException e) {
+            e.printStackTrace();
+            loger.warn("Cant get place by way with id " + way_id);
+        }
+
+        return places;
+    }
+
 }
