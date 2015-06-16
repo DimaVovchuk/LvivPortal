@@ -5,16 +5,21 @@ package com.lab.epam.entity;
  */
 public class PlaceMarkerWithPhoto {
 
+    private Integer placeId;
     private String name;
     private String latitude;
     private String longitude;
     private String imageReference;
+    private String description;
 
-    public PlaceMarkerWithPhoto(String name,String latitude,String longitude,String imageReference) {
+    public PlaceMarkerWithPhoto(Integer placeId,String name,String latitude,String longitude,String imageReference,String description) {
+        this.placeId = placeId;
         this.name = name;
         this.latitude = latitude;
         this.longitude = longitude;
         this.imageReference = imageReference;
+        this.description = description;
+
     }
 
     public String getImageReference() {
@@ -47,5 +52,21 @@ public class PlaceMarkerWithPhoto {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Integer getPlaceId() {
+        return placeId;
+    }
+
+    public void setPlaceId(Integer placeId) {
+        this.placeId = placeId;
     }
 }

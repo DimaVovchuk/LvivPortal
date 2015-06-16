@@ -13,27 +13,55 @@
             padding: 0px
         }
     </style>
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&language=ua"></script>
+    <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script>
-        // This example adds a marker to indicate the position
-        // of Bondi Beach in Sydney, Australiav
+
 
         function initialize() {
             var map = new google.maps.Map(document.getElementById('map-canvas'),
                     mapOptions);
             <c:forEach items="${places}" var="place">
-            var image = "${pageContext.request.contextPath}/images/localization/UA.png";
+
+            var contentString = '<div id="content">' +
+                    '<div id="siteNotice">' +
+                    '</div>' +
+                    '<h1 id="firstHeading" class="firstHeading"><c:out value="${place.name}"/></h1>' +
+                    '<div style{backround }>"${pageContext.request.contextPath}/upload/photo/${place.imageReference}"</div>'+
+                    '<div id="bodyContent">' +
+                    ' <c:out value="${place.description}"/>'+
+                    '<p>Attribution: <a href="portal?command=placeInformation&place_id=${place.placeId}">link</a></p>' +
+                    '</div>' +
+                    '</div>';
+
+            var infowindow = new google.maps.InfoWindow({
+                content: contentString
+            });
+
+            var image = {
+                url: "${pageContext.request.contextPath}/upload/photo/${place.imageReference}",
+                scaledSize: new google.maps.Size(50, 40), // scaled size
+                origin: new google.maps.Point(0, 0), // origin
+                anchor: new google.maps.Point(0, 0) // anchor
+            }
             var myLatLng = new google.maps.LatLng(${place.latitude}, ${place.longitude});
-            var beachMarker = new google.maps.Marker({
+
+            var marker = new google.maps.Marker({
                 position: myLatLng,
                 map: map,
+                info: contentString,
                 icon: image
+            });
+
+            google.maps.event.addListener(marker, 'click', function () {
+                infowindow.setContent(this.info);
+                infowindow.open(map, this);
             });
             </c:forEach>
         }
 
         var mapOptions = {
-            zoom: 4,
+            zoom: 15,
             center: new google.maps.LatLng(49.8426, 24.0278)
         }
 

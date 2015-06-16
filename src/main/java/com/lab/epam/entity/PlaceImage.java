@@ -31,7 +31,7 @@ public class PlaceImage implements Identified<Integer> {
     public String toString() {
         return "PlaceImage{" +
                 "id=" + id +
-                "place_id=" + place_id +
+                ", place_id=" + place_id +
                 ", reference=" + reference +
                 ", deleted='" + deleted +
                 '}';
