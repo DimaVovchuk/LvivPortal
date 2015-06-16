@@ -29,13 +29,14 @@
                     <c:forEach var="places" items="${places}">
                         <c:forEach var="placeImages" items="${placeImages}">
                         <c:if test="${places.id==placeDescriptions.place_id}">
+                            <c:if test="${placeImages.place_id == places.id}">
                          <div class="blog-grids">
                             <div class="blog-detail">
                                 <div class="blog-image">
 
-                            <c:if test="${placeImages.place_id == places.id}">
+
                                     <a href="portal?command=placeInformation&place_id=${places.id}"><img src="${pageContext.request.contextPath}/upload/photo/${placeImages.reference}" alt="" height="100" width="100"></a>
-                            </c:if>
+
 
                                 </div>
                                 <a href="portal?command=placeInformation&place_id=${places.id}"><h3><c:out value="${placeDescriptions.name}"/></h3></a>
@@ -46,7 +47,9 @@
 
 
                              </div>
-                         </div></c:if>
+                         </div>
+                            </c:if>
+                            </c:if>
                         </c:forEach>
                     </c:forEach>
                 </c:forEach>

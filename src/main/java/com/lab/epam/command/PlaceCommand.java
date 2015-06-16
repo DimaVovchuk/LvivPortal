@@ -77,7 +77,9 @@ public class PlaceCommand implements Command{
         }
 
         request.setAttribute("places", places);
+        loger.info("places = " + places);
         request.setAttribute("placeDescriptions", placeDescriptions);
+        loger.info("placeDescriptions = " + placeDescriptions);
         loger.info("placeImages = " + placeImages);
         request.setAttribute("placeImages", placeImages);
 

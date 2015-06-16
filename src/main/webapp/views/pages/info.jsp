@@ -85,7 +85,11 @@
                                                 <a href="#"><h4><c:out value="${users.login}"/></h4></a>
 
                                                 <p><c:out value="${placeResponse.description}"/></p>
-                                                <a class="comme" href="#"><cdg:l18n key=""/> Rating is ${placeResponse.rating}</a>
+                            <c:forEach var="placeRatings" items="${placeRatings}">
+                                <c:if test="${users.id==placeRatings.user_id}">
+                                    <c:out value="${placeRatings.rating}"/>
+                                </c:if>
+                            </c:forEach>
                                             </div>
                                             <div class="clearfix"></div>
                                         </div>
