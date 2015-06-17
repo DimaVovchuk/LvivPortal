@@ -26,7 +26,6 @@ $(document).ready(function ($) {
     $('.modal-trigger').leanModal({
         dismissible: true
     });
-
     $('#open-sign-up').on('click', function(){
         $('#sign-up').openModal();
         $('#sign-in').closeModal();

@@ -1,5 +1,6 @@
-package com.lab.epam.command;
+package com.lab.epam.command.logination;
 
+import com.lab.epam.command.controller.Command;
 import com.lab.epam.entity.User;
 import com.lab.epam.helper.ClassName;
 import com.lab.epam.md5.MD5Creator;
@@ -16,7 +17,7 @@ import java.io.IOException;
 /**
  * Created by Vasyl on 12.06.2015.
  */
-public class SignInCommand implements Command{
+public class SignInCommand implements Command {
     private static final Logger loger = LogManager.getLogger(ClassName.getCurrentClassName());
 
     @Override

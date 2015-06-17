@@ -5,7 +5,6 @@
     <div class="modal-content center-align">
         <h5 class="cyan-text darken-5"><cdg:l18n key="login.logintxt"/></h5>
         <br>
-
         <form id="sign-in-form" action="portal?command=signIn" method="post">
             <div class="input-field">
                 <input class="validate" id="login-in" type="text" name="login">
