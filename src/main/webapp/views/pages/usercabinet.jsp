@@ -17,7 +17,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
   <meta name="keywords" content=""/>
 </head>
-<jsp:include page="/views/elements/head.jsp"/>
+<jsp:include page="/views/elements/css.jsp"/>
 <body>
 
 <div class="blog">

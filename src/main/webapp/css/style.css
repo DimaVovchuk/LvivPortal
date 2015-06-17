@@ -73,7 +73,7 @@ a:hover {
     display: block;
 }
 
-.top-nav ul li a.login {
+.top-nav ul li a.blue {
     color: #0ab2d2;
 }
 
@@ -81,7 +81,7 @@ a:hover {
     background: #0ab2d2;
 }
 
-.top-nav ul li a.login:hover, .top-nav ul li a.login:focus {
+.top-nav ul li a.blue:hover, .top-nav ul li a.blue:focus {
     background: #0ab2d2;
     color: #fff;
 }

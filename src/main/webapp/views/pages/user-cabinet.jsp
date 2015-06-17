@@ -8,7 +8,7 @@
     <title><cdg:l18n key="usercab.title"/></title>
 </head>
 
-<jsp:include page="/views/elements/head.jsp"/>
+<jsp:include page="/views/elements/css.jsp"/>
 
 <body>
 
@@ -31,7 +31,7 @@
                         <a class="hover-image-right" href="#">
                             <cdg:l18n key="usercab.delete"/>
                         </a>
-                        <img src="${pageContext.request.contextPath}/images/places1.jpg" alt="">
+                        <img src="${pageContext.request.contextPath}/images/test_1.jpg" alt="">
                     </div>
                     <a href="#"><h5>Itinerary name</h5></a>
 
@@ -46,7 +46,7 @@
                         <a class="hover-image-right" href="#">
                             <cdg:l18n key="usercab.delete"/>
                         </a>
-                        <img src="${pageContext.request.contextPath}/images/places1.jpg" alt="">
+                        <img src="${pageContext.request.contextPath}/images/test_2.jpg" alt="">
                     </div>
                     <a href="#"><h5>Itinerary name</h5></a>
 
@@ -61,7 +61,7 @@
                         <a class="hover-image-right" href="#">
                             <cdg:l18n key="usercab.delete"/>
                         </a>
-                        <img src="${pageContext.request.contextPath}/images/places1.jpg" alt="">
+                        <img src="${pageContext.request.contextPath}/images/test_1.jpg" alt="">
                     </div>
                     <a href="#"><h5>Itinerary name</h5></a>
 

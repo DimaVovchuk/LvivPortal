@@ -10,122 +10,83 @@
     <meta name="keywords" content=""/>
 </head>
 
-<jsp:include page="/views/elements/head.jsp"/>
+<jsp:include page="/views/elements/css.jsp"/>
 
 <body>
 
 <jsp:include page="/views/elements/header.jsp"/>
 <jsp:include page="/views/elements/banner.jsp"/>
 
-<div class="services" id="places">
-    <div class="container">
-        <div class="services-main">
-            <div class="services-top" id="information">
-                <h3><cdg:l18n key="index.head"/></h3>
-            </div>
-            <div class="services-bottom">
-                <div class="row">
+<div class="index">
+    <div class="section">
+        <h2 class="center-align"><cdg:l18n key="index.head"/></h2>
 
-                    <div class="col-sm-6 col-md-4 ser">
-                        <div class="thumbnail">
-                            <a href="#">
-                                <div class="hover-image">
-                                    <img src="${pageContext.request.contextPath}/images/places1.jpg" alt="">
-                                </div>
-                            </a>
-
-                            <div class="caption">
-                                <a href="#"><h3><cdg:l18n key="index.architecture"/></h3></a>
-
-                                <p><cdg:l18n key="index.architecturetxt"/></p>
-
-                                <div class="dropup">
-                                    <button class="places-dropdown btn btn-default dropdown-toggle" type="button"
-                                            data-toggle="dropdown" aria-expanded="true">
-                                        <cdg:l18n key="index.choose"/>
-                                        <span class="caret"></span>
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#">Item 1</a></li>
-                                        <li><a href="#">Item 2</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="#">Item 3</a></li>
-                                    </ul>
-                                </div>
-                            </div>
+        <div class="row">
+            <div class="col l4 m6 s12">
+                <div class="section z-depth-2 center-align">
+                    <a href="#">
+                        <div class="hover-image">
+                            <img class="responsive-img" src="${pageContext.request.contextPath}/images/places1.jpg">
                         </div>
-                    </div>
-
-                    <div class="col-sm-6 col-md-4 ser">
-                        <div class="thumbnail">
-                            <a href="#">
-                                <div class="hover-image">
-                                    <img src="${pageContext.request.contextPath}/images/places2.jpg" alt="">
-                                </div>
-                            </a>
-
-                            <div class="caption">
-                                <a href="#"><h3><cdg:l18n key="index.culture"/></h3></a>
-
-                                <p><cdg:l18n key="index.culturetxt"/></p>
-
-                                <div class="dropup">
-                                    <button class="places-dropdown btn btn-default dropdown-toggle" type="button"
-                                            data-toggle="dropdown" aria-expanded="true">
-                                        <cdg:l18n key="index.choose"/>
-                                        <span class="caret"></span>
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#">Item 1</a></li>
-                                        <li><a href="#">Item 2</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="#">Item 3</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6 col-md-4 ser">
-                        <div class="thumbnail">
-                            <a href="#">
-                                <div class="hover-image">
-                                    <img src="${pageContext.request.contextPath}/images/places3.jpg" alt="">
-                                </div>
-                            </a>
-
-                            <div class="caption">
-                                <a href="#"><h3><cdg:l18n key="index.food"/></h3></a>
-
-                                <p><cdg:l18n key="index.foodtxt"/></p>
-
-                                <div class="dropup">
-                                    <button class="places-dropdown btn btn-default dropdown-toggle" type="button"
-                                            data-toggle="dropdown" aria-expanded="true">
-                                        <cdg:l18n key="index.choose"/>
-                                        <span class="caret"></span>
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#">Item 1</a></li>
-                                        <li><a href="#">Item 2</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="#">Item 3</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="clearfix"><br></div>
-
+                    </a>
+                    <a href="#"><h5><cdg:l18n key="index.architecture"/></h5></a>
+                    <p><cdg:l18n key="index.architecturetxt"/></p>
+                    <a class='waves-effect dropdown-button dropdown-full btn cyan darken-2' href='#' data-activates='dropdown-arch'><cdg:l18n
+                            key="index.choose"/></a>
+                    <ul id='dropdown-arch' class='dropdown-content'>
+                        <li><a href="#">one</a></li>
+                        <li><a href="#">two</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">three</a></li>
+                    </ul>
                 </div>
+            </div>
 
+            <div class="col l4 m6 s12">
+                <div class="section z-depth-2 center-align">
+                    <a href="#">
+                        <div class="hover-image">
+                            <img class="responsive-img" src="${pageContext.request.contextPath}/images/places2.jpg">
+                        </div>
+                    </a>
+                    <a href="#"><h5><cdg:l18n key="index.culture"/></h5></a>
+                    <p><cdg:l18n key="index.culturetxt"/></p>
+                    <a class='waves-effect dropdown-button btn dropdown-full cyan darken-2' href='#' data-activates='dropdown-cult'><cdg:l18n
+                            key="index.choose"/></a>
+                    <ul id='dropdown-cult' class='dropdown-content'>
+                        <li><a href="#">one</a></li>
+                        <li><a href="#">two</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">three</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col l4 m6 s12">
+                <div class="section z-depth-2 center-align">
+                    <a href="#">
+                        <div class="hover-image">
+                            <img class="responsive-img" src="${pageContext.request.contextPath}/images/places3.jpg">
+                        </div>
+                    </a>
+                    <a href="#"><h5><cdg:l18n key="index.culture"/></h5></a>
+                    <p><cdg:l18n key="index.culturetxt"/></p>
+                    <a class='waves-effect dropdown-button btn  dropdown-full cyan darken-2' href='#' data-activates='dropdown-food'><cdg:l18n
+                            key="index.choose"/></a>
+                    <ul id='dropdown-food' class='dropdown-content'>
+                        <li><a href="#">one</a></li>
+                        <li><a href="#">two</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">three</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
 <jsp:include page="/views/elements/footer.jsp"/>
+<jsp:include page="/views/elements/script.jsp"/>
 
 </body>
 </html>

@@ -1,0 +1,121 @@
+h2 {
+    font-family: 'Lora', serif;
+    font-weight: 600;
+    color: #484848;
+}
+
+a h5 {
+    font-family: 'Lora', serif;
+    font-weight: 700;
+    color: #000;
+}
+
+a h5:hover {
+    color:  #0ab2d2;
+}
+
+.col .dropdown-button {
+    width: 100%;
+    height: inherit;
+}
+
+.dropdown-content li a {
+    color: #000;
+}
+
+.hover-image {
+    background: #fff;
+    transition: all 1s;
+    -webkit-transition: all 1s;
+    height: inherit;
+    position: relative;
+}
+
+.hover-image img:hover {
+    opacity: 0.7;
+}
+
+/* HEADER */
+header nav ul li:hover {
+    background: #0ab2d2;
+}
+
+header nav ul a {
+    font-size: 1.2em;
+}
+
+header .side-nav a {
+    font-size: 1.2em;
+}
+
+header .dropdown-content li a {
+    color: #000;
+}
+
+header img.logo {
+    margin-left: 0.5em;
+    height: 1.9em;
+    width: auto;
+}
+
+header img.text-middle {
+    vertical-align: middle;
+}
+
+/* BANNER */
+.banner .parallax-container {
+    height: 600px;
+}
+
+.banner .container {
+    height: 100%;
+    font-family: 'Lora', serif;
+}
+
+.banner h4,
+.banner h5 {
+    font-style: italic;
+    font-weight: 600;
+}
+
+.banner .row {
+    width: 100%;
+}
+
+.banner .banner-text {
+    background: rgba(0,0,0,0.6);
+    padding-bottom: 2em;
+}
+
+/* LOGIN */
+
+.login label {
+    font-size: 1.2em;
+    color: #212121;
+}
+
+#sign-in {
+    width: 400px;
+}
+
+#sign-up {
+    width: 600px;
+}
+
+#sign-in, #sign-up {
+    border-top: solid;
+    border-bottom: solid;
+    border-width: 20px;
+    border-color: #0ab2d2;
+}
+
+/* INDEX */
+
+.index .row {
+    margin: 20px;
+}
+
+.index .col .section {
+    margin: 10px;
+    padding: 20px;
+}

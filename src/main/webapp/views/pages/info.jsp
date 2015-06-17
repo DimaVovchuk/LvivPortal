@@ -11,7 +11,7 @@
     <meta name="keywords" content=""/>
 </head>
 
-<jsp:include page="/views/elements/head.jsp"/>
+<jsp:include page="/views/elements/css.jsp"/>
 
 <body>
 

@@ -1,18 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <head>
-    <!-- Bootstrap -->
-    <link href="${pageContext.request.contextPath}/css/bootstrap.css" rel="stylesheet" type="text/css" media="all">
-    <script src="${pageContext.request.contextPath}/js/jquery-1.11.3.min.js"></script>
-    <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-    <!--- Material Angular -->
-    <link href="https://ajax.googleapis.com/ajax/libs/angular_material/0.9.4/angular-material.min.css" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-animate.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-aria.min.js"></script>
-    <!-- Custom Theme files -->
+    <link href="${pageContext.request.contextPath}/css/materialize.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/custom.css" rel="stylesheet">
+
+
+<%--    <!-- Custom Theme files -->
     <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet" type="text/css" media="all">
-    <link href="${pageContext.request.contextPath}/css/flexslider.css" rel="stylesheet" type="text/css" media="screen">
     <link href="${pageContext.request.contextPath}/css/simple-sidebar.css" rel="stylesheet">
     <!-- Login form files -->
     <link href="${pageContext.request.contextPath}/css/login.css" rel="stylesheet">
@@ -29,8 +23,6 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/move-top.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/easing.js"></script>
-    <!-- Change localization -->
-    <script src="${pageContext.request.contextPath}/js/language.js"></script>
     <!-- login form -->
     <script src="${pageContext.request.contextPath}/js/login.js"></script>
 
@@ -59,6 +51,6 @@
                 $('html,body').animate({scrollTop: $(this.hash).offset().top}, 1000);
             });
         });
-    </script>
+    </script>--%>
 
 </head>
