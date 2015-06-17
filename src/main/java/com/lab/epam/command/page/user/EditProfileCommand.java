@@ -1,5 +1,6 @@
-package com.lab.epam.command;
+package com.lab.epam.command.page.user;
 
+import com.lab.epam.command.controller.Command;
 import com.lab.epam.helper.ClassName;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -12,7 +13,7 @@ import java.io.IOException;
 /**
  * Created by Oleguk on 16.06.2015.
  */
-public class EditProfileCommand implements Command{
+public class EditProfileCommand implements Command {
     private static final Logger loger = LogManager.getLogger(ClassName.getCurrentClassName());
 
     public void execute(HttpServletRequest request,
