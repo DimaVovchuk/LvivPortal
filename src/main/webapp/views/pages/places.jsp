@@ -44,7 +44,9 @@
 
                                     <c:out value="${places.adress}"/>
                                     <div class="blog-btn"><a href="portal?command=placeInformation&place_id=${places.id}">Read More</a></div>
-
+                                <form action="portal?command=place&place_id=${places.id}&category=${category}" method="post">
+                                    <input type="submit" value="Submit">
+                                    </form>
 
                              </div>
                          </div>

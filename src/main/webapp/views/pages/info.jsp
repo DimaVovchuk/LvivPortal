@@ -49,7 +49,9 @@
                             <h4>Adress</h4>
                             ${place.adress}
                         </div>
-
+                        <form action="portal?command=placeInformation&place_id=${place.id}" method="post">
+                            <input type="submit" value="Submit">
+                        </form>
                     <div class="data-line">
                         <ul>
                             <li>

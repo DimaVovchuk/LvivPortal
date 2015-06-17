@@ -64,6 +64,33 @@ public class PlaceInfortmationCommand implements Command {
 
         HttpSession session = request.getSession();
 
+        List<Place> places = null;
+        List<Place> placeForWay;
+        placeForWay = (ArrayList<Place>)session.getAttribute("placeForWay");
+        String placeId = request.getParameter("place_id");
+        Place onePlaceForWay = null;
+        Boolean isInWay = false;
+
+        if (placeId != null){
+            onePlaceForWay = servicePlace.getByPK(Integer.parseInt(placeId));
+            if (onePlaceForWay != null){
+                if (placeForWay == null){
+                    placeForWay = new ArrayList<>();
+                } else {
+                    for (Place place: placeForWay){
+                        if (place.getId() == onePlaceForWay.getId()){
+                            isInWay = true;
+                        }
+                    }
+                }
+                if (!isInWay) {
+                    placeForWay.add(onePlaceForWay);
+                }
+            }
+        }
+        System.out.println("placeForWay " + placeForWay);
+        session.setAttribute("placeForWay",placeForWay);
+
         String login = (String)session.getAttribute("login");
         String not_login = null;
         if (message != null && login == null){

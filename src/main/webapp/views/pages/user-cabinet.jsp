@@ -9,8 +9,6 @@
     <title><cdg:l18n key="usercab.title"/></title>
 </head>
 
-<jsp:include page="/views/elements/head.jsp"/>
-
 <body>
 
 <jsp:include page="/views/elements/header.jsp"/>
