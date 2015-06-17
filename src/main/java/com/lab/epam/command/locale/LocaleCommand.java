@@ -1,5 +1,6 @@
-package com.lab.epam.command;
+package com.lab.epam.command.locale;
 
+import com.lab.epam.command.controller.Command;
 import com.lab.epam.helper.ClassName;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;

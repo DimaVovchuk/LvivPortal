@@ -1,5 +1,6 @@
-package com.lab.epam.command;
+package com.lab.epam.command.logination;
 
+import com.lab.epam.command.controller.Command;
 import com.lab.epam.entity.User;
 import com.lab.epam.helper.ClassName;
 import com.lab.epam.md5.MD5Creator;

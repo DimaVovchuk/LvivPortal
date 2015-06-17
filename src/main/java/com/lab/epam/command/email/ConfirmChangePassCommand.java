@@ -1,6 +1,6 @@
 package com.lab.epam.command.email;
 
-import com.lab.epam.command.Command;
+import com.lab.epam.command.controller.Command;
 import com.lab.epam.dao.PersistException;
 import com.lab.epam.entity.User;
 import com.lab.epam.helper.ClassName;

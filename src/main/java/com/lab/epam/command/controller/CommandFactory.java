@@ -1,10 +1,20 @@
-package com.lab.epam.command;
+package com.lab.epam.command.controller;
 
 /**
  * Created by Vasyl on 09.06.2015.
  */
 
 import com.lab.epam.command.email.*;
+import com.lab.epam.command.locale.LocaleCommand;
+import com.lab.epam.command.logination.SignInCommand;
+import com.lab.epam.command.logination.SignUpCommand;
+import com.lab.epam.command.page.index.IndexCommand;
+import com.lab.epam.command.page.map.GeotegPhotoCommand;
+import com.lab.epam.command.page.map.ShowMapCommand;
+import com.lab.epam.command.page.photo.UpLoadPictureCommand;
+import com.lab.epam.command.page.place.PlaceCommand;
+import com.lab.epam.command.page.place.PlaceInfortmationCommand;
+import com.lab.epam.command.page.user.UserCabinetCommand;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

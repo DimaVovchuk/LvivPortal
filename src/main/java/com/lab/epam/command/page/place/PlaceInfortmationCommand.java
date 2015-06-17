@@ -1,5 +1,6 @@
-package com.lab.epam.command;
+package com.lab.epam.command.page.place;
 
+import com.lab.epam.command.controller.Command;
 import com.lab.epam.entity.*;
 import com.lab.epam.helper.ClassName;
 import com.lab.epam.service.*;
@@ -19,7 +20,7 @@ import java.util.ResourceBundle;
 /**
  * Created by Admin on 13.06.2015.
  */
-public class PlaceInfortmationCommand implements Command{
+public class PlaceInfortmationCommand implements Command {
 
     private static final Logger loger = LogManager.getLogger(ClassName.getCurrentClassName());
 

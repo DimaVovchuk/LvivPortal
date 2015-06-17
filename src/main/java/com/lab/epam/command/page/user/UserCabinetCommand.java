@@ -1,5 +1,6 @@
-package com.lab.epam.command;
+package com.lab.epam.command.page.user;
 
+import com.lab.epam.command.controller.Command;
 import com.lab.epam.entity.*;
 import com.lab.epam.helper.ClassName;
 import com.lab.epam.service.*;
@@ -16,7 +17,7 @@ import java.util.*;
 /**
  * Created by Admin on 13.06.2015.
  */
-public class UserCabinetCommand implements Command{
+public class UserCabinetCommand implements Command {
     private static final Logger loger = LogManager.getLogger(ClassName.getCurrentClassName());
 
 
@@ -50,7 +51,7 @@ public class UserCabinetCommand implements Command{
         User user = null;
         Role role = null;
 
-        String page = "/views/pages/index.jsp";
+        String page = "/views/page/index.jsp";
         loger.info("Login in session is " + login);
         if (login != null) {
             user = userservice.geUserByLogin(login);

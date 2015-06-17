@@ -1,4 +1,4 @@
-package com.lab.epam.command;
+package com.lab.epam.command.controller;
 
 /**
  * Created by Vasyl on 09.06.2015.

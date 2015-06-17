@@ -1,5 +1,6 @@
-package com.lab.epam.command;
+package com.lab.epam.command.page.map;
 
+import com.lab.epam.command.controller.Command;
 import com.lab.epam.entity.Place;
 import com.lab.epam.entity.PlaceDescription;
 import com.lab.epam.entity.PlaceImage;
