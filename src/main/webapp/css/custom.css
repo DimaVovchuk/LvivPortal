@@ -1,4 +1,4 @@
-h2 {
+h2, h3 {
     font-family: 'Lora', serif;
     font-weight: 600;
     color: #484848;
@@ -128,6 +128,17 @@ header img.text-middle {
 }
 
 .index .col .section {
+    margin: 10px;
+    padding: 20px;
+}
+
+/* PLACES */
+
+.places .row {
+    margin-left: 20px;
+}
+
+.places .col .section {
     margin: 10px;
     padding: 20px;
 }
