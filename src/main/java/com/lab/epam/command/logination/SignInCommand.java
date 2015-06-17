@@ -39,7 +39,7 @@ public class SignInCommand implements Command {
             session.setAttribute("usedID",user.getId());
             session.setAttribute("role", user.getRoleID());
             loger.info("User " + login + " signing in ");
-            request.getRequestDispatcher("/views/pages/usercabinet.jsp").forward(request, response);
+            request.getRequestDispatcher("/views/pages/user-cabinet.jsp").forward(request, response);
         } else {
             session.setAttribute("loginError", 1);
             loger.info("login or password is incorrect");
