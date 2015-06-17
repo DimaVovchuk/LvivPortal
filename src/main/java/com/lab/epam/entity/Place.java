@@ -24,9 +24,9 @@ public class Place implements Identified<Integer> {
     @Column("rating")
     private Integer rating;
     @Column("category_id")
-    private Integer place_time;
-    @Column("place_time")
     private Integer category_id;
+    @Column("place_time")
+    private Integer place_time;
     @Column("deleted")
     private Boolean deleted = false;
 

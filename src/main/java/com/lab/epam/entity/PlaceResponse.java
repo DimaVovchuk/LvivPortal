@@ -14,8 +14,6 @@ public class PlaceResponse implements Identified<Integer> {
     private Integer id = null;
     @Column("description")
     private String description;
-    @Column("rating")
-    private Integer rating;
     @Column("user_id")
     private Integer user_id;
     @Column("place_id")
@@ -23,8 +21,7 @@ public class PlaceResponse implements Identified<Integer> {
     @Column("deleted")
     private Boolean deleted = false;
 
-    public PlaceResponse(String description, Integer rating,  Integer user_id, Integer place_id) {
-        this.rating = rating;
+    public PlaceResponse(String description,  Integer user_id, Integer place_id) {
         this.description = description;
         this.user_id = user_id;
         this.place_id = place_id;
@@ -37,7 +34,6 @@ public class PlaceResponse implements Identified<Integer> {
     public String toString() {
         return "PlaceResponse{" +
                 "id=" + id +
-                ", rating=" + rating +
                 ", description='" + description + '\'' +
                 ", user_id='" + user_id + '\'' +
                 ", place_id='" + place_id + '\'' +
@@ -51,14 +47,6 @@ public class PlaceResponse implements Identified<Integer> {
 
     protected void setId(Integer id) {
         this.id = id;
-    }
-
-    public Integer getRating() {
-        return rating;
-    }
-
-    public void setRating(Integer rating) {
-        this.rating = rating;
     }
 
     public String getDescription() {

@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="cdg" uri="customtags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE HTML>
 
 <html>
@@ -8,7 +9,7 @@
     <title><cdg:l18n key="usercab.title"/></title>
 </head>
 
-<jsp:include page="/views/elements/css.jsp"/>
+<jsp:include page="/views/elements/head.jsp"/>
 
 <body>
 
@@ -22,52 +23,35 @@
                 <h5><cdg:l18n key="usercab.itinerarytxt"/></h5>
             </div>
             <div class="about-text">
+                <c:forEach var="ways" items="${ways}">
+                    <c:forEach items="${wayPlaceImages}" var="wayPlaceImages">
+                    <c:forEach items="${way_place}" var="way_place">
+                    <c:if test="${ways.id == way_place.key}">
+                    <c:if test="${ways.id == wayPlaceImages.key}">
+                    <div class="col-md-4 about-text-left">
 
-                <div class="col-md-4 about-text-left">
-                    <div class="hover-image">
-                        <a class="hover-image-left" href="#">
-                            <cdg:l18n key="usercab.edit"/>
-                        </a>
-                        <a class="hover-image-right" href="#">
-                            <cdg:l18n key="usercab.delete"/>
-                        </a>
-                        <img src="${pageContext.request.contextPath}/images/test_1.jpg" alt="">
+                                    <div class="hover-image">
+                                        <a class="hover-image-left" href="#">
+                                            <cdg:l18n key="usercab.edit"/>
+                                        </a>
+                                        <a class="hover-image-right" href="#">
+                                            <cdg:l18n key="usercab.delete"/>
+                                        </a>
+                                        <img src="${pageContext.request.contextPath}/upload/photo/${wayPlaceImages.value.reference}" alt="">
+
+                                    </div>
+
+                        <c:forEach items="${way_place.value}" var="place">
+                                    <a href="portal?command=placeInformation&place_id=${place.place_id}"><h5>${place.name}</h5></a><i class="fa fa-arrow-right"></i>
+                                    </c:forEach>
+
+
                     </div>
-                    <a href="#"><h5>Itinerary name</h5></a>
-
-                    <p>Some information</p>
-                </div>
-
-                <div class="col-md-4 about-text-left">
-                    <div class="hover-image">
-                        <a class="hover-image-left" href="#">
-                            <cdg:l18n key="usercab.edit"/>
-                        </a>
-                        <a class="hover-image-right" href="#">
-                            <cdg:l18n key="usercab.delete"/>
-                        </a>
-                        <img src="${pageContext.request.contextPath}/images/test_2.jpg" alt="">
-                    </div>
-                    <a href="#"><h5>Itinerary name</h5></a>
-
-                    <p>Some information</p>
-                </div>
-
-                <div class="col-md-4 about-text-left">
-                    <div class="hover-image">
-                        <a class="hover-image-left" href="#">
-                            <cdg:l18n key="usercab.edit"/>
-                        </a>
-                        <a class="hover-image-right" href="#">
-                            <cdg:l18n key="usercab.delete"/>
-                        </a>
-                        <img src="${pageContext.request.contextPath}/images/test_1.jpg" alt="">
-                    </div>
-                    <a href="#"><h5>Itinerary name</h5></a>
-
-                    <p>Some information</p>
-                </div>
-
+                        </c:if>
+                        </c:if>
+                        </c:forEach>
+                        </c:forEach>
+                </c:forEach>
                 <div class="clearfix">
                 </div>
             </div>

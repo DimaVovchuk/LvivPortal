@@ -1,6 +1,6 @@
 package com.lab.epam.command.email;
 
-import com.lab.epam.command.Command;
+import com.lab.epam.command.controller.Command;
 import com.lab.epam.entity.User;
 import com.lab.epam.helper.ClassName;
 import com.lab.epam.service.UserService;
@@ -24,12 +24,11 @@ public class CheckChangePassTimeCommand implements Command {
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String email = request.getParameter("user");
         UserService userService = new UserService();
-        User user = userService.geUserByEmail("user");
+        User user = userService.geUserByEmail(email);
         HttpSession session = request.getSession();
         session.setAttribute("login",user.getLogin());
         long time = Long.parseLong(request.getParameter("param"));
         long timeMillis = System.currentTimeMillis();
-        System.out.println(timeMillis);
         if((timeMillis-time)<3600000){
             session.setAttribute("confirmed",1);
         }

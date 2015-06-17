@@ -1,6 +1,6 @@
 package com.lab.epam.servlet;
 
-import com.lab.epam.command.CommandFactory;
+import com.lab.epam.command.controller.CommandFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

@@ -3,6 +3,9 @@ package com.lab.epam.service;
 import com.lab.epam.dao.PersistException;
 import com.lab.epam.dao.imp.MySqlUserDao;
 import com.lab.epam.entity.User;
+import com.lab.epam.helper.ClassName;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import java.util.List;
 
