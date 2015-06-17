@@ -43,6 +43,34 @@
                                     </c:if>
                                 </c:if>
                             </c:forEach>
+            <div class="col-md-9 blog-left">
+                <c:forEach var="placeDescriptions" items="${placeDescriptions}">
+                    <c:forEach var="places" items="${places}">
+                        <c:forEach var="placeImages" items="${placeImages}">
+                        <c:if test="${places.id==placeDescriptions.place_id}">
+                            <c:if test="${placeImages.place_id == places.id}">
+                         <div class="blog-grids">
+                            <div class="blog-detail">
+                                <div class="blog-image">
+
+
+                                    <a href="portal?command=placeInformation&place_id=${places.id}"><img src="${pageContext.request.contextPath}/upload/photo/${placeImages.reference}" alt="" height="100" width="100"></a>
+
+
+                                </div>
+                                <a href="portal?command=placeInformation&place_id=${places.id}"><h3><c:out value="${placeDescriptions.name}"/></h3></a>
+
+
+                                    <c:out value="${places.adress}"/>
+                                    <div class="blog-btn"><a href="portal?command=placeInformation&place_id=${places.id}">Read More</a></div>
+                                <form action="portal?command=place&place_id=${places.id}&category=${category}" method="post">
+                                    <input type="submit" value="Submit">
+                                    </form>
+
+                             </div>
+                         </div>
+                            </c:if>
+                            </c:if>
                         </c:forEach>
                     </c:forEach>
                 </div>

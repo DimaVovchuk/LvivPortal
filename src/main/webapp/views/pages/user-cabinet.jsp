@@ -51,5 +51,6 @@
 
 <jsp:include page="/views/elements/footer.jsp"/>
 
+
 </body>
 </html>
