@@ -109,6 +109,18 @@ header img.text-middle {
     border-color: #0ab2d2;
 }
 
+/* MAP */
+
+.map .row .col {
+    padding: 0;
+}
+
+.sidebar-icon {
+    position: fixed;
+    width: 50px;
+    height: 100%;
+}
+
 /* INDEX */
 
 .index .row {

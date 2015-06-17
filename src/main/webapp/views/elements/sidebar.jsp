@@ -1,8 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE HTML>
 
-<div id="sidebar-icon">
-    <ul class="sidebar-nav">
+<div id="sidebar-icon ">
+    <ul class="side-nav">
         <li>
             <a href="#" id="menu-toggle-first"><i class="fa fa-university fa-fx"></i></a>
         </li>

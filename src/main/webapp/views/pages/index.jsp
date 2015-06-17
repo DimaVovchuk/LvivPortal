@@ -11,6 +11,7 @@
 </head>
 
 <jsp:include page="/views/elements/css.jsp"/>
+<jsp:include page="/views/elements/script.jsp"/>
 
 <body>
 
@@ -86,7 +87,6 @@
 </div>
 
 <jsp:include page="/views/elements/footer.jsp"/>
-<jsp:include page="/views/elements/script.jsp"/>
 
 </body>
 </html>

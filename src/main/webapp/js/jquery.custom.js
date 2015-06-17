@@ -13,6 +13,11 @@ function language(lang) {
 $(document).ready(function ($) {
     /* Mobile sidebar */
     $(".button-collapse").sideNav();
+    /* Sidebar */
+    $(".button-menu").sideNav({
+        menuWidth: 300,
+        edge: 'right'
+    });
     /* Dropdown menu */
     $(".dropdown-button").dropdown({
         constrain_width: false,

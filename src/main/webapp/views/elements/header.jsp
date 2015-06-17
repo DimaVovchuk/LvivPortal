@@ -11,21 +11,39 @@
                                                                        src="${pageContext.request.contextPath}/images/logo.png"></a>
                 <a href="#" data-activates="mobile-navbar" class="button-collapse"><i
                         class="mdi-navigation-menu"></i></a>
+
+                <ul class="right">
+                    <li><a href="#" data-activates="user-navbar" class="button-menu"><i class="mdi-action-account-circle left"></i></a></li>
+                </ul>
+
                 <ul class="right hide-on-med-and-down">
                     <li><a href="portal?command=index"><cdg:l18n key="header.home"/></a></li>
                     <li><a href="portal?command=place"><cdg:l18n key="header.places"/></a></li>
                     <li><a href="portal?command=showMap"><cdg:l18n key="header.plan"/></a></li>
                     <li><a class="dropdown-button" href="#" data-activates="lang-dropdown"><cdg:l18n key="header.lang"/><i
                             class="mdi-navigation-arrow-drop-down right"></i></a></li>
-                    <li><a class="modal-trigger" href="#sign-in"><i class="mdi-action-account-circle left"></i><cdg:l18n key="header.sign"/></a>
+                    <li><a class="modal-trigger" href="#sign-in"><i class="mdi-action-account-circle left"></i><cdg:l18n
+                            key="header.sign"/></a>
                     </li>
                 </ul>
+                
                 <ul class="side-nav" id="mobile-navbar">
                     <li><a href="portal?command=index"><cdg:l18n key="header.home"/></a></li>
                     <li><a href="portal?command=place"><cdg:l18n key="header.places"/></a></li>
                     <li><a href="portal?command=#"><cdg:l18n key="header.plan"/></a></li>
                     <li class="divider"></li>
                     <li><a href="#sign-in"><i class="mdi-action-account-circle right"></i><cdg:l18n key="header.sign"/></a>
+                    </li>
+                </ul>
+
+                <ul class="side-nav" id="user-navbar">
+                    <li style="padding-top: 10px"><img class="circle responsive-img" src="images/places1.jpg"></li>
+                    <li><a href="#"><i class="mdi-maps-directions-bike left"></i>My routes</a></li>
+                    <li><a href="#"><i class="mdi-action-account-balance left"></i>My places</a></li>
+                    <li><a href="#"><i class="mdi-image-photo left"></i>Gallery</a></li>
+                    <li><a href="#"><i class="mdi-action-settings left"></i>Settings</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#"><i class="mdi-navigation-close left"></i>Sign out</a>
                     </li>
                 </ul>
             </div>
