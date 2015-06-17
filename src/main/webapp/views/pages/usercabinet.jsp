@@ -65,5 +65,10 @@
 </div>
 <jsp:include page="/views/elements/footer.jsp"/>
 <jsp:include page="/views/pages/uploadImage.jsp"/>
+<form id="showAllUser" action="showAllUser" method="POST">
+  <input type="hidden" name="command" value="showAllUser">
+  <input type="submit" value="Show User"/>
+</form>
+
 </body>
 </html>
