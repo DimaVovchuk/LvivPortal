@@ -14,6 +14,7 @@ import com.lab.epam.command.page.map.ShowMapCommand;
 import com.lab.epam.command.page.photo.UpLoadPictureCommand;
 import com.lab.epam.command.page.place.PlaceCommand;
 import com.lab.epam.command.page.place.PlaceInfortmationCommand;
+import com.lab.epam.command.page.user.EditProfileCommand;
 import com.lab.epam.command.page.user.UserCabinetCommand;
 
 import javax.servlet.ServletException;
@@ -42,7 +43,7 @@ public class CommandFactory {
         commands.put("confirmReset", new ConfirmChangePassCommand());
         commands.put("resetEmail", new ResetEmail());
         commands.put("geotag", new GeotegPhotoCommand());
-
+        commands.put("edit", new EditProfileCommand());
     }
 
     public static void createCommand(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
