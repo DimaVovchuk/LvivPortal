@@ -10,7 +10,7 @@
 <%@ taglib prefix="cdg" uri="customtags" %>
 <html>
 <head>
-  <title><cdg:l18n key="index.title"/></title>
+  <title><cdg:l18n key="usercab.edit"/></title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
   <meta name="keywords" content=""/>
@@ -46,43 +46,43 @@
                     <div class="form-group">
                         <label class="col-lg-3 control-label">First name:</label>
                         <div class="col-lg-8">
-                            <input class="form-control" type="text" value="${user.name}">
+                            <input class="form-control" type="text" value="${user.first}">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-lg-3 control-label">Last name:</label>
                         <div class="col-lg-8">
-                            <input class="form-control" type="text" value="${user.surname}">
+                            <input class="form-control" type="text" value="${user.last}">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-lg-3 control-label">Login:</label>
                         <div class="col-lg-8">
-                            <input class="form-control" type="text" value="">
+                            <input class="form-control" type="text" value="${user.login}">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-lg-3 control-label">Email:</label>
                         <div class="col-lg-8">
-                            <input class="form-control" type="text" value="lvivportal@gmail.com">
+                            <input class="form-control" type="text" value="${user.email}">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-lg-3 control-label">Phone number:</label>
                         <div class="col-lg-8">
-                            <input class="form-control" type="text" value="0965555555">
+                            <input class="form-control" type="text" value="${user.phone}">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-lg-3 control-label">About:</label>
                         <div class="col-lg-8">
-                            <input class="form-control" type="text" value="I am a user, it is my personal info page">
+                            <input class="form-control" type="text" value="I am user..">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-3 control-label">Password:</label>
                         <div class="col-md-8">
-                            <input class="form-control" type="password" value="11111122333">
+                            <input class="form-control" type="password" value="${user.password}">
                         </div>
                     </div>
                     <div class="form-group">
