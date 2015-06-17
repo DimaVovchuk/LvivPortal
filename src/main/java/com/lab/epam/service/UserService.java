@@ -69,4 +69,8 @@ public class UserService {
     public boolean checkLogin(String login) {
         return mySqlUserDao.checkLogin(login);
     }
+
+    public Integer getRoleID(String login){
+        return mySqlUserDao.getRoleID(login);
+    }
 }
