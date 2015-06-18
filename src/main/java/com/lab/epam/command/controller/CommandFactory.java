@@ -49,6 +49,8 @@ public class CommandFactory {
         commands.put("geotag", new GeotegPhotoCommand());
         commands.put("showAllUser", new ShowAllUserCommand());
         commands.put("edit", new EditProfileCommand());
+        commands.put("userWays", new UserWaysCommand());
+        commands.put("userPlace", new UserPlaceCommand());
     }
 
     public static void createCommand(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

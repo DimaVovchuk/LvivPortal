@@ -36,7 +36,7 @@ public abstract class AbstractJDBCDao<T extends Identified<PK>, PK extends Integ
 
     public String getDeleteQuery() {
         String tableName = transformer.getTableName();
-        return "UPDATE `" + tableName + "` SET deleted = false WHERE id= ?;";
+        return "UPDATE `" + tableName + "` SET deleted = true WHERE id= ?;";
     }
 
 
