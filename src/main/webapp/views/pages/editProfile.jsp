@@ -58,14 +58,14 @@
         <div class="col s8">
             <c:choose>
                 <c:when test="${not empty msg}">
-
+                    <h3 color=red>${errorMsg}</h3>
                 </c:when>
                 <c:otherwise>
                 </c:otherwise>
             </c:choose>
             <h3>Personal info</h3>
 
-            <form action="portal?command=updateprofile&id=${id}" class="form-horizontal" role="form">
+            <form action="portal?command=updateprofile" class="form-horizontal" role="form">
                 <div class="row">
                     <div class="input-field col s12">
                         <i class="mdi-action-account-circle prefix"></i>

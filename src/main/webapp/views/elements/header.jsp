@@ -52,7 +52,7 @@
                 </ul>
 
                 <ul class="side-nav" id="user-navbar">
-                    <li style="padding-top: 10px"><img class="circle responsive-img" src="images/places1.jpg"></li>
+                    <li  class="center-align" style="padding-top: 10px"><img class="circle responsive-img" src="${pageContext.request.contextPath}/images/${avatar}" width="160"></li>
                     <li><a href="/portal?command=userWays"><i class="mdi-maps-directions-bike left"></i>My routes</a></li>
                     <li><a href="/portal?command=userPlace"><i class="mdi-action-account-balance left"></i>My places</a></li>
                     <li><a href="/portal?command=allUserPhoto"><i class="mdi-image-photo left"></i>Gallery</a></li>

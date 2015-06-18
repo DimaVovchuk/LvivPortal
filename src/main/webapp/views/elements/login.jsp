@@ -58,8 +58,7 @@
                 <input id="phone" placeholder='<cdg:l18n key="login.phone"/>' type='text' name="phone">
             </div>
             <div class="form">
-                <button class="btn waves-effect waves-light cyan darken-2" type="submit"
-                        >OK
+                <button class="btn waves-effect waves-light cyan darken-2" type="submit">OK
                 </button>
             </div>
         </form>
