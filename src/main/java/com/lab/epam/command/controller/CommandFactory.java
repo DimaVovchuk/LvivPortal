@@ -7,6 +7,7 @@ package com.lab.epam.command.controller;
 import com.lab.epam.command.email.*;
 import com.lab.epam.command.locale.LocaleCommand;
 import com.lab.epam.command.logination.SignInCommand;
+import com.lab.epam.command.logination.SignOutCommand;
 import com.lab.epam.command.logination.SignUpCommand;
 import com.lab.epam.command.page.index.IndexCommand;
 import com.lab.epam.command.page.map.GeotegPhotoCommand;
@@ -48,9 +49,11 @@ public class CommandFactory {
         commands.put("resetEmail", new ResetEmail());
         commands.put("geotag", new GeotegPhotoCommand());
         commands.put("showAllUser", new ShowAllUserCommand());
+        commands.put("allUserPhoto", new ShowAllUserPhoto());
         commands.put("edit", new EditProfileCommand());
         commands.put("userWays", new UserWaysCommand());
         commands.put("userPlace", new UserPlaceCommand());
+        commands.put("signOut", new SignOutCommand());
     }
 
     public static void createCommand(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

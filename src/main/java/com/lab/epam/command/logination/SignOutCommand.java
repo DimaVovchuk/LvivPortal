@@ -14,7 +14,7 @@ import java.io.IOException;
 /**
  * Created by Vasyl on 16.06.2015.
  */
-public class LogOutCommand implements Command {
+public class SignOutCommand implements Command {
     private static final Logger loger = LogManager.getLogger(ClassName.getCurrentClassName());
 
     public void execute(HttpServletRequest request,

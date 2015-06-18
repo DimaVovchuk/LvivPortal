@@ -10,7 +10,8 @@
     <div class='login'>
         <h2><cdg:l18n key="login.logintxt"/></h2>
 
-        <form id="sign-in-form" action="#" method="post">
+        <form id="sign-in-form" action="portal/signIn" method="post">
+            <input type="hidden" name="command" value="signIn">
             <div class="form">
                 <input id="login-in" placeholder='<cdg:l18n key="login.login"/>' type='text' name="login">
             </div>
@@ -19,7 +20,7 @@
             </div>
             <div class="form">
                 <button class="btn waves-effect waves-light cyan darken-2" type="submit"
-                        >OK
+                        >Show All User
                 </button>
             </div>
         </form>
@@ -27,7 +28,8 @@
     <div class='register'>
         <h2><cdg:l18n key="login.createtxt"/></h2>
 
-        <form id="sign-up-form" action="#" method="post">
+        <form id="sign-up-form" action="portal/signUp" method="post">
+            <input type="hidden" name="command" value="signUp">
             <div class="row" style="margin-bottom: 0">
                 <div class="col s6" style="padding-right: 10px">
                     <div class="form">

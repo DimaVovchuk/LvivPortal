@@ -53,12 +53,12 @@
 
                 <ul class="side-nav" id="user-navbar">
                     <li style="padding-top: 10px"><img class="circle responsive-img" src="images/places1.jpg"></li>
-                    <li><a href="?command=userWays"><i class="mdi-maps-directions-bike left"></i>My routes</a></li>
-                    <li><a href="?command=userPlace"><i class="mdi-action-account-balance left"></i>My places</a></li>
-                    <li><a href="#"><i class="mdi-image-photo left"></i>Gallery</a></li>
-                    <li><a href="#"><i class="mdi-action-settings left"></i>Settings</a></li>
+                    <li><a href="portal?command=userWays"><i class="mdi-maps-directions-bike left"></i>My routes</a></li>
+                    <li><a href="portal?command=userPlace"><i class="mdi-action-account-balance left"></i>My places</a></li>
+                    <li><a href="portal?command=allUserPhoto"><i class="mdi-image-photo left"></i>Gallery</a></li>
+                    <li><a href="portal?command=edit"><i class="mdi-action-settings left"></i>Settings</a></li>
                     <li class="divider"></li>
-                    <li><a href="#"><i class="mdi-navigation-close left"></i>Sign out</a>
+                    <li><a href="portal?command=signOut"><i class="mdi-navigation-close left"></i>Sign out</a>
                     </li>
                 </ul>
             </div>
