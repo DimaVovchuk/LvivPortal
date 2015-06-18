@@ -48,7 +48,7 @@ public class SaveProfileCommand implements Command {
         String password = request.getParameter("password");
         String avatar = request.getParameter("avatar");
 
-        String page = "/views/page/editProfile.jsp";
+        String page = "/views/pages/editProfile.jsp";
         String errorMsg = null;
 
         if (id != null) {

@@ -36,7 +36,7 @@ public class EditProfileCommand implements Command {
         language = locale.getLanguage();
 
         User user = null;
-        String page = "/views/page/editProfile.jsp";
+        String page = "/views/pages/editProfile.jsp";
         loger.info("Login in session is " + login);
 
         if (login != null) {
