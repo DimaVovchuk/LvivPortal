@@ -27,17 +27,14 @@ $(document).ready(function ($) {
         constrain_width: true,
         belowOrigin: true
     });
-    /* Modal login form */
+    /* Login form */
     $('.modal-trigger').leanModal({
         dismissible: true
     });
-    $('#open-sign-up').on('click', function(){
-        $('#sign-up').openModal();
-        $('#sign-in').closeModal();
-    });
-    $('#open-sign-in').on('click', function(){
-        $('#sign-in').openModal();
-        $('#sign-up').closeModal();
+    $('.switch').click(function(){
+        $('.login').animate({height: "toggle", opacity: "toggle"}, "slow");
+        $('.register').animate({height: "toggle", opacity: "toggle"}, "slow");
+        $('.sign').toggle();
     });
     /* Banner */
     $(".parallax").parallax();
