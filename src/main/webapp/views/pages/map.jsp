@@ -18,7 +18,7 @@
     <div class="row">
         <div class="col l3 m6 s2">
             <div class="sidebar-icon blue-grey darken-2">
-                Test
+
             </div>
         </div>
         <div class="col l9 m6 s10">

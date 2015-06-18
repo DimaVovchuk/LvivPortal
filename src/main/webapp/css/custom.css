@@ -90,10 +90,10 @@ header img.text-middle {
 /* LOGIN */
 
 #sign-in {
-    position: absolute;
+    position: fixed;
     width: 500px;
-    overflow: hidden;
-    max-height: 200%;
+    overflow: auto;
+    max-height: 100%;
 }
 
 .login-form {
@@ -126,7 +126,7 @@ header img.text-middle {
     font-size: 12px;
     line-height: 30px;
     text-align: center;
-    padding: 10px 10px 5px 10px;
+    padding: 10px 25px 5px 10px;
 }
 
 .login-form .switch .tooltip {

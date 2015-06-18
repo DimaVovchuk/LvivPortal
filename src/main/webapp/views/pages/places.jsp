@@ -31,8 +31,8 @@
                             <c:forEach var="placeImages" items="${placeImages}">
                                 <c:if test="${places.id==placeDescriptions.place_id}">
                                     <c:if test="${placeImages.place_id == places.id}">
-                                        <div class="col l4 m6 s12">
-                                            <div class="card z-depth-2" style="padding: 10px">
+                                        <div class="match-col col l4 m6 s12">
+                                            <div class="card z-depth-2" style="padding:10px; height:95%">
                                                 <form action="portal?command=place&place_id=${places.id}&category=${category}"
                                                       method="post" style="position:absolute;padding:5px">
                                                     <button class="btn-floating btn-large waves-effect waves-light cyan darken-2"
@@ -75,9 +75,15 @@
             </div>
         </div>
     </div>
+</div>
 
+<jsp:include page="/views/elements/footer.jsp"/>
 
-    <jsp:include page="/views/elements/footer.jsp"/>
+<script>
+    $(".match-col").matchHeight({
+        property: 'height'
+    });
+</script>
 
 </body>
 
