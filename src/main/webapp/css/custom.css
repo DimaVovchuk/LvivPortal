@@ -89,24 +89,148 @@ header img.text-middle {
 
 /* LOGIN */
 
-.login label {
-    font-size: 1.2em;
-    color: #212121;
-}
-
 #sign-in {
-    width: 400px;
+    position: absolute;
+    width: 500px;
+    overflow: hidden;
+    max-height: 200%;
 }
 
-#sign-up {
-    width: 600px;
+.login-form {
+    position: relative;
+    background: #ffffff;
+    width: 500px;
+    padding: 40px;
+    border-top: 5px solid #0097a7;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.15);
+    -moz-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.15);
+    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.15);
 }
 
-#sign-in, #sign-up {
-    border-top: solid;
-    border-bottom: solid;
-    border-width: 20px;
-    border-color: #0ab2d2;
+.login-form .switch {
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: #0097a7;
+    width: auto;
+    height: auto;
+    margin: -5px 0 0;
+    -webkit-border-radius: 0 3px 0 3px;
+    -moz-border-radius: 0 3px 0 3px;
+    border-radius: 0 3px 0 3px;
+    color: #ffffff;
+    font-size: 12px;
+    line-height: 30px;
+    text-align: center;
+    padding: 10px 10px 5px 10px;
+}
+
+.login-form .switch .tooltip {
+    position: absolute;
+    top: 5px;
+    right: -65px;
+    display: block;
+    background: rgba(0, 0, 0, 0.6);
+    width: auto;
+    padding: 5px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 1;
+    text-align: left;
+    text-transform: uppercase;
+}
+
+.login-form .switch .tooltip:before {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: -5px;
+    display: block;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-right: 5px solid rgba(0, 0, 0, 0.6);
+}
+
+.login-form .register {
+    display: none;
+}
+
+.login-form h2 {
+    margin: 0 0 20px;
+    line-height: 1;
+    color: #0097a7;
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.login-form .alert {
+    position: relative;
+    background: #f3f3f3;
+    color: #666666;
+    font-size: 12px;
+    margin-bottom: 20px;
+    padding: 15px;
+    text-align: left;
+}
+
+.login-form .alert .fa-times-circle {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    display: block;
+    width: 16px;
+    height: 16px;
+    line-height: 16px;
+    margin-top: -8px;
+    float: right;
+}
+
+.login-form .login-footer {
+    background: #f2f2f2;
+    width: 500px;
+    padding: 15px 40px;
+    margin: 0 0 -40px -40px;
+    -webkit-border-radius: 0 0 3px 3px;
+    -moz-border-radius: 0 0 3px 3px;
+    border-radius: 0 0 3px 3px;
+    color: #666666;
+    font-size: 15px;
+    text-align: center;
+}
+
+.login-form .login-footer a {
+    width: 285px;
+    color: #333333;
+    text-decoration: none;
+}
+
+.login-form button {
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.login-form .sign {
+    font-size: 20px;
+}
+
+.login-form .error {
+    color: red;
+    font-family: "Roboto";
+    font-size: 14px;
+}
+
+.login-form .col {
+    padding: 0;
 }
 
 /* MAP */
