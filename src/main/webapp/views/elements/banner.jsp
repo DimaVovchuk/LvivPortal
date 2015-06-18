@@ -4,7 +4,7 @@
 
 <div class="banner">
 <div class="parallax-container">
-    <div class="parallax"><img src="${pageContext.request.contextPath}/images/banner.jpg"></div>
+    <div class="parallax"><img class="responsive-img" src="${pageContext.request.contextPath}/images/banner.jpg"></div>
     <div class="container valign-wrapper">
         <div class="row">
             <div class="col l6 offset-l3 s10 offset-s1 banner-text center-align">
