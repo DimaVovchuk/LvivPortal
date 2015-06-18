@@ -136,6 +136,13 @@ public class Place implements Identified<Integer> {
         }
     }
 
+    public boolean equals(Object place){
+        Place places = (Place)place;
+        if (this.getId() == places.getId()){
+            return true;
+        } else return false;
+    }
+
 }
 
 

@@ -17,9 +17,9 @@ public class MyTestClass {
         MySqlCategoryDao mc = new MySqlCategoryDao();
         CategoryService sc = new CategoryService();
         UserService su = new UserService();
-        User user = su.geUserByEmail("Dima_Vovchuk@inbox.ru");
-        user.setPassword("123456789");
-        su.update(user);
+        //User user = su.geUserByEmail("Dima_Vovchuk@inbox.ru");
+       // user.setPassword("123456789");
+        //su.update(user);
        /* MySqlPlaceDao mp = new MySqlPlaceDao();
         MySqlPlaceResponseDao mpr = new MySqlPlaceResponseDao();
         MySqlRoleDao mr = new MySqlRoleDao();
@@ -40,7 +40,7 @@ public class MyTestClass {
         System.out.println(mu.getAll());
         System.out.println(mw.getAll());*/
        // sc.create(new Category("sdvfsd"));
-       su.create(new User.Builder("���������","�����","niceapple91","olya.podgornayaoi@gmail.com","password","0982713501",2).rating(2).status(20).build());
+       //su.create(new User.Builder("niceapple91","niceapple91","niceapple91","olya.podgornayaoi@gmail.com","password","0982713999",2).rating(2).status(20).build());
         System.out.println(su.getByPK(8));
     }
 }

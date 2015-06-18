@@ -13,7 +13,7 @@
 <jsp:include page="/views/elements/css.jsp"/>
 <jsp:include page="/views/elements/script.jsp"/>
 
-<body>
+<>
 
 <jsp:include page="/views/elements/header.jsp"/>
 
@@ -38,6 +38,9 @@
                                                     <c:out
                                                             value="${placeDescriptions.name}"/></h5></a>
                                                 <c:out value="${places.adress}"/>
+                                                <form action="portal?command=place&place_id=${places.id}&category=${category}" method="post">
+                                                    <input type="submit" value="Submit">
+                                                </form>
                                             </div>
                                         </div>
                                     </c:if>
@@ -47,6 +50,8 @@
                     </c:forEach>
                 </div>
             </div>
+        </div>
+
             <div class="col l3 m4 s5">
                 <div class="collection with-header z-depth-2">
                     <div class="collection-header"><h4><cdg:l18n key="places.categories"/></h4></div>
@@ -60,6 +65,8 @@
             </div>
         </div>
     </div>
+
+
 
 <jsp:include page="/views/elements/footer.jsp"/>
 

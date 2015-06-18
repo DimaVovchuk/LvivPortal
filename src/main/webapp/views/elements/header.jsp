@@ -12,21 +12,36 @@
                 <a href="#" data-activates="mobile-navbar" class="button-collapse"><i
                         class="mdi-navigation-menu"></i></a>
 
-                <ul class="right">
-                    <li><a href="#" data-activates="user-navbar" class="button-menu"><i class="mdi-action-account-circle left"></i></a></li>
-                </ul>
+                <c:choose>
+                    <c:when test="${login!=null}">
+                        <ul class="right">
+                            <li><a href="#" data-activates="user-navbar" class="button-menu"><i class="mdi-action-account-circle left"></i></a></li>
+                        </ul>
 
-                <ul class="right hide-on-med-and-down">
-                    <li><a href="portal?command=index"><cdg:l18n key="header.home"/></a></li>
-                    <li><a href="portal?command=place"><cdg:l18n key="header.places"/></a></li>
-                    <li><a href="portal?command=showMap"><cdg:l18n key="header.plan"/></a></li>
-                    <li><a class="dropdown-button" href="#" data-activates="lang-dropdown"><cdg:l18n key="header.lang"/><i
-                            class="mdi-navigation-arrow-drop-down right"></i></a></li>
-                    <li><a class="modal-trigger" href="#sign-in"><i class="mdi-action-account-circle left"></i><cdg:l18n
-                            key="header.sign"/></a>
-                    </li>
-                </ul>
-                
+                        <ul class="right hide-on-med-and-down">
+                            <li><a href="portal?command=index"><cdg:l18n key="header.home"/></a></li>
+                            <li><a href="portal?command=place"><cdg:l18n key="header.places"/></a></li>
+                            <li><a href="portal?command=showMap"><cdg:l18n key="header.plan"/></a></li>
+                            <li><a class="dropdown-button" href="#" data-activates="lang-dropdown"><cdg:l18n key="header.lang"/><i
+                                    class="mdi-navigation-arrow-drop-down right"></i></a></li>
+                            </li>
+                        </ul>
+                    </c:when>
+                    <c:otherwise>
+                        <ul class="right hide-on-med-and-down">
+                            <li><a href="portal?command=index"><cdg:l18n key="header.home"/></a></li>
+                            <li><a href="portal?command=place"><cdg:l18n key="header.places"/></a></li>
+                            <li><a href="portal?command=showMap"><cdg:l18n key="header.plan"/></a></li>
+                            <li><a class="dropdown-button" href="#" data-activates="lang-dropdown"><cdg:l18n key="header.lang"/><i
+                                    class="mdi-navigation-arrow-drop-down right"></i></a></li>
+                            <li><a class="modal-trigger" href="#sign-in"><i class="mdi-action-account-circle left"></i><cdg:l18n
+                                    key="header.sign"/></a>
+                            </li>
+                        </ul>
+
+                    </c:otherwise>
+                </c:choose>
+
                 <ul class="side-nav" id="mobile-navbar">
                     <li><a href="portal?command=index"><cdg:l18n key="header.home"/></a></li>
                     <li><a href="portal?command=place"><cdg:l18n key="header.places"/></a></li>

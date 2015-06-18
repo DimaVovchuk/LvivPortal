@@ -11,11 +11,14 @@ import com.lab.epam.command.logination.SignUpCommand;
 import com.lab.epam.command.page.index.IndexCommand;
 import com.lab.epam.command.page.map.GeotegPhotoCommand;
 import com.lab.epam.command.page.map.ShowMapCommand;
+import com.lab.epam.command.page.photo.ShowAllUserPhoto;
 import com.lab.epam.command.page.photo.UpLoadPictureCommand;
 import com.lab.epam.command.page.place.PlaceCommand;
 import com.lab.epam.command.page.place.PlaceInfortmationCommand;
 import com.lab.epam.command.page.user.EditProfileCommand;
 import com.lab.epam.command.page.user.UserCabinetCommand;
+import com.lab.epam.command.page.user.UserPlaceCommand;
+import com.lab.epam.command.page.user.UserWaysCommand;
 import com.lab.epam.command.page.user.admin.ShowAllUserCommand;
 
 import javax.servlet.ServletException;

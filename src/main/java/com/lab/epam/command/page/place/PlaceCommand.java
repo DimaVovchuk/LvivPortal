@@ -38,8 +38,37 @@ public class PlaceCommand implements Command {
 
 
         List<Place> places = null;
+        List<Place> placeForWay;
+        placeForWay = (ArrayList<Place>)session.getAttribute("placeForWay");
+        //
 
+        String placeId = request.getParameter("place_id");
+        Place onePlaceForWay = null;
+        Boolean isInWay = false;
+
+        if (placeId != null){
+            onePlaceForWay = servicePlace.getByPK(Integer.parseInt(placeId));
+            if (onePlaceForWay != null){
+                if (placeForWay == null){
+                    placeForWay = new ArrayList<>();
+                } else {
+                    for (Place place: placeForWay){
+                        if (place.getId() == onePlaceForWay.getId()){
+                            isInWay = true;
+                        }
+                    }
+                }
+                if (!isInWay) {
+                    placeForWay.add(onePlaceForWay);
+                }
+            }
+        }
+        System.out.println("placeForWay " + placeForWay);
+        session.setAttribute("placeForWay",placeForWay);
         String category = request.getParameter("category");
+      if (category == null){
+            category = "";
+        }
         if (category != null){
             switch(category){
                 case "sights": places = servicePlace.getPlaceByCategory(1);
@@ -52,7 +81,7 @@ public class PlaceCommand implements Command {
                     break;
                 case "restaurants": places = servicePlace.getPlaceByCategory(5);
                     break;
-                default: servicePlace.getAll();
+                default: places = servicePlace.getAll();
                     break;
             }
         } else {
@@ -68,6 +97,7 @@ public class PlaceCommand implements Command {
         PlaceDescription placeDescription;
         for (Place place: places){
             place_id = place.getId();
+
             placeDescription = placeDescriptionService.getPlaceDescriptionByIdPlace(place_id,language);
             placeDescriptions.add(placeDescription);
             placeImage = placeImageService.getPlaceImageByPlaceId(place_id);
@@ -83,7 +113,7 @@ public class PlaceCommand implements Command {
         loger.info("placeDescriptions = " + placeDescriptions);
         loger.info("placeImages = " + placeImages);
         request.setAttribute("placeImages", placeImages);
-
+        request.setAttribute("category", category);
         loger.info("Command Place.");
         request.getRequestDispatcher("/views/pages/places.jsp").forward(request, response);
     }
