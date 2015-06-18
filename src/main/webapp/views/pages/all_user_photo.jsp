@@ -11,11 +11,12 @@
 </tr>
 </c:forEach>
 
-<form id="sign-in-form" action="portal/showalluser" method="post">
-	<input type="hidden" name="command" value="showAllUser">
-	<button type="submit" >OK
-	</button>
+	<form id="sign-in-form" action="portal/showalluser" method="post">
+		<input type="hidden" name="command" value="showAllUser">
+		<button type="submit" >OK
+		</button>
 	</form>
+<jsp:include page="/views/pages/uploadTest.jsp"/>
 
 </body>
 </html>
