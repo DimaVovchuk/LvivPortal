@@ -9,6 +9,7 @@
 </head>
 
 <jsp:include page="/views/elements/css.jsp"/>
+<jsp:include page="/views/elements/script.jsp"/>
 
 <body>
 
@@ -16,18 +17,31 @@
 
 <div class="map">
     <div class="row">
-        <div class="col l3 m6 s2">
-            <div class="sidebar-icon blue-grey darken-2">
+        <div class="col l4 m6 s6">
 
+            <nav class="side-icon blue-grey darken-2">
+                <ul class="center-align">
+                    <li><a href="#"><i class="small mdi-notification-event-note white-text"></i>
+                        <span class="nav-text white-text">Itinerary</span>
+                    </a>
+                    </li>
+                    <li><a href="#"><i class="small mdi-action-account-balance white-text"></i>
+                        <span class="nav-text white-text">Places</span>
+                    </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="side-info z-depth-2">
+                Information
             </div>
         </div>
-        <div class="col l9 m6 s10">
-            Map
+
+        <div class="col l8 m6 s6">
+            <jsp:include page="geotag.jsp"/>
         </div>
     </div>
 </div>
-
-<jsp:include page="/views/elements/script.jsp"/>
 
 </body>
 </html>

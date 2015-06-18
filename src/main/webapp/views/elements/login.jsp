@@ -20,7 +20,7 @@
             </div>
             <div class="form">
                 <button class="btn waves-effect waves-light cyan darken-2" type="submit"
-                        >Show All User
+                        >OK
                 </button>
             </div>
         </form>
