@@ -58,14 +58,16 @@
         <div class="col s8">
             <c:choose>
                 <c:when test="${not empty msg}">
-                    <h3 color=red>${errorMsg}</h3>
+                    <h6>${user.errorMsg}</h6>
                 </c:when>
                 <c:otherwise>
                 </c:otherwise>
             </c:choose>
             <h3>Personal info</h3>
 
-            <form action="portal?command=updateprofile" class="form-horizontal" role="form">
+            <form id="update-profile" action="portal/update" metod="post">
+                <input type="hidden" name="command" value="updateprofile">
+
                 <div class="row">
                     <div class="input-field col s12">
                         <i class="mdi-action-account-circle prefix"></i>
@@ -115,20 +117,10 @@
                 </div>
 
                 <div class="row">
-                    <div class="input-field col s12">
-                        <i class="mdi-action-account-circle prefix"></i>
-                        <input value="${password}" id="pass" type="text" class="validate" name="password">
-                        <label class="active" for="pass">Password:</label>
-                    </div>
+                    <h6>You may <a href="#">change</a> your password</h6>
                 </div>
-
-                <div class="row">
-                    <div class="input-field col s12">
-                        <i class="mdi-action-account-circle prefix"></i>
-                        <input value="" id="cpass" type="text" class="validate" name="cpassword">
-                        <label class="active" for="cpass">Confirm password:</label>
-                    </div>
-                </div>
+                <input type="hidden" name="avatar" value="${img}">
+                <input type="hidden" name="id" value="${id}">
 
                 <div class="form-group">
                     <label class="col-md-3 control-label"></label>
@@ -140,8 +132,6 @@
                         <button class="btn waves-effect waves-light" type="reset" name="cancel">Cancel</button>
                     </div>
                 </div>
-                <input type="hidden" name="avatar" value="${img}">
-                <input type="hidden" name="id" value="${id}">
             </form>
         </div>
     </div>
