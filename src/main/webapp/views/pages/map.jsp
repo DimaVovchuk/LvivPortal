@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="keywords" content=""/>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&language=${language}"></script>
 </head>
 
 <jsp:include page="/views/elements/css.jsp"/>

@@ -64,7 +64,7 @@
 
             </c:forEach>
 
-            markerClusterer = new MarkerClusterer(map, markers,
+            var markerClusterer = new MarkerClusterer(map, markers,
                     {
                         maxZoom: 16,
                         gridSize: 50,
