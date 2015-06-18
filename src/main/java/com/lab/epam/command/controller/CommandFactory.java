@@ -17,6 +17,8 @@ import com.lab.epam.command.page.place.PlaceCommand;
 import com.lab.epam.command.page.place.PlaceInfortmationCommand;
 import com.lab.epam.command.page.user.EditProfileCommand;
 import com.lab.epam.command.page.user.UserCabinetCommand;
+import com.lab.epam.command.page.user.UserPlaceCommand;
+import com.lab.epam.command.page.user.UserWaysCommand;
 import com.lab.epam.command.page.user.admin.ShowAllUserCommand;
 
 import javax.servlet.ServletException;
@@ -47,7 +49,6 @@ public class CommandFactory {
         commands.put("geotag", new GeotegPhotoCommand());
         commands.put("showAllUser", new ShowAllUserCommand());
         commands.put("edit", new EditProfileCommand());
-        commands.put("showAllUserPhoto", new ShowAllUserPhoto());
     }
 
     public static void createCommand(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
