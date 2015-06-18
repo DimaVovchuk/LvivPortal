@@ -22,8 +22,8 @@ public class MySqlWayDao extends AbstractJDBCDao<Way, Integer> {
 
     ConnectionPool connection = ConnectionManager.getConnection();
     private static final Logger loger = LogManager.getLogger(ClassName.getCurrentClassName());
-    private static final String GET_WAY_BY_USER_ID = "SELECT w.id, w.rating, w.name, w.visible, w.way_days, w.way_time ,w.deleted FROM way AS w JOIN user_way AS uw JOIN user AS u WHERE uw.user_id = u.id AND uw.way_id = w.id AND u.id = ?";
-
+    private static final String GET_WAY_BY_USER_ID = "SELECT w.id, w.rating, w.name, w.visible, w.way_days, w.way_time ,w.deleted FROM way AS w JOIN user_way AS uw JOIN user AS u WHERE uw.user_id = u.id AND uw.way_id = w.id AND uw.deleted='false' AND u.id = ?";
+    private static final String DELETE_WAY_BY_USER_ID_WAY_ID = "UPDATE user_way SET deleted = true WHERE user_id = ? AND way_id = ?";
 
     private class PersistGroup extends Category {
         public void setId(int id) {
@@ -61,6 +61,30 @@ public class MySqlWayDao extends AbstractJDBCDao<Way, Integer> {
         return list;
 
     }
+
+    public void deleteWaysByUserIdWayId(Integer user_id, Integer way_id) throws PersistException {
+
+        Connection conn = connection.retrieve();
+        try (PreparedStatement statement = conn.prepareStatement(DELETE_WAY_BY_USER_ID_WAY_ID)) {
+            try {
+                statement.setObject(1, user_id);
+                statement.setObject(2, way_id);
+            } catch (Exception e) {
+                throw new PersistException(e);
+            }
+            int count = statement.executeUpdate();
+            if (count != 1) {
+                throw new PersistException("On delete modify more then 1 record: " + count);
+            }
+        } catch (Exception e) {
+            loger.warn("Cant delete way from user with " + user_id + " user_id and " + way_id + " way_id");
+            throw new PersistException(e);
+        } finally {
+            connection.putback(conn);
+        }
+
+    }
+
 }
 
 

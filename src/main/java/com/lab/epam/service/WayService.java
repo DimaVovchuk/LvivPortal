@@ -57,5 +57,15 @@ public class WayService {
         return ways;
     }
 
+    public void deleteWaysByUserIdWayId(Integer user_id, Integer way_id){
+        try {
+            mySqlWayDao.deleteWaysByUserIdWayId(user_id, way_id);
+
+        } catch (PersistException e) {
+            e.printStackTrace();
+            loger.warn("Cant delet way by user_id = " + user_id + " way_id " + way_id);
+        }
+    }
+
 }
 
