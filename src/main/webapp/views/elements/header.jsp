@@ -7,7 +7,7 @@
     <div class="navbar-fixed">
         <nav>
             <div class="nav-wrapper blue-grey darken-4">
-                <a href="portal?command=index" class="brand-logo"><img class="logo"
+                <a href="/portal?command=index" class="brand-logo"><img class="logo"
                                                                        src="${pageContext.request.contextPath}/images/logo.png"></a>
                 <a href="#" data-activates="mobile-navbar" class="button-collapse"><i
                         class="mdi-navigation-menu"></i></a>
@@ -19,9 +19,9 @@
                         </ul>
 
                         <ul class="right hide-on-med-and-down">
-                            <li><a href="portal?command=index"><cdg:l18n key="header.home"/></a></li>
-                            <li><a href="portal?command=place"><cdg:l18n key="header.places"/></a></li>
-                            <li><a href="portal?command=showMap"><cdg:l18n key="header.plan"/></a></li>
+                            <li><a href="/portal?command=index"><cdg:l18n key="header.home"/></a></li>
+                            <li><a href="/portal?command=place"><cdg:l18n key="header.places"/></a></li>
+                            <li><a href="/portal?command=showMap"><cdg:l18n key="header.plan"/></a></li>
                             <li><a class="dropdown-button" href="#" data-activates="lang-dropdown"><cdg:l18n key="header.lang"/><i
                                     class="mdi-navigation-arrow-drop-down right"></i></a></li>
                             </li>
@@ -29,9 +29,9 @@
                     </c:when>
                     <c:otherwise>
                         <ul class="right hide-on-med-and-down">
-                            <li><a href="portal?command=index"><cdg:l18n key="header.home"/></a></li>
-                            <li><a href="portal?command=place"><cdg:l18n key="header.places"/></a></li>
-                            <li><a href="portal?command=showMap"><cdg:l18n key="header.plan"/></a></li>
+                            <li><a href="/portal?command=index"><cdg:l18n key="header.home"/></a></li>
+                            <li><a href="/portal?command=place"><cdg:l18n key="header.places"/></a></li>
+                            <li><a href="/portal?command=showMap"><cdg:l18n key="header.plan"/></a></li>
                             <li><a class="dropdown-button" href="#" data-activates="lang-dropdown"><cdg:l18n key="header.lang"/><i
                                     class="mdi-navigation-arrow-drop-down right"></i></a></li>
                             <li><a class="modal-trigger" href="#sign-in"><i class="mdi-action-account-circle left"></i><cdg:l18n
@@ -43,9 +43,9 @@
                 </c:choose>
 
                 <ul class="side-nav" id="mobile-navbar">
-                    <li><a href="portal?command=index"><cdg:l18n key="header.home"/></a></li>
-                    <li><a href="portal?command=place"><cdg:l18n key="header.places"/></a></li>
-                    <li><a href="portal?command=#"><cdg:l18n key="header.plan"/></a></li>
+                    <li><a href="/portal?command=index"><cdg:l18n key="header.home"/></a></li>
+                    <li><a href="/portal?command=place"><cdg:l18n key="header.places"/></a></li>
+                    <li><a href="/portal?command=#"><cdg:l18n key="header.plan"/></a></li>
                     <li class="divider"></li>
                     <li><a href="#sign-in"><i class="mdi-action-account-circle right"></i><cdg:l18n key="header.sign"/></a>
                     </li>
@@ -53,12 +53,12 @@
 
                 <ul class="side-nav" id="user-navbar">
                     <li  class="center-align" style="padding-top: 10px"><img class="circle responsive-img" src="${pageContext.request.contextPath}/images/${avatar}" width="160"></li>
-                    <li><a href="portal?command=userWays"><i class="mdi-maps-directions-bike left"></i>My routes</a></li>
-                    <li><a href="portal?command=userPlace"><i class="mdi-action-account-balance left"></i>My places</a></li>
-                    <li><a href="portal?command=allUserPhoto"><i class="mdi-image-photo left"></i>Gallery</a></li>
-                    <li><a href="portal?command=edit"><i class="mdi-action-settings left"></i>Settings</a></li>
+                    <li><a href="/portal?command=userWays"><i class="mdi-maps-directions-bike left"></i>My routes</a></li>
+                    <li><a href="/portal?command=userPlace"><i class="mdi-action-account-balance left"></i>My places</a></li>
+                    <li><a href="/portal?command=allUserPhoto"><i class="mdi-image-photo left"></i>Gallery</a></li>
+                    <li><a href="/portal?command=edit"><i class="mdi-action-settings left"></i>Settings</a></li>
                     <li class="divider"></li>
-                    <li><a href="portal?command=signOut"><i class="mdi-navigation-close left"></i>Sign out</a>
+                    <li><a href="/portal?command=signOut"><i class="mdi-navigation-close left"></i>Sign out</a>
                     </li>
                 </ul>
             </div>

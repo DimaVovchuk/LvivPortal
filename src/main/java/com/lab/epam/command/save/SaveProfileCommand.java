@@ -3,12 +3,9 @@ package com.lab.epam.command.save;
 import com.lab.epam.command.controller.Command;
 import com.lab.epam.dao.PersistException;
 import com.lab.epam.entity.User;
-import com.lab.epam.entity.UserDataAboutTrip;
 import com.lab.epam.helper.ClassName;
-import com.lab.epam.service.PlaceService;
 import com.lab.epam.service.UserImageService;
 import com.lab.epam.service.UserService;
-import com.lab.epam.service.WayService;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -17,8 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.Locale;
-import java.util.ResourceBundle;
 
 /**
  * Created by Oleguk on 18.06.2015.
@@ -46,7 +41,7 @@ public class SaveProfileCommand implements Command {
         String phone = request.getParameter("phone");
         String about = request.getParameter("about");
         String password = request.getParameter("password");
-        String avatar = request.getParameter("avatar");
+        Integer avatar = Integer.valueOf(request.getParameter("avatar"));
 
         String page = "/views/pages/editProfile.jsp";
         String errorMsg = null;
@@ -67,7 +62,7 @@ public class SaveProfileCommand implements Command {
                 phone = request.getParameter("phone");
                 about = request.getParameter("about");
                 password = request.getParameter("password");
-                avatar = request.getParameter("avatar");
+                avatar = Integer.valueOf(request.getParameter("avatar"));
 
                 user.setName(name);
                 user.setSurname(surname);

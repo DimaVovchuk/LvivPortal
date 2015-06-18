@@ -70,12 +70,14 @@ public class CommandFactory {
 
         System.out.println(command);
 
-        if(commands.containsKey(command)) {
-            Command commamdExecute = commands.get(command);
-            commamdExecute.execute(request, response);
-        } else {
-            request.getRequestDispatcher("/views/pages/404.jsp").forward(request, response);
-        }
+
+            if (commands.containsKey(command)) {
+                Command commamdExecute = commands.get(command);
+                commamdExecute.execute(request, response);
+            } else {
+                request.getRequestDispatcher("/views/pages/404.jsp").forward(request, response);
+            }
+
     }
 }
 

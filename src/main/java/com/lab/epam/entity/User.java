@@ -32,8 +32,8 @@ public class User implements Identified<Integer> {
     private Integer role_id;
     @Column("about")
     private String about;
-    @Column("avatar")
-    private String avatar;
+    @Column("avatar_id")
+    private Integer avatar;
     @Column("deleted")
     private Boolean deleted = false;
 
@@ -69,6 +69,7 @@ public class User implements Identified<Integer> {
                 ", status='" + status + '\'' +
                 ", role='" + role_id + '\'' +
                 ", about='" + about + '\'' +
+                ", avatar='" + avatar + '\'' +
                 ", deleted=" + deleted +
                 '}';
     }
@@ -169,11 +170,11 @@ public class User implements Identified<Integer> {
         this.role_id = role_id;
     }
 
-    public String getAvatar() {
+    public Integer getAvatar() {
         return avatar;
     }
 
-    public void setAvatar(String avatar) {
+    public void setAvatar(Integer avatar) {
         this.avatar = avatar;
     }
 
@@ -199,7 +200,7 @@ public class User implements Identified<Integer> {
         private Integer rating;
         private Integer status;
         private String about;
-        private String avatar;
+        private Integer avatar;
 
         public Builder(String name, String surname, String login, String mail, String password, String phone, Integer role_id) {
             this.name = name;
@@ -221,7 +222,7 @@ public class User implements Identified<Integer> {
             return this;
         }
 
-        public Builder avatar(String val) {
+        public Builder avatar(Integer val) {
             avatar = val;
             return this;
         }
