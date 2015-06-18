@@ -20,8 +20,14 @@ public class WayService {
 
     MySqlWayDao mySqlWayDao = new MySqlWayDao();
 
-    public void create(Way object) throws PersistException {
-        mySqlWayDao.create(object);
+    public void create(Way object){
+        try {
+            mySqlWayDao.create(object);
+
+        } catch (PersistException e) {
+            e.printStackTrace();
+            loger.warn("Cant delet create user way");
+        }
     }
 
     public Way getByPK(Integer key) throws PersistException{
@@ -65,6 +71,19 @@ public class WayService {
             e.printStackTrace();
             loger.warn("Cant delet way by user_id = " + user_id + " way_id " + way_id);
         }
+    }
+
+    public Way getLastAdded(){
+        Way way = null;
+        try {
+            way = mySqlWayDao.getLastAdded();;
+
+        } catch (PersistException e) {
+            e.printStackTrace();
+            loger.warn("Cant get last way");
+        }
+
+        return way;
     }
 
 }

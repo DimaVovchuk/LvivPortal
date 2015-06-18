@@ -119,4 +119,37 @@ public class PlaceService {
         return places;
     }
 
+    public void deletePlaceByUserIdPlaceId(Integer user_id, Integer place_id){
+        try {
+            mySqlPlaceDao.deletePlaceByUserIdPlaceId(user_id, place_id);
+
+        } catch (PersistException e) {
+            e.printStackTrace();
+            loger.warn("Cant delet way by user_id = " + user_id + " place_id " + place_id);
+        }
+    }
+
+    public Place getPlaceByLongitudeLatitude(String longitude, String latitude){
+        Place place = null;
+        try {
+            place = mySqlPlaceDao.getPlaceByLongitudeLatitude(longitude, latitude);
+
+        } catch (PersistException e) {
+            e.printStackTrace();
+            loger.warn("Cant get place with longitude " + longitude + " and latitude " + latitude);
+        }
+
+        return place;
+    }
+
+    public void createPlaceWay(Integer place_id, Integer way_id, Integer day){
+        try {
+            mySqlPlaceDao.createPlaceWay(place_id, way_id,day);
+
+        } catch (PersistException e) {
+            e.printStackTrace();
+            loger.warn("Cant create place_way with place_id = " + place_id + " way_id " + way_id + " day " + day);
+        }
+    }
+
 }

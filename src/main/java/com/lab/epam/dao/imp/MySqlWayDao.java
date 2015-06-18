@@ -24,8 +24,9 @@ public class MySqlWayDao extends AbstractJDBCDao<Way, Integer> {
     private static final Logger loger = LogManager.getLogger(ClassName.getCurrentClassName());
     private static final String GET_WAY_BY_USER_ID = "SELECT w.id, w.rating, w.name, w.visible, w.way_days, w.way_time ,w.deleted FROM way AS w JOIN user_way AS uw JOIN user AS u WHERE uw.user_id = u.id AND uw.way_id = w.id AND uw.deleted='false' AND u.id = ?";
     private static final String DELETE_WAY_BY_USER_ID_WAY_ID = "UPDATE user_way SET deleted = true WHERE user_id = ? AND way_id = ?";
+    private static final String GET_LAST_ADDED = "SELECT * FROM way ORDER BY id DESC LIMIT 0,1";
 
-    private class PersistGroup extends Category {
+    private class PersistGroup extends Way {
         public void setId(int id) {
             super.setId(id);
         }
@@ -82,6 +83,32 @@ public class MySqlWayDao extends AbstractJDBCDao<Way, Integer> {
         } finally {
             connection.putback(conn);
         }
+
+    }
+
+    public Way getLastAdded() throws PersistException {
+
+        List<Way> list;
+        Connection conn = connection.retrieve();
+        try (PreparedStatement statement = conn.prepareStatement(GET_LAST_ADDED)) {
+            ResultSet rs = statement.executeQuery();
+            loger.info("Get last way is succesfull ");
+            list = parseResultSet(rs);
+            loger.info("Parse result with Transformer is succesfull");
+            if (list.size() <= 0){
+                loger.info("DB has any ways");
+                return null;
+            }
+            if (list.size() > 1){
+                loger.info("DB has more than one last way");
+            }
+        } catch (Exception e) {
+            loger.warn("Cant last way");
+            throw new PersistException(e);
+        } finally {
+            connection.putback(conn);
+        }
+        return list.iterator().next();
 
     }
 
