@@ -10,7 +10,6 @@ import com.lab.epam.command.logination.SignInCommand;
 import com.lab.epam.command.logination.SignOutCommand;
 import com.lab.epam.command.logination.SignUpCommand;
 import com.lab.epam.command.page.index.IndexCommand;
-import com.lab.epam.command.page.map.GeotegPhotoCommand;
 import com.lab.epam.command.page.map.ShowMapCommand;
 import com.lab.epam.command.page.photo.ShowAllUserPhoto;
 import com.lab.epam.command.page.photo.UpLoadPictureCommand;
@@ -44,7 +43,6 @@ public class CommandFactory {
         commands.put("checkTime", new CheckChangePassTimeCommand());
         commands.put("confirmReset", new ConfirmChangePassCommand());
         commands.put("resetEmail", new ResetEmail());
-        commands.put("geotag", new GeotegPhotoCommand());
         commands.put("showAllUser", new ShowAllUserCommand());
         commands.put("allUserPhoto", new ShowAllUserPhoto());
         commands.put("edit", new EditProfileCommand());
