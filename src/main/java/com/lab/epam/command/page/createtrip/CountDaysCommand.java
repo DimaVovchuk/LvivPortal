@@ -1,4 +1,4 @@
-package com.lab.epam.command.page.map;
+package com.lab.epam.command.page.createtrip;
 
 import com.lab.epam.command.controller.Command;
 import com.lab.epam.helper.ClassName;
@@ -11,15 +11,17 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Created by Dima on 15-Jun-15.
+ * Created by Admin on 18.06.2015.
  */
-public class GeotegPhotoCommand implements Command {
+public class CountDaysCommand implements Command {
+
     private static final Logger loger = LogManager.getLogger(ClassName.getCurrentClassName());
 
-    public void execute(HttpServletRequest request,
-                        HttpServletResponse response) throws ServletException, IOException {
+    @Override
+    public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        loger.info("Command PlanTripPage Cabinet.");
+        request.getRequestDispatcher("/views/pages/set_day_time.jsp").forward(request, response);
 
-        request.getRequestDispatcher("/views/pages/geotag.jsp").forward(request, response);
     }
 }

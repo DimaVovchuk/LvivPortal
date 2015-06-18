@@ -19,9 +19,9 @@ public class SignOutCommand implements Command {
 
     public void execute(HttpServletRequest request,
                           HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession(false);
+        HttpSession session = request.getSession();
         session.invalidate();
         loger.info("Command Logout session - false.");
-        request.getRequestDispatcher("/views/pages/index.jsp").forward(request, response);
+        response.sendRedirect("portal?command=index");
     }
 }

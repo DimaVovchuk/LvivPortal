@@ -24,10 +24,8 @@ public class Way implements Identified<Integer> {
     @Column("deleted")
     private Boolean deleted = false;
 
-    public Way(Integer rating, String name, Boolean visible, Integer way_days, Integer way_time){
+    public Way(Integer rating, Integer way_days, Integer way_time){
         this.rating = rating;
-        this.name = name;
-        this.visible = visible;
         this.way_days = way_days;
         this.way_time = way_time;
     }
