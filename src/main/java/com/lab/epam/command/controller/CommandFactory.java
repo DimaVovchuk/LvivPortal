@@ -17,6 +17,7 @@ import com.lab.epam.command.page.place.PlaceCommand;
 import com.lab.epam.command.page.place.PlaceInfortmationCommand;
 import com.lab.epam.command.page.user.*;
 import com.lab.epam.command.page.user.admin.ShowAllUserCommand;
+import com.lab.epam.command.save.SaveProfileCommand;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -46,6 +47,7 @@ public class CommandFactory {
         commands.put("showAllUser", new ShowAllUserCommand());
         commands.put("allUserPhoto", new ShowAllUserPhoto());
         commands.put("edit", new EditProfileCommand());
+        commands.put("updateprofile", new SaveProfileCommand());
         commands.put("userWays", new UserWaysCommand());
         commands.put("userPlace", new UserPlaceCommand());
         commands.put("deleteUserPlace", new DeleteUserPlaceCommand());

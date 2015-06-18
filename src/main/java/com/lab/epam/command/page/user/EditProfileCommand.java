@@ -36,9 +36,9 @@ public class EditProfileCommand implements Command {
         language = locale.getLanguage();
 
         User user = null;
-
         String page = "/views/page/editProfile.jsp";
         loger.info("Login in session is " + login);
+
         if (login != null) {
             user = userservice.geUserByLogin(login);
         }
@@ -57,6 +57,7 @@ public class EditProfileCommand implements Command {
             request.setAttribute("about", user.getAbout());
             request.setAttribute("password", user.getPassword());
             request.setAttribute("avatar", user.getAvatar());
+            request.setAttribute("id", user.getId());
         }
 
         loger.info("Command Edit Profile.");

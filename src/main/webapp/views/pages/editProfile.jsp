@@ -22,6 +22,8 @@
 <jsp:include page="/views/elements/header.jsp"/>
 
 <c:set var="img" value="${avatar}"/>
+<c:set var="msg" value="${msg}"/>
+
 <div class="container">
     <div class="row">
         <h1>Edit Profile</h1>
@@ -54,9 +56,16 @@
         </div>
 
         <div class="col s8">
+            <c:choose>
+                <c:when test="${not empty msg}">
+
+                </c:when>
+                <c:otherwise>
+                </c:otherwise>
+            </c:choose>
             <h3>Personal info</h3>
 
-            <form action="portal?command=updateprofile&login=${login}" class="form-horizontal" role="form">
+            <form action="portal?command=updateprofile&id=${id}" class="form-horizontal" role="form">
                 <div class="row">
                     <div class="input-field col s12">
                         <i class="mdi-action-account-circle prefix"></i>
@@ -132,6 +141,7 @@
                     </div>
                 </div>
                 <input type="hidden" name="avatar" value="${img}">
+                <input type="hidden" name="id" value="${id}">
             </form>
         </div>
     </div>
