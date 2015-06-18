@@ -38,6 +38,7 @@ public class SignInCommand implements Command {
             session.setAttribute("login", login);
             session.setAttribute("usedID",user.getId());
             session.setAttribute("role", user.getRoleID());
+            session.setAttribute("avatar", user.getAvatar());
             loger.info("User " + login + " signing in ");
             request.getRequestDispatcher("/views/pages/user-cabinet.jsp").forward(request, response);
         } else {
