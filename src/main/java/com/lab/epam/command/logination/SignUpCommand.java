@@ -59,7 +59,6 @@ public class SignUpCommand implements Command {
         user.setPhone(phone);
         user.setStatus(1);
         user.setRoleID(2);
-        user.setAvatar("default3.jpg");
 
         UserService userService = new UserService();
         boolean checkEmail = userService.checkEmail(email);
