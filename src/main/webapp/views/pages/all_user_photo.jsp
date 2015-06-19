@@ -2,13 +2,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+	<jsp:include page="/views/elements/css.jsp"/>
+	<jsp:include page="/views/elements/script.jsp"/>
 	<title></title>
 </head>
 <body>
 <c:forEach items="${AllUserPhoto}" var="elem">
-<tr>
-	<td><img src="${pageContext.request.contextPath}/upload/photo/${elem.reference}" alt="" height="100" width="100"></td>
-</tr>
+	<th><img class="materialboxed" width="200"  height="200" src="${pageContext.request.contextPath}/upload/photo/${elem.reference}"></th>
 </c:forEach>
 
 	<form id="sign-in-form" action="portal/showalluser" method="post">

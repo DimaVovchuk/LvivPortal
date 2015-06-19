@@ -2,8 +2,10 @@ package com.lab.epam.command.logination;
 
 import com.lab.epam.command.controller.Command;
 import com.lab.epam.entity.User;
+import com.lab.epam.entity.UserImage;
 import com.lab.epam.helper.ClassName;
 import com.lab.epam.md5.MD5Creator;
+import com.lab.epam.service.UserImageService;
 import com.lab.epam.service.UserService;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -35,10 +37,19 @@ public class SignInCommand implements Command {
         User user = serviceUser.geUserByLogin(login);
         session = request.getSession();
         if (user.getPassword()!= null && user.getPassword().equals(MD5Creator.getMD5(password + login))) {
+            Integer userID = user.getId();
             session.setAttribute("login", login);
-            session.setAttribute("usedID",user.getId());
+            session.setAttribute("usedID", userID);
             session.setAttribute("role", user.getRoleID());
-            session.setAttribute("avatar", user.getAvatar());
+
+            UserImageService userImageService = new UserImageService();
+            UserImage userImagee = userImageService.getUserImageByUserIdOne(userID);
+            String avatar = null;
+            if(userImagee !=null) {
+                avatar = userImagee.getReference();
+            }
+            session.setAttribute("avatar", avatar);
+
             loger.info("User " + login + " signing in ");
             request.getRequestDispatcher("/views/pages/user-cabinet.jsp").forward(request, response);
         } else {

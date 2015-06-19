@@ -7,6 +7,7 @@ import com.lab.epam.service.UserImageService;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
@@ -16,10 +17,11 @@ import java.util.List;
 public class ShowAllUserPhoto implements Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        HttpSession session = request.getSession();
+        Integer userID = (Integer)session.getAttribute("usedID");
         UserImageService userImageService = new UserImageService();
-        List<UserImage> userImageList = userImageService.getAll();
+        List<UserImage> userImageList = userImageService.getUserImageByUserId(userID);
         request.setAttribute("AllUserPhoto",userImageList);
-        request.getRequestDispatcher("/views/pages/all_user_photo.jsp").forward(request, response);
+        request.getRequestDispatcher("/views/pages/uploadTest.jsp").forward(request, response);
     }
 }

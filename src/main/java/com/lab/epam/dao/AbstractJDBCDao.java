@@ -77,7 +77,8 @@ public abstract class AbstractJDBCDao<T extends Identified<PK>, PK extends Integ
             if (entry.getKey().equals("password")) {
                 entry.setValue(entry.getValue());
             }
-            if (entry.getValue().getClass() == String.class) {
+
+            if (entry.getValue() != null && entry.getValue().getClass() == String.class) {
                 field += entry.getKey() + " = '" + entry.getValue() + "',";
             } else {
                 field += entry.getKey() + " = " + entry.getValue() + ",";
@@ -88,6 +89,7 @@ public abstract class AbstractJDBCDao<T extends Identified<PK>, PK extends Integ
         String tableName = transformer.getTableName();
         String query = "UPDATE `" + tableName + "` SET " + field
                 + " WHERE id = " + object.getId();
+
         return query;
 
     }

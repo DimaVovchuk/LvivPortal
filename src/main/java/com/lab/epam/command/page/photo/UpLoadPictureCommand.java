@@ -43,7 +43,7 @@ public class UpLoadPictureCommand implements Command {
             save(request,files, params);
 
             response.setContentType("text/html; charset=windows-1251");
-            response.sendRedirect("portal?command=allUserPhoto");
+            response.sendRedirect("/portal?command=allUserPhoto");
         }
         catch (FileUploadException fue) {
             fue.printStackTrace();
@@ -96,16 +96,18 @@ public class UpLoadPictureCommand implements Command {
                         UserImage userImage = new UserImage(usedID, imageName);
                         userImageService.create(userImage);
 
-                        System.out.println(imageID);//null
+                        List<UserImage> allImageList = userImageService.getUserImageByUserId(usedID);
+                        UserImage lastUploadHpoto = allImageList.get(allImageList.size() - 1);
+                        Integer lastImageIndex = lastUploadHpoto.getId();
+
                         User user = userService.getByPK(usedID);
-                        System.out.println(user.toString());
-                        user.setAvatar(imageID);
-                        System.out.println("after"+user.toString());
+                        user.setAvatar(lastImageIndex);
                         userService.update(user);
                         loger.info("File is successfully uploaded in database to Avatar image");
                     }
                     //����, � ������� ����� ���������� ������
                     String realPath = request.getRealPath("/upload/photo/" + File.separator + imageName);
+
                     final File file = new File(realPath);
                     FileOutputStream fos = new FileOutputStream(file);
                     fos.write(item.get());

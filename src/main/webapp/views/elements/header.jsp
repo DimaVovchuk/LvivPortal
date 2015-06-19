@@ -52,7 +52,12 @@
                 </ul>
 
                 <ul class="side-nav" id="user-navbar">
-                    <li  class="center-align" style="padding-top: 10px"><img class="circle responsive-img" src="${pageContext.request.contextPath}/images/${avatar}" width="160"></li>
+                    <c:if test="${usedID != null and avatar != null}" >
+                     <li  class="center-align" style="padding-top: 10px"><img class="circle responsive-img" src="${pageContext.request.contextPath}/upload/photo/${avatar}" width="160"></li>
+                    </c:if>
+                    <c:if test="${avatar == null}" >
+                        <li  class="center-align" style="padding-top: 10px"><img class="circle responsive-img" src="${pageContext.request.contextPath}/upload/photo/user.png" width="160"></li>
+                    </c:if>
                     <li><a href="/portal?command=userWays"><i class="mdi-maps-directions-bike left"></i>My routes</a></li>
                     <li><a href="/portal?command=userPlace"><i class="mdi-action-account-balance left"></i>My places</a></li>
                     <li><a href="/portal?command=allUserPhoto"><i class="mdi-image-photo left"></i>Gallery</a></li>

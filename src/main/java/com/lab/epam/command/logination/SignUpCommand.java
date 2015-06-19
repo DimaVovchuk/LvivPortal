@@ -60,6 +60,7 @@ public class SignUpCommand implements Command {
         user.setStatus(1);
         user.setRoleID(2);
 
+
         UserService userService = new UserService();
         boolean checkEmail = userService.checkEmail(email);
         boolean checkPhone = userService.checkPhone(phone);
