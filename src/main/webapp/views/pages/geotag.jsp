@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="cdg" uri="customtags" %>
 
 <script>
     function initialize() {
@@ -17,7 +18,7 @@
                 '<c:out value="${place.description}"/>' +
                 '</p>' +
                 '</div>' +
-                '<p> More: <a href="portal?command=placeInformation&place_id=${place.placeId}">link</a> </p>' +
+                '<p><a href="portal?command=placeInformation&place_id=${place.placeId}"><cdg:l18n key="map.readmore"/></a></p>' +
                 '</div>';
         var infowindow = new google.maps.InfoWindow({
             content: contentString
@@ -58,7 +59,3 @@
 </script>
 
 <div id="map-canvas"></div>
-
-<script>
-
-</script>
