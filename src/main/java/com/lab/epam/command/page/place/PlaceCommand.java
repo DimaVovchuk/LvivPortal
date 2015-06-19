@@ -32,18 +32,18 @@ public class PlaceCommand implements Command {
 
         HttpSession session = request.getSession();
 
-        ResourceBundle resourceBandle = (ResourceBundle)session.getAttribute("bundle");
+        ResourceBundle resourceBandle = (ResourceBundle) session.getAttribute("bundle");
         Locale locale = resourceBandle.getLocale();
         String language = locale.getLanguage();
 
 
         List<Place> places = null;
         List<Place> placeForWay;
-        UserDataAboutTrip userDataAboutTrip = (UserDataAboutTrip)session.getAttribute("userDataTrip");
-        placeForWay = (ArrayList<Place>)session.getAttribute("placeForWay");
+        UserDataAboutTrip userDataAboutTrip = (UserDataAboutTrip) session.getAttribute("userDataTrip");
+        placeForWay = (ArrayList<Place>) session.getAttribute("placeForWay");
         String dayNumberString = request.getParameter("dayNumber");
         Integer dayNumber = 0;
-        if (dayNumberString != null){
+        if (dayNumberString != null) {
             dayNumber = Integer.parseInt(dayNumberString);
         }
         //
@@ -52,22 +52,22 @@ public class PlaceCommand implements Command {
         Place onePlaceForWay = null;
         Boolean isInWay = false;
 
-        if (placeId != null && userDataAboutTrip != null && dayNumber != 0){
+        if (placeId != null && userDataAboutTrip != null && dayNumber != 0) {
             onePlaceForWay = servicePlace.getByPK(Integer.parseInt(placeId));
             loger.info("Get place is successfull");
-            Map<Integer,List<Place>> map = userDataAboutTrip.getPlaceDay();
+            Map<Integer, List<Place>> map = userDataAboutTrip.getPlaceDay();
             loger.info("Get map is successfull");
             Set<Integer> keys = map.keySet();
-            if (onePlaceForWay != null || !keys.contains(dayNumber)){
-                if (map.isEmpty()){
+            if (onePlaceForWay != null || !keys.contains(dayNumber)) {
+                if (map.isEmpty()) {
                     placeForWay = new ArrayList<>();
                     loger.info("Create new List<Place>");
                     loger.info("Day is " + dayNumber);
-                }else {
+                } else {
                     placeForWay = map.get(dayNumber);
                     loger.info("Get placeForWay");
-                    for (Place place: placeForWay){
-                        if (place.getId() == onePlaceForWay.getId()){
+                    for (Place place : placeForWay) {
+                        if (place.getId() == onePlaceForWay.getId()) {
                             isInWay = true;
                         }
                     }
@@ -83,25 +83,31 @@ public class PlaceCommand implements Command {
             loger.info("Set map to userDataAboutTrip");
         }
         System.out.println("userDataTrip " + userDataAboutTrip);
-        session.setAttribute("userDataTrip",userDataAboutTrip);
+        session.setAttribute("userDataTrip", userDataAboutTrip);
 
         String category = request.getParameter("category");
-      if (category == null){
+        if (category == null) {
             category = "";
         }
-        if (category != null){
-            switch(category){
-                case "sights": places = servicePlace.getPlaceByCategory(1);
+        if (category != null) {
+            switch (category) {
+                case "sights":
+                    places = servicePlace.getPlaceByCategory(1);
                     break;
-                case "churches": places = servicePlace.getPlaceByCategory(2);
+                case "churches":
+                    places = servicePlace.getPlaceByCategory(2);
                     break;
-                case "theatres": places = servicePlace.getPlaceByCategory(3);
+                case "theatres":
+                    places = servicePlace.getPlaceByCategory(3);
                     break;
-                case "hotels": places = servicePlace.getPlaceByCategory(4);
+                case "hotels":
+                    places = servicePlace.getPlaceByCategory(4);
                     break;
-                case "restaurants": places = servicePlace.getPlaceByCategory(5);
+                case "restaurants":
+                    places = servicePlace.getPlaceByCategory(5);
                     break;
-                default: places = servicePlace.getAll();
+                default:
+                    places = servicePlace.getAll();
                     break;
             }
         } else {
@@ -115,26 +121,51 @@ public class PlaceCommand implements Command {
         Integer place_id;
         PlaceImage placeImage;
         PlaceDescription placeDescription;
-        for (Place place: places){
+        for (Place place : places) {
             place_id = place.getId();
 
-            placeDescription = placeDescriptionService.getPlaceDescriptionByIdPlace(place_id,language);
+            placeDescription = placeDescriptionService.getPlaceDescriptionByIdPlace(place_id, language);
             placeDescriptions.add(placeDescription);
             placeImage = placeImageService.getPlaceImageByPlaceId(place_id);
             if (placeImage == null) {
-                placeImage = new PlaceImage(place_id,"default_building.jpg");
+                placeImage = new PlaceImage(place_id, "default_building.jpg");
             }
             placeImages.add(placeImage);
         }
 
-        request.setAttribute("places", places);
+        List<PlaceDescriptionAndPhoto> placesPageInfo = getPlaceDescriptionAndPhotoList(places, placeDescriptions, placeImages);
+        //request.setAttribute("places", places);
         loger.info("places = " + places);
-        request.setAttribute("placeDescriptions", placeDescriptions);
+        //request.setAttribute("placeDescriptions", placeDescriptions);
         loger.info("placeDescriptions = " + placeDescriptions);
         loger.info("placeImages = " + placeImages);
-        request.setAttribute("placeImages", placeImages);
+        //request.setAttribute("placeImages", placeImages);
         request.setAttribute("category", category);
+        request.setAttribute("places", placesPageInfo);
         loger.info("Command Place.");
         request.getRequestDispatcher("/views/pages/places.jsp").forward(request, response);
     }
+
+    private List<PlaceDescriptionAndPhoto> getPlaceDescriptionAndPhotoList(List<Place> places, List<PlaceDescription> placeDescriptions, List<PlaceImage> placeImages) {
+        List<PlaceDescriptionAndPhoto> list = new ArrayList<>();
+        for (PlaceDescription placeDescription : placeDescriptions) {
+            for (Place place : places) {
+                for (PlaceImage placeImage : placeImages) {
+                    if (place.getId() == placeDescription.getPlace_id()) {
+                        if (place.getId() == placeImage.getPlace_id()) {
+                            PlaceDescriptionAndPhoto item = new PlaceDescriptionAndPhoto();
+                            item.setId(place.getId());
+                            item.setImageReference(placeImage.getReference());
+                            item.setName(placeDescription.getName());
+                            item.setAdress(place.getAdress());
+                            System.out.println(item.toString());
+                            list.add(item);
+                        }
+                    }
+                }
+            }
+        }
+        return list;
+    }
+
 }
