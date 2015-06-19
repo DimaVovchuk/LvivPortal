@@ -2,7 +2,7 @@
 <%@ taglib prefix="cdg" uri="customtags" %>
 
 <div class="modal" id="sign-in">
-<div class='login-form aniamted bounceIn'>
+<div class='login-form'>
     <div class='switch'>
         <div class="sign"><cdg:l18n key="login.signup"/></div>
         <div class="sign" style="display: none"><cdg:l18n key="login.signin"/></div>

@@ -83,7 +83,7 @@ header img.text-middle {
 }
 
 .banner .banner-text {
-    background: rgba(0,0,0,0.6);
+    background: rgba(0, 0, 0, 0.6);
     padding-bottom: 2em;
 }
 
@@ -260,6 +260,70 @@ header img.text-middle {
     padding: 0;
 }
 
+#map-canvas {
+    position: absolute;
+    width: 75%;
+    height: 100%;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 25%;
+    padding-top: 64px;
+    z-index: 9;
+}
+
+#map-side {
+    position: absolute;
+    width: 25%;
+    height: 100%;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding-top: 64px;
+    z-index: 10;
+}
+
+.map .dropdown-select {
+    width: 100%;
+    border-radius: 0;
+}
+
+@media (max-width: 992px) {
+    #map-canvas {
+        width: 60%;
+        left: 40%;
+    }
+
+    #map-side {
+        width: 40%;
+    }
+}
+
+@media (max-width: 600px) {
+    #map-canvas {
+        width: 60%;
+        left: 40%;
+        padding-top: 56px
+    }
+
+    #map-side {
+        width: 40%;
+        padding-top: 56px;
+    }
+}
+
+#map-info .collection .collection-item {
+    padding: 5px 10px;
+}
+
+#map-info img {
+    width: 50px;
+    height: 50px;
+    vertical-align: middle;
+    margin-right: 20px;
+}
+
 /* SIDEBAR */
 .side-icon {
     z-index: 500;
@@ -327,4 +391,5 @@ header img.text-middle {
     width: inherit;
     height: 100%;
     margin-left: 60px;
+    padding-right: 60px;
 }

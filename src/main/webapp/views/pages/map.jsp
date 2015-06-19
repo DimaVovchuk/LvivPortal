@@ -17,31 +17,27 @@
 <jsp:include page="/views/elements/header.jsp"/>
 
 <div class="map">
-    <div class="row">
-        <div class="col l4 m6 s6">
+    <div class="z-depth-2" id="map-side">
+        <nav class="side-icon blue-grey darken-2 z-depth-5">
+            <ul class="center-align">
+                <li><a href="#"><i class="small mdi-notification-event-note white-text"></i>
+                    <span class="nav-text white-text">Itinerary</span>
+                </a>
+                </li>
+                <li><a href="#"><i class="small mdi-action-account-balance white-text"></i>
+                    <span class="nav-text white-text">Places</span>
+                </a>
+                </li>
+            </ul>
+        </nav>
 
-            <nav class="side-icon blue-grey darken-2">
-                <ul class="center-align">
-                    <li><a href="#"><i class="small mdi-notification-event-note white-text"></i>
-                        <span class="nav-text white-text">Itinerary</span>
-                    </a>
-                    </li>
-                    <li><a href="#"><i class="small mdi-action-account-balance white-text"></i>
-                        <span class="nav-text white-text">Places</span>
-                    </a>
-                    </li>
-                </ul>
-            </nav>
-
-            <div class="side-info z-depth-2">
-                Information
-            </div>
-        </div>
-
-        <div class="col l8 m6 s6">
-            <jsp:include page="geotag.jsp"/>
+        <div class="side-info">
+            <jsp:include page="map-info.jsp"/>
         </div>
     </div>
+
+    <jsp:include page="geotag.jsp"/>
+
 </div>
 
 </body>

@@ -27,6 +27,10 @@ $(document).ready(function ($) {
         constrain_width: true,
         belowOrigin: true
     });
+    $(".dropdown-select").dropdown({
+        constrain_width: true,
+        belowOrigin: true
+    });
     /* Login form */
     $('.modal-trigger').leanModal({
         dismissible: true
