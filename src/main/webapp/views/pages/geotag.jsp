@@ -7,15 +7,17 @@
                 mapOptions);
         var markers = [];
         <c:forEach items="${places}" var="place">
-        var contentString = '<div id="content">' +
-                '<div id="siteNotice">' +
+        var contentString = '<div class="map-content">' +
+                '<div class="siteNotice">' +
                 '</div>' +
-                '<h1 ><c:out value="${place.name}"/></h1>' +
-                '<div> <img src="${pageContext.request.contextPath}/upload/photo/${place.imageReference}" style="width:150px; float:left; margin-right: 5px;"></div>' +
-                '<div id="bodyContent">' +
-                ' <c:out value="${place.description}"/>' +
-                '<p>More: <a href="portal?command=placeInformation&place_id=${place.placeId}">link</a></p>' +
+                '<h5 class="cyan-text darken-4"><c:out value="${place.name}"/></h5>' +
+                '<div class="body-content">' +
+                '<p>' +
+                '<img src="${pageContext.request.contextPath}/upload/photo/${place.imageReference}">' +
+                '<c:out value="${place.description}"/>' +
+                '</p>' +
                 '</div>' +
+                '<p> More: <a href="portal?command=placeInformation&place_id=${place.placeId}">link</a> </p>' +
                 '</div>';
         var infowindow = new google.maps.InfoWindow({
             content: contentString
@@ -56,3 +58,7 @@
 </script>
 
 <div id="map-canvas"></div>
+
+<script>
+
+</script>

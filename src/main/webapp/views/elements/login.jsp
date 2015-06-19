@@ -69,10 +69,4 @@
 </div>
 </div>
 
-<script>
-    $("#sign-in-form").validate();
-    $("#sign-up-form").validate();
-</script>
-
-<script src="${pageContext.request.contextPath}/js/jquery.validate.min.js"></script>
 <script src='${pageContext.request.contextPath}/js/<cdg:l18n key="validator.js"/>'></script>

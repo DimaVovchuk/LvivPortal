@@ -40,6 +40,13 @@ $(document).ready(function ($) {
         $('.register').animate({height: "toggle", opacity: "toggle"}, "slow");
         $('.sign').toggle();
     });
+    $("#sign-in-form").validate();
+    $("#sign-up-form").validate();
     /* Banner */
     $(".parallax").parallax();
+    /* Truncate text */
+    $(".body-content").dotdotdot({
+        ellipsis: "... ",
+        watch: "window"
+    });
 });

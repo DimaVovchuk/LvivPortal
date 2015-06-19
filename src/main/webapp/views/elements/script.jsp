@@ -3,8 +3,10 @@
 <!-- Libraries -->
 <script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/materialize.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery.validate.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/markerclusterer.js"></script>
 <script src="${pageContext.request.contextPath}/js/jquery.matchHeight-min.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery.dotdotdot.min.js"></script>
 <!-- Custom -->
 <script src="${pageContext.request.contextPath}/js/jquery.custom.js"></script>
 <!-- External -->
