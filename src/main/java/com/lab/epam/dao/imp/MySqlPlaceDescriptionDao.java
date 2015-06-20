@@ -19,7 +19,7 @@ import java.util.List;
  */
 public class MySqlPlaceDescriptionDao extends AbstractJDBCDao<PlaceDescription, Integer> {
 
-    private static final String GET_LOCALE_DESCRIPTIONS_BY_PLACE = "SELECT * FROM place_description WHERE place_id = ? AND locale = ?";
+    private static final String GET_LOCALE_DESCRIPTIONS_BY_PLACE = "SELECT * FROM place_description WHERE place_id = ? AND locale = ? AND deleted = false";
 
     ConnectionPool connection = ConnectionManager.getConnection();
     Class<PlaceDescription> clazz;

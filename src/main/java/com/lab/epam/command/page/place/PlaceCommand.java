@@ -63,7 +63,7 @@ public class PlaceCommand implements Command {
                     placeForWay = new ArrayList<>();
                     loger.info("Create new List<Place>");
                     loger.info("Day is " + dayNumber);
-                } else {
+                }else {
                     placeForWay = map.get(dayNumber);
                     loger.info("Get placeForWay");
                     for (Place place : placeForWay) {
@@ -83,10 +83,13 @@ public class PlaceCommand implements Command {
             loger.info("Set map to userDataAboutTrip");
         }
         System.out.println("userDataTrip " + userDataAboutTrip);
-        session.setAttribute("userDataTrip", userDataAboutTrip);
+        System.out.println("dayNumber " + dayNumber);
+        System.out.println("placeId " + placeId);
+        session.setAttribute("userDataTrip",userDataAboutTrip);
 
         String category = request.getParameter("category");
-        if (category == null) {
+        System.out.println("category " + category);
+      if (category == null){
             category = "";
         }
         if (category != null) {

@@ -26,7 +26,7 @@ public abstract class AbstractJDBCDao<T extends Identified<PK>, PK extends Integ
 
     public String getSelectQuery(){
         String tableName = transformer.getTableName();
-        return "SELECT * FROM `" + tableName + "` WHERE deleted= true;";
+        return "SELECT * FROM `" + tableName + "` WHERE deleted= false;";
     }
 
     public String getSelectQueryWithOutDeleted(){

@@ -29,7 +29,7 @@ public class MySqlPlaceDao extends AbstractJDBCDao<Place, Integer> {
     private static final Logger loger = LogManager.getLogger(ClassName.getCurrentClassName());
 
     private static final String GET_PLACE_BY_CATEGORY = "SELECT * FROM place WHERE category_id = ?";
-    private static final String GET_PLACE_BY_USER_ID = "SELECT p.id, p.adress, p.latitude, p.longitude, p.category_id, p.rating, p.visible, p.place_time, p.deleted FROM place AS p JOIN user_place AS up JOIN user AS u WHERE up.user_id = u.id AND up.place_id = p.id AND u.id = ?";
+    private static final String GET_PLACE_BY_USER_ID = "SELECT p.id, p.adress, p.latitude, p.longitude, p.category_id, p.rating, p.visible, p.place_time, p.deleted FROM place AS p JOIN user_place AS up JOIN user AS u WHERE up.user_id = u.id AND up.deleted = false AND up.place_id = p.id AND u.id = ?";
     private static final String GET_PLACE_BY_WAY_ID = "SELECT p.id, p.adress, p.latitude, p.longitude, p.category_id, p.rating, p.visible, p.place_time, p.deleted FROM place AS p JOIN place_way AS pw JOIN way AS w WHERE pw.way_id = w.id AND pw.place_id = p.id AND w.id = ?";
     private static final String DELETE_PLACE_BY_USER_ID_PLACE_ID = "UPDATE user_place SET deleted = true WHERE user_id = ? AND place_id = ?";
     private static final String GET_PLACE_BY_LATITUDE_LONGITUDE = "SELECT * FROM place WHERE longitude = ? AND latitude = ?";
@@ -140,7 +140,7 @@ public class MySqlPlaceDao extends AbstractJDBCDao<Place, Integer> {
         Connection conn = connection.retrieve();
         try (PreparedStatement statement = conn.prepareStatement(GET_PLACE_BY_LATITUDE_LONGITUDE)) {
             statement.setString(1, longitude);
-            statement.setString(1, latitude);
+            statement.setString(2, latitude);
             ResultSet rs = statement.executeQuery();
             loger.info("Get places with longitude " + longitude + " and latitude " + latitude + " is succesfull ");
             list = parseResultSet(rs);

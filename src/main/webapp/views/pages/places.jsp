@@ -77,5 +77,30 @@
     });
 </script>
 
+
+
+<div id="chooseWay" class="modal">
+<div class="modal-content">
+
+<h4>Choose day</h4>
+
+
+<a class="waves-effect waves-teal btn-flat" href="portal?command=place&place_id=${place_id}&category=${category}&dayNumber=1">1</a>
+<a class="waves-effect waves-teal btn-flat" href="portal?command=place&dayNumber=2">2</a>
+<a class="waves-effect waves-teal btn-flat" href="portal?command=place&dayNumber=3">3</a>
+<a class="waves-effect waves-teal btn-flat" href="portal?command=place&dayNumber=4">4</a>
+</div>
+<div class="modal-footer">
+
+</div>
+</div>
+
+<script>
+$('.datepicker').pickadate({
+selectMonths: true, // Creates a dropdown to control month
+selectYears: 15 // Creates a dropdown of 15 years to control year
+});
+</script>
+
 </body>
 </html>

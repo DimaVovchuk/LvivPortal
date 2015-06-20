@@ -52,7 +52,7 @@ public class PlaceDescription implements Identified<Integer>{
             return id;
         }
 
-        protected void setId(Integer id) {
+        public void setId(Integer id) {
             this.id = id;
         }
 
