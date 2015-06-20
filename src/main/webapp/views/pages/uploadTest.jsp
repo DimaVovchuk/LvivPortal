@@ -1,16 +1,15 @@
-<%--&lt;%&ndash;<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>&ndash;%&gt;--%>
-<%--&lt;%&ndash;<html>&ndash;%&gt;--%>
-<%--&lt;%&ndash;<head></head>&ndash;%&gt;--%>
-<%--&lt;%&ndash;<body>&ndash;%&gt;--%>
-<%--&lt;%&ndash;<form method=post enctype=multipart/form-data stream action="portal/upload">&ndash;%&gt;--%>
-  <%--&lt;%&ndash;<input type="hidden" name="command" value="upLoad">&ndash;%&gt;--%>
-  <%--&lt;%&ndash;<c:set var="typePhoto" scope="session" value="userFoto"/>&ndash;%&gt;--%>
-  <%--&lt;%&ndash;<input type="file" style="width:100%" name="sendfile">&ndash;%&gt;--%>
-  <%--&lt;%&ndash;<input type=submit value="Отправить">&ndash;%&gt;--%>
-<%--&lt;%&ndash;</form>&ndash;%&gt;--%>
-<%--&lt;%&ndash;</body>&ndash;%&gt;--%>
-<%--&lt;%&ndash;</html>&ndash;%&gt;--%>
-<%--<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>--%>
+<%--<html>--%>
+<%--<head></head>--%>
+<%--<body>--%>
+<%--<form method=post enctype=multipart/form-data stream action="portal/upload">--%>
+  <%--<input type="hidden" name="command" value="upLoad">--%>
+  <%--<c:set var="typePhoto" scope="session" value="userFoto"/>--%>
+  <%--<input type="file" style="width:100%" name="sendfile">--%>
+  <%--<input type=submit value="пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ">--%>
+<%--</form>--%>
+<%--</body>--%>
+<%--</html>--%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
   <style type="text/css">
@@ -62,7 +61,7 @@
 <div>
   <form method=post enctype=multipart/form-data stream action="portal/upload">
     <input type="hidden" name="command" value="upLoad">
-    <c:set var="typePhoto" scope="session" value="userFoto"/>
+    <c:set var="typePhoto" scope="session" value="avatarFoto"/>
     <input id="fileupload" type="file" style="width:100%" name="sendfile">
   <b>Preview</b>
   <br />

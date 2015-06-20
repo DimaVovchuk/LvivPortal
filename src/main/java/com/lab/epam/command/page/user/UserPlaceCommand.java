@@ -66,11 +66,8 @@ public class UserPlaceCommand implements Command {
         }
 
         request.setAttribute("places", places);
-        System.out.println("places " + places);
         request.setAttribute("placeImages", placeImage);
-        System.out.println("placeImage " + placeImage);
         request.setAttribute("placeDescriptions", placeDescriptions);
-        System.out.println("placeDescription " + placeDescriptions);
         loger.info("Command User Place.");
         request.getRequestDispatcher("/views/pages/userPlace.jsp").forward(request, response);
 

@@ -37,7 +37,6 @@ public class UserWaysCommand implements Command {
         UserService userservice = new UserService();
         WayService wayService = new WayService();
 
-
         HttpSession session = request.getSession();
         String login = (String) session.getAttribute("login");
         ResourceBundle resourceBandle = (ResourceBundle) session.getAttribute("bundle");
