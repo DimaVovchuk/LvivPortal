@@ -9,21 +9,19 @@
         var markers = [];
         <c:forEach items="${places}" var="place">
         var contentString = '<div class="map-content card">' +
-                '<h5 class="cyan-text darken-4"><c:out value="${place.name}"/></h5>' +
-                '<div class="body-content">' +
-                '   <div class="card-image waves-effect waves-block waves-light">' +
-                '       <img class="activator responsive-img" src="${pageContext.request.contextPath}/upload/photo/${place.imageReference}">' +
-                '   </div>' +
-                '   <div class="card-content">' +
-                '       <span class="card-title activator grey-text text-darken-4">Description <i class="mdi-navigation-more-vert right"></i></span>' +
-                '   </div>' +
-                '   <div class="card-reveal">' +
-                '       <span class="card-title grey-text text-darken-4">Description <i class="mdi-navigation-close right"></i></span>' +
-                '       <p><c:out value="${place.description}"/></p>' +
-
-                '   </div>' +
-                '   <p><a href="portal?command=placeInformation&place_id=${place.placeId}"><cdg:l18n key="map.readmore"/></a></p>' +
-                '   </div>' +
+                '<div class="card-image waves-effect waves-light">' +
+                '   <img class="responsive-img activator" src="${pageContext.request.contextPath}/upload/photo/${place.imageReference}">' +
+                '</div>' +
+                '<div class="card-content">' +
+                '   <span class="card-title activator grey-text text-darken-4"><c:out value="${place.name}"/><i class="mdi-navigation-more-vert right"></i></span>' +
+                '</div>' +
+                '<div class="card-reveal">' +
+                '   <span class="card-title grey-text text-darken-4"><c:out value="${place.name}"/><i class="mdi-navigation-close right"></i></span>' +
+                '   <p><c:out value="${place.description}"/></p>' +
+                '</div>' +
+                '<div class="card-action">' +
+                '   <a href="portal?command=placeInformation&place_id=${place.placeId}"><cdg:l18n key="map.readmore"/></a>' +
+                '</div>' +
                 '</div>' +
                 '</div>';
 
@@ -43,7 +41,7 @@
             position: myLatLng,
             info: contentString,
             animation: google.maps.Animation.DROP,
-            icon: image,
+            icon: image
         });
 
         markers.push(marker);
