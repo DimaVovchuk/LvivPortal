@@ -31,6 +31,12 @@ $(document).ready(function ($) {
         constrain_width: true,
         belowOrigin: true
     });
+    /* Select menu */
+    $('select').material_select();
+    /* Calendar */
+    $('.datepicker').pickadate({
+        selectMonths: true
+    });
     /* Login form */
     $('.modal-trigger').leanModal({
         dismissible: true
@@ -48,5 +54,22 @@ $(document).ready(function ($) {
     $(".body-content").dotdotdot({
         ellipsis: "... ",
         watch: "window"
+    });
+    /* Plan trip */
+    $('#endDate').change(function () {
+        var start = new Date($('#startDate').val());
+        var end = new Date($(this).val());
+        var diffDays = (end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24) + 1;
+        if (diffDays <= 0) {
+            $("#dateInfo").html('Wrong').toggleClass('error');
+        }
+        else $("#daysValue").html(diffDays);
+    });
+    $('#dontKnowDate').change(function () {
+        $('#days').animate({height: "toggle", opacity: "toggle"});
+    });
+
+    $('#automatic').change(function () {
+        $('#places').animate({height: "toggle", opacity: "toggle"});
     });
 });

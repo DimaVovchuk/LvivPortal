@@ -40,6 +40,12 @@ header nav ul li:hover {
     background: #0ab2d2;
 }
 
+.error {
+    color: red;
+    font-family: "Roboto", serif;
+    font-size: 14px;
+}
+
 header nav ul a {
     font-size: 1.2em;
 }
@@ -223,18 +229,45 @@ header img.text-middle {
     font-size: 20px;
 }
 
-.login-form .error {
-    color: red;
-    font-family: "Roboto", serif;
-    font-size: 14px;
-}
-
 .login-form .col {
     padding: 0;
 }
 
-/* INDEX */
+/* PLAN TRIP */
+#set-date-time {
+    width: 500px;
+    height: 70%;
+    max-height: 100%;
+    padding: 0px 20px;
+    border-top: solid;
+    border-top-color: #0ab2d2;
+    border-top-width: 20px;
+    border-bottom: solid;
+    border-bottom-color: #0ab2d2;
+    border-bottom-width: 20px;
+}
 
+#set-date-time .col {
+    padding: 0;
+}
+
+#set-date-time label {
+    color: #000;
+}
+
+#set-date-time ::-webkit-input-placeholder {
+    color: #000;
+}
+
+#set-date-time .select-wrapper {
+    z-index: 1000;
+}
+
+#set-date-time button {
+    width: 100%;
+}
+
+/* INDEX */
 .index .row {
     margin: 20px;
 }
@@ -350,7 +383,7 @@ header img.text-middle {
 
     .map-content .body-content {
         overflow: hidden;
-        max-height: 150px;
+        max-height: 120px;
     }
 
     .map-content img {
