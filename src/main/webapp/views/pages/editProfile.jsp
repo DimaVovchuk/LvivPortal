@@ -21,8 +21,6 @@
 <body>
 <jsp:include page="/views/elements/header.jsp"/>
 
-<c:set var="img" value="${avatar}"/>
-<c:set var="msg" value="${msg}"/>
 
 <div class="container">
     <div class="row">
@@ -31,11 +29,11 @@
         <div class="col s4">
             <div class="text-center">
                 <c:choose>
-                    <c:when test="${empty img}">
-                        <img src="${pageContext.request.contextPath}/images/default3.jpg" width = 70% class="circle responsive-img" alt="avatar">
+                    <c:when test="${empty avatar}">
+                        <img src="${pageContext.request.contextPath}/upload/photo/user.png" width = 70% class="circle responsive-img" alt="avatar">
                     </c:when>
                     <c:otherwise>
-                        <img src="${pageContext.request.contextPath}/images/${img}" width = 70% class="circle responsive-img" alt="avatar">
+                        <img src="${pageContext.request.contextPath}/upload/photo/${avatar}" width = 70% class="circle responsive-img" alt="avatar">
                     </c:otherwise>
                 </c:choose>
                 <h6>Upload a different photo...</h6>

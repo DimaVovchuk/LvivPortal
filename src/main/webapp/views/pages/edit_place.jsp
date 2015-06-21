@@ -1,3 +1,6 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="cdg" uri="customtags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Vasyl
@@ -28,35 +31,35 @@
         </c:forEach>
     </div>
 
-      <form id="update-profile" action="portal/updateplace" metod="post">
+      <form id="updatePlaceProfile" action="portal/updateplace" metod="post">
         <input type="hidden" name="command" value="updateprofile">
         <c:forEach items="${placeDescriptionList}" var="elem">
           <div class="row">
-            <input value="${elem.name}" id="placename" type="text" class="validate" name="name">
-            <label class="active" for="placename">Place name:</label>
+            <input value="${elem.name}" id="placeName" type="text" name="placeName">
+            <label class="active" for="placeName">Place name:</label>
           </div>
         </c:forEach>
 
         <c:forEach items="${placeDescriptionList}" var="elem">
           <div class="row">
-            <input value="${elem.description}" id="placedescription" type="text" class="validate" name="description">
-            <label class="active" for="placedescription">Place description:</label>
+            <input value="${elem.description}" id="placeDescription" type="text" name="placeDescription">
+            <label class="active" for="placeDescription">Place description:</label>
           </div>
         </c:forEach>
 
         <div class="row">
-            <input value="${editPlace.adress}" id="adress" type="text" class="validate" name="adress">
-            <label class="active" for="adress">Place address:</label>
+            <input value="${editPlace.adress}" id="placeAdress" type="text" name="placeAdress">
+            <label class="active" for="placeAdress">Place address:</label>
         </div>
 
         <div class="row">
-            <input value="${editPlace.latitude}" id="latitude" type="text" class="validate" name="latitude">
-            <label class="active" for="latitude">Place latitude:</label>
+            <input value="${editPlace.latitude}" id="placeLatitude" type="text" name="placeLatitude">
+            <label class="active" for="placeLatitude">Place latitude:</label>
         </div>
 
         <div class="row">
-            <input value="${editPlace.longitude}" id="longitude" type="text" class="validate" name="longitude">
-            <label class="active" for="longitude">Place longitude:</label>
+            <input value="${editPlace.longitude}" id="placeLongitude" type="text" name="placeLongitude">
+            <label class="active" for="placeLongitude">Place longitude:</label>
         </div>
 
         <div class="row">
@@ -65,8 +68,8 @@
         </div>
 
         <div class="row">
-            <input value="${placeRating.rating}" id="rating" type="text" class="validate" name="rating">
-            <label class="active" for="rating">Place rating:</label>
+            <input value="${placeRating.rating}" id="placeRating" type="text" class="validate" name="placeRating">
+            <label class="active" for="placeRating">Place rating:</label>
         </div>
 
         <div class="form-group">

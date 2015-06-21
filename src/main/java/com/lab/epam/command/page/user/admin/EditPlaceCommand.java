@@ -28,7 +28,7 @@ public class EditPlaceCommand implements Command{
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //String editPlaceIDSring = request.getParameter("editPlaceID");
-        String editPlaceIDSring = "2";
+        String editPlaceIDSring = "1";
         HttpSession session = request.getSession();
         loger.info("start EditPlaceCommand");
 
@@ -59,7 +59,7 @@ public class EditPlaceCommand implements Command{
             session.setAttribute("placeRating", placeRating);
             loger.info("edit place rating is " + placeRating);
         }
-
+        response.setContentType("text/html; charset=windows-1251");
         request.getRequestDispatcher("/views/pages/edit_place.jsp").forward(request, response);
     }
 }

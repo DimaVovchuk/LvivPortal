@@ -7,23 +7,26 @@
 	<title></title>
 </head>
 <body>
-<c:forEach items="${AllUserPhoto}" var="elem">
-	<th><img class="materialboxed" width="200"  height="200" src="${pageContext.request.contextPath}/upload/photo/${elem.reference}"></th>
-</c:forEach>
+	<jsp:include page="/views/elements/header.jsp"/>
+	<c:forEach items="${AllUserPhoto}" var="elem">
+		<th><img class="materialboxed" width="200"  height="200" src="${pageContext.request.contextPath}/upload/photo/${elem.reference}"></th>
+	</c:forEach>
+	<jsp:include page="/views/pages/uploadImage.jsp"/>
 
-<form id="sign-in-form" action="portal/showalluser" method="post">
-	<input type="hidden" name="command" value="showAllUser">
-	<input type="hidden" name="requestType" value="showAllUser">
-	<button type="submit" >Show all user
-	</button>
-</form>
 
-<form id="edit_place" action="portal/editplace" method="post">
-	<input type="hidden" name="command" value="editPlace">
-	<button type="submit" >Edit Place
-	</button>
-</form>
-<jsp:include page="/views/pages/uploadTest.jsp"/>
-
+	<b>show all user test command</b>
+	<form id="sign-in-form" action="portal/showalluser" method="post">
+		<input type="hidden" name="command" value="showAllUser">
+		<input type="hidden" name="requestType" value="showAllUser">
+		<button type="submit" >Show all user
+		</button>
+	</form>
+	<b>edit place test command</b>
+	<form id="edit_place" action="portal/editplace" method="post">
+		<input type="hidden" name="command" value="editPlace">
+		<button type="submit" >Edit Place
+		</button>
+	</form>
+	<jsp:include page="/views/elements/footer.jsp"/>
 </body>
 </html>

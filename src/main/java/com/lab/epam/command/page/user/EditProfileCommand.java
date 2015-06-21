@@ -18,8 +18,6 @@ import java.util.*;
  */
 public class EditProfileCommand implements Command {
     private static final Logger loger = LogManager.getLogger(ClassName.getCurrentClassName());
-
-    private List<UserImage> userImage = new ArrayList<>();
     String language;
 
 
@@ -47,7 +45,7 @@ public class EditProfileCommand implements Command {
         }
         if (user != null) {
 
-            userImage = userImageService.getUserImageByUserId(user.getId());
+            UserImage userImage = userImageService.getByPK(user.getAvatar());
 
             request.setAttribute("name", user.getName());
             request.setAttribute("surname", user.getSurname());
@@ -56,7 +54,7 @@ public class EditProfileCommand implements Command {
             request.setAttribute("phone", user.getPhone());
             request.setAttribute("about", user.getAbout());
             request.setAttribute("password", user.getPassword());
-            request.setAttribute("avatar", user.getAvatar());
+            request.setAttribute("avatar", userImage.getReference());
             request.setAttribute("id", user.getId());
         }
 
