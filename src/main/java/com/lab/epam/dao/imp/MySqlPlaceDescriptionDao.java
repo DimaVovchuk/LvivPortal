@@ -2,12 +2,13 @@ package com.lab.epam.dao.imp;
 
 import com.lab.epam.dao.AbstractJDBCDao;
 import com.lab.epam.dao.PersistException;
-import com.lab.epam.entity.Category;
-import com.lab.epam.entity.Place;
 import com.lab.epam.entity.PlaceDescription;
+import com.lab.epam.helper.ClassName;
 import com.lab.epam.persistant.ConnectionManager;
 import com.lab.epam.persistant.ConnectionPool;
 import com.lab.epam.transformer.Transformer;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,8 +19,10 @@ import java.util.List;
  * Created by Admin on 12.06.2015.
  */
 public class MySqlPlaceDescriptionDao extends AbstractJDBCDao<PlaceDescription, Integer> {
-
+    private static final Logger loger = LogManager.getLogger(ClassName.getCurrentClassName());
     private static final String GET_LOCALE_DESCRIPTIONS_BY_PLACE = "SELECT * FROM place_description WHERE place_id = ? AND locale = ? AND deleted = false";
+    private static final String GET_ALL_INFORMATION_BY_PLACE = "SELECT * FROM place_description WHERE place_id = ?";
+
 
     ConnectionPool connection = ConnectionManager.getConnection();
     Class<PlaceDescription> clazz;
@@ -39,6 +42,7 @@ public class MySqlPlaceDescriptionDao extends AbstractJDBCDao<PlaceDescription, 
     }
 
     public PlaceDescription getPlaceDescriptionByIdPlace(Integer place_id, String locale) throws PersistException {
+        loger.info("Method getAllInformationAboutPlace started");
         List<PlaceDescription> list;
             Connection conn = connection.retrieve();
             try (PreparedStatement statement = conn.prepareStatement(GET_LOCALE_DESCRIPTIONS_BY_PLACE)) {
@@ -46,15 +50,18 @@ public class MySqlPlaceDescriptionDao extends AbstractJDBCDao<PlaceDescription, 
                 statement.setString(2, locale);
                 ResultSet rs = statement.executeQuery();
                 list = parseResultSet(rs);
+                loger.info("PlaceDescription list are " + list.toString());
             } catch (Exception e) {
                 throw new PersistException(e);
             } finally {
                 connection.putback(conn);
             }
             if (list == null || list.size() == 0) {
+                loger.warn("Record with PK = " + place_id + " not found.");
                 throw new PersistException("Record with PK = " + place_id + " not found.");
             }
             if (list.size() > 1) {
+                loger.warn("Received more than one record.");
                 throw new PersistException("Received more than one record.");
             }
             return list.iterator().next();
@@ -63,6 +70,27 @@ public class MySqlPlaceDescriptionDao extends AbstractJDBCDao<PlaceDescription, 
 
     }
 
+    public List<PlaceDescription> getAllInformationAboutPlace(Integer place_id) throws PersistException {
+        loger.info("Method getAllInformationAboutPlace started");
+        List<PlaceDescription> list =null;
+        Connection conn = connection.retrieve();
+        try (PreparedStatement statement = conn.prepareStatement(GET_ALL_INFORMATION_BY_PLACE)) {
+            statement.setInt(1, place_id);
+            ResultSet rs = statement.executeQuery();
+            list = parseResultSet(rs);
+            loger.info("PlaceDescription list are " + list.toString());
+        } catch (Exception e) {
+            loger.warn(e.getMessage());
+        } finally {
+            connection.putback(conn);
+        }
 
+        if (list == null || list.size() == 0) {
+            loger.warn("Record with PK = " + place_id + " not found.");
+            throw new PersistException("Record with PK = " + place_id + " not found.");
+        }
+        loger.info("Method getAllInformationAboutPlace ended");
+        return list;
+    }
 
 }

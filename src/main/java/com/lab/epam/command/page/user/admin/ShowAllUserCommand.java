@@ -30,8 +30,67 @@ public class ShowAllUserCommand implements Command{
         Map<User, String> userRole = new HashMap<User, String>();
         UserService userService = new UserService();
         RoleService roleService = new RoleService();
+        Integer servletUserId = null;
+        Integer changeRoleID =null;
+        Integer changeStatus = null;
+
+        String requestType = request.getParameter("requestType");
+        System.out.println("requestType " + requestType);
+
+        String servletUserIdString = request.getParameter("servletUserId");
+        loger.info("servletUserIdString "  + servletUserIdString);
+        if(servletUserIdString != null){
+            servletUserId = Integer.valueOf(servletUserIdString);
+            loger.info("User id is "  + servletUserId);
+            System.out.println("servletUserId " + servletUserId);
+        }
+
+
+        String changeRoleIDString = request.getParameter("changeRoleID");
+        loger.info("changeRoleIDString " + changeRoleIDString);
+        if(changeRoleIDString != null && requestType.equalsIgnoreCase("changeRole")){
+            User userChangeRole = userService.getByPK(servletUserId);
+            changeRoleID = Integer.valueOf(changeRoleIDString);
+            loger.info("changeRoleID " + changeRoleID);
+
+            userChangeRole.setRoleID(changeRoleID);
+            try {
+                userService.update(userChangeRole);
+                showAllUser(userRole,roleService,userService,request);
+                loger.info("user role is succesful changed ");
+            } catch (PersistException e) {
+                loger.warn(e.getMessage());
+            }
+        }
+
+        String changeStatusIDString = request.getParameter("changeStatucID");
+        loger.info("changeStatusIDString " + changeStatusIDString);
+        if(changeStatusIDString != null && requestType.equalsIgnoreCase("changeStatus")){
+            changeStatus = Integer.valueOf(changeStatusIDString);
+            loger.info("changeStatus " + changeStatus);
+            User userChangeStatus = userService.getByPK(servletUserId);
+            userChangeStatus.setStatus(changeStatus);
+            try {
+                userService.update(userChangeStatus);
+                showAllUser(userRole, roleService, userService, request);
+                loger.info("user status is succesful changed ");
+            } catch (PersistException e) {
+                loger.warn(e.getMessage());
+            }
+        }
+
+
+        if(requestType.equalsIgnoreCase("showAllUser")){
+            showAllUser(userRole,roleService,userService,request);
+            loger.info("Show all user.");
+        }
+
+        request.getRequestDispatcher("/views/pages/admin_cabinet.jsp").forward(request, response);
+    }
+
+    private void showAllUser(Map<User, String> userRole,RoleService roleService, UserService userService,HttpServletRequest request){
         try {
-            userList = userService.getAll();
+            List<User>userList = userService.getAll();
             for (int i = 0; i < userList.size(); i++) {
                 Integer roleID= userService.getRoleID(userList.get(i).getLogin());
                 loger.info("roleID " + roleID);
@@ -43,7 +102,5 @@ public class ShowAllUserCommand implements Command{
         } catch (PersistException e) {
             loger.warn(e.getMessage());
         }
-
-        request.getRequestDispatcher("/views/pages/admin_cabinet.jsp").forward(request, response);
     }
 }

@@ -65,43 +65,55 @@
 			<td>${elem.key.login}</td>
 			<td>${elem.key.mail}</td>
 			<td>${elem.key.phone}</td>
-			<td><a class="waves-effect waves-light btn modal-trigger" href="#modal1">${elem.key.status}</a></td>
-			<td><a class="waves-effect waves-light btn modal-trigger" href="#changerole" onclick="
-			<c:set var="salary" scope="session" value="${elem.key.id}"/>">${elem.value}</a></td>
-			<%--<td>--%>
-			<%--<label>--%>
+			<td><button class="btn modal-trigger type="submit" data-target="changestatus"
+				id="btn1" onclick="$('#uuserStatusID').val('${elem.key.id}')"> ${elem.key.status} </button></td></td>
+
+			<td><button class="btn modal-trigger type="submit" data-target="changerole"
+				id="btn1" onclick="$('#uid').val('${elem.key.id}')"> ${elem.value} </button></td>
+
+				<%--<td>--%>
+				<%--<label>--%>
 				<%--<button onclick="<c:set var="salary" scope="request" value="${elem.key.id}"/>">--%>
-					<%--<a class="waves-effect waves-light btn modal-trigger" href="#changerole">${elem.value}</a>--%>
+				<%--<a class="waves-effect waves-light btn modal-trigger" href="#changerole">${elem.value}</a>--%>
 				<%--</button>--%>
-			<%--</label>--%>
-			<%--</td>--%>
+				<%--</label>--%>
+				<%--</td>--%>
 		</tr>
 	</c:forEach>
 	</tbody>
 
 </table>
-<div id="modal1" class="modal">
+<div id="changestatus" class="modal">
 	<div class="modal-content">
 		<h4>Modal Header</h4>
+		<form id="change_status" action="/portal/showalluser" method="post">
+			<input type="hidden" name="command" value="showAllUser">
+			<input type="hidden" name="requestType" value="changeStatus">
+			<input placeholder="Placeholder" id="uuserStatusID" name="servletUserId" type="hidden">
 
-	</div>
-	<div class="modal-footer">
-		<a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+			<input name="changeStatucID" type="radio" value="1" id="1"/><label for="1">Active</label>
+			<input name="changeStatucID" type="radio" value="3" id="2"/><label for="2">Bloked</label>
+
+			<button class="btn waves-effect waves-light cyan darken-2" type="submit">OK</button>
+		</form>
 	</div>
 </div>
 
 <div id="changerole" class="modal">
 	<div class="modal-content">
 		<h4>Change Role</h4>
+		<form id="change_role" action="/portal/showalluser" method="post">
+			<input type="hidden" name="command" value="showAllUser">
+			<input type="hidden" name="requestType" value="changeRole">
+			<input placeholder="Placeholder" id="uid" name="servletUserId" type="hidden">
 
-		<c:out value="${salary}"/>
-		<input name="role" type="radio" id="1"/><label for="1">Admin</label>
-		<input name="role" type="radio" id="2"/><label for="2">User</label>
-		<input name="role" type="radio" id="3"/><label for="3">Guide</label>
-		<input name="role" type="radio" id="4"/><label for="4">Company</label>
-	</div>
-	<div class="modal-footer">
-		<a href="?command=changerole" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+			<p><input name="changeRoleID" type="radio" value="1" id="3"/><label for="3">Admin</label></p>
+			<p><input name="changeRoleID" type="radio" value="2" id="4"/><label for="4">User</label></p>
+			<p><input name="changeRoleID" type="radio" value="3" id="5"/><label for="5">Guide</label></p>
+			<p><input name="changeRoleID" type="radio" value="4" id="6"/><label for="6">Company</label></p>
+
+			<button class="btn waves-effect waves-light cyan darken-2" type="submit">OK</button>
+		</form>
 	</div>
 </div>
 </body>

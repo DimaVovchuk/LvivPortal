@@ -1,9 +1,7 @@
 package com.lab.epam.service;
 
 import com.lab.epam.dao.PersistException;
-import com.lab.epam.dao.imp.MySqlPlaceDescriptionDao;
 import com.lab.epam.dao.imp.MySqlPlaceImageDao;
-import com.lab.epam.entity.PlaceDescription;
 import com.lab.epam.entity.PlaceImage;
 import com.lab.epam.helper.ClassName;
 import org.apache.log4j.LogManager;
@@ -97,5 +95,15 @@ public class PlaceImageService {
         return placeImage;
     }
 
+    public List<PlaceImage> getAllPlaceImageByPlaceId(Integer place_id){
+        List<PlaceImage> placeImageList = null;
+        try {
+            placeImageList =  mySqlPlaceImageDao.getAllPlaceImageByPlaceId(place_id);
 
+        } catch (PersistException e) {
+            e.printStackTrace();
+            loger.warn("Cant get images from DB");
+        }
+        return placeImageList;
+    }
 }

@@ -2,8 +2,6 @@ package com.lab.epam.dao.imp;
 
 import com.lab.epam.dao.AbstractJDBCDao;
 import com.lab.epam.dao.PersistException;
-import com.lab.epam.entity.Category;
-import com.lab.epam.entity.Place;
 import com.lab.epam.entity.PlaceImage;
 import com.lab.epam.helper.ClassName;
 import com.lab.epam.persistant.ConnectionManager;
@@ -56,10 +54,24 @@ public class MySqlPlaceImageDao extends AbstractJDBCDao<PlaceImage, Integer> {
             connection.putback(conn);
         }
         return list.iterator().next();
-
-
-
     }
 
-
+    public List<PlaceImage> getAllPlaceImageByPlaceId(Integer place_id) throws PersistException {
+        List<PlaceImage> list;
+        Connection conn = connection.retrieve();
+        try (PreparedStatement statement = conn.prepareStatement(GET_IMAGE_BY_PLACE_ID)) {
+            statement.setInt(1, place_id);
+            ResultSet rs = statement.executeQuery();
+            list = parseResultSet(rs);
+            if (list.size() <= 0){
+                loger.info("DB has any place_images with " + place_id + " place_id");
+                return null;
+            }
+        } catch (Exception e) {
+            throw new PersistException(e);
+        } finally {
+            connection.putback(conn);
+        }
+        return list;
+    }
 }

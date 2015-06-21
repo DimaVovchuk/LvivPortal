@@ -19,6 +19,7 @@ import com.lab.epam.command.page.photo.UpLoadPictureCommand;
 import com.lab.epam.command.page.place.PlaceCommand;
 import com.lab.epam.command.page.place.PlaceInfortmationCommand;
 import com.lab.epam.command.page.user.*;
+import com.lab.epam.command.page.user.admin.EditPlaceCommand;
 import com.lab.epam.command.page.user.admin.ShowAllUserCommand;
 import com.lab.epam.command.save.SaveProfileCommand;
 
@@ -59,6 +60,7 @@ public class CommandFactory {
         commands.put("planTrip", new CountDaysCommand());
         commands.put("createUserData", new CreateUserDataCommand());
         commands.put("routes", new RoutesCommand());
+        commands.put("editPlace", new EditPlaceCommand());
     }
 
     public static void createCommand(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

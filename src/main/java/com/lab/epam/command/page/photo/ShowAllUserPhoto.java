@@ -22,6 +22,6 @@ public class ShowAllUserPhoto implements Command {
         UserImageService userImageService = new UserImageService();
         List<UserImage> userImageList = userImageService.getUserImageByUserId(userID);
         request.setAttribute("AllUserPhoto",userImageList);
-        request.getRequestDispatcher("/views/pages/uploadTest.jsp").forward(request, response);
+        request.getRequestDispatcher("/views/pages/all_user_photo.jsp").forward(request, response);
     }
 }

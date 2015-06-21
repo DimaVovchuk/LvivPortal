@@ -1,11 +1,7 @@
 package com.lab.epam.service;
 
 import com.lab.epam.dao.PersistException;
-import com.lab.epam.dao.imp.MySqlCategoryDao;
-import com.lab.epam.dao.imp.MySqlPlaceDao;
 import com.lab.epam.dao.imp.MySqlPlaceDescriptionDao;
-import com.lab.epam.entity.Category;
-import com.lab.epam.entity.Place;
 import com.lab.epam.entity.PlaceDescription;
 import com.lab.epam.helper.ClassName;
 import org.apache.log4j.LogManager;
@@ -99,4 +95,14 @@ public class PlaceDescriptionService {
         return placeDescription;
     }
 
+    public List<PlaceDescription>  getPlaceDescriptionByIdPlace(Integer place_id){
+        List<PlaceDescription> placeDescriptionList = null;
+        try {
+            placeDescriptionList =  mySqlPlaceDescriptionDao.getAllInformationAboutPlace(place_id);
+        } catch (PersistException e) {
+            e.printStackTrace();
+            loger.warn("Cant get place description by place_id = " + place_id);
+        }
+        return placeDescriptionList;
+    }
 }
