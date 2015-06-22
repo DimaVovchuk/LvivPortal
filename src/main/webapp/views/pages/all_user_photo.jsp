@@ -4,7 +4,7 @@
 <head>
 	<jsp:include page="/views/elements/css.jsp"/>
 	<jsp:include page="/views/elements/script.jsp"/>
-	<title></title>
+	<title>Gallery</title>
 </head>
 <body>
 	<jsp:include page="/views/elements/header.jsp"/>
@@ -15,14 +15,14 @@
 
 
 	<b>show all user test command</b>
-	<form id="sign-in-form" action="portal/showalluser" method="post">
+	<form id="sign-in-form" action="/portal/showalluser" method="post">
 		<input type="hidden" name="command" value="showAllUser">
 		<input type="hidden" name="requestType" value="showAllUser">
 		<button type="submit" >Show all user
 		</button>
 	</form>
 	<b>edit place test command</b>
-	<form id="edit_place" action="portal/editplace" method="post">
+	<form id="edit_place" action="/portal/editplace" method="post">
 		<input type="hidden" name="command" value="editPlace">
 		<button type="submit" >Edit Place
 		</button>

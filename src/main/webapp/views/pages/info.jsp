@@ -53,6 +53,20 @@
 
                         <a class="waves-effect waves-light btn modal-trigger" href="#chooseDay">Choose day</a><br>
                         <a class="waves-effect waves-light btn modal-trigger" href="portal?command=savePlace&place_id=${place_id}">Favorite place</a>
+                        <button class="btn modal-trigger type="submit" data-target="editplace" id="btn1" onclick="$('editPlaceID').val('${place_id}')"> Edit place </button>
+
+
+                        <div id="editplace" class="modal">
+                            <div class="modal-content">
+                                <h4>Do you want to edit this place?</h4>
+                                <form id="editp_place" action="/portal/editplace" method="post">
+                                    <input type="hidden" name="command" value="editPlace">
+                                     <input placeholder="Placeholder" id="editPlaceID" name="editPlaceID" type="hidden" value="${place.id}">
+
+                                    <button class="btn waves-effect waves-light cyan darken-2" type="submit">YES</button>
+                                </form>
+                            </div>
+                        </div>
                         <div id="chooseDay" class="modal">
                             <div class="modal-content">
 

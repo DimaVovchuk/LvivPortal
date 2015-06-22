@@ -3,15 +3,13 @@
 
 <html>
 <head>
-	<title>Show All Users</title>
-
+	<title>Admin dashboard</title>
 	<link href="https://cdn.datatables.net/1.10.7/css/jquery.dataTables.css" rel="stylesheet">
 	<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
 	<jsp:include page="/views/elements/css.jsp"/>
 	<jsp:include page="/views/elements/script.jsp"/>
 	<script src="https://cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-
 	<script>
 		$(document).ready(function () {
 			$('#example').dataTable({
@@ -27,6 +25,7 @@
 
 </head>
 <body>
+<jsp:include page="/views/elements/header.jsp"/>
 <table id="example" class="display" cellspacing="0" width="100%">
 	<thead>
 	<tr>
@@ -70,14 +69,6 @@
 
 			<td><button class="btn modal-trigger type="submit" data-target="changerole"
 				id="btn1" onclick="$('#uid').val('${elem.key.id}')"> ${elem.value} </button></td>
-
-				<%--<td>--%>
-				<%--<label>--%>
-				<%--<button onclick="<c:set var="salary" scope="request" value="${elem.key.id}"/>">--%>
-				<%--<a class="waves-effect waves-light btn modal-trigger" href="#changerole">${elem.value}</a>--%>
-				<%--</button>--%>
-				<%--</label>--%>
-				<%--</td>--%>
 		</tr>
 	</c:forEach>
 	</tbody>
@@ -116,5 +107,6 @@
 		</form>
 	</div>
 </div>
+<jsp:include page="/views/elements/footer.jsp"/>
 </body>
 </html>
