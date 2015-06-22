@@ -1,5 +1,6 @@
 package com.lab.epam.smtp;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,7 +16,9 @@ public class SendEmail {
         Properties props = new Properties();
         InputStream stream = null;
             try {
-                stream = new FileInputStream("D:\\JAVA\\Git\\LvivPortal\\src\\main\\resources\\persistent.xml");
+                ClassLoader classLoader =SendEmail.class.getClassLoader();
+                File file = new File(classLoader.getResource("persistent.xml").getFile());
+                stream = new FileInputStream(file);
                 props.loadFromXML(stream);
             } catch (IOException e) {
                 e.printStackTrace();

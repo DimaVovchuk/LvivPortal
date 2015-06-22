@@ -10,16 +10,11 @@
     <meta name="keywords" content=""/>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script>
-        $(document).ready(function(){
-            $("#btn1").click(function(){
-                $("#category").text("");
-            });
-            $("#btn2").click(function(){
-                $("#test2").html("<b>Hello world!</b>");
-            });
-            $("#btn3").click(function(){
-                $("#test3").val("Dolly Duck");
-            });
+        $("#timePlace").mousemove( function(e){
+            $("#timeValue").html($(this).val());
+        });
+        $("#timePlace").change( function(e){
+            $("#timeValue").html($(this).val());
         });
     </script>
 </head>
@@ -60,7 +55,8 @@
                                 <a href="portal?command=placeInformation&place_id=${place.id}"><img
                                         src="${pageContext.request.contextPath}/upload/photo/${place.imageReference}"
                                         style="width: 100%"></a>
-                                <a href="portal?command=placeInformation&place_id=${place.id}"><h5>
+                                <a href="portal?command=placeInformation&place_id=${place.id}">
+                                    <h5>
                                     <c:out
                                             value="${place.name}"/></h5></a>
                                 <c:out value="${place.adress}"/>
@@ -108,19 +104,28 @@
 <h4>Choose day</h4>
     <form id="choose_day" action="/portal/place" method="get">
         <input type="hidden" name="command" value="place">
+
         <div class="input-field col s6">
             <input placeholder="Placeholder" id="place_id" name="place_id" type="hidden">
         </div>
+
         <div class="input-field col s6">
             <input placeholder="Placeholder" name="category" type="hidden" value="${requestScope.category}">
         </div>
-        <label>Browser Select</label>
+
+        <label>Day number select</label>
         <select name="dayNumber" class="browser-default">
             <option value="" disabled selected>Choose your option</option>
                 <c:forEach var="i" begin="1" end="${userDataTrip.dayCount}">
                     <option width="10px" value="${i}"><c:out value="${i}"/></option>
                 </c:forEach>
             </select>
+
+        <p class="range-field">
+            <input type="range" name="timePlace" id="timePlace" min="5" max="30" />
+            <p id="timeValue"></p>
+        </p>
+
         <button class="btn waves-effect waves-light cyan darken-2" type="submit"
                 >OK
         </button>

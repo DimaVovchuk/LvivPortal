@@ -11,6 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
@@ -55,8 +56,11 @@ public class PlaceInfortmationCommand implements Command {
 
         if (place_id != null) {
             PlaceImage im = placeImageService.getPlaceImageByPlaceId(place_id);
+            if (im == null || !isInFolder(im.getReference(), request)) {
+                im = new PlaceImage(place_id, "default_building.jpg");
+            }
             place_reference = im.getReference();
-            loger.info("place_reference is " + place_reference);
+            loger.info("place_reference is ");
         }
 
         HttpSession session = request.getSession();
@@ -258,4 +262,19 @@ public class PlaceInfortmationCommand implements Command {
         request.getRequestDispatcher("/views/pages/info.jsp").forward(request, response);
 
     }
+
+    private Boolean isInFolder(String fileName, HttpServletRequest request) {
+        ClassLoader classLoader = getClass().getClassLoader();
+        String realPath = request.getRealPath("/upload/photo/");
+        File f = new File(realPath);
+        String[] list = f.list();
+        System.out.println(list);
+        for (String file : list) {
+            if (fileName.equals(file)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

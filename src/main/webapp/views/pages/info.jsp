@@ -51,12 +51,13 @@
                             ${place.adress}
                         </div>
 
-                        <a class="waves-effect waves-light btn modal-trigger" href="#chooseDay">Choose day</a>
+                        <a class="waves-effect waves-light btn modal-trigger" href="#chooseDay">Choose day</a><br>
+                        <a class="waves-effect waves-light btn modal-trigger" href="portal?command=savePlace&place_id=${place_id}">Favorite place</a>
                         <div id="chooseDay" class="modal">
                             <div class="modal-content">
 
                                 <h4>Choose day</h4>
-                                <form id="choose_day" action="/portal/placeInformation" method="get">
+                                <form id="choose_day" action="/portal/placeInformation" method="post">
                                     <input type="hidden" name="command" value="placeInformation">
                                     <div class="input-field col s6">
                                         <input placeholder="Placeholder" id="place_id" name="place_id" type="hidden" value="${place.id}">
@@ -71,8 +72,14 @@
                                     <button class="btn waves-effect waves-light cyan darken-2" type="submit"
                                             >OK
                                     </button>
-                                </form>
+                                </form><br>
+                                <a class="waves-effect waves-light btn" href="portal?command=savePlace&place_id=${place_id}">Favorite Place</a>
 
+                                <form action="portal?command=savePlace&place_id=${place_id}" method="post">
+                                <button class="btn waves-effect waves-light cyan darken-2" type="submit"
+                                        >Favorite Place
+                                </button>
+                                    </form>
                             </div>
                             <div class="modal-footer">
 
@@ -148,11 +155,11 @@
             <div class="blog-cate">
                 <h3><cdg:l18n key="places.categories"/></h3>
                 <ul>
-                    <li><a href="#">Architectural sights</a></li>
-                    <li><a href="#">Churches</a></li>
-                    <li><a href="#">Theatres</a></li>
-                    <li><a href="#">Hotels</a></li>
-                    <li><a href="#">Restaurants</a></li>
+                    <li><a href="portal?command=place&category=architecture">Architectural sights</a></li>
+                    <li><a href="portal?command=place&category=churches">Churches</a></li>
+                    <li><a href="portal?command=place&category=theatres">Theatres</a></li>
+                    <li><a href="portal?command=place&category=hotels">Hotels</a></li>
+                    <li><a href="portal?command=place&category=restaurants">Restaurants</a></li>
                 </ul>
             </div>
         </div>

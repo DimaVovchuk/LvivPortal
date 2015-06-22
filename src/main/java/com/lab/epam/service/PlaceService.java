@@ -142,13 +142,23 @@ public class PlaceService {
         return place;
     }
 
-    public void createPlaceWay(Integer place_id, Integer way_id, Integer day){
+    public void createPlaceWay(Integer place_id, Integer way_id, Integer day, Integer time){
         try {
-            mySqlPlaceDao.createPlaceWay(place_id, way_id,day);
+            mySqlPlaceDao.createPlaceWay(place_id, way_id, day, time);
 
         } catch (PersistException e) {
             e.printStackTrace();
             loger.warn("Cant create place_way with place_id = " + place_id + " way_id " + way_id + " day " + day);
+        }
+    }
+
+    public void createPlaceUser(Integer place_id, Integer user_id){
+        try {
+            mySqlPlaceDao.createPlaceUser(place_id, user_id);
+
+        } catch (PersistException e) {
+            e.printStackTrace();
+            loger.warn("Cant create user_place with user_id = " + user_id + " place_id " + place_id);
         }
     }
 
