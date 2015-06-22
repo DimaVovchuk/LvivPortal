@@ -90,7 +90,7 @@ public class PlaceJSONCommand implements Command {
         }
         if (category != null) {
             switch (category) {
-                case "sights":
+                case "architecture":
                     places = servicePlace.getPlaceByCategory(1);
                     break;
                 case "churches":
