@@ -277,6 +277,10 @@ header img.text-middle {
     padding: 20px;
 }
 
+.index .dropdown-content {
+    height: 300px;
+}
+
 /* PLACES */
 
 .places .row {
