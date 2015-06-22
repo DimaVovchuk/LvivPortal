@@ -1,5 +1,6 @@
 package com.lab.epam.command.page.createtrip;
 
+import com.google.gson.Gson;
 import com.lab.epam.command.controller.Command;
 import com.lab.epam.entity.Category;
 import com.lab.epam.entity.UserDataAboutTrip;
@@ -182,7 +183,11 @@ public class CreateUserDataCommand implements Command {
         HttpSession session = request.getSession();
         System.out.println("userDataTrip " + userDataTrip);
         session.setAttribute("userDataTrip", userDataTrip);
-        request.setAttribute("correctDate", correctDate);
+
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write(new Gson().toJson(correctDate));
+
         response.sendRedirect("portal?command=showMap");
         //request.getRequestDispatcher(page).forward(request, response);
 

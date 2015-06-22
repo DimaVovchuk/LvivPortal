@@ -44,11 +44,18 @@ public class PlaceCommand implements Command {
         UserDataAboutTrip userDataAboutTrip = (UserDataAboutTrip) session.getAttribute("userDataTrip");
         placeForWay = (ArrayList<Place>) session.getAttribute("placeForWay");
         String dayNumberString = request.getParameter("dayNumber");
+        String timePlaceString = request.getParameter("timePlace");
+
         Integer dayNumber = 0;
+        Integer timePlace = 0;
+
         if (dayNumberString != null) {
             dayNumber = Integer.parseInt(dayNumberString);
         }
         //
+        if (timePlaceString != null) {
+            timePlace = Integer.parseInt(timePlaceString);
+        }
 
         String placeId = request.getParameter("place_id");
         Place onePlaceForWay = null;
@@ -75,8 +82,11 @@ public class PlaceCommand implements Command {
                     }
                 }
                 if (!isInWay) {
-                    placeForWay.add(onePlaceForWay);
-                    loger.info("Add new place to placeForWay. Place is " + onePlaceForWay);
+                    if (timePlace != 0) {
+                        onePlaceForWay.setPlace_time(timePlace);
+                        placeForWay.add(onePlaceForWay);
+                        loger.info("Add new place to placeForWay. Place is " + onePlaceForWay);
+                    }
                 }
             }
             map.put(dayNumber, placeForWay);
@@ -96,7 +106,7 @@ public class PlaceCommand implements Command {
         }
         if (category != null) {
             switch (category) {
-                case "sights":
+                case "architecture":
                     places = servicePlace.getPlaceByCategory(1);
                     break;
                 case "churches":
@@ -164,7 +174,7 @@ public class PlaceCommand implements Command {
                             item.setImageReference(placeImage.getReference());
                             item.setName(placeDescription.getName());
                             item.setAdress(place.getAdress());
-                            System.out.println(item.toString());
+                           // System.out.println(item.toString());
                             list.add(item);
                         }
                     }
@@ -179,7 +189,6 @@ public class PlaceCommand implements Command {
         String realPath = request.getRealPath("/upload/photo/");
         File f = new File(realPath);
         String[] list = f.list();
-        System.out.println(list);
         for (String file : list) {
             if (fileName.equals(file)) {
                 return true;

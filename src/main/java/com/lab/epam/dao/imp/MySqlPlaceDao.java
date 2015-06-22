@@ -33,7 +33,8 @@ public class MySqlPlaceDao extends AbstractJDBCDao<Place, Integer> {
     private static final String GET_PLACE_BY_WAY_ID = "SELECT p.id, p.adress, p.latitude, p.longitude, p.category_id, p.rating, p.visible, p.place_time, p.deleted FROM place AS p JOIN place_way AS pw JOIN way AS w WHERE pw.way_id = w.id AND pw.place_id = p.id AND w.id = ?";
     private static final String DELETE_PLACE_BY_USER_ID_PLACE_ID = "UPDATE user_place SET deleted = true WHERE user_id = ? AND place_id = ?";
     private static final String GET_PLACE_BY_LATITUDE_LONGITUDE = "SELECT * FROM place WHERE longitude = ? AND latitude = ?";
-    private static final String CREATE_PLACE_WAY = "INSERT INTO place_way (place_id, way_id, day_number) VALUES (?,?,?);";
+    private static final String CREATE_PLACE_WAY = "INSERT INTO place_way (place_id, way_id, day_number, time) VALUES (?,?,?,?);";
+    private static final String CREATE_USER_PLACE = "INSERT INTO user_place (place_id, user_id) VALUES (?,?);";
 
     private class PersistGroup extends Place {
         public void setId(int id) {
@@ -159,17 +160,37 @@ public class MySqlPlaceDao extends AbstractJDBCDao<Place, Integer> {
         return list.iterator().next();
     }
 
-    public void createPlaceWay(Integer place_id, Integer way_id, Integer day) throws PersistException {
+    public void createPlaceWay(Integer place_id, Integer way_id, Integer day, Integer time) throws PersistException {
         Connection conn = connection.retrieve();
         try (PreparedStatement statement = conn.prepareStatement(CREATE_PLACE_WAY)) {
             statement.setInt(1, place_id);
             statement.setInt(2, way_id);
             statement.setInt(3, day);
+            statement.setInt(4, time);
             int count = statement.executeUpdate();
             if (count != 1) {
                 throw new PersistException("On persist modify more then 1 record: " + count);
             } else {
                 System.out.println("Create is succesfule");
+            }
+        } catch (Exception e) {
+            throw new PersistException(e);
+        } finally {
+            connection.putback(conn);
+        }
+    }
+
+    public void createPlaceUser(Integer place_id, Integer user_id) throws PersistException {
+        Connection conn = connection.retrieve();
+        try (PreparedStatement statement = conn.prepareStatement(CREATE_USER_PLACE)) {
+            statement.setInt(1, place_id);
+            statement.setInt(2, user_id);
+
+            int count = statement.executeUpdate();
+            if (count != 1) {
+                throw new PersistException("On persist modify more then 1 record: " + count);
+            } else {
+                System.out.println("Create user_place is succesfule");
             }
         } catch (Exception e) {
             throw new PersistException(e);

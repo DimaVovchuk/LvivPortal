@@ -67,7 +67,7 @@ public class SaveWayCommand implements Command {
                                 place = servicePlace.getPlaceByLongitudeLatitude(place.getLongitude(), place.getLatitude());
                                 loger.info("Create castom place is successfull");
                             }
-                            servicePlace.createPlaceWay(place.getId(), way.getId(),key);
+                            servicePlace.createPlaceWay(place.getId(), way.getId(), key, place.getPlace_time());
                             loger.info("Create place_way is successfull");
                         }
 
@@ -79,7 +79,7 @@ public class SaveWayCommand implements Command {
             loger.warn("You want create way without places");
         }
         loger.warn("You create new way in DB");
-        response.sendRedirect("?command=userWays");
+        response.sendRedirect("portal?command=userWays");
 
     }
 }
