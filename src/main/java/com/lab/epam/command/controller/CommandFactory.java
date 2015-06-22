@@ -5,6 +5,7 @@ package com.lab.epam.command.controller;
  */
 
 import com.lab.epam.command.email.*;
+import com.lab.epam.command.page.place.PlaceJSONCommand;
 import com.lab.epam.command.locale.LocaleCommand;
 import com.lab.epam.command.logination.SignInCommand;
 import com.lab.epam.command.logination.SignOutCommand;
@@ -63,6 +64,7 @@ public class CommandFactory {
         commands.put("routes", new RoutesCommand());
         commands.put("saveWay", new SaveWayCommand());
         commands.put("editPlace", new EditPlaceCommand());
+        commands.put("placeJSON", new PlaceJSONCommand());
     }
 
     public static void createCommand(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

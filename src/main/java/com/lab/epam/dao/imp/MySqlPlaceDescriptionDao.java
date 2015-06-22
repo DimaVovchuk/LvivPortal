@@ -42,7 +42,6 @@ public class MySqlPlaceDescriptionDao extends AbstractJDBCDao<PlaceDescription, 
     }
 
     public PlaceDescription getPlaceDescriptionByIdPlace(Integer place_id, String locale) throws PersistException {
-        loger.info("Method getAllInformationAboutPlace started");
         List<PlaceDescription> list;
             Connection conn = connection.retrieve();
             try (PreparedStatement statement = conn.prepareStatement(GET_LOCALE_DESCRIPTIONS_BY_PLACE)) {
@@ -50,7 +49,6 @@ public class MySqlPlaceDescriptionDao extends AbstractJDBCDao<PlaceDescription, 
                 statement.setString(2, locale);
                 ResultSet rs = statement.executeQuery();
                 list = parseResultSet(rs);
-                loger.info("PlaceDescription list are " + list.toString());
             } catch (Exception e) {
                 throw new PersistException(e);
             } finally {
@@ -78,7 +76,6 @@ public class MySqlPlaceDescriptionDao extends AbstractJDBCDao<PlaceDescription, 
             statement.setInt(1, place_id);
             ResultSet rs = statement.executeQuery();
             list = parseResultSet(rs);
-            loger.info("PlaceDescription list are " + list.toString());
         } catch (Exception e) {
             loger.warn(e.getMessage());
         } finally {

@@ -115,5 +115,6 @@
         </li>
     </ul>
 </header>
-<jsp:include page="/views/pages/set_day_time.jsp"/>
+
 <jsp:include page="/views/elements/login.jsp"/>
+<jsp:include page="/views/pages/set_day_time_modal.jsp"/>

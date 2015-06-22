@@ -49,7 +49,6 @@ public class MySqlCategoryDao extends AbstractJDBCDao<Category, Integer> {
             ResultSet rs = statement.executeQuery();
             loger.info("Get category with category name " + categotrName + " is succesfull");
             list = parseResultSet(rs);
-            loger.info("Parse result with Transformer is succesfull");
             if (list.size() <= 0){
                 loger.info("DB has any category with category name " + categotrName);
                 return null;

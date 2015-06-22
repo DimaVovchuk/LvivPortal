@@ -1,5 +1,6 @@
 package com.lab.epam.command.page.place;
 
+import com.google.gson.Gson;
 import com.lab.epam.command.controller.Command;
 import com.lab.epam.entity.*;
 import com.lab.epam.helper.ClassName;
@@ -9,24 +10,18 @@ import com.lab.epam.service.PlaceService;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import javax.servlet.http.HttpSession;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.net.URI;
 import java.util.*;
 
-/**
- * Created by Dima on 11-Jun-15.
- */
-public class PlaceCommand implements Command {
+public class PlaceJSONCommand implements Command {
     private static final Logger loger = LogManager.getLogger(ClassName.getCurrentClassName());
 
-    public void execute(HttpServletRequest request,
-                        HttpServletResponse response) throws ServletException, IOException {
-
+    @Override
+    public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PlaceService servicePlace = new PlaceService();
 
         PlaceDescriptionService placeDescriptionService = new PlaceDescriptionService();
@@ -48,7 +43,6 @@ public class PlaceCommand implements Command {
         if (dayNumberString != null) {
             dayNumber = Integer.parseInt(dayNumberString);
         }
-        //
 
         String placeId = request.getParameter("place_id");
         Place onePlaceForWay = null;
@@ -60,12 +54,12 @@ public class PlaceCommand implements Command {
             Map<Integer, List<Place>> map = userDataAboutTrip.getPlaceDay();
             loger.info("Get map is successfull");
             Set<Integer> keys = map.keySet();
-            if (onePlaceForWay != null) {
-                if (map.isEmpty() || !keys.contains(dayNumber)) {
+            if (onePlaceForWay != null || !keys.contains(dayNumber)) {
+                if (map.isEmpty()) {
                     placeForWay = new ArrayList<>();
                     loger.info("Create new List<Place>");
                     loger.info("Day is " + dayNumber);
-                } else {
+                }else {
                     placeForWay = map.get(dayNumber);
                     loger.info("Get placeForWay");
                     for (Place place : placeForWay) {
@@ -87,16 +81,16 @@ public class PlaceCommand implements Command {
         System.out.println("userDataTrip " + userDataAboutTrip);
         System.out.println("dayNumber " + dayNumber);
         System.out.println("placeId " + placeId);
-        session.setAttribute("userDataTrip", userDataAboutTrip);
+        session.setAttribute("userDataTrip",userDataAboutTrip);
 
         String category = request.getParameter("category");
         System.out.println("category " + category);
-        if (category == null) {
+        if (category == null){
             category = "";
         }
         if (category != null) {
             switch (category) {
-                case "sights":
+                case "architecture":
                     places = servicePlace.getPlaceByCategory(1);
                     break;
                 case "churches":
@@ -128,28 +122,19 @@ public class PlaceCommand implements Command {
         PlaceDescription placeDescription;
         for (Place place : places) {
             place_id = place.getId();
-
             placeDescription = placeDescriptionService.getPlaceDescriptionByIdPlace(place_id, language);
             placeDescriptions.add(placeDescription);
             placeImage = placeImageService.getPlaceImageByPlaceId(place_id);
-            if (placeImage == null || !isInFolder(placeImage.getReference(), request)) {
+            if (placeImage == null) {
                 placeImage = new PlaceImage(place_id, "default_building.jpg");
             }
             placeImages.add(placeImage);
         }
 
         List<PlaceDescriptionAndPhoto> placesPageInfo = getPlaceDescriptionAndPhotoList(places, placeDescriptions, placeImages);
-        //request.setAttribute("places", places);
-        loger.info("places = " + places);
-        //request.setAttribute("placeDescriptions", placeDescriptions);
-        loger.info("placeDescriptions = " + placeDescriptions);
-        loger.info("placeImages = " + placeImages);
-        //request.setAttribute("placeImages", placeImages);
-        request.setAttribute("category", category);
-        request.setAttribute("places", placesPageInfo);
-        request.setAttribute("userDataTrip", userDataAboutTrip);
-        loger.info("Command Place.");
-        request.getRequestDispatcher("/views/pages/places.jsp").forward(request, response);
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write(new Gson().toJson(placesPageInfo));
     }
 
     private List<PlaceDescriptionAndPhoto> getPlaceDescriptionAndPhotoList(List<Place> places, List<PlaceDescription> placeDescriptions, List<PlaceImage> placeImages) {
@@ -172,19 +157,5 @@ public class PlaceCommand implements Command {
             }
         }
         return list;
-    }
-
-    private Boolean isInFolder(String fileName, HttpServletRequest request) {
-        ClassLoader classLoader = getClass().getClassLoader();
-        String realPath = request.getRealPath("/upload/photo/");
-        File f = new File(realPath);
-        String[] list = f.list();
-        System.out.println(list);
-        for (String file : list) {
-            if (fileName.equals(file)) {
-                return true;
-            }
-        }
-        return false;
     }
 }

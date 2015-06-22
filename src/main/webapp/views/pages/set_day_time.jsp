@@ -2,6 +2,30 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="cdg" uri="customtags" %>
 
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="keywords" content=""/>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $('#set-date-time').openModal();
+    });
+</script>
+
+</head>
+<jsp:include page="/views/elements/css.jsp"/>
+<jsp:include page="/views/elements/script.jsp"/>
+
+<body>
+<jsp:include page="/views/elements/header.jsp"/>
+<jsp:include page="/views/elements/footer.jsp"/>
+
+</body>
+</html>
+
 <div class="modal" id="set-date-time">
     <h5><cdg:l18n key="plan.choose"/></h5>
     <form action="/portal?command=createUserData" method="post">
