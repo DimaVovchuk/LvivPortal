@@ -8,6 +8,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="keywords" content=""/>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#btn1").click(function(){
+                $("#category").text("");
+            });
+            $("#btn2").click(function(){
+                $("#test2").html("<b>Hello world!</b>");
+            });
+            $("#btn3").click(function(){
+                $("#test3").val("Dolly Duck");
+            });
+        });
+    </script>
 </head>
 
 <jsp:include page="/views/elements/css.jsp"/>
@@ -30,11 +44,27 @@
                             <div class="card z-depth-2" style="padding:10px; height:95%">
                                 <form action="portal?command=place&place_id=${place.id}&category=${requestScope.category}"
                                       method="post" style="position:absolute;padding:5px">
-                                    <button class="btn-floating btn-large waves-effect waves-light cyan darken-2"
-                                            type="submit">
+                                    <c:set var="category" scope="request" value="${requestScope.category}"/>
+                                    <c:if test="${userDataTrip!=null}">
+                                    <button class="btn modal-trigger btn-floating btn-large waves-effect waves-light cyan darken-2"
+                                            type="submit" data-target="chooseDay"
+                                            id="btn1" onclick="$('#place_id').val('${place.id}')">
                                         <i class="mdi-content-add"></i>
+
+                                    </button>
+                                    </c:if>
+
+
+                                </form>
+
+                                <form action="/portal/saveWay" method="get">
+                                    <input type="hidden" name="command" value="saveWay">
+                                    <button class="btn waves-effect waves-light cyan darken-2" type="submit"
+                                            >OK
                                     </button>
                                 </form>
+
+
                                 <a href="portal?command=placeInformation&place_id=${place.id}"><img
                                         src="${pageContext.request.contextPath}/upload/photo/${place.imageReference}"
                                         style="width: 100%"></a>
@@ -79,16 +109,31 @@
 
 
 
-<div id="chooseWay" class="modal">
+<div id="chooseDay" class="modal">
 <div class="modal-content">
-
+<h4 id="ID"></h4>
+    <c:set var="category" scope="request" value="${requestScope.category}"/>
 <h4>Choose day</h4>
+    <form id="choose_day" action="/portal/place" method="get">
+        <input type="hidden" name="command" value="place">
+        <div class="input-field col s6">
+            <input placeholder="Placeholder" id="place_id" name="place_id" type="hidden">
+        </div>
+        <div class="input-field col s6">
+            <input placeholder="Placeholder" name="category" type="hidden" value="${requestScope.category}">
+        </div>
+        <label>Browser Select</label>
+        <select name="dayNumber" class="browser-default">
+            <option value="" disabled selected>Choose your option</option>
+                <c:forEach var="i" begin="1" end="${userDataTrip.dayCount}">
+                    <option width="10px" value="${i}"><c:out value="${i}"/></option>
+                </c:forEach>
+            </select>
+        <button class="btn waves-effect waves-light cyan darken-2" type="submit"
+                >OK
+        </button>
+    </form>
 
-
-<a class="waves-effect waves-teal btn-flat" href="portal?command=place&place_id=${place_id}&category=${category}&dayNumber=1">1</a>
-<a class="waves-effect waves-teal btn-flat" href="portal?command=place&dayNumber=2">2</a>
-<a class="waves-effect waves-teal btn-flat" href="portal?command=place&dayNumber=3">3</a>
-<a class="waves-effect waves-teal btn-flat" href="portal?command=place&dayNumber=4">4</a>
 </div>
 <div class="modal-footer">
 
@@ -100,6 +145,13 @@ $('.datepicker').pickadate({
 selectMonths: true, // Creates a dropdown to control month
 selectYears: 15 // Creates a dropdown of 15 years to control year
 });
+</script>
+
+<script>
+    function myFunction() {
+        var x = document.getElementById("ID").value;
+        document.getElementById("demo").innerHTML = x;
+    }
 </script>
 
 </body>

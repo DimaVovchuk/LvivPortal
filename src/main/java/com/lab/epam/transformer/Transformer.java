@@ -5,6 +5,7 @@ import com.lab.epam.md5.MD5Creator;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -69,7 +70,7 @@ public class Transformer<T> {
 						+ objectColumns.get("login").toString()));
 			}
 			field += entry.getKey() + ",";
-			if (entry.getValue().getClass() == String.class) {
+			if (entry.getValue().getClass() == String.class || entry.getValue().getClass() == Date.class) {
 				values += "'" + entry.getValue() + "',";
 			} else {
 				values += entry.getValue() + ",";

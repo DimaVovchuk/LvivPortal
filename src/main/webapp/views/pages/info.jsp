@@ -4,14 +4,15 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title><cdg:l18n key="info.title"/></title>
-
+    <title><cdg:l18n key="places.title"/></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="keywords" content=""/>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 </head>
 
 <jsp:include page="/views/elements/css.jsp"/>
+<jsp:include page="/views/elements/script.jsp"/>
 
 <body>
 
@@ -49,9 +50,34 @@
                             <h4>Adress</h4>
                             ${place.adress}
                         </div>
-                        <form action="portal?command=placeInformation&place_id=${place.id}" method="post">
-                            <input type="submit" value="Submit">
-                        </form>
+
+                        <a class="waves-effect waves-light btn modal-trigger" href="#chooseDay">Choose day</a>
+                        <div id="chooseDay" class="modal">
+                            <div class="modal-content">
+
+                                <h4>Choose day</h4>
+                                <form id="choose_day" action="/portal/placeInformation" method="get">
+                                    <input type="hidden" name="command" value="placeInformation">
+                                    <div class="input-field col s6">
+                                        <input placeholder="Placeholder" id="place_id" name="place_id" type="hidden" value="${place.id}">
+                                    </div>
+                                    <label>Browser Select</label>
+                                    <select name="dayNumber" class="browser-default">
+                                        <option value="" disabled selected>Choose your option</option>
+                                        <c:forEach var="i" begin="1" end="4">
+                                            <option width="10px" value="${i}"><c:out value="${i}"/></option>
+                                        </c:forEach>
+                                    </select>
+                                    <button class="btn waves-effect waves-light cyan darken-2" type="submit"
+                                            >OK
+                                    </button>
+                                </form>
+
+                            </div>
+                            <div class="modal-footer">
+
+                            </div>
+                        </div>
                     <div class="data-line">
                         <ul>
                             <li>
@@ -135,6 +161,8 @@
 </div>
 
 <jsp:include page="/views/elements/footer.jsp"/>
+
+
 
 </body>
 </html>

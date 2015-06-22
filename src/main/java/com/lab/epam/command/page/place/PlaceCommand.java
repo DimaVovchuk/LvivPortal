@@ -58,8 +58,8 @@ public class PlaceCommand implements Command {
             Map<Integer, List<Place>> map = userDataAboutTrip.getPlaceDay();
             loger.info("Get map is successfull");
             Set<Integer> keys = map.keySet();
-            if (onePlaceForWay != null || !keys.contains(dayNumber)) {
-                if (map.isEmpty()) {
+            if (onePlaceForWay != null) {
+                if (map.isEmpty() || !keys.contains(dayNumber)) {
                     placeForWay = new ArrayList<>();
                     loger.info("Create new List<Place>");
                     loger.info("Day is " + dayNumber);
@@ -145,6 +145,7 @@ public class PlaceCommand implements Command {
         //request.setAttribute("placeImages", placeImages);
         request.setAttribute("category", category);
         request.setAttribute("places", placesPageInfo);
+        request.setAttribute("userDataTrip", userDataAboutTrip);
         loger.info("Command Place.");
         request.getRequestDispatcher("/views/pages/places.jsp").forward(request, response);
     }

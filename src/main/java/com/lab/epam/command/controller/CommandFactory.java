@@ -22,6 +22,7 @@ import com.lab.epam.command.page.user.*;
 import com.lab.epam.command.page.user.admin.EditPlaceCommand;
 import com.lab.epam.command.page.user.admin.ShowAllUserCommand;
 import com.lab.epam.command.save.SaveProfileCommand;
+import com.lab.epam.command.save.SaveWayCommand;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -60,6 +61,7 @@ public class CommandFactory {
         commands.put("planTrip", new CountDaysCommand());
         commands.put("createUserData", new CreateUserDataCommand());
         commands.put("routes", new RoutesCommand());
+        commands.put("saveWay", new SaveWayCommand());
         commands.put("editPlace", new EditPlaceCommand());
     }
 

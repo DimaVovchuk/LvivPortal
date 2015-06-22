@@ -4,6 +4,8 @@ import com.lab.epam.dao.Identified;
 import com.lab.epam.transformer.Column;
 import com.lab.epam.transformer.Table;
 
+import java.sql.Date;
+
 /**
  * Created by Admin on 10.06.2015.
  */
@@ -21,13 +23,29 @@ public class Way implements Identified<Integer> {
     private Integer way_time;
     @Column("visible")
     private Boolean visible;
+    @Column("date_begin")
+    private Date begin;
+    @Column("date_end")
+    private Date end;
     @Column("deleted")
     private Boolean deleted = false;
 
-    public Way(Integer rating, Integer way_days, Integer way_time){
+    public Way(Integer id, Integer rating, String name, Integer way_days, Integer way_time, Boolean visible, Date begin, Date end, Boolean deleted) {
+        this.id = id;
         this.rating = rating;
+        this.name = name;
         this.way_days = way_days;
         this.way_time = way_time;
+        this.visible = visible;
+        this.begin = begin;
+        this.end = end;
+        this.deleted = deleted;
+    }
+
+    public Way(Integer rating, Date begin, Date end){
+        this.rating = rating;
+        this.begin = begin;
+        this.end = end;
     }
 
     public Way(){

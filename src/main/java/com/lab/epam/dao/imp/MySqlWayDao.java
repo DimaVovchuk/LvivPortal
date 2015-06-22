@@ -22,9 +22,11 @@ public class MySqlWayDao extends AbstractJDBCDao<Way, Integer> {
 
     ConnectionPool connection = ConnectionManager.getConnection();
     private static final Logger loger = LogManager.getLogger(ClassName.getCurrentClassName());
-    private static final String GET_WAY_BY_USER_ID = "SELECT w.id, w.rating, w.name, w.visible, w.way_days, w.way_time ,w.deleted FROM way AS w JOIN user_way AS uw JOIN user AS u WHERE uw.user_id = u.id AND uw.way_id = w.id AND uw.deleted='false' AND u.id = ?";
+
+    private static final String GET_WAY_BY_USER_ID = "SELECT w.id, w.rating, w.name, w.visible, w.way_days, w.way_time, w.date_begin, w.date_end, w.deleted FROM way AS w JOIN user_way AS uw JOIN user AS u WHERE uw.user_id = u.id AND uw.way_id = w.id AND uw.deleted='false' AND u.id = ?";
     private static final String DELETE_WAY_BY_USER_ID_WAY_ID = "UPDATE user_way SET deleted = true WHERE user_id = ? AND way_id = ?";
     private static final String GET_LAST_ADDED = "SELECT * FROM way ORDER BY id DESC LIMIT 0,1";
+    private static final String CREATE_USER_WAY = "INSERT INTO user_way (user_id, way_id, way_days) VALUES (?,?,?);";
 
     private class PersistGroup extends Way {
         public void setId(int id) {
@@ -109,6 +111,27 @@ public class MySqlWayDao extends AbstractJDBCDao<Way, Integer> {
             connection.putback(conn);
         }
         return list.iterator().next();
+
+    }
+
+    public void createUserWay(Integer user_id, Integer way_id, Integer day) throws PersistException {
+        Connection conn = connection.retrieve();
+        try (PreparedStatement statement = conn.prepareStatement(CREATE_USER_WAY)) {
+            statement.setInt(1, user_id);
+            statement.setInt(2, way_id);
+            statement.setInt(3, day);
+            int count = statement.executeUpdate();
+            if (count != 1) {
+                throw new PersistException("On persist modify more then 1 record: " + count);
+            } else {
+                System.out.println("Create is succesfule");
+            }
+        } catch (Exception e) {
+            throw new PersistException(e);
+        } finally {
+            connection.putback(conn);
+        }
+
 
     }
 
