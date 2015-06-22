@@ -45,6 +45,7 @@ private static final Logger loger = LogManager.getLogger(ClassName.getCurrentCla
         }
         HttpSession session = request.getSession();
         session.setAttribute("login",login);
+        session.setAttribute("usedID", userByLogin.getId());
         session.setAttribute("role",userByLogin.getRoleID());
         loger.info("User " +login+ " signing in ");
         response.sendRedirect("portal?command=index");

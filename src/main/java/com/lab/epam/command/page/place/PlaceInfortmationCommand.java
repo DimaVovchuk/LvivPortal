@@ -12,10 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.ResourceBundle;
+import java.util.*;
 
 /**
  * Created by Admin on 13.06.2015.
@@ -66,30 +63,53 @@ public class PlaceInfortmationCommand implements Command {
 
         List<Place> places = null;
         List<Place> placeForWay;
-        placeForWay = (ArrayList<Place>)session.getAttribute("placeForWay");
+        UserDataAboutTrip userDataAboutTrip = (UserDataAboutTrip) session.getAttribute("userDataTrip");
+        placeForWay = (ArrayList<Place>) session.getAttribute("placeForWay");
+        String dayNumberString = request.getParameter("dayNumber");
+        Integer dayNumber = 0;
+        if (dayNumberString != null) {
+            dayNumber = Integer.parseInt(dayNumberString);
+        }
+        //
+
         String placeId = request.getParameter("place_id");
         Place onePlaceForWay = null;
         Boolean isInWay = false;
 
-        if (placeId != null){
+        if (placeId != null && userDataAboutTrip != null && dayNumber != 0) {
             onePlaceForWay = servicePlace.getByPK(Integer.parseInt(placeId));
-            if (onePlaceForWay != null){
-                if (placeForWay == null){
+            loger.info("Get place is successfull");
+            Map<Integer, List<Place>> map = userDataAboutTrip.getPlaceDay();
+            loger.info("Get map is successfull");
+            Set<Integer> keys = map.keySet();
+            if (onePlaceForWay != null || !keys.contains(dayNumber)) {
+                if (map.isEmpty()) {
                     placeForWay = new ArrayList<>();
-                } else {
-                    for (Place place: placeForWay){
-                        if (place.getId() == onePlaceForWay.getId()){
+                    loger.info("Create new List<Place>");
+                    loger.info("Day is " + dayNumber);
+                }else {
+                    placeForWay = map.get(dayNumber);
+                    loger.info("Get placeForWay");
+                    for (Place place : placeForWay) {
+                        if (place.getId() == onePlaceForWay.getId()) {
                             isInWay = true;
                         }
                     }
                 }
                 if (!isInWay) {
                     placeForWay.add(onePlaceForWay);
+                    loger.info("Add new place to placeForWay. Place is " + onePlaceForWay);
                 }
             }
+            map.put(dayNumber, placeForWay);
+            loger.info("Put placeForWay to map");
+            userDataAboutTrip.setPlaceDay(map);
+            loger.info("Set map to userDataAboutTrip");
         }
-        System.out.println("placeForWay " + placeForWay);
-        session.setAttribute("placeForWay",placeForWay);
+        System.out.println("userDataTrip " + userDataAboutTrip);
+        System.out.println("dayNumber " + dayNumber);
+        System.out.println("placeId " + placeId);
+        session.setAttribute("userDataTrip",userDataAboutTrip);
 
         String login = (String)session.getAttribute("login");
         String not_login = null;
@@ -101,6 +121,8 @@ public class PlaceInfortmationCommand implements Command {
         if (login != null && message != null){
             User user = userService.geUserByLogin(login);
             loger.info("User, who send comment has login " + login);
+            Decoder decoder = new Decoder();
+            message = decoder.decodeStringUtf8(message);
             if (user != null){
                 placeResponseService.create(new PlaceResponse(message, user.getId(),place_id));
                 place_rating = placeRatingService.getPlaceRatingByPlaceAndUser(place_id,user.getId());

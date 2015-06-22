@@ -6,8 +6,12 @@ import com.lab.epam.dao.PersistException;
 import com.lab.epam.dao.imp.MySqlCategoryDao;
 import com.lab.epam.dao.imp.MySqlDaoFactory;
 import com.lab.epam.entity.Category;
+import com.lab.epam.entity.PlaceDescription;
 import com.lab.epam.entity.PlaceResponse;
+import com.lab.epam.helper.ClassName;
 import com.lab.epam.persistant.ConnectionPool;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import java.io.Serializable;
 import java.sql.PreparedStatement;
@@ -19,6 +23,7 @@ import java.util.List;
  */
 public class CategoryService {
 
+    private static final Logger loger = LogManager.getLogger(ClassName.getCurrentClassName());
     MySqlCategoryDao mySqlCategoryDao = new MySqlCategoryDao();
 
     public void create(Category object) throws PersistException{
@@ -44,6 +49,23 @@ public class CategoryService {
     public List<Category> getAllWithoutDeleted() throws PersistException{
         return mySqlCategoryDao.getAllWithoutDeleted();
     }
+
+    public Category getCategoryByName(String categotrName){
+        Category category = null;
+        try {
+            category = mySqlCategoryDao.getCategoryByName(categotrName);
+
+        } catch (PersistException e) {
+            e.printStackTrace();
+            loger.warn("Cant get category with category name " + categotrName);
+        }
+
+        return category;
+    }
+
+
+
+
 }
 
 

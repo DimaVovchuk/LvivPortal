@@ -26,7 +26,7 @@ public class WayService {
 
         } catch (PersistException e) {
             e.printStackTrace();
-            loger.warn("Cant delet create user way");
+            loger.warn("Cant create user way");
         }
     }
 
@@ -84,6 +84,16 @@ public class WayService {
         }
 
         return way;
+    }
+
+    public void createUserWay(Integer user_id, Integer way_id, Integer day){
+        try {
+            mySqlWayDao.createUserWay(user_id, way_id, day);
+
+        } catch (PersistException e) {
+            e.printStackTrace();
+            loger.warn("Cant create way by user_id = " + user_id + " way_id " + way_id);
+        }
     }
 
 }

@@ -1,5 +1,7 @@
 package com.lab.epam.entity;
 
+import java.sql.Date;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,38 +11,62 @@ import java.util.Map;
  */
 public class UserDataAboutTrip {
 
-    private Integer dayCount;
-    private Integer hoursCount;
-    private String beginTrip;
-    private String endTrip;
+    private Integer dayCount = 1;
+    private String beginPlace;
+    private String endPlace;
+    private Date beginTrip;
+    private Date endTrip;
+    private Boolean dontKnowDate = false;
+    private Boolean withOutBegin = false;
     private List<Category> category;
-    private Boolean isHotel = true;
-    private Boolean isCaffees = true;
-    private Integer timeBetweenCaffees;
+    private Boolean isCaffees = false;
     private Map<Integer,List<Place>> placeDay = new HashMap<>();
+    private Boolean isAutomatic = false;
 
-    public UserDataAboutTrip(Builder builder) {
-
-        dayCount = builder.dayCount;
-        hoursCount = builder.hoursCount;
-        beginTrip = builder.beginTrip;
-        endTrip = builder.endTrip;
-        category = builder.category;
-        isHotel = builder.isHotel;
-        isCaffees = builder.isCaffees;
-        timeBetweenCaffees = builder.timeBetweenCaffees;
-        placeDay = builder.placeDay;
+    public Boolean getIsAutomatic() {
+        return isAutomatic;
     }
 
-    public UserDataAboutTrip(){
+    public void setIsAutomatic(Boolean isAutomatic) {
+        this.isAutomatic = isAutomatic;
     }
 
-    public Integer getHoursCount() {
-        return hoursCount;
+
+
+    public Boolean getDontKnowDate() {
+        return dontKnowDate;
     }
 
-    public void setHoursCount(Integer hoursCount) {
-        this.hoursCount = hoursCount;
+    public void setDontKnowDate(Boolean dontKnowDate) {
+        this.dontKnowDate = dontKnowDate;
+    }
+
+    public Boolean getWithOutBegin() {
+        return withOutBegin;
+    }
+
+    public void setWithOutBegin(Boolean withOutBegin) {
+        this.withOutBegin = withOutBegin;
+    }
+
+    public UserDataAboutTrip() {
+
+    }
+
+    public Date getBeginTrip() {
+        return beginTrip;
+    }
+
+    public void setBeginTrip(Date beginTrip) {
+        this.beginTrip = beginTrip;
+    }
+
+    public Date getEndTrip() {
+        return endTrip;
+    }
+
+    public void setEndTrip(Date endTrip) {
+        this.endTrip = endTrip;
     }
 
     public Integer getDayCount() {
@@ -56,20 +82,12 @@ public class UserDataAboutTrip {
         this.category = category;
     }
 
-    public String getEndTrip() {
-        return endTrip;
+    public String getEndPlace() {
+        return endPlace;
     }
 
-    public void setEndTrip(String endTrip) {
-        this.endTrip = endTrip;
-    }
-
-    public Boolean getIsHotel() {
-        return isHotel;
-    }
-
-    public void setIsHotel(Boolean isHotel) {
-        this.isHotel = isHotel;
+    public void setEndPlace(String endPlace) {
+        this.endPlace = endPlace;
     }
 
     public Boolean getIsCaffees() {
@@ -80,14 +98,6 @@ public class UserDataAboutTrip {
         this.isCaffees = isCaffees;
     }
 
-    public Integer getTimeBetweenCaffees() {
-        return timeBetweenCaffees;
-    }
-
-    public void setTimeBetweenCaffees(Integer timeBetweenCaffees) {
-        this.timeBetweenCaffees = timeBetweenCaffees;
-    }
-
     public Map<Integer, List<Place>> getPlaceDay() {
         return placeDay;
     }
@@ -96,70 +106,34 @@ public class UserDataAboutTrip {
         this.placeDay = placeDay;
     }
 
-    public String getBeginTrip() {
+    public String getBeginPlace() {
 
-        return beginTrip;
+        return beginPlace;
     }
 
-    public void setBeginTrip(String beginTrip) {
-        this.beginTrip = beginTrip;
+    public void setBeginPlace(String beginPlace) {
+        this.beginPlace = beginPlace;
     }
 
     public void setDayCount(Integer dayCount) {
         this.dayCount = dayCount;
     }
 
-    public static class Builder {
-        private Integer dayCount;
-        private Integer hoursCount;
-        private List<Category> category;
 
-        private String beginTrip;
-        private String endTrip;
-        private Boolean isHotel = true;
-        private Boolean isCaffees = true;
-        private Integer timeBetweenCaffees;
-        private Map<Integer,List<Place>> placeDay = new HashMap<>();
-
-        public Builder(Integer dayCount, Integer hoursCount, List<Category> category) {
-            this.dayCount = dayCount;
-            this.category = category;
-            this.hoursCount = hoursCount;
-        }
-
-        public Builder beginTrip(String val) {
-            beginTrip = val;
-            return this;
-        }
-
-        public Builder endTrip(String val) {
-            endTrip = val;
-            return this;
-        }
-
-        public Builder beginTrip(Boolean val) {
-            isHotel = val;
-            return this;
-        }
-
-        public Builder endTrip(Boolean val) {
-            isHotel = val;
-            return this;
-        }
-
-        public Builder timeBetweenCaffees(Integer val) {
-            timeBetweenCaffees = val;
-            return this;
-        }
-
-        public Builder placeDay(Map<Integer,List<Place>> val) {
-            placeDay = val;
-            return this;
-        }
-
-        public UserDataAboutTrip build() {
-            return new UserDataAboutTrip(this);
-        }
+    @Override
+    public String toString() {
+        return "UserDataAboutTrip{" +
+                "dayCount=" + dayCount +
+                ", beginPlace='" + beginPlace + '\'' +
+                ", endPlace='" + endPlace + '\'' +
+                ", beginTrip=" + beginTrip +
+                ", endTrip=" + endTrip +
+                ", dontKnowDate=" + dontKnowDate +
+                ", withOutBegin=" + withOutBegin +
+                ", category=" + category +
+                ", isCaffees=" + isCaffees +
+                ", placeDay=" + placeDay +
+                ", isAutomatic=" + isAutomatic +
+                '}';
     }
-
 }

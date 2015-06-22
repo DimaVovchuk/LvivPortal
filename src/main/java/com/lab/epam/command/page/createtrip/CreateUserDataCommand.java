@@ -4,16 +4,25 @@ import com.lab.epam.command.controller.Command;
 import com.lab.epam.entity.Category;
 import com.lab.epam.entity.UserDataAboutTrip;
 import com.lab.epam.helper.ClassName;
+import com.lab.epam.service.CategoryService;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import org.joda.time.DateMidnight;
+import org.joda.time.DateTime;
+import org.joda.time.Days;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by Admin on 19.06.2015.
@@ -21,74 +30,162 @@ import java.util.List;
 public class CreateUserDataCommand implements Command {
 
     private static final Logger loger = LogManager.getLogger(ClassName.getCurrentClassName());
-    public static final Integer TIME_DEFAULT = 8;
+    public static final String CHURCHES = "Churches";
+    public static final String ARCHITECTURE = "Architectural sights";
+    public static final String THEATRES = "Theatres";
+    public static String SQL_FORMAT_DATE = "yyyy-MM-dd";
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        String dayCountString = request.getParameter("dayCount");
-        String dayTimeString = request.getParameter("dayTime");
-        String dontNowString = request.getParameter("dontNowTime");
-        String dontBegin = request.getParameter("dontBegin");
-        String begin = request.getParameter("begin");
-        String dontEnd = request.getParameter("dontEnd");
-        String end = request.getParameter("end");
-        String isCaffees = request.getParameter("isCaffees");
-        String timeBetweenCaffeesString = request.getParameter("timeBetweenCaffees");
-        String architectural = request.getParameter("architectural");
+        UserDataAboutTrip userDataTrip = new UserDataAboutTrip();
+        String stringDateFormat = "dd MMMM, yyyy";
+        SimpleDateFormat format = new SimpleDateFormat(stringDateFormat, Locale.US);
+        DateFormat formatter_sql = new SimpleDateFormat(SQL_FORMAT_DATE);
+        CategoryService cateroryService = new CategoryService();
+        Date begin = null;
+        Date end = null;
+        int daysBegin = -1;
+        Boolean correctDate = false;
+        Boolean correctBegin = false;
+        Boolean correctEnd = false;
+        String page = "portal?command=showMap";
+
+        List<Category> listCategory = null;
+        Boolean haveCategory = false;
+        String beginTrip = request.getParameter("startDate");
+        String endTrip = request.getParameter("endDate");
+        String dontKnowDate = request.getParameter("dontKnowDate");
+        String automatic = request.getParameter("automatic");
+        String architecture = request.getParameter("architecture");
         String churches = request.getParameter("churches");
         String theatres = request.getParameter("theatres");
-        String hotels = request.getParameter("hotels");
-        String isHotel = request.getParameter("isHotel");
-        String restaurants = request.getParameter("restaurants");
-        Integer dayCount = 0;
-        Integer dayTime = 0;
-        List<Category> categry = new ArrayList<>();
+        String lunch = request.getParameter("lunch");
+        String placeArrive = request.getParameter("placeArrive");
 
-        if (dayCountString != null){
-            dayCount = Integer.parseInt(dayCountString);
+        System.out.println("beginTrip " + beginTrip);
+        System.out.println("endTrip " + endTrip);
+        System.out.println("dontKnowDate " + dontKnowDate);
+        System.out.println("automatic " + automatic);
+        System.out.println("architecture " + architecture);
+        System.out.println("churches " + churches);
+        System.out.println("theatres " + theatres);
+        System.out.println("lunch " + lunch);
+        System.out.println("placeArrive " + placeArrive);
+
+        if (dontKnowDate == null){
+            if (beginTrip != null && !beginTrip.equalsIgnoreCase("")){
+                try {
+                    begin = format.parse(beginTrip);
+                    DateTime start = new DateTime(new Date());
+                    DateTime ending = new DateTime(begin);
+                    Days d = Days.daysBetween(start, ending);
+                    daysBegin = d.getDays();
+                    System.out.println("day begin " + daysBegin);
+                    if (daysBegin >= 0){
+                        java.sql.Date sqltDate= new java.sql.Date(begin.getTime());
+                        userDataTrip.setBeginTrip(sqltDate);
+                        correctBegin = true;
+
+                    }else {
+                        loger.info("Begindata is less than now" + beginTrip);
+                    }
+                } catch (ParseException e) {
+                    loger.error("Error with parse begindata " + beginTrip);
+                    e.printStackTrace();
+
+                }
+            }
+
+            if (endTrip != null && !endTrip.equalsIgnoreCase("")){
+                try {
+                    end = format.parse(endTrip);
+                    DateTime start = new DateTime(begin);
+                    DateTime ending = new DateTime(end);
+                    Days d = Days.daysBetween(start, ending);
+                    int days = d.getDays();
+                    if (days >= 0 && daysBegin >= 0){
+                        java.sql.Date sqltDate= new java.sql.Date(end.getTime());
+                        userDataTrip.setEndTrip(sqltDate);
+                        correctEnd = true;
+                    }else {
+                        loger.info("Enddata is less than now" + endTrip);
+                    }
+                } catch (ParseException e) {
+                    loger.info("Error with parse endTrip " + endTrip);
+                    e.printStackTrace();
+
+                }
+            }
+
+            if (correctBegin && correctEnd){
+                correctDate = true;
+            }
+
+            if ( userDataTrip.getBeginTrip() != null && userDataTrip.getEndTrip() != null){
+
+                    DateTime start = new DateTime(begin);
+                    DateTime ending = new DateTime(end);
+                    Days d = Days.daysBetween(start, ending);
+                    int days = d.getDays() + 1;
+                    System.out.println("days " + days);
+                    userDataTrip.setDayCount(days);
+            }
+        } else{
+            userDataTrip.setDontKnowDate(true);
         }
-        if (dontNowString != null && !dontNowString.equalsIgnoreCase("dontNow")){
-            dayTime = Integer.parseInt(dayTimeString);
+
+        if (placeArrive != null){
+            if (placeArrive.equalsIgnoreCase("withoutPlaceArrive")) {
+                userDataTrip.setWithOutBegin(true);
+            } else {
+                userDataTrip.setBeginPlace(placeArrive);
+            }
         }else {
-            dayTime = TIME_DEFAULT;
+            userDataTrip.setWithOutBegin(true);
         }
-        if (churches != null && churches.equalsIgnoreCase("churches")){
-            categry.add(new Category("categry"));
-        }
-        if (theatres != null && theatres.equalsIgnoreCase("theatres")){
-            categry.add(new Category("theatres"));
-        }
-        if (hotels != null && hotels.equalsIgnoreCase("hotels")){
-            categry.add(new Category("hotels"));
-        }
-        if (architectural != null && architectural.equalsIgnoreCase("architectural")){
-            categry.add(new Category("architectural"));
-        }
-        if (restaurants != null && restaurants.equalsIgnoreCase("restaurants")){
-            categry.add(new Category("restaurants"));
-        }
-        UserDataAboutTrip userDataTrip = new UserDataAboutTrip.Builder(dayCount,dayTime,categry).build();
 
-        if (dontBegin != null && !dontBegin.equalsIgnoreCase("dontBegin") && begin != null){
-            userDataTrip.setBeginTrip(begin);
+        if (automatic != null) {
+            userDataTrip.setIsAutomatic(false);
+            if (architecture != null || churches != null || theatres != null) {
+                listCategory = new ArrayList<>();
+                haveCategory = true;
+            }
+
+            if (architecture != null) {
+                Category cat = cateroryService.getCategoryByName(ARCHITECTURE);
+                listCategory.add(cat);
+            }
+
+            if (churches != null) {
+                Category cat = cateroryService.getCategoryByName(CHURCHES);
+                listCategory.add(cat);
+            }
+
+            if (theatres != null) {
+                Category cat = cateroryService.getCategoryByName(THEATRES);
+                listCategory.add(cat);
+            }
+
+            if (haveCategory) {
+                userDataTrip.setCategory(listCategory);
+            }
+
+            if (lunch != null) {
+                userDataTrip.setIsCaffees(true);
+            }
+
+        }else{
+            userDataTrip.setIsAutomatic(false);
         }
-        if (dontEnd != null && !dontEnd.equalsIgnoreCase("dontEnd") && end != null){
-            userDataTrip.setEndTrip(end);
-        }
-        if (isCaffees != null && !isCaffees.equalsIgnoreCase("isCaffees")){
-            userDataTrip.setIsCaffees(false);
-        }
-        if (isHotel != null && !isHotel.equalsIgnoreCase("isHotel")){
-            userDataTrip.setIsHotel(false);
-        }
-        if (isCaffees != null && !isCaffees.equalsIgnoreCase("isCaffees") && timeBetweenCaffeesString != null){
-            userDataTrip.setTimeBetweenCaffees(Integer.parseInt(timeBetweenCaffeesString));
-        }
+
         HttpSession session = request.getSession();
+        System.out.println("userDataTrip " + userDataTrip);
         session.setAttribute("userDataTrip", userDataTrip);
-        loger.info("Command Create data for user trip.");
-        response.sendRedirect("portal?command=place");
+        request.setAttribute("correctDate", correctDate);
+        response.sendRedirect("portal?command=showMap");
+        //request.getRequestDispatcher(page).forward(request, response);
 
     }
+
 }
