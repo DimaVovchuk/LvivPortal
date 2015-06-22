@@ -22,6 +22,17 @@
             <label for="dontKnowDate"><cdg:l18n key="plan.dontknowdate"/></label>
         </p>
 
+        <p><cdg:l18n key="plan.arrive"/></p>
+
+        <p>
+           <select name="placeArrive">
+                <option value="withoutPlaceArrive" disabled selected><cdg:l18n key="plan.noarrive"/></option>
+                <option value="Place1">Place 1</option>
+                <option value="Place2">Place 2</option>
+                <option value="Place3">Place 3</option>
+            </select>
+        </p>
+
         <p>
             <input id="automatic" value="automatic" name="automatic" type="checkbox"/>
             <label for="automatic"><cdg:l18n key="plan.automatic"/></label>
@@ -41,13 +52,6 @@
             <input id="lunch" type="checkbox" value="withLunch" name="lunch"/>
             <label for="lunch"><cdg:l18n key="plan.lunch"/></label><br>
 
-            <p><cdg:l18n key="plan.arrive"/></p>
-            <select name="placeArrive">
-                <option value="withoutPlaceArrive" disabled selected><cdg:l18n key="plan.noarrive"/></option>
-                <option value="Place1">Place 1</option>
-                <option value="Place2">Place 2</option>
-                <option value="Place3">Place 3</option>
-            </select>
         </div>
         <button class="btn waves-effect waves-light cyan darken-2" type="submit">OK</button>
     </form>

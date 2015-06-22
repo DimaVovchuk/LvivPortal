@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
@@ -63,7 +64,7 @@ public class PlaceCommand implements Command {
                     placeForWay = new ArrayList<>();
                     loger.info("Create new List<Place>");
                     loger.info("Day is " + dayNumber);
-                }else {
+                } else {
                     placeForWay = map.get(dayNumber);
                     loger.info("Get placeForWay");
                     for (Place place : placeForWay) {
@@ -85,11 +86,11 @@ public class PlaceCommand implements Command {
         System.out.println("userDataTrip " + userDataAboutTrip);
         System.out.println("dayNumber " + dayNumber);
         System.out.println("placeId " + placeId);
-        session.setAttribute("userDataTrip",userDataAboutTrip);
+        session.setAttribute("userDataTrip", userDataAboutTrip);
 
         String category = request.getParameter("category");
         System.out.println("category " + category);
-      if (category == null){
+        if (category == null) {
             category = "";
         }
         if (category != null) {
@@ -172,4 +173,14 @@ public class PlaceCommand implements Command {
         return list;
     }
 
+    private Boolean isInFilder(String fileName, HttpServletRequest request) {
+        File f = new File(request.getContextPath() + "\\upload\\photo");
+        String[] list = f.list();
+        for (String file : list) {
+            if (fileName.equals(file)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

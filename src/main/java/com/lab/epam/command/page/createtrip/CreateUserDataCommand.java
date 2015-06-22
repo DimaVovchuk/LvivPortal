@@ -45,6 +45,7 @@ public class CreateUserDataCommand implements Command {
         CategoryService cateroryService = new CategoryService();
         Date begin = null;
         Date end = null;
+        int daysBegin = -1;
 
         List<Category> listCategory = null;
         Boolean haveCategory = false;
@@ -72,11 +73,12 @@ public class CreateUserDataCommand implements Command {
             if (beginTrip != null){
                 try {
                     begin = format.parse(beginTrip);
-                    DateTime start = new DateTime(begin);
-                    DateTime ending = new DateTime(new Date());
+                    DateTime start = new DateTime(new Date());
+                    DateTime ending = new DateTime(begin);
                     Days d = Days.daysBetween(start, ending);
-                    int days = d.getDays();
-                    if (days >= 0){
+                    daysBegin = d.getDays();
+                    System.out.println("day begin " + daysBegin);
+                    if (daysBegin >= 0){
                         java.sql.Date sqltDate= new java.sql.Date(begin.getTime());
                         userDataTrip.setBeginTrip(sqltDate);
                     }else {
@@ -96,7 +98,7 @@ public class CreateUserDataCommand implements Command {
                     DateTime ending = new DateTime(end);
                     Days d = Days.daysBetween(start, ending);
                     int days = d.getDays();
-                    if (days >= 0){
+                    if (days >= 0 && daysBegin >= 0){
                         java.sql.Date sqltDate= new java.sql.Date(end.getTime());
                         userDataTrip.setEndTrip(sqltDate);
                     }else {
@@ -120,6 +122,16 @@ public class CreateUserDataCommand implements Command {
             }
         } else{
             userDataTrip.setDontKnowDate(true);
+        }
+
+        if (placeArrive != null){
+            if (placeArrive.equalsIgnoreCase("withoutPlaceArrive")) {
+                userDataTrip.setWithOutBegin(true);
+            } else {
+                userDataTrip.setBeginPlace(placeArrive);
+            }
+        }else {
+            userDataTrip.setWithOutBegin(true);
         }
 
         if (automatic != null) {
@@ -150,14 +162,6 @@ public class CreateUserDataCommand implements Command {
 
             if (lunch != null) {
                 userDataTrip.setIsCaffees(true);
-            }
-
-            if (placeArrive != null){
-                if (placeArrive.equalsIgnoreCase("withoutPlaceArrive")) {
-                    userDataTrip.setWithOutBegin(true);
-                } else {
-                    userDataTrip.setBeginPlace(placeArrive);
-                }
             }
 
         }else{

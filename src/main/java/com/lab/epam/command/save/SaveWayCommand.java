@@ -79,7 +79,7 @@ public class SaveWayCommand implements Command {
             loger.warn("You want create way without places");
         }
         loger.warn("You create new way in DB");
-        response.sendRedirect("?command=signIn");
+        response.sendRedirect("?command=userWays");
 
     }
 }
