@@ -57,14 +57,6 @@
 
                                 </form>
 
-                                <form action="/portal/saveWay" method="get">
-                                    <input type="hidden" name="command" value="saveWay">
-                                    <button class="btn waves-effect waves-light cyan darken-2" type="submit"
-                                            >OK
-                                    </button>
-                                </form>
-
-
                                 <a href="portal?command=placeInformation&place_id=${place.id}"><img
                                         src="${pageContext.request.contextPath}/upload/photo/${place.imageReference}"
                                         style="width: 100%"></a>
