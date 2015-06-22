@@ -68,7 +68,6 @@ $(document).ready(function ($) {
     $('#dontKnowDate').change(function () {
         $('#days').animate({height: "toggle", opacity: "toggle"});
     });
-
     $('#automatic').change(function () {
         $('#places').animate({height: "toggle", opacity: "toggle"});
     });

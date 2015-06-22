@@ -70,7 +70,8 @@ header img.text-middle {
 
 /* BANNER */
 .banner .parallax-container {
-    height: 600px;
+    height: 500px;
+    border-bottom: 10px solid #0097a7;
 }
 
 .banner .container {
@@ -459,4 +460,15 @@ header img.text-middle {
     height: 100%;
     margin-left: 60px;
     padding-right: 60px;
+}
+
+/* FOOTER */
+footer.page-footer {
+    margin-top: 0;
+    padding-top: 0;
+}
+
+.footer-parallax {
+    border-top: 10px solid #0097a7;
+    height: 300px;
 }
