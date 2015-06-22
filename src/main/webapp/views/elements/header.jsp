@@ -20,9 +20,9 @@
                         </ul>
 
                         <ul class="right hide-on-med-and-down">
-                            <li><a href="portal?command=index"><cdg:l18n key="header.home"/></a></li>
-                            <li><a href="portal?command=place"><cdg:l18n key="header.places"/></a></li>
-                            <li><a href="portal?command=planTrip"><cdg:l18n key="header.plan"/></a></li>
+                            <li><a href="/portal?command=index"><cdg:l18n key="header.home"/></a></li>
+                            <li><a href="/portal?command=place"><cdg:l18n key="header.places"/></a></li>
+                            <li><a href="/portal?command=planTrip"><cdg:l18n key="header.plan"/></a></li>
                             <c:set var="pageNumber" scope="request" value="1"/>
                             <li><a class="dropdown-button" href="#" data-activates="lang-dropdown"><cdg:l18n
                                     key="header.lang"/><i
@@ -32,8 +32,8 @@
                     </c:when>
                     <c:otherwise>
                         <ul class="right hide-on-med-and-down">
-                            <li><a href="portal?command=index"><cdg:l18n key="header.home"/></a></li>
-                            <li><a href="portal?command=place"><cdg:l18n key="header.places"/></a></li>
+                            <li><a href="/portal?command=index"><cdg:l18n key="header.home"/></a></li>
+                            <li><a href="/portal?command=place"><cdg:l18n key="header.places"/></a></li>
                             <li><a class="modal-trigger" href="#set-date-time"><cdg:l18n key="header.plan"/></a></li>
                             <c:set var="pageNumber" scope="request" value="1"/>
                             <li><a class="dropdown-button" href="#" data-activates="lang-dropdown"><cdg:l18n
@@ -49,8 +49,8 @@
                 </c:choose>
 
                 <ul class="side-nav" id="mobile-navbar">
-                    <li><a href="portal?command=index"><cdg:l18n key="header.home"/></a></li>
-                    <li><a href="portal?command=place"><cdg:l18n key="header.places"/></a></li>
+                    <li><a href="/portal?command=index"><cdg:l18n key="header.home"/></a></li>
+                    <li><a href="/portal?command=place"><cdg:l18n key="header.places"/></a></li>
                     <li><a class="modal-trigger" href="#set-date-time"><cdg:l18n key="header.plan"/></a></li>
                     <c:set var="pageNumber" scope="request" value="1"/>
                     <li class="divider"></li>
