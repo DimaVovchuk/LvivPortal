@@ -10,10 +10,10 @@
     <meta name="keywords" content=""/>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script>
-        $("#timePlace").mousemove( function(e){
+        $("#timePlace").mousemove(function (e) {
             $("#timeValue").html($(this).val());
         });
-        $("#timePlace").change( function(e){
+        $("#timePlace").change(function (e) {
             $("#timeValue").html($(this).val());
         });
     </script>
@@ -41,12 +41,12 @@
                                       method="post" style="position:absolute;padding:5px">
                                     <c:set var="category" scope="request" value="${requestScope.category}"/>
                                     <c:if test="${userDataTrip!=null}">
-                                    <button class="btn modal-trigger btn-floating btn-large waves-effect waves-light cyan darken-2"
-                                            type="submit" data-target="chooseDay"
-                                            id="btn1" onclick="$('#place_id').val('${place.id}')">
-                                        <i class="mdi-content-add"></i>
+                                        <button class="btn modal-trigger btn-floating btn-large waves-effect waves-light cyan darken-2"
+                                                type="submit" data-target="chooseDay"
+                                                id="btn1" onclick="$('#place_id').val('${place.id}')">
+                                            <i class="mdi-content-add"></i>
 
-                                    </button>
+                                        </button>
                                     </c:if>
 
 
@@ -57,8 +57,8 @@
                                         style="width: 100%"></a>
                                 <a href="portal?command=placeInformation&place_id=${place.id}">
                                     <h5>
-                                    <c:out
-                                            value="${place.name}"/></h5></a>
+                                        <c:out
+                                                value="${place.name}"/></h5></a>
                                 <c:out value="${place.adress}"/>
                             </div>
                         </div>
@@ -69,17 +69,17 @@
             <div class="col l3 m4 s5">
                 <div class="collection with-header z-depth-2">
                     <div class="collection-header"><h4><cdg:l18n key="places.categories"/></h4></div>
-                    <a href="portal?command=place&category=architecture" class="collection-item black-text"><cdg:l18n
+                    <a href="portal?command=place&category=architecture" class="collection-item black-text ${requestScope.active_architecture}"><cdg:l18n
                             key="places.architecture"/></a>
-                    <a href="portal?command=place&category=churches" class="collection-item black-text"><cdg:l18n
+                    <a href="portal?command=place&category=churches" class="collection-item black-text ${requestScope.active_churches}"><cdg:l18n
                             key="places.churches"/></a>
-                    <a href="portal?command=place&category=theatres" class="collection-item black-text"><cdg:l18n
+                    <a href="portal?command=place&category=theatres" class="collection-item black-text ${requestScope.active_theatres}"><cdg:l18n
                             key="places.theatres"/></a>
-                    <a href="portal?command=place&category=hotels" class="collection-item black-text"><cdg:l18n
+                    <a href="portal?command=place&category=hotels" class="collection-item black-text ${requestScope.active_hotels}"><cdg:l18n
                             key="places.hotels"/></a>
-                    <a href="portal?command=place&category=restaurants" class="collection-item black-text"><cdg:l18n
+                    <a href="portal?command=place&category=restaurants" class="collection-item black-text ${requestScope.active_restaurants}"><cdg:l18n
                             key="places.restaurants"/></a>
-                    <a href="portal?command=place" class="collection-item black-text"><cdg:l18n key="places.all"/></a>
+                    <a href="portal?command=place" class="collection-item black-text ${requestScope.active_allplaces}"><cdg:l18n key="places.all"/></a>
                 </div>
             </div>
 
@@ -96,52 +96,52 @@
 </script>
 
 
-
 <div id="chooseDay" class="modal">
-<div class="modal-content">
-<h4 id="ID"></h4>
-    <c:set var="category" scope="request" value="${requestScope.category}"/>
-<h4>Choose day</h4>
-    <form id="choose_day" action="/portal/place" method="get">
-        <input type="hidden" name="command" value="place">
+    <div class="modal-content">
+        <h4 id="ID"></h4>
+        <c:set var="category" scope="request" value="${requestScope.category}"/>
+        <h4>Choose day</h4>
 
-        <div class="input-field col s6">
-            <input placeholder="Placeholder" id="place_id" name="place_id" type="hidden">
-        </div>
+        <form id="choose_day" action="/portal/place" method="get">
+            <input type="hidden" name="command" value="place">
 
-        <div class="input-field col s6">
-            <input placeholder="Placeholder" name="category" type="hidden" value="${requestScope.category}">
-        </div>
+            <div class="input-field col s6">
+                <input placeholder="Placeholder" id="place_id" name="place_id" type="hidden">
+            </div>
 
-        <label>Day number select</label>
-        <select name="dayNumber" class="browser-default">
-            <option value="" disabled selected>Choose your option</option>
+            <div class="input-field col s6">
+                <input placeholder="Placeholder" name="category" type="hidden" value="${requestScope.category}">
+            </div>
+
+            <label>Day number select</label>
+            <select name="dayNumber" class="browser-default">
+                <option value="" disabled selected>Choose your option</option>
                 <c:forEach var="i" begin="1" end="${userDataTrip.dayCount}">
                     <option width="10px" value="${i}"><c:out value="${i}"/></option>
                 </c:forEach>
             </select>
 
-        <p class="range-field">
-            <input type="range" name="timePlace" id="timePlace" min="5" max="30" />
+            <p class="range-field">
+                <input type="range" name="timePlace" id="timePlace" min="5" max="30"/>
+
             <p id="timeValue"></p>
-        </p>
 
-        <button class="btn waves-effect waves-light cyan darken-2" type="submit"
-                >OK
-        </button>
-    </form>
+            <button class="btn waves-effect waves-light cyan darken-2" type="submit"
+                    >OK
+            </button>
+        </form>
 
-</div>
-<div class="modal-footer">
+    </div>
+    <div class="modal-footer">
 
-</div>
+    </div>
 </div>
 
 <script>
-$('.datepicker').pickadate({
-selectMonths: true, // Creates a dropdown to control month
-selectYears: 15 // Creates a dropdown of 15 years to control year
-});
+    $('.datepicker').pickadate({
+        selectMonths: true, // Creates a dropdown to control month
+        selectYears: 15 // Creates a dropdown of 15 years to control year
+    });
 </script>
 
 <script>

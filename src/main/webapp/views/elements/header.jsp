@@ -20,14 +20,14 @@
                         </ul>
 
                         <ul class="right hide-on-med-and-down">
-                            <li><a href="/portal?command=index"><cdg:l18n key="header.home"/></a></li>
-                            <li><a href="/portal?command=place"><cdg:l18n key="header.places"/></a></li>
+                            <li class="${requestScope.active_home}"><a href="/portal?command=index"><cdg:l18n key="header.home"/></a></li>
+                            <li class="${requestScope.active_places}"><a href="/portal?command=place"><cdg:l18n key="header.places"/></a></li>
                             <c:choose>
                                 <c:when test="${userDataTrip != null }">
-                                    <li><a href="/portal?command=showMap"><cdg:l18n key="header.plan"/></a></li>
+                                    <li class="${requestScope.active_plan}"><a href="/portal?command=showMap"><cdg:l18n key="header.plan"/></a></li>
                                 </c:when>
                                 <c:otherwise>
-                                    <li><a class="modal-trigger" href="#set-date-time"><cdg:l18n key="header.plan"/></a>
+                                    <li  class="${requestScope.active_plan}"><a class="modal-trigger" href="#set-date-time"><cdg:l18n key="header.plan"/></a>
                                     </li>
                                 </c:otherwise>
                             </c:choose>
@@ -35,19 +35,18 @@
                             <li><a class="dropdown-button" href="#" data-activates="lang-dropdown"><cdg:l18n
                                     key="header.lang"/><i
                                     class="mdi-navigation-arrow-drop-down right"></i></a></li>
-                            </li>
                         </ul>
                     </c:when>
                     <c:otherwise>
                         <ul class="right hide-on-med-and-down">
-                            <li><a href="/portal?command=index"><cdg:l18n key="header.home"/></a></li>
-                            <li><a href="/portal?command=place"><cdg:l18n key="header.places"/></a></li>
+                            <li class="${requestScope.active_home}"><a href="/portal?command=index"><cdg:l18n key="header.home"/></a></li>
+                            <li class="${requestScope.active_places}"><a href="/portal?command=place"><cdg:l18n key="header.places"/></a></li>
                             <c:choose>
                                 <c:when test="${userDataTrip != null }">
-                                    <li><a href="/portal?command=showMap"><cdg:l18n key="header.plan"/></a></li>
+                                    <li class="${requestScope.active_plan}"><a href="/portal?command=showMap"><cdg:l18n key="header.plan"/></a></li>
                                 </c:when>
                                 <c:otherwise>
-                                    <li><a class="modal-trigger" href="#set-date-time"><cdg:l18n key="header.plan"/></a>
+                                    <li class="${requestScope.active_plan}"><a class="modal-trigger" href="#set-date-time"><cdg:l18n key="header.plan"/></a>
                                     </li>
                                 </c:otherwise>
                             </c:choose>
@@ -60,14 +59,13 @@
                                     key="header.sign"/></a>
                             </li>
                         </ul>
-
                     </c:otherwise>
                 </c:choose>
 
                 <ul class="side-nav" id="mobile-navbar">
-                    <li><a href="/portal?command=index"><cdg:l18n key="header.home"/></a></li>
-                    <li><a href="/portal?command=place"><cdg:l18n key="header.places"/></a></li>
-                    <li><a class="modal-trigger" href="#set-date-time"><cdg:l18n key="header.plan"/></a></li>
+                    <li class="${requestScope.active_home}"><a href="/portal?command=index"><cdg:l18n key="header.home"/></a></li>
+                    <li class="${requestScope.active_places}"><a href="/portal?command=place"><cdg:l18n key="header.places"/></a></li>
+                    <li class="${requestScope.active_plan}"><a class="modal-trigger" href="#set-date-time"><cdg:l18n key="header.plan"/></a></li>
                     <c:set var="pageNumber" scope="request" value="1"/>
                     <li class="divider"></li>
                     <li><a class="modal-trigger" href="#sign-in"><i

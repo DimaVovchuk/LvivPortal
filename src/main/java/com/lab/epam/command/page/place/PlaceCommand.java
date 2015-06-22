@@ -108,21 +108,27 @@ public class PlaceCommand implements Command {
             switch (category) {
                 case "architecture":
                     places = servicePlace.getPlaceByCategory(1);
+                    request.setAttribute("active_architecture", "active");
                     break;
                 case "churches":
                     places = servicePlace.getPlaceByCategory(2);
+                    request.setAttribute("active_churches", "active");
                     break;
                 case "theatres":
                     places = servicePlace.getPlaceByCategory(3);
+                    request.setAttribute("active_theatres", "active");
                     break;
                 case "hotels":
                     places = servicePlace.getPlaceByCategory(4);
+                    request.setAttribute("active_hotels", "active");
                     break;
                 case "restaurants":
                     places = servicePlace.getPlaceByCategory(5);
+                    request.setAttribute("active_restaurants", "active");
                     break;
                 default:
                     places = servicePlace.getAll();
+                    request.setAttribute("active_allplaces", "active");
                     break;
             }
         } else {
@@ -159,6 +165,7 @@ public class PlaceCommand implements Command {
         request.setAttribute("places", placesPageInfo);
         request.setAttribute("userDataTrip", userDataAboutTrip);
         loger.info("Command Place.");
+        request.setAttribute("active_places", "active");
         request.getRequestDispatcher("/views/pages/places.jsp").forward(request, response);
     }
 

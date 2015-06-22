@@ -19,6 +19,7 @@ public class IndexCommand implements Command {
     public void execute(HttpServletRequest request,
                           HttpServletResponse response) throws ServletException, IOException {
         loger.info("Command IndexCommand.");
+        request.setAttribute("active_home", "active");
         request.getRequestDispatcher("/views/pages/index.jsp").forward(request, response);
     }
 }
