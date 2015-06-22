@@ -64,7 +64,7 @@
                                     <label>Browser Select</label>
                                     <select name="dayNumber" class="browser-default">
                                         <option value="" disabled selected>Choose your option</option>
-                                        <c:forEach var="i" begin="1" end="4">
+                                        <c:forEach var="i" begin="1" end="${userDataTrip.dayCount}">
                                             <option width="10px" value="${i}"><c:out value="${i}"/></option>
                                         </c:forEach>
                                     </select>

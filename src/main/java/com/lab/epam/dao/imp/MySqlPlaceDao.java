@@ -73,9 +73,7 @@ public class MySqlPlaceDao extends AbstractJDBCDao<Place, Integer> {
         try (PreparedStatement statement = conn.prepareStatement(GET_PLACE_BY_USER_ID)) {
             statement.setInt(1, user_id);
             ResultSet rs = statement.executeQuery();
-            loger.info("Get places from user with id" + user_id + " is succesfull " + rs);
             list = parseResultSet(rs);
-            loger.info("Parse result with Transformer is succesfull list = " + list);
             if (list.size() <= 0){
                 loger.info("DB has any place from user with " + user_id + " user_id");
                 return null;
@@ -96,9 +94,8 @@ public class MySqlPlaceDao extends AbstractJDBCDao<Place, Integer> {
         try (PreparedStatement statement = conn.prepareStatement(GET_PLACE_BY_WAY_ID)) {
             statement.setInt(1, way_id);
             ResultSet rs = statement.executeQuery();
-            loger.info("Get places from way with id" + way_id + " is succesfull " + rs);
+            loger.info("Get places from way with id" + way_id + " is succesfull ");
             list = parseResultSet(rs);
-            loger.info("Parse result with Transformer is succesfull list = " + list);
             if (list.size() <= 0){
                 loger.info("DB has any place from way with " + way_id + " way_id");
                 return null;

@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
 import java.util.*;
 
 /**
@@ -131,7 +132,7 @@ public class PlaceCommand implements Command {
             placeDescription = placeDescriptionService.getPlaceDescriptionByIdPlace(place_id, language);
             placeDescriptions.add(placeDescription);
             placeImage = placeImageService.getPlaceImageByPlaceId(place_id);
-            if (placeImage == null) {
+            if (placeImage == null || !isInFolder(placeImage.getReference(), request)) {
                 placeImage = new PlaceImage(place_id, "default_building.jpg");
             }
             placeImages.add(placeImage);
@@ -173,9 +174,12 @@ public class PlaceCommand implements Command {
         return list;
     }
 
-    private Boolean isInFilder(String fileName, HttpServletRequest request) {
-        File f = new File(request.getContextPath() + "\\upload\\photo");
+    private Boolean isInFolder(String fileName, HttpServletRequest request) {
+        ClassLoader classLoader = getClass().getClassLoader();
+        String realPath = request.getRealPath("/upload/photo/");
+        File f = new File(realPath);
         String[] list = f.list();
+        System.out.println(list);
         for (String file : list) {
             if (fileName.equals(file)) {
                 return true;

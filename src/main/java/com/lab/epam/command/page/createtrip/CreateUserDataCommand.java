@@ -46,6 +46,10 @@ public class CreateUserDataCommand implements Command {
         Date begin = null;
         Date end = null;
         int daysBegin = -1;
+        Boolean correctDate = false;
+        Boolean correctBegin = false;
+        Boolean correctEnd = false;
+        String page = "portal?command=showMap";
 
         List<Category> listCategory = null;
         Boolean haveCategory = false;
@@ -70,7 +74,7 @@ public class CreateUserDataCommand implements Command {
         System.out.println("placeArrive " + placeArrive);
 
         if (dontKnowDate == null){
-            if (beginTrip != null){
+            if (beginTrip != null && !beginTrip.equalsIgnoreCase("")){
                 try {
                     begin = format.parse(beginTrip);
                     DateTime start = new DateTime(new Date());
@@ -81,6 +85,8 @@ public class CreateUserDataCommand implements Command {
                     if (daysBegin >= 0){
                         java.sql.Date sqltDate= new java.sql.Date(begin.getTime());
                         userDataTrip.setBeginTrip(sqltDate);
+                        correctBegin = true;
+
                     }else {
                         loger.info("Begindata is less than now" + beginTrip);
                     }
@@ -91,7 +97,7 @@ public class CreateUserDataCommand implements Command {
                 }
             }
 
-            if (endTrip != null){
+            if (endTrip != null && !endTrip.equalsIgnoreCase("")){
                 try {
                     end = format.parse(endTrip);
                     DateTime start = new DateTime(begin);
@@ -101,6 +107,7 @@ public class CreateUserDataCommand implements Command {
                     if (days >= 0 && daysBegin >= 0){
                         java.sql.Date sqltDate= new java.sql.Date(end.getTime());
                         userDataTrip.setEndTrip(sqltDate);
+                        correctEnd = true;
                     }else {
                         loger.info("Enddata is less than now" + endTrip);
                     }
@@ -109,6 +116,10 @@ public class CreateUserDataCommand implements Command {
                     e.printStackTrace();
 
                 }
+            }
+
+            if (correctBegin && correctEnd){
+                correctDate = true;
             }
 
             if ( userDataTrip.getBeginTrip() != null && userDataTrip.getEndTrip() != null){
@@ -171,6 +182,10 @@ public class CreateUserDataCommand implements Command {
         HttpSession session = request.getSession();
         System.out.println("userDataTrip " + userDataTrip);
         session.setAttribute("userDataTrip", userDataTrip);
+        request.setAttribute("correctDate", correctDate);
         response.sendRedirect("portal?command=showMap");
+        //request.getRequestDispatcher(page).forward(request, response);
+
     }
+
 }
