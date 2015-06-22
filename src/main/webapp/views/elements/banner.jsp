@@ -9,6 +9,7 @@
         <div class="container valign-wrapper">
             <div class="row">
                 <div class="col l6 offset-l3 s10 offset-s1 banner-text center-align">
+
                     <h2 class="white-text"><cdg:l18n key="index.title"/></h2>
                     <h4 class="white-text"><cdg:l18n key="banner.head"/></h4>
                     <h5 class="white-text"><cdg:l18n key="banner.text"/></h5>

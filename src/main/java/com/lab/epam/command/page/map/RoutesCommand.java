@@ -1,21 +1,21 @@
 package com.lab.epam.command.page.map;
 
 import com.lab.epam.command.controller.Command;
-import com.lab.epam.entity.Place;
-import com.lab.epam.entity.UserDataAboutTrip;
+import com.lab.epam.entity.*;
 import com.lab.epam.helper.ClassName;
+import com.lab.epam.service.PlaceDescriptionService;
+import com.lab.epam.service.PlaceImageService;
+import com.lab.epam.workWithMap.Distance;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import org.json.JSONException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by Dima on 19-Jun-15.
@@ -32,31 +32,48 @@ public class RoutesCommand implements Command {
         Comparator<Place> placeComparator = new Comparator<Place>() {
             @Override
             public int compare(Place o1, Place o2) {
-                double earthRadius = 6371000; //meters
-                double dLat = Math.toRadians(Double.parseDouble(o1.getLatitude()) - Double.parseDouble(o2.getLatitude()));
-                double dLng = Math.toRadians(Double.parseDouble(o1.getLongitude()) - Double.parseDouble(o2.getLongitude()));
-                double a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-                        Math.cos(Math.toRadians(Double.parseDouble(o1.getLatitude()))) * Math.cos(Math.toRadians(Double.parseDouble(o1.getLatitude()))) *
-                                Math.sin(dLng / 2) * Math.sin(dLng / 2);
-                double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-                float dist = (float) (earthRadius * c);
                 int result = 0;
-                if (dist < 0) {
-                    result = 1;
-                }
-                if (dist > 0) {
-                    result = -1;
-                }
-                if (dist == 0) {
-                    result = 0;
+                Distance distance = new Distance();
+                String obj1 =  ""+o1.getLatitude()+" "+o1.getLongitude()+"";
+                String obj2 =  ""+o2.getLatitude()+" "+o2.getLongitude()+"";
+                try {
+                    result = distance.getDistance(obj1,obj2);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
                 return result;
             }
         };
-        System.out.println(places);
-        Collections.sort(places,placeComparator);
-        System.out.println(places);
-        request.setAttribute("wayPlaces", places);
+       // Collections.sort(places, placeComparator);
+//        String obj1 =  ""+places.get(0).getLatitude()+" "+places.get(0).getLongitude()+"";
+//        Distance distance = new Distance();
+//        List<Place> placesSort = new ArrayList<>();
+//        List<Integer> dist = new ArrayList<>();
+//        for (int i = 1; i < places.size()-1; i++) {
+//            String obj2 =  ""+places.get(i).getLatitude()+" "+places.get(i).getLongitude()+"";
+//            try {
+//                dist.add(distance.getDistance(obj1, obj2));
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//        System.out.println(dist);
+        PlaceImageService placeImageService = new PlaceImageService();
+        List<PlaceMarkerWithPhoto> placeMarkerWithPhotos = new ArrayList<>();
+        PlaceDescriptionService placeDescriptionService = new PlaceDescriptionService();
+        ResourceBundle bundle = (ResourceBundle) session.getAttribute("bundle");
+
+        for (Place place : places) {
+            PlaceDescription placeDescription = placeDescriptionService.getPlaceDescriptionByIdPlace(place.getId(), bundle.getLocale().toString());
+            PlaceImage placeImage = placeImageService.getPlaceImageByPlaceId(place.getId());
+            if(placeImage.getReference() == null){
+                placeImage.setReference("default_building.jpg");
+            }
+            placeMarkerWithPhotos.add(new PlaceMarkerWithPhoto(place.getId(), placeDescription.getName(), place.getLatitude(), place.getLongitude(), placeImage.getReference(), placeDescription.getDescription()));
+        }
+        request.setAttribute("wayPlaces", placeMarkerWithPhotos);
         loger.info("Command RoutesCommand.");
         request.getRequestDispatcher("/views/pages/routes.jsp").forward(request, response);
     }
