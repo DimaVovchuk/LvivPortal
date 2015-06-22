@@ -44,8 +44,12 @@ public class EditProfileCommand implements Command {
             loger.warn("No user with login " + login);
         }
         if (user != null) {
-
-            UserImage userImage = userImageService.getByPK(user.getAvatar());
+            UserImage userImage = null;
+            if(user.getAvatar() != null){
+                userImage = userImageService.getByPK(user.getAvatar());
+            }else{
+                userImage = new UserImage(user.getId(),"user.png");
+            }
 
             request.setAttribute("name", user.getName());
             request.setAttribute("surname", user.getSurname());

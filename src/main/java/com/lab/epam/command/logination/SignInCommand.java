@@ -50,6 +50,7 @@ public class SignInCommand implements Command {
             }
             session.setAttribute("avatar", avatar);
 
+
             loger.info("User " + login + " signing in ");
             request.getRequestDispatcher("/views/pages/user-cabinet.jsp").forward(request, response);
         } else {
