@@ -322,14 +322,21 @@ header img.text-middle {
     border-radius: 0;
 }
 
+#map-info .collection {
+    margin: 0;
+    height: calc(100% - 100px);
+    overflow-y: auto;
+}
+
 #map-info .collection .collection-item {
     padding: 5px 10px;
+    height: 60px;
 }
 
 #map-info img {
     width: 50px;
     height: 50px;
-    vertical-align: middle;
+    float: left;
     margin-right: 20px;
 }
 
@@ -360,6 +367,10 @@ header img.text-middle {
 
     #map-side {
         width: 40%;
+    }
+
+    #map-info .collection {
+        height: calc(100% - 92px);
     }
 }
 
