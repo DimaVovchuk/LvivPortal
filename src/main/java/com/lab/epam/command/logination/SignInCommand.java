@@ -43,7 +43,7 @@ public class SignInCommand implements Command {
             session.setAttribute("role", user.getRoleID());
 
             UserImageService userImageService = new UserImageService();
-            UserImage userImagee = userImageService.getUserImageByUserIdOne(userID);
+            UserImage userImagee = userImageService.getByPK(user.getAvatar());
             String avatar = null;
             if(userImagee !=null) {
                 avatar = userImagee.getReference();

@@ -62,7 +62,7 @@ public class SaveWayCommand implements Command {
                     for (Integer key : keys) {
                         List<Place> places = placesDay.get(key);
                         for (Place place: places){
-                            if (!place.isVisible()){
+                            if (!place.getVisible()){
                                 servicePlace.create(place);
                                 place = servicePlace.getPlaceByLongitudeLatitude(place.getLongitude(), place.getLatitude());
                                 loger.info("Create castom place is successfull");
