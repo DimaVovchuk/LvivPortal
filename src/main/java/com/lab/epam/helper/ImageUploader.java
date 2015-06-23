@@ -63,7 +63,7 @@ public class ImageUploader {
                 String imageName = item.getName();
                 HttpSession session = request.getSession();
 
-                Pattern p = Pattern.compile("([^\\s]+(?=\\.(jpg|gif|png))\\.\\2)");
+                Pattern p = Pattern.compile("([^\\s]+(?=\\.(jpg|JPG|gif|png))\\.\\2)");
                 Matcher m = p.matcher(imageName);
                 boolean matches = !m.matches();
                 if(!matches) {
