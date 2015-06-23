@@ -33,7 +33,7 @@ public class User implements Identified<Integer> {
     @Column("about")
     private String about;
     @Column("avatar_id")
-    private Integer avatar = null;
+    private Integer avatar;
     @Column("deleted")
     private Boolean deleted = false;
 
