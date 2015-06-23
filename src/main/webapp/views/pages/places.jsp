@@ -59,18 +59,22 @@
                                     <a href="portal?command=placeInformation&place_id=${place.id}">
                                         <h5><c:out value="${place.name}"/></h5></a>
                                     <c:out value="${place.adress}"/>
-                                    <div class="right-align">
-                                    <a class="btn-floating btn-large waves-effect waves-light cyan darken-2"
-                                       href="portal?command=rectRating&place_id=${place.id}&category=${requestScope.category}">
-                                        <i class="material-icons">thumb_up</i>
-                                    </a>
-
-                                    <a class="btn-floating btn-large waves-effect waves-light cyan darken-2"
-                                       href="portal?command=rectRating&place_id=${place.id}&category=${requestScope.category}">
-                                        <i class="material-icons">thumb_down</i>
-                                    </a>
-                                        </div>
-
+                                    <c:if test="${login!=null}">
+                                        <div class="right-align">
+                                            <c:if test="${place.rating!=1}">
+                                        <a class="btn-floating btn-large waves-effect waves-light cyan darken-2"
+                                           href="portal?command=rectRating&place_id=${place.id}&category=${requestScope.category}">
+                                            <i class="material-icons">thumb_up</i>
+                                        </a>
+                                            </c:if>
+                                            <c:if test="${place.rating!=-1}">
+                                            <a class="btn-floating btn-large waves-effect waves-light cyan darken-2"
+                                           href="portal?command=rectRating&place_id=${place.id}&category=${requestScope.category}">
+                                            <i class="material-icons">thumb_down</i>
+                                        </a>
+                                            </c:if>
+                                            </div>
+                                </c:if>
 
                                 </div>
                             </div>

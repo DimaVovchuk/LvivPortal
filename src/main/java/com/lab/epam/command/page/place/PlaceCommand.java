@@ -3,9 +3,7 @@ package com.lab.epam.command.page.place;
 import com.lab.epam.command.controller.Command;
 import com.lab.epam.entity.*;
 import com.lab.epam.helper.ClassName;
-import com.lab.epam.service.PlaceDescriptionService;
-import com.lab.epam.service.PlaceImageService;
-import com.lab.epam.service.PlaceService;
+import com.lab.epam.service.*;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -30,6 +28,8 @@ public class PlaceCommand implements Command {
 
         PlaceDescriptionService placeDescriptionService = new PlaceDescriptionService();
         PlaceImageService placeImageService = new PlaceImageService();
+        PlaceRatingService placeRatingService = new PlaceRatingService();
+        UserService userService = new UserService();
 
         HttpSession session = request.getSession();
 
@@ -132,25 +132,45 @@ public class PlaceCommand implements Command {
         }
         List<PlaceDescription> placeDescriptions = new ArrayList<>();
         List<PlaceImage> placeImages = new ArrayList<>();
+        List<PlaceRating> placeRatings = new ArrayList<>();
 
         Comparator comparator = new Place.PlaceComparator();
         Collections.sort(places, comparator);
         Integer place_id;
         PlaceImage placeImage;
         PlaceDescription placeDescription;
+        PlaceRating placeRating;
+
+        String login = (String)session.getAttribute("login");
+        User user = null;
+        if (login != null){
+            user = userService.geUserByLogin(login);
+        }
+
         for (Place place : places) {
             place_id = place.getId();
 
             placeDescription = placeDescriptionService.getPlaceDescriptionByIdPlace(place_id, language);
             placeDescriptions.add(placeDescription);
+
             placeImage = placeImageService.getPlaceImageByPlaceId(place_id);
             if (placeImage == null || !isInFolder(placeImage.getReference(), request)) {
                 placeImage = new PlaceImage(place_id, "default_building.jpg");
             }
             placeImages.add(placeImage);
+
+            if (user != null){
+                placeRating = placeRatingService.getPlaceRatingByPlaceAndUser(place_id,user.getId());
+                if (placeRating == null){
+                    placeRating = new PlaceRating(user.getId(),place_id,0);
+                }
+                placeRatings.add(placeRating);
+
+            }
+
         }
 
-        List<PlaceDescriptionAndPhoto> placesPageInfo = getPlaceDescriptionAndPhotoList(places, placeDescriptions, placeImages);
+        List<PlaceDescriptionAndPhoto> placesPageInfo = getPlaceDescriptionAndPhotoList(places, placeDescriptions, placeImages, placeRatings);
         request.setAttribute("category", category);
         request.setAttribute("places", placesPageInfo);
         request.setAttribute("userDataTrip", userDataAboutTrip);
@@ -159,20 +179,41 @@ public class PlaceCommand implements Command {
         request.getRequestDispatcher("/views/pages/places.jsp").forward(request, response);
     }
 
-    private List<PlaceDescriptionAndPhoto> getPlaceDescriptionAndPhotoList(List<Place> places, List<PlaceDescription> placeDescriptions, List<PlaceImage> placeImages) {
+    private List<PlaceDescriptionAndPhoto> getPlaceDescriptionAndPhotoList(List<Place> places, List<PlaceDescription> placeDescriptions, List<PlaceImage> placeImages, List<PlaceRating> placeRatings) {
         List<PlaceDescriptionAndPhoto> list = new ArrayList<>();
         for (PlaceDescription placeDescription : placeDescriptions) {
             for (Place place : places) {
                 for (PlaceImage placeImage : placeImages) {
-                    if (place.getId() == placeDescription.getPlace_id()) {
-                        if (place.getId() == placeImage.getPlace_id()) {
-                            PlaceDescriptionAndPhoto item = new PlaceDescriptionAndPhoto();
-                            item.setId(place.getId());
-                            item.setImageReference(placeImage.getReference());
-                            item.setName(placeDescription.getName());
-                            item.setAdress(place.getAdress());
-                           // System.out.println(item.toString());
-                            list.add(item);
+                    if (!placeRatings.isEmpty()){
+                        for (PlaceRating placeRating : placeRatings) {
+                            if (place.getId() == placeDescription.getPlace_id()) {
+                                if (place.getId() == placeImage.getPlace_id()) {
+                                    if (placeRating.getPlace_id() == place.getId()) {
+                                        PlaceDescriptionAndPhoto item = new PlaceDescriptionAndPhoto();
+                                        item.setId(place.getId());
+                                        item.setImageReference(placeImage.getReference());
+                                        item.setName(placeDescription.getName());
+                                        item.setAdress(place.getAdress());
+                                        item.setRating(placeRating.getRating());
+                                        System.out.println(item.toString());
+                                        list.add(item);
+                                        // System.out.println(item.toString());
+                                    }
+                                }
+                            }
+                        }
+                    } else {
+                        if (place.getId() == placeDescription.getPlace_id()) {
+                            if (place.getId() == placeImage.getPlace_id()) {
+                                PlaceDescriptionAndPhoto item = new PlaceDescriptionAndPhoto();
+                                item.setId(place.getId());
+                                item.setImageReference(placeImage.getReference());
+                                item.setName(placeDescription.getName());
+                                item.setAdress(place.getAdress());
+                                item.setRating(0);
+                                System.out.println(item.toString());
+                                list.add(item);
+                            }
                         }
                     }
                 }
