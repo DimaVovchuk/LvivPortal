@@ -299,6 +299,38 @@ header img.text-middle {
     background: #0ab2d2;
 }
 
+.place-page-navigation {
+    width: 100%;
+    height: 55px;
+    padding-top: 20px;
+    text-align: center;
+}
+
+.place-page-navigation a {
+    margin-left: 5px;
+    margin-right: 5px;
+    color: black;
+}
+
+.place-page-navigation a.page_link {
+    padding: 5px 10px;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+}
+
+.place-page-navigation a.active_page {
+    background-color: #0ab2d2;
+}
+
+.place-page-navigation a.first_link,
+.place-page-navigation a.last_link,
+.place-page-navigation a.previous_link,
+.place-page-navigation a.next_link {
+    display: none;
+}
+
 /* MAP */
 .map .row .col {
     padding: 0;

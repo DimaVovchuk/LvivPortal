@@ -5,6 +5,7 @@
 <script src="${pageContext.request.contextPath}/js/jquery.validate.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/jquery.matchHeight-min.js"></script>
 <script src="${pageContext.request.contextPath}/js/jquery.dotdotdot.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery.pajinate.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/materialize.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/markerclusterer.js"></script>
 <script src="${pageContext.request.contextPath}/js/handlebars-v3.0.3.js"></script>
