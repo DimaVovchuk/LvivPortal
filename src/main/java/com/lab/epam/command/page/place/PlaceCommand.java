@@ -9,13 +9,12 @@ import com.lab.epam.service.PlaceService;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import javax.servlet.http.HttpSession;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
-import java.net.URI;
 import java.util.*;
 
 /**
@@ -94,9 +93,6 @@ public class PlaceCommand implements Command {
             userDataAboutTrip.setPlaceDay(map);
             loger.info("Set map to userDataAboutTrip");
         }
-        System.out.println("userDataTrip " + userDataAboutTrip);
-        System.out.println("dayNumber " + dayNumber);
-        System.out.println("placeId " + placeId);
         session.setAttribute("userDataTrip", userDataAboutTrip);
 
         String category = request.getParameter("category");

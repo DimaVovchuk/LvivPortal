@@ -105,7 +105,7 @@ public class Place implements Identified<Integer> {
         this.category_id = category_id;
     }
 
-    public Boolean isVisible() {
+    public Boolean getVisible() {
         return visible;
     }
 

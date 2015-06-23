@@ -50,10 +50,23 @@
                 waypoints: waypts,
                 optimizeWaypoints: true,
                 travelMode: google.maps.TravelMode.WALKING
+
             };
             directionsService.route(request, function(response, status) {
                 if (status == google.maps.DirectionsStatus.OK) {
                     directionsDisplay.setDirections(response);
+                    <%--var image = {--%>
+                        <%--url: "${pageContext.request.contextPath}/upload/photo/${wayPlaces[i].imageReference}",--%>
+                        <%--scaledSize: new google.maps.Size(60, 40),--%>
+                        <%--origin: new google.maps.Point(0, 0),--%>
+                        <%--anchor: new google.maps.Point(0, 0)--%>
+                    <%--};--%>
+                    <%--var marker = new google.maps.Marker({--%>
+                        <%--position: new google.maps.LatLng(${wayPlaces[i].latitude}, ${wayPlaces[i].longitude}),--%>
+                        <%--info: contentString,--%>
+                        <%--animation: google.maps.Animation.DROP,--%>
+                        <%--icon: image--%>
+                    <%--});--%>
                 }
             });
         }
