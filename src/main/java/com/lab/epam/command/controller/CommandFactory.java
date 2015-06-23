@@ -19,6 +19,7 @@ import com.lab.epam.command.page.photo.ShowAllUserPhoto;
 import com.lab.epam.command.page.photo.UpLoadPictureCommand;
 import com.lab.epam.command.page.place.PlaceCommand;
 import com.lab.epam.command.page.place.PlaceInfortmationCommand;
+import com.lab.epam.command.page.place.RectRatingCommand;
 import com.lab.epam.command.page.place.SaveEditPlaceCommand;
 import com.lab.epam.command.page.user.*;
 import com.lab.epam.command.page.user.admin.EditPlaceCommand;
@@ -69,6 +70,7 @@ public class CommandFactory {
         commands.put("placeJSON", new PlaceJSONCommand());
         commands.put("savePlace", new SavePlaceCommand());
         commands.put("saveEditPlace", new SaveEditPlaceCommand());
+        commands.put("rectRating", new RectRatingCommand());
     }
 
     public static void createCommand(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

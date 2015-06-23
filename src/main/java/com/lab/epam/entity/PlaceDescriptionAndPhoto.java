@@ -6,12 +6,30 @@ public class PlaceDescriptionAndPhoto {
     private String imageReference;
     private String name;
     private String adress;
+    private Integer rating = 0;
 
     public PlaceDescriptionAndPhoto(Integer id, String imageReference, String name, String adress) {
         this.id = id;
         this.imageReference = imageReference;
         this.name = name;
         this.adress = adress;
+    }
+
+    public Integer getRating() {
+        return rating;
+    }
+
+    public void setRating(Integer rating) {
+        this.rating = rating;
+    }
+
+    public PlaceDescriptionAndPhoto(Integer id, String imageReference, String name, String adress, Integer rating) {
+        this.id = id;
+        this.imageReference = imageReference;
+        this.name = name;
+        this.adress = adress;
+        this.rating = rating;
+
     }
 
     public PlaceDescriptionAndPhoto() {
@@ -57,6 +75,7 @@ public class PlaceDescriptionAndPhoto {
                 ", imageReference='" + imageReference + '\'' +
                 ", name='" + name + '\'' +
                 ", adress='" + adress + '\'' +
+                ", rating='" + rating + '\'' +
                 '}';
     }
 }

@@ -4,10 +4,20 @@
 <!DOCTYPE HTML>
 <html>
 <head>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <title><cdg:l18n key="places.title"/></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="keywords" content=""/>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script>
+        $("#timePlace").mousemove( function(e){
+            $("#timeValue").html($(this).val());
+        });
+        $("#timePlace").change( function(e){
+            $("#timeValue").html($(this).val());
+        });
+    </script>
 </head>
 
 <jsp:include page="/views/elements/css.jsp"/>
@@ -49,6 +59,23 @@
                                     <a href="portal?command=placeInformation&place_id=${place.id}">
                                         <h5><c:out value="${place.name}"/></h5></a>
                                     <c:out value="${place.adress}"/>
+                                    <c:if test="${login!=null}">
+                                        <div class="right-align">
+                                            <c:if test="${place.rating!=1}">
+                                        <a class="btn-floating btn-large waves-effect waves-light cyan darken-2"
+                                           href="portal?command=rectRating&place_id=${place.id}&category=${requestScope.category}">
+                                            <i class="material-icons">thumb_up</i>
+                                        </a>
+                                            </c:if>
+                                            <c:if test="${place.rating!=-1}">
+                                            <a class="btn-floating btn-large waves-effect waves-light cyan darken-2"
+                                           href="portal?command=rectRating&place_id=${place.id}&category=${requestScope.category}">
+                                            <i class="material-icons">thumb_down</i>
+                                        </a>
+                                            </c:if>
+                                            </div>
+                                </c:if>
+
                                 </div>
                             </div>
                         </c:forEach>
@@ -87,6 +114,14 @@
 
 <jsp:include page="/views/elements/footer.jsp"/>
 
+<script>
+    $(".match-col").matchHeight({
+        property: 'height'
+    });
+</script>
+
+
+
 <div id="chooseDay" class="modal">
     <div class="modal-content">
         <h4 id="ID"></h4>
@@ -100,29 +135,28 @@
                 <input placeholder="Placeholder" id="place_id" name="place_id" type="hidden">
             </div>
 
-            <div class="input-field col s6">
-                <input placeholder="Placeholder" name="category" type="hidden" value="${requestScope.category}">
-            </div>
-            <label>Day number select</label>
-            <select name="dayNumber" class="browser-default">
-                <option value="" disabled selected>Choose your option</option>
+        <label><cdg:l18n key="select.day.number"/></label>
+        <select name="dayNumber" class="browser-default">
                 <c:forEach var="i" begin="1" end="${userDataTrip.dayCount}">
                     <option width="10px" value="${i}"><c:out value="${i}"/></option>
                 </c:forEach>
             </select>
+        <label><cdg:l18n key="select.place.time"/></label>
+        <p class="range-field">
+            <input type="range" name="timePlace" id="timePlace" min="15" value="15" step="15" max="240" />
+        <p id="timeValue"></p>
+        </p>
 
-            <p class="range-field">
-                <input type="range" name="timePlace" id="timePlace" min="5" max="30"/>
+        <button class="btn waves-effect waves-light cyan darken-2" type="submit"
+                >OK
+        </button>
+    </form>
 
-            <p id="timeValue"></p>
-            <button class="btn waves-effect waves-light cyan darken-2" type="submit"
-                    >OK
-            </button>
-        </form>
-    </div>
-    <div class="modal-footer">
-    </div>
 </div>
+<div class="modal-footer">
+
+</div>
+    </div>
 
 <script src="${pageContext.request.contextPath}/js/pages/places.js"></script>
 

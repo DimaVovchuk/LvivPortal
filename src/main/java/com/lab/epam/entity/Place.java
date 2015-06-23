@@ -132,7 +132,7 @@ public class Place implements Identified<Integer> {
 
    public static class PlaceComparator implements Comparator<Object> {
         public int compare(Object cC1, Object cC2) {
-            return ((Place)cC1).rating.compareTo(((Place)cC2).rating);
+            return ((Place)cC2).rating.compareTo(((Place)cC1).rating);
         }
     }
 
