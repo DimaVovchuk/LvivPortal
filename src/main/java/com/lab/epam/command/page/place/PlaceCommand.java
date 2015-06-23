@@ -151,12 +151,6 @@ public class PlaceCommand implements Command {
         }
 
         List<PlaceDescriptionAndPhoto> placesPageInfo = getPlaceDescriptionAndPhotoList(places, placeDescriptions, placeImages);
-        //request.setAttribute("places", places);
-        loger.info("places = " + places);
-        //request.setAttribute("placeDescriptions", placeDescriptions);
-        loger.info("placeDescriptions = " + placeDescriptions);
-        loger.info("placeImages = " + placeImages);
-        //request.setAttribute("placeImages", placeImages);
         request.setAttribute("category", category);
         request.setAttribute("places", placesPageInfo);
         request.setAttribute("userDataTrip", userDataAboutTrip);
