@@ -36,16 +36,15 @@ public class SignInCommand implements Command {
         UserService serviceUser = new UserService();
         User user = serviceUser.geUserByLogin(login);
         session = request.getSession();
-        if (user.getPassword()!= null && user.getPassword().equals(MD5Creator.getMD5(password + login))) {
+        if (user.getPassword() != null && user.getPassword().equals(MD5Creator.getMD5(password + login))) {
             Integer userID = user.getId();
             session.setAttribute("login", login);
             session.setAttribute("usedID", userID);
             session.setAttribute("role", user.getRoleID());
-
-            UserImageService userImageService = new UserImageService();
-            UserImage userImagee = userImageService.getByPK(user.getAvatar());
             String avatar = null;
-            if(userImagee !=null) {
+            if (user.getAvatar() != null) {
+                UserImageService userImageService = new UserImageService();
+                UserImage userImagee = userImageService.getByPK(user.getAvatar());
                 avatar = userImagee.getReference();
             }
             session.setAttribute("avatar", avatar);
