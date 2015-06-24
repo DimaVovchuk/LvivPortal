@@ -5,6 +5,7 @@ package com.lab.epam.command.controller;
  */
 
 import com.lab.epam.command.email.*;
+import com.lab.epam.command.logination.*;
 import com.lab.epam.command.page.place.PlaceJSONCommand;
 import com.lab.epam.command.locale.LocaleCommand;
 import com.lab.epam.command.logination.SignInCommand;
@@ -70,6 +71,8 @@ public class CommandFactory {
         commands.put("placeJSON", new PlaceJSONCommand());
         commands.put("savePlace", new SavePlaceCommand());
         commands.put("saveEditPlace", new SaveEditPlaceCommand());
+        commands.put("signUpFormCheck", new SignUpFormCheckCommand());
+        commands.put("signInFormCheck", new SignInFormCheckCommand());
         commands.put("rectRating", new RectRatingCommand());
     }
 
