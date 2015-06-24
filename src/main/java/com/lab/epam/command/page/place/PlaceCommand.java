@@ -62,18 +62,18 @@ public class PlaceCommand implements Command {
 
         if (placeId != null && userDataAboutTrip != null && dayNumber != 0) {
             onePlaceForWay = servicePlace.getByPK(Integer.parseInt(placeId));
-            loger.info("Get place is successfull");
+          //  loger.info("Get place is successfull");
             Map<Integer, List<Place>> map = userDataAboutTrip.getPlaceDay();
-            loger.info("Get map is successfull");
+            //loger.info("Get map is successfull");
             Set<Integer> keys = map.keySet();
             if (onePlaceForWay != null) {
                 if (map.isEmpty() || !keys.contains(dayNumber)) {
                     placeForWay = new ArrayList<>();
-                    loger.info("Create new List<Place>");
-                    loger.info("Day is " + dayNumber);
+              //      loger.info("Create new List<Place>");
+              //      loger.info("Day is " + dayNumber);
                 } else {
                     placeForWay = map.get(dayNumber);
-                    loger.info("Get placeForWay");
+                //    loger.info("Get placeForWay");
                     for (Place place : placeForWay) {
                         if (place.getId() == onePlaceForWay.getId()) {
                             isInWay = true;
@@ -84,7 +84,7 @@ public class PlaceCommand implements Command {
                     if (timePlace != 0) {
                         onePlaceForWay.setPlace_time(timePlace);
                         placeForWay.add(onePlaceForWay);
-                        loger.info("Add new place to placeForWay. Place is " + onePlaceForWay);
+                  //      loger.info("Add new place to placeForWay. Place is " + onePlaceForWay);
                     }
                 }
             }
@@ -210,7 +210,7 @@ public class PlaceCommand implements Command {
                                 item.setName(placeDescription.getName());
                                 item.setAdress(place.getAdress());
                                 item.setRating(0);
-                                System.out.println(item.toString());
+                             //   System.out.println(item.toString());
                                 list.add(item);
                             }
                         }

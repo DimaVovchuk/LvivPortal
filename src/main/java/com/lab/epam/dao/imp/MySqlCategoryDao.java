@@ -47,7 +47,7 @@ public class MySqlCategoryDao extends AbstractJDBCDao<Category, Integer> {
         try (PreparedStatement statement = conn.prepareStatement(GET_CATEGORY_BY_NAME)) {
             statement.setString(1, categotrName);
             ResultSet rs = statement.executeQuery();
-            loger.info("Get category with category name " + categotrName + " is succesfull");
+          //  loger.info("Get category with category name " + categotrName + " is succesfull");
             list = parseResultSet(rs);
             if (list.size() <= 0){
                 loger.info("DB has any category with category name " + categotrName);
@@ -58,7 +58,7 @@ public class MySqlCategoryDao extends AbstractJDBCDao<Category, Integer> {
                 return null;
             }
         } catch (Exception e) {
-            loger.warn("Cant get category with category name " + categotrName);
+           // loger.warn("Cant get category with category name " + categotrName);
             throw new PersistException(e);
         } finally {
             connection.putback(conn);

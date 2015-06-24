@@ -92,7 +92,7 @@ public class UserCabinetCommand implements Command {
             page = "/views/pages/user-cabinet.jsp";
         }
 
-        loger.info("Page is " + page);
+        //loger.info("Page is " + page);
 
         loger.info("Command User Cabinet.");
         request.getRequestDispatcher(page).forward(request, response);
@@ -108,16 +108,16 @@ public class UserCabinetCommand implements Command {
             way_id = way.getId();
             way_place_list = placeService.getPlaceByWayId(way_id);
             if (way_place_list != null && !way_place_list.isEmpty()){
-                loger.info(" way_place_list are " + way_place_list + " way_id" + way_id);
+              //  loger.info(" way_place_list are " + way_place_list + " way_id" + way_id);
                 way_placeDescription_list = getPlaceDescriptionByPlace(way_place_list);
-                loger.info(" way_placeDescription_list are " + way_placeDescription_list);
+               // loger.info(" way_placeDescription_list are " + way_placeDescription_list);
                 way_place.put(way_id, way_placeDescription_list);
                 wayPlaceImages.put(way_id, getPlaceImageByPlace(way_place_list));
             }
 
         }
-        loger.info(" way_place are " + way_place);
-        loger.info(" wayPlaceImages are " + wayPlaceImages);
+        //loger.info(" way_place are " + way_place);
+        //loger.info(" wayPlaceImages are " + wayPlaceImages);
         return way_place;
     }
 

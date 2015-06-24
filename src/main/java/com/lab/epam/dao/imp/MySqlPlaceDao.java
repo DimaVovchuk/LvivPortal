@@ -96,7 +96,7 @@ public class MySqlPlaceDao extends AbstractJDBCDao<Place, Integer> {
         try (PreparedStatement statement = conn.prepareStatement(GET_PLACE_BY_WAY_ID)) {
             statement.setInt(1, way_id);
             ResultSet rs = statement.executeQuery();
-            loger.info("Get places from way with id" + way_id + " is succesfull ");
+           // loger.info("Get places from way with id" + way_id + " is succesfull ");
             list = parseResultSet(rs);
             if (list.size() <= 0){
                 loger.info("DB has any place from way with " + way_id + " way_id");
@@ -141,9 +141,9 @@ public class MySqlPlaceDao extends AbstractJDBCDao<Place, Integer> {
             statement.setString(1, longitude);
             statement.setString(2, latitude);
             ResultSet rs = statement.executeQuery();
-            loger.info("Get places with longitude " + longitude + " and latitude " + latitude + " is succesfull ");
+          //  loger.info("Get places with longitude " + longitude + " and latitude " + latitude + " is succesfull ");
             list = parseResultSet(rs);
-            loger.info("Parse result with Transformer is succesfull");
+            //loger.info("Parse result with Transformer is succesfull");
             if (list.size() <= 0){
                 loger.info("DB has any place with longitude " + longitude + " and latitude " + latitude);
                 return null;
@@ -172,7 +172,7 @@ public class MySqlPlaceDao extends AbstractJDBCDao<Place, Integer> {
             if (count != 1) {
                 throw new PersistException("On persist modify more then 1 record: " + count);
             } else {
-                System.out.println("Create is succesfule");
+             //   System.out.println("Create is succesfule");
             }
         } catch (Exception e) {
             throw new PersistException(e);
@@ -191,7 +191,7 @@ public class MySqlPlaceDao extends AbstractJDBCDao<Place, Integer> {
             if (count != 1) {
                 throw new PersistException("On persist modify more then 1 record: " + count);
             } else {
-                System.out.println("Create user_place is succesfule");
+                //System.out.println("Create user_place is succesfule");
             }
         } catch (Exception e) {
             throw new PersistException(e);

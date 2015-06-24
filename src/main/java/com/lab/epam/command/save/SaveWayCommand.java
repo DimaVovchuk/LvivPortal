@@ -52,7 +52,7 @@ public class SaveWayCommand implements Command {
                 if (placesDay != null){
                     wayDays = placeForWay.getDayCount();
                     wayService.create(new Way(0, beginTrip, endTrip));
-                    loger.info("Create way is successfull");
+                    //loger.info("Create way is successfull");
                     Way way = wayService.getLastAdded();
                     if (user != null && way != null && wayDays > 0){
                         wayService.createUserWay(user.getId(), way.getId(), wayDays);
@@ -78,7 +78,7 @@ public class SaveWayCommand implements Command {
         }else {
             loger.warn("You want create way without places");
         }
-        loger.warn("You create new way in DB");
+        loger.info("You create new way in DB");
         response.sendRedirect("portal?command=userWays");
 
     }

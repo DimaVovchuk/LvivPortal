@@ -106,7 +106,7 @@ public abstract class AbstractJDBCDao<T extends Identified<PK>, PK extends Integ
             if (count != 1) {
                 throw new PersistException("On persist modify more then 1 record: " + count);
             } else {
-                System.out.println("Create is succesfule");
+                //System.out.println("Create is succesfule");
             }
         } catch (Exception e) {
             throw new PersistException(e);

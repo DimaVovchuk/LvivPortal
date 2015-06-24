@@ -69,13 +69,10 @@ public class PlaceJSONCommand implements Command {
             map.put(dayNumber, placeForWay);
             userDataAboutTrip.setPlaceDay(map);
         }
-        System.out.println("userDataTrip " + userDataAboutTrip);
-        System.out.println("dayNumber " + dayNumber);
-        System.out.println("placeId " + placeId);
         session.setAttribute("userDataTrip", userDataAboutTrip);
 
         String category = request.getParameter("category");
-        System.out.println("category " + category);
+        //System.out.println("category " + category);
         if (category == null) {
             category = "";
         }
@@ -140,7 +137,7 @@ public class PlaceJSONCommand implements Command {
                             item.setImageReference(placeImage.getReference());
                             item.setName(placeDescription.getName());
                             item.setAdress(place.getAdress());
-                            System.out.println(item.toString());
+                            //System.out.println(item.toString());
                             list.add(item);
                         }
                     }

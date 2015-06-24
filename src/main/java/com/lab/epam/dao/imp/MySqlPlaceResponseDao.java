@@ -46,7 +46,7 @@ public class MySqlPlaceResponseDao extends AbstractJDBCDao<PlaceResponse, Intege
             ResultSet rs = statement.executeQuery();
             list = parseResultSet(rs);
             if (list.size() <= 0){
-                loger.info("DB has any place_response with " + place_id + " place_id");
+             //   loger.info("DB has any place_response with " + place_id + " place_id");
                 return null;
             }
         } catch (Exception e) {

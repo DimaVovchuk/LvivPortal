@@ -533,3 +533,11 @@ footer.page-footer {
     width: 400px;
     margin-top: 10%;
 }
+
+.routs a {
+    color: #000;
+    font-family: 'Lora', serif;
+    font-weight: 100;
+    font-size: small;
+
+}

@@ -64,16 +64,6 @@ public class CreateUserDataCommand implements Command {
         String lunch = request.getParameter("lunch");
         String placeArrive = request.getParameter("placeArrive");
 
-        System.out.println("beginTrip " + beginTrip);
-        System.out.println("endTrip " + endTrip);
-        System.out.println("dontKnowDate " + dontKnowDate);
-        System.out.println("automatic " + automatic);
-        System.out.println("architecture " + architecture);
-        System.out.println("churches " + churches);
-        System.out.println("theatres " + theatres);
-        System.out.println("lunch " + lunch);
-        System.out.println("placeArrive " + placeArrive);
-
         if (dontKnowDate == null){
             if (beginTrip != null && !beginTrip.equalsIgnoreCase("")){
                 try {
@@ -181,7 +171,7 @@ public class CreateUserDataCommand implements Command {
         }
 
         HttpSession session = request.getSession();
-        System.out.println("userDataTrip " + userDataTrip);
+        //System.out.println("userDataTrip " + userDataTrip);
         session.setAttribute("userDataTrip", userDataTrip);
 
         response.setContentType("application/json");

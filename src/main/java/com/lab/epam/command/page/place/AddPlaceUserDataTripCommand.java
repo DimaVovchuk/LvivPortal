@@ -85,7 +85,7 @@ public class AddPlaceUserDataTripCommand implements Command {
             userDataAboutTrip.setPlaceDay(map);
             loger.info("Set map to userDataAboutTrip");
         }
-        System.out.println("userDataAboutTrip " + userDataAboutTrip);
+     //   System.out.println("userDataAboutTrip " + userDataAboutTrip);
         session.setAttribute("userDataTrip", userDataAboutTrip);
         request.getRequestDispatcher("portal?command=userPlace").forward(request, response);
 

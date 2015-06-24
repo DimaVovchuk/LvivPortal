@@ -44,9 +44,9 @@ public class MySqlUserImageDao extends AbstractJDBCDao<UserImage, Integer> {
         try (PreparedStatement statement = conn.prepareStatement(GET_IMAGE_BY_USER_ID)) {
             statement.setInt(1, user_id);
             ResultSet rs = statement.executeQuery();
-            loger.info("Get images from user_images is succesfull " + rs);
+            //loger.info("Get images from user_images is succesfull " + rs);
             list = parseResultSet(rs);
-            loger.info("Parse result with Transformer is succesfull list = " + list);
+            //loger.info("Parse result with Transformer is succesfull list = " + list);
             if (list.size() <= 0){
                 loger.info("DB has any user_images with " + user_id + " user_id");
                 return null;
@@ -69,7 +69,7 @@ public class MySqlUserImageDao extends AbstractJDBCDao<UserImage, Integer> {
         try (PreparedStatement statement = conn.prepareStatement(GET_IMAGE_BY_USER_ID)) {
             statement.setInt(1, user_id);
             ResultSet rs = statement.executeQuery();
-            loger.info("Get images from user_images is succesfull " + rs);
+           // loger.info("Get images from user_images is succesfull " + rs);
             list = parseResultSet(rs);
             loger.info("Parse result with Transformer is succesfull list = " + list);
             if (list.size() <= 0){

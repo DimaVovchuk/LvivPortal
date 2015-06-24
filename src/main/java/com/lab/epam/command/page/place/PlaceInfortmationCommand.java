@@ -102,7 +102,7 @@ public class PlaceInfortmationCommand implements Command {
                 }
                 if (!isInWay) {
                     placeForWay.add(onePlaceForWay);
-                    loger.info("Add new place to placeForWay. Place is " + onePlaceForWay);
+                  //  loger.info("Add new place to placeForWay. Place is " + onePlaceForWay);
                 }
             }
             map.put(dayNumber, placeForWay);
@@ -110,9 +110,6 @@ public class PlaceInfortmationCommand implements Command {
             userDataAboutTrip.setPlaceDay(map);
             loger.info("Set map to userDataAboutTrip");
         }
-        System.out.println("userDataTrip " + userDataAboutTrip);
-        System.out.println("dayNumber " + dayNumber);
-        System.out.println("placeId " + placeId);
         session.setAttribute("userDataTrip",userDataAboutTrip);
 
         String login = (String)session.getAttribute("login");
@@ -145,7 +142,7 @@ public class PlaceInfortmationCommand implements Command {
 
         Place place = servicePlace.getByPK(place_id);
 
-        loger.info("Place with id " + place_id + " is " + place);
+       // loger.info("Place with id " + place_id + " is " + place);
 
         PlaceDescription placeDescription;
         PlaceImage placeImage;
@@ -184,9 +181,9 @@ public class PlaceInfortmationCommand implements Command {
         }
 
         placeResponse = placeResponseService.getPlaceResponseByPlace(place_id);
-        loger.info("Place responses for place_id " + place_id + " is " + placeResponse);
+        //loger.info("Place responses for place_id " + place_id + " is " + placeResponse);
         if (placeResponse == null){
-            loger.info("Not place response for place_id " + place_id);
+           // loger.info("Not place response for place_id " + place_id);
         } else{
             for (PlaceResponse placeRespons: placeResponse) {
                 loger.info("Place response " + placeRespons);
@@ -237,28 +234,28 @@ public class PlaceInfortmationCommand implements Command {
         loger.info("Images " + userImages);
 
         request.setAttribute("place", place);
-        loger.info("place " + place);
+        //loger.info("place " + place);
         request.setAttribute("placeDescription", placeDescription);
-        loger.info("placeDescription " + placeDescription);
+        //loger.info("placeDescription " + placeDescription);
         request.setAttribute("placeImage", placeImage);
-        loger.info("placeImage " + placeImage);
+        //loger.info("placeImage " + placeImage);
         request.setAttribute("placeResponse", placeResponse);
-        loger.info("placeResponse " + placeResponse);
+        //loger.info("placeResponse " + placeResponse);
         request.setAttribute("userImages", userImages);
-        loger.info("userImages " + userImages);
+        //loger.info("userImages " + userImages);
         request.setAttribute("users", users);
-        loger.info("users " + users);
+        //loger.info("users " + users);
         request.setAttribute("infoPlacePhone", infoPlacePhone);
-        loger.info("infoPlacePhone " + infoPlacePhone);
+        //loger.info("infoPlacePhone " + infoPlacePhone);
         request.setAttribute("infoPlacePrice", infoPlacePrice);
-        loger.info("infoPlacePrice " + infoPlacePrice);
+        //loger.info("infoPlacePrice " + infoPlacePrice);
         request.setAttribute("place_reference", place_reference);
-        loger.info("place_reference " + place_reference);
+        //loger.info("place_reference " + place_reference);
         request.setAttribute("place_reference", place_reference);
-        loger.info("placeRatings " + placeRatings);
+        //loger.info("placeRatings " + placeRatings);
         request.setAttribute("placeRatings", placeRatings);
 
-        loger.info("Command Place Info.");
+        //loger.info("Command Place Info.");
         request.getRequestDispatcher("/views/pages/info.jsp").forward(request, response);
 
     }

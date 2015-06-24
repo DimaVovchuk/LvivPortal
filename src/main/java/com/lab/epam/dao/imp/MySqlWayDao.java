@@ -48,9 +48,9 @@ public class MySqlWayDao extends AbstractJDBCDao<Way, Integer> {
         try (PreparedStatement statement = conn.prepareStatement(GET_WAY_BY_USER_ID)) {
             statement.setInt(1, user_id);
             ResultSet rs = statement.executeQuery();
-            loger.info("Get ways from user with id" + user_id + " is succesfull " + rs);
+            //loger.info("Get ways from user with id" + user_id + " is succesfull " + rs);
             list = parseResultSet(rs);
-            loger.info("Parse result with Transformer is succesfull list = " + list);
+            //loger.info("Parse result with Transformer is succesfull list = " + list);
             if (list.size() <= 0){
                 loger.info("DB has any ways from user with " + user_id + " user_id");
                 return null;
@@ -94,9 +94,9 @@ public class MySqlWayDao extends AbstractJDBCDao<Way, Integer> {
         Connection conn = connection.retrieve();
         try (PreparedStatement statement = conn.prepareStatement(GET_LAST_ADDED)) {
             ResultSet rs = statement.executeQuery();
-            loger.info("Get last way is succesfull ");
+          //  loger.info("Get last way is succesfull ");
             list = parseResultSet(rs);
-            loger.info("Parse result with Transformer is succesfull");
+            //loger.info("Parse result with Transformer is succesfull");
             if (list.size() <= 0){
                 loger.info("DB has any ways");
                 return null;
@@ -124,7 +124,7 @@ public class MySqlWayDao extends AbstractJDBCDao<Way, Integer> {
             if (count != 1) {
                 throw new PersistException("On persist modify more then 1 record: " + count);
             } else {
-                System.out.println("Create is succesfule");
+             //   System.out.println("Create is succesfule");
             }
         } catch (Exception e) {
             throw new PersistException(e);

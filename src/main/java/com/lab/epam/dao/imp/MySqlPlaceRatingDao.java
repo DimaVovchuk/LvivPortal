@@ -48,7 +48,7 @@ public class MySqlPlaceRatingDao extends AbstractJDBCDao<PlaceRating, Integer> {
             ResultSet rs = statement.executeQuery();
             list = parseResultSet(rs);
             if (list.size() <= 0){
-                loger.info("DB has any place_rating with " + place_id + " place_id and user_id " + user_id);
+               // loger.info("DB has any place_rating with " + place_id + " place_id and user_id " + user_id);
                 return null;
             }
             if (list.size() != 1){
