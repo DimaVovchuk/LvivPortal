@@ -6,7 +6,6 @@ import com.lab.epam.entity.PlaceRating;
 import com.lab.epam.entity.User;
 import com.lab.epam.helper.ClassName;
 import com.lab.epam.service.PlaceRatingService;
-import com.lab.epam.service.PlaceResponseService;
 import com.lab.epam.service.PlaceService;
 import com.lab.epam.service.UserService;
 import org.apache.log4j.LogManager;
@@ -50,7 +49,7 @@ public class RectRatingCommand implements Command {
         String login = (String)session.getAttribute("login");
         User user = null;
         if (login != null){
-            user = userService.geUserByLogin(login);
+            user = userService.getUserByLogin(login);
         }
 
         if (user != null && place_id != null){

@@ -41,7 +41,7 @@ public class SaveWayCommand implements Command {
         String login = (String)session.getAttribute("login");
         User user = null;
         if (login != null){
-            user = userService.geUserByLogin(login);
+            user = userService.getUserByLogin(login);
         }
 
         if (placeForWay != null){

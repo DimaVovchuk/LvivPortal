@@ -20,10 +20,8 @@ public class EditProfileCommand implements Command {
     private static final Logger loger = LogManager.getLogger(ClassName.getCurrentClassName());
     String language;
 
-
     public void execute(HttpServletRequest request,
                         HttpServletResponse response) throws ServletException, IOException {
-
         UserService userservice = new UserService();
         UserImageService userImageService = new UserImageService();
 
@@ -32,13 +30,12 @@ public class EditProfileCommand implements Command {
         ResourceBundle resourceBandle = (ResourceBundle)session.getAttribute("bundle");
         Locale locale = resourceBandle.getLocale();
         language = locale.getLanguage();
-
         User user = null;
-        String page = "/views/pages/editProfile.jsp";
+
         loger.info("Login in session is " + login);
 
         if (login != null) {
-            user = userservice.geUserByLogin(login);
+            user = userservice.getUserByLogin(login);
         }
         if (user == null){
             loger.warn("No user with login " + login);
@@ -50,19 +47,13 @@ public class EditProfileCommand implements Command {
             }else{
                 userImage = new UserImage(user.getId(),"user.png");
             }
-
-            request.setAttribute("name", user.getName());
-            request.setAttribute("surname", user.getSurname());
-            request.setAttribute("login", user.getLogin());
-            request.setAttribute("mail", user.getMail());
-            request.setAttribute("phone", user.getPhone());
-            request.setAttribute("about", user.getAbout());
-            request.setAttribute("password", user.getPassword());
-            request.setAttribute("avatar", userImage.getReference());
-            request.setAttribute("id", user.getId());
+            session.setAttribute("userForEdit", user);
+            session.setAttribute("avatar", userImage.getReference());
+        } else{
+            request.setAttribute("errorMsg", "Data base error");
         }
 
         loger.info("Command Edit Profile.");
-        request.getRequestDispatcher(page).forward(request, response);
+        request.getRequestDispatcher("/views/pages/editProfile.jsp").forward(request, response);
     }
 }

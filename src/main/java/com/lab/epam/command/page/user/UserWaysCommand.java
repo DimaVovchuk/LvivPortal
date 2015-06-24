@@ -77,7 +77,7 @@ public class UserWaysCommand implements Command {
 
         loger.info("Login in session is " + login);
         if (login != null) {
-            user = userservice.geUserByLogin(login);
+            user = userservice.getUserByLogin(login);
         }
         if (user == null) {
             loger.warn("No user with login " + login);

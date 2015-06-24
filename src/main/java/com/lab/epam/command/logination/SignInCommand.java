@@ -34,7 +34,7 @@ public class SignInCommand implements Command {
             return;
         }
         UserService serviceUser = new UserService();
-        User user = serviceUser.geUserByLogin(login);
+        User user = serviceUser.getUserByLogin(login);
         session = request.getSession();
         if (user.getPassword() != null && user.getPassword().equals(MD5Creator.getMD5(password + login))) {
             Integer userID = user.getId();

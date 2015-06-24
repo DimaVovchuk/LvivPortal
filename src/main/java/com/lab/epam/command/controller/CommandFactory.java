@@ -15,10 +15,7 @@ import com.lab.epam.command.page.map.RoutesCommand;
 import com.lab.epam.command.page.map.ShowMapCommand;
 import com.lab.epam.command.page.photo.ShowAllUserPhoto;
 import com.lab.epam.command.page.photo.UpLoadPictureCommand;
-import com.lab.epam.command.page.place.PlaceCommand;
-import com.lab.epam.command.page.place.PlaceInfortmationCommand;
-import com.lab.epam.command.page.place.RectRatingCommand;
-import com.lab.epam.command.page.place.SaveEditPlaceCommand;
+import com.lab.epam.command.page.place.*;
 import com.lab.epam.command.page.user.*;
 import com.lab.epam.command.page.user.admin.EditPlaceCommand;
 import com.lab.epam.command.page.user.admin.ShowAllUserCommand;
@@ -30,6 +27,7 @@ import com.lab.epam.command.save.SaveWayCommand;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -86,7 +84,8 @@ public class CommandFactory {
 //        }
 
         if (request.getContentType() != null && request.getContentType().toLowerCase().indexOf("multipart/form-data") > -1 ){
-            command = "upLoad";
+            HttpSession session = request.getSession();
+            command = (String)session.getAttribute("command");
         }
 
         System.out.println(command);

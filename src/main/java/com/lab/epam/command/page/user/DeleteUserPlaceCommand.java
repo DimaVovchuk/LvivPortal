@@ -5,7 +5,6 @@ import com.lab.epam.entity.User;
 import com.lab.epam.helper.ClassName;
 import com.lab.epam.service.PlaceService;
 import com.lab.epam.service.UserService;
-import com.lab.epam.service.WayService;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -38,7 +37,7 @@ public class DeleteUserPlaceCommand implements Command {
 
         loger.info("Login in session is " + login);
         if (login != null) {
-            user = userservice.geUserByLogin(login);
+            user = userservice.getUserByLogin(login);
         }
         if (user == null) {
             loger.warn("No user with login " + login);

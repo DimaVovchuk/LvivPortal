@@ -1,19 +1,55 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Oleguk
-  Date: 15.06.2015
-  Time: 16:22
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="cdg" uri="customtags" %>
 <html>
 <head>
-    <title><cdg:l18n key="usercab.edit"/></title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta name="keywords" content=""/>
+	<style type="text/css">
+		body {
+			font-family: Arial;
+			font-size: 10pt;
+		}
+
+		#dvPreview {
+			filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=image);
+			min-height: 300px;
+			min-width: 300px;
+			display: none;
+		}
+	</style>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+	<script language="javascript" type="text/javascript">
+		$(function () {
+			$("#fileupload").change(function () {
+				$("#dvPreview").html("");
+				var regex = /([^\s]+(?=\.(jpg|JPG|gif|png))\.\2)/;
+				if (regex.test($(this).val().toLowerCase())) {
+					if ($.browser.msie && parseFloat(jQuery.browser.version) <= 9.0) {
+						$("#dvPreview").show();
+						$("#dvPreview")[0].filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = $(this).val();
+					}
+					else {
+						if (typeof (FileReader) != "undefined") {
+							$("#dvPreview").show();
+							$("#dvPreview").append("<img />");
+							var reader = new FileReader();
+							reader.onload = function (e) {
+								$("#dvPreview img").attr("src", e.target.result);
+							}
+							reader.readAsDataURL($(this)[0].files[0]);
+						} else {
+							alert("This browser does not support FileReader.");
+						}
+					}
+				} else {
+					alert("Please upload a valid image file.");
+				}
+			});
+		});
+	</script>
+	<title><cdg:l18n key="usercab.edit"/></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<meta name="keywords" content=""/>
 </head>
 <jsp:include page="/views/elements/css.jsp"/>
 <jsp:include page="/views/elements/script.jsp"/>
@@ -23,116 +59,92 @@
 
 
 <div class="container">
-    <div class="row">
-        <h1>Edit Profile</h1>
-        <hr>
-        <div class="col s4">
-            <div class="text-center">
-                <c:choose>
-                    <c:when test="${empty avatar}">
-                        <img src="${pageContext.request.contextPath}/upload/photo/user.png" width = 70% class="circle responsive-img" alt="avatar">
-                    </c:when>
-                    <c:otherwise>
-                        <img src="${pageContext.request.contextPath}/upload/photo/${avatar}" width = 70% class="circle responsive-img" alt="avatar">
-                    </c:otherwise>
-                </c:choose>
-                <h6>Upload a different photo...</h6>
-                <div class="file-field input-field">
-                    <div class="row">
-                        <div class="col s10 offset-s1">
-                            <input class="file-path validate" type="text" value="" name="img"/>
-                        </div>
-                        <div class="col s2">
-                            <div class="btn">
-                                <span>Upload</span>
-                                <input type="file"/>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+	<div class="row">
+		<h1>Edit Profile</h1>
+		<hr>
+		<form method=post enctype=multipart/form-data action="portal/update">
+			<c:set var="command" scope="session" value="updateprofile"/>
+			<c:set var="typePhoto" scope="session" value="avatarFoto"/>
+			<div class="col s4">
+				<div class="text-center">
+					<c:choose>
+						<c:when test="${empty avatar}">
+							<img src="${pageContext.request.contextPath}/upload/photo/user.png" width=70%
+							     class="circle responsive-img" name="newAvatar">
+						</c:when>
+						<c:otherwise>
+							<img src="${pageContext.request.contextPath}/upload/photo/${avatar}" width=70%
+							     class="circle responsive-img" name="newAvatar">
+						</c:otherwise>
+					</c:choose>
+					<h6>Upload a different photo...</h6>
+					<input id="fileupload" type="file" name="sendfile">
+				</div>
+			</div>
 
-        <div class="col s8">
-            <c:choose>
-                <c:when test="${not empty msg}">
-                    <h6>${user.errorMsg}</h6>
-                </c:when>
-                <c:otherwise>
-                </c:otherwise>
-            </c:choose>
-            <h3>Personal info</h3>
+			<div class="col s8">
+				<h3>Personal info</h3>
 
-            <form id="update-profile" action="portal/update" metod="post">
-                <input type="hidden" name="command" value="updateprofile">
+				<div class="row">
+					<div class="input-field col s12">
+						<i class="mdi-action-account-circle prefix"></i>
+						<label class="active" for="NewName">First Name:</label>
+						<input value="<c:out value="${userForEdit.name}"/>" id="NewName" type="text" name="NewName">
+					</div>
+				</div>
 
-                <div class="row">
-                    <div class="input-field col s12">
-                        <i class="mdi-action-account-circle prefix"></i>
-                        <input value="${name}" id="first_name" type="text" class="validate" name="name">
-                        <label class="active" for="first_name">First Name:</label>
-                    </div>
-                </div>
+				<div class="row">
+					<div class="input-field col s12">
+						<i class="mdi-action-account-circle prefix"></i>
+						<label class="active" for="surname">Last Name:</label>
+						<input value="${userForEdit.surname}" id="surname" type="text" name="surname">
+					</div>
+				</div>
 
-                <div class="row">
-                    <div class="input-field col s12">
-                        <i class="mdi-action-account-circle prefix"></i>
-                        <input value="${surname}" id="last_name" type="text" class="validate" name="surname">
-                        <label class="active" for="last_name">Last Name:</label>
-                    </div>
-                </div>
+				<div class="row">
+					<div class="input-field col s12">
+						<i class="mdi-action-account-circle prefix"></i>
+						<label class="active" for="login">Login:</label>
+						<input value="${userForEdit.login}" id="login" type="text" name="login" disabled>
+					</div>
+				</div>
 
-                <div class="row">
-                    <div class="input-field col s12">
-                        <i class="mdi-action-account-circle prefix"></i>
-                        <input value="${login}" id="login" type="text" class="validate" name="login">
-                        <label class="active" for="login">Login:</label>
-                    </div>
-                </div>
+				<div class="row">
+					<div class="input-field col s12">
+						<i class="mdi-action-account-circle prefix"></i>
+						<label class="active" for="mail">Email:</label>
+						<input value="${userForEdit.mail}" id="mail" type="text" name="mail">
+					</div>
+				</div>
 
-                <div class="row">
-                    <div class="input-field col s12">
-                        <i class="mdi-action-account-circle prefix"></i>
-                        <input value="${mail}" id="mail" type="text" class="validate" name="mail">
-                        <label class="active" for="mail">Email:</label>
-                    </div>
-                </div>
+				<div class="row">
+					<div class="input-field col s12">
+						<i class="mdi-communication-phone prefix"></i>
+						<label class="active" for="phone">Phone number:</label>
+						<input value="${userForEdit.phone}" id="phone" type="text" name="phone">
+					</div>
+				</div>
 
-                <div class="row">
-                    <div class="input-field col s12">
-                        <i class="mdi-communication-phone prefix"></i>
-                        <input value="${phone}" id="pnumber" type="text" class="validate" name="phone">
-                        <label class="active" for="pnumber">Phone number:</label>
-                    </div>
-                </div>
+				<div class="row">
+					<div class="input-field col s12">
+						<i class="mdi-action-account-circle prefix"></i>
+						<label class="active" for="about">About:</label>
+						<input value="${userForEdit.about}" id="about" type="text" name="about">
+					</div>
+				</div>
 
-                <div class="row">
-                    <div class="input-field col s12">
-                        <i class="mdi-action-account-circle prefix"></i>
-                        <input value="${about}" id="about" type="text" class="validate" name="about">
-                        <label class="active" for="about">About:</label>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <h6>You may <a href="#">change</a> your password</h6>
-                </div>
-                <input type="hidden" name="avatar" value="${img}">
-                <input type="hidden" name="id" value="${id}">
-
-                <div class="form-group">
-                    <label class="col-md-3 control-label"></label>
-                    <div class="col-md-8">
-                        <button class="btn waves-effect waves-light" type="submit" name="save">Save Changes
-                            <i class="mdi-content-send right"></i>
-                        </button>
-                        <span></span>
-                        <button class="btn waves-effect waves-light" type="reset" name="cancel">Cancel</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
+				<div class="row">
+					<h6>You may <a href="#">change</a> your password</h6>
+				</div>
+				<div class="form-group">
+					<label class="col-md-3 control-label"></label>
+						<button class="btn waves-effect waves-light" type="submit" name="save">Save Changes
+							<i class="mdi-content-send right"></i></button>
+						<button class="btn waves-effect waves-light" type="reset" name="cancel">Cancel</button>
+				</div>
+			</div>
+		</form>
+	</div>
 </div>
 <hr>
 <jsp:include page="/views/elements/footer.jsp"/>

@@ -4,14 +4,15 @@
 <!DOCTYPE HTML>
 <html>
 <head>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.css" rel="stylesheet">
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js"></script>
     <title><cdg:l18n key="places.title"/></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="keywords" content=""/>
 </head>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<link href="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.css" rel="stylesheet">
-<script src="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js"></script>
+
 <jsp:include page="/views/elements/css.jsp"/>
 <jsp:include page="/views/elements/script.jsp"/>
 
@@ -27,7 +28,6 @@
                     <h3>${placeDescription.name}</h3>
                     <div class="fotorama" data-transition="crossfade" data-nav="thumbs" data-loop="true" data-autoplay="true" data-allowfullscreen="true" data-keyboard="true" >
                     <c:forEach items="${place_referenceList}" var="elem">
-
                         <img class="materialboxed" width="200" height="200"
                              src="${pageContext.request.contextPath}/upload/photo/${elem.reference}">
                     </c:forEach>
@@ -58,7 +58,7 @@
 
                         <a class="waves-effect waves-light btn modal-trigger" href="#chooseDay">Choose day</a><br>
                         <a class="waves-effect waves-light btn modal-trigger" href="portal?command=savePlace&place_id=${place_id}">Favorite place</a>
-                        <button class="btn modal-trigger type="submit" data-target="editplace" id="btn1" onclick="$('editPlaceID').val('${place_id}')"> Edit place </button>
+                        <button class="btn modal-trigger" type="submit" data-target="editplace" id="btn1" onclick="$('editPlaceID').val('${place_id}')"> Edit place </button>
 
 
                         <div id="editplace" class="modal">

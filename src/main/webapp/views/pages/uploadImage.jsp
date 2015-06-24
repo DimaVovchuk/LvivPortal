@@ -48,8 +48,8 @@
 </head>
 <body>
 <div>
-  <form method=post enctype=multipart/form-data stream action="portal/upload">
-    <input type="hidden" name="command" value="upLoad">
+  <form method=post enctype=multipart/form-data action="portal/upload">
+    <c:set var="command" scope="session" value="upLoad"/>
     <c:set var="typePhoto" scope="session" value="userFoto"/>
     <b>Choose image:</b>
     <input id="fileupload" type="file" name="sendfile">

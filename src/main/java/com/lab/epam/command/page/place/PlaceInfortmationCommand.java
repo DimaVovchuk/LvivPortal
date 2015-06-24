@@ -118,7 +118,7 @@ public class PlaceInfortmationCommand implements Command {
             userDataAboutTrip.setPlaceDay(map);
             loger.info("Set map to userDataAboutTrip");
         }
-        session.setAttribute("userDataTrip",userDataAboutTrip);
+        session.setAttribute("userDataTrip", userDataAboutTrip);
 
         String login = (String) session.getAttribute("login");
         String not_login = null;
@@ -128,7 +128,7 @@ public class PlaceInfortmationCommand implements Command {
         request.setAttribute("not_login", not_login);
 
         if (login != null && message != null) {
-            User user = userService.geUserByLogin(login);
+            User user = userService.getUserByLogin(login);
             loger.info("User, who send comment has login " + login);
             Decoder decoder = new Decoder();
             message = decoder.decodeStringUtf8(message);
@@ -257,9 +257,8 @@ public class PlaceInfortmationCommand implements Command {
         //loger.info("infoPlacePhone " + infoPlacePhone);
         request.setAttribute("infoPlacePrice", infoPlacePrice);
         //loger.info("infoPlacePrice " + infoPlacePrice);
-        request.setAttribute("place_reference", place_reference);
+        request.setAttribute("place_referenceList", imList);
         //loger.info("place_reference " + place_reference);
-        request.setAttribute("place_reference", place_reference);
         //loger.info("placeRatings " + placeRatings);
         request.setAttribute("placeRatings", placeRatings);
 

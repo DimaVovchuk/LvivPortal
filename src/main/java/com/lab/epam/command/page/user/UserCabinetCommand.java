@@ -54,7 +54,7 @@ public class UserCabinetCommand implements Command {
         String page = "/views/page/index.jsp";
         loger.info("Login in session is " + login);
         if (login != null) {
-            user = userservice.geUserByLogin(login);
+            user = userservice.getUserByLogin(login);
         }
         if (user == null){
             loger.warn("No user with login " + login);

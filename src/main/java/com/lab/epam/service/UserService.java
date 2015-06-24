@@ -50,7 +50,7 @@ public class UserService {
     public List<User> getAllWithoutDeleted() throws PersistException {
         return mySqlUserDao.getAllWithoutDeleted();
     }
-    public User geUserByLogin(String login){
+    public User getUserByLogin(String login){
         return mySqlUserDao.getUserByLogin(login);
     }
 
