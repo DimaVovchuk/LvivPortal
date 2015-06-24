@@ -299,8 +299,25 @@ header img.text-middle {
     padding: 20px;
 }
 
+.places .card {
+    padding: 10px;
+    height: 95%;
+}
+
+.places .card img {
+    max-height: 300px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .places .collection .collection-item.active {
     background: #0ab2d2;
+}
+
+.places .bottom-right-btn {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
 }
 
 .place-page-navigation {

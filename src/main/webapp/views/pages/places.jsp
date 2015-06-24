@@ -9,14 +9,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="keywords" content=""/>
-    <script>
-        $("#timePlace").mousemove( function(e){
-            $("#timeValue").html($(this).val());
-        });
-        $("#timePlace").change( function(e){
-            $("#timeValue").html($(this).val());
-        });
-    </script>
 </head>
 
 <jsp:include page="/views/elements/css.jsp"/>
@@ -40,11 +32,11 @@
 
                         <c:forEach var="place" items="${requestScope.places}">
                             <div class="match-col col l4 m6 s12" style="display:none">
-                                <div class="card z-depth-2" style="padding:10px; height:95%">
+                                <div class="card z-depth-2">
                                     <form action="portal?command=place&place_id=${place.id}&category=${requestScope.category}"
                                           method="post" style="position:absolute;padding:5px">
                                         <c:set var="category" scope="request" value="${requestScope.category}"/>
-                                        <c:if test="${userDataTrip!=null}">
+                                        <c:if test="${requestScope.userDataTrip!=null}">
                                             <button class="btn modal-trigger btn-floating btn-large waves-effect waves-light cyan darken-2"
                                                     type="submit" data-target="chooseDay"
                                                     id="btn1" onclick="$('#place_id').val('${place.id}')">
@@ -52,29 +44,31 @@
                                             </button>
                                         </c:if>
                                     </form>
-                                    <a href="portal?command=placeInformation&place_id=${place.id}"><img
-                                            src="${pageContext.request.contextPath}/upload/photo/${place.imageReference}"
-                                            style="width: 100%"></a>
+                                    <div class="center-align">
+                                        <a href="portal?command=placeInformation&place_id=${place.id}"><img
+                                                class="responsive-img"
+                                                src="${pageContext.request.contextPath}/upload/photo/${place.imageReference}"></a>
+                                    </div>
                                     <a href="portal?command=placeInformation&place_id=${place.id}">
                                         <h5><c:out value="${place.name}"/></h5></a>
-                                    <c:out value="${place.adress}"/>
+                                    <span><c:out value="${place.adress}"/></span>
                                     <c:if test="${login!=null}">
-                                        <div class="right-align">
+                                        <div style="height: 50px"></div>
+                                        <div class="bottom-right-btn">
                                             <c:if test="${place.rating!=1}">
-                                        <a class="btn-floating btn-large waves-effect waves-light cyan darken-2"
-                                           href="portal?command=rectRating&rating=1&place_id=${place.id}&category=${requestScope.category}">
-                                            <i class="material-icons">thumb_up</i>
-                                        </a>
+                                                <a class="btn-floating btn-large waves-effect waves-light cyan darken-2"
+                                                   href="portal?command=rectRating&rating=1&place_id=${place.id}&category=${requestScope.category}">
+                                                    <i class="material-icons">thumb_up</i>
+                                                </a>
                                             </c:if>
                                             <c:if test="${place.rating!=-1}">
-                                            <a class="btn-floating btn-large waves-effect waves-light cyan darken-2"
-                                           href="portal?command=rectRating&rating=-1&place_id=${place.id}&category=${requestScope.category}">
-                                            <i class="material-icons">thumb_down</i>
-                                        </a>
+                                                <a class="btn-floating btn-large waves-effect waves-light cyan darken-2"
+                                                   href="portal?command=rectRating&rating=-1&place_id=${place.id}&category=${requestScope.category}">
+                                                    <i class="material-icons">thumb_down</i>
+                                                </a>
                                             </c:if>
-                                            </div>
-                                </c:if>
-
+                                        </div>
+                                    </c:if>
                                 </div>
                             </div>
                         </c:forEach>
@@ -126,28 +120,30 @@
                 <input placeholder="Placeholder" id="place_id" name="place_id" type="hidden">
             </div>
 
-        <label><cdg:l18n key="select.day.number"/></label>
-        <select name="dayNumber" class="browser-default">
+            <label><cdg:l18n key="select.day.number"/></label>
+            <select name="dayNumber" class="browser-default">
                 <c:forEach var="i" begin="1" end="${userDataTrip.dayCount}">
                     <option width="10px" value="${i}"><c:out value="${i}"/></option>
                 </c:forEach>
             </select>
-        <label><cdg:l18n key="select.place.time"/></label>
-        <p class="range-field">
-            <input type="range" name="timePlace" id="timePlace" min="15" value="15" step="15" max="240" />
-        <p id="timeValue"></p>
-        </p>
+            <label><cdg:l18n key="select.place.time"/></label>
 
-        <button class="btn waves-effect waves-light cyan darken-2" type="submit"
-                >OK
-        </button>
-    </form>
+            <p class="range-field">
+                <input type="range" name="timePlace" id="timePlace" min="15" value="15" step="15" max="240"/>
 
-</div>
-<div class="modal-footer">
+            <p id="timeValue"></p>
+            </p>
 
-</div>
+            <button class="btn waves-effect waves-light cyan darken-2" type="submit"
+                    >OK
+            </button>
+        </form>
+
     </div>
+    <div class="modal-footer">
+
+    </div>
+</div>
 
 <script src="${pageContext.request.contextPath}/js/pages/places.js"></script>
 
