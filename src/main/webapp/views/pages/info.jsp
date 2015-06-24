@@ -8,9 +8,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="keywords" content=""/>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 </head>
+<!-- 1. Link to jQuery (1.8 or later), -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
+<!-- fotorama.css & fotorama.js. -->
+<link href="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.css" rel="stylesheet">
+<!-- 3 KB -->
+<script src="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js"></script>
+<!-- 16 KB -->
 <jsp:include page="/views/elements/css.jsp"/>
 <jsp:include page="/views/elements/script.jsp"/>
 
@@ -23,8 +29,14 @@
         <div class="blog-main">
             <div class="col-md-9 blog-left">
                 <div class="blog-grids">
-                    <img src="${pageContext.request.contextPath}/upload/photo/${place_reference}" alt="">
+                    <br>
+                    <div class="fotorama" data-transition="crossfade" data-loop="true" data-autoplay="true" data-allowfullscreen="true" data-keyboard="true" >
+                    <c:forEach items="${place_referenceList}" var="elem">
 
+                        <img class="materialboxed" width="200" height="200"
+                             src="${pageContext.request.contextPath}/upload/photo/${elem.reference}">
+                    </c:forEach>
+                </div>
                     <div class="blog-detail">
                         <h3>${placeDescription.name}</h3>
 
@@ -62,14 +74,14 @@
                                 <form id="editp_place" action="/portal/editplace" method="post">
                                     <input type="hidden" name="command" value="editPlace">
                                      <input placeholder="Placeholder" id="editPlaceID" name="editPlaceID" type="hidden" value="${place.id}">
-
                                     <button class="btn waves-effect waves-light cyan darken-2" type="submit">YES</button>
+                                    <button class="btn waves-effect waves-light cyan darken-2"type="reset" data-dismiss="modal">NO</button>
                                 </form>
+
                             </div>
                         </div>
                         <div id="chooseDay" class="modal">
                             <div class="modal-content">
-
                                 <h4>Choose day</h4>
                                 <form id="choose_day" action="/portal/placeInformation" method="post">
                                     <input type="hidden" name="command" value="placeInformation">

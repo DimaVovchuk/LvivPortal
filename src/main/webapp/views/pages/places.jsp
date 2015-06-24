@@ -62,13 +62,13 @@
                                         <div class="right-align">
                                             <c:if test="${place.rating!=1}">
                                         <a class="btn-floating btn-large waves-effect waves-light cyan darken-2"
-                                           href="portal?command=rectRating&place_id=${place.id}&category=${requestScope.category}">
+                                           href="portal?command=rectRating&rating=1&place_id=${place.id}&category=${requestScope.category}">
                                             <i class="material-icons">thumb_up</i>
                                         </a>
                                             </c:if>
                                             <c:if test="${place.rating!=-1}">
                                             <a class="btn-floating btn-large waves-effect waves-light cyan darken-2"
-                                           href="portal?command=rectRating&place_id=${place.id}&category=${requestScope.category}">
+                                           href="portal?command=rectRating&rating=-1&place_id=${place.id}&category=${requestScope.category}">
                                             <i class="material-icons">thumb_down</i>
                                         </a>
                                             </c:if>
@@ -119,7 +119,7 @@
         <c:set var="category" scope="request" value="${requestScope.category}"/>
         <h4>Choose day</h4>
 
-        <form id="choose_day" action="/portal/place" method="get">
+        <form id="choose_day" action="/portal/place" method="post">
             <input type="hidden" name="command" value="place">
 
             <div class="input-field col s6">

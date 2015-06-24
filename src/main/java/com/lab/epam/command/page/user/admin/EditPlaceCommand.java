@@ -25,7 +25,7 @@ public class EditPlaceCommand implements Command{
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String editPlaceIDSring = request.getParameter("editPlaceID");
-//        String editPlaceIDSring = "3";
+
         HttpSession session = request.getSession();
         loger.info("start EditPlaceCommand");
 
@@ -36,6 +36,7 @@ public class EditPlaceCommand implements Command{
             //get place
             Place place = placeService.getByPK(editPlaceID);
             session.setAttribute("editPlace", place);
+            session.setAttribute("editPlaceID",editPlaceID);
 
             if(place.getVisible() == null){
                 place.setVisible(true);
@@ -71,18 +72,6 @@ public class EditPlaceCommand implements Command{
                 loger.warn(e.getMessage());
             }
 
-            //get place rating
-            PlaceRatingService placeRatingService = new PlaceRatingService();
-            Integer placeRating = 0;
-            PlaceRating placeRatingObj = placeRatingService.getByPK(editPlaceID);
-            loger.info("placeRatingObj " + placeRatingObj);
-            try {
-                placeRating = placeRatingObj.getRating();
-            }catch (Exception e){
-              loger.warn(e.getMessage());
-            }
-            session.setAttribute("placeRating", placeRating);
-            loger.info("edit place rating is " + placeRating);
         }
         response.setContentType("text/html; charset=windows-1251");
         request.getRequestDispatcher("/views/pages/edit_place.jsp").forward(request, response);

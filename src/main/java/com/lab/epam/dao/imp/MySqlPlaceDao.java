@@ -35,6 +35,7 @@ public class MySqlPlaceDao extends AbstractJDBCDao<Place, Integer> {
     private static final String GET_PLACE_BY_LATITUDE_LONGITUDE = "SELECT * FROM place WHERE longitude = ? AND latitude = ?";
     private static final String CREATE_PLACE_WAY = "INSERT INTO place_way (place_id, way_id, day_number, time) VALUES (?,?,?,?);";
     private static final String CREATE_USER_PLACE = "INSERT INTO user_place (place_id, user_id) VALUES (?,?);";
+    private static final String GET_PLACE_ID_BY_USER_ID = "SELECT id FROM user_place WHERE place_id = ? AND user_id = ?";
 
     private class PersistGroup extends Place {
         public void setId(int id) {
@@ -197,9 +198,28 @@ public class MySqlPlaceDao extends AbstractJDBCDao<Place, Integer> {
         } finally {
             connection.putback(conn);
         }
-
-
     }
+
+    public Integer getPlaceByUserIdPlaceId(Integer place_id, Integer user_id) throws PersistException {
+        Connection conn = connection.retrieve();
+        Integer id;
+        try (PreparedStatement statement = conn.prepareStatement(GET_PLACE_ID_BY_USER_ID)) {
+            statement.setInt(1, place_id);
+            statement.setInt(2, user_id);
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()){
+                return 1;
+            }
+            else {
+                return null;
+            }
+        } catch (Exception e) {
+            throw new PersistException(e);
+        } finally {
+            connection.putback(conn);
+        }
+    }
+
 
 
 }

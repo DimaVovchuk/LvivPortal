@@ -43,6 +43,14 @@ public class UserWaysCommand implements Command {
         Locale locale = resourceBandle.getLocale();
         language = locale.getLanguage();
 
+        UserDataAboutTrip userDataAboutTrip = (UserDataAboutTrip) session.getAttribute("userDataTrip");
+        Integer dayCount;
+
+        if (userDataAboutTrip != null){
+            dayCount = userDataAboutTrip.getDayCount();
+        }
+
+
         User user = null;
 
         loger.info("Login in session is " + login);
@@ -66,12 +74,15 @@ public class UserWaysCommand implements Command {
                 placeDescriptions = getPlaceDescriptionByPlace(places);
             }
         }
+
+        List<WayPlaceImage> waysPlaceImage = getWayPlaceImageList(ways, way_place, wayPlaceImages);
             request.setAttribute("places", places);
-            request.setAttribute("ways", ways);
-            request.setAttribute("user", user);
-            request.setAttribute("placeDescription", placeDescriptions);
-            request.setAttribute("way_place", way_place);
-            request.setAttribute("wayPlaceImages", wayPlaceImages);
+            //request.setAttribute("ways", ways);
+            request.setAttribute("waysPlaceImage", waysPlaceImage);
+        request.setAttribute("user", user);
+           //request.setAttribute("placeDescription", placeDescriptions);
+            //request.setAttribute("way_place", way_place);
+           // request.setAttribute("wayPlaceImages", wayPlaceImages);
 
             loger.info("Command User Ways.");
             request.getRequestDispatcher("/views/pages/userWay.jsp").forward(request, response);
@@ -122,6 +133,18 @@ public class UserWaysCommand implements Command {
             }
         }
         return placeImage;
+    }
+
+    private List<WayPlaceImage> getWayPlaceImageList(List<Way> ways,  Map<Integer, List<PlaceDescription>> way_place, Map<Integer,PlaceImage> wayPlaceImages){
+        List<WayPlaceImage> list = new ArrayList<>();
+        for (Way way : ways) {
+            WayPlaceImage item = new WayPlaceImage();
+            item.setId(way.getId());
+            item.setImageReference(wayPlaceImages.get(way.getId()).getReference());
+            item.setPlace(way_place.get(way.getId()));
+            list.add(item);
+        }
+        return list;
     }
 }
 

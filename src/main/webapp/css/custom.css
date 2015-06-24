@@ -41,6 +41,7 @@ header nav ul li.active {
     background: #0ab2d2;
 }
 
+
 .error {
     color: red;
     font-family: "Roboto", serif;
@@ -511,4 +512,22 @@ footer.page-footer {
 .footer-parallax {
     border-top: 10px solid #0097a7;
     height: 300px;
+}
+
+
+
+
+/* Olya CSS */
+
+.ok-footer .modal-footer .btn {
+    float: right;
+    margin: 6px 10px;
+    width: 120px;
+    align-content: center;
+
+}
+
+#delete-place {
+    width: 400px;
+    margin-top: 10%;
 }

@@ -162,4 +162,17 @@ public class PlaceService {
         }
     }
 
+    public Integer getPlaceByUserIdPlaceId(Integer place_id, Integer user_id){
+        Integer id = null;
+        try {
+            id = mySqlPlaceDao.getPlaceByUserIdPlaceId(place_id, user_id);
+
+        } catch (PersistException e) {
+            e.printStackTrace();
+            loger.warn("Cant get user_place id with place_id " + place_id + " and user_id " + user_id);
+        }
+
+        return id;
+    }
+
 }
