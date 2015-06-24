@@ -48,6 +48,7 @@ public class SignUpCommand implements Command {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         String phone = request.getParameter("phone");
+        Integer role = Integer.valueOf(request.getParameter("role"));
 
         User user = new User();
         user.setRating(0);
@@ -58,7 +59,7 @@ public class SignUpCommand implements Command {
         user.setPassword(password);
         user.setPhone(phone);
         user.setStatus(1);
-        user.setRoleID(2);
+        user.setRoleID(role);
 
 
         UserService userService = new UserService();
@@ -149,7 +150,6 @@ public class SignUpCommand implements Command {
                 loger.info("New user was added");
                 request.getRequestDispatcher("/views/pages/user-cabinet.jsp").forward(request, response);
             } catch (Exception e) {
-                e.printStackTrace();
                 loger.info("Adding new user was failed");
                 loger.error(e.getMessage());
             }

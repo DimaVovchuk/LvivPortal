@@ -31,7 +31,7 @@ public class PlaceInfortmationCommand implements Command {
         Integer rating = 0;
         String ratingString = request.getParameter("rating");
 
-        if (ratingString != null){
+        if (ratingString != null) {
             rating = Integer.parseInt(ratingString);
         }
 
@@ -41,7 +41,7 @@ public class PlaceInfortmationCommand implements Command {
         loger.info("Place with id " + place_id);
 
         //String place_reference = request.getParameter("place_reference");
-       // loger.info("place_reference is " + place_reference);
+        // loger.info("place_reference is " + place_reference);
 
         PlaceService servicePlace = new PlaceService();
         PlaceResponseService placeResponseService = new PlaceResponseService();
@@ -51,16 +51,24 @@ public class PlaceInfortmationCommand implements Command {
         PlaceImageService placeImageService = new PlaceImageService();
         UserService userService = new UserService();
         UserImageService userImageService = new UserImageService();
-        String place_reference = null;
+//        String place_reference = null;
         PlaceRating place_rating = null;
-
+        List<PlaceImage> imList = new ArrayList<>();
         if (place_id != null) {
-            PlaceImage im = placeImageService.getPlaceImageByPlaceId(place_id);
-            if (im == null || !isInFolder(im.getReference(), request)) {
-                im = new PlaceImage(place_id, "default_building.jpg");
+            List<PlaceImage> fullImageList = placeImageService.getAllPlaceImageByPlaceId(place_id);
+            if (fullImageList != null && !fullImageList.isEmpty()) {
+                imList = fullImageList;
+                for (int index = 0; index < imList.size(); index++) {
+                    if (fullImageList.get(index) == null || !isInFolder(fullImageList.get(index).getReference(), request)) {
+                        imList.remove(index);
+                    }
+                }
+                System.out.println(imList);
+            } else{
+                imList.add(new PlaceImage(place_id, "default_building.jpg"));
             }
-            place_reference = im.getReference();
-            loger.info("place_reference is ");
+//            place_reference = im.getReference();
+//            loger.info("place_reference is ");
         }
 
         HttpSession session = request.getSession();
@@ -91,7 +99,7 @@ public class PlaceInfortmationCommand implements Command {
                     placeForWay = new ArrayList<>();
                     loger.info("Create new List<Place>");
                     loger.info("Day is " + dayNumber);
-                }else {
+                } else {
                     placeForWay = map.get(dayNumber);
                     loger.info("Get placeForWay");
                     for (Place place : placeForWay) {
@@ -112,31 +120,31 @@ public class PlaceInfortmationCommand implements Command {
         }
         session.setAttribute("userDataTrip",userDataAboutTrip);
 
-        String login = (String)session.getAttribute("login");
+        String login = (String) session.getAttribute("login");
         String not_login = null;
-        if (message != null && login == null){
+        if (message != null && login == null) {
             not_login = "You are logout. Please login and than leave a comment";
         }
         request.setAttribute("not_login", not_login);
 
-        if (login != null && message != null){
+        if (login != null && message != null) {
             User user = userService.geUserByLogin(login);
             loger.info("User, who send comment has login " + login);
             Decoder decoder = new Decoder();
             message = decoder.decodeStringUtf8(message);
-            if (user != null){
-                placeResponseService.create(new PlaceResponse(message, user.getId(),place_id));
-                place_rating = placeRatingService.getPlaceRatingByPlaceAndUser(place_id,user.getId());
-                if (place_rating != null){
+            if (user != null) {
+                placeResponseService.create(new PlaceResponse(message, user.getId(), place_id));
+                place_rating = placeRatingService.getPlaceRatingByPlaceAndUser(place_id, user.getId());
+                if (place_rating != null) {
                     place_rating.setRating(rating);
                     placeRatingService.update(place_rating);
-                }else {
-                    placeRatingService.create(new PlaceRating(user.getId(),place_id,rating));
+                } else {
+                    placeRatingService.create(new PlaceRating(user.getId(), place_id, rating));
                 }
             }
         }
 
-        ResourceBundle resourceBandle = (ResourceBundle)session.getAttribute("bundle");
+        ResourceBundle resourceBandle = (ResourceBundle) session.getAttribute("bundle");
         Locale locale = resourceBandle.getLocale();
         String language = locale.getLanguage();
 
@@ -161,22 +169,22 @@ public class PlaceInfortmationCommand implements Command {
         place_id = place.getId();
         String[] infoPlacePhone = null;
         String[] infoPlacePrice = null;
-        placeDescription = placeDescriptionService.getPlaceDescriptionByIdPlace(place_id,language);
+        placeDescription = placeDescriptionService.getPlaceDescriptionByIdPlace(place_id, language);
 
-        if (placeDescription == null){
+        if (placeDescription == null) {
             loger.info("Not place description for place_id " + place_id);
-        } else{
-            if (placeDescription.getPhone() != null){
+        } else {
+            if (placeDescription.getPhone() != null) {
                 infoPlacePhone = placeDescription.getPhone().split(";");
             }
-            if (placeDescription.getPrice() != null){
+            if (placeDescription.getPrice() != null) {
                 infoPlacePrice = placeDescription.getPrice().split(";");
             }
         }
 
         placeImage = placeImageService.getPlaceImageByPlaceId(place_id);
 
-        if (placeImage == null){
+        if (placeImage == null) {
             loger.info("Not place image for place_id " + place_id);
         }
 

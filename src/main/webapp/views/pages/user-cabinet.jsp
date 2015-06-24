@@ -47,6 +47,22 @@
         </c:forEach>
 
     </div>
+
+    <b>show all user test command</b>
+
+    <form id="sign-in-form" action="/portal/showalluser" method="post">
+        <input type="hidden" name="command" value="showAllUser">
+        <input type="hidden" name="requestType" value="showAllUser">
+        <button type="submit">Show all user
+        </button>
+    </form>
+    <b>edit place test command</b>
+
+    <form id="edit_place" action="/portal/editplace" method="post">
+        <input type="hidden" name="command" value="editPlace">
+        <button type="submit">Edit Place
+        </button>
+    </form>
 </div>
 
 <jsp:include page="/views/elements/footer.jsp"/>

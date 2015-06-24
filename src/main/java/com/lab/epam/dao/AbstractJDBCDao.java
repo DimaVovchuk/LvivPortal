@@ -2,9 +2,12 @@ package com.lab.epam.dao;
 
 import com.lab.epam.dao.imp.MySqlDaoFactory;
 import com.lab.epam.entity.Decoder;
+import com.lab.epam.helper.ClassName;
 import com.lab.epam.persistant.ConnectionManager;
 import com.lab.epam.persistant.ConnectionPool;
 import com.lab.epam.transformer.Transformer;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,7 +20,7 @@ import java.util.Map;
  * Created by Admin on 10.06.2015.
  */
 public abstract class AbstractJDBCDao<T extends Identified<PK>, PK extends Integer> implements GenericDao<T, PK>, ClassNameInterface {
-
+    private static final Logger loger = LogManager.getLogger(ClassName.getCurrentClassName());
     private ConnectionPool connection;
     private Decoder dec;
 
@@ -106,7 +109,7 @@ public abstract class AbstractJDBCDao<T extends Identified<PK>, PK extends Integ
             if (count != 1) {
                 throw new PersistException("On persist modify more then 1 record: " + count);
             } else {
-                //System.out.println("Create is succesfule");
+                loger.info("Create is succesfule");
             }
         } catch (Exception e) {
             throw new PersistException(e);

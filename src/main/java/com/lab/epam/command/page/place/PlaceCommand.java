@@ -96,6 +96,7 @@ public class PlaceCommand implements Command {
         session.setAttribute("userDataTrip", userDataAboutTrip);
 
         String category = request.getParameter("category");
+        System.out.println("category " + category);
         if (category == null) {
             category = "";
         }
