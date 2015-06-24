@@ -56,9 +56,9 @@ public class UserPlaceCommand implements Command {
         }
         if (user != null) {
             Integer userId = user.getId();
-            Integer roleId = user.getRoleID();
+            //Integer roleId = user.getRoleID();
             places = placeService.getPlaceByUserId(userId);
-
+            System.out.println("places size is " + places.size());
             if (places != null && !places.isEmpty()) {
                 placeDescriptions = getPlaceDescriptionByPlace(places);
                 placeImage = getPlaceImageByPlace(places);
@@ -84,6 +84,7 @@ public class UserPlaceCommand implements Command {
             placeDescription = placeDescriptionService.getPlaceDescriptionByIdPlace(place_id, language);
             placeDescriptions.add(placeDescription);
         }
+        System.out.println("placeDescriptions size is " + placeDescriptions.size());
         return placeDescriptions;
     }
 
@@ -99,6 +100,7 @@ public class UserPlaceCommand implements Command {
                 }
                 placeImage.add(image);
         }
+        System.out.println("placeImage size is " + placeImage.size());
         return placeImage;
     }
 

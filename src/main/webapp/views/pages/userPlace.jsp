@@ -1,34 +1,4 @@
 
-<%--<%@ page contentType="text/html;charset=UTF-8" language="java" %>--%>
-<%--<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>--%>
-<%--<%@ taglib prefix="cdg" uri="customtags" %>--%>
-<%--<!DOCTYPE HTML>--%>
-<%--<html>--%>
-<%--<head>--%>
-
-<%--</head>--%>
-<%--<body>--%>
-
-
-
-<%--&lt;%&ndash;<c:forEach var="placeDescriptions" items="${placeDescriptions}">&ndash;%&gt;--%>
-    <%--&lt;%&ndash;<c:forEach var="places" items="${places}">&ndash;%&gt;--%>
-        <%--&lt;%&ndash;<c:forEach var="placeImages" items="${placeImages}">&ndash;%&gt;--%>
-            <%--&lt;%&ndash;<c:if test="${places.id==placeDescriptions.place_id}">&ndash;%&gt;--%>
-            <%--&lt;%&ndash;<c:if test="${placeImages.place_id == places.id}">&ndash;%&gt;--%>
-              <%--&lt;%&ndash;<h5><c:out value="${placeDescriptions.name}"/></h5><br>&ndash;%&gt;--%>
-            <%--&lt;%&ndash;<img src="${pageContext.request.contextPath}/upload/photo/${placeImages.reference}" alt="" height="100" width="100"></a><br>&ndash;%&gt;--%>
-            <%--&lt;%&ndash;<h5><c:out  value="${placeDescriptions.name}"/></h5><br>&ndash;%&gt;--%>
-            <%--&lt;%&ndash;<c:out value="${places.adress}"/><br>&ndash;%&gt;--%>
-            <%--&lt;%&ndash;</c:if>&ndash;%&gt;--%>
-            <%--&lt;%&ndash;</c:if>&ndash;%&gt;--%>
-        <%--&lt;%&ndash;</c:forEach>&ndash;%&gt;--%>
-    <%--&lt;%&ndash;</c:forEach>&ndash;%&gt;--%>
-<%--&lt;%&ndash;</c:forEach>&ndash;%&gt;--%>
-
-<%--</body>--%>
-<%--</html>--%>
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="cdg" uri="customtags" %>
@@ -65,11 +35,19 @@
                                       method="post" style="position:absolute;padding:5px">
                                     <c:set var="category" scope="request" value="${requestScope.category}"/>
                                         <button class="btn modal-trigger btn-floating btn-large waves-effect waves-light red darken-2"
-                                                type="submit" data-target="chooseDay"
-                                                id="btn1" onclick="$('#place_id').val('${place.id}')">
-                                            <i class="mdi-content-sub"></i>
+                                                type="submit" data-target="delete-place"
+                                                id="btn" onclick="$('#place_id').val('${place.id}')">
+                                            <i class="material-icons">delete</i>
                                         </button>
+                                    <c:if test="${userDataTrip!=null}">
+                                    <button class="btn modal-trigger btn-floating btn-large waves-effect waves-light cyan darken-2"
+                                            type="submit" data-target="add-place"
+                                            id="btn1" onclick="$('#place_id_add').val('${place.id}')">
+                                        <i class="mdi-content-add"></i>
+                                    </button>
+                                    </c:if>
                                 </form>
+
 
 
                                 <a href="portal?command=placeInformation&place_id=${place.id}"><img
@@ -102,7 +80,7 @@
 
 
 
-<div id="chooseDay" class="modal">
+<div id="delete-place" class="modal">
     <div class="modal-content">
         <p><cdg:l18n key="sure.delete"/></p>
         <form id="sure" action="/portal/deletePlace" method="post">
@@ -112,14 +90,44 @@
                 <input placeholder="Placeholder" id="place_id" name="place_id" type="hidden">
             </div>
 
-
-
-            <button class="btn waves-effect waves-light cyan darken-2" type="submit" value="true" name="yes"
-                    >OK
+        <div class="ok-footer">
+            <div class="modal-footer">
+                <button class="btn waves-effect waves-light cyan darken-2" type="submit" value="true" name="yes">Ok
             </button>
+                <button class="btn waves-effect waves-light cyan darken-2" type="submit" value="false" name="no"
+                        >Cancel
+            </button>
+            </div>
+            </div>
+        </form>
+    </div>
+</div>
 
-            <button class="btn waves-effect waves-light cyan darken-2" type="submit" value="false" name="no"
-                    >No
+<div id="add-place" class="modal">
+    <div class="modal-content">
+        <c:set var="category" scope="request" value="${requestScope.category}"/>
+        <h2><cdg:l18n key="select.day.number"/></h2>
+        <form id="choose_day" action="/portal/addplace" method="post">
+            <input type="hidden" name="command" value="addplace">
+
+            <div class="input-field col s6">
+                <input placeholder="Placeholder" id="place_id_add" name="place_id" type="hidden">
+            </div>
+
+            <label><cdg:l18n key="select.day.number"/></label>
+            <select name="dayNumber" class="browser-default">
+                <c:forEach var="i" begin="1" end="${userDataTrip.dayCount}">
+                    <option width="10px" value="${i}"><c:out value="${i}"/></option>
+                </c:forEach>
+            </select>
+            <label><cdg:l18n key="select.place.time"/></label>
+            <p class="range-field">
+                <input type="range" name="timePlace" id="timePlace" min="15" value="15" step="15" max="240" />
+            <p id="timeValue"></p>
+            </p>
+
+            <button class="btn waves-effect waves-light cyan darken-2" type="submit"
+                    >OK
             </button>
         </form>
 
@@ -127,6 +135,7 @@
     <div class="modal-footer">
 
     </div>
+
 </div>
 
 <script>

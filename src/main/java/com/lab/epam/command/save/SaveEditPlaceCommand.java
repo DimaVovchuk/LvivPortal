@@ -1,4 +1,4 @@
-package com.lab.epam.command.page.place;
+package com.lab.epam.command.save;
 
 import com.lab.epam.command.controller.Command;
 

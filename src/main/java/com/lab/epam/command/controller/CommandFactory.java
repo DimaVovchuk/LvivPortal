@@ -4,8 +4,9 @@ package com.lab.epam.command.controller;
  * Created by Vasyl on 09.06.2015.
  */
 
+import com.lab.epam.command.delete.DeletePlaceCommand;
 import com.lab.epam.command.email.*;
-import com.lab.epam.command.page.place.PlaceJSONCommand;
+import com.lab.epam.command.page.place.*;
 import com.lab.epam.command.locale.LocaleCommand;
 import com.lab.epam.command.logination.SignInCommand;
 import com.lab.epam.command.logination.SignOutCommand;
@@ -17,10 +18,7 @@ import com.lab.epam.command.page.map.RoutesCommand;
 import com.lab.epam.command.page.map.ShowMapCommand;
 import com.lab.epam.command.page.photo.ShowAllUserPhoto;
 import com.lab.epam.command.page.photo.UpLoadPictureCommand;
-import com.lab.epam.command.page.place.PlaceCommand;
-import com.lab.epam.command.page.place.PlaceInfortmationCommand;
-import com.lab.epam.command.page.place.RectRatingCommand;
-import com.lab.epam.command.page.place.SaveEditPlaceCommand;
+import com.lab.epam.command.save.SaveEditPlaceCommand;
 import com.lab.epam.command.page.user.*;
 import com.lab.epam.command.page.user.admin.EditPlaceCommand;
 import com.lab.epam.command.page.user.admin.ShowAllUserCommand;
@@ -71,6 +69,8 @@ public class CommandFactory {
         commands.put("savePlace", new SavePlaceCommand());
         commands.put("saveEditPlace", new SaveEditPlaceCommand());
         commands.put("rectRating", new RectRatingCommand());
+        commands.put("deletePlace", new DeletePlaceCommand());
+        commands.put("addplace", new AddPlaceUserDataTripCommand());
     }
 
     public static void createCommand(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

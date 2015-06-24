@@ -4,9 +4,21 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title><cdg:l18n key="places.title"/></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="keywords" content=""/>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 </head>
+
+<jsp:include page="/views/elements/css.jsp"/>
+<jsp:include page="/views/elements/script.jsp"/>
+
 <body>
+
+<jsp:include page="/views/elements/header.jsp"/>
+
 
 <c:forEach var="ways" items="${ways}">
   <c:forEach items="${wayPlaceImages}" var="wayPlaceImages">

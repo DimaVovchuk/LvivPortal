@@ -43,7 +43,10 @@ public class SavePlaceCommand implements Command {
         }
 
         if (user != null && place_id != 0){
-            placeService.createPlaceUser(place_id, user.getId());
+            if (placeService.getPlaceByUserIdPlaceId(place_id, user.getId()) == null){
+                placeService.createPlaceUser(place_id, user.getId());
+                System.out.println(placeService.getPlaceByUserIdPlaceId(place_id, user.getId()));
+            }
         }
         request.setAttribute("place_id", place_id);
         request.getRequestDispatcher("portal?command=placeInformation").forward(request, response);
