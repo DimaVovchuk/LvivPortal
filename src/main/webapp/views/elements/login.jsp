@@ -63,11 +63,11 @@
                 </div>
                 <div class="form">
                     <input name="role" type="radio" id="user" value="2" checked="checked"/>
-                    <label class="radio-label" for="user">User</label>
+                    <label class="radio-label" for="user"><cdg:l18n key="role.user"/></label>
                     <input name="role" type="radio" id="guide" value="3"/>
-                    <label class="radio-label" for="guide">Guide</label>
+                    <label class="radio-label" for="guide"><cdg:l18n key="role.guide"/></label>
                     <input name="role" type="radio" id="company" value="4"/>
-                    <label class="radio-label" for="company">Agency</label>
+                    <label class="radio-label" for="company"><cdg:l18n key="role.company"/></label>
                 </div>
                 <div class="form">
                     <button class="btn waves-effect waves-light cyan darken-2" type="submit">OK

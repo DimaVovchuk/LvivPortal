@@ -1,4 +1,4 @@
-var loadCategories = function() {
+var loadCategories = function () {
     $.ajax({
         url: window.location.origin + '/portal?command=placeJSON',
         success: updatePlaces,
@@ -6,16 +6,16 @@ var loadCategories = function() {
     });
 };
 
-var updatePlaces = function(data) {
-    if(!data) return false;
+var updatePlaces = function (data) {
+    if (!data) return false;
     var source = $("#place-info-template").html();
     var template = Handlebars.compile(source);
     var html = template(data);
     $('#place-info-collection').html(html);
 };
 
-var loadEvents = function() {
-    $('#dropdown-places').on('click', 'li', function(e){
+var loadEvents = function () {
+    $('#dropdown-places').on('click', 'li', function (e) {
         e.preventDefault();
         $.ajax({
             url: window.location.origin + '/' + $(e.target).attr('href'),
@@ -25,7 +25,28 @@ var loadEvents = function() {
     });
 };
 
-$(function() {
+var windowIDList = ['#map-itinerary', '#map-places'];
+
+function linkProcess(id) {
+    var li = '#li-' + id;
+    var map = '#map-' + id;
+    $(li).addClass('active');
+    $(map).show();
+    windowIDList.forEach(function (item) {
+        if (item !== map) {
+            $(item).hide();
+        }
+    });
+}
+
+$(function () {
     loadCategories();
     loadEvents();
+
+    $('.link-process').on('click', function(e) {
+        var type = $(e.currentTarget).data('type');
+        linkProcess(type);
+        $('.link-process').removeClass('active');
+        $(".link-process[data-type='"+type+"']").addClass('active');
+    })
 });

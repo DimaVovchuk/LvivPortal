@@ -9,7 +9,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="keywords" content=""/>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script>
         $("#timePlace").mousemove( function(e){
             $("#timeValue").html($(this).val());
@@ -113,14 +112,6 @@
 </div>
 
 <jsp:include page="/views/elements/footer.jsp"/>
-
-<script>
-    $(".match-col").matchHeight({
-        property: 'height'
-    });
-</script>
-
-
 
 <div id="chooseDay" class="modal">
     <div class="modal-content">

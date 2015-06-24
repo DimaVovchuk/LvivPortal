@@ -101,11 +101,12 @@
     </div>
 </div>
 
+<jsp:include page="/views/elements/footer-img.jsp"/>
 <jsp:include page="/views/elements/footer.jsp"/>
 
 <script id="place-template" type="text/x-handlebars-template">
     {{#each this}}
-    <li><a href="#">{{name}}</a></li>
+    <li><a href="portal?command=placeInformation&place_id={{id}}">{{name}}</a></li>
     {{/each}}
 </script>
 

@@ -2,7 +2,15 @@
 <%@ taglib prefix="cdg" uri="customtags" %>
 
 <div id="map-info">
-    <div id="map-places">
+    <div id="map-itinerary" class="animated fadeInDown">
+        <div class="collection">
+            <a href="#" class="collection-item black-text">Day 1</a>
+            <a href="#" class="collection-item black-text">Day 2</a>
+            <a href="#" class="collection-item black-text">Day 3</a>
+        </div>
+    </div>
+
+    <div id="map-places" class="animated fadeInDown" style="display: none">
         <a class='dropdown-select btn cyan darken-2' href='#' data-activates='dropdown-places'><cdg:l18n
                 key="places.categories"/></a>
         <ul id='dropdown-places' class='dropdown-content'>
