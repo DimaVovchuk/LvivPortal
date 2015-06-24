@@ -11,9 +11,8 @@ function loadCategory(category) {
         var template = Handlebars.compile(source);
         var html = template(data);
         $('#dropdown-' + category).html(html);
-    };
-};
-
+    }
+}
 
 $(function() {
     loadCategory('architecture');

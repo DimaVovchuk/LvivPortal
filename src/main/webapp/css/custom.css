@@ -514,7 +514,37 @@ footer.page-footer {
     height: 300px;
 }
 
+/* *** ADMIN PAGE *** */
+#admin-page {
+    min-height: calc(100% - 64px - 50px);
+}
 
+#admin-page #table-display-number {
+    color: #000;
+    height: 2.5em;
+    font-size: 14px;
+}
+
+#admin-page .btn {
+    padding: 0 10px;
+    margin-bottom: 5px;
+}
+
+#admin-page #change-role {
+    max-width: 300px;
+    border-top: 20px solid #0ab2d2;
+    border-bottom: 20px solid #0ab2d2;
+}
+
+#admin-page #change-role .btn {
+    width: 48%;
+}
+
+@media (max-width: 600px) {
+    #admin-page {
+        min-height: calc(100% - 56px - 50px);
+    }
+}
 
 
 /* Olya CSS */

@@ -257,9 +257,9 @@ public class PlaceInfortmationCommand implements Command {
         //loger.info("infoPlacePhone " + infoPlacePhone);
         request.setAttribute("infoPlacePrice", infoPlacePrice);
         //loger.info("infoPlacePrice " + infoPlacePrice);
-        request.setAttribute("place_reference", place_reference);
+        //request.setAttribute("place_reference", place_reference);
         //loger.info("place_reference " + place_reference);
-        request.setAttribute("place_reference", place_reference);
+        //request.setAttribute("place_reference", place_reference);
         //loger.info("placeRatings " + placeRatings);
         request.setAttribute("placeRatings", placeRatings);
 
