@@ -6,6 +6,10 @@ import com.lab.epam.entity.User;
 import com.lab.epam.helper.ClassName;
 import com.lab.epam.service.UserImageService;
 import com.lab.epam.service.UserService;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -14,91 +18,84 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.*;
 
 /**
  * Created by Oleguk on 18.06.2015.
  */
 public class SaveProfileCommand implements Command {
-
     private static final Logger loger = LogManager.getLogger(ClassName.getCurrentClassName());
 
     @Override
     public void execute(HttpServletRequest request,
                         HttpServletResponse response) throws ServletException, IOException {
-
         loger.info("Command Update Profile.");
-
         HttpSession session = request.getSession();
-        UserService userservice = new UserService();
+        List files = new ArrayList();
+        Map<String, String> params = new HashMap<String, String>();
+        try {
+            init(request,params,files);
+        } catch (FileUploadException e) {
+            e.printStackTrace();
+        }
+
+        for(Map.Entry<String, String> entry: params.entrySet()){
+            System.out.println(entry.getValue() + "-- "+ entry.getKey());
+        }
+
+        UserService userService = new UserService();
         UserImageService userImageService = new UserImageService();
-        Integer id = (Integer)session.getAttribute("id");
+        String userLogin = (String) session.getAttribute("login");
+
         User user = null;
 
-        String name = request.getParameter("name");
-        String surname = request.getParameter("surname");
-        String login = request.getParameter("login");
-        String mail = request.getParameter("mail");
-        String phone = request.getParameter("phone");
-        String about = request.getParameter("about");
-        String password = request.getParameter("password");
-        Integer avatar = Integer.valueOf(request.getParameter("avatar"));
+        String name = (String) session.getAttribute("NewName");
+        loger.info("NewName " + name);
+        String name1 = (String) request.getAttribute("NewName");
+        loger.info("NewName1 " + name1);
+        String surname = (String) session.getAttribute("surname");
+        String login = (String) session.getAttribute("login");
+        String mail = (String) session.getAttribute("mail");
+        String phone = (String) session.getAttribute("phone");
+        String about = (String) session.getAttribute("about");
+        String typePhoto = (String) session.getAttribute("typePhoto");
 
-        String page = "/views/pages/editProfile.jsp";
+
         String errorMsg = null;
 
-        if (id != null) {
-            user = userservice.getByPK(id);
+        if (userLogin != null) {
+            user = userService.getUserByLogin(userLogin);
+            loger.info("Command Update user " + user);
         }
-        if (user == null){
-            loger.warn("No user with id " + id);
-        }
-        else {
-            if (!(user.getName().equals(name) && user.getSurname().equals(surname) && user.getLogin().equals(login) && user.getMail().equals(mail)
-                    && user.getPhone().equals(phone) && user.getAbout().equals(about) && user.getPassword().equals(password) && user.getAvatar().equals(avatar))) {
-                name = request.getParameter("name");
-                surname = request.getParameter("surname");
-                login = request.getParameter("login");
-                mail = request.getParameter("mail");
-                phone = request.getParameter("phone");
-                about = request.getParameter("about");
-                password = request.getParameter("password");
-                avatar = Integer.valueOf(request.getParameter("avatar"));
 
-                user.setName(name);
-                user.setSurname(surname);
-                user.setLogin(login);
-                user.setMail(mail);
-                user.setPhone(phone);
-                user.setAbout(about);
-                user.setPassword(password);
-                user.setAvatar(avatar);
+        user.setName(name);
+        user.setSurname(surname);
+        user.setLogin(login);
+        user.setMail(mail);
+        user.setPhone(phone);
+        user.setAbout(about);
+        loger.info("CUser after change " + user);
+        try {
+            userService.update(user);
+        } catch (PersistException e) {
+            loger.info("User is not update");
+        }
+        response.sendRedirect("/portal?command=edit");
+    }
+    private static void init(HttpServletRequest request, Map params, List files) throws FileUploadException {
+        DiskFileItemFactory factory = new DiskFileItemFactory();
+        ServletFileUpload upload = new ServletFileUpload(factory);
+
+        List items = upload.parseRequest(request);
+        for (Iterator i = items.iterator(); i.hasNext();) {
+            FileItem item = (FileItem) i.next();
+            if (item.isFormField()) {
+                params.put(item.getFieldName(), item.getString());
             }
             else {
-                errorMsg = "You have not changed any field";
+                if (item.getSize() <= 0) continue;
+                files.add(item);
             }
-        }
-
-        if (!(errorMsg == null || errorMsg.isEmpty() || errorMsg == "")) {
-            loger.info("User profile of \'" + user.getName() + "\' is updated!");
-            try {
-                userservice.update(user);
-            } catch (PersistException e) {
-                e.printStackTrace();
-            }
-            request.setAttribute("name", user.getName());
-            request.setAttribute("surname", user.getSurname());
-            request.setAttribute("login", user.getLogin());
-            request.setAttribute("mail", user.getMail());
-            request.setAttribute("phone", user.getPhone());
-            request.setAttribute("about", user.getAbout());
-            request.setAttribute("password", user.getPassword());
-            request.setAttribute("avatar", user.getAvatar());
-            request.setAttribute("msg", errorMsg);
-            request.getRequestDispatcher(page).forward(request, response);
-        }
-        else {
-            request.setAttribute("msg", errorMsg);
-            request.getRequestDispatcher(page).forward(request, response);
         }
     }
 }

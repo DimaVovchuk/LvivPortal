@@ -144,7 +144,7 @@ public class PlaceCommand implements Command {
         String login = (String)session.getAttribute("login");
         User user = null;
         if (login != null){
-            user = userService.geUserByLogin(login);
+            user = userService.getUserByLogin(login);
         }
 
         for (Place place : places) {

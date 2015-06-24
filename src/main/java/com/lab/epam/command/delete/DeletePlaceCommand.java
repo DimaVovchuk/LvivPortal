@@ -42,7 +42,7 @@ public class DeletePlaceCommand implements Command {
             String login = (String)session.getAttribute("login");
             User user = null;
             if (login != null){
-                user = userService.geUserByLogin(login);
+                user = userService.getUserByLogin(login);
             }
 
             if (user != null && place_id != null){

@@ -27,6 +27,7 @@ import com.lab.epam.command.save.SaveWayCommand;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -71,6 +72,7 @@ public class CommandFactory {
         commands.put("rectRating", new RectRatingCommand());
         commands.put("deletePlace", new DeletePlaceCommand());
         commands.put("addplace", new AddPlaceUserDataTripCommand());
+        commands.put("userAllWay", new UserAllWayCommand());
     }
 
     public static void createCommand(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -83,7 +85,8 @@ public class CommandFactory {
 //        }
 
         if (request.getContentType() != null && request.getContentType().toLowerCase().indexOf("multipart/form-data") > -1 ){
-            command = "upLoad";
+            HttpSession session = request.getSession();
+            command = (String)session.getAttribute("command");
         }
 
         System.out.println(command);

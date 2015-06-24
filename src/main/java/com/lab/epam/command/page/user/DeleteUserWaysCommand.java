@@ -13,8 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.Locale;
-import java.util.ResourceBundle;
 
 /**
  * Created by Admin on 18.06.2015.
@@ -39,7 +37,7 @@ public class DeleteUserWaysCommand implements Command {
 
         loger.info("Login in session is " + login);
         if (login != null) {
-            user = userservice.geUserByLogin(login);
+            user = userservice.getUserByLogin(login);
         }
         if (user == null) {
             loger.warn("No user with login " + login);

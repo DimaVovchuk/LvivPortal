@@ -23,7 +23,41 @@ public class Way implements Identified<Integer> {
     private Integer way_time;
     @Column("visible")
     private Boolean visible;
+
+    public Date getBegin() {
+        return begin;
+    }
+
+    public void setBegin(Date begin) {
+        this.begin = begin;
+    }
+
+    public Date getEnd() {
+        return end;
+    }
+
+    public void setEnd(Date end) {
+        this.end = end;
+    }
+
+    public Integer getWay_time() {
+        return way_time;
+    }
+
+    public void setWay_time(Integer way_time) {
+        this.way_time = way_time;
+    }
+
+    public Integer getWay_days() {
+        return way_days;
+    }
+
+    public void setWay_days(Integer way_days) {
+        this.way_days = way_days;
+    }
+
     @Column("date_begin")
+
     private Date begin;
     @Column("date_end")
     private Date end;

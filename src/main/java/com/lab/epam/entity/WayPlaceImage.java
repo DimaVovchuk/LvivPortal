@@ -1,5 +1,6 @@
 package com.lab.epam.entity;
 
+import java.sql.Date;
 import java.util.List;
 
 /**
@@ -9,6 +10,25 @@ public class WayPlaceImage {
 
     private Integer id;
     private String imageReference;
+    private Date beginDate;
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
+    public Date getBeginDate() {
+        return beginDate;
+    }
+
+    public void setBeginDate(Date beginDate) {
+        this.beginDate = beginDate;
+    }
+
+    private Date endDate;
     private List<PlaceDescription> place;
 
     public WayPlaceImage() {

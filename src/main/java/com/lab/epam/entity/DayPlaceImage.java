@@ -8,6 +8,16 @@ import java.util.List;
 public class DayPlaceImage {
 
     private Integer day;
+
+    public String getImageReference() {
+        return imageReference;
+    }
+
+    public void setImageReference(String imageReference) {
+        this.imageReference = imageReference;
+    }
+
+    private String imageReference;
     private List<ImageDescription> placeImage;
 
     public DayPlaceImage() {

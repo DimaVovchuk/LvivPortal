@@ -27,7 +27,7 @@ public class ConfirmChangePassCommand implements Command {
         HttpSession session = request.getSession();
         String login = (String) session.getAttribute("login");
         UserService userService = new UserService();
-        User user = userService.geUserByLogin(login);
+        User user = userService.getUserByLogin(login);
         String password = request.getParameter("password");
         String md5 = MD5Creator.getMD5(password+login);
         user.setPassword(md5);
