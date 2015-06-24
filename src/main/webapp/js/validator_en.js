@@ -8,14 +8,26 @@ $.validator.addMethod(
 $("#sign-in-form").validate({
     rules: {
         login: "required",
-        password: "required"
+        password: {
+            required: true,
+            remote: {
+                url: window.location.origin + '/portal?command=signInFormCheck',
+                type: 'post',
+                data: {
+                    login: function() {
+                        return $('#login-in').val()
+                    }
+                }
+            }
+        }
     },
     messages: {
         login: {
             required: "Please enter login"
         },
         password: {
-            required: "Please enter password"
+            required: "Please enter password",
+            remote: "Wrong login or password"
         }
     }
 });
@@ -32,11 +44,19 @@ $("#sign-up-form").validate({
         },
         login: {
             required: true,
-            regex: /^[A-Za-z0-9_-]+$/
+            regex: /^[A-Za-z0-9_-]+$/,
+            remote: {
+                url: window.location.origin + '/portal?command=signUpFormCheck',
+                type: 'post'
+            }
         },
         email: {
             required: true,
-            email: true
+            email: true,
+            remote: {
+                url: window.location.origin + '/portal?command=signUpFormCheck',
+                type: 'post'
+            }
         },
         password: {
             required: true,
@@ -47,7 +67,11 @@ $("#sign-up-form").validate({
         },
         phone: {
             required: true,
-            regex: /^[0-9\+\s\(\)]+$/
+            regex: /^[0-9\+\s\(\)]+$/,
+            remote: {
+                url: window.location.origin + '/portal?command=signUpFormCheck',
+                type: 'post'
+            }
         }
     },
     messages: {
@@ -61,11 +85,13 @@ $("#sign-up-form").validate({
         },
         login: {
             required: "Please enter login",
-            regex: "Only latin letters, dashes and underscores are allowed"
+            regex: "Only latin letters, dashes and underscores are allowed",
+            remote: "This login is already in use"
         },
         email: {
             required: "Please enter E-mail address",
-            email: "Wrong E-mail address format"
+            email: "Wrong E-mail address format",
+            remote: "This E-mail address is already in use"
         },
         password: {
             required: "Please enter password"
@@ -77,6 +103,7 @@ $("#sign-up-form").validate({
         phone: {
             required: "Please enter phone number",
             regex: "Wrong phone number format",
+            remote: "This phone number is already in use"
         }
     }
 });

@@ -237,6 +237,10 @@ header img.text-middle {
     padding: 0;
 }
 
+.login-form .radio-label {
+    margin-right: 10px;
+}
+
 /* PLAN TRIP */
 #set-date-time {
     width: 500px;

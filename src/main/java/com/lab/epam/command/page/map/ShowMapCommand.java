@@ -25,10 +25,10 @@ import java.util.ResourceBundle;
  * Created by Vasyl on 09.06.2015.
  */
 public class ShowMapCommand implements Command {
-        private static final Logger loger = LogManager.getLogger(ClassName.getCurrentClassName());
+    private static final Logger loger = LogManager.getLogger(ClassName.getCurrentClassName());
 
     public void execute(HttpServletRequest request,
-                          HttpServletResponse response) throws ServletException, IOException {
+                        HttpServletResponse response) throws ServletException, IOException {
         PlaceService placeService = new PlaceService();
         List<Place> all = placeService.getAll();
         PlaceImageService placeImageService = new PlaceImageService();
@@ -41,12 +41,9 @@ public class ShowMapCommand implements Command {
         for (Place place : all) {
             PlaceDescription placeDescription = placeDescriptionService.getPlaceDescriptionByIdPlace(place.getId(), bundle.getLocale().toString());
             PlaceImage placeImage = placeImageService.getPlaceImageByPlaceId(place.getId());
-            if(placeImage.getReference() == null){
-                placeImage.setReference("default_building.jpg");
-            }
             placeMarkerWithPhotos.add(new PlaceMarkerWithPhoto(place.getId(), placeDescription.getName(), place.getLatitude(), place.getLongitude(), placeImage.getReference(), placeDescription.getDescription()));
         }
-        session.setAttribute("language",bundle.getLocale().toString());
+        session.setAttribute("language", bundle.getLocale().toString());
         request.setAttribute("places", placeMarkerWithPhotos);
         loger.info("Command ShowMapCommand.");
         request.getRequestDispatcher("/views/pages/map.jsp").forward(request, response);
