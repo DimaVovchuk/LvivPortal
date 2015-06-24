@@ -12,3 +12,4 @@ $('#place-page-container').pajinate({
 $(".match-col").matchHeight({
     property: 'height'
 });
+

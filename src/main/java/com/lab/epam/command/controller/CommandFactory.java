@@ -72,6 +72,7 @@ public class CommandFactory {
         commands.put("rectRating", new RectRatingCommand());
         commands.put("deletePlace", new DeletePlaceCommand());
         commands.put("addplace", new AddPlaceUserDataTripCommand());
+        commands.put("userAllWay", new UserAllWayCommand());
     }
 
     public static void createCommand(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

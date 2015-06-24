@@ -182,12 +182,14 @@ public class UserWaysCommand implements Command {
 
     private List<WayPlaceImage> getWayPlaceImageList(List<Way> ways,  Map<Integer, List<PlaceDescription>> way_place, Map<Integer,PlaceImage> wayPlaceImages){
         List<WayPlaceImage> list = new ArrayList<>();
-        for (Way way : ways) {
-            WayPlaceImage item = new WayPlaceImage();
-            item.setId(way.getId());
-            item.setImageReference(wayPlaceImages.get(way.getId()).getReference());
-            item.setPlace(way_place.get(way.getId()));
-            list.add(item);
+        if(ways != null && !ways.isEmpty()){
+            for (Way way : ways) {
+                WayPlaceImage item = new WayPlaceImage();
+                item.setId(way.getId());
+                item.setImageReference(wayPlaceImages.get(way.getId()).getReference());
+                item.setPlace(way_place.get(way.getId()));
+                list.add(item);
+            }
         }
         return list;
     }
@@ -201,19 +203,25 @@ public class UserWaysCommand implements Command {
             List<ImageDescription> imageDescriptionList = new ArrayList<>();
             List<PlaceDescription> placeList = place.get(key);
             List<PlaceImage> imageList = placeImages.get(key);
-            for (PlaceDescription placeDescription: placeList){
-                for (PlaceImage image: imageList){
-                    if(image.getPlace_id() == placeDescription.getPlace_id()) {
-                        ImageDescription imageDescriptionItem = new ImageDescription();
-                        imageDescriptionItem.setDescription(placeDescription.getDescription());
-                        imageDescriptionItem.setImageReference(image.getReference());
-                        imageDescriptionItem.setLocale(placeDescription.getLocale());
-                        imageDescriptionItem.setName(placeDescription.getName());
-                        imageDescriptionItem.setPlace_id(placeDescription.getPlace_id());
-                        imageDescriptionItem.setPrice(placeDescription.getPrice());
-                        imageDescriptionList.add(imageDescriptionItem);
+            if (placeList != null && !placeList.isEmpty() && imageList != null && !imageList.isEmpty()) {
+                for (PlaceDescription placeDescription : placeList) {
+                    for (PlaceImage image : imageList) {
+                        if (image.getPlace_id() == placeDescription.getPlace_id()) {
+                            ImageDescription imageDescriptionItem = new ImageDescription();
+                            imageDescriptionItem.setDescription(placeDescription.getDescription());
+                            imageDescriptionItem.setImageReference(image.getReference());
+                            imageDescriptionItem.setLocale(placeDescription.getLocale());
+                            imageDescriptionItem.setName(placeDescription.getName());
+                            imageDescriptionItem.setPlace_id(placeDescription.getPlace_id());
+                            imageDescriptionItem.setPrice(placeDescription.getPrice());
+                            imageDescriptionList.add(imageDescriptionItem);
+                        }
                     }
                 }
+            }
+            if (imageList != null && !imageList.isEmpty()){
+                String image = imageList.iterator().next().getReference();
+                item.setImageReference(image);
             }
             item.setPlaceImage(imageDescriptionList);
             list.add(item);
