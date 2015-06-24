@@ -1,7 +1,16 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="cdg" uri="customtags" %>
+<style type="text/css">
+    .labels img {
+        width: 50px;
+        height: 50px;
+        border: 2px solid black;
+        border-radius: 50%;
+    }
 
+</style>
+<script src="http://google-maps-utility-library-v3.googlecode.com/svn/tags/markerwithlabel/1.1.9/src/markerwithlabel.js" type="text/javascript"></script>
 <script>
     function initialize() {
         var map = new google.maps.Map(document.getElementById('map-canvas'),
@@ -25,24 +34,31 @@
                 '</div>' +
                 '</div>';
 
-        var infowindow = new google.maps.InfoWindow({
+            var infowindow = new google.maps.InfoWindow({
             content: contentString
         });
 
 
         var image = {
             url: "${pageContext.request.contextPath}/upload/photo/${place.imageReference}",
-            scaledSize: new google.maps.Size(60, 40),
+            scaledSize: new google.maps.Size(0, 0),
             origin: new google.maps.Point(0, 0),
             anchor: new google.maps.Point(0, 0)
         };
         var myLatLng = new google.maps.LatLng(${place.latitude}, ${place.longitude});
-        var marker = new google.maps.Marker({
+        var pictureLabel = document.createElement("img");
+        pictureLabel.src = "${pageContext.request.contextPath}/upload/photo/${place.imageReference}";
+        var marker = new MarkerWithLabel({
+            icon: image,
             position: myLatLng,
             info: contentString,
-            animation: google.maps.Animation.DROP,
-            icon: image
+            labelContent: pictureLabel,
+            labelAnchor: new google.maps.Point(22, 0),
+            labelClass: "labels", // the CSS class for the label
+            labelVisible: true
+//            animation: google.maps.Animation.DROP,
         });
+
 
         markers.push(marker);
         google.maps.event.addListener(marker, 'click', function () {
@@ -50,6 +66,7 @@
             infowindow.open(map, this);
         });
         </c:forEach>
+
         var markerClusterer = new MarkerClusterer(map, markers,
                 {
                     maxZoom: 16,

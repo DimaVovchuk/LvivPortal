@@ -6,15 +6,30 @@
 <head>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
-    <title>Draggable directions</title>
+    <title>Routes</title>
     <style>
         html, body, #map-canvas {
             height: 100%;
             margin: 0px;
             padding: 0px
         }
+
+        /*.labels {*/
+            /*color: red;*/
+            /*background-color: white;*/
+            /*font-family: "Lucida Grande", "Arial", sans-serif;*/
+            /*font-size: 10px;*/
+            /*font-weight: bold;*/
+            /*text-align: center;*/
+            /*width: 60px;*/
+            /*border: 2px solid black;*/
+            /*white-space: nowrap;*/
+        /*}*/
     </style>
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
+    <%--<script src="http://google-maps-utility-library-v3.googlecode.com/svn/tags/markerwithlabel/1.1.9/src/markerwithlabel.js" type="text/javascript"></script>--%>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyCL9BI_9U8ba_Zf_ldHd9KrYFtBtK7cTzI"
+            type="text/javascript">
+    </script>
     <script>
 
         var directionsDisplay;
@@ -31,18 +46,67 @@
             };
             map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
             directionsDisplay.setMap(map);
+            directionsDisplay.setOptions({suppressMarkers: true});
+
             calcRoute();
+
         }
 
+
         function calcRoute() {
+            <c:choose>
+            <c:when test="${wayPlaces.size() > 1}">
             var start = new google.maps.LatLng(${wayPlaces[0].latitude}, ${wayPlaces[0].longitude});
-            var end =  new google.maps.LatLng(${wayPlaces[fn:length(wayPlaces)-1].latitude}, ${wayPlaces[fn:length(wayPlaces)-1].longitude});
-            var waypts = [
-                <c:forEach var="i" begin="1" end="${fn:length(wayPlaces)-2}">
-                <%--<c:forEach items="${wayPlaces}" var="place">--%>
-                {location: new google.maps.LatLng(${wayPlaces[i].latitude}, ${wayPlaces[i].longitude})},
-                </c:forEach>
-            ];
+            var image = {
+                url: "${pageContext.request.contextPath}/upload/photo/${wayPlaces[0].imageReference}",
+                scaledSize: new google.maps.Size(40, 30),
+                origin: new google.maps.Point(0, 0),
+                anchor: new google.maps.Point(0, 0)
+            };
+
+            <%--new MarkerWithLabel({--%>
+                <%--position: new google.maps.LatLng(${wayPlaces[0].latitude}, ${wayPlaces[0].longitude}),--%>
+                <%--map: map,--%>
+                <%--labelContent: "$425K",--%>
+                <%--labelAnchor: new google.maps.Point(22, 0),--%>
+                <%--labelClass: "labels", // the CSS class for the label--%>
+                <%--labelStyle: {opacity: 0.75}--%>
+            <%--});--%>
+
+            new google.maps.Marker({
+                position: new google.maps.LatLng(${wayPlaces[0].latitude}, ${wayPlaces[0].longitude}),
+                icon: image,
+                map: map
+            });
+            var end = new google.maps.LatLng(${wayPlaces[fn:length(wayPlaces)-1].latitude}, ${wayPlaces[fn:length(wayPlaces)-1].longitude});
+            var image = {
+                url: "${pageContext.request.contextPath}/upload/photo/${wayPlaces[fn:length(wayPlaces)-1].imageReference}",
+                scaledSize: new google.maps.Size(40, 30),
+                origin: new google.maps.Point(0, 0),
+                anchor: new google.maps.Point(0, 0)
+            };
+            new google.maps.Marker({
+                position: new google.maps.LatLng(${wayPlaces[fn:length(wayPlaces)-1].latitude}, ${wayPlaces[fn:length(wayPlaces)-1].longitude}),
+                icon: image,
+                map: map
+            });
+            var waypts = [];
+            <c:forEach var="i" begin="1" end="${fn:length(wayPlaces)-2}">
+            waypts.push({location: new google.maps.LatLng(${wayPlaces[i].latitude}, ${wayPlaces[i].longitude})});
+            var image = {
+                url: "${pageContext.request.contextPath}/upload/photo/${wayPlaces[i].imageReference}",
+                scaledSize: new google.maps.Size(40, 30),
+                origin: new google.maps.Point(0, 0),
+                anchor: new google.maps.Point(0, 0)
+            };
+            new google.maps.Marker({
+                position: new google.maps.LatLng(${wayPlaces[i].latitude}, ${wayPlaces[i].longitude}),
+                icon: image,
+                map: map
+
+            });
+            </c:forEach>
+
 
             var request = {
                 origin: start,
@@ -52,26 +116,16 @@
                 travelMode: google.maps.TravelMode.WALKING
 
             };
-            directionsService.route(request, function(response, status) {
+            </c:when>
+            </c:choose>
+            directionsService.route(request, function (response, status) {
                 if (status == google.maps.DirectionsStatus.OK) {
                     directionsDisplay.setDirections(response);
-                    <%--var image = {--%>
-                        <%--url: "${pageContext.request.contextPath}/upload/photo/${wayPlaces[i].imageReference}",--%>
-                        <%--scaledSize: new google.maps.Size(60, 40),--%>
-                        <%--origin: new google.maps.Point(0, 0),--%>
-                        <%--anchor: new google.maps.Point(0, 0)--%>
-                    <%--};--%>
-                    <%--var marker = new google.maps.Marker({--%>
-                        <%--position: new google.maps.LatLng(${wayPlaces[i].latitude}, ${wayPlaces[i].longitude}),--%>
-                        <%--info: contentString,--%>
-                        <%--animation: google.maps.Animation.DROP,--%>
-                        <%--icon: image--%>
-                    <%--});--%>
                 }
             });
         }
 
-            google.maps.event.addDomListener(window, 'load', initialize);
+        google.maps.event.addDomListener(window, 'load', initialize);
 
     </script>
 </head>

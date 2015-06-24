@@ -27,53 +27,52 @@ public class RoutesCommand implements Command {
                         HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         UserDataAboutTrip userDataTrip = (UserDataAboutTrip) session.getAttribute("userDataTrip");
-        Map<Integer, List<Place>> placeDay = userDataTrip.getPlaceDay();
-        List<Place> places = placeDay.get(1);
-        Comparator<Place> placeComparator = new Comparator<Place>() {
-            @Override
-            public int compare(Place o1, Place o2) {
-                int result = 0;
-                Distance distance = new Distance();
-                String obj1 =  ""+o1.getLatitude()+" "+o1.getLongitude()+"";
-                String obj2 =  ""+o2.getLatitude()+" "+o2.getLongitude()+"";
+        if(userDataTrip != null){
+            Map<Integer, List<Place>> placeDay = userDataTrip.getPlaceDay();
+            List<Place> places = placeDay.get(1);
+
+            String obj1 =  ""+places.get(0).getLatitude()+" "+places.get(0).getLongitude()+"";
+            Distance distance = new Distance();
+            List<Double> dist = new ArrayList<>();
+            for (int i = 1; i < places.size(); i++) {
+                String obj2 =  ""+places.get(i).getLatitude()+" "+places.get(i).getLongitude()+"";
                 try {
-                    result = distance.getDistance(obj1,obj2);
-                } catch (IOException e) {
-                    e.printStackTrace();
+                    dist.add(distance.getDistance(obj1, obj2));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                return result;
             }
-        };
-       // Collections.sort(places, placeComparator);
-//        String obj1 =  ""+places.get(0).getLatitude()+" "+places.get(0).getLongitude()+"";
-//        Distance distance = new Distance();
-//        List<Place> placesSort = new ArrayList<>();
-//        List<Integer> dist = new ArrayList<>();
-//        for (int i = 1; i < places.size()-1; i++) {
-//            String obj2 =  ""+places.get(i).getLatitude()+" "+places.get(i).getLongitude()+"";
-//            try {
-//                dist.add(distance.getDistance(obj1, obj2));
-//            } catch (JSONException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//        System.out.println(dist);
-        PlaceImageService placeImageService = new PlaceImageService();
-        List<PlaceMarkerWithPhoto> placeMarkerWithPhotos = new ArrayList<>();
-        PlaceDescriptionService placeDescriptionService = new PlaceDescriptionService();
-        ResourceBundle bundle = (ResourceBundle) session.getAttribute("bundle");
 
-        for (Place place : places) {
-            PlaceDescription placeDescription = placeDescriptionService.getPlaceDescriptionByIdPlace(place.getId(), bundle.getLocale().toString());
-            PlaceImage placeImage = placeImageService.getPlaceImageByPlaceId(place.getId());
-            if(placeImage.getReference() == null){
-                placeImage.setReference("default_building.jpg");
+            TreeMap<Double,Place> sorted = new TreeMap<>();
+            sorted.put(0.0,places.get(0));
+            int j = 1;
+            for (int i = 0; i < dist.size(); i++) {
+                sorted.put(dist.get(i),places.get(j));
+                j++;
             }
-            placeMarkerWithPhotos.add(new PlaceMarkerWithPhoto(place.getId(), placeDescription.getName(), place.getLatitude(), place.getLongitude(), placeImage.getReference(), placeDescription.getDescription()));
+            Collection<Place> values = sorted.values();
+            List<Place> list = new ArrayList<>();
+            list.addAll(values);
+
+
+            PlaceImageService placeImageService = new PlaceImageService();
+            List<PlaceMarkerWithPhoto> placeMarkerWithPhotos = new ArrayList<>();
+            PlaceDescriptionService placeDescriptionService = new PlaceDescriptionService();
+            ResourceBundle bundle = (ResourceBundle) session.getAttribute("bundle");
+
+            for (Place place : values) {
+                PlaceDescription placeDescription = placeDescriptionService.getPlaceDescriptionByIdPlace(place.getId(), bundle.getLocale().toString());
+                PlaceImage placeImage = placeImageService.getPlaceImageByPlaceId(place.getId());
+                placeMarkerWithPhotos.add(new PlaceMarkerWithPhoto(place.getId(), placeDescription.getName(), place.getLatitude(), place.getLongitude(), placeImage.getReference(), placeDescription.getDescription()));
+            }
+            session.setAttribute("language", bundle.getLocale().toString());
+            request.setAttribute("wayPlaces", placeMarkerWithPhotos);
+
+        }else{
+
+            request.setAttribute("error", "Choose some places");
         }
-        request.setAttribute("wayPlaces", placeMarkerWithPhotos);
+
         loger.info("Command RoutesCommand.");
         request.getRequestDispatcher("/views/pages/routes.jsp").forward(request, response);
     }
