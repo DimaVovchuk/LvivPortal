@@ -9,14 +9,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="keywords" content=""/>
 </head>
-<!-- 1. Link to jQuery (1.8 or later), -->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-
-<!-- fotorama.css & fotorama.js. -->
 <link href="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.css" rel="stylesheet">
-<!-- 3 KB -->
 <script src="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js"></script>
-<!-- 16 KB -->
 <jsp:include page="/views/elements/css.jsp"/>
 <jsp:include page="/views/elements/script.jsp"/>
 
@@ -29,8 +24,8 @@
         <div class="blog-main">
             <div class="col-md-9 blog-left">
                 <div class="blog-grids">
-                    <br>
-                    <div class="fotorama" data-transition="crossfade" data-loop="true" data-autoplay="true" data-allowfullscreen="true" data-keyboard="true" >
+                    <h3>${placeDescription.name}</h3>
+                    <div class="fotorama" data-transition="crossfade" data-nav="thumbs" data-loop="true" data-autoplay="true" data-allowfullscreen="true" data-keyboard="true" >
                     <c:forEach items="${place_referenceList}" var="elem">
 
                         <img class="materialboxed" width="200" height="200"
@@ -38,8 +33,6 @@
                     </c:forEach>
                 </div>
                     <div class="blog-detail">
-                        <h3>${placeDescription.name}</h3>
-
                         ${placeDescription.description}<br>
 
                         <c:if test="${placeDescription.phone!=null}">

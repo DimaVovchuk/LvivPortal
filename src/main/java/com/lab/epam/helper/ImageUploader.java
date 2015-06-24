@@ -110,7 +110,7 @@ public class ImageUploader {
                     fos.close();
                 } else {
                     session.setAttribute("imageError", 1);
-                    loger.warn("Name is pattern error");
+                    loger.warn("Name is pattern error " + imageName);
                 }
             }
         }

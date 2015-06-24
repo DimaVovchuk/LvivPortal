@@ -53,14 +53,17 @@ public class PlaceInfortmationCommand implements Command {
         UserImageService userImageService = new UserImageService();
 //        String place_reference = null;
         PlaceRating place_rating = null;
-        List<PlaceImage> imList = null;
+        List<PlaceImage> imList = new ArrayList<>();
         if (place_id != null) {
-            imList = placeImageService.getAllPlaceImageByPlaceId(place_id);
-            if (!imList.isEmpty()) {
-                for (int index = 0; index < imList.size(); index++)
-                    if (imList.get(index) == null || !isInFolder(imList.get(index).getReference(), request)) {
-                        imList.add(new PlaceImage(place_id, "default_building.jpg"));
+            List<PlaceImage> fullImageList = placeImageService.getAllPlaceImageByPlaceId(place_id);
+            if (fullImageList != null && !fullImageList.isEmpty()) {
+                imList = fullImageList;
+                for (int index = 0; index < imList.size(); index++) {
+                    if (fullImageList.get(index) == null || !isInFolder(fullImageList.get(index).getReference(), request)) {
+                        imList.remove(index);
                     }
+                }
+                System.out.println(imList);
             } else{
                 imList.add(new PlaceImage(place_id, "default_building.jpg"));
             }
@@ -258,7 +261,7 @@ public class PlaceInfortmationCommand implements Command {
         request.setAttribute("infoPlacePrice", infoPlacePrice);
         loger.info("infoPlacePrice " + infoPlacePrice);
         request.setAttribute("place_referenceList", imList);
-        loger.info("place_referenceList " + imList);
+//        loger.info("place_reference " + place_reference);
 //        request.setAttribute("place_reference", place_reference);
         loger.info("placeRatings " + placeRatings);
         request.setAttribute("placeRatings", placeRatings);

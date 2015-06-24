@@ -20,7 +20,7 @@
     $(function () {
       $("#fileupload").change(function () {
         $("#dvPreview").html("");
-        var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.JPG|.jpeg|.gif|.png|.bmp)$/;
+        var regex = /([^\s]+(?=\.(jpg|JPG|gif|png))\.\2)/;
         if (regex.test($(this).val().toLowerCase())) {
           if ($.browser.msie && parseFloat(jQuery.browser.version) <= 9.0) {
             $("#dvPreview").show();
@@ -52,9 +52,11 @@
     <input type="hidden" name="command" value="upLoad">
     <c:set var="typePhoto" scope="session" value="userFoto"/>
     <b>Choose image:</b>
-    <input id="fileupload" type="file" multiple="multiple" name="sendfile">
+    <input id="fileupload" type="file" name="sendfile">
+    <%--multiple="multiple"--%>
+    <br>
     <b>Preview:</b>
-    <br />
+    <br>
     <div id="dvPreview">
     </div>
     <input type=submit value="Upload">
