@@ -32,9 +32,8 @@ public class SaveProfileCommand implements Command {
     private static final Logger loger = LogManager.getLogger(ClassName.getCurrentClassName());
     private static final String CHECK_NAME = "^[^<>/{}\\s?!;]+$";
     private static final String CHECK_SURNAME = "^[^<>/{}\\s?!;]+$";
-    private static final String CHECK_EMAIL = "(\\w+@[a-zA-Z_]+?\\.[a-zA-Z]{2,6})";
     private static final String CHECK_PHONE = "([0-9]{6,15})";
-    private static final String CHECK_ABOUT = "^[^<>/{}\\s?!;]+$";
+    private static final String CHECK_ABOUT = "^[^<>/{}]+$";
 
     @Override
     public void execute(HttpServletRequest request,
@@ -58,7 +57,6 @@ public class SaveProfileCommand implements Command {
         }
         String name = params.get("NewName");
         String surname = params.get("surname");
-        String mail = params.get("mail");
         String phone = params.get("phone");
         String about = params.get("about");
 
@@ -75,18 +73,12 @@ public class SaveProfileCommand implements Command {
             loger.warn("Surname is pattern error");
         }
 
-        if (checkData(mail, CHECK_EMAIL)) {
-            session.setAttribute("loginError", 1);
-            errorFlag = true;
-            loger.warn("Emain is pattern error");
-        }
-
         if (checkData(phone, CHECK_PHONE)) {
             session.setAttribute("loginError", 1);
             errorFlag = true;
             loger.warn("Phone is pattern error");
         }
-        if (checkData(about, CHECK_ABOUT)) {
+        if (checkData(about, CHECK_ABOUT) || about=="") {
             session.setAttribute("loginError", 1);
             errorFlag = true;
             loger.warn("about is pattern error");
@@ -101,22 +93,10 @@ public class SaveProfileCommand implements Command {
             errorFlag = true;
             loger.warn("Phone is empty");
         }
-        if (mail == "") {
-            session.setAttribute("emailError", 1);
-            errorFlag = true;
-            loger.warn("Email is empty");
-        }
 
-        User forCheckMail = userService.geUserByEmail(mail);
-        if(user.getId()!= forCheckMail.getId()){
-            session.setAttribute("emailError", 1);
-            errorFlag = true;
-            loger.warn("Such email is exist");
-        }
-
-        User forChecPhone = userService.geUserByEmail(mail);
+        User forChecPhone = userService.getUserByPhone(phone);
         if(user.getId()!= forChecPhone.getId()){
-            session.setAttribute("emailError", 1);
+            session.setAttribute("phoneError", 1);
             errorFlag = true;
             loger.warn("Such phone is exist");
         }
@@ -125,7 +105,6 @@ public class SaveProfileCommand implements Command {
         } else {
             user.setName(name);
             user.setSurname(surname);
-            user.setMail(mail);
             user.setPhone(phone);
             user.setAbout(about);
             loger.info("CUser after change " + user);
@@ -198,7 +177,7 @@ public class SaveProfileCommand implements Command {
                     user.setAvatar(lastImageIndex);
                     userService.update(user);
                     loger.info("File is successfully uploaded in database to Avatar image");
-                    //????, ? ??????? ????? ?????????? ??????
+
                     String realPath = request.getRealPath("/upload/photo/" + File.separator + imageName);
 
                     final File file = new File(realPath);

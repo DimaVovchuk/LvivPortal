@@ -75,6 +75,7 @@ public class CommandFactory {
         commands.put("addplace", new AddPlaceUserDataTripCommand());
         commands.put("userAllWay", new UserAllWayCommand());
         commands.put("routesJSON", new RoutesJSONCommand());
+        commands.put("addNewPlace", new AddNewPlaceCommand());
     }
 
     public static void createCommand(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

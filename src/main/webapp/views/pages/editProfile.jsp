@@ -52,8 +52,8 @@
 					<div class="input-field col s12">
 						<i class="mdi-action-account-circle prefix"></i>
 						<label class="active" for="surname">Last Name:</label>
-						<input value="${userForEdit.surname}" id="surname" type="text" name="surname">
-					</div>
+						<input value="<c:out value="${userForEdit.surname}"/>" id="surname" type="text" name="surname">
+				</div>
 				</div>
 
 				<div class="row">
@@ -84,12 +84,12 @@
 					<div class="input-field col s12">
 						<i class="mdi-action-account-circle prefix"></i>
 						<label class="active" for="about">About:</label>
-						<input value="${userForEdit.about}" id="about" type="text" name="about">
+						<input value="<c:out value="${userForEdit.about}"/>" id="about" type="text" name="about">
 					</div>
 				</div>
 
 				<div class="row">
-					<h6>You may <a href="#">change</a> your password</h6>
+					<h6>You may <a href="/portal?command=userPlace">change</a> your password</h6>
 				</div>
 				<div class="form-group">
 					<label class="col-md-3 control-label"></label>
