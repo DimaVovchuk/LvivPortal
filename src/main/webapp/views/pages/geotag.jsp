@@ -1,22 +1,79 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="cdg" uri="customtags" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <style type="text/css">
     .labels img {
         width: 50px;
         height: 50px;
         border: 2px solid black;
         border-radius: 50%;
+        /*animation: pulse 1s ease 1s 1;*/
     }
 
+    /* ANIMATIONS */
+    @-webkit-keyframes pulse {
+        40% {
+            width: 40px;
+            height: 40px;
+            /*-webkit-transform: scale(2);*/
+            /*-moz-transform: scale(2);*/
+            /*transform: scale(2);*/
+        }
+
+        100% {
+            width: 80px;
+            height: 80px;
+            /*-webkit-transform: scale(1);*/
+            /*-moz-transform: scale(1);*/
+            /*transform: scale(1);*/
+        }
+    }
+
+    @-moz-keyframes pulse {
+        40% {
+            width: 40px;
+            height: 40px;
+            /*-webkit-transform: scale(2);*/
+            /*-moz-transform: scale(2);*/
+            /*transform: scale(2);*/
+        }
+
+        100% {
+            width: 80px;
+            height: 80px;
+            /*-webkit-transform: scale(1);*/
+            /*-moz-transform: scale(1);*/
+            /*transform: scale(1);*/
+        }
+    }
+
+    @keyframes pulse {
+        40% {
+            width: 40px;
+            height: 40px;
+            /*-webkit-transform: scale(2);*/
+            /*-moz-transform: scale(2);*/
+            /*transform: scale(2);*/
+        }
+
+        100% {
+            width: 80px;
+            height: 80px;
+            /*-webkit-transform: scale(1);*/
+            /*-moz-transform: scale(1);*/
+            /*transform: scale(1);*/
+        }
+    }
 
 </style>
-<script src="http://google-maps-utility-library-v3.googlecode.com/svn/tags/markerwithlabel/1.1.9/src/markerwithlabel.js" type="text/javascript"></script>
+<script src="http://google-maps-utility-library-v3.googlecode.com/svn/tags/markerwithlabel/1.1.9/src/markerwithlabel.js"
+        type="text/javascript"></script>
 <script>
-    function initialize() {
-        var map = new google.maps.Map(document.getElementById('map-canvas'),
-                mapOptions);
-        var markers = [];
+
+    var markers = [];
+    function initMarkers(map) {
+        var map = map;
         <c:forEach items="${places}" var="place">
         var contentString = '<div class="map-content card">' +
                 '<div class="card-image waves-effect waves-light">' +
@@ -35,13 +92,13 @@
                 '</div>' +
                 '</div>';
 
-            var infowindow = new google.maps.InfoWindow({
+        var infowindow = new google.maps.InfoWindow({
             content: contentString
         });
 
 
         var image = {
-            url: "${pageContext.request.contextPath}/upload/photo/${place.imageReference}",
+            url: "",
             scaledSize: new google.maps.Size(0, 0),
             origin: new google.maps.Point(0, 0),
             anchor: new google.maps.Point(0, 0)
@@ -57,30 +114,49 @@
             labelAnchor: new google.maps.Point(22, 0),
             labelClass: "labels", // the CSS class for the label
             labelVisible: true
-//            animation: google.maps.Animation.DROP,
         });
-
-
         markers.push(marker);
+
         google.maps.event.addListener(marker, 'click', function () {
             infowindow.setContent(this.info);
             infowindow.open(map, this);
-        });
-        </c:forEach>
+            map.setZoom(19);
+            map.setCenter(myLatLng);
 
+        });
+
+
+        </c:forEach>
+        return markers;
+    }
+
+    function myclick(image) {
+        <c:forEach var="i" begin="0" end="${fn:length(places)-1}">
+        if("${places[i].imageReference}" == image){
+            google.maps.event.trigger(markers[${i}], "click");
+        }
+        </c:forEach>
+    }
+    mapOptions = {
+        zoom: 15,
+        center: new google.maps.LatLng(49.8426, 24.0278)
+    };
+    function initialize() {
+        var map = new google.maps.Map(document.getElementById('map-canvas'),
+                mapOptions);
+        var markers = initMarkers(map);
         var markerClusterer = new MarkerClusterer(map, markers,
                 {
                     maxZoom: 16,
                     gridSize: 50,
                     styles: null
                 });
+        return map;
     }
     var mapOptions;
-    mapOptions = {
-        zoom: 15,
-        center: new google.maps.LatLng(49.8426, 24.0278)
-    };
     google.maps.event.addDomListener(window, 'load', initialize);
+
 </script>
+
 
 <div id="map-canvas"></div>

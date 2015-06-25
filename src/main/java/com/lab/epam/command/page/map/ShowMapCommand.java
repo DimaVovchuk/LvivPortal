@@ -41,6 +41,9 @@ public class ShowMapCommand implements Command {
         for (Place place : all) {
             PlaceDescription placeDescription = placeDescriptionService.getPlaceDescriptionByIdPlace(place.getId(), bundle.getLocale().toString());
             PlaceImage placeImage = placeImageService.getPlaceImageByPlaceId(place.getId());
+            if(placeImage== null){
+                placeImage = new PlaceImage(place.getId(),"default_building.jpg");
+            }
             placeMarkerWithPhotos.add(new PlaceMarkerWithPhoto(place.getId(), placeDescription.getName(), place.getLatitude(), place.getLongitude(), placeImage.getReference(), placeDescription.getDescription()));
         }
         session.setAttribute("language", bundle.getLocale().toString());
