@@ -33,6 +33,7 @@ public class ImageUploader {
 
     public static void uploadImage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         loger.info("ImageUploader");
+        loger.info("uploadImage method ImageUploader started");
         try {
             List files = new ArrayList();
             Map params = new HashMap<String, String>();
@@ -51,18 +52,18 @@ public class ImageUploader {
             loger.error(e.getMessage());
             throw new ServletException(e);
         }
+        loger.info("uploadImage method ImageUploader ended");
     }
-
-    /**
-     * ????????? ??????????? ????? ?? ????? ???????
-     */
     private static void save(HttpServletRequest request,List files, Map params) throws IOException {
+        loger.info("save method ImageUploader started");
         try {
             for (Iterator i = files.iterator(); i.hasNext();) {
+                loger.info("start loop for");
                 FileItem item = (FileItem) i.next();
                 String imageName = item.getName();
                 HttpSession session = request.getSession();
 
+                loger.info("imageName before save is "  + imageName);
                 Pattern p = Pattern.compile("([^\\s]+(?=\\.(jpg|JPG|gif|png))\\.\\2)");
                 Matcher m = p.matcher(imageName);
                 boolean matches = !m.matches();
@@ -71,8 +72,10 @@ public class ImageUploader {
                     Integer usedID = (Integer) session.getAttribute("usedID");
                     Integer imageID = (Integer) session.getAttribute("imageID");
                     String typeFoto = (String) session.getAttribute("typePhoto");
+                    loger.info("typeFoto is" + typeFoto);
 
                     if(imageID != null && typeFoto.equalsIgnoreCase("placeFoto")) {
+                        loger.info("Start uplad to place gallery");
                         PlaceImageService placeImageService = new PlaceImageService();
                         PlaceImage placeImage = new PlaceImage(imageID, imageName);
                         placeImageService.create(placeImage);
@@ -80,6 +83,7 @@ public class ImageUploader {
                     }
 
                     if(usedID !=null && typeFoto.equalsIgnoreCase("userFoto")){
+                        loger.info("Start uplad to user gallery");
                         UserImageService userImageService = new UserImageService();
                         UserImage userImage = new UserImage(usedID, imageName);
                         userImageService.create(userImage);
@@ -87,15 +91,18 @@ public class ImageUploader {
                     }
 
                     if(usedID !=null && typeFoto.equalsIgnoreCase("avatarFoto")){
+                        loger.info("Start uplad to user avatar");
                         UserImageService userImageService = new UserImageService();
                         UserService userService = new UserService();
+                        loger.info("user id for avater id" + usedID);
+                        loger.info("image name for avater id" + imageName);
                         UserImage userImage = new UserImage(usedID, imageName);
                         userImageService.create(userImage);
 
                         List<UserImage> allImageList = userImageService.getUserImageByUserId(usedID);
                         UserImage lastUploadHpoto = allImageList.get(allImageList.size() - 1);
                         Integer lastImageIndex = lastUploadHpoto.getId();
-
+                        loger.info("image name last index" + lastImageIndex);
                         User user = userService.getByPK(usedID);
                         user.setAvatar(lastImageIndex);
                         userService.update(user);
@@ -122,15 +129,12 @@ public class ImageUploader {
             e.printStackTrace();
             loger.error(e.getMessage());
         }
+        loger.info("save method ImageUploader ended");
     }
 
-    /**
-     * ?????????????? ????????? Map params ??????????? ?? ????? ? List files ?????????????? ???????
-     * (? ????? ?????? ???? ????)
-     */
     private static void init(HttpServletRequest request, Map params, List files) throws FileUploadException {
         DiskFileItemFactory factory = new DiskFileItemFactory();
-        //????????????? ??????? ??? ????????? ??????
+        loger.info("init method ImageUploader started");
         File folder = new File("c:\\tmp");
         if(folder.exists()){
         } else {
@@ -140,8 +144,7 @@ public class ImageUploader {
         factory.setRepository(folder);
         ServletFileUpload upload = new ServletFileUpload(factory);
 
-        //????????? ??????????? ?? ?????? ???????????? ????? ? ?????
-        long imageSize = 1024000;
+          long imageSize = 1024000;
         upload.setSizeMax(imageSize);
 
         List items = upload.parseRequest(request);
@@ -150,12 +153,11 @@ public class ImageUploader {
             if (item.isFormField()) {
                 params.put(item.getFieldName(), item.getString());
             }
-            //... ???? ???, ?? ???????????? ?????? AttachmentDataSource ?
-            //???????? ??? ? ?????? ????????????? ??????
             else {
                 if (item.getSize() <= 0) continue;
                 files.add(item);
             }
         }
+        loger.info("init method ImageUploader ended");
     }
 }

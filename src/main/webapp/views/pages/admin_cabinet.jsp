@@ -1,112 +1,159 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="cdg" uri="customtags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
+<!DOCTYPE HTML>
 <html>
+
 <head>
-	<title>Admin dashboard</title>
-	<link href="https://cdn.datatables.net/1.10.7/css/jquery.dataTables.css" rel="stylesheet">
-	<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
-	<jsp:include page="/views/elements/css.jsp"/>
-	<jsp:include page="/views/elements/script.jsp"/>
-	<script src="https://cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
-	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-	<script>
-		$(document).ready(function () {
-			$('#example').dataTable({
-				"language": {
-					"lengthMenu": "Display _MENU_ records per page",
-					"zeroRecords": "Nothing found - sorry",
-					"info": "Showing page _PAGE_ of _PAGES_",
-					"infoEmpty": "No records available",
-					"infoFiltered": "(filtered from _MAX_ total records)"
-				}
-			});
-		});</script>
-
+    <title><cdg:l18n key="admin.title"/></title>
 </head>
+
+<jsp:include page="/views/elements/css.jsp"/>
+<jsp:include page="/views/elements/script.jsp"/>
+
 <body>
+
 <jsp:include page="/views/elements/header.jsp"/>
-<table id="example" class="display" cellspacing="0" width="100%">
-	<thead>
-	<tr>
-		<th>User Id</th>
-		<th>Rating</th>
-		<th>Name</th>
-		<th>Surname</th>
-		<th>Login</th>
-		<th>Mail</th>
-		<th>Phone</th>
-		<th>Status</th>
-		<th>Role</th>
-	</tr>
-	</thead>
 
-	<tfoot>
-	<tr>
-		<th>User Id</th>
-		<th>Rating</th>
-		<th>Name</th>
-		<th>Surname</th>
-		<th>Login</th>
-		<th>Mail</th>
-		<th>Phone</th>
-		<th>Status</th>
-		<th>Role</th>
-	</tr>
-	</tfoot>
-	<tbody>
-	<c:forEach items="${AllUsers}" var="elem">
-		<tr>
-			<td>${elem.key.id}</td>
-			<td>${elem.key.rating}</td>
-			<td>${elem.key.name}</td>
-			<td>${elem.key.surname}</td>
-			<td>${elem.key.login}</td>
-			<td>${elem.key.mail}</td>
-			<td>${elem.key.phone}</td>
-			<td><button class="btn modal-trigger type="submit" data-target="changestatus"
-				id="btn1" onclick="$('#uuserStatusID').val('${elem.key.id}')"> ${elem.key.status} </button></td></td>
+<div id="admin-page">
 
-			<td><button class="btn modal-trigger type="submit" data-target="changerole"
-				id="btn1" onclick="$('#uid').val('${elem.key.id}')"> ${elem.value} </button></td>
-		</tr>
-	</c:forEach>
-	</tbody>
+    <div class="section">
+        <h3 class="center-align"><cdg:l18n key="admin.title"/></h3>
 
-</table>
-<div id="changestatus" class="modal">
-	<div class="modal-content">
-		<h4>Modal Header</h4>
-		<form id="change_status" action="/portal/showalluser" method="post">
-			<input type="hidden" name="command" value="showAllUser">
-			<input type="hidden" name="requestType" value="changeStatus">
-			<input placeholder="Placeholder" id="uuserStatusID" name="servletUserId" type="hidden">
+        <div class="row">
+            <div class="col l10 offset-l1 m12 s12">
+                <table id="admin-page-table" class="display" cellspacing="0" width="100%">
+                    <thead>
+                    <tr>
+                        <th><cdg:l18n key="admin.userid"/></th>
+                        <th><cdg:l18n key="admin.rating"/></th>
+                        <th><cdg:l18n key="login.firstname"/></th>
+                        <th><cdg:l18n key="login.lastname"/></th>
+                        <th><cdg:l18n key="login.login"/></th>
+                        <th><cdg:l18n key="login.email"/></th>
+                        <th><cdg:l18n key="login.phone"/></th>
+                        <th><cdg:l18n key="admin.status"/></th>
+                        <th><cdg:l18n key="admin.role"/></th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tfoot>
+                    <tr>
+                        <th><cdg:l18n key="admin.userid"/></th>
+                        <th><cdg:l18n key="admin.rating"/></th>
+                        <th><cdg:l18n key="login.firstname"/></th>
+                        <th><cdg:l18n key="login.lastname"/></th>
+                        <th><cdg:l18n key="login.login"/></th>
+                        <th><cdg:l18n key="login.email"/></th>
+                        <th><cdg:l18n key="login.phone"/></th>
+                        <th><cdg:l18n key="admin.status"/></th>
+                        <th><cdg:l18n key="admin.role"/></th>
+                        <th></th>
+                    </tr>
+                    </tfoot>
+                    <tbody>
+                    <c:forEach items="${requestScope.AllUsers}" var="elem">
+                        <tr>
+                            <td>${elem.key.id}</td>
+                            <td>${elem.key.rating}</td>
+                            <td>${elem.key.name}</td>
+                            <td>${elem.key.surname}</td>
+                            <td>${elem.key.login}</td>
+                            <td>${elem.key.mail}</td>
+                            <td>${elem.key.phone}</td>
+                            <td>
+                                <c:if test="${elem.key.status == 1}">
+                                    <cdg:l18n key="admin.active"/>
+                                </c:if>
+                                <c:if test="${elem.key.status == 3}">
+                                    <cdg:l18n key="admin.disabled"/>
+                                </c:if>
+                            </td>
+                            <td>${elem.value}</td>
+                            <td>
+                                <form id="change-status" action="#" method="post">
+                                    <input type="hidden" name="command" value="showAllUser">
+                                    <input type="hidden" name="requestType" value="changeStatus">
+                                    <input type="hidden" name="servletUserId" value="${elem.key.id}">
+                                    <c:if test="${elem.key.status == 1}">
+                                        <input type="hidden" name="changeStatucID" value="3">
+                                    </c:if>
+                                    <c:if test="${elem.key.status == 3}">
+                                        <input type="hidden" name="changeStatucID" value="1">
+                                    </c:if>
+                                </form>
+                                <c:if test="${elem.key.status == 1}">
+                                    <button type="submit" form="change-status"
+                                            class="btn cyan darken-2 waves-effect waves-light"><cdg:l18n key="admin.disable"/>
+                                    </button>
+                                </c:if>
+                                <c:if test="${elem.key.status == 3}">
+                                    <button type="submit" form="change-status"
+                                            class="btn cyan darken-2 waves-effect waves-light"><cdg:l18n key="admin.enable"/>
+                                    </button>
+                                </c:if>
+                                <button class="btn modal-trigger cyan darken-2" data-target="change-role"
+                                        onclick="$('#user-id').val('${elem.key.id}')"><cdg:l18n key="admin.changerole"/>
+                                </button>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 
-			<input name="changeStatucID" type="radio" value="1" id="1"/><label for="1">Active</label>
-			<input name="changeStatucID" type="radio" value="3" id="2"/><label for="2">Bloked</label>
+    <div id="change-role" class="modal">
+        <div class="modal-content">
+            <h5 class="center-align">Change role</h5>
 
-			<button class="btn waves-effect waves-light cyan darken-2" type="submit">OK</button>
-		</form>
-	</div>
+            <form id="change_role" action="#" method="post">
+                <input type="hidden" name="command" value="showAllUser">
+                <input type="hidden" name="requestType" value="changeRole">
+                <input type="hidden" name="servletUserId" id="user-id">
+
+                <p><input type="radio" name="changeRoleID" value="1" id="role1"/><label for="role1" class="black-text"><cdg:l18n key="role.admin"/></label>
+                </p>
+
+                <p><input type="radio" name="changeRoleID" value="2" id="role2"/><label for="role2" class="black-text"><cdg:l18n key="role.user"/></label>
+                </p>
+
+                <p><input type="radio" name="changeRoleID" value="3" id="role3"/><label for="role3" class="black-text"><cdg:l18n key="role.guide"/></label>
+                </p>
+
+                <p><input type="radio" name="changeRoleID" value="4" id="role4"/><label for="role4" class="black-text"><cdg:l18n key="role.company"/></label>
+                </p>
+
+                <div class="divider"></div><br>
+                <button type="submit" class="btn waves-effect waves-light cyan darken-2">OK</button>
+                <button type="reset" class="btn modal-close waves-effect waves-light cyan darken-2"><cdg:l18n key="button.cancel"/></button>
+            </form>
+        </div>
+    </div>
+
 </div>
 
-<div id="changerole" class="modal">
-	<div class="modal-content">
-		<h4>Change Role</h4>
-		<form id="change_role" action="/portal/showalluser" method="post">
-			<input type="hidden" name="command" value="showAllUser">
-			<input type="hidden" name="requestType" value="changeRole">
-			<input placeholder="Placeholder" id="uid" name="servletUserId" type="hidden">
-
-			<p><input name="changeRoleID" type="radio" value="1" id="3"/><label for="3">Admin</label></p>
-			<p><input name="changeRoleID" type="radio" value="2" id="4"/><label for="4">User</label></p>
-			<p><input name="changeRoleID" type="radio" value="3" id="5"/><label for="5">Guide</label></p>
-			<p><input name="changeRoleID" type="radio" value="4" id="6"/><label for="6">Company</label></p>
-
-			<button class="btn waves-effect waves-light cyan darken-2" type="submit">OK</button>
-		</form>
-	</div>
-</div>
 <jsp:include page="/views/elements/footer.jsp"/>
+
+<script>
+    $('#admin-page-table').dataTable({
+        "language": {
+            "lengthMenu": '<span style="color: #000; font-size: 15px"><cdg:l18n key="admin.tabledisplay"/></span>' +
+            '<select id="table-display-number" class="browser-default">' +
+            '   <option value="10">10</option>' +
+            '   <option value="25">25</option>' +
+            '   <option value="50">50</option>' +
+            '   <option value="100">100</option>' +
+            '</select>',
+            search: '<span style="color: #000; font-size: 15px"><cdg:l18n key="button.search"/></span>',
+            "zeroRecords": "Nothing found - sorry",
+            "info": "Showing page _PAGE_ of _PAGES_",
+            "infoEmpty": "No records available",
+            "infoFiltered": "(filtered from _MAX_ total records)"
+        }
+    });
+</script>
+
 </body>
 </html>

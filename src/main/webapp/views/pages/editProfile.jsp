@@ -3,49 +3,6 @@
 <%@ taglib prefix="cdg" uri="customtags" %>
 <html>
 <head>
-	<style type="text/css">
-		body {
-			font-family: Arial;
-			font-size: 10pt;
-		}
-
-		#dvPreview {
-			filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=image);
-			min-height: 300px;
-			min-width: 300px;
-			display: none;
-		}
-	</style>
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-	<script language="javascript" type="text/javascript">
-		$(function () {
-			$("#fileupload").change(function () {
-				$("#dvPreview").html("");
-				var regex = /([^\s]+(?=\.(jpg|JPG|gif|png))\.\2)/;
-				if (regex.test($(this).val().toLowerCase())) {
-					if ($.browser.msie && parseFloat(jQuery.browser.version) <= 9.0) {
-						$("#dvPreview").show();
-						$("#dvPreview")[0].filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = $(this).val();
-					}
-					else {
-						if (typeof (FileReader) != "undefined") {
-							$("#dvPreview").show();
-							$("#dvPreview").append("<img />");
-							var reader = new FileReader();
-							reader.onload = function (e) {
-								$("#dvPreview img").attr("src", e.target.result);
-							}
-							reader.readAsDataURL($(this)[0].files[0]);
-						} else {
-							alert("This browser does not support FileReader.");
-						}
-					}
-				} else {
-					alert("Please upload a valid image file.");
-				}
-			});
-		});
-	</script>
 	<title><cdg:l18n key="usercab.edit"/></title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -56,8 +13,6 @@
 
 <body>
 <jsp:include page="/views/elements/header.jsp"/>
-
-
 <div class="container">
 	<div class="row">
 		<h1>Edit Profile</h1>
@@ -138,9 +93,9 @@
 				</div>
 				<div class="form-group">
 					<label class="col-md-3 control-label"></label>
-						<button class="btn waves-effect waves-light" type="submit" name="save">Save Changes
-							<i class="mdi-content-send right"></i></button>
-						<button class="btn waves-effect waves-light" type="reset" name="cancel">Cancel</button>
+					<button class="btn waves-effect waves-light" type="submit" name="save">Save Changes
+						<i class="mdi-content-send right"></i></button>
+					<button class="btn waves-effect waves-light" type="reset" name="cancel">Cancel</button>
 				</div>
 			</div>
 		</form>
