@@ -19,6 +19,7 @@
 
 <jsp:include page="/views/elements/header.jsp"/>
 
+<div clacc="user-places" id="user-places">
 <div class="places">
     <div class="section">
         <h3 class="center-align"><cdg:l18n key="places.head"/></h3>
@@ -136,6 +137,7 @@
     </div>
 
 </div>
+    </div>
 
 <script>
     $('.datepicker').pickadate({
