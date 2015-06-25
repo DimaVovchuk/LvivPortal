@@ -35,7 +35,7 @@ public class MySqlPlaceDao extends AbstractJDBCDao<Place, Integer> {
     private static final String GET_PLACE_BY_LATITUDE_LONGITUDE = "SELECT * FROM place WHERE longitude = ? AND latitude = ?";
     private static final String CREATE_PLACE_WAY = "INSERT INTO place_way (place_id, way_id, day_number, time) VALUES (?,?,?,?);";
     private static final String CREATE_USER_PLACE = "INSERT INTO user_place (place_id, user_id) VALUES (?,?);";
-    private static final String GET_PLACE_ID_BY_USER_ID = "SELECT id FROM user_place WHERE place_id = ? AND user_id = ?";
+    private static final String GET_PLACE_ID_BY_USER_ID = "SELECT id FROM user_place WHERE place_id = ? AND user_id = ? AND deleted=false";
 
     private class PersistGroup extends Place {
         public void setId(int id) {

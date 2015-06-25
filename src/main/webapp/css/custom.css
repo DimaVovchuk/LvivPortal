@@ -532,4 +532,10 @@ footer.page-footer {
     margin-top: 10%;
 }
 
+#user-places {
+    min-height: calc(100% - 64px - 50px);
+}
+
+
+
 

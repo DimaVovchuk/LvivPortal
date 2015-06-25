@@ -58,13 +58,15 @@ public class UserPlaceCommand implements Command {
             Integer userId = user.getId();
             //Integer roleId = user.getRoleID();
             places = placeService.getPlaceByUserId(userId);
-            System.out.println("places size is " + places.size());
             if (places != null && !places.isEmpty()) {
                 placeDescriptions = getPlaceDescriptionByPlace(places);
                 placeImage = getPlaceImageByPlace(places);
             }
         }
-        List<PlaceDescriptionAndPhoto> placesPageInfo = getPlaceDescriptionAndPhotoList(places, placeDescriptions, placeImage);
+        List<PlaceDescriptionAndPhoto> placesPageInfo = null;
+        if(places != null && !places.isEmpty()){
+            placesPageInfo = getPlaceDescriptionAndPhotoList(places, placeDescriptions, placeImage);
+        }
        // request.setAttribute("places", places);
        // request.setAttribute("placeImages", placeImage);
         //request.setAttribute("placeDescriptions", placeDescriptions);

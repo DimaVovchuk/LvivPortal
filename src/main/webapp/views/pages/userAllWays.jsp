@@ -26,10 +26,12 @@
 <jsp:include page="/views/elements/header.jsp"/>
 
 <h3 class="center-align"><cdg:l18n key="way.head"/></h3>
-
+<div clacc="user-places" id="user-places">
 <div class="row">
   <div class="col l9 m8 s7">
 
+<c:choose>
+  <c:when test="${requestScope.waysPlaceImage != null}">
     <c:forEach var="way" items="${requestScope.waysPlaceImage}">
       <div class="match-col col l4 m6 s9" style="display:none">
         <div class="card z-depth-2" style="padding:10px; height:95%">
@@ -44,7 +46,7 @@
             <span class="card-title activator grey-text text-darken-4"><div align="center"><h6>${way.beginDate} - ${way.endDate}</h6></div></span>
           </div>
           <div class="card-reveal">
-            <span class="card-title grey-text text-darken-4"><cdg:l18n key="day.number"/></span>
+            <span class="card-title grey-text text-darken-4"><cdg:l18n key="places.way"/></span>
             <p>
               <c:forEach var="place" items="${way.place}">
             <div class=" match-colum col l6 m9 s18">
@@ -64,6 +66,11 @@
       </div>
 
     </c:forEach>
+  </c:when>
+  <c:otherwise>
+    <h3><cdg:l18n key="places.way"/></h3>
+  </c:otherwise>
+  </c:choose>
   </div>
 
 
@@ -90,6 +97,7 @@
 
 
 </div>
+  </div>
 
 <jsp:include page="/views/elements/footer.jsp"/>
 
