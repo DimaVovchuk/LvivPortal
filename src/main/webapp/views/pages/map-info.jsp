@@ -1,17 +1,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="cdg" uri="customtags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <div id="map-info">
     <div id="map-itinerary" class="animated fadeInDown">
-        <div class="collection">
-            <a href="#" class="collection-item black-text">Day 1</a>
-            <a href="#" class="collection-item black-text">Day 2</a>
-            <a href="#" class="collection-item black-text">Day 3</a>
-        </div>
+        <div id="route-info-collection" class="collection"></div>
     </div>
 
     <div id="map-places" class="animated fadeInDown" style="display: none">
-        <a class='dropdown-select btn cyan darken-2' href='#' data-activates='dropdown-places'><cdg:l18n
+        <a class='dropdown-select btn cyan darken-2 waves-effect waves-light' href='#' data-activates='dropdown-places'><cdg:l18n
                 key="places.categories"/></a>
         <ul id='dropdown-places' class='dropdown-content'>
             <li><a href="portal?command=placeJSON&category=sights" class="collection-item"
@@ -44,12 +41,35 @@
             <a href="#" class="collection-item black-text">
                 <img class="circle responsive-img"
                      src="${pageContext.request.contextPath}/upload/photo/{{imageReference}}">
+
                 <div class="valign-wrapper" style="height:100%">
                     <div class="valign">
                         <div class="truncate"><b>{{name}}</b><br>{{adress}}</div>
                     </div>
                 </div>
             </a>
+            {{/each}}
+        </script>
+
+        <script id="route-info-template" type="text/x-handlebars-template">
+            {{#each this}}
+            <c:set var="dayNumber" value="{{dayNumber}}"/>
+            <a href="#" class="collection-item black-text blue-grey lighten-4 waves-effect waves-light" onclick="$('#places-day${dayNumber}').toggle();">
+                <cdg:l18n key="map.route.day"/> {{dayNumber}}<br>
+                <cdg:l18n key="map.route.totaltime"/>: {{hours}} <cdg:l18n key="map.route.hours"/> {{minutes}} <cdg:l18n key="map.route.minutes"/>
+            </a>
+            <div id="places-day{{dayNumber}}" class="collection animated fadeInLeft">
+                {{#each places}}
+                <a href="#" class="collection-item black-text">
+                    <img class="circle responsive-img" src="${pageContext.request.contextPath}/upload/photo/{{imageReference}}">
+                    <div class="valign-wrapper" style="height:100%">
+                        <div class="valign">
+                            <div class="truncate"><b>{{name}}</b><br>{{adress}}</div>
+                        </div>
+                    </div>
+                </a>
+                {{/each}}
+            </div>
             {{/each}}
         </script>
 

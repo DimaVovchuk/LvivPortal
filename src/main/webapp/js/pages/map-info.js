@@ -39,9 +39,26 @@ function linkProcess(id) {
     });
 }
 
+var loadRoutes = function () {
+    $.ajax({
+        url: window.location.origin + '/portal?command=routesJSON',
+        success: updateRoutes,
+        error: updateRoutes
+    });
+};
+
+var updateRoutes = function (data) {
+    if (!data) return false;
+    var source = $("#route-info-template").html();
+    var template = Handlebars.compile(source);
+    var html = template(data);
+    $('#route-info-collection').html(html);
+};
+
 $(function () {
     loadCategories();
     loadEvents();
+    loadRoutes();
 
     $('.link-process').on('click', function(e) {
         var type = $(e.currentTarget).data('type');
@@ -49,4 +66,5 @@ $(function () {
         $('.link-process').removeClass('active');
         $(".link-process[data-type='"+type+"']").addClass('active');
     })
+
 });
