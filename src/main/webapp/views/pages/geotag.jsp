@@ -72,8 +72,21 @@
 <script>
 
     var markers = [];
-    function initMarkers(map) {
-        var map = map;
+
+    function myclick(image) {
+        <c:forEach var="i" begin="0" end="${fn:length(places)-1}">
+        if("${places[i].imageReference}" == image){
+            google.maps.event.trigger(markers[${i}], "click");
+        }
+        </c:forEach>
+    }
+    mapOptions = {
+        zoom: 14,
+        center: new google.maps.LatLng(49.8426, 24.0278)
+    };
+    function initialize() {
+        var map = new google.maps.Map(document.getElementById('map-canvas'),
+                mapOptions);
         <c:forEach items="${places}" var="place">
         var contentString = '<div class="map-content card">' +
                 '<div class="card-image waves-effect waves-light">' +
@@ -96,7 +109,6 @@
             content: contentString
         });
 
-
         var image = {
             url: "",
             scaledSize: new google.maps.Size(0, 0),
@@ -115,45 +127,23 @@
             labelClass: "labels", // the CSS class for the label
             labelVisible: true
         });
-        markers.push(marker);
 
         google.maps.event.addListener(marker, 'click', function () {
             infowindow.setContent(this.info);
             infowindow.open(map, this);
-            map.setZoom(19);
-            map.setCenter(myLatLng);
+            map.setZoom(17);
+            map.setCenter(this.position);
 
         });
-
-
+        markers.push(marker);
         </c:forEach>
-        return markers;
-    }
-
-    function myclick(image) {
-        <c:forEach var="i" begin="0" end="${fn:length(places)-1}">
-        if("${places[i].imageReference}" == image){
-            google.maps.event.trigger(markers[${i}], "click");
-        }
-        </c:forEach>
-    }
-    mapOptions = {
-        zoom: 15,
-        center: new google.maps.LatLng(49.8426, 24.0278)
-    };
-    function initialize() {
-        var map = new google.maps.Map(document.getElementById('map-canvas'),
-                mapOptions);
-        var markers = initMarkers(map);
         var markerClusterer = new MarkerClusterer(map, markers,
                 {
                     maxZoom: 16,
                     gridSize: 50,
                     styles: null
                 });
-        return map;
     }
-    var mapOptions;
     google.maps.event.addDomListener(window, 'load', initialize);
 
 </script>
