@@ -174,5 +174,7 @@ public class PlaceService {
 
         return id;
     }
-
+    public Integer createAndReturnIndex(Place place){
+        return mySqlPlaceDao.createAndReturnIndex(place);
+    }
 }
