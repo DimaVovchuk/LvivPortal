@@ -1,7 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="cdg" uri="customtags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <div id="map-info">
     <div id="map-itinerary" class="animated fadeInDown">
         <div id="route-info-collection" class="collection"></div>
@@ -38,7 +37,7 @@
 
         <script id="place-info-template" type="text/x-handlebars-template">
             {{#each this}}
-            <a href="#" class="collection-item black-text">
+            <a href="#" onclick="myclick('{{imageReference}}')" class="collection-item black-text">
                 <img class="circle responsive-img"
                      src="${pageContext.request.contextPath}/upload/photo/{{imageReference}}">
 
@@ -60,7 +59,7 @@
             </a>
             <div id="places-day{{dayNumber}}" class="collection animated fadeInLeft">
                 {{#each places}}
-                <a href="#" class="collection-item black-text">
+                <a href="#" onclick="myclick('{{imageReference}}')" class="collection-item black-text">
                     <img class="circle responsive-img" src="${pageContext.request.contextPath}/upload/photo/{{imageReference}}">
                     <div class="valign-wrapper" style="height:100%">
                         <div class="valign">

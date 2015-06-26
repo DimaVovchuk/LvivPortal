@@ -20,10 +20,7 @@ import com.lab.epam.command.page.place.*;
 import com.lab.epam.command.page.user.*;
 import com.lab.epam.command.page.user.admin.EditPlaceCommand;
 import com.lab.epam.command.page.user.admin.ShowAllUserCommand;
-import com.lab.epam.command.save.SaveEditPlaceCommand;
-import com.lab.epam.command.save.SavePlaceCommand;
-import com.lab.epam.command.save.SaveProfileCommand;
-import com.lab.epam.command.save.SaveWayCommand;
+import com.lab.epam.command.save.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -76,6 +73,7 @@ public class CommandFactory {
         commands.put("userAllWay", new UserAllWayCommand());
         commands.put("routesJSON", new RoutesJSONCommand());
         commands.put("addNewPlace", new AddNewPlaceCommand());
+        commands.put("saveNewPlace", new SaveNewPlaceCommand());
     }
 
     public static void createCommand(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

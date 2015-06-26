@@ -1,8 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="cdg" uri="customtags" %>
 <html>
 <head>
 	<title>Add New Place</title>
-
 	<jsp:include page="/views/elements/css.jsp"/>
 	<jsp:include page="/views/elements/script.jsp"/>
 
@@ -12,12 +13,12 @@
 	<h2>Add new Place</h2>
 	<hr>
 	<div class="text-center">
-		<form method=post enctype=multipart/form-data action="portal/update">
-			<c:set var="command" scope="session" value="newPlaceFoto"/>
+		<form method=post enctype=multipart/form-data action="portal/newplace">
+			<c:set var="command" scope="session" value="saveNewPlace"/>
 			<c:set var="typePhoto" scope="session" value="placeFoto"/>
 			<div class="row">
 				<h6>Upload a different photo...</h6>
-				<input id="fileupload" type="file" name="sendfile">
+				<input id="fileupload" type="file" multiple="multiple" name="sendfile">
 			</div>
 			<div class="row">
 				<label class="active" for="addPlaceNameUA">Place name in UA:</label>
@@ -45,7 +46,7 @@
 			</div>
 
 			<div class="row">
-				<label Place Category:</label>
+				<label>Place Category:</label>
 				<select name="newCategory">
 					<option value="1">Architectural sights</option>
 					<option value="2">Churches</option>
@@ -56,7 +57,7 @@
 			</div>
 
 			<div class="row">
-				<label class="active" for="addPlaceTime">Minimum time what need for visiting this place:</label>
+				<label class="active" for="addPlaceTime">Minimum time what need for visiting this place(IN MINUTE):</label>
 				<input value="" id="addPlaceTime" type="text" name="addPlaceTime">
 			</div>
 
@@ -91,9 +92,8 @@
 					<i class="mdi-content-send right"></i></button>
 				<button class="btn waves-effect waves-light" type="reset" name="cancel">Cancel</button>
 			</div>
+		</form>
 	</div>
-	</form>
-
 </div>
 
 <br>

@@ -68,7 +68,7 @@
 					<div class="input-field col s12">
 						<i class="mdi-action-account-circle prefix"></i>
 						<label class="active" for="mail">Email:</label>
-						<input value="${userForEdit.mail}" id="mail" type="text" name="mail">
+						<input value="${userForEdit.mail}" id="mail" type="text" name="mail" disabled>
 					</div>
 				</div>
 

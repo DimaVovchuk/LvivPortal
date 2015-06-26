@@ -2,6 +2,7 @@ package com.lab.epam.command.save;
 
 import com.lab.epam.command.controller.Command;
 import com.lab.epam.dao.PersistException;
+import com.lab.epam.entity.Decoder;
 import com.lab.epam.entity.User;
 import com.lab.epam.entity.UserImage;
 import com.lab.epam.helper.ClassName;
@@ -50,7 +51,6 @@ public class SaveProfileCommand implements Command {
         try {
             init(request, params, files);
             save(request, files, params);
-
             response.setContentType("text/html; charset=windows-1251");
         } catch (FileUploadException e) {
             loger.warn(e.getMessage());
@@ -62,24 +62,24 @@ public class SaveProfileCommand implements Command {
 
         //check input data
         if (checkData(name, CHECK_NAME)) {
-            session.setAttribute("loginError", 1);
+            session.setAttribute("NameError", 1);
             errorFlag = true;
             loger.warn("Name is pattern error");
         }
 
         if (checkData(surname, CHECK_SURNAME)) {
-            session.setAttribute("loginError", 1);
+            session.setAttribute("SurnameError", 1);
             errorFlag = true;
             loger.warn("Surname is pattern error");
         }
 
         if (checkData(phone, CHECK_PHONE)) {
-            session.setAttribute("loginError", 1);
+            session.setAttribute("PhoneError", 1);
             errorFlag = true;
             loger.warn("Phone is pattern error");
         }
-        if (checkData(about, CHECK_ABOUT) || about=="") {
-            session.setAttribute("loginError", 1);
+        if (checkData(about, CHECK_ABOUT) && about=="") {
+            session.setAttribute("aboutError", 1);
             errorFlag = true;
             loger.warn("about is pattern error");
         }
@@ -103,10 +103,10 @@ public class SaveProfileCommand implements Command {
 
         if (errorFlag) {
         } else {
-            user.setName(name);
-            user.setSurname(surname);
+            user.setName(Decoder.decodeStringUtf8(name));
+            user.setSurname(Decoder.decodeStringUtf8(surname));
             user.setPhone(phone);
-            user.setAbout(about);
+            user.setAbout(Decoder.decodeStringUtf8(about));
             loger.info("CUser after change " + user);
 
             try {
@@ -147,32 +147,23 @@ public class SaveProfileCommand implements Command {
     private static void save(HttpServletRequest request, List files, Map params) throws IOException {
         try {
             for (Iterator i = files.iterator(); i.hasNext(); ) {
-                loger.info("start loop for");
                 FileItem item = (FileItem) i.next();
                 String imageName = item.getName();
                 HttpSession session = request.getSession();
 
-                loger.info("imageName before save is " + imageName);
                 Pattern p = Pattern.compile("([^\\s]+(?=\\.(jpg|JPG|gif|png))\\.\\2)");
                 Matcher m = p.matcher(imageName);
                 boolean matches = !m.matches();
                 if (!matches) {
                     Integer usedID = (Integer) session.getAttribute("usedID");
-                    String typeFoto = (String) session.getAttribute("typePhoto");
-                    loger.info("typeFoto is" + typeFoto);
-                    loger.info("Start uplad to user avatar");
                     UserImageService userImageService = new UserImageService();
                     UserService userService = new UserService();
-                    loger.info("user id for avater id" + usedID);
-                    loger.info("image name for avater id" + imageName);
                     UserImage userImage = new UserImage(usedID, imageName);
-                    loger.info("userImage" + userImage);
                     userImageService.create(userImage);
 
                     List<UserImage> allImageList = userImageService.getUserImageByUserId(usedID);
                     UserImage lastUploadHpoto = allImageList.get(allImageList.size() - 1);
                     Integer lastImageIndex = lastUploadHpoto.getId();
-                    loger.info("image name last index" + lastImageIndex);
                     User user = userService.getByPK(usedID);
                     user.setAvatar(lastImageIndex);
                     userService.update(user);
