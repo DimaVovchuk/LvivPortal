@@ -35,7 +35,7 @@ public class RoutesCommand implements Command {
                 String obj1 = "" + places.get(0).getLatitude() + " " + places.get(0).getLongitude() + "";
                 Distance distance = new Distance();
                 List<Double> dist = new ArrayList<>();
-                for (int i = 1; i < places.size(); i++) {
+                for (int i = 0; i < places.size(); i++) {
                     String obj2 = "" + places.get(i).getLatitude() + " " + places.get(i).getLongitude() + "";
                     try {
                         dist.add(distance.getDistance(obj1, obj2));
@@ -67,21 +67,43 @@ public class RoutesCommand implements Command {
                     placeMarkerWithPhotos.add(new PlaceMarkerWithPhoto(place.getId(), placeDescription.getName(), place.getLatitude(), place.getLongitude(), placeImage.getReference(), placeDescription.getDescription()));
                 }
                 session.setAttribute("language", bundle.getLocale().toString());
-                request.setAttribute("wayPlaces", placeMarkerWithPhotos);
+//                request.setAttribute("wayPlaces", placeMarkerWithPhotos);
+                response.setContentType("application/json");
+                response.setCharacterEncoding("UTF-8");
+                response.getWriter().write(new Gson().toJson(placeMarkerWithPhotos));
+            } else {
+                //request.setAttribute("error", "Choose some places");
             }
-        } else {
-            session.setAttribute("language", bundle.getLocale().toString());
-            //request.setAttribute("wayPlaces", placeMarkerWithPhotos);
-            response.setContentType("application/json");
-            response.setCharacterEncoding("UTF-8");
-            response.getWriter().write(new Gson().toJson(placeMarkerWithPhotos));
 
-        }else{
-
-            //request.setAttribute("error", "Choose some places");
+            //loger.info("Command RoutesCommand.");
+            //request.getRequestDispatcher("/views/pages/routes.jsp").forward(request, response);
         }
 
-        //loger.info("Command RoutesCommand.");
-        //request.getRequestDispatcher("/views/pages/routes.jsp").forward(request, response);
+
+//    public int getFirstPlace(List<Place> places) throws IOException, JSONException {
+//        int index = 0;
+//        double dist = 0;
+//        String o1 = "" + places.get(0).getLatitude() + " " + places.get(0).getLongitude() + "";
+//        String o2 = "" + places.get(1).getLatitude() + " " + places.get(1).getLongitude() + "";
+//        Distance distance = new Distance();
+//        double maxMinDist = distance.getDistance(o1, o2);
+//        for (int i = 0; i < places.size(); i++) {
+//            o1 = "" + places.get(i).getLatitude() + " " + places.get(i).getLongitude() + "";
+//            for (int j = 1; j < places.size(); i++) {
+//                o2 = "" + places.get(i).getLatitude() + " " + places.get(i).getLongitude() + "";
+//                dist += distance.getDistance(o1, o2);
+//            }
+//
+//            if (maxMinDist > dist) {
+//                index = i;
+//                maxMinDist = dist;
+//                dist = 0;
+//            } else {
+//                dist = 0;
+//            }
+//        }
+//
+//        return index;
+//    }
     }
 }
