@@ -386,13 +386,28 @@ header img.text-middle {
     border-radius: 0;
 }
 
-#map-info .collection {
+#map-info #place-info-collection {
     margin: 0;
     height: calc(100% - 100px);
     overflow-y: auto;
 }
 
-#map-info .collection .collection-item {
+#map-info #place-info-collection .collection-item {
+    padding: 5px 10px;
+    height: 60px;
+}
+
+#map-info #route-info-collection {
+    margin: 0;
+    height: calc(100% - 64px);
+    overflow-y: auto;
+}
+
+#map-info #route-info-collection .collection {
+    margin: 0;
+}
+
+#map-info #route-info-collection .collection-item {
     padding: 5px 10px;
     height: 60px;
 }
@@ -432,10 +447,6 @@ header img.text-middle {
     #map-side {
         width: 40%;
     }
-
-    #map-info .collection {
-        height: calc(100% - 92px);
-    }
 }
 
 @media (max-width: 600px) {
@@ -448,6 +459,14 @@ header img.text-middle {
     #map-side {
         width: 40%;
         padding-top: 56px;
+    }
+
+    #map-info #place-info-collection {
+        height: calc(100% - 92px);
+    }
+
+    #map-info #route-info-collection {
+        height: calc(100% - 56px);
     }
 }
 
