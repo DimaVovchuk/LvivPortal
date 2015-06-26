@@ -438,6 +438,13 @@ header img.text-middle {
     color: #039be5;
 }
 
+#map-canvas .labels img {
+    width: 50px;
+    height: 50px;
+    border: 2px solid black;
+    border-radius: 50%;
+}
+
 @media (max-width: 992px) {
     #map-canvas {
         width: 60%;

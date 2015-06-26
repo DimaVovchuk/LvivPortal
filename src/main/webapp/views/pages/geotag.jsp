@@ -1,21 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="cdg" uri="customtags" %>
-<style type="text/css">
-    .labels img {
-        width: 50px;
-        height: 50px;
-        border: 2px solid black;
-        border-radius: 50%;
-    }
 
-
-</style>
-<script src="http://google-maps-utility-library-v3.googlecode.com/svn/tags/markerwithlabel/1.1.9/src/markerwithlabel.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/js/markerwithlabel.js"></script>
 <script>
-    function initialize() {
-        var map = new google.maps.Map(document.getElementById('map-canvas'),
-                mapOptions);
+    function initStartMarkers() {
         var markers = [];
         <c:forEach items="${places}" var="place">
         var contentString = '<div class="map-content card">' +
@@ -34,12 +23,9 @@
                 '</div>' +
                 '</div>' +
                 '</div>';
-
             var infowindow = new google.maps.InfoWindow({
             content: contentString
         });
-
-
         var image = {
             url: "${pageContext.request.contextPath}/upload/photo/${place.imageReference}",
             scaledSize: new google.maps.Size(0, 0),
@@ -55,19 +41,15 @@
             info: contentString,
             labelContent: pictureLabel,
             labelAnchor: new google.maps.Point(22, 0),
-            labelClass: "labels", // the CSS class for the label
+            labelClass: "labels",
             labelVisible: true
-//            animation: google.maps.Animation.DROP,
         });
-
-
         markers.push(marker);
         google.maps.event.addListener(marker, 'click', function () {
             infowindow.setContent(this.info);
             infowindow.open(map, this);
         });
         </c:forEach>
-
         var markerClusterer = new MarkerClusterer(map, markers,
                 {
                     maxZoom: 16,
@@ -75,12 +57,4 @@
                     styles: null
                 });
     }
-    var mapOptions;
-    mapOptions = {
-        zoom: 15,
-        center: new google.maps.LatLng(49.8426, 24.0278)
-    };
-    google.maps.event.addDomListener(window, 'load', initialize);
 </script>
-
-<div id="map-canvas"></div>

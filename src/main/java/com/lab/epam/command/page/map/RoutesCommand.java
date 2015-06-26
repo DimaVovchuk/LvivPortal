@@ -1,5 +1,6 @@
 package com.lab.epam.command.page.map;
 
+import com.google.gson.Gson;
 import com.lab.epam.command.controller.Command;
 import com.lab.epam.entity.*;
 import com.lab.epam.helper.ClassName;
@@ -66,14 +67,17 @@ public class RoutesCommand implements Command {
                 placeMarkerWithPhotos.add(new PlaceMarkerWithPhoto(place.getId(), placeDescription.getName(), place.getLatitude(), place.getLongitude(), placeImage.getReference(), placeDescription.getDescription()));
             }
             session.setAttribute("language", bundle.getLocale().toString());
-            request.setAttribute("wayPlaces", placeMarkerWithPhotos);
+            //request.setAttribute("wayPlaces", placeMarkerWithPhotos);
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write(new Gson().toJson(placeMarkerWithPhotos));
 
         }else{
 
-            request.setAttribute("error", "Choose some places");
+            //request.setAttribute("error", "Choose some places");
         }
 
-        loger.info("Command RoutesCommand.");
-        request.getRequestDispatcher("/views/pages/routes.jsp").forward(request, response);
+        //loger.info("Command RoutesCommand.");
+        //request.getRequestDispatcher("/views/pages/routes.jsp").forward(request, response);
     }
 }
