@@ -56,7 +56,7 @@ var loadCategoriesEvents = function () {
 
 var loadRoutes = function () {
     $.ajax({
-        url: window.location.origin + '/portal?command=routesJSON',
+        url: window.location.origin + '/portal?command=routes',
         success: updateRoutes,
         error: updateRoutes
     });
@@ -173,15 +173,16 @@ var calcRoute = function (data) {
 
 $(function () {
     /* SIDEBAR */
+    initBlankMap();
     initLinkProcess();
     loadCategories();
     loadCategoriesEvents();
     loadRoutes();
     setupDayTrigger();
     /* MAP */
-    initBlankMap();
-    //google.maps.event.addDomListener(window, 'load', initStartMarkers);
 
-    loadDayData();
+    google.maps.event.addDomListener(window, 'load', initStartMarkers);
+
+    //loadDayData();
     //google.maps.event.addDomListener(window, 'load', initDayMarkers);
 });
