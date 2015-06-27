@@ -2,17 +2,34 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="cdg" uri="customtags" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-
 <script src="${pageContext.request.contextPath}/js/markerwithlabel.js"></script>
 <script>
     var markers = [];
+    var markerClusterer;
 
     function myclick(image) {
         <c:forEach var="i" begin="0" end="${fn:length(places)-1}">
-        if("${places[i].imageReference}" == image){
+        if ("${places[i].imageReference}" == image) {
             google.maps.event.trigger(markers[${i}], "click");
         }
         </c:forEach>
+    }
+
+    function hideMarkers() {
+        for (var i = 0; i < markers.length; i++) {
+            markers[i].setVisible(false);
+        }
+        markerClusterer.clearMarkers();
+    }
+    function showMarkers() {
+        for (var i = 0; i < markers.length; i++) {
+            markers[i].setVisible(true);
+        }
+        markerClusterer.addMarkers(markers);
+    }
+
+    function showRouteMarkers(mark){
+
     }
 
     function initStartMarkers() {
@@ -53,7 +70,7 @@
             info: contentString,
             labelContent: pictureLabel,
             labelAnchor: new google.maps.Point(22, 0),
-            labelClass: "labels", // the CSS class for the label
+            labelClass: "labels",
             labelVisible: true
         });
 
@@ -66,8 +83,9 @@
         });
         markers.push(marker);
         </c:forEach>
-        var markerClusterer = new MarkerClusterer(map, markers,
+        markerClusterer = new MarkerClusterer(map, markers,
                 {
+                    ignoreHidden: true,
                     maxZoom: 16,
                     gridSize: 50,
                     styles: null
