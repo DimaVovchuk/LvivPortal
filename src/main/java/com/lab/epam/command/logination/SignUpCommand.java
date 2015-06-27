@@ -29,6 +29,7 @@ public class SignUpCommand implements Command {
     private static final String CHECK_EMAIL = "(\\w+@[a-zA-Z_]+?\\.[a-zA-Z]{2,6})";
     private static final String CHECK_PASSWORD = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,15})";
     private static final String CHECK_PHONE = "([0-9]{6,15})";
+    private static final String CHECK_AGENCY_NAME = "^[^<>/{}]+$";
 
     private static boolean checkData(String testString, String pattern) {
         Pattern p = Pattern.compile(pattern);
@@ -44,23 +45,12 @@ public class SignUpCommand implements Command {
         boolean errorFlag = false;
         String name = request.getParameter("first");
         String surname = request.getParameter("last");
+        String companyName = request.getParameter("companyname");
         String login = request.getParameter("login");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         String phone = request.getParameter("phone");
         Integer role = Integer.valueOf(request.getParameter("role"));
-
-        User user = new User();
-        user.setRating(0);
-        user.setName(name);
-        user.setSurname(surname);
-        user.setLogin(login);
-        user.setMail(email);
-        user.setPassword(password);
-        user.setPhone(phone);
-        user.setStatus(1);
-        user.setRoleID(role);
-
 
         UserService userService = new UserService();
         boolean checkEmail = userService.checkEmail(email);
@@ -85,6 +75,12 @@ public class SignUpCommand implements Command {
             loger.warn("Login is pattern error");
         }
 
+        if (checkData(login, CHECK_AGENCY_NAME)) {
+            session.setAttribute("agencyNameError", 1);
+            errorFlag = true;
+            loger.warn("Agency name is pattern error");
+        }
+
         if (checkData(email, CHECK_EMAIL)) {
             session.setAttribute("loginError", 1);
             errorFlag = true;
@@ -101,6 +97,14 @@ public class SignUpCommand implements Command {
             session.setAttribute("loginError", 1);
             errorFlag = true;
             loger.warn("Phone is pattern error");
+        }
+
+        if (role.equals(4)) {
+            if (companyName == "") {
+                session.setAttribute("agencyName", 1);
+                errorFlag = true;
+                loger.warn("Company Name is empty");
+            }
         }
 
         if (login == "") {
@@ -141,6 +145,18 @@ public class SignUpCommand implements Command {
         if (errorFlag) {
         } else {
             try {
+                User user = new User();
+                user.setRating(0);
+                user.setName(name);
+                user.setSurname(surname);
+                user.setLogin(login);
+                user.setMail(email);
+                user.setPassword(password);
+                user.setPhone(phone);
+                user.setStatus(1);
+                user.setRoleID(role);
+                user.setCompanyName(companyName);
+
                 userService.create(user);
                 session.setAttribute("avatar", user.getAvatar());
                 ResourceBundle bundle = (ResourceBundle) session.getAttribute("bundle");

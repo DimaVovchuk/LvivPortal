@@ -35,6 +35,7 @@ public class SaveProfileCommand implements Command {
     private static final String CHECK_SURNAME = "^[^<>/{}\\s?!;]+$";
     private static final String CHECK_PHONE = "([0-9]{6,15})";
     private static final String CHECK_ABOUT = "^[^<>/{}]+$";
+    private static final String CHECK_AGENCY_NAME = "^[^<>/{}]+$";
 
     @Override
     public void execute(HttpServletRequest request,
@@ -46,6 +47,7 @@ public class SaveProfileCommand implements Command {
         UserService userService = new UserService();
         String userLogin = (String) session.getAttribute("login");
         User user = null;
+        Integer userRole = null;
         Boolean errorFlag = false;
 
         try {
@@ -59,6 +61,7 @@ public class SaveProfileCommand implements Command {
         String surname = params.get("surname");
         String phone = params.get("phone");
         String about = params.get("about");
+        String companyName = params.get("companyName");
 
         //check input data
         if (checkData(name, CHECK_NAME)) {
@@ -78,7 +81,7 @@ public class SaveProfileCommand implements Command {
             errorFlag = true;
             loger.warn("Phone is pattern error");
         }
-        if (checkData(about, CHECK_ABOUT) && about=="") {
+        if (checkData(about, CHECK_ABOUT) && about == "") {
             session.setAttribute("aboutError", 1);
             errorFlag = true;
             loger.warn("about is pattern error");
@@ -86,6 +89,7 @@ public class SaveProfileCommand implements Command {
 
         if (userLogin != null) {
             user = userService.getUserByLogin(userLogin);
+            userRole = user.getRole_id();
             loger.info("Command Update user " + user);
         }
         if (phone == "") {
@@ -94,8 +98,21 @@ public class SaveProfileCommand implements Command {
             loger.warn("Phone is empty");
         }
 
+        if (userRole == 3 || userRole == 4) {
+            if (checkData(companyName, CHECK_AGENCY_NAME)) {
+                session.setAttribute("companyNameError", 1);
+                errorFlag = true;
+                loger.warn("Company name is pattern error");
+            }
+            if (companyName == "") {
+                session.setAttribute("companyNameError", 1);
+                errorFlag = true;
+                loger.warn("Company name is empty");
+            }
+
+        }
         User forChecPhone = userService.getUserByPhone(phone);
-        if(user.getId()!= forChecPhone.getId()){
+        if (user.getId() != forChecPhone.getId()) {
             session.setAttribute("phoneError", 1);
             errorFlag = true;
             loger.warn("Such phone is exist");
@@ -105,6 +122,7 @@ public class SaveProfileCommand implements Command {
         } else {
             user.setName(Decoder.decodeStringUtf8(name));
             user.setSurname(Decoder.decodeStringUtf8(surname));
+            user.setCompanyName(Decoder.decodeStringUtf8(companyName));
             user.setPhone(phone);
             user.setAbout(Decoder.decodeStringUtf8(about));
             loger.info("CUser after change " + user);

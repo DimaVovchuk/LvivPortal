@@ -36,6 +36,8 @@ public class User implements Identified<Integer> {
     private Integer avatar;
     @Column("deleted")
     private Boolean deleted = false;
+    @Column("company_name")
+    private String companyName;
 
     public User(Builder builder) {
 
@@ -66,12 +68,21 @@ public class User implements Identified<Integer> {
                 ", mail='" + mail + '\'' +
                 ", password='" + password + '\'' +
                 ", phone='" + phone + '\'' +
-                ", status='" + status + '\'' +
-                ", role='" + role_id + '\'' +
+                ", status=" + status +
+                ", role_id=" + role_id +
                 ", about='" + about + '\'' +
-                ", avatar='" + avatar + '\'' +
+                ", avatar=" + avatar +
                 ", deleted=" + deleted +
+                ", companyName=" + companyName +
                 '}';
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
     }
 
     public Integer getId() {

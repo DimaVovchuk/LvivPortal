@@ -47,6 +47,9 @@
                     </div>
                 </div>
                 <div class="form">
+                    <input id="companyname" placeholder='<cdg:l18n key="login.companyname"/>' type='text' name="companyname">
+                </div>
+                <div class="form">
                     <input id="login" placeholder='<cdg:l18n key="login.login"/>' type='text' name="login">
                 </div>
                 <div class="form">

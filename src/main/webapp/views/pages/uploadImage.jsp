@@ -52,7 +52,7 @@
     <c:set var="command" scope="session" value="upLoad"/>
     <c:set var="typePhoto" scope="session" value="userFoto"/>
     <b>Choose image:</b>
-    <input id="fileupload" type="file" name="sendfile">
+    <input id="fileupload" type="file" multiple="multiple" name="sendfile">
     <%--multiple="multiple"--%>
     <br>
     <b>Preview:</b>

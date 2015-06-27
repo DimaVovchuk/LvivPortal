@@ -82,7 +82,7 @@ public class CommandFactory {
         commands.put("deletePlaceFromTrip", new DeletePlaceFromTripCommand());
         commands.put("deleteDay", new DeleteDayCommand());
         commands.put("addDay", new AddDayCommand());
-
+        commands.put("companyInformation", new CompanyInformationCommand());
         commands.put("commercial", new CommercialCommand());
     }
 

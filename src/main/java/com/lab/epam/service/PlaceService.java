@@ -29,8 +29,7 @@ public class PlaceService {
     public Place getByPK(Integer key) {
         Place place = null;
         try {
-            place = mySqlPlaceDao.getByPK(key);
-            ;
+            place =  mySqlPlaceDao.getByPK(key);;
 
         } catch (PersistException e) {
             e.printStackTrace();
@@ -71,8 +70,7 @@ public class PlaceService {
     public List<Place> getAllWithoutDeleted() {
         List<Place> places = null;
         try {
-            places = mySqlPlaceDao.getAllWithoutDeleted();
-            ;
+            places = mySqlPlaceDao.getAllWithoutDeleted();;
 
         } catch (PersistException e) {
             e.printStackTrace();
@@ -189,8 +187,7 @@ public class PlaceService {
 
         return id;
     }
-
-    public Integer createAndReturnIndex(Place place) {
+    public Integer createAndReturnIndex(Place place){
         return mySqlPlaceDao.createAndReturnIndex(place);
     }
 
