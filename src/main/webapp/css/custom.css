@@ -606,8 +606,10 @@ footer.page-footer {
 .ok-footer .modal-footer .btn {
     float: right;
     margin: 6px 10px;
-    width: 120px;
+    width: 140px;
     align-content: center;
+    align-self: center;
+    align-items: center;
 
 }
 
@@ -618,6 +620,35 @@ footer.page-footer {
 
 #user-places {
     min-height: calc(100% - 64px - 50px);
+}
+
+#user-places a{
+    color: #000;
+}
+
+#close-png{
+    padding: 0px;
+    margin: 0px;
+}
+
+#sure-save {
+    width: 550px;
+    margin-top: 10%;
+}
+
+#get-direction {
+    width: 400px;
+    margin-top: 10%;
+}
+
+#user-trip-save .ok-footer .modal-footer .btn {
+    float: right;
+    margin: 20px 10px;
+    width: 140px;
+    align-content: center;
+    align-self: center;
+    align-items: center;
+
 }
 
 

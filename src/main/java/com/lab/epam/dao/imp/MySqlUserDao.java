@@ -11,6 +11,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Admin on 10.06.2015.
@@ -23,7 +25,7 @@ public class MySqlUserDao extends AbstractJDBCDao<User, Integer> {
     public static final String checkPhoneSQL = "SELECT * FROM USER WHERE phone=?";
     public static final String checkLoginSQL = "SELECT * FROM USER WHERE login=?";
     public static final String getRoleID = "SELECT role_id FROM USER WHERE login=?";
-
+    public static final String getUserByRole = "SELECT * FROM USER WHERE role_id=?";
     private ConnectionPool connection = ConnectionManager.getConnection();
 
     private class PersistGroup extends Category {
@@ -39,6 +41,19 @@ public class MySqlUserDao extends AbstractJDBCDao<User, Integer> {
         return User.class;
     }
 
+    public List<User> getUserByRole(Integer statusID){
+        List<User> userList = new ArrayList<>();
+        Connection conn = connection.retrieve();
+        try (PreparedStatement statement = conn.prepareStatement(getUserByRole)) {
+            statement.setInt(1, statusID);
+            ResultSet rs = statement.executeQuery();
+            userList = parseResultSet(rs);
+        } catch (Exception e) {
+        } finally {
+            connection.putback(conn);
+        }
+        return userList;
+    }
 
     public User getUserByLogin(String login) {
         User user = new User();

@@ -68,6 +68,9 @@ public class RectRatingCommand implements Command {
                 placeRatingService.create(new PlaceRating(user.getId(),place_id,ratingNew));
                 Place place = servicePlace.getByPK(place_id);
                 Integer placeRating = place.getRating();
+             //   System.out.println("place " + place);
+               // System.out.println("placeRating " + placeRating);
+                //System.out.println("ratingNew " + ratingNew);
                 place.setRating(placeRating + ratingNew);
                 servicePlace.update(place);
 
@@ -76,7 +79,7 @@ public class RectRatingCommand implements Command {
         }
         loger.info("Command Rect rating.");
         request.setAttribute("category", category);
-        request.getRequestDispatcher("portal?command=place").forward(request, response);
+        response.sendRedirect("portal?command=place&category=" + category);
 
 
     }

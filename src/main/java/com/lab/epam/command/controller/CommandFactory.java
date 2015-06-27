@@ -8,8 +8,12 @@ import com.lab.epam.command.delete.DeletePlaceCommand;
 import com.lab.epam.command.email.*;
 import com.lab.epam.command.locale.LocaleCommand;
 import com.lab.epam.command.logination.*;
+import com.lab.epam.command.page.createtrip.AddDayCommand;
 import com.lab.epam.command.page.createtrip.CountDaysCommand;
 import com.lab.epam.command.page.createtrip.CreateUserDataCommand;
+import com.lab.epam.command.page.createtrip.CreateUserDataFromDBCommand;
+import com.lab.epam.command.page.delete.DeleteDayCommand;
+import com.lab.epam.command.page.delete.DeletePlaceFromTripCommand;
 import com.lab.epam.command.page.index.IndexCommand;
 import com.lab.epam.command.page.map.RoutesCommand;
 import com.lab.epam.command.page.map.RoutesJSONCommand;
@@ -74,6 +78,13 @@ public class CommandFactory {
         commands.put("routesJSON", new RoutesJSONCommand());
         commands.put("addNewPlace", new AddNewPlaceCommand());
         commands.put("saveNewPlace", new SaveNewPlaceCommand());
+        commands.put("createUserDataFromDB", new CreateUserDataFromDBCommand());
+        commands.put("updateWay", new UpdateWayCommand());
+        commands.put("deletePlaceFromTrip", new DeletePlaceFromTripCommand());
+        commands.put("deleteDay", new DeleteDayCommand());
+        commands.put("addDay", new AddDayCommand());
+
+        commands.put("commercial", new CommercialCommand());
     }
 
     public static void createCommand(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

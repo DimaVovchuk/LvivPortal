@@ -11,6 +11,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.List;
@@ -27,6 +28,9 @@ public class MySqlWayDao extends AbstractJDBCDao<Way, Integer> {
     private static final String DELETE_WAY_BY_USER_ID_WAY_ID = "UPDATE user_way SET deleted = true WHERE user_id = ? AND way_id = ?";
     private static final String GET_LAST_ADDED = "SELECT * FROM way ORDER BY id DESC LIMIT 0,1";
     private static final String CREATE_USER_WAY = "INSERT INTO user_way (user_id, way_id, way_days) VALUES (?,?,?);";
+    private static final String UPDATE_WAY_DAY = "UPDATE user_way SET way_days = ? WHERE user_id = ? AND way_id = ?";
+    private static final String UPDATE_WAY_BEGIN_DATE = "UPDATE way SET date_begin = ? WHERE id = ?";
+    private static final String UPDATE_WAY_END_DATE = "UPDATE way SET date_end = ? WHERE id = ?";
 
     private class PersistGroup extends Way {
         public void setId(int id) {
@@ -131,8 +135,58 @@ public class MySqlWayDao extends AbstractJDBCDao<Way, Integer> {
         } finally {
             connection.putback(conn);
         }
+    }
 
+    public void updateWayDay(Integer user_id, Integer way_id, Integer day) throws PersistException {
+        Connection conn = connection.retrieve();
+        try (PreparedStatement statement = conn.prepareStatement(UPDATE_WAY_DAY)) {
+            statement.setInt(2, user_id);
+            statement.setInt(3, way_id);
+            statement.setInt(1, day);
+            int count = statement.executeUpdate();
+            if (count != 1) {
+                throw new PersistException("On persist modify more then 1 record: " + count);
+            } else {
+            }
+        } catch (Exception e) {
+            throw new PersistException(e);
+        } finally {
+            connection.putback(conn);
+        }
+    }
 
+    public void updateWayBeginDate(Integer way_id, Date beginDate) throws PersistException {
+        Connection conn = connection.retrieve();
+        try (PreparedStatement statement = conn.prepareStatement(UPDATE_WAY_BEGIN_DATE)) {
+            statement.setDate(1, beginDate);
+            statement.setInt(2, way_id);
+            int count = statement.executeUpdate();
+            if (count != 1) {
+                throw new PersistException("On persist modify more then 1 record: " + count);
+            } else {
+            }
+        } catch (Exception e) {
+            throw new PersistException(e);
+        } finally {
+            connection.putback(conn);
+        }
+    }
+
+    public void updateWayEndDate(Integer way_id, Date endDate) throws PersistException {
+        Connection conn = connection.retrieve();
+        try (PreparedStatement statement = conn.prepareStatement(UPDATE_WAY_END_DATE)) {
+            statement.setDate(1, endDate);
+            statement.setInt(2, way_id);
+            int count = statement.executeUpdate();
+            if (count != 1) {
+                throw new PersistException("On persist modify more then 1 record: " + count);
+            } else {
+            }
+        } catch (Exception e) {
+            throw new PersistException(e);
+        } finally {
+            connection.putback(conn);
+        }
     }
 
 }

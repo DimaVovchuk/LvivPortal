@@ -76,10 +76,11 @@ public class Way implements Identified<Integer> {
         this.deleted = deleted;
     }
 
-    public Way(Integer rating, Date begin, Date end){
+    public Way(Integer rating, Date begin, Date end, Integer way_days){
         this.rating = rating;
         this.begin = begin;
         this.end = end;
+        this.way_days = way_days;
     }
 
     public Way(){

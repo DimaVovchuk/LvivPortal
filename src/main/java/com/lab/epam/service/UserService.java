@@ -78,4 +78,8 @@ public class UserService {
     public Integer getRoleID(String login) {
         return mySqlUserDao.getRoleID(login);
     }
+
+    public List<User> getUserByRole(Integer statusID){
+        return mySqlUserDao.getUserByRole(statusID);
+    }
 }
