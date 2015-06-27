@@ -16,7 +16,6 @@ import com.lab.epam.command.page.delete.DeleteDayCommand;
 import com.lab.epam.command.page.delete.DeletePlaceFromTripCommand;
 import com.lab.epam.command.page.index.IndexCommand;
 import com.lab.epam.command.page.map.RoutesCommand;
-import com.lab.epam.command.page.map.RoutesJSONCommand;
 import com.lab.epam.command.page.map.ShowMapCommand;
 import com.lab.epam.command.page.photo.ShowAllUserPhoto;
 import com.lab.epam.command.page.photo.UpLoadPictureCommand;
@@ -75,7 +74,7 @@ public class CommandFactory {
         commands.put("deletePlace", new DeletePlaceCommand());
         commands.put("addplace", new AddPlaceUserDataTripCommand());
         commands.put("userAllWay", new UserAllWayCommand());
-        commands.put("routesJSON", new RoutesJSONCommand());
+//        commands.put("routesJSON", new RoutesJSONCommand());
         commands.put("addNewPlace", new AddNewPlaceCommand());
         commands.put("saveNewPlace", new SaveNewPlaceCommand());
         commands.put("createUserDataFromDB", new CreateUserDataFromDBCommand());

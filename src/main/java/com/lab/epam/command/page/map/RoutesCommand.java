@@ -33,6 +33,9 @@ public class RoutesCommand implements Command {
             Distance distance = new Distance();
             List<RouteOneDayPlacesInfo> routeDayPlacesInfo = new ArrayList<>();
             for (int j = 1; j <= placeDay.size(); j++) {
+                if (placeDay.get(j).isEmpty()) {
+                    continue;
+                }
                 List<Place> places = new ArrayList<>();
                 List<Double> dist = new ArrayList<>();
                 RouteOneDayPlacesInfo routeOneDayInfo = new RouteOneDayPlacesInfo(j);
@@ -47,17 +50,27 @@ public class RoutesCommand implements Command {
                     }
                 }
                 ResourceBundle bundle = (ResourceBundle) session.getAttribute("bundle");
-                System.out.println(places);
                 List<PlaceMarkerWithPhoto> placeMarkerWithPhotos = sortPlaces(places, dist, bundle.getLocale());
-                System.out.println(placeMarkerWithPhotos);
                 routeOneDayInfo.setPlaces(placeMarkerWithPhotos);
-                for (int i = 0; i < places.size(); i++) {
-                    routeOneDayInfo.setTotalMinutes(routeOneDayInfo.getTotalMinutes() + places.get(i).getPlace_time());
+                for (Place place : places) {
+                    routeOneDayInfo.setTotalMinutes(routeOneDayInfo.getTotalMinutes() + place.getPlace_time());
                 }
-                System.out.println(routeOneDayInfo);
+                if (places.size() > 1) {
+                    for (int i = 0; i < places.size() - 1; i++) {
+                        String o1 = "" + places.get(i).getLatitude() + " " + places.get(i).getLongitude() + "";
+                        String o2 = "" + places.get(i + 1).getLatitude() + " " + places.get(i + 1).getLongitude() + "";
+                        Double time = 0.0;
+                        try {
+                            time = distance.getTime(o1, o2);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        int time1 = time.intValue() / 60;
+                        routeOneDayInfo.setTotalMinutes(routeOneDayInfo.getTotalMinutes() + time1);
+                    }
+                }
                 routeDayPlacesInfo.add(routeOneDayInfo);
             }
-            System.out.println(routeDayPlacesInfo);
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
             response.getWriter().write(new Gson().toJson(routeDayPlacesInfo));
@@ -66,29 +79,26 @@ public class RoutesCommand implements Command {
     }
 
     public List<PlaceMarkerWithPhoto> sortPlaces(List<Place> places, List<Double> dist, Locale language) {
-//        if (places.size() < 1) {
 
-            TreeMap<Double, Place> sorted = new TreeMap<>();
-            sorted.put(0.0, places.get(0));
-            int j = 1;
-            for (int i = 0; i < dist.size(); i++) {
-                sorted.put(dist.get(i), places.get(j));
-                j++;
-            }
-            Collection<Place> values = sorted.values();
-            PlaceImageService placeImageService = new PlaceImageService();
-            List<PlaceMarkerWithPhoto> placeMarkerWithPhotos = new ArrayList<>();
-            PlaceDescriptionService placeDescriptionService = new PlaceDescriptionService();
+        TreeMap<Double, Place> sorted = new TreeMap<>();
+        sorted.put(0.0, places.get(0));
+        int j = 1;
+        for (Double aDist : dist) {
+            sorted.put(aDist, places.get(j));
+            j++;
+        }
+        Collection<Place> values = sorted.values();
+        PlaceImageService placeImageService = new PlaceImageService();
+        List<PlaceMarkerWithPhoto> placeMarkerWithPhotos = new ArrayList<>();
+        PlaceDescriptionService placeDescriptionService = new PlaceDescriptionService();
 
-            for (Place place : values) {
-                PlaceDescription placeDescription = placeDescriptionService.getPlaceDescriptionByIdPlace(place.getId(), language.toString());
-                PlaceImage placeImage = placeImageService.getPlaceImageByPlaceId(place.getId());
-                placeMarkerWithPhotos.add(new PlaceMarkerWithPhoto(place.getId(), placeDescription.getName(), place.getLatitude(), place.getLongitude(), placeImage.getReference(), placeDescription.getDescription()));
-            }
+        for (Place place : values) {
+            PlaceDescription placeDescription = placeDescriptionService.getPlaceDescriptionByIdPlace(place.getId(), language.toString());
+            PlaceImage placeImage = placeImageService.getPlaceImageByPlaceId(place.getId());
+            placeMarkerWithPhotos.add(new PlaceMarkerWithPhoto(place.getId(), placeDescription.getName(), place.getLatitude(), place.getLongitude(), placeImage.getReference(), placeDescription.getDescription()));
+        }
 
-            return placeMarkerWithPhotos;
-//        }
-//        return new ArrayList<PlaceMarkerWithPhoto>();
+        return placeMarkerWithPhotos;
     }
 
 

@@ -55,8 +55,8 @@ public class Distance {
         return Double.parseDouble(distance);
     }
 
-    public Integer getTime(String origin, String destination) throws IOException, JSONException {
-        final String baseUrl = "http://maps.googleapis.com/maps/api/directions/json";// путь к Geocoding API по
+    public double getTime(String origin, String destination) throws IOException, JSONException {
+        final String baseUrl = "http://maps.googleapis.com/maps/api/directions/json";
         final Map<String, String> params = Maps.newHashMap();
         params.put("sensor", "false");
         params.put("language", "ua");
@@ -68,14 +68,14 @@ public class Distance {
         JSONObject location = response.getJSONArray("routes").getJSONObject(0);
         location = location.getJSONArray("legs").getJSONObject(0);
         final String duration = location.getJSONObject("duration").getString("value");
-        return Integer.parseInt(duration);
+        return Double.parseDouble(duration);
     }
 
     public static void main(String[] args) {
         Distance distance = new Distance();
         try {
             System.out.println(distance.getDistance("49.843698 24.025574", "49.840862 24.02893") / 1000 + " km");
-            System.out.println(distance.getTime("49.843698 24.025574", "49.840862 24.02893").doubleValue() / 60 + " min");
+            System.out.println(distance.getTime("49.843698 24.025574", "49.840862 24.02893") / 60 + " min");
         } catch (IOException e) {
             e.printStackTrace();
         } catch (JSONException e) {
