@@ -9,6 +9,7 @@ import com.lab.epam.helper.ClassName;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import java.sql.Date;
 import java.util.List;
 
 /**
@@ -30,8 +31,16 @@ public class WayService {
         }
     }
 
-    public Way getByPK(Integer key) throws PersistException{
-        return mySqlWayDao.getByPK(key);
+    public Way getByPK(Integer key){
+        Way way = null;
+        try {
+            way = mySqlWayDao.getByPK(key);
+
+        } catch (PersistException e) {
+            e.printStackTrace();
+            loger.warn("Cant get user way by PK");
+        }
+        return way;
     }
 
     public void update(Way object) throws PersistException{
@@ -93,6 +102,36 @@ public class WayService {
         } catch (PersistException e) {
             e.printStackTrace();
             loger.warn("Cant create way by user_id = " + user_id + " way_id " + way_id);
+        }
+    }
+
+    public void updateWayDay(Integer user_id, Integer way_id, Integer day){
+        try {
+            mySqlWayDao.updateWayDay(user_id, way_id, day);
+
+        } catch (PersistException e) {
+            e.printStackTrace();
+            loger.warn("Cant update way_day by user_id = " + user_id + " way_id " + way_id);
+        }
+    }
+
+    public void updateWayBeginDate(Integer way_id, Date beginDate){
+        try {
+            mySqlWayDao.updateWayBeginDate(way_id, beginDate);
+
+        } catch (PersistException e) {
+            e.printStackTrace();
+            loger.warn("Cant update beginDate" +  way_id  + "way_id");
+        }
+    }
+
+    public void updateWayEndDate(Integer way_id, Date endDate){
+        try {
+            mySqlWayDao.updateWayEndDate(way_id, endDate);
+
+        } catch (PersistException e) {
+            e.printStackTrace();
+            loger.warn("Cant update endDate by" + " way_id " + way_id);
         }
     }
 

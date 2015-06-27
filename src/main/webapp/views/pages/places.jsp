@@ -55,18 +55,45 @@
                                     <c:if test="${login!=null}">
                                         <div style="height: 50px"></div>
                                         <div class="bottom-right-btn">
-                                            <c:if test="${place.rating!=1}">
-                                                <a class="btn-floating btn-large waves-effect waves-light cyan darken-2"
+                                                <c:choose>
+                                                <c:when test="${place.rating==1}">
+                                                <a class="btn-floating disabled btn-small">
+                                                    <i class="material-icons">thumb_up</i>
+                                                </a>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <a class="btn-floating btn-small waves-effect waves-light cyan darken-2"
                                                    href="portal?command=rectRating&rating=1&place_id=${place.id}&category=${requestScope.category}">
                                                     <i class="material-icons">thumb_up</i>
                                                 </a>
-                                            </c:if>
-                                            <c:if test="${place.rating!=-1}">
-                                                <a class="btn-floating btn-large waves-effect waves-light cyan darken-2"
-                                                   href="portal?command=rectRating&rating=-1&place_id=${place.id}&category=${requestScope.category}">
+                                            </c:otherwise>
+                                            </c:choose>
+                                            <c:choose>
+                                            <c:when test="${place.rating==0}">
+                                                <a class="btn-floating disabled btn-small">
+                                                <i class="material-icons">thumbs_up_down</i>
+                                            </a>
+                                            </c:when>
+                                                <c:otherwise>
+                                                    <a class="btn-floating btn-small waves-effect waves-light cyan darken-2"
+                                                       href="portal?command=rectRating&rating=0&place_id=${place.id}&category=${requestScope.category}">
+                                                        <i class="material-icons">thumbs_up_down</i>
+                                                    </a>
+                                                </c:otherwise>
+                                            </c:choose>
+                                            <c:choose>
+                                            <c:when test="${place.rating==-1}">
+                                                <a class="btn-floating disabled btn-small">
                                                     <i class="material-icons">thumb_down</i>
                                                 </a>
-                                            </c:if>
+                                            </c:when>
+                                                <c:otherwise>
+                                                    <a class="btn-floating btn-small waves-effect waves-light cyan darken-2"
+                                                       href="portal?command=rectRating&rating=-1&place_id=${place.id}&category=${requestScope.category}">
+                                                        <i class="material-icons">thumb_down</i>
+                                                    </a>
+                                                </c:otherwise>
+                                            </c:choose>
                                         </div>
                                     </c:if>
                                 </div>

@@ -54,6 +54,7 @@ public class RectRatingCommand implements Command {
 
         if (user != null && place_id != null){
             place_rating = placeRatingService.getPlaceRatingByPlaceAndUser(place_id,user.getId());
+           // System.out.println("place_rating " + place_rating);
             if (place_rating != null){
                 ratingOld = place_rating.getRating();
                 if (ratingOld != ratingNew){
@@ -62,16 +63,19 @@ public class RectRatingCommand implements Command {
                     Place place = servicePlace.getByPK(place_id);
                     Integer placeRating = place.getRating();
                     place.setRating(placeRating - ratingOld + ratingNew);
+                    //System.out.println("place " + place);
                     servicePlace.update(place);
                 }
             }else {
                 placeRatingService.create(new PlaceRating(user.getId(),place_id,ratingNew));
                 Place place = servicePlace.getByPK(place_id);
                 Integer placeRating = place.getRating();
+                //System.out.println("place else " + place);
              //   System.out.println("place " + place);
                // System.out.println("placeRating " + placeRating);
                 //System.out.println("ratingNew " + ratingNew);
                 place.setRating(placeRating + ratingNew);
+               // System.out.println("place else " + place);
                 servicePlace.update(place);
 
             }
@@ -79,7 +83,7 @@ public class RectRatingCommand implements Command {
         }
         loger.info("Command Rect rating.");
         request.setAttribute("category", category);
-        request.getRequestDispatcher("portal?command=place").forward(request, response);
+        response.sendRedirect("portal?command=place&category=" + category);
 
 
     }

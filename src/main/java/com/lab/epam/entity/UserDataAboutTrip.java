@@ -12,6 +12,16 @@ import java.util.Map;
 public class UserDataAboutTrip {
 
     private Integer dayCount = 1;
+
+    public Integer getWay_id() {
+        return way_id;
+    }
+
+    public void setWay_id(Integer way_id) {
+        this.way_id = way_id;
+    }
+
+    private Integer way_id = 0;
     private String beginPlace;
     private String endPlace;
     private Date beginTrip;
@@ -22,6 +32,16 @@ public class UserDataAboutTrip {
     private Boolean isCaffees = false;
     private Map<Integer,List<Place>> placeDay = new HashMap<>();
     private Boolean isAutomatic = false;
+
+    public Boolean getIsSaved() {
+        return isSaved;
+    }
+
+    public void setIsSaved(Boolean isSaved) {
+        this.isSaved = isSaved;
+    }
+
+    private Boolean isSaved = false;
 
     public Boolean getIsAutomatic() {
         return isAutomatic;

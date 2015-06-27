@@ -69,7 +69,10 @@ public class UserAllWayCommand implements Command {
             }
         }
 
-        List<WayPlaceImage> waysPlaceImage = getWayPlaceImageList(ways, way_place, wayPlaceImages);
+        List<WayPlaceImage> waysPlaceImage = null;
+        if(ways != null && !ways.isEmpty()){
+            waysPlaceImage = getWayPlaceImageList(ways, way_place, wayPlaceImages);
+        }
         request.setAttribute("places", places);
         request.setAttribute("waysPlaceImage", waysPlaceImage);
         request.setAttribute("user", user);
@@ -81,6 +84,7 @@ public class UserAllWayCommand implements Command {
 
     private List<WayPlaceImage> getWayPlaceImageList(List<Way> ways,  Map<Integer, List<PlaceDescription>> way_place, Map<Integer,PlaceImage> wayPlaceImages){
         List<WayPlaceImage> list = new ArrayList<>();
+        System.out.println("ways " + ways.size() + " way_place " + way_place.size() + " wayPlaceImages " + wayPlaceImages.size());
         if(ways != null && !ways.isEmpty()){
             for (Way way : ways) {
                 WayPlaceImage item = new WayPlaceImage();
@@ -117,7 +121,21 @@ public class UserAllWayCommand implements Command {
         return way_place;
     }
 
-
+    private List<PlaceImage> getPlaceImageListByPlace(List<Place> places) {
+        List<PlaceImage> placeImages = new ArrayList<>();
+        Integer place_id;
+        if (!places.isEmpty()) {
+            for (Place place : places) {
+                place_id = place.getId();
+                PlaceImage placeImage = placeImageService.getPlaceImageByPlaceId(place_id);
+                if (placeImage.getReference() == null || !isInFolder(placeImage.getReference())) {
+                    placeImage = new PlaceImage(place_id, "default_building.jpg");
+                }
+                placeImages.add(placeImage);
+            }
+        }
+        return placeImages;
+    }
 
     private List<PlaceDescription> getPlaceDescriptionByPlace (List < Place > places) {
         Integer place_id;

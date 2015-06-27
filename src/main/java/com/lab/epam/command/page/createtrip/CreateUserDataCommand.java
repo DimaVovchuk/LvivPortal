@@ -3,6 +3,7 @@ package com.lab.epam.command.page.createtrip;
 import com.google.gson.Gson;
 import com.lab.epam.command.controller.Command;
 import com.lab.epam.entity.Category;
+import com.lab.epam.entity.Place;
 import com.lab.epam.entity.UserDataAboutTrip;
 import com.lab.epam.helper.ClassName;
 import com.lab.epam.service.CategoryService;
@@ -20,10 +21,7 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
 /**
  * Created by Admin on 19.06.2015.
@@ -121,6 +119,11 @@ public class CreateUserDataCommand implements Command {
                     int days = d.getDays() + 1;
                     System.out.println("days " + days);
                     userDataTrip.setDayCount(days);
+                    Map<Integer, List<Place>> places = new HashMap<>();
+                    for (int i = 1; i <=  days; i++){
+                        places.put(i, new ArrayList<Place>());
+                    }
+                    userDataTrip.setPlaceDay(places);
             }
         } else{
             userDataTrip.setDontKnowDate(true);

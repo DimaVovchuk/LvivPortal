@@ -8,8 +8,12 @@ import com.lab.epam.command.delete.DeletePlaceCommand;
 import com.lab.epam.command.email.*;
 import com.lab.epam.command.locale.LocaleCommand;
 import com.lab.epam.command.logination.*;
+import com.lab.epam.command.page.createtrip.AddDayCommand;
 import com.lab.epam.command.page.createtrip.CountDaysCommand;
 import com.lab.epam.command.page.createtrip.CreateUserDataCommand;
+import com.lab.epam.command.page.createtrip.CreateUserDataFromDBCommand;
+import com.lab.epam.command.page.delete.DeleteDayCommand;
+import com.lab.epam.command.page.delete.DeletePlaceFromTripCommand;
 import com.lab.epam.command.page.index.IndexCommand;
 import com.lab.epam.command.page.map.RoutesCommand;
 import com.lab.epam.command.page.map.ShowMapCommand;
@@ -19,10 +23,7 @@ import com.lab.epam.command.page.place.*;
 import com.lab.epam.command.page.user.*;
 import com.lab.epam.command.page.user.admin.EditPlaceCommand;
 import com.lab.epam.command.page.user.admin.ShowAllUserCommand;
-import com.lab.epam.command.save.SaveEditPlaceCommand;
-import com.lab.epam.command.save.SavePlaceCommand;
-import com.lab.epam.command.save.SaveProfileCommand;
-import com.lab.epam.command.save.SaveWayCommand;
+import com.lab.epam.command.save.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -73,6 +74,12 @@ public class CommandFactory {
         commands.put("deletePlace", new DeletePlaceCommand());
         commands.put("addplace", new AddPlaceUserDataTripCommand());
         commands.put("userAllWay", new UserAllWayCommand());
+        commands.put("createUserDataFromDB", new CreateUserDataFromDBCommand());
+        commands.put("updateWay", new UpdateWayCommand());
+        commands.put("deletePlaceFromTrip", new DeletePlaceFromTripCommand());
+        commands.put("deleteDay", new DeleteDayCommand());
+        commands.put("addDay", new AddDayCommand());
+
     }
 
     public static void createCommand(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
