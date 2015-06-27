@@ -20,7 +20,7 @@ public class Place implements Identified<Integer> {
     @Column("longitude")
     private String longitude;
     @Column("visible")
-    private Boolean visible;
+    private Boolean visible = true;
     @Column("rating")
     private Integer rating;
     @Column("category_id")
@@ -136,13 +136,21 @@ public class Place implements Identified<Integer> {
         }
     }
 
-    public boolean equals(Object place){
-        Place places = (Place)place;
-        if (this.getId() == places.getId()){
-            return true;
-        } else return false;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Place)) return false;
+
+        Place place = (Place) o;
+
+        return getId().equals(place.getId());
+
     }
 
+    @Override
+    public int hashCode() {
+        return getId().hashCode();
+    }
 }
 
 

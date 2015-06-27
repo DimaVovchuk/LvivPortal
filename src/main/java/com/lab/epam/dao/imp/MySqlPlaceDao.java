@@ -25,12 +25,16 @@ public class MySqlPlaceDao extends AbstractJDBCDao<Place, Integer> {
 
     private static final String GET_PLACE_BY_CATEGORY = "SELECT * FROM place WHERE category_id = ?";
     private static final String GET_PLACE_BY_USER_ID = "SELECT p.id, p.adress, p.latitude, p.longitude, p.category_id, p.rating, p.visible, p.place_time, p.deleted FROM place AS p JOIN user_place AS up JOIN user AS u WHERE up.user_id = u.id AND up.deleted = false AND up.place_id = p.id AND u.id = ?";
-    private static final String GET_PLACE_BY_WAY_ID = "SELECT p.id, p.adress, p.latitude, p.longitude, p.category_id, p.rating, p.visible, p.place_time, p.deleted FROM place AS p JOIN place_way AS pw JOIN way AS w WHERE pw.way_id = w.id AND pw.place_id = p.id AND w.id = ?";
+    private static final String GET_PLACE_BY_WAY_ID_DAY_NUMBER = "SELECT p.id, p.adress, p.latitude, p.longitude, p.category_id, p.rating, p.visible, p.place_time, p.deleted FROM place AS p JOIN place_way AS pw JOIN way AS w WHERE pw.way_id = w.id AND pw.place_id = p.id AND pw.deleted = false AND w.id = ? AND pw.day_number = ?";
+    private static final String GET_PLACE_BY_WAY_ID = "SELECT p.id, p.adress, p.latitude, p.longitude, p.category_id, p.rating, p.visible, p.place_time, p.deleted FROM place AS p JOIN place_way AS pw JOIN way AS w WHERE pw.way_id = w.id AND pw.place_id = p.id AND w.id = ? AND pw.deleted = false";
     private static final String DELETE_PLACE_BY_USER_ID_PLACE_ID = "UPDATE user_place SET deleted = true WHERE user_id = ? AND place_id = ?";
     private static final String GET_PLACE_BY_LATITUDE_LONGITUDE = "SELECT * FROM place WHERE longitude = ? AND latitude = ?";
     private static final String CREATE_PLACE_WAY = "INSERT INTO place_way (place_id, way_id, day_number, time) VALUES (?,?,?,?);";
     private static final String CREATE_USER_PLACE = "INSERT INTO user_place (place_id, user_id) VALUES (?,?);";
     private static final String GET_PLACE_ID_BY_USER_ID = "SELECT id FROM user_place WHERE place_id = ? AND user_id = ? AND deleted=false";
+    private static final String DELETE_PLACE_BY_WAY_ID_PLACE_ID = "UPDATE place_way SET deleted = true WHERE way_id = ? AND place_id = ? AND day_number = ?";
+    private static final String DELETE_PLACE_BY_WAY_ID_DAY_NUMBER = "UPDATE place_way SET deleted = true WHERE way_id = ? AND day_number = ?";
+
 
     private class PersistGroup extends Place {
         public void setId(int id) {
@@ -151,6 +155,28 @@ public class MySqlPlaceDao extends AbstractJDBCDao<Place, Integer> {
             return list;
         }
 
+    public List<Place> getPlaceByWayIdDayNumber(Integer way_id, Integer day_number) throws PersistException {
+        List<Place> list;
+        Connection conn = connection.retrieve();
+        try (PreparedStatement statement = conn.prepareStatement(GET_PLACE_BY_WAY_ID_DAY_NUMBER)) {
+            statement.setInt(1, way_id);
+            statement.setInt(2, day_number);
+            ResultSet rs = statement.executeQuery();
+            // loger.info("Get places from way with id" + way_id + " is succesfull ");
+            list = parseResultSet(rs);
+            if (list.size() <= 0){
+                loger.info("DB has any place from way with " + way_id + " way_id " + day_number + " day_number");
+                return null;
+            }
+        } catch (Exception e) {
+            loger.warn("Cant get places from way with " + way_id + " way_id " + day_number + " day_number");
+            throw new PersistException(e);
+        } finally {
+            connection.putback(conn);
+        }
+        return list;
+    }
+
     public void deletePlaceByUserIdPlaceId(Integer user_id, Integer place_id) throws PersistException {
 
         Connection conn = connection.retrieve();
@@ -259,6 +285,51 @@ public class MySqlPlaceDao extends AbstractJDBCDao<Place, Integer> {
         }
     }
 
+    public void deletePlaceByWayIdPlaceId(Integer way_id, Integer place_id, Integer day_number) throws PersistException {
+
+        Connection conn = connection.retrieve();
+        try (PreparedStatement statement = conn.prepareStatement(DELETE_PLACE_BY_WAY_ID_PLACE_ID)) {
+            try {
+                statement.setObject(1, way_id);
+                statement.setObject(2, place_id);
+                statement.setObject(3, day_number);
+            } catch (Exception e) {
+                throw new PersistException(e);
+            }
+            int count = statement.executeUpdate();
+            if (count != 1) {
+                throw new PersistException("On delete modify more then 1 record: " + count);
+            }
+        } catch (Exception e) {
+            loger.warn("Cant delete place from place_way with " + way_id + " way_id and " + place_id + " place_id");
+            throw new PersistException(e);
+        } finally {
+            connection.putback(conn);
+        }
+
+    }
+
+
+    public void deletePlaceByWayIdDayNumber(Integer way_id, Integer day_number) throws PersistException {
+
+        Connection conn = connection.retrieve();
+        try (PreparedStatement statement = conn.prepareStatement(DELETE_PLACE_BY_WAY_ID_DAY_NUMBER)) {
+            try {
+                statement.setObject(1, way_id);
+                statement.setObject(2, day_number);
+            } catch (Exception e) {
+                throw new PersistException(e);
+            }
+            int count = statement.executeUpdate();
+
+        } catch (Exception e) {
+            loger.warn("Cant delete place from place_way with " + way_id + " way_id and " + day_number + " day_number");
+            throw new PersistException(e);
+        } finally {
+            connection.putback(conn);
+        }
+
+    }
 
 }
 

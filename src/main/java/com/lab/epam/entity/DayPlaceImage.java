@@ -17,7 +17,7 @@ public class DayPlaceImage {
         this.imageReference = imageReference;
     }
 
-    private String imageReference;
+    private String imageReference = "default_day.jpg";
     private List<ImageDescription> placeImage;
 
     public DayPlaceImage() {
@@ -32,6 +32,7 @@ public class DayPlaceImage {
     @Override
     public String toString() {
         return "DayPlaceImage{" +
+                "imageReference=" + imageReference +
                 "day=" + day +
                 ", placeImage=" + placeImage +
                 '}';

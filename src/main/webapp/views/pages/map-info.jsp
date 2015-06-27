@@ -53,7 +53,7 @@
         <script id="route-info-template" type="text/x-handlebars-template">
             {{#each this}}
             <c:set var="dayNumber" value="{{dayNumber}}"/>
-            <a href="#" class="collection-item black-text blue-grey lighten-4 waves-effect waves-light" onclick="$('#places-day${dayNumber}').toggle();">
+            <a href="#" data-day="${dayNumber}" class="day-trigger collection-item black-text blue-grey lighten-4 waves-effect waves-light">
                 <cdg:l18n key="map.route.day"/> {{dayNumber}}<br>
                 <cdg:l18n key="map.route.totaltime"/>: {{hours}} <cdg:l18n key="map.route.hours"/> {{minutes}} <cdg:l18n key="map.route.minutes"/>
             </a>

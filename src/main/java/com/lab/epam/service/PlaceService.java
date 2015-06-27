@@ -119,6 +119,19 @@ public class PlaceService {
         return places;
     }
 
+    public List<Place> getPlaceByWayIdDayNumber(Integer way_id, Integer day_number){
+        List<Place> places = null;
+        try {
+            places = mySqlPlaceDao.getPlaceByWayIdDayNumber(way_id, day_number);
+
+        } catch (PersistException e) {
+            e.printStackTrace();
+            loger.warn("Cant get place by way with id " + way_id  + " " + day_number + " day_number");
+        }
+
+        return places;
+    }
+
     public void deletePlaceByUserIdPlaceId(Integer user_id, Integer place_id){
         try {
             mySqlPlaceDao.deletePlaceByUserIdPlaceId(user_id, place_id);

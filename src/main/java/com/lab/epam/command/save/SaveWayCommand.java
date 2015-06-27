@@ -49,12 +49,13 @@ public class SaveWayCommand implements Command {
             Date endTrip = placeForWay.getEndTrip();
             Map<Integer,List<Place>> placesDay = placeForWay.getPlaceDay();
             Integer wayDays = 0;
-                if (placesDay != null){
+                if (placesDay != null && !placesDay.isEmpty()){
                     wayDays = placeForWay.getDayCount();
-                    wayService.create(new Way(0, beginTrip, endTrip));
+                    wayService.create(new Way(0, beginTrip, endTrip, wayDays));
                     //loger.info("Create way is successfull");
                     Way way = wayService.getLastAdded();
                     if (user != null && way != null && wayDays > 0){
+                        placeForWay.setWay_id(way.getId());
                         wayService.createUserWay(user.getId(), way.getId(), wayDays);
                     }
                     Set<Integer> keys = placesDay.keySet();
@@ -62,23 +63,24 @@ public class SaveWayCommand implements Command {
                     for (Integer key : keys) {
                         List<Place> places = placesDay.get(key);
                         for (Place place: places){
-                            if (!place.getVisible()){
+                           /* if (!place.getVisible()){
                                 servicePlace.create(place);
                                 place = servicePlace.getPlaceByLongitudeLatitude(place.getLongitude(), place.getLatitude());
                                 loger.info("Create castom place is successfull");
-                            }
+                            }*/
                             servicePlace.createPlaceWay(place.getId(), way.getId(), key, place.getPlace_time());
                             loger.info("Create place_way is successfull");
                         }
 
                     }
                     loger.info("Create new way is successfull");
-
+                    placeForWay.setIsSaved(true);
                 }
         }else {
             loger.warn("You want create way without places");
         }
         loger.info("You create new way in DB");
+        session.setAttribute("userDataTrip", placeForWay);
         response.sendRedirect("portal?command=userWays");
 
     }

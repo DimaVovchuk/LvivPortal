@@ -63,6 +63,7 @@ public class UserWaysCommand implements Command {
                     List<PlaceDescription> placeDescription = getPlaceDescriptionByPlace(mapPlaceMaintenance.get(key));
                     mapPlaceDescriptionMaintenance.put(key, placeDescription);
                     List<PlaceImage> placeImage = getPlaceImageListByPlace(mapPlaceMaintenance.get(key));
+
                     mapPlaceImageMaintenance.put(key, placeImage);
                 }
             }
@@ -72,40 +73,7 @@ public class UserWaysCommand implements Command {
             daysPlaceImage = getDayPlaceImageList(mapPlaceDescriptionMaintenance, mapPlaceImageMaintenance);
         }
 
-        // Get user data about way from DB
-        User user = null;
-
-        loger.info("Login in session is " + login);
-        if (login != null) {
-            user = userservice.getUserByLogin(login);
-        }
-        if (user == null) {
-            loger.warn("No user with login " + login);
-        }
-        if (user != null) {
-            Integer userId = user.getId();
-            Integer roleId = user.getRoleID();
-            ways = wayService.getWaysByUserId(userId);
-            places = placeService.getPlaceByUserId(userId);
-
-            if (ways != null && !ways.isEmpty()) {
-                way_place = getPlaceDescriptionByWay(ways);
-            }
-
-            if (places != null && !places.isEmpty()) {
-                placeDescriptions = getPlaceDescriptionByPlace(places);
-            }
-        }
-
-        List<WayPlaceImage> waysPlaceImage = getWayPlaceImageList(ways, way_place, wayPlaceImages);
-        request.setAttribute("places", places);
-            //request.setAttribute("ways", ways);
-        request.setAttribute("waysPlaceImage", waysPlaceImage);
-        request.setAttribute("user", user);
         request.setAttribute("daysPlaceImage", daysPlaceImage);
-           //request.setAttribute("placeDescription", placeDescriptions);
-            //request.setAttribute("way_place", way_place);
-           // request.setAttribute("wayPlaceImages", wayPlaceImages);
 
             loger.info("Command User Ways.");
             request.getRequestDispatcher("/views/pages/userWay.jsp").forward(request, response);
@@ -158,6 +126,9 @@ public class UserWaysCommand implements Command {
                 if (placeImage == null) {
                     place_id = place.getId();
                     placeImage = placeImageService.getPlaceImageByPlaceId(place_id);
+                    if (placeImage.getReference() == null || !isInFolder(placeImage.getReference())) {
+                        placeImage = new PlaceImage(place_id, "default_building.jpg");
+                    }
                 }
             }
         }
