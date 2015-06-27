@@ -5,7 +5,9 @@
 <html>
 
 <head>
-
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.css" rel="stylesheet">
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js"></script>
     <link href="${pageContext.request.contextPath}/css/fotorama.css" rel="stylesheet">
     <script src="${pageContext.request.contextPath}/js/fotorama.js"></script>
     <title><cdg:l18n key="places.title"/></title>

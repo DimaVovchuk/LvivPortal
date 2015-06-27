@@ -187,6 +187,25 @@ public class PlaceService {
 
         return id;
     }
+    public void deletePlaceByWayIdPlaceId(Integer way_id, Integer place_id, Integer day_number){
+        try {
+            mySqlPlaceDao.deletePlaceByWayIdPlaceId(way_id, place_id, day_number);
+
+        } catch (PersistException e) {
+            e.printStackTrace();
+            loger.warn("Cant delet place_way by way_id = " + way_id + " place_id " + place_id);
+        }
+    }
+
+    public void deletePlaceByWayIdDayNumber(Integer way_id, Integer day_number){
+        try {
+            mySqlPlaceDao.deletePlaceByWayIdDayNumber(way_id, day_number);
+
+        } catch (PersistException e) {
+            e.printStackTrace();
+            loger.warn("Cant delet place_way by way_id = " + way_id + " day_number " + day_number);
+        }
+    }
     public Integer createAndReturnIndex(Place place){
         return mySqlPlaceDao.createAndReturnIndex(place);
     }

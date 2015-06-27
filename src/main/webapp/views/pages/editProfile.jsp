@@ -17,9 +17,9 @@
 	<div class="row">
 		<h1>Edit Profile</h1>
 		<hr>
-		<form method=post enctype=multipart/form-data action="portal/update">
+		<form method=post enctype=multipart/form-data action="portal?command=update">
 			<c:set var="command" scope="session" value="updateprofile"/>
-			<c:set var="typePhoto" scope="session" value="avatarFoto"/>
+			<%--<c:set var="role" scope="request" value="${userForEdit.role}"/>--%>
 			<div class="col s4">
 				<div class="text-center">
 					<c:choose>
@@ -53,7 +53,16 @@
 						<i class="mdi-action-account-circle prefix"></i>
 						<label class="active" for="surname">Last Name:</label>
 						<input value="<c:out value="${userForEdit.surname}"/>" id="surname" type="text" name="surname">
+					</div>
 				</div>
+
+				<div class="row">
+					<div class="input-field col s12">
+						<i class="mdi-action-account-circle prefix"></i>
+						<label class="active" for="companyName">Company name:</label>
+						<%--<input value="${userForEdit.role}" id="role" type="text" type="hidden" name="role">--%>
+						<input value="${userForEdit.companyName}" id="companyName" type="text" name="companyName">
+					</div>
 				</div>
 
 				<div class="row">
