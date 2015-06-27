@@ -7,7 +7,7 @@ import java.io.UnsupportedEncodingException;
  */
 public class Decoder {
 
-    public String decodeStringUtf8(String string){
+    public static String decodeStringUtf8(String string){
         String decode = null;
         if (string == null){
             return string;

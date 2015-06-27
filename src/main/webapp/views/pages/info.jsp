@@ -76,7 +76,7 @@
                         <div id="chooseDay" class="modal">
                             <div class="modal-content">
                                 <h4>Choose day</h4>
-                                <form id="choose_day" action="/portal/placeInformation" method="post">
+                                <form id="choose_day" action="/portal?command=placeInformation" method="post">
                                     <input type="hidden" name="command" value="placeInformation">
                                     <div class="input-field col s6">
                                         <input placeholder="Placeholder" id="place_id" name="place_id" type="hidden" value="${place.id}">

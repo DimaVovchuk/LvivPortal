@@ -63,17 +63,13 @@ public class PlaceInfortmationCommand implements Command {
                         imList.remove(index);
                     }
                 }
-                System.out.println(imList);
             } else{
                 imList.add(new PlaceImage(place_id, "default_building.jpg"));
             }
-//            place_reference = im.getReference();
-//            loger.info("place_reference is ");
         }
 
         HttpSession session = request.getSession();
 
-        List<Place> places = null;
         List<Place> placeForWay;
         UserDataAboutTrip userDataAboutTrip = (UserDataAboutTrip) session.getAttribute("userDataTrip");
         placeForWay = (ArrayList<Place>) session.getAttribute("placeForWay");

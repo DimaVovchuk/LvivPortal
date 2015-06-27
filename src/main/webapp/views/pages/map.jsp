@@ -35,9 +35,10 @@
         </div>
     </div>
 
-    <jsp:include page="geotag.jsp"/>
-
+    <div id="map-canvas"></div>
 </div>
+
+<jsp:include page="geotag.jsp"/>
 
 </body>
 </html>

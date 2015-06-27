@@ -22,7 +22,7 @@ public class UserService {
         mySqlUserDao.create(object);
     }
 
-    public User getByPK(Integer key){
+    public User getByPK(Integer key) {
         User user = null;
         try {
             user = mySqlUserDao.getByPK(key);
@@ -39,7 +39,7 @@ public class UserService {
         mySqlUserDao.update(object);
     }
 
-    public void delete(User object) throws PersistException{
+    public void delete(User object) throws PersistException {
         mySqlUserDao.delete(object);
     }
 
@@ -50,8 +50,13 @@ public class UserService {
     public List<User> getAllWithoutDeleted() throws PersistException {
         return mySqlUserDao.getAllWithoutDeleted();
     }
-    public User getUserByLogin(String login){
+
+    public User getUserByLogin(String login) {
         return mySqlUserDao.getUserByLogin(login);
+    }
+
+    public User getUserByPhone(String phone) {
+        return mySqlUserDao.getUserByPhone(phone);
     }
 
     public User geUserByEmail(String email) {
@@ -70,7 +75,7 @@ public class UserService {
         return mySqlUserDao.checkLogin(login);
     }
 
-    public Integer getRoleID(String login){
+    public Integer getRoleID(String login) {
         return mySqlUserDao.getRoleID(login);
     }
 }

@@ -3,12 +3,9 @@ package com.lab.epam.command.page.place;
 import com.google.gson.Gson;
 import com.lab.epam.command.controller.Command;
 import com.lab.epam.entity.*;
-import com.lab.epam.helper.ClassName;
 import com.lab.epam.service.PlaceDescriptionService;
 import com.lab.epam.service.PlaceImageService;
 import com.lab.epam.service.PlaceService;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -31,7 +28,6 @@ public class PlaceJSONCommand implements Command {
         ResourceBundle resourceBandle = (ResourceBundle) session.getAttribute("bundle");
         Locale locale = resourceBandle.getLocale();
         String language = locale.getLanguage();
-
 
         List<Place> places = null;
         List<Place> placeForWay;
@@ -72,7 +68,6 @@ public class PlaceJSONCommand implements Command {
         session.setAttribute("userDataTrip", userDataAboutTrip);
 
         String category = request.getParameter("category");
-        //System.out.println("category " + category);
         if (category == null) {
             category = "";
         }
@@ -137,7 +132,6 @@ public class PlaceJSONCommand implements Command {
                             item.setImageReference(placeImage.getReference());
                             item.setName(placeDescription.getName());
                             item.setAdress(place.getAdress());
-                            //System.out.println(item.toString());
                             list.add(item);
                         }
                     }

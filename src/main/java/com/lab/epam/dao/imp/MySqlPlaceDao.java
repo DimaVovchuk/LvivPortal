@@ -2,23 +2,18 @@ package com.lab.epam.dao.imp;
 
 import com.lab.epam.dao.AbstractJDBCDao;
 import com.lab.epam.dao.PersistException;
-import com.lab.epam.entity.Category;
 import com.lab.epam.entity.Place;
-import com.lab.epam.entity.PlaceDescription;
 import com.lab.epam.helper.ClassName;
 import com.lab.epam.persistant.ConnectionManager;
 import com.lab.epam.persistant.ConnectionPool;
-import com.lab.epam.transformer.Transformer;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.LinkedList;
+import java.sql.SQLException;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Admin on 10.06.2015.
@@ -54,66 +49,111 @@ public class MySqlPlaceDao extends AbstractJDBCDao<Place, Integer> {
         return Place.class;
     }
 
+    public Integer createAndReturnIndex(Place place) {
+        Connection connect = connection.getConnection();
+        Integer index = -1;
+        PreparedStatement ps = null;
+        PreparedStatement psGetId = null;
+        ResultSet rsId = null;
+        String sqlQuery = "INSERT INTO place (adress, latitude,longitude,category_id,rating,visible,place_time,deleted) VALUES (?, ?, ?, ?, ?, ?, ?, ?); ";
+        String sqlQueryGetId = "SELECT id FROM place WHERE id = LAST_INSERT_ID();";
+            try {
+                connect.setAutoCommit(false);
+                ps = connect.prepareStatement(sqlQuery);
+                psGetId = connect.prepareStatement(sqlQueryGetId);
+                ps.setString(1, place.getAdress());
+                ps.setString(2, place.getLatitude());
+                ps.setString(3, place.getLongitude());
+                ps.setInt(4, place.getCategory_id());
+                ps.setInt(5, place.getRating());
+                ps.setBoolean(6, place.getVisible());
+                ps.setInt(7, place.getPlace_time());
+                ps.setBoolean(8, place.getDeleted());
+                ps.executeUpdate();
 
-    public List<Place> getPlaceByCategory(Integer category_id) throws PersistException {
-        List<Place> list;
-        Connection conn = connection.retrieve();
-        try (PreparedStatement statement = conn.prepareStatement(GET_PLACE_BY_CATEGORY)) {
-            statement.setInt(1, category_id);
-            ResultSet rs = statement.executeQuery();
-            list = parseResultSet(rs);
-        } catch (Exception e) {
-            throw new PersistException(e);
-        } finally {
-            connection.putback(conn);
-        }
-        return list;
-
-
-
-    }
-
-    public List<Place> getPlaceByUserId(Integer user_id) throws PersistException {
-        List<Place> list;
-        Connection conn = connection.retrieve();
-        try (PreparedStatement statement = conn.prepareStatement(GET_PLACE_BY_USER_ID)) {
-            statement.setInt(1, user_id);
-            ResultSet rs = statement.executeQuery();
-            list = parseResultSet(rs);
-            if (list.size() <= 0){
-                loger.info("DB has any place from user with " + user_id + " user_id");
-                return null;
+                loger.info("before executeQuery");
+                rsId = psGetId.executeQuery();
+                loger.info("after executeQuery" + rsId.toString());
+                if(rsId.next()) {
+                    index = rsId.getInt("id");
+                }
+                loger.info("index " + index);
+                connect.commit();
+            } catch (SQLException e) {
+                loger.error(e.getMessage());
             }
-        } catch (Exception e) {
-            loger.warn("Cant get places from user with " + user_id + " user_id");
-            throw new PersistException(e);
-        } finally {
-            connection.putback(conn);
-        }
-        return list;
-    }
-
-
-    public List<Place> getPlaceByWayId(Integer way_id) throws PersistException {
-        List<Place> list;
-        Connection conn = connection.retrieve();
-        try (PreparedStatement statement = conn.prepareStatement(GET_PLACE_BY_WAY_ID)) {
-            statement.setInt(1, way_id);
-            ResultSet rs = statement.executeQuery();
-           // loger.info("Get places from way with id" + way_id + " is succesfull ");
-            list = parseResultSet(rs);
-            if (list.size() <= 0){
-                loger.info("DB has any place from way with " + way_id + " way_id");
-                return null;
+            try {
+                connect.setAutoCommit(true);
+            } catch (SQLException ex) {
+                loger.error(ex.getMessage());
+            } finally{
+                try {
+                    connect.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
-        } catch (Exception e) {
-            loger.warn("Cant get places from way with " + way_id + " way_id");
-            throw new PersistException(e);
-        } finally {
-            connection.putback(conn);
+            return index;
+            }
+
+        public List<Place> getPlaceByCategory (Integer category_id)throws PersistException {
+            List<Place> list;
+            Connection conn = connection.retrieve();
+            try (PreparedStatement statement = conn.prepareStatement(GET_PLACE_BY_CATEGORY)) {
+                statement.setInt(1, category_id);
+                ResultSet rs = statement.executeQuery();
+                list = parseResultSet(rs);
+            } catch (Exception e) {
+                throw new PersistException(e);
+            } finally {
+                connection.putback(conn);
+            }
+            return list;
+
+
         }
-        return list;
-    }
+
+        public List<Place> getPlaceByUserId (Integer user_id)throws PersistException {
+            List<Place> list;
+            Connection conn = connection.retrieve();
+            try (PreparedStatement statement = conn.prepareStatement(GET_PLACE_BY_USER_ID)) {
+                statement.setInt(1, user_id);
+                ResultSet rs = statement.executeQuery();
+                list = parseResultSet(rs);
+                if (list.size() <= 0) {
+                    loger.info("DB has any place from user with " + user_id + " user_id");
+                    return null;
+                }
+            } catch (Exception e) {
+                loger.warn("Cant get places from user with " + user_id + " user_id");
+                throw new PersistException(e);
+            } finally {
+                connection.putback(conn);
+            }
+            return list;
+        }
+
+
+        public List<Place> getPlaceByWayId (Integer way_id)throws PersistException {
+            List<Place> list;
+            Connection conn = connection.retrieve();
+            try (PreparedStatement statement = conn.prepareStatement(GET_PLACE_BY_WAY_ID)) {
+                statement.setInt(1, way_id);
+                ResultSet rs = statement.executeQuery();
+                // loger.info("Get places from way with id" + way_id + " is succesfull ");
+                list = parseResultSet(rs);
+                if (list.size() <= 0) {
+                    loger.info("DB has any place from way with " + way_id + " way_id");
+                    return null;
+                }
+            } catch (Exception e) {
+                loger.warn("Cant get places from way with " + way_id + " way_id");
+                throw new PersistException(e);
+            } finally {
+                connection.putback(conn);
+            }
+            return list;
+        }
 
     public List<Place> getPlaceByWayIdDayNumber(Integer way_id, Integer day_number) throws PersistException {
         List<Place> list;
@@ -167,14 +207,14 @@ public class MySqlPlaceDao extends AbstractJDBCDao<Place, Integer> {
             statement.setString(1, longitude);
             statement.setString(2, latitude);
             ResultSet rs = statement.executeQuery();
-          //  loger.info("Get places with longitude " + longitude + " and latitude " + latitude + " is succesfull ");
+            //  loger.info("Get places with longitude " + longitude + " and latitude " + latitude + " is succesfull ");
             list = parseResultSet(rs);
             //loger.info("Parse result with Transformer is succesfull");
-            if (list.size() <= 0){
+            if (list.size() <= 0) {
                 loger.info("DB has any place with longitude " + longitude + " and latitude " + latitude);
                 return null;
             }
-            if (list.size() > 1){
+            if (list.size() > 1) {
                 loger.info("DB has more than one place with longitude " + longitude + " and latitude " + latitude);
                 return null;
             }
@@ -198,7 +238,7 @@ public class MySqlPlaceDao extends AbstractJDBCDao<Place, Integer> {
             if (count != 1) {
                 throw new PersistException("On persist modify more then 1 record: " + count);
             } else {
-             //   System.out.println("Create is succesfule");
+                //   System.out.println("Create is succesfule");
             }
         } catch (Exception e) {
             throw new PersistException(e);
@@ -233,10 +273,9 @@ public class MySqlPlaceDao extends AbstractJDBCDao<Place, Integer> {
             statement.setInt(1, place_id);
             statement.setInt(2, user_id);
             ResultSet rs = statement.executeQuery();
-            if (rs.next()){
+            if (rs.next()) {
                 return 1;
-            }
-            else {
+            } else {
                 return null;
             }
         } catch (Exception e) {
@@ -291,7 +330,6 @@ public class MySqlPlaceDao extends AbstractJDBCDao<Place, Integer> {
         }
 
     }
-
 
 }
 
