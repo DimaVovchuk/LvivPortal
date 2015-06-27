@@ -64,11 +64,11 @@
                         <div id="editplace" class="modal">
                             <div class="modal-content">
                                 <h4>Do you want to edit this place?</h4>
-                                <form id="editp_place" action="/portal/editplace" method="post">
+                                <form id="edit_place" action="/portal/editplace" method="post">
                                     <input type="hidden" name="command" value="editPlace">
                                      <input placeholder="Placeholder" id="editPlaceID" name="editPlaceID" type="hidden" value="${place.id}">
                                     <button class="btn waves-effect waves-light cyan darken-2" type="submit">YES</button>
-                                    <button class="btn waves-effect waves-light cyan darken-2"type="reset" data-dismiss="modal">NO</button>
+                                    <button type="reset" class="btn modal-close waves-effect waves-light cyan darken-2">NO</button>
                                 </form>
 
                             </div>

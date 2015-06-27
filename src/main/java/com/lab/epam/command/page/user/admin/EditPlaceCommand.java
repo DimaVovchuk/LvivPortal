@@ -47,13 +47,17 @@ public class EditPlaceCommand implements Command{
             PlaceImageService placeImageService = new PlaceImageService();
             List<PlaceImage> placeImageList = placeImageService.getAllPlaceImageByPlaceId(editPlaceID);
             List<PlaceImage> referenceList =new ArrayList<>();
-            for(int index = 0;index < placeImageList.size();index++){
-                String reference = placeImageList.get(index).getReference();
-                if(isInFolder(reference,request))
-                referenceList.add(placeImageList.get(index));
+            if(placeImageList != null) {
+                for (int index = 0; index < placeImageList.size(); index++) {
+                    String reference = placeImageList.get(index).getReference();
+                    if (isInFolder(reference, request))
+                        referenceList.add(placeImageList.get(index));
+                }
+            } else{
+                PlaceImage placeImage = new PlaceImage(editPlaceID,"default_building.jpg");
+                referenceList.add(placeImage);
             }
             session.setAttribute("placeImageList", referenceList);
-            loger.info("edit place fotos are " + placeImageList.toString());
 
             //get place description
             PlaceDescriptionService  placeDescriptionService = new PlaceDescriptionService();
@@ -73,7 +77,6 @@ public class EditPlaceCommand implements Command{
             }
 
         }
-        response.setContentType("text/html; charset=windows-1251");
         request.getRequestDispatcher("/views/pages/edit_place.jsp").forward(request, response);
     }
 

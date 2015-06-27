@@ -74,6 +74,7 @@ public class CommandFactory {
         commands.put("routesJSON", new RoutesJSONCommand());
         commands.put("addNewPlace", new AddNewPlaceCommand());
         commands.put("saveNewPlace", new SaveNewPlaceCommand());
+        commands.put("commercial", new CommercialCommand());
     }
 
     public static void createCommand(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
