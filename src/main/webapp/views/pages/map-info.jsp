@@ -54,9 +54,10 @@
             {{#each this}}
             <c:set var="dayNumber" value="{{dayNumber}}"/>
             <a href="#" data-day="${dayNumber}" class="day-trigger collection-item black-text blue-grey lighten-4 waves-effect waves-light">
-                <cdg:l18n key="map.route.day"/> {{dayNumber}}<br>
+                <cdg:l18n key="map.route.day"/> {{dayNumber}} <br>
                 <cdg:l18n key="map.route.totaltime"/>: {{hours}} <cdg:l18n key="map.route.hours"/> {{minutes}} <cdg:l18n key="map.route.minutes"/>
             </a>
+            <a href="#" id="map-day${dayNumber}" data-day="${dayNumber}" data-show="1" class="btn cyan darken-2 map-day-trigger">Show on map</a>
             <div id="places-day{{dayNumber}}" class="collection animated fadeInLeft">
                 {{#each places}}
                 <a href="#" onclick="myclick('{{imageReference}}')" class="collection-item black-text">

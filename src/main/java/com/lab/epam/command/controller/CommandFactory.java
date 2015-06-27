@@ -83,6 +83,7 @@ public class CommandFactory {
         commands.put("deleteDay", new DeleteDayCommand());
         commands.put("addDay", new AddDayCommand());
 
+        commands.put("commercial", new CommercialCommand());
     }
 
     public static void createCommand(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

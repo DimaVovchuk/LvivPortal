@@ -158,9 +158,10 @@ public class SaveNewPlaceCommand implements Command {
             placeDescriptionUA.setPhone(addPlacePhone);
             placeDescriptionUA.setPrice(Decoder.decodeStringUtf8(addPlacePriceUA));
             loger.info("placeDescriptionUA is  " + placeDescriptionUA);
-            PlaceDescription placeDescriptionEN = new PlaceDescription(new PlaceDescription.Builder(lastAddedPlace, "EN", addPlaceNameEN, addPlaceDescriptionEN));
+            PlaceDescription placeDescriptionEN = new PlaceDescription(new PlaceDescription.Builder(lastAddedPlace, "EN",
+                    Decoder.decodeStringUtf8(addPlaceNameEN), Decoder.decodeStringUtf8(addPlaceDescriptionEN)));
             placeDescriptionEN.setPhone(addPlacePhone);
-            placeDescriptionEN.setPrice(addPlacePriceEN);
+            placeDescriptionEN.setPrice(Decoder.decodeStringUtf8(addPlacePriceEN));
             loger.info("placeDescriptionEN is  " + placeDescriptionEN);
 
             placeDescriptionService.create(placeDescriptionUA);

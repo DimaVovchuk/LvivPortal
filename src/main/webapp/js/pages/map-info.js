@@ -68,6 +68,7 @@ var updateRoutes = function (data) {
     var template = Handlebars.compile(source);
     var html = template(data);
     $('#route-info-collection').html(html);
+    routesData = data;
 };
 
 var setupDayTrigger = function () {
@@ -78,10 +79,29 @@ var setupDayTrigger = function () {
     })
 };
 
+var setupMapDayTrigger = function () {
+    $(document).on('click', '.map-day-trigger', function (e) {
+        e.preventDefault();
+        var show = $(e.currentTarget).data('show');
+        var day = $(e.currentTarget).data('day');
+        if (show === 1) {
+            $(e.currentTarget).data('show', 0);
+            $('#map-day' + day).html('Hide from map');
+            initDayMarkers(day - 1);
+        }
+        if (show === 0) {
+            $(e.currentTarget).data('show', 1);
+            $('#map-day' + day).html('Show on map');
+        }
+    })
+};
+
 /* *** MAP *** */
 
 var map;
 var lvivMap = new google.maps.LatLng(49.8426, 24.0278);
+
+var routesData;
 
 var initBlankMap = function () {
     var mapOptions = {
@@ -91,22 +111,14 @@ var initBlankMap = function () {
     map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 };
 
-var loadDayData = function () {
-    $.ajax({
-        url: window.location.origin + '/portal?command=routes',
-        success: initDayMarkers,
-        error: initDayMarkers
-    })
-};
-
 var directionsDisplay;
 var directionsService = new google.maps.DirectionsService();
 
-var initDayMarkers = function (data) {
+var initDayMarkers = function (dayNumber) {
     directionsDisplay = new google.maps.DirectionsRenderer();
     directionsDisplay.setMap(map);
     directionsDisplay.setOptions({suppressMarkers: true});
-    calcRoute(data);
+    calcRoute(routesData[dayNumber].places);
 };
 
 var calcRoute = function (data) {
@@ -137,7 +149,7 @@ var calcRoute = function (data) {
         });
         var waypts = [];
 
-        for (var i=1; i < (data.length - 1); i++) {
+        for (var i = 1; i < (data.length - 1); i++) {
             console.log("${pageContext.request.contextPath}/upload/photo/" + data[i].imageReference);
             waypts.push({
                 location: new google.maps.LatLng(data[i].latitude, data[i].longitude)
@@ -179,6 +191,7 @@ $(function () {
     loadCategoriesEvents();
     loadRoutes();
     setupDayTrigger();
+    setupMapDayTrigger();
     /* MAP */
 
     google.maps.event.addDomListener(window, 'load', initStartMarkers);
