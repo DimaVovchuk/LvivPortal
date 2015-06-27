@@ -88,10 +88,13 @@ var setupMapDayTrigger = function () {
             $(e.currentTarget).data('show', 0);
             $('#map-day' + day).html('Hide from map');
             initDayMarkers(day - 1);
+            hideMarkers();
         }
         if (show === 0) {
             $(e.currentTarget).data('show', 1);
             $('#map-day' + day).html('Show on map');
+            directionsDisplay.setMap(null);
+            showMarkers();
         }
     })
 };

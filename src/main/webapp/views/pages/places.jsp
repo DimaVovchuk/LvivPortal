@@ -46,14 +46,13 @@
                                     </form>
                                     <div class="center-align">
                                         <a href="portal?command=placeInformation&place_id=${place.id}"><img
-                                                class="responsive-img"
+                                                class="responsive-img place-img"
                                                 src="${pageContext.request.contextPath}/upload/photo/${place.imageReference}"></a>
                                     </div>
                                     <a href="portal?command=placeInformation&place_id=${place.id}">
                                         <h5><c:out value="${place.name}"/></h5></a>
-                                    <span><c:out value="${place.adress}"/></span>
                                     <c:if test="${login!=null}">
-                                        <div style="height: 50px"></div>
+                                        <div style="height: 40px"></div>
                                         <div class="bottom-right-btn">
                                                 <c:choose>
                                                 <c:when test="${place.rating==1}">
