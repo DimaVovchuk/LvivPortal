@@ -552,6 +552,11 @@ header img.text-middle {
     padding-right: 60px;
 }
 
+.map-day-trigger {
+    padding: 0;
+    width: 100%;
+}
+
                                              /* *** FOOTER *** */
 footer.page-footer {
     margin-top: 0;
@@ -627,8 +632,8 @@ footer.page-footer {
 }
 
 #close-png{
-    padding: 0px;
-    margin: 0px;
+    padding: 0;
+    margin: 0;
 }
 
 #sure-save {

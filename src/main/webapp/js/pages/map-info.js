@@ -79,6 +79,23 @@ var setupDayTrigger = function () {
     })
 };
 
+var setupMapDayTrigger = function () {
+    $(document).on('click', '.map-day-trigger', function (e) {
+        e.preventDefault();
+        var show = $(e.currentTarget).data('show');
+        var day = $(e.currentTarget).data('day');
+        if (show === 1) {
+            $(e.currentTarget).data('show', 0);
+            $('#map-day' + day).html('Hide from map');
+            initDayMarkers(day - 1);
+        }
+        if (show === 0) {
+            $(e.currentTarget).data('show', 1);
+            $('#map-day' + day).html('Show on map');
+        }
+    })
+};
+
 /* *** MAP *** */
 
 var map;
@@ -132,7 +149,7 @@ var calcRoute = function (data) {
         });
         var waypts = [];
 
-        for (var i=1; i < (data.length - 1); i++) {
+        for (var i = 1; i < (data.length - 1); i++) {
             console.log("${pageContext.request.contextPath}/upload/photo/" + data[i].imageReference);
             waypts.push({
                 location: new google.maps.LatLng(data[i].latitude, data[i].longitude)
@@ -174,6 +191,7 @@ $(function () {
     loadCategoriesEvents();
     loadRoutes();
     setupDayTrigger();
+    setupMapDayTrigger();
     /* MAP */
 
     google.maps.event.addDomListener(window, 'load', initStartMarkers);
