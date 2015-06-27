@@ -115,4 +115,6 @@
 </header>
 
 <jsp:include page="/views/elements/login.jsp"/>
-<jsp:include page="/views/pages/set_day_time_modal.jsp"/>
+<jsp:include page="/views/pages/set-day-time.jsp"/>
+
+<script src="${pageContext.request.contextPath}/js/pages/header.js"></script>
