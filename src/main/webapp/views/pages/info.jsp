@@ -3,18 +3,19 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE HTML>
 <html>
+
 <head>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <link href="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.css" rel="stylesheet">
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js"></script>
+
+    <link href="${pageContext.request.contextPath}/css/fotorama.css" rel="stylesheet">
+    <script src="${pageContext.request.contextPath}/js/fotorama.js"></script>
     <title><cdg:l18n key="places.title"/></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="keywords" content=""/>
 </head>
 
-<jsp:include page="/views/elements/css.jsp"/>
 <jsp:include page="/views/elements/script.jsp"/>
+<jsp:include page="/views/elements/css.jsp"/>
 
 <body>
 

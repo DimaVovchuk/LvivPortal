@@ -68,6 +68,7 @@ var updateRoutes = function (data) {
     var template = Handlebars.compile(source);
     var html = template(data);
     $('#route-info-collection').html(html);
+    routesData = data;
 };
 
 var setupDayTrigger = function () {
@@ -83,6 +84,8 @@ var setupDayTrigger = function () {
 var map;
 var lvivMap = new google.maps.LatLng(49.8426, 24.0278);
 
+var routesData;
+
 var initBlankMap = function () {
     var mapOptions = {
         zoom: 15,
@@ -91,22 +94,14 @@ var initBlankMap = function () {
     map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 };
 
-var loadDayData = function () {
-    $.ajax({
-        url: window.location.origin + '/portal?command=routes',
-        success: initDayMarkers,
-        error: initDayMarkers
-    })
-};
-
 var directionsDisplay;
 var directionsService = new google.maps.DirectionsService();
 
-var initDayMarkers = function (data) {
+var initDayMarkers = function (dayNumber) {
     directionsDisplay = new google.maps.DirectionsRenderer();
     directionsDisplay.setMap(map);
     directionsDisplay.setOptions({suppressMarkers: true});
-    calcRoute(data);
+    calcRoute(routesData[dayNumber].places);
 };
 
 var calcRoute = function (data) {
