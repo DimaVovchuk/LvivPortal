@@ -1,4 +1,26 @@
+$.validator.addMethod(
+    "regex",
+    function (value, element, regex) {
+        return regex.test(value);
+    }
+);
+
 $("#sign-in-form").validate({
+    rules: {
+        login: "required",
+        password: {
+            required: true,
+            remote: {
+                url: window.location.origin + '/portal?command=signInFormCheck',
+                type: 'post',
+                data: {
+                    login: function () {
+                        return $('#login-in').val()
+                    }
+                }
+            }
+        }
+    },
     messages: {
         login: {
             required: "Please enter login"
@@ -11,6 +33,48 @@ $("#sign-in-form").validate({
 });
 
 $("#sign-up-form").validate({
+    rules: {
+        first: {
+            regex: /^[^<>$\(\)]*$/
+        },
+        last: {
+            regex: /^[^<>$\(\)]*$/
+        },
+        companyname: {
+            regex: /^[^<>$\(\)]*$/
+        },
+        login: {
+            required: true,
+            regex: /^[A-Za-z0-9_-]+$/,
+            remote: {
+                url: window.location.origin + '/portal?command=signUpFormCheck',
+                type: 'post'
+            }
+        },
+        email: {
+            required: true,
+            email: true,
+            remote: {
+                url: window.location.origin + '/portal?command=signUpFormCheck',
+                type: 'post'
+            }
+        },
+        password: {
+            required: true
+        },
+        confirm: {
+            required: true,
+            equalTo: "#password"
+        },
+        phone: {
+            required: true,
+            regex: /^[0-9\+\s\(\)]+$/,
+            remote: {
+                url: window.location.origin + '/portal?command=signUpFormCheck',
+                type: 'post'
+            }
+        }
+    },
     messages: {
         first: {
             regex: "Special characters are not allowed"
@@ -42,6 +106,59 @@ $("#sign-up-form").validate({
             required: "Please enter phone number",
             regex: "Wrong phone number format",
             remote: "This phone number is already in use"
+        }
+    }
+});
+
+$('#reset-send-email-form').validate({
+    rules: {
+        email: "email"
+    },
+    messages: {
+        email: {
+            email: "Wrong E-mail address format"
+        }
+    }
+});
+
+$('#reset-confirm-form').validate({
+    rules: {
+        password: {
+            required: true
+        },
+        confirm: {
+            required: true,
+            equalTo: "#resetpassword"
+        }
+    },
+    messages: {
+        password: {
+            required: "Please enter password"
+        },
+        confirm: {
+            required: "Please confirm your password",
+            equalTo: "Password and confirmation do not match"
+        }
+    }
+});
+
+$('#reset-confirm-form').validate({
+    rules: {
+        password: {
+            required: true
+        },
+        confirm: {
+            required: true,
+            equalTo: "#resetpassword"
+        }
+    },
+    messages: {
+        password: {
+            required: "Please enter password"
+        },
+        confirm: {
+            required: "Please confirm your password",
+            equalTo: "Password and confirmation do not match"
         }
     }
 });

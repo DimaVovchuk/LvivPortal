@@ -5,7 +5,7 @@
 <div class="modal" id="set-date-time">
     <h5><cdg:l18n key="plan.choose"/></h5>
 
-    <form action="portal?command=createUserData" method="post">
+    <form id="new-route-form" action="portal?command=createUserData" method="post">
         <div id="days">
             <div class="row">
                 <div class="col s5">

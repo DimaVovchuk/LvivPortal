@@ -50,17 +50,16 @@ a h5:hover {
     border-bottom-width: 20px;
 }
 
-                                        /* *** HEADER *** */
-header nav ul li:hover,
-header nav ul li.active {
-    background: #0ab2d2;
-}
-
-
 .error {
     color: red;
     font-family: "Roboto", serif;
     font-size: 14px;
+}
+
+                                        /* *** HEADER *** */
+header nav ul li:hover,
+header nav ul li.active {
+    background: #0ab2d2;
 }
 
 header nav ul a {
@@ -464,9 +463,18 @@ header img.text-middle {
 }
 
 #map-canvas .card {
-    margin: 0;
-    max-width: 400px;
-    max-height: 400px;
+     margin: 0;
+     max-width: 300px;
+     max-height: 300px;
+}
+
+#map-canvas .card-image {
+    max-height: 250px;
+}
+
+#map-canvas .card-title {
+    font-size: 20px;
+    line-height: 25px;
 }
 
 #map-canvas .card-content {

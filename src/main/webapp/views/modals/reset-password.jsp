@@ -8,17 +8,15 @@
 
         <div class="divider"></div>
         <div class="section">
-            <form action="portal?command=sendEmail" method="post">
-                <div class="input-field">
-                    <input id="reset-email" name="email" type="email"/>
-                    <label for="reset-email"><cdg:l18n key="login.email"/></label>
+            <form id="reset-send-email-form" action="portal?command=sendEmail" method="post">
+                <div class="form">
+                    <input placeholder="<cdg:l18n key="login.email"/>" name="email" type="email"/>
                 </div>
-                <button class="btn cyan darken-2 modal-action modal-close" type="submit">
-                    OK
-                </button>
+                <div class="section">
+                    <button class="btn cyan darken-2" type="submit">OK</button>
+                </div>
             </form>
         </div>
-
     </div>
 
     <div id="reset-send-email-info" class="modal">
@@ -33,18 +31,18 @@
 
         <div class="divider"></div>
         <div class="section">
-            <form action="portal?command=confirmReset" method="post">
-                <div class="input-field">
-                    <input id="reset-new-password" name="password" type="password"/>
-                    <label for="reset-new-password"><cdg:l18n key="login.password"/></label>
+            <form id="reset-confirm-form" action="portal?command=confirmReset" method="post">
+                <div class="form">
+                    <input id="resetpassword" placeholder="<cdg:l18n key="login.password"/>" name="password"
+                           type="password"/>
                 </div>
-                <div class="input-field">
-                    <input id="reset-new-confirm" name="password" type="password"/>
-                    <label for="reset-new-confirm"><cdg:l18n key="login.confirm"/></label>
+                <div class="form">
+                    <input placeholder="<cdg:l18n key="login.confirm"/>" name="confirm"
+                           type="password"/>
                 </div>
-                <button class="btn cyan darken-2 modal-action modal-close" type="submit">
-                    OK
-                </button>
+                <div class="section">
+                    <button class="btn cyan darken-2" type="submit">OK</button>
+                </div>
             </form>
         </div>
     </div>
