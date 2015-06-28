@@ -66,8 +66,10 @@
 </div>
 
 <li><a href="/portal?command=addNewPlace"></i>Add new place TEST</a></li>
-
+<br>
 <li><a href="/portal?command=commercial"></i>Show company test</a></li>
+<br>
+<li><a href="/portal?command=addCustomPlace"></i>Add custom place</a></li>
 <br>
 <jsp:include page="/views/elements/footer.jsp"/>
 

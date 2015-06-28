@@ -84,6 +84,8 @@ public class CommandFactory {
         commands.put("addDay", new AddDayCommand());
         commands.put("companyInformation", new CompanyInformationCommand());
         commands.put("commercial", new CommercialCommand());
+        commands.put("addCustomPlace", new AddCustomPlaceCommand());
+        commands.put("saveCustomPlace", new SaveCustomPlaceCommand());
     }
 
     public static void createCommand(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
