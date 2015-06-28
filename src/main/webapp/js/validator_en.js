@@ -14,7 +14,7 @@ $("#sign-in-form").validate({
                 url: window.location.origin + '/portal?command=signInFormCheck',
                 type: 'post',
                 data: {
-                    login: function() {
+                    login: function () {
                         return $('#login-in').val()
                     }
                 }
@@ -35,12 +35,13 @@ $("#sign-in-form").validate({
 $("#sign-up-form").validate({
     rules: {
         first: {
-            required: true,
-            regex: /^[^<>$\(\)]+$/
+            regex: /^[^<>$\(\)]*$/
         },
         last: {
-            required: true,
-            regex: /^[^<>$\(\)]+$/
+            regex: /^[^<>$\(\)]*$/
+        },
+        companyname: {
+            regex: /^[^<>$\(\)]*$/
         },
         login: {
             required: true,
@@ -59,7 +60,7 @@ $("#sign-up-form").validate({
             }
         },
         password: {
-            required: true,
+            required: true
         },
         confirm: {
             required: true,
@@ -76,11 +77,12 @@ $("#sign-up-form").validate({
     },
     messages: {
         first: {
-            required: "Please enter first name",
             regex: "Special characters are not allowed"
         },
         last: {
-            required: "Please enter last name",
+            regex: "Special characters are not allowed"
+        },
+        companyname: {
             regex: "Special characters are not allowed"
         },
         login: {
@@ -104,6 +106,59 @@ $("#sign-up-form").validate({
             required: "Please enter phone number",
             regex: "Wrong phone number format",
             remote: "This phone number is already in use"
+        }
+    }
+});
+
+$('#reset-send-email-form').validate({
+    rules: {
+        email: "email"
+    },
+    messages: {
+        email: {
+            email: "Wrong E-mail address format"
+        }
+    }
+});
+
+$('#reset-confirm-form').validate({
+    rules: {
+        password: {
+            required: true
+        },
+        confirm: {
+            required: true,
+            equalTo: "#resetpassword"
+        }
+    },
+    messages: {
+        password: {
+            required: "Please enter password"
+        },
+        confirm: {
+            required: "Please confirm your password",
+            equalTo: "Password and confirmation do not match"
+        }
+    }
+});
+
+$('#reset-confirm-form').validate({
+    rules: {
+        password: {
+            required: true
+        },
+        confirm: {
+            required: true,
+            equalTo: "#resetpassword"
+        }
+    },
+    messages: {
+        password: {
+            required: "Please enter password"
+        },
+        confirm: {
+            required: "Please confirm your password",
+            equalTo: "Password and confirmation do not match"
         }
     }
 });

@@ -34,7 +34,7 @@
             <form id="sign-up-form" action="/portal?command=signUp" method="post">
                 <input type="hidden" name="command" value="signUp">
 
-                <div class="row" style="margin-bottom: 0">
+                <div id="first-last-form" class="row animated fadeIn" style="margin-bottom: 0">
                     <div class="col s6" style="padding-right: 10px">
                         <div class="form">
                             <input id="first" placeholder='<cdg:l18n key="login.firstname"/>' type='text' name="first">
@@ -46,7 +46,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="form">
+                <div id="company-form" class="form animated fadeIn" style="display: none">
                     <input id="companyname" placeholder='<cdg:l18n key="login.companyname"/>' type='text' name="companyname">
                 </div>
                 <div class="form">
@@ -65,11 +65,11 @@
                     <input id="phone" placeholder='<cdg:l18n key="login.phone"/>' type='text' name="phone">
                 </div>
                 <div class="form">
-                    <input name="role" type="radio" id="user" value="2" checked="checked"/>
+                    <input name="role" type="radio" id="user" value="2" checked="checked" onchange="changeRoleToggle('user')"/>
                     <label class="radio-label" for="user"><cdg:l18n key="role.user"/></label>
-                    <input name="role" type="radio" id="guide" value="3"/>
+                    <input name="role" type="radio" id="guide" value="3" onchange="changeRoleToggle('guide')"/>
                     <label class="radio-label" for="guide"><cdg:l18n key="role.guide"/></label>
-                    <input name="role" type="radio" id="company" value="4"/>
+                    <input name="role" type="radio" id="company" value="4" onchange="changeRoleToggle('company')"/>
                     <label class="radio-label" for="company"><cdg:l18n key="role.company"/></label>
                 </div>
                 <div class="form">
@@ -79,9 +79,7 @@
             </form>
         </div>
         <div class="login-footer">
-            <a href="#"><cdg:l18n key="login.forgot"/></a>
+            <a href="#reset-send-email" class="modal-trigger"><cdg:l18n key="login.forgot"/></a>
         </div>
     </div>
 </div>
-
-<script src='${pageContext.request.contextPath}/js/<cdg:l18n key="validator.js"/>'></script>

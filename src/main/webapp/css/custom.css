@@ -41,17 +41,25 @@ a h5:hover {
     opacity: 0.7;
 }
 
-                                        /* *** HEADER *** */
-header nav ul li:hover,
-header nav ul li.active {
-    background: #0ab2d2;
+.modal {
+    border-top: solid;
+    border-top-color: #0ab2d2;
+    border-top-width: 20px;
+    border-bottom: solid;
+    border-bottom-color: #0ab2d2;
+    border-bottom-width: 20px;
 }
-
 
 .error {
     color: red;
     font-family: "Roboto", serif;
     font-size: 14px;
+}
+
+                                        /* *** HEADER *** */
+header nav ul li:hover,
+header nav ul li.active {
+    background: #0ab2d2;
 }
 
 header nav ul a {
@@ -109,6 +117,8 @@ header img.text-middle {
     width: 500px;
     overflow: auto;
     max-height: 100%;
+    border-top: 0;
+    border-bottom: 0;
 }
 
 .login-form {
@@ -246,6 +256,22 @@ header img.text-middle {
     margin-right: 10px;
 }
 
+#reset-password .btn {
+    width: 100%;
+}
+
+#reset-send-email,
+#reset-confirm {
+    width: 400px;
+    padding: 20px;
+}
+
+#reset-send-email-info,
+#reset-confirm-info {
+    width: 300px;
+    padding: 20px;
+}
+
                                         /* *** PLAN TRIP *** */
 #set-date-time {
     width: 500px;
@@ -357,6 +383,18 @@ header img.text-middle {
     display: none;
 }
 
+#chooseDay {
+    width: 500px;
+}
+
+#chooseDay input[type=number] {
+    height: 2em;
+}
+
+#chooseDay .btn {
+    width: 100%;
+}
+
                                         /* *** MAP *** */
 .map .row .col {
     padding: 0;
@@ -425,9 +463,18 @@ header img.text-middle {
 }
 
 #map-canvas .card {
-    margin: 0;
-    max-width: 400px;
-    max-height: 400px;
+     margin: 0;
+     max-width: 300px;
+     max-height: 300px;
+}
+
+#map-canvas .card-image {
+    max-height: 250px;
+}
+
+#map-canvas .card-title {
+    font-size: 20px;
+    line-height: 25px;
 }
 
 #map-canvas .card-content {

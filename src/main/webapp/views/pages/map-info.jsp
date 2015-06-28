@@ -73,6 +73,8 @@
             {{/each}}
         </script>
 
-        <script src="${pageContext.request.contextPath}/js/pages/map-info.js"></script>
+        <script id="route-empty-template" type="text/x-handlebars-template">
+            <h5 style="padding: 10px">Add places to the itinerary</h5>
+        </script>
     </div>
 </div>
