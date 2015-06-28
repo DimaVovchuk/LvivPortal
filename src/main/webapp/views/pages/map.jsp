@@ -39,6 +39,7 @@
 </div>
 
 <jsp:include page="geotag.jsp"/>
+<script src="${pageContext.request.contextPath}/js/pages/map.js"></script>
 
 </body>
 </html>

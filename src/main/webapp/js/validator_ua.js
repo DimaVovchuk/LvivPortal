@@ -33,54 +33,14 @@ $("#sign-in-form").validate({
 });
 
 $("#sign-up-form").validate({
-    rules: {
-        first: {
-            required: true,
-            regex: /^[^<>$\(\)]+$/
-        },
-        last: {
-            required: true,
-            regex: /^[^<>$\(\)]+$/
-        },
-        login: {
-            required: true,
-            regex: /^[A-Za-z0-9_-]+$/,
-            remote: {
-                url: window.location.origin + '/portal?command=signUpFormCheck',
-                type: 'post'
-            }
-        },
-        email: {
-            required: true,
-            email: true,
-            remote: {
-                url: window.location.origin + '/portal?command=signUpFormCheck',
-                type: 'post'
-            }
-        },
-        password: {
-            required: true
-        },
-        confirm: {
-            required: true,
-            equalTo: "#password"
-        },
-        phone: {
-            required: true,
-            regex: /^[0-9\+\s\(\)]+$/,
-            remote: {
-                url: window.location.origin + '/portal?command=signUpFormCheck',
-                type: 'post'
-            }
-        }
-    },
     messages: {
         first: {
-            required: "Будь ласка, введіть ім'я",
             regex: "Спеціальні символи не допускаються"
         },
         last: {
-            required: "Будь ласка, введіть прізвище",
+            regex: "Спеціальні символи не допускаються"
+        },
+        companyname: {
             regex: "Спеціальні символи не допускаються"
         },
         login: {

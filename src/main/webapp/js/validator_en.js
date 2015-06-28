@@ -1,26 +1,4 @@
-$.validator.addMethod(
-    "regex",
-    function (value, element, regex) {
-        return regex.test(value);
-    }
-);
-
 $("#sign-in-form").validate({
-    rules: {
-        login: "required",
-        password: {
-            required: true,
-            remote: {
-                url: window.location.origin + '/portal?command=signInFormCheck',
-                type: 'post',
-                data: {
-                    login: function() {
-                        return $('#login-in').val()
-                    }
-                }
-            }
-        }
-    },
     messages: {
         login: {
             required: "Please enter login"
@@ -33,54 +11,14 @@ $("#sign-in-form").validate({
 });
 
 $("#sign-up-form").validate({
-    rules: {
-        first: {
-            required: true,
-            regex: /^[^<>$\(\)]+$/
-        },
-        last: {
-            required: true,
-            regex: /^[^<>$\(\)]+$/
-        },
-        login: {
-            required: true,
-            regex: /^[A-Za-z0-9_-]+$/,
-            remote: {
-                url: window.location.origin + '/portal?command=signUpFormCheck',
-                type: 'post'
-            }
-        },
-        email: {
-            required: true,
-            email: true,
-            remote: {
-                url: window.location.origin + '/portal?command=signUpFormCheck',
-                type: 'post'
-            }
-        },
-        password: {
-            required: true,
-        },
-        confirm: {
-            required: true,
-            equalTo: "#password"
-        },
-        phone: {
-            required: true,
-            regex: /^[0-9\+\s\(\)]+$/,
-            remote: {
-                url: window.location.origin + '/portal?command=signUpFormCheck',
-                type: 'post'
-            }
-        }
-    },
     messages: {
         first: {
-            required: "Please enter first name",
             regex: "Special characters are not allowed"
         },
         last: {
-            required: "Please enter last name",
+            regex: "Special characters are not allowed"
+        },
+        companyname: {
             regex: "Special characters are not allowed"
         },
         login: {

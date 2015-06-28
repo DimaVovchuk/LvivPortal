@@ -1,24 +1,4 @@
-/* Change localization language */
-function language(lang) {
-    var xhr = new XMLHttpRequest();
-    xhr.open("GET", "portal?command=locale&lang="+lang, true);
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState == 4) {
-            location.reload();
-        }
-    };
-    xhr.send();
-}
-
-$(document).ready(function ($) {
-    /* Mobile sidebar */
-    $(".button-collapse").sideNav();
-    /* Sidebar */
-    $(".button-menu").sideNav({
-        menuWidth: 300,
-        edge: 'right'
-    });
-    /* Dropdown menu */
+var initDropdownMenu = function () {
     $(".dropdown-button").dropdown({
         constrain_width: false,
         belowOrigin: true
@@ -31,25 +11,50 @@ $(document).ready(function ($) {
         constrain_width: true,
         belowOrigin: true
     });
-    /* Select menu */
+};
+
+var initSelectMenu = function () {
     $('select').material_select();
-    /* Calendar */
+};
+
+var initCalendar = function () {
     $('.datepicker').pickadate({
         selectMonths: true
     });
-    /* Login form */
+};
+
+var initModalWindows = function () {
     $('.modal-trigger').leanModal({
         dismissible: true
     });
-    $('.switch').click(function(){
-        $('.login').animate({height: "toggle", opacity: "toggle"}, "slow");
-        $('.register').animate({height: "toggle", opacity: "toggle"}, "slow");
-        $('.sign').toggle();
-    });
-    $("#sign-in-form").validate();
-    $("#sign-up-form").validate();
-    /* Banner */
+};
+
+var initParallax = function () {
     $(".parallax").parallax();
+};
+
+var initUserSidebar = function () {
+    $(".button-menu").sideNav({
+        menuWidth: 300,
+        edge: 'right'
+    });
+};
+
+var initStartModalWindow = function () {
+    var startModal = $('#start-modal').data('modal');
+    if (startModal === 'emailSent') {
+        $('#reset-send-email-info').openModal();
+    }
+};
+
+$(document).ready(function ($) {
+    initDropdownMenu();
+    initSelectMenu();
+    initCalendar();
+    initModalWindows();
+    initParallax();
+    initUserSidebar();
+    initStartModalWindow();
     /* Truncate text */
     $(".body-content").dotdotdot({
         ellipsis: "... ",

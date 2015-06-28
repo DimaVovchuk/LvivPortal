@@ -17,9 +17,20 @@ var matchColumn = function () {
 };
 
 var imgHeight = function () {
-    var width = $('.place-img').width();
-    $('.place-img').css({
+    var img = $('.place-img');
+    var width = img.width();
+    img.css({
         'height': width + 'px'
+    });
+};
+
+var initRangeListeners = function () {
+    var timePlace = $("#timePlace");
+    timePlace.mousemove(function (e) {
+        $("#timeValue").html($(this).val());
+    });
+    timePlace.change(function (e) {
+        $("#timeValue").html($(this).val());
     });
 };
 
@@ -27,4 +38,5 @@ $(function () {
     matchColumn();
     imgHeight();
     paginate();
+    initRangeListeners();
 });
