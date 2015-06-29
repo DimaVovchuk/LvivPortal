@@ -121,5 +121,4 @@
 <jsp:include page="/views/modals/new-route.jsp"/>
 
 <script src="${pageContext.request.contextPath}/js/pages/header.js"></script>
-<script src='${pageContext.request.contextPath}/js/validator_rules.js'></script>
 <script src='${pageContext.request.contextPath}/js/<cdg:l18n key="validator.js"/>'></script>

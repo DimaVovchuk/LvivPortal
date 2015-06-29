@@ -7,14 +7,13 @@
     <div class="modal-content">
         <c:set var="category" scope="request" value="${requestScope.category}"/>
         <h5><cdg:l18n key="places.addtoroute"/></h5>
+
         <div class="divider"></div>
 
-        <form id="choose_day" action="/portal/place" method="post">
+        <form id="choose-day-form" action="/portal/place" method="post">
             <input type="hidden" name="command" value="place">
+            <input id="place_id" name="place_id" type="hidden">
 
-            <div class="input-field col s6">
-                <input id="place_id" name="place_id" type="hidden">
-            </div>
             <p><cdg:l18n key="select.day.number"/></p>
 
             <div class="row">
