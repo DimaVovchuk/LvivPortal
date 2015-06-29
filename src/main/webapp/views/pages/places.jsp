@@ -126,6 +126,8 @@
                     <a href="portal?command=place"
                        class="collection-item black-text ${requestScope.active_allplaces}"><cdg:l18n
                             key="places.all"/></a>
+
+
                 </div>
             </div>
         </div>

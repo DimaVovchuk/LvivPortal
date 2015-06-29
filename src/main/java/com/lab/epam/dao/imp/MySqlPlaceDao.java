@@ -96,6 +96,22 @@ public class MySqlPlaceDao extends AbstractJDBCDao<Place, Integer> {
             return index;
             }
 
+    public void create(Connection conn, Place place) throws PersistException {
+
+        String sql = prepareStatementForInsert(place);//getCreateQuery();
+        try (PreparedStatement statement = conn.prepareStatement(sql)) {
+            // prepareStatementForInsert(statement, object);
+            int count = statement.executeUpdate();
+            if (count != 1) {
+                throw new PersistException("On persist modify more then 1 record: " + count);
+            } else {
+                loger.info("Create is succesfule");
+            }
+        } catch (Exception e) {
+            throw new PersistException(e);
+        }
+    }
+
         public List<Place> getPlaceByCategory (Integer category_id)throws PersistException {
             List<Place> list;
             Connection conn = connection.retrieve();
@@ -227,6 +243,30 @@ public class MySqlPlaceDao extends AbstractJDBCDao<Place, Integer> {
         return list.iterator().next();
     }
 
+    public Place getPlaceByLongitudeLatitude(Connection conn, String longitude, String latitude) throws PersistException {
+        List<Place> list;
+        try (PreparedStatement statement = conn.prepareStatement(GET_PLACE_BY_LATITUDE_LONGITUDE)) {
+            statement.setString(1, longitude);
+            statement.setString(2, latitude);
+            ResultSet rs = statement.executeQuery();
+            //  loger.info("Get places with longitude " + longitude + " and latitude " + latitude + " is succesfull ");
+            list = parseResultSet(rs);
+            //loger.info("Parse result with Transformer is succesfull");
+            if (list.size() <= 0) {
+                loger.info("DB has any place with longitude " + longitude + " and latitude " + latitude);
+                return null;
+            }
+            if (list.size() > 1) {
+                loger.info("DB has more than one place with longitude " + longitude + " and latitude " + latitude);
+                return null;
+            }
+        } catch (Exception e) {
+            loger.warn("Cant get places with longitude " + longitude + " and latitude " + latitude);
+            throw new PersistException(e);
+        }
+        return list.iterator().next();
+    }
+
     public void createPlaceWay(Integer place_id, Integer way_id, Integer day, Integer time) throws PersistException {
         Connection conn = connection.retrieve();
         try (PreparedStatement statement = conn.prepareStatement(CREATE_PLACE_WAY)) {
@@ -244,6 +284,23 @@ public class MySqlPlaceDao extends AbstractJDBCDao<Place, Integer> {
             throw new PersistException(e);
         } finally {
             connection.putback(conn);
+        }
+    }
+
+    public void createPlaceWay(Connection conn, Integer place_id, Integer way_id, Integer day, Integer time) throws PersistException {
+        try (PreparedStatement statement = conn.prepareStatement(CREATE_PLACE_WAY)) {
+            statement.setInt(1, place_id);
+            statement.setInt(2, way_id);
+            statement.setInt(3, day);
+            statement.setInt(4, time);
+            int count = statement.executeUpdate();
+            if (count != 1) {
+                throw new PersistException("On persist modify more then 1 record: " + count);
+            } else {
+                //   System.out.println("Create is succesfule");
+            }
+        } catch (Exception e) {
+            throw new PersistException(e);
         }
     }
 

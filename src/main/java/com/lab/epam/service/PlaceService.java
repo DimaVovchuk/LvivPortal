@@ -7,6 +7,7 @@ import com.lab.epam.helper.ClassName;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import java.sql.Connection;
 import java.util.List;
 
 /**
@@ -20,6 +21,15 @@ public class PlaceService {
     public void create(Place object){
         try {
             mySqlPlaceDao.create(object);
+        } catch (PersistException e) {
+            e.printStackTrace();
+            loger.warn("Cant get all places");
+        }
+    }
+
+    public void create(Connection conn, Place object){
+        try {
+            mySqlPlaceDao.create(conn, object);
         } catch (PersistException e) {
             e.printStackTrace();
             loger.warn("Cant get all places");
@@ -155,9 +165,32 @@ public class PlaceService {
         return place;
     }
 
+    public Place getPlaceByLongitudeLatitude(Connection conn, String longitude, String latitude){
+        Place place = null;
+        try {
+            place = mySqlPlaceDao.getPlaceByLongitudeLatitude(conn, longitude, latitude);
+
+        } catch (PersistException e) {
+            e.printStackTrace();
+            loger.warn("Cant get place with longitude " + longitude + " and latitude " + latitude);
+        }
+
+        return place;
+    }
+
     public void createPlaceWay(Integer place_id, Integer way_id, Integer day, Integer time){
         try {
             mySqlPlaceDao.createPlaceWay(place_id, way_id, day, time);
+
+        } catch (PersistException e) {
+            e.printStackTrace();
+            loger.warn("Cant create place_way with place_id = " + place_id + " way_id " + way_id + " day " + day);
+        }
+    }
+
+    public void createPlaceWay(Connection conn, Integer place_id, Integer way_id, Integer day, Integer time){
+        try {
+            mySqlPlaceDao.createPlaceWay(conn, place_id, way_id, day, time);
 
         } catch (PersistException e) {
             e.printStackTrace();
@@ -187,6 +220,27 @@ public class PlaceService {
 
         return id;
     }
+
+    public void deletePlaceByWayIdPlaceId(Integer way_id, Integer place_id, Integer day_number){
+        try {
+            mySqlPlaceDao.deletePlaceByWayIdPlaceId(way_id, place_id, day_number);
+
+        } catch (PersistException e) {
+            e.printStackTrace();
+            loger.warn("Cant delet place_way by way_id = " + way_id + " place_id " + place_id);
+        }
+    }
+
+    public void deletePlaceByWayIdDayNumber(Integer way_id, Integer day_number){
+        try {
+            mySqlPlaceDao.deletePlaceByWayIdDayNumber(way_id, day_number);
+
+        } catch (PersistException e) {
+            e.printStackTrace();
+            loger.warn("Cant delet place_way by way_id = " + way_id + " day_number " + day_number);
+        }
+    }
+
     public Integer createAndReturnIndex(Place place){
         return mySqlPlaceDao.createAndReturnIndex(place);
     }

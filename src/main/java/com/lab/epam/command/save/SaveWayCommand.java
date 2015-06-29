@@ -37,6 +37,7 @@ public class SaveWayCommand implements Command {
         UserService userService = new UserService();
 
         UserDataAboutTrip placeForWay;
+        Boolean isFull = false;
         placeForWay = (UserDataAboutTrip)session.getAttribute("userDataTrip");
         String login = (String)session.getAttribute("login");
         User user = null;
@@ -51,37 +52,34 @@ public class SaveWayCommand implements Command {
             Integer wayDays = 0;
                 if (placesDay != null && !placesDay.isEmpty()){
                     wayDays = placeForWay.getDayCount();
-                    wayService.create(new Way(0, beginTrip, endTrip, wayDays));
-                    //loger.info("Create way is successfull");
-                    Way way = wayService.getLastAdded();
-                    if (user != null && way != null && wayDays > 0){
-                        placeForWay.setWay_id(way.getId());
-                        wayService.createUserWay(user.getId(), way.getId(), wayDays);
-                    }
+                    Way wayNew = new Way(0, beginTrip, endTrip, wayDays);
+
                     Set<Integer> keys = placesDay.keySet();
                     Collection<List<Place>> values = placesDay.values();
                     for (Integer key : keys) {
                         List<Place> places = placesDay.get(key);
-                        for (Place place: places){
-                           /* if (!place.getVisible()){
-                                servicePlace.create(place);
-                                place = servicePlace.getPlaceByLongitudeLatitude(place.getLongitude(), place.getLatitude());
-                                loger.info("Create castom place is successfull");
-                            }*/
-                            servicePlace.createPlaceWay(place.getId(), way.getId(), key, place.getPlace_time());
-                            loger.info("Create place_way is successfull");
+                        if (!places.isEmpty()){
+                            isFull = true;
+                            break;
                         }
-
                     }
-                    loger.info("Create new way is successfull");
-                    placeForWay.setIsSaved(true);
+                    if (user != null){
+                        Integer way_id = wayService.createUserWay(wayNew, placesDay, user.getId(), isFull);
+                        if (way_id != null){
+                            placeForWay.setWay_id(way_id);
+                            placeForWay.setIsSaved(true);
+                        }
+                    }
                 }
         }else {
             loger.warn("You want create way without places");
         }
         loger.info("You create new way in DB");
+        placeForWay.setIsFull(isFull);
+      //  request.setAttribute("isFull", isFull);
         session.setAttribute("userDataTrip", placeForWay);
         response.sendRedirect("portal?command=userWays");
+
 
     }
 }

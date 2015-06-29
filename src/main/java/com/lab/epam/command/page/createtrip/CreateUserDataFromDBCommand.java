@@ -48,7 +48,8 @@ public class CreateUserDataFromDBCommand implements Command {
                 userDataTrip.setEndTrip(way.getEnd());
             }
             userDataTrip.setIsSaved(true);
-
+            userDataTrip.setIsFull(true);
+            userDataTrip.setDayCount(way.getWay_days());
             for (int i = 1; i <= userDataTrip.getDayCount(); i++){
                 List<Place> place = placeService.getPlaceByWayIdDayNumber(way_id, i);
                 if (place != null && !place.isEmpty()){
