@@ -57,18 +57,19 @@ public class SignUpCommand implements Command {
         boolean checkPhone = userService.checkPhone(phone);
         boolean checkLogin = userService.checkLogin(login);
 
-        if (checkData(name, CHECK_NAME)) {
-            session.setAttribute("loginError", 1);
-            errorFlag = true;
-            loger.warn("Name is pattern error");
-        }
+        if(!role.equals(4)) {
+            if (checkData(name, CHECK_NAME)) {
+                session.setAttribute("loginError", 1);
+                errorFlag = true;
+                loger.warn("Name is pattern error");
+            }
 
-        if (checkData(surname, CHECK_SURNAME)) {
-            session.setAttribute("loginError", 1);
-            errorFlag = true;
-            loger.warn("Surname is pattern error");
+            if (checkData(surname, CHECK_SURNAME)) {
+                session.setAttribute("loginError", 1);
+                errorFlag = true;
+                loger.warn("Surname is pattern error");
+            }
         }
-
         if (checkData(login, CHECK_LOGIN)) {
             session.setAttribute("loginError", 1);
             errorFlag = true;
