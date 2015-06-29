@@ -8,6 +8,7 @@ import com.lab.epam.command.delete.DeletePlaceCommand;
 import com.lab.epam.command.email.*;
 import com.lab.epam.command.locale.LocaleCommand;
 import com.lab.epam.command.logination.*;
+import com.lab.epam.command.logination.vk.VkAuthorizationCommand;
 import com.lab.epam.command.page.createtrip.AddDayCommand;
 import com.lab.epam.command.page.createtrip.CountDaysCommand;
 import com.lab.epam.command.page.createtrip.CreateUserDataCommand;
@@ -86,6 +87,8 @@ public class CommandFactory {
         commands.put("commercial", new CommercialCommand());
         commands.put("addCustomPlace", new AddCustomPlaceCommand());
         commands.put("saveCustomPlace", new SaveCustomPlaceCommand());
+        commands.put("authorVK", new VkAuthorizationCommand());
+        //commands.put("authorFB", new FbAuthorizationCommand());
     }
 
     public static void createCommand(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
