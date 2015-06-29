@@ -1,6 +1,5 @@
 package com.lab.epam.command.page.place;
 
-import com.google.gson.Gson;
 import com.lab.epam.command.controller.Command;
 import com.lab.epam.entity.*;
 import com.lab.epam.helper.ClassName;
@@ -84,8 +83,8 @@ public class PlaceCommand implements Command {
                 if (!isInWay) {
                     if (timePlace != 0) {
                         onePlaceForWay.setPlace_time(timePlace);
+                        userDataAboutTrip.setSortFlag(true);
                         placeForWay.add(onePlaceForWay);
-                  //      loger.info("Add new place to placeForWay. Place is " + onePlaceForWay);
                     }
                 }
             }
@@ -95,10 +94,7 @@ public class PlaceCommand implements Command {
             loger.info("Set map to userDataAboutTrip");
         }
         session.setAttribute("userDataTrip", userDataAboutTrip);
-       // System.out.println("userDataTrip " + userDataAboutTrip);
-       // System.out.println("onePlaceForWay " + onePlaceForWay);
         String category = request.getParameter("category");
-        //System.out.println("category " + category);
         if (category == null) {
             category = "";
         }
@@ -176,16 +172,9 @@ public class PlaceCommand implements Command {
         request.setAttribute("category", category);
         request.setAttribute("places", placesPageInfo);
         request.setAttribute("userDataTrip", userDataAboutTrip);
-       // CategoryListPlace categoryListPlace = new CategoryListPlace();
-        //categoryListPlace.setCategory(category);
-        //categoryListPlace.setPlaces(placesPageInfo);
 
         loger.info("Command Place.");
-        //request.setAttribute("active_places", "active");
        request.getRequestDispatcher("/views/pages/places.jsp").forward(request, response);
-       // response.setContentType("application/json");
-        //response.setCharacterEncoding("UTF-8");
-       // response.getWriter().write(new Gson().toJson(categoryListPlace));
     }
 
     private List<PlaceDescriptionAndPhoto> getPlaceDescriptionAndPhotoList(List<Place> places, List<PlaceDescription> placeDescriptions, List<PlaceImage> placeImages, List<PlaceRating> placeRatings) {
@@ -204,9 +193,7 @@ public class PlaceCommand implements Command {
                                         item.setName(placeDescription.getName());
                                         item.setAdress(place.getAdress());
                                         item.setRating(placeRating.getRating());
-                                      //  System.out.println(item.toString());
                                         list.add(item);
-                                        // System.out.println(item.toString());
                                     }
                                 }
                             }
@@ -220,7 +207,6 @@ public class PlaceCommand implements Command {
                                 item.setName(placeDescription.getName());
                                 item.setAdress(place.getAdress());
                                 item.setRating(0);
-                             //   System.out.println(item.toString());
                                 list.add(item);
                             }
                         }

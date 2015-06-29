@@ -17,6 +17,7 @@ import java.util.Map;
  * Created by Dima on 23-Jun-15.
  */
 public class Distance {
+//    public static int iter = 0;
 
     private String encodeParams(final Map<String, String> params) {
         final String paramsUrl = Joiner.on('&').join(
@@ -39,11 +40,16 @@ public class Distance {
     }
 
     public Map<String,Double> getDistanceAndTime(String origin, String destination) throws IOException, JSONException {
-        try {
-            Thread.sleep(505);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+//        iter++;
+//        if(iter == 4){
+//            try {
+//                Thread.currentThread().sleep(1005);
+//                System.out.println(iter);
+//                iter=0;
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//        }
         String baseUrl = "http://maps.googleapis.com/maps/api/directions/json";
         Map<String, String> params = Maps.newHashMap();
         params.put("sensor", "false");
@@ -53,15 +59,18 @@ public class Distance {
         params.put("destination", destination);
         String url = baseUrl + '?' + encodeParams(params);
         System.out.println(url);
-//        if(JsonReader.read(url).has("error_message")){
-//            try {
-//                Thread.sleep(500);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-//        }
         JSONObject response = JsonReader.read(url);
-        System.out.println(response.has("error_message"));
+        int i = 0;
+        while(response.has("error_message")){
+            try {
+                Thread.currentThread().sleep(1000 + i);
+                response = JsonReader.read(url);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            i = 1000;
+
+        }
         JSONObject location = response.getJSONArray("routes").getJSONObject(0);
         location = location.getJSONArray("legs").getJSONObject(0);
         String distance = location.getJSONObject("distance").getString("value");
@@ -71,33 +80,6 @@ public class Distance {
         map.put("distance",Double.parseDouble(distance));
         return map;
     }
-
-//    public double getTime(String origin, String destination) throws IOException, JSONException {
-//        try {
-//            Thread.sleep(500);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//        String baseUrl = "http://maps.googleapis.com/maps/api/directions/json";
-//        Map<String, String> params = Maps.newHashMap();
-//        params.put("sensor", "false");
-//        params.put("language", "ua");
-//        params.put("mode", "walking");
-//        params.put("origin", origin);
-//        params.put("destination", destination);
-//        String url = baseUrl + '?' + encodeParams(params);
-//        System.out.println(url);
-//        JSONObject response = JsonReader.read(url);
-//        JSONObject location = response.getJSONArray("routes").getJSONObject(0);
-//        location = location.getJSONArray("legs").getJSONObject(0);
-//        String duration = location.getJSONObject("duration").getString("value");
-//        return Double.parseDouble(duration);
-//    }
-
-    public static void main(String[] args) {
-    }
-
-
 
 }
 

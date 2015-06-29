@@ -33,6 +33,7 @@ public class UserDataAboutTrip {
     private Boolean isAutomatic = false;
     private Double timePerDay;
     private Double timeForLunch;
+    private boolean sortFlag = true;
 
 
     public Boolean getIsSaved() {
@@ -173,5 +174,13 @@ public class UserDataAboutTrip {
 
     public void setTimePerDay(Double timePerDay) {
         this.timePerDay = timePerDay;
+    }
+
+    public boolean getSortFlag() {
+        return sortFlag;
+    }
+
+    public void setSortFlag(boolean sortFlag) {
+        this.sortFlag = sortFlag;
     }
 }
