@@ -27,14 +27,10 @@
 		}
 
 		function updateMarkerPositionLat(latLng) {
-			document.getElementById('info').innerHTML = [
-				latLng.lat()
-			];
+			document.getElementById('info').value =  latLng.lat();
 		}
 		function updateMarkerPositionLon(latLng) {
-			document.getElementById('info1' ).innerHTML = [
-				latLng.lng()
-			];
+			document.getElementById('info1').value = latLng.lng();
 		}
 
 		function updateMarkerAddress(str) {
@@ -104,25 +100,14 @@
 <div class="container">
 	<div id="mapCanvas"></div>
 	<form method=post action="portal?command=saveCustomPlace">
-		<%--<c:set var="command" scope="session" value="saveCustomPlace"/>--%>
 		<input type="hidden" name="command" value="saveCustomPlace">
 
 		<div id="infoPanel">
 			<b>Marker status:</b>
 			<div id="markerStatus"><i>Click and drag the marker.</i></div>
 			<b>Current position:</b>
-			<div id="info" ></div>
-			<div id="info1"></div>
-
-			<%--<div class="row">--%>
-				<%--<label class="active" for="placeLatitude">latitude</label>--%>
-				<%--<input value="${document}" id="placeLatitude" type="text" name="placeLatitude">--%>
-			<%--</div>--%>
-
-			<%--<div class="row">--%>
-				<%--<label class="active" for="placeLongitude">longitude</label>--%>
-				<%--<input value="" id="placeLongitude" type="text" name="placeLongitude">--%>
-			<%--</div>--%>
+			<input name="info" id="info" value=""/>
+			<input name="info1" id="info1" value=""/>
 
 			<b>Closest matching address:</b>
 			<div id="address"></div>
@@ -133,6 +118,5 @@
 		</div>
 	</form>
 </div>
-<%--<jsp:include page="/views/elements/footer.jsp"/>--%>
 </body>
 </html>

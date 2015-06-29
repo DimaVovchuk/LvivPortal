@@ -16,16 +16,10 @@ public class SaveCustomPlaceCommand implements Command {
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
 
-        String lattt = request.getParameter("lattt");
         String lat = request.getParameter("info");
         String lot = request.getParameter("info1");
-        String lat1 = (String) session.getAttribute("info");
-        String lot1= (String) session.getAttribute("info1");
-        System.out.println("lattt " + lattt);
 
         System.out.println("lat " + lat);
         System.out.println("lot " + lot);
-        System.out.println("lat " + lat1);
-        System.out.println("lot " + lot1);
     }
 }
