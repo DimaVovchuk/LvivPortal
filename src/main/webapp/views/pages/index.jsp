@@ -25,7 +25,7 @@
         <div class="row">
             <div class="col l4 m6 s12">
                 <div class="section z-depth-2 center-align">
-                    <a href="#">
+                    <a href="portal?command=place&category=architecture">
                         <div class="hover-image">
                             <img class="responsive-img" src="${pageContext.request.contextPath}/images/places_architecture.jpg">
                         </div>
@@ -40,7 +40,7 @@
 
             <div class="col l4 m6 s12">
                 <div class="section z-depth-2 center-align">
-                    <a href="#">
+                    <a href="portal?command=place&category=churches">
                         <div class="hover-image">
                             <img class="responsive-img" src="${pageContext.request.contextPath}/images/places_churches.jpg">
                         </div>
@@ -55,7 +55,7 @@
 
             <div class="col l4 m6 s12">
                 <div class="section z-depth-2 center-align">
-                    <a href="#">
+                    <a href="portal?command=place&category=theatres">
                         <div class="hover-image">
                             <img class="responsive-img" src="${pageContext.request.contextPath}/images/places_theatres.jpg">
                         </div>
@@ -70,7 +70,7 @@
 
             <div class="col l4 m6 s12">
                 <div class="section z-depth-2 center-align">
-                    <a href="#">
+                    <a href="portal?command=place&category=restaurants">
                         <div class="hover-image">
                             <img class="responsive-img" src="${pageContext.request.contextPath}/images/places_restaurants.jpg">
                         </div>
@@ -85,7 +85,7 @@
 
             <div class="col l4 m6 s12">
                 <div class="section z-depth-2 center-align">
-                    <a href="#">
+                    <a href="portal?command=place&category=hotels">
                         <div class="hover-image">
                             <img class="responsive-img" src="${pageContext.request.contextPath}/images/places_hotels.jpg">
                         </div>

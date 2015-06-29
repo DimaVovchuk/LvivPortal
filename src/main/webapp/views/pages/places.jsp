@@ -4,7 +4,6 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <title><cdg:l18n key="places.title"/></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -46,14 +45,13 @@
                                     </form>
                                     <div class="center-align">
                                         <a href="portal?command=placeInformation&place_id=${place.id}"><img
-                                                class="responsive-img"
+                                                class="responsive-img place-img"
                                                 src="${pageContext.request.contextPath}/upload/photo/${place.imageReference}"></a>
                                     </div>
                                     <a href="portal?command=placeInformation&place_id=${place.id}">
                                         <h5><c:out value="${place.name}"/></h5></a>
-                                    <span><c:out value="${place.adress}"/></span>
                                     <c:if test="${login!=null}">
-                                        <div style="height: 50px"></div>
+                                        <div style="height: 40px"></div>
                                         <div class="bottom-right-btn">
                                                 <c:choose>
                                                 <c:when test="${place.rating==1}">
@@ -135,69 +133,7 @@
 </div>
 
 <jsp:include page="/views/elements/footer.jsp"/>
-
-<div id="chooseDay" class="modal">
-    <div class="modal-content">
-        <h4 id="ID"></h4>
-        <c:set var="category" scope="request" value="${requestScope.category}"/>
-        <h4>Choose day</h4>
-
-        <form id="choose_day" action="/portal/place" method="post">
-            <input type="hidden" name="command" value="place">
-
-            <div class="input-field col s6">
-                <input placeholder="Placeholder" id="place_id" name="place_id" type="hidden">
-            </div>
-
-            <label><cdg:l18n key="select.day.number"/></label>
-            <select name="dayNumber" class="browser-default">
-                <c:forEach var="i" begin="1" end="${userDataTrip.dayCount}">
-                    <option width="10px" value="${i}"><c:out value="${i}"/></option>
-                </c:forEach>
-            </select>
-            <label><cdg:l18n key="select.place.time"/></label>
-
-            <p class="range-field">
-                <input type="range" name="timePlace" id="timePlace" min="15" value="15" step="15" max="240"/>
-
-            <p id="timeValue"></p>
-            </p>
-
-            <button class="btn waves-effect waves-light cyan darken-2" type="submit"
-                    >OK
-            </button>
-        </form>
-
-    </div>
-    <div class="modal-footer">
-
-    </div>
-</div>
-
-<script src="${pageContext.request.contextPath}/js/pages/places.js"></script>
-
-<script>
-    $('.datepicker').pickadate({
-        selectMonths: true, // Creates a dropdown to control month
-        selectYears: 15 // Creates a dropdown of 15 years to control year
-    });
-</script>
-
-<script>
-    function myFunction() {
-        var x = document.getElementById("ID").value;
-        document.getElementById("demo").innerHTML = x;
-    }
-</script>
-
-<script>
-    $("#timePlace").mousemove(function (e) {
-        $("#timeValue").html($(this).val());
-    });
-    $("#timePlace").change(function (e) {
-        $("#timeValue").html($(this).val());
-    });
-</script>
+<jsp:include page="/views/modals/add-place-to-route.jsp"/>
 
 </body>
 </html>

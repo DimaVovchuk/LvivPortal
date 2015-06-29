@@ -9,7 +9,6 @@ import com.lab.epam.helper.ClassName;
 import com.lab.epam.service.CategoryService;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import org.joda.time.DateMidnight;
 import org.joda.time.DateTime;
 import org.joda.time.Days;
 
@@ -61,9 +60,11 @@ public class CreateUserDataCommand implements Command {
         String theatres = request.getParameter("theatres");
         String lunch = request.getParameter("lunch");
         String placeArrive = request.getParameter("placeArrive");
+        String timeForLunch = request.getParameter("lunchTime");
+        String timePerDay = request.getParameter("dayTime");
 
-        if (dontKnowDate == null){
-            if (beginTrip != null && !beginTrip.equalsIgnoreCase("")){
+        if (dontKnowDate == null) {
+            if (beginTrip != null && !beginTrip.equalsIgnoreCase("")) {
                 try {
                     begin = format.parse(beginTrip);
                     DateTime start = new DateTime(new Date());
@@ -71,12 +72,12 @@ public class CreateUserDataCommand implements Command {
                     Days d = Days.daysBetween(start, ending);
                     daysBegin = d.getDays();
                     System.out.println("day begin " + daysBegin);
-                    if (daysBegin >= 0){
-                        java.sql.Date sqltDate= new java.sql.Date(begin.getTime());
+                    if (daysBegin >= 0) {
+                        java.sql.Date sqltDate = new java.sql.Date(begin.getTime());
                         userDataTrip.setBeginTrip(sqltDate);
                         correctBegin = true;
 
-                    }else {
+                    } else {
                         loger.info("Begindata is less than now" + beginTrip);
                     }
                 } catch (ParseException e) {
@@ -86,18 +87,18 @@ public class CreateUserDataCommand implements Command {
                 }
             }
 
-            if (endTrip != null && !endTrip.equalsIgnoreCase("")){
+            if (endTrip != null && !endTrip.equalsIgnoreCase("")) {
                 try {
                     end = format.parse(endTrip);
                     DateTime start = new DateTime(begin);
                     DateTime ending = new DateTime(end);
                     Days d = Days.daysBetween(start, ending);
                     int days = d.getDays();
-                    if (days >= 0 && daysBegin >= 0){
-                        java.sql.Date sqltDate= new java.sql.Date(end.getTime());
+                    if (days >= 0 && daysBegin >= 0) {
+                        java.sql.Date sqltDate = new java.sql.Date(end.getTime());
                         userDataTrip.setEndTrip(sqltDate);
                         correctEnd = true;
-                    }else {
+                    } else {
                         loger.info("Enddata is less than now" + endTrip);
                     }
                 } catch (ParseException e) {
@@ -107,40 +108,40 @@ public class CreateUserDataCommand implements Command {
                 }
             }
 
-            if (correctBegin && correctEnd){
+            if (correctBegin && correctEnd) {
                 correctDate = true;
             }
 
-            if ( userDataTrip.getBeginTrip() != null && userDataTrip.getEndTrip() != null){
+            if (userDataTrip.getBeginTrip() != null && userDataTrip.getEndTrip() != null) {
 
-                    DateTime start = new DateTime(begin);
-                    DateTime ending = new DateTime(end);
-                    Days d = Days.daysBetween(start, ending);
-                    int days = d.getDays() + 1;
-                    System.out.println("days " + days);
-                    userDataTrip.setDayCount(days);
-                    Map<Integer, List<Place>> places = new HashMap<>();
-                    for (int i = 1; i <=  days; i++){
-                        places.put(i, new ArrayList<Place>());
-                    }
-                    userDataTrip.setPlaceDay(places);
+                DateTime start = new DateTime(begin);
+                DateTime ending = new DateTime(end);
+                Days d = Days.daysBetween(start, ending);
+                int days = d.getDays() + 1;
+                userDataTrip.setDayCount(days);
+                Map<Integer, List<Place>> places = new HashMap<>();
+                for (int i = 1; i <= days; i++) {
+                    places.put(i, new ArrayList<Place>());
+                }
+                userDataTrip.setPlaceDay(places);
             }
-        } else{
+        } else {
             userDataTrip.setDontKnowDate(true);
         }
 
-        if (placeArrive != null){
+        if (placeArrive != null) {
             if (placeArrive.equalsIgnoreCase("withoutPlaceArrive")) {
                 userDataTrip.setWithOutBegin(true);
             } else {
                 userDataTrip.setBeginPlace(placeArrive);
             }
-        }else {
+        } else {
             userDataTrip.setWithOutBegin(true);
         }
 
         if (automatic != null) {
-            userDataTrip.setIsAutomatic(false);
+            userDataTrip.setIsAutomatic(true);
+            userDataTrip.setTimePerDay(Double.parseDouble(timePerDay));
             if (architecture != null || churches != null || theatres != null) {
                 listCategory = new ArrayList<>();
                 haveCategory = true;
@@ -166,15 +167,15 @@ public class CreateUserDataCommand implements Command {
             }
 
             if (lunch != null) {
+                userDataTrip.setTimeForLunch(Double.parseDouble(timeForLunch));
                 userDataTrip.setIsCaffees(true);
             }
 
-        }else{
+        } else {
             userDataTrip.setIsAutomatic(false);
         }
 
         HttpSession session = request.getSession();
-        //System.out.println("userDataTrip " + userDataTrip);
         session.setAttribute("userDataTrip", userDataTrip);
 
         response.setContentType("application/json");
@@ -182,8 +183,7 @@ public class CreateUserDataCommand implements Command {
         response.getWriter().write(new Gson().toJson(correctDate));
 
         response.sendRedirect("portal?command=showMap");
-        //request.getRequestDispatcher(page).forward(request, response);
-
     }
+
 
 }

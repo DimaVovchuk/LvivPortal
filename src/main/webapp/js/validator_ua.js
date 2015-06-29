@@ -1,6 +1,6 @@
 $.validator.addMethod(
     "regex",
-    function(value, element, regex) {
+    function (value, element, regex) {
         return regex.test(value);
     }
 );
@@ -14,7 +14,7 @@ $("#sign-in-form").validate({
                 url: window.location.origin + '/portal?command=signInFormCheck',
                 type: 'post',
                 data: {
-                    login: function() {
+                    login: function () {
                         return $('#login-in').val()
                     }
                 }
@@ -35,12 +35,13 @@ $("#sign-in-form").validate({
 $("#sign-up-form").validate({
     rules: {
         first: {
-            required: true,
-            regex: /^[^<>$\(\)]+$/
+            regex: /^[^<>$\(\)]*$/
         },
         last: {
-            required: true,
-            regex: /^[^<>$\(\)]+$/
+            regex: /^[^<>$\(\)]*$/
+        },
+        companyname: {
+            regex: /^[^<>$\(\)]*$/
         },
         login: {
             required: true,
@@ -76,11 +77,12 @@ $("#sign-up-form").validate({
     },
     messages: {
         first: {
-            required: "Будь ласка, введіть ім'я",
             regex: "Спеціальні символи не допускаються"
         },
         last: {
-            required: "Будь ласка, введіть прізвище",
+            regex: "Спеціальні символи не допускаються"
+        },
+        companyname: {
             regex: "Спеціальні символи не допускаються"
         },
         login: {
@@ -104,6 +106,38 @@ $("#sign-up-form").validate({
             required: "Будь ласка, введіть номер телефону",
             regex: "Невірний формат номеру телефону",
             remote: "Цей номер телефону вже використовується"
+        }
+    }
+});
+
+$('#reset-send-email-form').validate({
+    rules: {
+        email: "email"
+    },
+    messages: {
+        email: {
+            email: "Невірний формат електронної пошти"
+        }
+    }
+});
+
+$('#reset-confirm-form').validate({
+    rules: {
+        password: {
+            required: true
+        },
+        confirm: {
+            required: true,
+            equalTo: "#resetpassword"
+        }
+    },
+    messages: {
+        password: {
+            required: "Будь ласка, введіть пароль"
+        },
+        confirm: {
+            required: "Будь ласка, підтвердіть пароль",
+            equalTo: "Пароль і підтвердження не співпадають"
         }
     }
 });

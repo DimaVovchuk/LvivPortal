@@ -1,8 +1,15 @@
 /* *** SIDEBAR *** */
-
-var windowIDList = ['#map-itinerary', '#map-places'];
+var initSidebar = function () {
+    initLinkProcess();
+    loadPlaces();
+    initCategoriesEvents();
+    loadRoutes();
+    initDayTrigger();
+    initMapDayTrigger();
+};
 
 var linkProcess = function (id) {
+    var windowIDList = ['#map-itinerary', '#map-places'];
     var li = '#li-' + id;
     var map = '#map-' + id;
     $(li).addClass('active');
@@ -23,9 +30,8 @@ var initLinkProcess = function () {
     })
 };
 
-/* *** MAP PLACES *** */
-
-var loadCategories = function () {
+/* Sidebar - Places */
+var loadPlaces = function () {
     $.ajax({
         url: window.location.origin + '/portal?command=placeJSON',
         success: updatePlaces,
@@ -41,7 +47,7 @@ var updatePlaces = function (data) {
     $('#place-info-collection').html(html);
 };
 
-var loadCategoriesEvents = function () {
+var initCategoriesEvents = function () {
     $('#dropdown-places').on('click', 'li', function (e) {
         e.preventDefault();
         $.ajax({
@@ -52,8 +58,7 @@ var loadCategoriesEvents = function () {
     });
 };
 
-/* *** ROUTES *** */
-
+/* Sidebar - Routes */
 var loadRoutes = function () {
     $.ajax({
         url: window.location.origin + '/portal?command=routes',
@@ -64,14 +69,18 @@ var loadRoutes = function () {
 
 var updateRoutes = function (data) {
     if (!data) return false;
-    var source = $("#route-info-template").html();
+    if (data.length > 0) {
+        var source = $("#route-info-template").html();
+    } else {
+        source = $("#route-empty-template").html();
+    }
     var template = Handlebars.compile(source);
     var html = template(data);
     $('#route-info-collection').html(html);
     routesData = data;
 };
 
-var setupDayTrigger = function () {
+var initDayTrigger = function () {
     $(document).on('click', '.day-trigger', function (e) {
         e.preventDefault();
         var day = $(e.currentTarget).data('day');
@@ -79,7 +88,7 @@ var setupDayTrigger = function () {
     })
 };
 
-var setupMapDayTrigger = function () {
+var initMapDayTrigger = function () {
     $(document).on('click', '.map-day-trigger', function (e) {
         e.preventDefault();
         var show = $(e.currentTarget).data('show');
@@ -88,10 +97,15 @@ var setupMapDayTrigger = function () {
             $(e.currentTarget).data('show', 0);
             $('#map-day' + day).html('Hide from map');
             initDayMarkers(day - 1);
+            hideMarkers();
+            showRoutesMarkers(day - 1)
         }
         if (show === 0) {
             $(e.currentTarget).data('show', 1);
             $('#map-day' + day).html('Show on map');
+            directionsDisplay.set('directions', null);
+            hideMarkers();
+            showMarkers();
         }
     })
 };
@@ -125,7 +139,7 @@ var calcRoute = function (data) {
     if (data.length > 1) {
         var start = new google.maps.LatLng(data[0].latitude, data[0].longitude);
         var image = {
-            url: "${pageContext.request.contextPath}/upload/photo/" + data[0].imageReference,
+            url: "",
             scaledSize: new google.maps.Size(40, 30),
             origin: new google.maps.Point(0, 0),
             anchor: new google.maps.Point(0, 0)
@@ -137,7 +151,7 @@ var calcRoute = function (data) {
         });
         var end = new google.maps.LatLng(data[data.length - 1].latitude, data[data.length - 1].longitude);
         image = {
-            url: "${pageContext.request.contextPath}/upload/photo/" + data[data.length - 1].imageReference,
+            url: "",
             scaledSize: new google.maps.Size(40, 30),
             origin: new google.maps.Point(0, 0),
             anchor: new google.maps.Point(0, 0)
@@ -150,12 +164,11 @@ var calcRoute = function (data) {
         var waypts = [];
 
         for (var i = 1; i < (data.length - 1); i++) {
-            console.log("${pageContext.request.contextPath}/upload/photo/" + data[i].imageReference);
             waypts.push({
                 location: new google.maps.LatLng(data[i].latitude, data[i].longitude)
             });
             image = {
-                url: "${pageContext.request.contextPath}/upload/photo/" + data[i].imageReference,
+                url: "",
                 scaledSize: new google.maps.Size(40, 30),
                 origin: new google.maps.Point(0, 0),
                 anchor: new google.maps.Point(0, 0)
@@ -184,16 +197,9 @@ var calcRoute = function (data) {
 /* *** MAIN *** */
 
 $(function () {
-    /* SIDEBAR */
-    initBlankMap();
-    initLinkProcess();
-    loadCategories();
-    loadCategoriesEvents();
-    loadRoutes();
-    setupDayTrigger();
-    setupMapDayTrigger();
+    initSidebar();
     /* MAP */
-
+    initBlankMap();
     google.maps.event.addDomListener(window, 'load', initStartMarkers);
 
     //loadDayData();

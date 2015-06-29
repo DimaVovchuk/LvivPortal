@@ -120,6 +120,14 @@
     </ul>
 </header>
 
+<div id="start-modal" data-modal="${requestScope.modal}"></div>
+
+<jsp:include page="/views/modals/login.jsp"/>
+<jsp:include page="/views/modals/reset-password.jsp"/>
+<jsp:include page="/views/modals/new-route.jsp"/>
+
+<script src="${pageContext.request.contextPath}/js/pages/header.js"></script>
+<script src='${pageContext.request.contextPath}/js/<cdg:l18n key="validator.js"/>'></script>
 <jsp:include page="/views/elements/login.jsp"/>
 <jsp:include page="/views/pages/set_day_time_modal.jsp"/>
 <jsp:include page="/views/pages/sure-save.jsp"/>
