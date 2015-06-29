@@ -37,7 +37,12 @@ public class CommercialCommand implements Command {
 
         UserImageService userImageService = new UserImageService();
         for(int index = 0; index < allCommercialUser.size();index++) {
-            userImage= userImageService.getByPK(allCommercialUser.get(index).getAvatar());
+            Integer avatarID = allCommercialUser.get(index).getAvatar();
+            if(avatarID !=null) {
+                userImage = userImageService.getByPK(avatarID);
+            } else{
+                userImage = new UserImage(allCommercialUser.get(index).getId(),"user.png");
+            }
             allUserAvatarMap.put(userImage, allCommercialUser.get(index));
         }
 
@@ -51,14 +56,24 @@ public class CommercialCommand implements Command {
             switch (role) {
                 case "guide":
                     for(int index = 0; index < userGuideList.size();index++) {
-                        userImage= userImageService.getByPK(userGuideList.get(index).getAvatar());
+                        Integer avatarID = userGuideList.get(index).getAvatar();
+                        if(avatarID !=null) {
+                            userImage= userImageService.getByPK(avatarID);
+                        } else{
+                            userImage = new UserImage(allCommercialUser.get(index).getId(),"user.png");
+                        }
                         guideAvatarMap.put(userImage, userGuideList.get(index));
                     }
                     session.setAttribute("allUserAvatarMap",guideAvatarMap);
                     break;
                 case "agency":
                     for(int index = 0; index < userConpanyList.size();index++) {
-                        userImage= userImageService.getByPK(userConpanyList.get(index).getAvatar());
+                        Integer avatarID = userConpanyList.get(index).getAvatar();
+                        if(avatarID !=null) {
+                            userImage= userImageService.getByPK(avatarID);
+                        } else{
+                            userImage = new UserImage(allCommercialUser.get(index).getId(),"user.png");
+                        }
                         agencyAvatarMap.put(userImage, userConpanyList.get(index));
                     }
                     session.setAttribute("allUserAvatarMap",agencyAvatarMap);
