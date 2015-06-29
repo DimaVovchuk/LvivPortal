@@ -4,11 +4,10 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <title><cdg:l18n key="places.title"/></title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-  <meta name="keywords" content=""/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="keywords" content=""/>
 </head>
 
 <jsp:include page="/views/elements/css.jsp"/>
@@ -66,6 +65,8 @@
 </div>
 
 <jsp:include page="/views/elements/footer.jsp"/>
+<jsp:include page="/views/modals/add-place-to-route-recomended.jsp"/>
+<%--<jsp:include page="/views/modals/add-place-to-route.jsp"/>--%>
 
 
 <%--<script src="${pageContext.request.contextPath}/js/pages/places.js"></script>--%>
@@ -87,17 +88,104 @@
   }
 </script>
 
+<%--<script>--%>
+    <%--function submitForm(form){--%>
+        <%--var url = form.attr("action");--%>
+        <%--var formData = {};--%>
+        <%--$(form).find("input[name]").each(function (index, node) {--%>
+            <%--formData[node.name] = node.value;--%>
+        <%--});--%>
+        <%--$.post(url, formData).done(function (data) {--%>
+            <%--alert(data);--%>
+        <%--});--%>
+    <%--}--%>
+<%--</script>--%>
+
+<%--<script>--%>
+    <%--$(function () {--%>
+
+        <%--$('form').on('submit', function (e) {--%>
+
+            <%--e.preventDefault();--%>
+
+            <%--$.ajax({--%>
+                <%--type: 'post',--%>
+                <%--url: window.location.origin + '/portal?command=addplace',--%>
+                <%--data: $('form').serialize(),--%>
+<%--//                success: function () {--%>
+<%--//                    alert('form was submitted');--%>
+<%--//                }--%>
+            <%--});--%>
+
+        <%--});--%>
+
+    <%--});--%>
+<%--</script>--%>
+
+<%--<script>--%>
+    <%--function like(placeholder) {--%>
+        <%--$.ajax({--%>
+            <%--url: $(placeholder).attr('rel'),--%>
+            <%--type: "GET",--%>
+            <%--success:dissable(placeholder),--%>
+            <%--error:function (){--%>
+                <%--alert("testing error");--%>
+            <%--}--%>
+        <%--});--%>
+        <%--return false;--%>
+    <%--}--%>
+<%--</script>--%>
+
+<%--<script>--%>
+    <%--function none(placeholder) {--%>
+        <%--$.ajax({--%>
+            <%--url: $(placeholder).attr('rel'),--%>
+            <%--type: "GET",--%>
+            <%--success:dissable(placeholder),--%>
+            <%--error:function (){--%>
+                <%--alert("testing error");--%>
+            <%--}--%>
+        <%--});--%>
+        <%--return false;--%>
+    <%--}--%>
+<%--</script>--%>
+
+<%--<script>--%>
+    <%--function dislike(placeholder) {--%>
+        <%--$.ajax({--%>
+            <%--url: $(placeholder).attr('rel'),--%>
+            <%--type: "GET",--%>
+            <%--success:dissable(placeholder),--%>
+            <%--error:function (){--%>
+                <%--alert("testing error");--%>
+            <%--}--%>
+        <%--});--%>
+        <%--return false;--%>
+    <%--}--%>
+<%--</script>--%>
+
+<%--<script>--%>
+    <%--function dissable(placeholder) {--%>
+        <%--var x = $(placeholder).data('id');--%>
+        <%--$("#up" + x).removeClass('disabled');--%>
+        <%--$("#none" + x).removeClass('disabled');--%>
+        <%--$("#down" + x).removeClass('disabled');--%>
+        <%--$(placeholder).addClass('disabled');--%>
+    <%--}--%>
+<%--</script>--%>
+
+
 <script id="recomended-place-info-template" type="text/x-handlebars-template">
-  {{#each this}}
+    {{#each this}}
   <div class="match-col col l4 m6 s12">
     <div class="card z-depth-2" style="padding:10px; height:95%">
-      {{#with userDataTrip}}
-      <button class="btn modal-trigger btn-floating btn-large waves-effect waves-light cyan darken-2"
-              type="submit" data-target="chooseDay"
-              id="btn1" onclick="$('#place_id').val('{{id}}')">
-        <i class="mdi-content-add"></i>
-      </button>
-      {{/with}}
+        <c:if test="${userDataTrip!=null}">
+
+                    <a class="modal-trigger btn-floating btn-large waves-effect waves-light cyan darken-2" data-target="chooseDayRecomended"
+                            name onclick="$('#place_id').val('{{id}}')">
+                        <i class="mdi-content-add"></i>
+                    </a>
+      </c:if>
 
       <div class="center-align">
         <a href="portal?command=placeInformation&place_id={{id}}"><img
@@ -106,6 +194,27 @@
         <a href="portal?command=placeInformation&place_id={{id}}">
           <h5><c:out value="{{name}}"/></h5></a>
         <span><c:out value="{{adress}}"/></span>
+          <c:if test="${login!=null}">
+              <div style="height: 40px"></div>
+              <div class="bottom-right-btn">
+                          <a onClick="like(this);" data-id="{{id}}" data-rating="{{rating}}" id="up{{id}}" class="up{{id}} btn-floating btn-floating btn-small"
+                             href="javascript:;" rel="portal?command=rectRating&rating=1&place_id={{id}}">
+                              <i class="material-icons">thumb_up</i>
+                          </a>
+
+                          <a onClick="none(this);" data-id="{{id}}" id="none{{id}}"class="none{{id}} btn-floating btn-floating btn-small"
+                             href="javascript:;" rel="portal?command=rectRating&rating=0&place_id={{id}}">
+                              <i class="material-icons">thumbs_up_down</i>
+                          </a>
+
+
+                          <a onClick="dislike(this);" data-id="{{id}}" id="down{{id}}" class="down{{id}} btn-floating btn-floating btn-small"
+                             href="javascript:;" rel="portal?command=rectRating&rating=-1&place_id={{id}}">
+                              <i class="material-icons">thumb_down</i>
+                          </a>
+
+              </div>
+          </c:if>
       </div>
     </div>
   </div>

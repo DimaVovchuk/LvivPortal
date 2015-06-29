@@ -186,7 +186,7 @@ public class CreateUserDataCommand implements Command {
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write(new Gson().toJson(correctDate));
 
-        response.sendRedirect("portal?command=showMap");
+        response.sendRedirect("/portal?command=showMap");
     }
 
     public Map<Integer, List<Place>> getPlacesByTimeAndCategory(List<Category> listCategory, Double time) {

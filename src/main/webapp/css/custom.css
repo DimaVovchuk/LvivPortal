@@ -740,6 +740,8 @@ footer.page-footer {
     align-items: center;
 }
 
-
+#cancel-route a{
+    color: #FFFFFF;
+}
 
 

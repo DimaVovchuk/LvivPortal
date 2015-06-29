@@ -10,8 +10,8 @@
 
     <div class="divider"></div>
 
-    <form id="choose-day-form" action="recomended-place.jsp" method="post">
-      <%--<input type="hidden" name="command" value="place">--%>
+    <form>
+      <%--<input type="hidden" name="command" value="addplace">--%>
       <input id="place_id" name="place_id" type="hidden">
 
       <p><cdg:l18n key="select.day.number"/></p>
@@ -31,7 +31,7 @@
         <span><span id="timeValue"></span> <cdg:l18n key="map.route.minutes"/></span>
       </p>
       <br>
-      <button class="btn waves-effect waves-light cyan darken-2" type="submit" onclick="return f(this.form ,this.form.place_id ,this.form.dayNumber, this.form.timePlace) "
+      <button class="btn modal-action modal-close waves-effect waves-light cyan darken-2" name="submit" type="submit"
               >OK
       </button>
     </form>

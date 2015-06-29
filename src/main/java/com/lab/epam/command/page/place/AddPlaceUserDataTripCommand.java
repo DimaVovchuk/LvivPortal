@@ -78,6 +78,7 @@ public class AddPlaceUserDataTripCommand implements Command {
                         onePlaceForWay.setPlace_time(timePlace);
                         placeForWay.add(onePlaceForWay);
                         userDataAboutTrip.setIsFull(true);
+                        userDataAboutTrip.setSortFlag(true);
                     }
                 }
             }
@@ -88,7 +89,7 @@ public class AddPlaceUserDataTripCommand implements Command {
         }
      //   System.out.println("userDataAboutTrip " + userDataAboutTrip);
         session.setAttribute("userDataTrip", userDataAboutTrip);
-        request.getRequestDispatcher("portal?command=userPlace").forward(request, response);
+        //request.getRequestDispatcher("portal?command=userPlace").forward(request, response);
 
     }
 

@@ -10,6 +10,80 @@ var loadRecomendedPlaceData = function () {
     })
 };
 
+function disabled(data) {
+    var siz = data.length;
+    for (var i = 1; i < siz; i++){
+        var rating = $("#up" + i).data('rating');
+        var x = $("#up" + i).data('id');
+        if (rating=='1'){$("#up" + x).addClass('disabled');}
+        if (rating=='0'){$("#none" + x).addClass('disabled');}
+        if (rating=='-1'){$("#down" + x).addClass('disabled');}
+    }
+}
+
+function like(placeholder) {
+    $.ajax({
+        url: $(placeholder).attr('rel'),
+        type: "GET",
+        success:dissable(placeholder),
+        error:function (){
+            alert("testing error");
+        }
+    });
+    return false;
+}
+
+$(function () {
+
+    $('form').on('submit', function (e) {
+
+        e.preventDefault();
+
+        $.ajax({
+            type: 'post',
+            url: window.location.origin + '/portal?command=addplace',
+            data: $('form').serialize(),
+//                success: function () {
+//                    alert('form was submitted');
+//                }
+        });
+
+    });
+
+});
+
+function dissable(placeholder) {
+    var x = $(placeholder).data('id');
+    $("#up" + x).removeClass('disabled');
+    $("#none" + x).removeClass('disabled');
+    $("#down" + x).removeClass('disabled');
+    $(placeholder).addClass('disabled');
+}
+
+function none(placeholder) {
+    $.ajax({
+        url: $(placeholder).attr('rel'),
+        type: "GET",
+        success:dissable(placeholder),
+        error:function (){
+            alert("testing error");
+        }
+    });
+    return false;
+}
+
+function dislike(placeholder) {
+    $.ajax({
+        url: $(placeholder).attr('rel'),
+        type: "GET",
+        success:dissable(placeholder),
+        error:function (){
+            alert("testing error");
+        }
+    });
+    return false;
+}
+
 var loadPlaces = function (data) {
     if (!data) return false;
     var source = $("#recomended-place-info-template").html();
@@ -20,7 +94,7 @@ var loadPlaces = function (data) {
     var html = template(data);
     $('#recomended-place-info-collection').html(html);
     heightLoad();
-    loadAddButton(data);
+    disabled(data);
 };
 
 var loadAddButton = function (data) {
@@ -37,6 +111,7 @@ var heightLoad = function () {
         property: 'height'
     })
     paginator();
+    initModalWindows();
 
 };
 
@@ -54,7 +129,12 @@ var paginator = function () {
 
 };
 
+var initModalWindows = function () {
+    $('.modal-trigger').leanModal({
+        dismissible: true
+    });
+};
+
 $(function () {
     loadRecomendedPlaceData();
-
 });

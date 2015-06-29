@@ -135,5 +135,6 @@
 <jsp:include page="/views/elements/footer.jsp"/>
 <jsp:include page="/views/modals/add-place-to-route.jsp"/>
 
+
 </body>
 </html>

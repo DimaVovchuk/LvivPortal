@@ -119,13 +119,13 @@
                         <input placeholder="Placeholder" id="way_id" name="way_id" type="hidden">
                     </div>
 
-                    <div class="ok-footer">
+                    <div class="ok-footer" id="cancel-route">
                         <div class="modal-footer">
                             <button class="btn waves-effect waves-light cyan darken-2" type="submit">Ok
                             </button>
-                            <button class="modal-action modal-close btn waves-effect waves-light cyan darken-2"
+                            <a class="modal-action modal-close btn waves-effect waves-light cyan darken-2"
                                     ><cdg:l18n key="cancel"/>
-                            </button>
+                            </a>
                         </div>
                     </div>
                 </form>
