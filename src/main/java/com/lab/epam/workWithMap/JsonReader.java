@@ -11,6 +11,7 @@ import java.nio.charset.Charset;
  * Created by Dima on 23-Jun-15.
  */
 public class JsonReader {
+
     private static String readAll(final Reader rd) throws IOException {
         final StringBuilder sb = new StringBuilder();
         int cp;

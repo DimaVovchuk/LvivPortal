@@ -98,11 +98,13 @@ var initMapDayTrigger = function () {
             $('#map-day' + day).html('Hide from map');
             initDayMarkers(day - 1);
             hideMarkers();
+            showRoutesMarkers(day - 1)
         }
         if (show === 0) {
             $(e.currentTarget).data('show', 1);
             $('#map-day' + day).html('Show on map');
-            directionsDisplay.setMap(null);
+            directionsDisplay.set('directions', null);
+            hideMarkers();
             showMarkers();
         }
     })
@@ -137,7 +139,7 @@ var calcRoute = function (data) {
     if (data.length > 1) {
         var start = new google.maps.LatLng(data[0].latitude, data[0].longitude);
         var image = {
-            url: "${pageContext.request.contextPath}/upload/photo/" + data[0].imageReference,
+            url: "",
             scaledSize: new google.maps.Size(40, 30),
             origin: new google.maps.Point(0, 0),
             anchor: new google.maps.Point(0, 0)
@@ -149,7 +151,7 @@ var calcRoute = function (data) {
         });
         var end = new google.maps.LatLng(data[data.length - 1].latitude, data[data.length - 1].longitude);
         image = {
-            url: "${pageContext.request.contextPath}/upload/photo/" + data[data.length - 1].imageReference,
+            url: "",
             scaledSize: new google.maps.Size(40, 30),
             origin: new google.maps.Point(0, 0),
             anchor: new google.maps.Point(0, 0)
@@ -162,12 +164,11 @@ var calcRoute = function (data) {
         var waypts = [];
 
         for (var i = 1; i < (data.length - 1); i++) {
-            console.log("${pageContext.request.contextPath}/upload/photo/" + data[i].imageReference);
             waypts.push({
                 location: new google.maps.LatLng(data[i].latitude, data[i].longitude)
             });
             image = {
-                url: "${pageContext.request.contextPath}/upload/photo/" + data[i].imageReference,
+                url: "",
                 scaledSize: new google.maps.Size(40, 30),
                 origin: new google.maps.Point(0, 0),
                 anchor: new google.maps.Point(0, 0)

@@ -1,7 +1,6 @@
 package com.lab.epam.entity;
 
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,6 +31,9 @@ public class UserDataAboutTrip {
     private Boolean isCaffees = false;
     private Map<Integer,List<Place>> placeDay = new HashMap<>();
     private Boolean isAutomatic = false;
+    private Double timePerDay;
+    private Double timeForLunch;
+
 
     public Boolean getIsSaved() {
         return isSaved;
@@ -155,5 +157,21 @@ public class UserDataAboutTrip {
                 ", placeDay=" + placeDay +
                 ", isAutomatic=" + isAutomatic +
                 '}';
+    }
+
+    public Double getTimeForLunch() {
+        return timeForLunch;
+    }
+
+    public void setTimeForLunch(Double timeForLunch) {
+        this.timeForLunch = timeForLunch;
+    }
+
+    public Double getTimePerDay() {
+        return timePerDay;
+    }
+
+    public void setTimePerDay(Double timePerDay) {
+        this.timePerDay = timePerDay;
     }
 }

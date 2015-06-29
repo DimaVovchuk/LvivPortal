@@ -1,6 +1,5 @@
 package com.lab.epam.command.page.createtrip;
 
-import com.google.gson.Gson;
 import com.lab.epam.command.controller.Command;
 import com.lab.epam.entity.Place;
 import com.lab.epam.entity.UserDataAboutTrip;
@@ -12,7 +11,6 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -48,6 +46,7 @@ public class CreateUserDataFromDBCommand implements Command {
                 userDataTrip.setEndTrip(way.getEnd());
             }
             userDataTrip.setIsSaved(true);
+            userDataTrip.setDayCount(way.getWay_days());
 
             for (int i = 1; i <= userDataTrip.getDayCount(); i++){
                 List<Place> place = placeService.getPlaceByWayIdDayNumber(way_id, i);

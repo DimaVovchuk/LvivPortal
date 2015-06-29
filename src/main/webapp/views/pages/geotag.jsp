@@ -16,21 +16,18 @@
     }
 
     function hideMarkers() {
-        for (var i = 0; i < markers.length; i++) {
-            markers[i].setVisible(false);
-        }
+//        for (var i = 0; i < markers.length; i++) {
+//            markers[i].setVisible(false);
+//        }
         markerClusterer.clearMarkers();
     }
     function showMarkers() {
-        for (var i = 0; i < markers.length; i++) {
-            markers[i].setVisible(true);
-        }
-        markerClusterer.addMarkers(markers);
-    }
-    function showRoutesMarkers(dayNumber) {
 //        for (var i = 0; i < markers.length; i++) {
 //            markers[i].setVisible(true);
 //        }
+        markerClusterer.addMarkers(markers);
+    }
+    function showRoutesMarkers(dayNumber) {
         var routesMarkers = [];
         for(var i = 0; i < routesData[dayNumber].places.length; i++){
             var content = '<div class="map-content card">' +
@@ -38,10 +35,10 @@
                     '   <img class="responsive-img activator" src="${pageContext.request.contextPath}/upload/photo/' + routesData[dayNumber].places[i].imageReference +'">' +
                     '</div>' +
                     '<div class="card-content">' +
-                    '   <span class="card-title activator grey-text text-darken-4">'+routesData[dayNumber].places[i]+'<i class="mdi-navigation-more-vert right"></i></span>' +
+                    '   <span class="card-title activator grey-text text-darken-4">'+routesData[dayNumber].places[i].name+'<i class="mdi-navigation-more-vert right"></i></span>' +
                     '</div>' +
                     '<div class="card-reveal">' +
-                    '   <span class="card-title grey-text text-darken-4">'+routesData[dayNumber].places[i]+'<i class="mdi-navigation-close right"></i></span>' +
+                    '   <span class="card-title grey-text text-darken-4">'+routesData[dayNumber].places[i].name+'<i class="mdi-navigation-close right"></i></span>' +
                     '   <p>'+routesData[dayNumber].places[i].description+'</p>' +
                     '</div>' +
                     '<div class="card-action">' +
