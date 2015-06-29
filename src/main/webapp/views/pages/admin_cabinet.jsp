@@ -71,7 +71,7 @@
                             </td>
                             <td>${elem.value}</td>
                             <td>
-                                <form id="change-status" action="#" method="post">
+                                <form id="change-status${elem.key.id}" action="#" method="post">
                                     <input type="hidden" name="command" value="showAllUser">
                                     <input type="hidden" name="requestType" value="changeStatus">
                                     <input type="hidden" name="servletUserId" value="${elem.key.id}">
@@ -83,12 +83,12 @@
                                     </c:if>
                                 </form>
                                 <c:if test="${elem.key.status == 1}">
-                                    <button type="submit" form="change-status"
+                                    <button type="submit" form="change-status${elem.key.id}"
                                             class="btn cyan darken-2 waves-effect waves-light"><cdg:l18n key="admin.disable"/>
                                     </button>
                                 </c:if>
                                 <c:if test="${elem.key.status == 3}">
-                                    <button type="submit" form="change-status"
+                                    <button type="submit" form="change-status${elem.key.id}"
                                             class="btn cyan darken-2 waves-effect waves-light"><cdg:l18n key="admin.enable"/>
                                     </button>
                                 </c:if>
