@@ -726,6 +726,20 @@ footer.page-footer {
 
 }
 
+#sure-save-sign-out {
+    width: 400px;
+    margin-top: 10%;
+}
+
+#user-trip-save-singin .ok-footer .modal-footer .btn {
+    float: right;
+    margin: 20px 10px;
+    width: 140px;
+    align-content: center;
+    align-self: center;
+    align-items: center;
+}
+
 
 
 

@@ -89,10 +89,16 @@ public class UserAllWayCommand implements Command {
             for (Way way : ways) {
                 WayPlaceImage item = new WayPlaceImage();
                 item.setId(way.getId());
+                System.out.println("beginn " + way.getBegin());
                 item.setBeginDate(way.getBegin());
+                System.out.println("end " + way.getEnd());
                 item.setEndDate(way.getEnd());
-                item.setImageReference(wayPlaceImages.get(way.getId()).getReference());
-                item.setPlace(way_place.get(way.getId()));
+                if (wayPlaceImages.size() <= way.getId()){
+                    item.setImageReference(wayPlaceImages.get(way.getId()).getReference());
+                }
+                if (way_place.size() <= way.getId()){
+                    item.setPlace(way_place.get(way.getId()));
+                }
                 list.add(item);
             }
         }

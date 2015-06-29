@@ -92,6 +92,7 @@
                                 <i class="mdi-content-add"></i>
                             </a>
                         </div>
+
                             <%--</c:when>--%>
                             <%--<c:otherwise>--%>
                             <%--<div class="match-col col l4 m6 s9" style="display:none">--%>
@@ -148,7 +149,7 @@
     <div id="sure-save" class="modal">
         <div id="user-trip-save" class="modal-content">
             <c:choose>
-                <c:when test="${userDataTrip.isSaved == false}">
+                <c:when test="${userDataTrip.isSaved == false && userDataTrip.isFull != false}">
                     <p><cdg:l18n key="sure.save"/></p>
 
                     <div class="ok-footer">
@@ -160,6 +161,16 @@
                 </c:when>
                 <c:when test="${userDataTrip == null}">
                     <p><cdg:l18n key="any.current.route"/></p>
+
+                    <div class="ok-footer">
+                        <div class="modal-footer">
+                            <a class="modal-action modal-close btn waves-effect waves-light cyan darken-2">Ok
+                            </a>
+                        </div>
+                    </div>
+                </c:when>
+                <c:when test="${userDataTrip.isFull == false}">
+                    <p><cdg:l18n key="any.place.way"/></p>
 
                     <div class="ok-footer">
                         <div class="modal-footer">

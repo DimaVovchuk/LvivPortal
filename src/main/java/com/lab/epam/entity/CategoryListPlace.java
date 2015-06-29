@@ -9,6 +9,7 @@ public class CategoryListPlace {
 
 
     String category;
+    List<PlaceDescriptionAndPhoto> places;
 
     public CategoryListPlace(String category, List<PlaceDescriptionAndPhoto> places) {
         this.category = category;
@@ -31,8 +32,6 @@ public class CategoryListPlace {
     public void setCategory(String category) {
         this.category = category;
     }
-
-    List<PlaceDescriptionAndPhoto> places;
 
     public CategoryListPlace() {
     }

@@ -36,6 +36,16 @@ public class UserDataAboutTrip {
     private boolean sortFlag = true;
 
 
+    public Boolean getIsFull() {
+        return isFull;
+    }
+
+    public void setIsFull(Boolean isFull) {
+        this.isFull = isFull;
+    }
+
+    private Boolean isFull = false;
+
     public Boolean getIsSaved() {
         return isSaved;
     }

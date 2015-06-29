@@ -91,8 +91,14 @@
                     <li><a href="/portal?command=allUserPhoto"><i class="mdi-image-photo left"></i>Gallery</a></li>
                     <li><a href="/portal?command=edit"><i class="mdi-action-settings left"></i>Settings</a></li>
                     <li class="divider"></li>
-                    <li><a href="/portal?command=signOut"><i class="mdi-navigation-close left"></i>Sign out</a>
-                    </li>
+                    <c:choose>
+                        <c:when test="${userDataTrip != null && userDataTrip.isSaved == false && userDataTrip.isFull == true}">
+                            <li><a class="modal-trigger" href="#sure-save-sign-out"><i class="mdi-navigation-close left"></i>Sign out</a></li>
+                        </c:when>
+                        <c:otherwise>
+                            <li><a href="/portal?command=signOut"><i class="mdi-navigation-close left"></i>Sign out</a></li>
+                        </c:otherwise>
+                    </c:choose>
                 </ul>
             </div>
         </nav>
@@ -122,3 +128,6 @@
 
 <script src="${pageContext.request.contextPath}/js/pages/header.js"></script>
 <script src='${pageContext.request.contextPath}/js/<cdg:l18n key="validator.js"/>'></script>
+<jsp:include page="/views/elements/login.jsp"/>
+<jsp:include page="/views/pages/set_day_time_modal.jsp"/>
+<jsp:include page="/views/pages/sure-save.jsp"/>

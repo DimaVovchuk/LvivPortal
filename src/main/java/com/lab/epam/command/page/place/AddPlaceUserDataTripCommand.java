@@ -37,6 +37,7 @@ public class AddPlaceUserDataTripCommand implements Command {
         String dayNumberString = request.getParameter("dayNumber");
         String timePlaceString = request.getParameter("timePlace");
 
+
         Integer dayNumber = 0;
         Integer timePlace = 0;
 
@@ -76,7 +77,7 @@ public class AddPlaceUserDataTripCommand implements Command {
                     if (timePlace != 0) {
                         onePlaceForWay.setPlace_time(timePlace);
                         placeForWay.add(onePlaceForWay);
-                        loger.info("Add new place to placeForWay. Place is " + onePlaceForWay);
+                        userDataAboutTrip.setIsFull(true);
                     }
                 }
             }
