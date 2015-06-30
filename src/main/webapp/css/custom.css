@@ -54,6 +54,11 @@ a h5:hover {
     min-height: calc(100% - 64px - 50px);
 }
 
+.btn-on-img {
+    position: absolute;
+    margin: 10px;
+}
+
 .error {
     color: red;
     font-family: "Roboto", serif;
@@ -353,6 +358,10 @@ header img.text-middle {
     position: absolute;
     bottom: 10px;
     right: 10px;
+}
+
+.places .btn-floating.disabled {
+    background-color: #ffc400;
 }
 
 .place-page-navigation {
