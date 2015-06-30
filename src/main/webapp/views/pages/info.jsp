@@ -54,16 +54,22 @@
                         <p>${place.adress}</p>
                     </div>
                 </div>
-                <div class="card">
-                    <a class="waves-effect waves-light btn modal-trigger cyan darken-2" href="#choose-day">Choose
-                        day</a>
+                <c:if test="${sessionScope.userDataTrip != null}">
+                    <a class="waves-effect waves-light btn modal-trigger cyan darken-2" href="#chooseDay"
+                       onclick="$('#place_id').val('${place.id}')">
+                        <cdg:l18n key="place.add2route"/>
+                    </a>
+                </c:if>
+                <c:if test="${sessionScope.login != null}">
                     <a class="waves-effect waves-light btn modal-trigger cyan darken-2"
-                       href="portal?command=savePlace&place_id=${place_id}">Favorite place</a>
+                       href="portal?command=savePlace&place_id=${place_id}"><cdg:l18n key="place.favorite"/></a>
+                </c:if>
+                <c:if test="${sessionScope.role == 1}">
                     <button class="waves-effect waves-light btn modal-trigger cyan darken-2" data-target="editplace"
                             onclick="$('editPlaceID').val('${place_id}')">
-                        Edit place
+                        <cdg:l18n key="button.edit"/>
                     </button>
-                </div>
+                </c:if>
 
                 <div class="card">
                     <h5><cdg:l18n key="place.comment"/></h5>
@@ -95,7 +101,8 @@
                         <div class="section">
                             <div class="divider"></div>
                         </div>
-                        <button type="submit" class="waves-effect waves-light btn cyan darken-2"><cdg:l18n key="place.sendcomment"/></button>
+                        <button type="submit" class="waves-effect waves-light btn cyan darken-2"><cdg:l18n
+                                key="place.sendcomment"/></button>
                     </form>
                 </div>
 
@@ -176,8 +183,7 @@
             </button>
         </form>
         <br>
-        <a class="waves-effect waves-light btn"
-           href="portal?command=savePlace&place_id=${place_id}">Favorite Place</a>
+        <a class="waves-effect waves-light btn" href="portal?command=savePlace&place_id=${place_id}">Favorite Place</a>
 
         <form action="portal?command=savePlace&place_id=${place_id}" method="post">
             <button class="btn waves-effect waves-light cyan darken-2" type="submit"
@@ -194,7 +200,7 @@
     <div class="modal-content">
         <h4>Do you want to edit this place?</h4>
 
-        <form id="edit_place" action="/portal/editplace" method="post">
+        <form id="edit_place" action="/portal?command=editPlace" method="post">
             <input type="hidden" name="command" value="editPlace">
             <input placeholder="Placeholder" id="editPlaceID" name="editPlaceID" type="hidden"
                    value="${place.id}">
@@ -207,6 +213,7 @@
 </div>
 
 <jsp:include page="/views/elements/footer.jsp"/>
+<jsp:include page="/views/modals/add-place-to-route.jsp"/>
 
 </body>
 </html>

@@ -12,6 +12,7 @@ import org.apache.log4j.Logger;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -39,6 +40,7 @@ public class MySqlPlaceImageDao extends AbstractJDBCDao<PlaceImage, Integer> {
 
     public PlaceImage getPlaceImageByPlaceId(Integer place_id) throws PersistException {
         List<PlaceImage> list;
+        List<PlaceImage> referenceList;
         Connection conn = connection.retrieve();
         try (PreparedStatement statement = conn.prepareStatement(GET_IMAGE_BY_PLACE_ID)) {
             statement.setInt(1, place_id);
@@ -48,12 +50,22 @@ public class MySqlPlaceImageDao extends AbstractJDBCDao<PlaceImage, Integer> {
                 loger.info("DB has any place_images with " + place_id + " place_id");
                 return null;
             }
+            referenceList = new ArrayList<>();
+            for (int index = 0; index < list.size(); index++) {
+                if (list.get(index).getDeleted() == false) {
+                    referenceList.add(list.get(index));
+                }
+            }
+            if(referenceList.isEmpty()){
+                loger.info("No active images");
+                return null;
+            }
         } catch (Exception e) {
             throw new PersistException(e);
         } finally {
             connection.putback(conn);
         }
-        return list.iterator().next();
+        return referenceList.iterator().next();
     }
 
     public List<PlaceImage> getAllPlaceImageByPlaceId(Integer place_id) throws PersistException {

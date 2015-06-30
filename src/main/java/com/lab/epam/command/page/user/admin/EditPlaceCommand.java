@@ -50,7 +50,7 @@ public class EditPlaceCommand implements Command{
             if(placeImageList != null) {
                 for (int index = 0; index < placeImageList.size(); index++) {
                     String reference = placeImageList.get(index).getReference();
-                    if (isInFolder(reference, request))
+                    if (isInFolder(reference, request) && placeImageList.get(index).getDeleted()==false)
                         referenceList.add(placeImageList.get(index));
                 }
             } else{

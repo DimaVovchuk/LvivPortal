@@ -100,6 +100,7 @@
 <div class="container">
 	<div id="mapCanvas"></div>
 	<form method=post action="portal?command=saveCustomPlace">
+		<%--<c:set var="command" scope="session" value="saveCustomPlace"/>--%>
 		<input type="hidden" name="command" value="saveCustomPlace">
 
 		<div id="infoPanel">
@@ -118,5 +119,6 @@
 		</div>
 	</form>
 </div>
+<%--<jsp:include page="/views/elements/footer.jsp"/>--%>
 </body>
 </html>

@@ -10,7 +10,7 @@
 
     <div class="divider"></div>
 
-    <form>
+    <form id="form-add-place">
       <%--<input type="hidden" name="command" value="addplace">--%>
       <input id="place_id" name="place_id" type="hidden">
 

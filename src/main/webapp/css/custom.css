@@ -411,12 +411,40 @@ header img.text-middle {
     background-color: #ffc400;
 }
 
-#choose-day {
-    width: 300px;
+#chooseDay {
+    width: 500px;
 }
 
-#choose-day .btn {
-    width: 100%;
+#chooseDay input[type=number] {
+    height: 2em;
+}
+
+                                        /* *** EDIT PLACE *** */
+#edit-place .material-placeholder {
+    display: inline-block;
+    padding: 10px;
+}
+
+#edit-place .material-placeholder {
+
+}
+
+#edit-place .file-field .btn {
+    position: relative;
+}
+
+#edit-place .image-thumbnail{
+    height: 100px;
+    margin: 10px;
+    float: left;
+}
+
+#edit-place .dropdown-content li>span {
+    color: #000;
+}
+
+#edit-place .switch label {
+    color: #000;
 }
 
                                         /* *** MAP *** */
