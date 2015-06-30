@@ -24,14 +24,19 @@
         <div class="col l8 offset-l2 m12 s12 z-depth-2" style="padding: 20px">
             <h5 class="center-align">Photo gallery</h5>
 
-            <div class="center-align valign-wrapper">
+            <div class="row">
                 <c:forEach items="${placeImageList}" var="elem">
                     <c:if test="${elem.deleted eq false}">
-                        <img class="materialboxed" width="200" height="200"
-                             src="${pageContext.request.contextPath}/upload/photo/${elem.reference}">
-                        <button class="btn modal-trigger" type="submit" data-target="deleteImage"
-                                id="btn1" onclick="$('#deleteImageID').val('${elem.id}')"> DELETE
-                        </button>
+                        <div class="col l3 m4 s6" style="height: 200px">
+                            <img class="materialboxed responsive-img"
+                                 src="${pageContext.request.contextPath}/upload/photo/${elem.reference}">
+                            <div class="center-align" style="margin-top: -35px">
+                                <button class="btn btn-floating modal-trigger cyan darken-2" type="submit" data-target="deleteImage"
+                                        id="btn1" onclick="$('#deleteImageID').val('${elem.id}')"><i
+                                        class="material-icons">delete</i>
+                                </button>
+                            </div>
+                        </div>
                     </c:if>
                 </c:forEach>
             </div>
@@ -44,7 +49,8 @@
                         <input type="hidden" name="command" value="deleteImageByDB">
                         <input placeholder="Placeholder" id="deleteImageID" name="deleteImageID" type="hidden">
                         <button class="btn waves-effect waves-light cyan darken-2" type="submit">YES</button>
-                        <button class="modal-action modal-close btn waves-effect waves-light cyan darken-2" type="reset">
+                        <button class="modal-action modal-close btn waves-effect waves-light cyan darken-2"
+                                type="reset">
                             NO
                         </button>
                     </form>
@@ -204,22 +210,22 @@
 
                         <div class="switch">
                             <c:choose>
-	                            <c:when test="${editPlace.visible}">
-		                            <label>
-			                            <cdg:l18n key="editplace.placeunvisible"/>
-			                            <input name="newVisible" type="checkbox" checked="checked">
-			                            <span class="lever"></span>
-			                            <cdg:l18n key="editplace.placevisible"/>
-		                            </label>
-	                            </c:when>
-	                            <c:otherwise>
-		                            <label>
-			                            <cdg:l18n key="editplace.placeunvisible"/>
-			                            <input name="newVisible" type="checkbox">
-			                            <span class="lever"></span>
-			                            <cdg:l18n key="editplace.placevisible"/>
-		                            </label>
-	                            </c:otherwise>
+                                <c:when test="${editPlace.visible}">
+                                    <label>
+                                        <cdg:l18n key="editplace.placeunvisible"/>
+                                        <input name="newVisible" type="checkbox" checked="checked">
+                                        <span class="lever"></span>
+                                        <cdg:l18n key="editplace.placevisible"/>
+                                    </label>
+                                </c:when>
+                                <c:otherwise>
+                                    <label>
+                                        <cdg:l18n key="editplace.placeunvisible"/>
+                                        <input name="newVisible" type="checkbox">
+                                        <span class="lever"></span>
+                                        <cdg:l18n key="editplace.placevisible"/>
+                                    </label>
+                                </c:otherwise>
                             </c:choose>
                         </div>
                     </div>
@@ -228,22 +234,22 @@
 
                         <div class="switch">
                             <c:choose>
-	                            <c:when test="${editPlace.deleted}">
-		                            <label>
-			                            <cdg:l18n key="editplace.placestatdelete"/>
-			                            <input name="newState" type="checkbox">
-			                            <span class="lever"></span>
-			                            <cdg:l18n key="editplace.placestatactive"/>
-		                            </label>
-	                            </c:when>
-	                            <c:otherwise>
-		                            <label>
-			                            <cdg:l18n key="editplace.placestatdelete"/>
-			                            <input name="newState" type="checkbox" checked="checked">
-			                            <span class="lever"></span>
-			                            <cdg:l18n key="editplace.placestatactive"/>
-		                            </label>
-	                            </c:otherwise>
+                                <c:when test="${editPlace.deleted}">
+                                    <label>
+                                        <cdg:l18n key="editplace.placestatdelete"/>
+                                        <input name="newState" type="checkbox">
+                                        <span class="lever"></span>
+                                        <cdg:l18n key="editplace.placestatactive"/>
+                                    </label>
+                                </c:when>
+                                <c:otherwise>
+                                    <label>
+                                        <cdg:l18n key="editplace.placestatdelete"/>
+                                        <input name="newState" type="checkbox" checked="checked">
+                                        <span class="lever"></span>
+                                        <cdg:l18n key="editplace.placestatactive"/>
+                                    </label>
+                                </c:otherwise>
                             </c:choose>
                         </div>
                     </div>
@@ -319,6 +325,8 @@
     placeDescriptionUA.html(placeDescriptionUA.html().trim());
     var placeDescriptionEN = $('#placeDescriptionEN');
     placeDescriptionEN.html(placeDescriptionEN.html().trim());
+
+
 </script>
 
 </body>
