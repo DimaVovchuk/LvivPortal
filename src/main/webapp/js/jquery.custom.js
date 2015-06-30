@@ -40,6 +40,10 @@ var initUserSidebar = function () {
     });
 };
 
+var initImgMaterialBox = function () {
+    $('.materialboxed').materialbox();
+};
+
 var initStartModalWindow = function () {
     var startModal = $('#start-modal').data('modal');
     if (startModal === 'emailSent') {
@@ -54,6 +58,7 @@ $(document).ready(function ($) {
     initModalWindows();
     initParallax();
     initUserSidebar();
+    initImgMaterialBox();
     initStartModalWindow();
     /* Truncate text */
     $(".body-content").dotdotdot({
