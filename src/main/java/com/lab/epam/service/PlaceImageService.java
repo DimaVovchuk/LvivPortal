@@ -7,6 +7,7 @@ import com.lab.epam.helper.ClassName;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -72,15 +73,20 @@ public class PlaceImageService {
 
     public List<PlaceImage> getAllWithoutDeleted(){
         List<PlaceImage> placeImage = null;
+        List<PlaceImage> referenceList = null;
         try {
             placeImage = mySqlPlaceImageDao.getAllWithoutDeleted();;
-
+            referenceList = new ArrayList<>();
+            for (int index = 0; index < placeImage.size(); index++) {
+                if (placeImage.get(index).getDeleted() == false)
+                    referenceList.add(placeImage.get(index));
+            }
         } catch (PersistException e) {
             e.printStackTrace();
             loger.warn("Cant get all place images");
         }
 
-        return placeImage;
+        return referenceList;
     }
 
     public PlaceImage getPlaceImageByPlaceId(Integer place_id){
@@ -97,13 +103,18 @@ public class PlaceImageService {
 
     public List<PlaceImage> getAllPlaceImageByPlaceId(Integer place_id){
         List<PlaceImage> placeImageList = null;
+        List<PlaceImage> referenceList = null;
         try {
             placeImageList =  mySqlPlaceImageDao.getAllPlaceImageByPlaceId(place_id);
-
+            referenceList = new ArrayList<>();
+            for (int index = 0; index < placeImageList.size(); index++) {
+                if (placeImageList.get(index).getDeleted() == false)
+                    referenceList.add(placeImageList.get(index));
+            }
         } catch (PersistException e) {
             e.printStackTrace();
             loger.warn("Cant get images from DB");
         }
-        return placeImageList;
+        return referenceList;
     }
 }

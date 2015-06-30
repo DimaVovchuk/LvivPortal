@@ -3,7 +3,10 @@ package com.lab.epam.command.page.place;
 import com.google.gson.Gson;
 import com.lab.epam.command.controller.Command;
 import com.lab.epam.entity.*;
+import com.lab.epam.helper.ClassName;
 import com.lab.epam.service.*;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -13,10 +16,15 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
-public class PlaceJSONCommand implements Command {
+/**
+ * Created by Admin on 27.06.2015.
+ */
+public class RecomendedPlaceCommand  implements Command {
+    private static final Logger loger = LogManager.getLogger(ClassName.getCurrentClassName());
 
-    @Override
-    public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void execute(HttpServletRequest request,
+                        HttpServletResponse response) throws ServletException, IOException {
+
         PlaceService servicePlace = new PlaceService();
 
         PlaceDescriptionService placeDescriptionService = new PlaceDescriptionService();
@@ -30,43 +38,8 @@ public class PlaceJSONCommand implements Command {
         Locale locale = resourceBandle.getLocale();
         String language = locale.getLanguage();
 
+
         List<Place> places = null;
-        List<Place> placeForWay;
-        UserDataAboutTrip userDataAboutTrip = (UserDataAboutTrip) session.getAttribute("userDataTrip");
-        placeForWay = (ArrayList<Place>) session.getAttribute("placeForWay");
-        String dayNumberString = request.getParameter("dayNumber");
-        Integer dayNumber = 0;
-        if (dayNumberString != null) {
-            dayNumber = Integer.parseInt(dayNumberString);
-        }
-
-        String placeId = request.getParameter("place_id");
-        Place onePlaceForWay = null;
-        Boolean isInWay = false;
-
-        if (placeId != null && userDataAboutTrip != null && dayNumber != 0) {
-            onePlaceForWay = servicePlace.getByPK(Integer.parseInt(placeId));
-            Map<Integer, List<Place>> map = userDataAboutTrip.getPlaceDay();
-            Set<Integer> keys = map.keySet();
-            if (onePlaceForWay != null || !keys.contains(dayNumber)) {
-                if (map.isEmpty()) {
-                    placeForWay = new ArrayList<>();
-                } else {
-                    placeForWay = map.get(dayNumber);
-                    for (Place place : placeForWay) {
-                        if (place.getId() == onePlaceForWay.getId()) {
-                            isInWay = true;
-                        }
-                    }
-                }
-                if (!isInWay) {
-                    placeForWay.add(onePlaceForWay);
-                }
-            }
-            map.put(dayNumber, placeForWay);
-            userDataAboutTrip.setPlaceDay(map);
-        }
-        session.setAttribute("userDataTrip", userDataAboutTrip);
 
         String category = request.getParameter("category");
         if (category == null) {
@@ -76,21 +49,27 @@ public class PlaceJSONCommand implements Command {
             switch (category) {
                 case "architecture":
                     places = servicePlace.getPlaceByCategory(1);
+                    request.setAttribute("active_architecture", "active");
                     break;
                 case "churches":
                     places = servicePlace.getPlaceByCategory(2);
+                    request.setAttribute("active_churches", "active");
                     break;
                 case "theatres":
                     places = servicePlace.getPlaceByCategory(3);
+                    request.setAttribute("active_theatres", "active");
                     break;
                 case "hotels":
                     places = servicePlace.getPlaceByCategory(4);
+                    request.setAttribute("active_hotels", "active");
                     break;
                 case "restaurants":
                     places = servicePlace.getPlaceByCategory(5);
+                    request.setAttribute("active_restaurants", "active");
                     break;
                 default:
                     places = servicePlace.getAll();
+                    request.setAttribute("active_allplaces", "active");
                     break;
             }
         } else {
@@ -98,6 +77,7 @@ public class PlaceJSONCommand implements Command {
         }
         List<PlaceDescription> placeDescriptions = new ArrayList<>();
         List<PlaceImage> placeImages = new ArrayList<>();
+        List<PlaceRating> placeRatings = new ArrayList<>();
 
         Comparator comparator = new Place.PlaceComparator();
         Collections.sort(places, comparator);
@@ -105,7 +85,6 @@ public class PlaceJSONCommand implements Command {
         PlaceImage placeImage;
         PlaceDescription placeDescription;
         PlaceRating placeRating;
-        List<PlaceRating> placeRatings = new ArrayList<>();
 
         String login = (String)session.getAttribute("login");
         User user = null;
@@ -115,13 +94,16 @@ public class PlaceJSONCommand implements Command {
 
         for (Place place : places) {
             place_id = place.getId();
+
             placeDescription = placeDescriptionService.getPlaceDescriptionByIdPlace(place_id, language);
             placeDescriptions.add(placeDescription);
+
             placeImage = placeImageService.getPlaceImageByPlaceId(place_id);
             if (placeImage == null || !isInFolder(placeImage.getReference(), request)) {
                 placeImage = new PlaceImage(place_id, "default_building.jpg");
             }
             placeImages.add(placeImage);
+
             if (user != null){
                 placeRating = placeRatingService.getPlaceRatingByPlaceAndUser(place_id,user.getId());
                 if (placeRating == null){
@@ -133,9 +115,11 @@ public class PlaceJSONCommand implements Command {
 
         }
 
-
-
         List<PlaceDescriptionAndPhoto> placesPageInfo = getPlaceDescriptionAndPhotoList(places, placeDescriptions, placeImages, placeRatings);
+        //request.setAttribute("category", category);
+        //request.setAttribute("places", placesPageInfo);
+
+        loger.info("Command Place.");
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write(new Gson().toJson(placesPageInfo));
@@ -196,5 +180,4 @@ public class PlaceJSONCommand implements Command {
         }
         return false;
     }
-
 }

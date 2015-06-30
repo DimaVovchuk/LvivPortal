@@ -33,7 +33,18 @@ public class UserDataAboutTrip {
     private Boolean isAutomatic = false;
     private Double timePerDay;
     private Double timeForLunch;
+    private boolean sortFlag = true;
 
+
+    public Boolean getIsFull() {
+        return isFull;
+    }
+
+    public void setIsFull(Boolean isFull) {
+        this.isFull = isFull;
+    }
+
+    private Boolean isFull = false;
 
     public Boolean getIsSaved() {
         return isSaved;
@@ -173,5 +184,13 @@ public class UserDataAboutTrip {
 
     public void setTimePerDay(Double timePerDay) {
         this.timePerDay = timePerDay;
+    }
+
+    public boolean getSortFlag() {
+        return sortFlag;
+    }
+
+    public void setSortFlag(boolean sortFlag) {
+        this.sortFlag = sortFlag;
     }
 }
