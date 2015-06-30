@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.Map;
 
 /**
  * Created by Vasyl on 28.06.2015.
@@ -16,14 +17,18 @@ public class SaveCustomPlaceCommand implements Command {
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
 
-        String lattt = request.getParameter("lattt");
+        Map<String,String> lattt = request.getParameterMap();
         String lat = request.getParameter("info");
         String lot = request.getParameter("info1");
         String lat1 = (String) session.getAttribute("info");
         String lot1= (String) session.getAttribute("info1");
-        System.out.println("lattt " + lattt);
+        String pl = request.getParameter("info");
+        String lottn = request.getParameter("myvalue");
 
-        System.out.println("lat " + lat);
+        for(Map.Entry entry: lattt.entrySet()){
+            System.out.println(entry.getValue().toString() + " - " + entry.getKey());
+        }
+        System.out.println("lot " + lottn );
         System.out.println("lot " + lot);
         System.out.println("lat " + lat1);
         System.out.println("lot " + lot1);
