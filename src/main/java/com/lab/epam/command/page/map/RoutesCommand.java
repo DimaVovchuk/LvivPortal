@@ -6,7 +6,6 @@ import com.lab.epam.entity.*;
 import com.lab.epam.helper.ClassName;
 import com.lab.epam.service.PlaceDescriptionService;
 import com.lab.epam.service.PlaceImageService;
-import com.lab.epam.service.PlaceService;
 import com.lab.epam.workWithMap.Distance;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -30,9 +29,6 @@ public class RoutesCommand implements Command {
         HttpSession session = request.getSession();
         UserDataAboutTrip userDataTrip = (UserDataAboutTrip) session.getAttribute("userDataTrip");
         if (userDataTrip != null) {
-            if (userDataTrip.getIsAutomatic()) {
-                userDataTrip.setPlaceDay(getPlacesByTimeAndCategory(userDataTrip.getCategory(), userDataTrip.getTimePerDay()));
-            }
             Map<Integer, List<Place>> placeDay = userDataTrip.getPlaceDay();
             Distance distance = new Distance();
             List<RouteOneDayPlacesInfo> routeDayPlacesInfo = new ArrayList<>();
@@ -41,36 +37,49 @@ public class RoutesCommand implements Command {
                     continue;
                 }
                 List<Place> places = new ArrayList<>();
-                //List<Double> dist = new ArrayList<>();
                 List<Map<String, Double>> distAndTime = new ArrayList<>();
                 RouteOneDayPlacesInfo routeOneDayInfo = new RouteOneDayPlacesInfo(j);
                 places = placeDay.get(j);
-                String obj1 = "" + places.get(0).getLatitude() + " " + places.get(0).getLongitude() + "";
-                for (int i = 1; i < places.size(); i++) {
-                    String obj2 = "" + places.get(i).getLatitude() + " " + places.get(i).getLongitude() + "";
-                    try {
-                        distAndTime.add(distance.getDistanceAndTime(obj1, obj2));
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-                ResourceBundle bundle = (ResourceBundle) session.getAttribute("bundle");
-                List<PlaceMarkerWithPhoto> placeMarkerWithPhotos = sortPlaces(places, distAndTime, bundle.getLocale());
-                routeOneDayInfo.setPlaces(placeMarkerWithPhotos);
-                if (places.size() > 1) {
-                    for (int i = 0; i < places.size() - 1; i++) {
-                        String o1 = "" + places.get(i).getLatitude() + " " + places.get(i).getLongitude() + "";
-                        String o2 = "" + places.get(i + 1).getLatitude() + " " + places.get(i + 1).getLongitude() + "";
-                        Double time = 0.0;
+                List<PlaceMarkerWithPhoto> placeMarkerWithPhotos = new ArrayList<>();
+                if (userDataTrip.getSortFlag()) {
+                    String obj1 = "" + places.get(0).getLatitude() + " " + places.get(0).getLongitude() + "";
+                    for (int i = 1; i < places.size(); i++) {
+                        String obj2 = "" + places.get(i).getLatitude() + " " + places.get(i).getLongitude() + "";
                         try {
-                            time = distance.getDistanceAndTime(o1, o2).get("time");
+                            distAndTime.add(distance.getDistanceAndTime(obj1, obj2));
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        int time1 = time.intValue() / 60;
-                        routeOneDayInfo.setTotalMinutes(routeOneDayInfo.getTotalMinutes() + time1 + places.get(i).getPlace_time());
+                    }
+                    ResourceBundle bundle = (ResourceBundle) session.getAttribute("bundle");
+                    placeMarkerWithPhotos = sortPlaces(places, distAndTime, bundle.getLocale());
+                    userDataTrip.setSortFlag(false);
+                    session.setAttribute("userDataTrip",userDataTrip);
+                }else{
+                    PlaceImageService placeImageService = new PlaceImageService();
+                    PlaceDescriptionService placeDescriptionService = new PlaceDescriptionService();
+                    ResourceBundle bundle = (ResourceBundle) session.getAttribute("bundle");
+                    for (Place place : placeDay.get(j)) {
+                        PlaceDescription placeDescription = placeDescriptionService.getPlaceDescriptionByIdPlace(place.getId(), bundle.getLocale().toString());
+                        PlaceImage placeImage = placeImageService.getPlaceImageByPlaceId(place.getId());
+                        placeMarkerWithPhotos.add(new PlaceMarkerWithPhoto(place.getId(), placeDescription.getName(), place.getLatitude(), place.getLongitude(), placeImage.getReference(), placeDescription.getDescription()));
                     }
                 }
+                routeOneDayInfo.setPlaces(placeMarkerWithPhotos);
+//                if (places.size() > 1) {
+//                    for (int i = 0; i < places.size() - 1; i++) {
+//                        String o1 = "" + places.get(i).getLatitude() + " " + places.get(i).getLongitude() + "";
+//                        String o2 = "" + places.get(i + 1).getLatitude() + " " + places.get(i + 1).getLongitude() + "";
+//                        Double time = 0.0;
+//                        try {
+//                            time = distance.getDistanceAndTime(o1, o2).get("time");
+//                        } catch (JSONException e) {
+//                            e.printStackTrace();
+//                        }
+//                        int time1 = time.intValue() / 60;
+//                        routeOneDayInfo.setTotalMinutes(routeOneDayInfo.getTotalMinutes() + time1 + places.get(i).getPlace_time());
+//                    }
+//                }
                 routeDayPlacesInfo.add(routeOneDayInfo);
             }
             response.setContentType("application/json");
@@ -88,7 +97,6 @@ public class RoutesCommand implements Command {
         for (Map<String, Double> stringDoubleMap : dist) {
             sorted.put(stringDoubleMap.get("distance"), places.get(j));
             j++;
-
         }
 
         Collection<Place> values = sorted.values();
@@ -103,55 +111,6 @@ public class RoutesCommand implements Command {
         }
 
         return placeMarkerWithPhotos;
-    }
-
-    public Map<Integer, List<Place>> getPlacesByTimeAndCategory(List<Category> listCategory, Double time) {
-        List<Place> places = new ArrayList<>();
-        List<Place> result = new ArrayList<>();
-        PlaceService placeService = new PlaceService();
-        time = time * 3600; // перевести час в секунди
-        for (int i = 0; i < listCategory.size(); i++) {
-            places.addAll(placeService.getPlaceByCategory(listCategory.get(i).getId()));
-        }
-        places.sort(new Comparator<Place>() {
-            @Override
-            public int compare(Place o1, Place o2) {
-                return o2.getRating() - o1.getRating();
-            }
-        });
-        result.add(places.get(0));
-        places.remove(0);
-        Double tempTime = 900.0;
-        int j = 0;
-        Distance distance = new Distance();
-        while (true) {
-            if (places.size() == j) {
-                break;
-            }
-            String o1 = "" + result.get(j).getLatitude() + " " + result.get(j).getLongitude() + "";
-            String o2 = "" + places.get(0).getLatitude() + " " + places.get(0).getLongitude() + "";
-            double t = 0;
-            try {
-                t = distance.getDistanceAndTime(o1, o2).get("time");
-            } catch (IOException | JSONException e) {
-                e.printStackTrace();
-            }
-            if ((tempTime + 900 + t) > time) {
-                break;
-            }
-            result.add(places.get(j));
-            places.remove(0);
-            tempTime = tempTime + 900 + t;
-        }
-
-        tempTime /= 60;
-        double minutes = tempTime % 60;
-        double hours = (tempTime - minutes) / 60;
-        System.out.println(hours + "/" + minutes);
-
-        Map<Integer, List<Place>> map = new HashMap<>();
-        map.put(1, result);
-        return map;
     }
 
 

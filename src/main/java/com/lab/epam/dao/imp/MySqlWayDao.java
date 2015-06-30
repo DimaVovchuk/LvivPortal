@@ -69,6 +69,23 @@ public class MySqlWayDao extends AbstractJDBCDao<Way, Integer> {
 
     }
 
+    public void create(Connection conn, Way way) throws PersistException {
+
+        String sql = prepareStatementForInsert(way);//getCreateQuery();
+        try (PreparedStatement statement = conn.prepareStatement(sql)) {
+            // prepareStatementForInsert(statement, object);
+            int count = statement.executeUpdate();
+            if (count != 1) {
+                throw new PersistException("On persist modify more then 1 record: " + count);
+            } else {
+                loger.info("Create is succesfule");
+            }
+        } catch (Exception e) {
+            throw new PersistException(e);
+        }
+    }
+
+
     public void deleteWaysByUserIdWayId(Integer user_id, Integer way_id) throws PersistException {
 
         Connection conn = connection.retrieve();
@@ -118,6 +135,29 @@ public class MySqlWayDao extends AbstractJDBCDao<Way, Integer> {
 
     }
 
+    public Way getLastAdded(Connection conn) throws PersistException {
+
+        List<Way> list;
+        try (PreparedStatement statement = conn.prepareStatement(GET_LAST_ADDED)) {
+            ResultSet rs = statement.executeQuery();
+            //  loger.info("Get last way is succesfull ");
+            list = parseResultSet(rs);
+            //loger.info("Parse result with Transformer is succesfull");
+            if (list.size() <= 0){
+                loger.info("DB has any ways");
+                return null;
+            }
+            if (list.size() > 1){
+                loger.info("DB has more than one last way");
+            }
+        } catch (Exception e) {
+            loger.warn("Cant last way");
+            throw new PersistException(e);
+        }
+        return list.iterator().next();
+
+    }
+
     public void createUserWay(Integer user_id, Integer way_id, Integer day) throws PersistException {
         Connection conn = connection.retrieve();
         try (PreparedStatement statement = conn.prepareStatement(CREATE_USER_WAY)) {
@@ -128,12 +168,28 @@ public class MySqlWayDao extends AbstractJDBCDao<Way, Integer> {
             if (count != 1) {
                 throw new PersistException("On persist modify more then 1 record: " + count);
             } else {
-             //   System.out.println("Create is succesfule");
+                //   System.out.println("Create is succesfule");
             }
         } catch (Exception e) {
             throw new PersistException(e);
         } finally {
             connection.putback(conn);
+        }
+    }
+
+    public void createUserWay(Connection conn, Integer user_id, Integer way_id, Integer day) throws PersistException {
+        try (PreparedStatement statement = conn.prepareStatement(CREATE_USER_WAY)) {
+            statement.setInt(1, user_id);
+            statement.setInt(2, way_id);
+            statement.setInt(3, day);
+            int count = statement.executeUpdate();
+            if (count != 1) {
+                throw new PersistException("On persist modify more then 1 record: " + count);
+            } else {
+                //   System.out.println("Create is succesfule");
+            }
+        } catch (Exception e) {
+            throw new PersistException(e);
         }
     }
 

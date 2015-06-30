@@ -41,6 +41,7 @@ public class UserWaysCommand implements Command {
         this.request = request;
         HttpSession session = request.getSession();
         String login = (String) session.getAttribute("login");
+        String isFull = request.getParameter("isFull");
         ResourceBundle resourceBandle = (ResourceBundle) session.getAttribute("bundle");
         Locale locale = resourceBandle.getLocale();
         language = locale.getLanguage();
@@ -74,6 +75,7 @@ public class UserWaysCommand implements Command {
         }
 
         request.setAttribute("daysPlaceImage", daysPlaceImage);
+        request.setAttribute("isFull", isFull);
 
             loger.info("Command User Ways.");
             request.getRequestDispatcher("/views/pages/userWay.jsp").forward(request, response);

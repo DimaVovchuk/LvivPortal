@@ -17,7 +17,7 @@ import com.lab.epam.command.page.createtrip.CreateUserDataFromDBCommand;
 import com.lab.epam.command.page.delete.DeleteDayCommand;
 import com.lab.epam.command.page.delete.DeletePlaceFromTripCommand;
 import com.lab.epam.command.page.index.IndexCommand;
-import com.lab.epam.command.page.map.RoutesCommand;
+//import com.lab.epam.command.page.map.RoutesJSONCommand;
 import com.lab.epam.command.page.map.ShowMapCommand;
 import com.lab.epam.command.page.photo.ShowAllUserPhoto;
 import com.lab.epam.command.page.photo.UpLoadPictureCommand;
@@ -64,7 +64,7 @@ public class CommandFactory {
         commands.put("signOut", new SignOutCommand());
         commands.put("planTrip", new CountDaysCommand());
         commands.put("createUserData", new CreateUserDataCommand());
-        commands.put("routes", new RoutesCommand());
+        
         commands.put("saveWay", new SaveWayCommand());
         commands.put("editPlace", new EditPlaceCommand());
         commands.put("placeJSON", new PlaceJSONCommand());
@@ -76,7 +76,7 @@ public class CommandFactory {
         commands.put("deletePlace", new DeletePlaceCommand());
         commands.put("addplace", new AddPlaceUserDataTripCommand());
         commands.put("userAllWay", new UserAllWayCommand());
-//        commands.put("routesJSON", new RoutesJSONCommand());
+        //commands.put("routesJSON", new RoutesJSONCommand());
         commands.put("addNewPlace", new AddNewPlaceCommand());
         commands.put("saveNewPlace", new SaveNewPlaceCommand());
         commands.put("createUserDataFromDB", new CreateUserDataFromDBCommand());
@@ -84,6 +84,9 @@ public class CommandFactory {
         commands.put("deletePlaceFromTrip", new DeletePlaceFromTripCommand());
         commands.put("deleteDay", new DeleteDayCommand());
         commands.put("addDay", new AddDayCommand());
+        commands.put("recomendedPlace", new RecomendedPlaceCommand());
+        commands.put("recomendedPlaceload", new RecomendedPlaceLoaderCommand());
+
         commands.put("companyInformation", new CompanyInformationCommand());
         commands.put("commercial", new CommercialCommand());
         commands.put("addCustomPlace", new AddCustomPlaceCommand());

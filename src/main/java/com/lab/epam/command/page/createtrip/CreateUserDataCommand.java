@@ -7,10 +7,13 @@ import com.lab.epam.entity.Place;
 import com.lab.epam.entity.UserDataAboutTrip;
 import com.lab.epam.helper.ClassName;
 import com.lab.epam.service.CategoryService;
+import com.lab.epam.service.PlaceService;
+import com.lab.epam.workWithMap.Distance;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.joda.time.DateTime;
 import org.joda.time.Days;
+import org.json.JSONException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -164,6 +167,7 @@ public class CreateUserDataCommand implements Command {
 
             if (haveCategory) {
                 userDataTrip.setCategory(listCategory);
+                userDataTrip.setPlaceDay(getPlacesByTimeAndCategory(listCategory, Double.valueOf(timePerDay)));
             }
 
             if (lunch != null) {
@@ -182,7 +186,57 @@ public class CreateUserDataCommand implements Command {
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write(new Gson().toJson(correctDate));
 
-        response.sendRedirect("portal?command=showMap");
+        response.sendRedirect("/portal?command=showMap");
+    }
+
+    public Map<Integer, List<Place>> getPlacesByTimeAndCategory(List<Category> listCategory, Double time) {
+        List<Place> places = new ArrayList<>();
+        List<Place> result = new ArrayList<>();
+        PlaceService placeService = new PlaceService();
+        time = time * 3600; // перевести час в секунди
+        for (int i = 0; i < listCategory.size(); i++) {
+            places.addAll(placeService.getPlaceByCategory(listCategory.get(i).getId()));
+        }
+        places.sort(new Comparator<Place>() {
+            @Override
+            public int compare(Place o1, Place o2) {
+                return o2.getRating() - o1.getRating();
+            }
+        });
+        result.add(places.get(0));
+        places.remove(0);
+        Double tempTime = 900.0;
+        int j = 0;
+        Distance distance = new Distance();
+        while (true) {
+            if (places.size()-1 == j) {
+                break;
+            }
+            String o1 = "" + result.get(j).getLatitude() + " " + result.get(j).getLongitude() + "";
+            String o2 = "" + places.get(0).getLatitude() + " " + places.get(0).getLongitude() + "";
+            double t = 0;
+            try {
+                t = distance.getDistanceAndTime(o1, o2).get("time");
+            } catch (IOException | JSONException e) {
+                e.printStackTrace();
+            }
+            if ((tempTime + 900 + t) > time) {
+                break;
+            }
+            result.add(places.get(j));
+            places.remove(0);
+            tempTime = tempTime + 900 + t;
+            j++;
+        }
+
+        tempTime /= 60;
+        double minutes = tempTime % 60;
+        double hours = (tempTime - minutes) / 60;
+        System.out.println(hours + "/" + minutes);
+
+        Map<Integer, List<Place>> map = new HashMap<>();
+        map.put(1, result);
+        return map;
     }
 
 

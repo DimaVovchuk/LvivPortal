@@ -124,6 +124,8 @@
                     <a href="portal?command=place"
                        class="collection-item black-text ${requestScope.active_allplaces}"><cdg:l18n
                             key="places.all"/></a>
+
+
                 </div>
             </div>
         </div>
@@ -132,6 +134,7 @@
 
 <jsp:include page="/views/elements/footer.jsp"/>
 <jsp:include page="/views/modals/add-place-to-route.jsp"/>
+
 
 </body>
 </html>
