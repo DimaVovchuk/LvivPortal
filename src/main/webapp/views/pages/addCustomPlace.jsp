@@ -9,6 +9,7 @@
 	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 	<script type="text/javascript">
 		var geocoder = new google.maps.Geocoder();
+
 		function geocodePosition(pos) {
 			geocoder.geocode({
 				latLng: pos
@@ -26,93 +27,79 @@
 		}
 
 		function updateMarkerPositionLat(latLng) {
-			//document.setProperty('info',latLng.lat());
-	document.getElementById('info').value = latLng.lat();
+			document.getElementById('info').value =  latLng.lat();
 		}
 		function updateMarkerPositionLon(latLng) {
-			document.getElementById('info1').innerHTML = [
-				latLng.lng()
-		];
-	}
+			document.getElementById('info1').value = latLng.lng();
+		}
 
-	function updateMarkerAddress(str) {
-		document.getElementById('address').innerHTML = str;
-	}
+		function updateMarkerAddress(str) {
+			document.getElementById('address').innerHTML = str;
+		}
 
-	function initialize() {
-		var latLng = new google.maps.LatLng(49.8426, 24.0278);
-		var map = new google.maps.Map(document.getElementById('mapCanvas'), {
-			zoom: 12,
-			center: latLng,
-			mapTypeId: google.maps.MapTypeId.ROADMAP
-		});
-		var marker = new google.maps.Marker({
-			position: latLng,
-			title: 'Point A',
-			map: map,
-			draggable: true
-		});
+		function initialize() {
+			var latLng = new google.maps.LatLng(49.8426, 24.0278);
+			var map = new google.maps.Map(document.getElementById('mapCanvas'), {
+				zoom: 12,
+				center: latLng,
+				mapTypeId: google.maps.MapTypeId.ROADMAP
+			});
+			var marker = new google.maps.Marker({
+				position: latLng,
+				title: 'Point A',
+				map: map,
+				draggable: true
+			});
 
-		// Update current position info.
-		updateMarkerPositionLat(latLng);
-		updateMarkerPositionLon(latLng);
-		geocodePosition(latLng);
+			// Update current position info.
+			updateMarkerPositionLat(latLng);
+			updateMarkerPositionLon(latLng);
+			geocodePosition(latLng);
 
-		// Add dragging event listeners.
-		google.maps.event.addListener(marker, 'dragstart', function () {
-			updateMarkerAddress('Dragging...');
-		});
+			// Add dragging event listeners.
+			google.maps.event.addListener(marker, 'dragstart', function () {
+				updateMarkerAddress('Dragging...');
+			});
 
-		google.maps.event.addListener(marker, 'drag', function () {
-			updateMarkerStatus('Dragging...');
-			updateMarkerPositionLat(marker.getPosition());
-			updateMarkerPositionLon(marker.getPosition());
-		});
+			google.maps.event.addListener(marker, 'drag', function () {
+				updateMarkerStatus('Dragging...');
+				updateMarkerPositionLat(marker.getPosition());
+				updateMarkerPositionLon(marker.getPosition());
+			});
 
-		google.maps.event.addListener(marker, 'dragend', function () {
-			updateMarkerStatus('Drag ended');
-			geocodePosition(marker.getPosition());
-		});
-	}
+			google.maps.event.addListener(marker, 'dragend', function () {
+				updateMarkerStatus('Drag ended');
+				geocodePosition(marker.getPosition());
+			});
+		}
 
-	// Onload handler to fire off the app.
-	google.maps.event.addDomListener(window, 'load', initialize);
-
-	function codeAddress() {
-		var address2 = document.getElementById('target').value;
-		geocoder.geocode( { 'address': address2}, function(results) {
-			alert(results[0].geometry.location);
-			map.setCenter(results[0].geometry.location);
-		});
-	}
-
-
-//		var n = $('#info').html();
-//		$('#placeLatitude').val(n);
-//		console.log(n)
-</script>
+		// Onload handler to fire off the app.
+		google.maps.event.addDomListener(window, 'load', initialize);
+		var abc = document.getElementsByTagName("info1");
+		var value_to_store = abc[0].firstChild.nodeValue;
+	</script>
 </head>
 <body>
 <style>
-#mapCanvas {
-	width: 500px;
-	height: 400px;
-	float: left;
-}
+	#mapCanvas {
+		width: 500px;
+		height: 400px;
+		float: left;
+	}
 
-#infoPanel {
-	float: left;
-	margin-left: 10px;
-}
+	#infoPanel {
+		float: left;
+		margin-left: 10px;
+	}
 
-#infoPanel div {
-	margin-bottom: 5px;
-}
+	#infoPanel div {
+		margin-bottom: 5px;
+	}
 </style>
 <jsp:include page="/views/elements/header.jsp"/>
 <div class="container">
 	<div id="mapCanvas"></div>
-	<form method="post" action="portal?command=saveCustomPlace">
+	<form method=post action="portal?command=saveCustomPlace">
 		<%--<c:set var="command" scope="session" value="saveCustomPlace"/>--%>
 		<input type="hidden" name="command" value="saveCustomPlace">
 
@@ -121,20 +108,7 @@
 			<div id="markerStatus"><i>Click and drag the marker.</i></div>
 			<b>Current position:</b>
 			<input name="info" id="info" value=""/>
-			<div name="info1" id="info1"></div>
-			<input type="hidden"  id="myvalue" />
-			<%--<div class="row">--%>
-				<%--<label class="active" for="placeLatitude">latitude</label>--%>
-				<%--&lt;%&ndash;<c:set var="pl" scope="request" value="${document.getElementById('info').innerHTML}"/>&ndash;%&gt;--%>
-				<%--&lt;%&ndash;<c:out value="${document.getElementById('info').innerHTML}"/>&ndash;%&gt;--%>
-
-				<%--<input value="<%! %>" id="placeLatitude" type="text" name="placeLatitude">--%>
-			<%--</div>--%>
-
-			<%--<div class="row">--%>
-				<%--<label class="active" for="placeLongitude">longitude</label>--%>
-				<%--<input value="" id="placeLongitude" type="text" name="placeLongitude">--%>
-			<%--</div>--%>
+			<input name="info1" id="info1" value=""/>
 
 			<b>Closest matching address:</b>
 			<div id="address"></div>
@@ -145,7 +119,6 @@
 		</div>
 	</form>
 </div>
-
 <%--<jsp:include page="/views/elements/footer.jsp"/>--%>
 </body>
 </html>

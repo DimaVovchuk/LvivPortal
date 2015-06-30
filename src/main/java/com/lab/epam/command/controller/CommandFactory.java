@@ -17,7 +17,7 @@ import com.lab.epam.command.page.createtrip.CreateUserDataFromDBCommand;
 import com.lab.epam.command.page.delete.DeleteDayCommand;
 import com.lab.epam.command.page.delete.DeletePlaceFromTripCommand;
 import com.lab.epam.command.page.index.IndexCommand;
-//import com.lab.epam.command.page.map.RoutesJSONCommand;
+import com.lab.epam.command.page.map.RoutesCommand;
 import com.lab.epam.command.page.map.ShowMapCommand;
 import com.lab.epam.command.page.photo.ShowAllUserPhoto;
 import com.lab.epam.command.page.photo.UpLoadPictureCommand;
@@ -64,7 +64,7 @@ public class CommandFactory {
         commands.put("signOut", new SignOutCommand());
         commands.put("planTrip", new CountDaysCommand());
         commands.put("createUserData", new CreateUserDataCommand());
-        
+        commands.put("routes", new RoutesCommand());
         commands.put("saveWay", new SaveWayCommand());
         commands.put("editPlace", new EditPlaceCommand());
         commands.put("placeJSON", new PlaceJSONCommand());
@@ -76,7 +76,6 @@ public class CommandFactory {
         commands.put("deletePlace", new DeletePlaceCommand());
         commands.put("addplace", new AddPlaceUserDataTripCommand());
         commands.put("userAllWay", new UserAllWayCommand());
-        //commands.put("routesJSON", new RoutesJSONCommand());
         commands.put("addNewPlace", new AddNewPlaceCommand());
         commands.put("saveNewPlace", new SaveNewPlaceCommand());
         commands.put("createUserDataFromDB", new CreateUserDataFromDBCommand());
@@ -84,9 +83,6 @@ public class CommandFactory {
         commands.put("deletePlaceFromTrip", new DeletePlaceFromTripCommand());
         commands.put("deleteDay", new DeleteDayCommand());
         commands.put("addDay", new AddDayCommand());
-        commands.put("recomendedPlace", new RecomendedPlaceCommand());
-        commands.put("recomendedPlaceload", new RecomendedPlaceLoaderCommand());
-
         commands.put("companyInformation", new CompanyInformationCommand());
         commands.put("commercial", new CommercialCommand());
         commands.put("addCustomPlace", new AddCustomPlaceCommand());
@@ -94,6 +90,8 @@ public class CommandFactory {
         commands.put("authorVK", new VkAuthorizationCommand());
         commands.put("deleteImageByDB", new DeleteImageCommand());
         //commands.put("authorFB", new FbAuthorizationCommand());
+        commands.put("recomendedPlace", new RecomendedPlaceCommand());
+        commands.put("recomendedPlaceload", new RecomendedPlaceLoaderCommand());
     }
 
     public static void createCommand(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -117,7 +115,7 @@ public class CommandFactory {
                 Command commamdExecute = commands.get(command);
                 commamdExecute.execute(request, response);
             } else {
-                request.getRequestDispatcher("/views/pages/404.jsp").forward(request, response);
+               request.getRequestDispatcher("/views/pages/404.jsp").forward(request, response);
             }
 
     }
