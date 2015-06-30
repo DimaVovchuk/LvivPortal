@@ -11,7 +11,6 @@
 </head>
 
 <jsp:include page="/views/elements/css.jsp"/>
-<jsp:include page="/views/elements/script.jsp"/>
 
 <body>
 
@@ -76,14 +75,14 @@
             <c:if test="${userDataTrip!=null}">
 
                 <a class="modal-trigger btn-floating btn-large waves-effect waves-light cyan darken-2" data-target="chooseDayRecomended"
-                   name onclick="$('#place_id').val('{{id}}')">
+                   name onclick="$('#place_id').val('{{id}}')" style="position: absolute; margin: 10px">
                     <i class="mdi-content-add"></i>
                 </a>
             </c:if>
 
             <div class="center-align">
                 <a href="/portal?command=placeInformation&place_id={{id}}"><img
-                        class="responsive-img"
+                        class="responsive-img place-img"
                         src="${pageContext.request.contextPath}/upload/photo/{{imageReference}}"></a>
                 <a href="/portal?command=placeInformation&place_id={{id}}">
                     <h5><c:out value="{{name}}"/></h5></a>
@@ -92,18 +91,18 @@
                     <div style="height: 40px"></div>
                     <div class="bottom-right-btn">
                         <a onClick="like(this);" data-id="{{id}}" data-rating="{{rating}}" id="up{{id}}" class="up{{id}} btn-floating btn-floating btn-small"
-                           href="javascript:;" rel="/portal?command=rectRating&rating=1&place_id={{id}}">
+                           href="javascript:" rel="/portal?command=rectRating&rating=1&place_id={{id}}">
                             <i class="material-icons">thumb_up</i>
                         </a>
 
                         <a onClick="none(this);" data-id="{{id}}" id="none{{id}}"class="none{{id}} btn-floating btn-floating btn-small"
-                           href="javascript:;" rel="/portal?command=rectRating&rating=0&place_id={{id}}">
+                           href="javascript:" rel="/portal?command=rectRating&rating=0&place_id={{id}}">
                             <i class="material-icons">thumbs_up_down</i>
                         </a>
 
 
                         <a onClick="dislike(this);" data-id="{{id}}" id="down{{id}}" class="down{{id}} btn-floating btn-floating btn-small"
-                           href="javascript:;" rel="/portal?command=rectRating&rating=-1&place_id={{id}}">
+                           href="javascript:" rel="/portal?command=rectRating&rating=-1&place_id={{id}}">
                             <i class="material-icons">thumb_down</i>
                         </a>
 
@@ -114,8 +113,6 @@
     </div>
     {{/each}}
 </script>
-
-
 
 </body>
 </html>

@@ -1,5 +1,4 @@
 var loadPlaceData = function () {
-
     $.ajax({
         url: window.location.origin + '/portal?command=placeJSON',
         success: loadPlaces,
@@ -10,28 +9,28 @@ var loadPlaceData = function () {
 var loadPlaces = function (data) {
     if (!data) return false;
     var source = $("#place-info-template").html();
-    Handlebars.registerHelper("variable_x", function(input){
+    Handlebars.registerHelper("variable_x", function(){
         return Session.get("x");
     });
     var template = Handlebars.compile(source);
     var html = template(data);
     $('#place-info-collection').html(html);
-    imgHeight();
     disabled(data);
 };
 
-function disabled(data) {
+var disabled = function (data) {
     var siz = data.length;
     for (var i = 1; i < siz; i++){
-        var rating = $("#up" + i).data('rating');
-        var x = $("#up" + i).data('id');
+        var up_i = $("#up" + i);
+        var rating = up_i.data('rating');
+        var x = up_i.data('id');
         if (rating=='1'){$("#up" + x).addClass('disabled');}
         if (rating=='0'){$("#none" + x).addClass('disabled');}
         if (rating=='-1'){$("#down" + x).addClass('disabled');}
     }
-}
+};
 
-function like(placeholder) {
+var like = function (placeholder) {
     $.ajax({
         url: $(placeholder).attr('rel'),
         type: "GET",
@@ -41,36 +40,17 @@ function like(placeholder) {
         }
     });
     return false;
-}
+};
 
-$(function () {
-
-    $('#form-add-place').on('submit', function (e) {
-
-        e.preventDefault();
-
-        $.ajax({
-            type: 'post',
-            url: window.location.origin + '/portal?command=addplace',
-            data: $('form').serialize(),
-//                success: function () {
-//                    alert('form was submitted');
-//                }
-        });
-
-    });
-
-});
-
-function dissable(placeholder) {
+var dissable = function (placeholder) {
     var x = $(placeholder).data('id');
     $("#up" + x).removeClass('disabled');
     $("#none" + x).removeClass('disabled');
     $("#down" + x).removeClass('disabled');
     $(placeholder).addClass('disabled');
-}
+};
 
-function none(placeholder) {
+var none = function (placeholder) {
     $.ajax({
         url: $(placeholder).attr('rel'),
         type: "GET",
@@ -80,9 +60,9 @@ function none(placeholder) {
         }
     });
     return false;
-}
+};
 
-function dislike(placeholder) {
+var dislike = function (placeholder) {
     $.ajax({
         url: $(placeholder).attr('rel'),
         type: "GET",
@@ -92,7 +72,7 @@ function dislike(placeholder) {
         }
     });
     return false;
-}
+};
 
 var paginate = function () {
     $('#place-page-container').pajinate({
@@ -110,8 +90,6 @@ var matchColumn = function () {
     $(".match-col").matchHeight({
         property: 'height'
     });
-    paginate();
-    initModalWindows();
 };
 
 var imgHeight = function () {
@@ -120,7 +98,6 @@ var imgHeight = function () {
     img.css({
         'height': width + 'px'
     });
-    matchColumn();
 };
 
 var initRangeListeners = function () {
@@ -134,12 +111,27 @@ var initRangeListeners = function () {
 };
 
 $(function () {
+    initRangeListeners();
     loadPlaceData();
-    matchColumn();
-    imgHeight();
-    setTimeout(function() {
+
+    setTimeout(function () {
+        imgHeight();
+        matchColumn();
         paginate();
     }, 500);
-    paginate();
-    initRangeListeners();
+
+/*    $('#form-add-place').on('submit', function (e) {
+
+        e.preventDefault();
+
+        $.ajax({
+            type: 'post',
+            url: window.location.origin + '/portal?command=addplace',
+            data: $('form').serialize(),
+//                success: function () {
+//                    alert('form was submitted');
+//                }
+        });
+
+    });*/
 });
