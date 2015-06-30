@@ -39,43 +39,44 @@
             <div class="col l3 m4 s5">
                 <div class="collection with-header z-depth-2">
                     <div class="collection-header"><h4><cdg:l18n key="places.categories"/></h4></div>
-
-                    <a href="/portal?command=place&category=architecture"
-                       class="collection-item black-text ${requestScope.active_architecture}"><cdg:l18n
-                            key="places.architecture"/><c:set scope="session" var="category" value="architecture"/></a>
-                    <a href="/portal?command=place&category=churches"
-                       class="collection-item black-text ${requestScope.active_churches}"><cdg:l18n
-                            key="places.churches"/><c:set scope="session" var="category" value="churches"/></a>
-                    <a href="portal?command=place&category=theatres"
-                       class="collection-item black-text ${requestScope.active_theatres}"><cdg:l18n
-                            key="places.theatres"/><c:set scope="session" var="category" value="theatres"/></a>
-                    <a href="/portal?command=place&category=hotels"
-                       class="collection-item black-text ${requestScope.active_hotels}"><cdg:l18n
-                            key="places.hotels"/><c:set scope="session" var="category" value="hotels"/></a>
-                    <a href="/portal?command=place&category=restaurants"
-                       class="collection-item black-text ${requestScope.active_restaurants}"><cdg:l18n
-                            key="places.restaurants"/><c:set scope="session" var="category" value="restaurants"/></a>
-                    <a href="/portal?command=place"
-                       class="collection-item black-text ${requestScope.active_allplaces}"><cdg:l18n
-                            key="places.all"/></a>
-                    <%--<a href="portal?command=placeJSON&category=sights"  data-category="architectture"--%>
-                        <%--class="collection-item black-text ${requestScope.active_architecture}"><cdg:l18n--%>
-                        <%--key="places.architecture"/><c:set scope="session" var="category" value="architectture"/></a>--%>
-                    <%--<a href="portal?command=placeJSON&category=sights"  data-category="churches"--%>
-                        <%--class="collection-item black-text ${requestScope.active_churches}"><cdg:l18n--%>
-                        <%--key="places.churches"/><c:set scope="session" var="category" value="churches"/></a>--%>
-                    <%--<a href="portal?command=placeJSON&category=sights"  data-category="theatres"--%>
-                        <%--class="collection-item black-text ${requestScope.active_theatres}"><cdg:l18n--%>
-                        <%--key="places.theatres"/><c:set scope="session" var="category" value="theatres"/></a>--%>
-                    <%--<a href="portal?command=placeJSON&category=sights"  data-category="hotels"--%>
-                        <%--class="collection-item black-text ${requestScope.active_hotels}"><cdg:l18n--%>
-                        <%--key="places.hotels"/><c:set scope="session" var="category" value="hotels"/></a>--%>
-                    <%--<a href="portal?command=placeJSON&category=sights"  data-category="restaurants"--%>
-                        <%--class="collection-item black-text ${requestScope.active_restaurants}"><cdg:l18n--%>
-                        <%--key="places.restaurants"/><c:set scope="session" var="category" value="restaurants"/></a>--%>
+<div id="category-place">
+                    <%--<a href="/portal?command=place&category=architecture"--%>
+                       <%--class="collection-item black-text ${requestScope.active_architecture}"><cdg:l18n--%>
+                            <%--key="places.architecture"/><c:set scope="session" var="category" value="architecture"/></a>--%>
+                    <%--<a href="/portal?command=place&category=churches"--%>
+                       <%--class="collection-item black-text ${requestScope.active_churches}"><cdg:l18n--%>
+                            <%--key="places.churches"/><c:set scope="session" var="category" value="churches"/></a>--%>
+                    <%--<a href="portal?command=place&category=theatres"--%>
+                       <%--class="collection-item black-text ${requestScope.active_theatres}"><cdg:l18n--%>
+                            <%--key="places.theatres"/><c:set scope="session" var="category" value="theatres"/></a>--%>
+                    <%--<a href="/portal?command=place&category=hotels"--%>
+                       <%--class="collection-item black-text ${requestScope.active_hotels}"><cdg:l18n--%>
+                            <%--key="places.hotels"/><c:set scope="session" var="category" value="hotels"/></a>--%>
+                    <%--<a href="/portal?command=place&category=restaurants"--%>
+                       <%--class="collection-item black-text ${requestScope.active_restaurants}"><cdg:l18n--%>
+                            <%--key="places.restaurants"/><c:set scope="session" var="category" value="restaurants"/></a>--%>
                     <%--<a href="/portal?command=place"--%>
-                        <%--class="collection-item black-text ${requestScope.active_allplaces}"><cdg:l18n--%>
-                        <%--key="places.all"/></a>--%>
+                       <%--class="collection-item black-text ${requestScope.active_allplaces}"><cdg:l18n--%>
+                            <%--key="places.all"/></a>--%>
+                    <a href="portal?command=placeJSON&category=architecture"  data-category="architectture"
+                        class="collection-item black-text ${requestScope.active_architecture}"><cdg:l18n
+                        key="places.architecture"/></a>
+                    <a href="portal?command=placeJSON&category=churches"  data-category="churches"
+                        class="collection-item black-text ${requestScope.active_churches}"><cdg:l18n
+                        key="places.churches"/></a>
+                    <a href="portal?command=placeJSON&category=theatres"  data-category="theatres"
+                        class="collection-item black-text ${requestScope.active_theatres}"><cdg:l18n
+                        key="places.theatres"/></a>
+                    <a href="portal?command=placeJSON&category=hotels"  data-category="hotels"
+                        class="collection-item black-text ${requestScope.active_hotels}"><cdg:l18n
+                        key="places.hotels"/></a>
+                    <a href="portal?command=placeJSON&category=restaurants"  data-category="restaurants"
+                        class="collection-item black-text ${requestScope.active_restaurants}"><cdg:l18n
+                        key="places.restaurants"/></a>
+                    <a href="portal?command=placeJSON"
+                        class="collection-item black-text ${requestScope.active_allplaces}"><cdg:l18n
+                        key="places.all"/></a>
+    </div>
 
                 </div>
             </div>

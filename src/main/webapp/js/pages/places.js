@@ -1,18 +1,25 @@
-var loadPlaceData = function () {
+var loadPlaceAboutData = function () {
+
     $.ajax({
         url: window.location.origin + '/portal?command=placeJSON',
-        success: loadPlaces,
-        error: loadPlaces
+        success: loadPlacesData,
+        error: loadPlacesData
     })
 };
 
-var loadPlaces = function (data) {
+var loadPlacesData = function (data) {
     if (!data) return false;
     var source = $("#place-info-template").html();
     var template = Handlebars.compile(source);
     var html = template(data);
     $('#place-info-collection').html(html);
+    setTimeout(function () {
+        imgHeight();
+        matchColumn();
+        paginate();
+    }, 0);
     disabled(data);
+
 };
 
 var disabled = function (data) {
@@ -114,6 +121,7 @@ var initRangeListeners = function () {
 var addPlace = function () {
     $('#form-add-place').on('submit', function (e) {
         e.preventDefault();
+        e.stopImmediatePropagation();
         $.ajax({
             type: 'post',
             url: window.location.origin + '/portal?command=addplace',
@@ -122,15 +130,23 @@ var addPlace = function () {
     });
 };
 
+var initCategoriesEventsPlace = function () {
+    $('#category-place').on('click', function (e) {
+        e.preventDefault();
+        $.ajax({
+            url: window.location.origin + '/' + $(e.target).attr('href'),
+            success: loadPlacesData,
+            error: loadPlacesData
+        });
+    });
+};
+
 $(function () {
     initRangeListeners();
-    loadPlaceData();
+    loadPlaceAboutData();
+    initCategoriesEventsPlace();
 
-    setTimeout(function () {
-        imgHeight();
-        matchColumn();
-        paginate();
-    }, 500);
+
     addPlace();
 
 
