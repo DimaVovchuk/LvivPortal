@@ -4,6 +4,7 @@ package com.lab.epam.command.controller;
  * Created by Vasyl on 09.06.2015.
  */
 
+import com.lab.epam.command.delete.DeleteImageCommand;
 import com.lab.epam.command.delete.DeletePlaceCommand;
 import com.lab.epam.command.email.*;
 import com.lab.epam.command.locale.LocaleCommand;
@@ -88,6 +89,7 @@ public class CommandFactory {
         commands.put("addCustomPlace", new AddCustomPlaceCommand());
         commands.put("saveCustomPlace", new SaveCustomPlaceCommand());
         commands.put("authorVK", new VkAuthorizationCommand());
+        commands.put("deleteImageByDB", new DeleteImageCommand());
         //commands.put("authorFB", new FbAuthorizationCommand());
     }
 
