@@ -40,22 +40,22 @@
             <div class="col l3 m4 s5">
                 <div class="collection with-header z-depth-2">
                     <div class="collection-header"><h4><cdg:l18n key="places.categories"/></h4></div>
-                    <a href="portal?command=place&category=architecture"
+                    <a href="/portal?command=place&category=architecture"
                        class="collection-item black-text ${requestScope.active_architecture}"><cdg:l18n
                             key="places.architecture"/></a>
-                    <a href="portal?command=place&category=churches"
+                    <a href="/portal?command=place&category=churches"
                        class="collection-item black-text ${requestScope.active_churches}"><cdg:l18n
                             key="places.churches"/></a>
                     <a href="portal?command=place&category=theatres"
                        class="collection-item black-text ${requestScope.active_theatres}"><cdg:l18n
                             key="places.theatres"/></a>
-                    <a href="portal?command=place&category=hotels"
+                    <a href="/portal?command=place&category=hotels"
                        class="collection-item black-text ${requestScope.active_hotels}"><cdg:l18n
                             key="places.hotels"/></a>
-                    <a href="portal?command=place&category=restaurants"
+                    <a href="/portal?command=place&category=restaurants"
                        class="collection-item black-text ${requestScope.active_restaurants}"><cdg:l18n
                             key="places.restaurants"/></a>
-                    <a href="portal?command=place"
+                    <a href="/portal?command=place"
                        class="collection-item black-text ${requestScope.active_allplaces}"><cdg:l18n
                             key="places.all"/></a>
                 </div>
@@ -82,28 +82,28 @@
             </c:if>
 
             <div class="center-align">
-                <a href="portal?command=placeInformation&place_id={{id}}"><img
+                <a href="/portal?command=placeInformation&place_id={{id}}"><img
                         class="responsive-img"
                         src="${pageContext.request.contextPath}/upload/photo/{{imageReference}}"></a>
-                <a href="portal?command=placeInformation&place_id={{id}}">
+                <a href="/portal?command=placeInformation&place_id={{id}}">
                     <h5><c:out value="{{name}}"/></h5></a>
                 <span><c:out value="{{adress}}"/></span>
                 <c:if test="${login!=null}">
                     <div style="height: 40px"></div>
                     <div class="bottom-right-btn">
                         <a onClick="like(this);" data-id="{{id}}" data-rating="{{rating}}" id="up{{id}}" class="up{{id}} btn-floating btn-floating btn-small"
-                           href="javascript:;" rel="portal?command=rectRating&rating=1&place_id={{id}}">
+                           href="javascript:;" rel="/portal?command=rectRating&rating=1&place_id={{id}}">
                             <i class="material-icons">thumb_up</i>
                         </a>
 
                         <a onClick="none(this);" data-id="{{id}}" id="none{{id}}"class="none{{id}} btn-floating btn-floating btn-small"
-                           href="javascript:;" rel="portal?command=rectRating&rating=0&place_id={{id}}">
+                           href="javascript:;" rel="/portal?command=rectRating&rating=0&place_id={{id}}">
                             <i class="material-icons">thumbs_up_down</i>
                         </a>
 
 
                         <a onClick="dislike(this);" data-id="{{id}}" id="down{{id}}" class="down{{id}} btn-floating btn-floating btn-small"
-                           href="javascript:;" rel="portal?command=rectRating&rating=-1&place_id={{id}}">
+                           href="javascript:;" rel="/portal?command=rectRating&rating=-1&place_id={{id}}">
                             <i class="material-icons">thumb_down</i>
                         </a>
 

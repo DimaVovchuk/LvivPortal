@@ -45,7 +45,7 @@ function like(placeholder) {
 
 $(function () {
 
-    $('form').on('submit', function (e) {
+    $('#form-add-place').on('submit', function (e) {
 
         e.preventDefault();
 

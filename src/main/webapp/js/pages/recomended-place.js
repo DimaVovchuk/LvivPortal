@@ -1,13 +1,23 @@
-/**
- * Created by Admin on 27.06.2015.
- */
+var loadPlaceData = function () {
 
-var loadRecomendedPlaceData = function () {
     $.ajax({
-        url: window.location.origin + '/portal?command=recomendedPlace',
+        url: window.location.origin + '/portal?command=replaceJSON',
         success: loadPlaces,
         error: loadPlaces
     })
+};
+
+var loadPlaces = function (data) {
+    if (!data) return false;
+    var source = $("#place-info-template").html();
+    Handlebars.registerHelper("variable_x", function(input){
+        return Session.get("x");
+    });
+    var template = Handlebars.compile(source);
+    var html = template(data);
+    $('#place-info-collection').html(html);
+    imgHeight();
+    disabled(data);
 };
 
 function disabled(data) {
@@ -35,7 +45,7 @@ function like(placeholder) {
 
 $(function () {
 
-    $('form').on('submit', function (e) {
+    $('#form-add-place').on('submit', function (e) {
 
         e.preventDefault();
 
@@ -84,57 +94,47 @@ function dislike(placeholder) {
     return false;
 }
 
-var loadPlaces = function (data) {
-    if (!data) return false;
-    var source = $("#recomended-place-info-template").html();
-    Handlebars.registerHelper("variable_x", function(input){
-        return Session.get("x");
-    });
-    var template = Handlebars.compile(source);
-    var html = template(data);
-    $('#recomended-place-info-collection').html(html);
-    heightLoad();
-    disabled(data);
-};
-
-var loadAddButton = function (data) {
-    if (!data) return false;
-    var source = $("#recomended-add-button").html();
-    var template = Handlebars.compile(source);
-    var html = template(data);
-    $('#recomended-add-button-collection').html(html);
-    heightLoad();
-};
-
-var heightLoad = function () {
-    $(".match-col").matchHeight({
-        property: 'height'
-    })
-    paginator();
-    initModalWindows();
-
-};
-
-var paginator = function () {
+var paginate = function () {
     $('#place-page-container').pajinate({
         items_per_page: 6,
         item_container_id: '.place-page-content',
         nav_panel_id: '.place-page-navigation',
-        start_page: 0,
         nav_label_first: '',
         nav_label_prev: '',
         nav_label_next: '',
         nav_label_last: ''
     });
-
 };
 
-var initModalWindows = function () {
-    $('.modal-trigger').leanModal({
-        dismissible: true
+var matchColumn = function () {
+    $(".match-col").matchHeight({
+        property: 'height'
+    });
+    paginate();
+    initModalWindows();
+};
+
+var imgHeight = function () {
+    var img = $('.place-img');
+    var width = img.width();
+    img.css({
+        'height': width + 'px'
+    });
+    matchColumn();
+};
+
+var initRangeListeners = function () {
+    var timePlace = $("#timePlace");
+    timePlace.mousemove(function (e) {
+        $("#timeValue").html($(this).val());
+    });
+    timePlace.change(function (e) {
+        $("#timeValue").html($(this).val());
     });
 };
 
 $(function () {
-    loadRecomendedPlaceData();
+    loadPlaceData();
+
+    initRangeListeners();
 });
