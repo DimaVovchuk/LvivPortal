@@ -23,7 +23,10 @@ public class MySqlPlaceDao extends AbstractJDBCDao<Place, Integer> {
     ConnectionPool connection = ConnectionManager.getConnection();
     private static final Logger loger = LogManager.getLogger(ClassName.getCurrentClassName());
 
-    private static final String GET_PLACE_BY_CATEGORY = "SELECT * FROM place WHERE category_id = ?";
+    private static final String GET_PLACE_BY_CATEGORY = "SELECT * FROM place WHERE deleted=false AND visible=true AND category_id = ?";
+    private static final String GET_PLACE_BY_CATEGORY_RECOMENDED = "SELECT * FROM place WHERE recomended=true AND deleted=false AND visible=true AND category_id = ?";
+    private static final String GET_PLACE_RECOMENDED = "SELECT * FROM place WHERE recomended=true AND deleted=false AND visible=true";
+    private static final String GET_PLACE_VISIBLE = "SELECT * FROM place WHERE deleted=false AND visible=true";
     private static final String GET_PLACE_BY_USER_ID = "SELECT p.id, p.adress, p.latitude, p.longitude, p.category_id, p.rating, p.visible, p.place_time, p.deleted FROM place AS p JOIN user_place AS up JOIN user AS u WHERE up.user_id = u.id AND up.deleted = false AND up.place_id = p.id AND u.id = ?";
     private static final String GET_PLACE_BY_WAY_ID_DAY_NUMBER = "SELECT p.id, p.adress, p.latitude, p.longitude, p.category_id, p.rating, p.visible, p.place_time, p.deleted FROM place AS p JOIN place_way AS pw JOIN way AS w WHERE pw.way_id = w.id AND pw.place_id = p.id AND pw.deleted = false AND w.id = ? AND pw.day_number = ?";
     private static final String GET_PLACE_BY_WAY_ID = "SELECT p.id, p.adress, p.latitude, p.longitude, p.category_id, p.rating, p.visible, p.place_time, p.deleted FROM place AS p JOIN place_way AS pw JOIN way AS w WHERE pw.way_id = w.id AND pw.place_id = p.id AND w.id = ? AND pw.deleted = false";
@@ -112,6 +115,38 @@ public class MySqlPlaceDao extends AbstractJDBCDao<Place, Integer> {
         }
     }
 
+    public List<Place> getAllPlaceRecomended ()throws PersistException {
+        List<Place> list;
+        Connection conn = connection.retrieve();
+        try (PreparedStatement statement = conn.prepareStatement(GET_PLACE_RECOMENDED)) {
+            ResultSet rs = statement.executeQuery();
+            list = parseResultSet(rs);
+        } catch (Exception e) {
+            throw new PersistException(e);
+        } finally {
+            connection.putback(conn);
+        }
+        return list;
+
+
+    }
+
+    public List<Place> getAllPlaceVisible ()throws PersistException {
+        List<Place> list;
+        Connection conn = connection.retrieve();
+        try (PreparedStatement statement = conn.prepareStatement(GET_PLACE_VISIBLE)) {
+            ResultSet rs = statement.executeQuery();
+            list = parseResultSet(rs);
+        } catch (Exception e) {
+            throw new PersistException(e);
+        } finally {
+            connection.putback(conn);
+        }
+        return list;
+
+
+    }
+
         public List<Place> getPlaceByCategory (Integer category_id)throws PersistException {
             List<Place> list;
             Connection conn = connection.retrieve();
@@ -128,6 +163,23 @@ public class MySqlPlaceDao extends AbstractJDBCDao<Place, Integer> {
 
 
         }
+
+    public List<Place> getPlaceByCategoryRecomended (Integer category_id)throws PersistException {
+        List<Place> list;
+        Connection conn = connection.retrieve();
+        try (PreparedStatement statement = conn.prepareStatement(GET_PLACE_BY_CATEGORY_RECOMENDED)) {
+            statement.setInt(1, category_id);
+            ResultSet rs = statement.executeQuery();
+            list = parseResultSet(rs);
+        } catch (Exception e) {
+            throw new PersistException(e);
+        } finally {
+            connection.putback(conn);
+        }
+        return list;
+
+
+    }
 
         public List<Place> getPlaceByUserId (Integer user_id)throws PersistException {
             List<Place> list;

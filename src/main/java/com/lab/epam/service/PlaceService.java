@@ -103,6 +103,45 @@ public class PlaceService {
         return places;
     }
 
+    public List<Place> getPlaceByCategoryRecomended(Integer category_id){
+        List<Place> places = null;
+        try {
+            places = mySqlPlaceDao.getPlaceByCategoryRecomended(category_id);
+
+        } catch (PersistException e) {
+            e.printStackTrace();
+            loger.warn("Cant get all places");
+        }
+
+        return places;
+    }
+
+    public List<Place> getAllPlaceVisible(){
+        List<Place> places = null;
+        try {
+            places = mySqlPlaceDao.getAllPlaceVisible();
+
+        } catch (PersistException e) {
+            e.printStackTrace();
+            loger.warn("Cant get all places");
+        }
+
+        return places;
+    }
+
+    public List<Place> getAllPlaceRecomended(){
+        List<Place> places = null;
+        try {
+            places = mySqlPlaceDao.getAllPlaceRecomended();
+
+        } catch (PersistException e) {
+            e.printStackTrace();
+            loger.warn("Cant get all places");
+        }
+
+        return places;
+    }
+
     public List<Place> getPlaceByUserId(Integer user_id){
         List<Place> places = null;
         try {
