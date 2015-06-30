@@ -19,9 +19,30 @@
 	<hr>
 	<div class="text-center">
 		<c:forEach items="${placeImageList}" var="elem">
-			<img class="materialboxed" width="200" height="200"
-			     src="${pageContext.request.contextPath}/upload/photo/${elem.reference}">
+			<c:if test="${elem.deleted eq false}">
+				<img class="materialboxed" width="200" height="200"
+				     src="${pageContext.request.contextPath}/upload/photo/${elem.reference}">
+				<button class="btn modal-trigger" type="submit" data-target="deleteImage"
+				        id="btn1" onclick="$('#deleteImageID').val('${elem.id}')"> DELETE
+				</button>
+			</c:if>
 		</c:forEach>
+
+		<div id="deleteImage" class="modal">
+			<div class="modal-content">
+				<h4>Modal Header</h4>
+
+				<form id="change_status" action="#" method="get">
+					<input type="hidden" name="command" value="deleteImageByDB">
+					<input placeholder="Placeholder" id="deleteImageID" name="deleteImageID" type="hidden">
+					<button class="btn waves-effect waves-light cyan darken-2" type="submit">YES</button>
+					<button class="modal-action modal-close btn waves-effect waves-light cyan darken-2" type="reset">
+						NO
+					</button>
+				</form>
+			</div>
+		</div>
+
 
 		<form method=post enctype=multipart/form-data action="/portal/editplace">
 			<c:set var="command" scope="session" value="saveEditPlace"/>
@@ -52,12 +73,14 @@
 				<div class="row">
 					<c:choose>
 						<c:when test="${elem.locale eq 'UA'}">
-							<label class="active" for="placeDescriptionUA"><cdg:l18n key="editplace.placediscUA"/></label>
+							<label class="active" for="placeDescriptionUA"><cdg:l18n
+									key="editplace.placediscUA"/></label>
 							<input value="<c:out value="${placeDescriptionList[0].description}"/>"
 							       id="placeDescriptionUA" type="text" name="placeDescriptionUA">
 						</c:when>
 						<c:otherwise>
-							<label class="active" for="placeDescriptionEN"><cdg:l18n key="editplace.placediscEN"/></label>
+							<label class="active" for="placeDescriptionEN"><cdg:l18n
+									key="editplace.placediscEN"/></label>
 							<input value="<c:out value="${placeDescriptionList[1].description}"/>"
 							       id="placeDescriptionEN" type="text" name="placeDescriptionEN">
 						</c:otherwise>
@@ -157,8 +180,10 @@
 
 			<div class="form-group">
 				<label class="col-md-3 control-label"></label>
-				<button class="btn waves-effect waves-light" type="submit" name="save"><cdg:l18n key="editplace.placesavechange"/><i class="mdi-content-send right"></i></button>
-				<button class="btn waves-effect waves-light" type="reset" name="cancel"><cdg:l18n key="editplace.placecancel"/></button>
+				<button class="btn waves-effect waves-light" type="submit" name="save"><cdg:l18n
+						key="editplace.placesavechange"/><i class="mdi-content-send right"></i></button>
+				<button class="btn waves-effect waves-light" type="reset" name="cancel"><cdg:l18n
+						key="editplace.placecancel"/></button>
 			</div>
 		</form>
 	</div>
