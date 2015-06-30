@@ -97,7 +97,7 @@
 				</div>
 
 				<div class="row">
-					<h6><cdg:l18n key="usercab.youmay"/><a href="/portal?command=userPlace"> <cdg:l18n key="usercab.change"/></a> <cdg:l18n key="usercab.yourpas"/></h6>
+					<h6><cdg:l18n key="usercab.youmay"/><a href="/portal?command=resetEmail"> <cdg:l18n key="usercab.change"/></a> <cdg:l18n key="usercab.yourpas"/></h6>
 				</div>
 				<div class="form-group">
 					<label class="col-md-3 control-label"></label>
