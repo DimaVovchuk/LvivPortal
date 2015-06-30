@@ -1,7 +1,7 @@
 var loadPlaceData = function () {
 
     $.ajax({
-        url: window.location.origin + '/portal?command=replaceJSON',
+        url: window.location.origin + '/portal?command=recomendedPlace',
         success: loadPlaces,
         error: loadPlaces
     })

@@ -9,9 +9,6 @@ var loadPlaceData = function () {
 var loadPlaces = function (data) {
     if (!data) return false;
     var source = $("#place-info-template").html();
-    Handlebars.registerHelper("variable_x", function(){
-        return Session.get("x");
-    });
     var template = Handlebars.compile(source);
     var html = template(data);
     $('#place-info-collection').html(html);
@@ -29,6 +26,7 @@ var disabled = function (data) {
         if (rating=='-1'){$("#down" + x).addClass('disabled');}
     }
 };
+
 
 var like = function (placeholder) {
     $.ajax({
@@ -62,6 +60,8 @@ var none = function (placeholder) {
     return false;
 };
 
+
+
 var dislike = function (placeholder) {
     $.ajax({
         url: $(placeholder).attr('rel'),
@@ -90,6 +90,7 @@ var matchColumn = function () {
     $(".match-col").matchHeight({
         property: 'height'
     });
+    initModalWindows();
 };
 
 var imgHeight = function () {
@@ -110,6 +111,17 @@ var initRangeListeners = function () {
     });
 };
 
+var addPlace = function () {
+    $('#form-add-place').on('submit', function (e) {
+        e.preventDefault();
+        $.ajax({
+            type: 'post',
+            url: window.location.origin + '/portal?command=addplace',
+            data: $('form').serialize(),
+        });
+    });
+};
+
 $(function () {
     initRangeListeners();
     loadPlaceData();
@@ -119,19 +131,7 @@ $(function () {
         matchColumn();
         paginate();
     }, 500);
+    addPlace();
 
-/*    $('#form-add-place').on('submit', function (e) {
 
-        e.preventDefault();
-
-        $.ajax({
-            type: 'post',
-            url: window.location.origin + '/portal?command=addplace',
-            data: $('form').serialize(),
-//                success: function () {
-//                    alert('form was submitted');
-//                }
-        });
-
-    });*/
 });

@@ -69,6 +69,7 @@ public class PlaceJSONCommand implements Command {
         session.setAttribute("userDataTrip", userDataAboutTrip);
 
         String category = request.getParameter("category");
+        System.out.println("category " + category);
         if (category == null) {
             category = "";
         }
@@ -90,12 +91,13 @@ public class PlaceJSONCommand implements Command {
                     places = servicePlace.getPlaceByCategory(5);
                     break;
                 default:
-                    places = servicePlace.getAll();
+                    places = servicePlace.getAllPlaceVisible();
                     break;
             }
         } else {
-            places = servicePlace.getAll();
+            places = servicePlace.getAllPlaceVisible();
         }
+      //  session.setAttribute("category", null);
         List<PlaceDescription> placeDescriptions = new ArrayList<>();
         List<PlaceImage> placeImages = new ArrayList<>();
 
