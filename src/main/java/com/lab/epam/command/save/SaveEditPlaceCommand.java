@@ -73,6 +73,8 @@ public class SaveEditPlaceCommand implements Command {
         String newState = params.get("newState");
         loger.info("All data waas succesful getting");
 
+        System.out.println("newVisible " + newVisible);
+        System.out.println("newState " + newState);
 //check input data
         if (checkData(newPlaceNameUA, CHECK_DATA) && newPlaceNameUA == "") {
             session.setAttribute("nameUAError", 1);
@@ -149,8 +151,20 @@ public class SaveEditPlaceCommand implements Command {
             place.setLongitude(newPlaceLongitude);
             place.setCategory_id(Integer.valueOf(newCategory));
             place.setRating(Integer.valueOf(newPlaceRating));
+
+            if(newVisible == null){
+                newVisible="false";
+            }else{
+                newVisible="true";
+            }
             place.setVisible(new Boolean(newVisible));
             place.setPlace_time(Integer.valueOf(newPlaceTime));
+
+            if(newState == null){
+                newState="true";
+            }else{
+                newState="false";
+            }
             place.setDeleted(new Boolean(newState));
             loger.info("Object place is created " + place);
 

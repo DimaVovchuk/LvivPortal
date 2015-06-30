@@ -204,22 +204,22 @@
 
                         <div class="switch">
                             <c:choose>
-                                <c:when test="${editPlace.visible}">
-                                    <label>
-                                        <cdg:l18n key="editplace.placeunvisible"/>
-                                        <input name="newVisible" type="checkbox" checked="checked">
-                                        <span class="lever"></span>
-                                        <cdg:l18n key="editplace.placevisible"/>
-                                    </label>
-                                </c:when>
-                                <c:otherwise>
-                                    <label>
-                                        <cdg:l18n key="editplace.placeunvisible"/>
-                                        <input name="newVisible" type="checkbox">
-                                        <span class="lever"></span>
-                                        <cdg:l18n key="editplace.placevisible"/>
-                                    </label>
-                                </c:otherwise>
+	                            <c:when test="${editPlace.visible}">
+		                            <label>
+			                            <cdg:l18n key="editplace.placeunvisible"/>
+			                            <input name="newVisible" type="checkbox" checked="checked">
+			                            <span class="lever"></span>
+			                            <cdg:l18n key="editplace.placevisible"/>
+		                            </label>
+	                            </c:when>
+	                            <c:otherwise>
+		                            <label>
+			                            <cdg:l18n key="editplace.placeunvisible"/>
+			                            <input name="newVisible" type="checkbox">
+			                            <span class="lever"></span>
+			                            <cdg:l18n key="editplace.placevisible"/>
+		                            </label>
+	                            </c:otherwise>
                             </c:choose>
                         </div>
                     </div>
@@ -228,22 +228,22 @@
 
                         <div class="switch">
                             <c:choose>
-                                <c:when test="${editPlace.deleted}">
-                                    <label>
-                                        <cdg:l18n key="editplace.placestatdelete"/>
-                                        <input name="newState" type="checkbox">
-                                        <span class="lever"></span>
-                                        <cdg:l18n key="editplace.placestatactive"/>
-                                    </label>
-                                </c:when>
-                                <c:otherwise>
-                                    <label>
-                                        <cdg:l18n key="editplace.placestatdelete"/>
-                                        <input name="newState" type="checkbox" checked="checked">
-                                        <span class="lever"></span>
-                                        <cdg:l18n key="editplace.placestatactive"/>
-                                    </label>
-                                </c:otherwise>
+	                            <c:when test="${editPlace.deleted}">
+		                            <label>
+			                            <cdg:l18n key="editplace.placestatdelete"/>
+			                            <input name="newState" type="checkbox">
+			                            <span class="lever"></span>
+			                            <cdg:l18n key="editplace.placestatactive"/>
+		                            </label>
+	                            </c:when>
+	                            <c:otherwise>
+		                            <label>
+			                            <cdg:l18n key="editplace.placestatdelete"/>
+			                            <input name="newState" type="checkbox" checked="checked">
+			                            <span class="lever"></span>
+			                            <cdg:l18n key="editplace.placestatactive"/>
+		                            </label>
+	                            </c:otherwise>
                             </c:choose>
                         </div>
                     </div>
