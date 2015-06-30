@@ -26,10 +26,10 @@ var imgHeight = function () {
 
 var initRangeListeners = function () {
     var timePlace = $("#timePlace");
-    timePlace.mousemove(function (e) {
+    timePlace.mousemove(function () {
         $("#timeValue").html($(this).val());
     });
-    timePlace.change(function (e) {
+    timePlace.change(function () {
         $("#timeValue").html($(this).val());
     });
 };
@@ -37,6 +37,9 @@ var initRangeListeners = function () {
 $(function () {
     matchColumn();
     imgHeight();
+    setTimeout(function() {
+        paginate();
+    }, 500);
     paginate();
     initRangeListeners();
 });

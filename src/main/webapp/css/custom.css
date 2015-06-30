@@ -429,6 +429,24 @@ header img.text-middle {
 
 }
 
+#edit-place .file-field .btn {
+    position: relative;
+}
+
+#edit-place .image-thumbnail{
+    height: 100px;
+    margin: 10px;
+    float: left;
+}
+
+#edit-place .dropdown-content li>span {
+    color: #000;
+}
+
+#edit-place .switch label {
+    color: #000;
+}
+
                                         /* *** MAP *** */
 .map .row .col {
     padding: 0;
