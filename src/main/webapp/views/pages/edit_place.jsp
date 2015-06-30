@@ -26,10 +26,32 @@
 
             <div class="center-align valign-wrapper">
                 <c:forEach items="${placeImageList}" var="elem">
-                    <img class="materialboxed responsive-img valign" width="200" height="200"
-                         src="${pageContext.request.contextPath}/upload/photo/${elem.reference}">
+                    <c:if test="${elem.deleted eq false}">
+                        <img class="materialboxed" width="200" height="200"
+                             src="${pageContext.request.contextPath}/upload/photo/${elem.reference}">
+                        <button class="btn modal-trigger" type="submit" data-target="deleteImage"
+                                id="btn1" onclick="$('#deleteImageID').val('${elem.id}')"> DELETE
+                        </button>
+                    </c:if>
                 </c:forEach>
             </div>
+
+            <div id="deleteImage" class="modal">
+                <div class="modal-content">
+                    <h4>Modal Header</h4>
+
+                    <form id="change_status" action="#" method="get">
+                        <input type="hidden" name="command" value="deleteImageByDB">
+                        <input placeholder="Placeholder" id="deleteImageID" name="deleteImageID" type="hidden">
+                        <button class="btn waves-effect waves-light cyan darken-2" type="submit">YES</button>
+                        <button class="modal-action modal-close btn waves-effect waves-light cyan darken-2" type="reset">
+                            NO
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+
             <div class="divider"></div>
 
             <form method=post enctype=multipart/form-data action="/portal/editplace">

@@ -200,7 +200,7 @@
     <div class="modal-content">
         <h4>Do you want to edit this place?</h4>
 
-        <form id="edit_place" action="/portal/editplace" method="post">
+        <form id="edit_place" action="/portal?command=editPlace" method="post">
             <input type="hidden" name="command" value="editPlace">
             <input placeholder="Placeholder" id="editPlaceID" name="editPlaceID" type="hidden"
                    value="${place.id}">
