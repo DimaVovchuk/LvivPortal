@@ -1,4 +1,5 @@
 var loadPlaceData = function () {
+
     $.ajax({
         url: window.location.origin + '/portal?command=placeJSON',
         success: loadPlaces,
@@ -8,13 +9,14 @@ var loadPlaceData = function () {
 
 var loadPlaces = function (data) {
     if (!data) return false;
-    var source = $("#recomended-place-info-template").html();
+    var source = $("#place-info-template").html();
     Handlebars.registerHelper("variable_x", function(input){
         return Session.get("x");
     });
     var template = Handlebars.compile(source);
     var html = template(data);
-    $('#recomended-place-info-collection').html(html);
+    $('#place-info-collection').html(html);
+    imgHeight();
     disabled(data);
 };
 
@@ -108,6 +110,8 @@ var matchColumn = function () {
     $(".match-col").matchHeight({
         property: 'height'
     });
+    paginate();
+    initModalWindows();
 };
 
 var imgHeight = function () {
@@ -116,6 +120,7 @@ var imgHeight = function () {
     img.css({
         'height': width + 'px'
     });
+    matchColumn();
 };
 
 var initRangeListeners = function () {
@@ -130,8 +135,6 @@ var initRangeListeners = function () {
 
 $(function () {
     loadPlaceData();
-    matchColumn();
-    imgHeight();
-    paginate();
+
     initRangeListeners();
 });

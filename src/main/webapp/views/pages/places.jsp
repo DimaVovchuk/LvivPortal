@@ -21,82 +21,16 @@
     <div class="section">
         <h3 class="center-align"><cdg:l18n key="places.head"/></h3>
 
+
         <div class="row">
             <div class="col l9 m8 s7">
                 <div id="place-page-container" class="row z-depth-2">
 
                     <div class="place-page-navigation z-depth-1"></div>
 
-                    <div class="place-page-content">
+                    <div id="place-info-collection" class="place-page-content">
 
-                        <c:forEach var="place" items="${requestScope.places}">
-                            <div class="match-col col l4 m6 s12" style="display:none">
-                                <div class="card z-depth-2">
-                                    <form action="portal?command=place&place_id=${place.id}&category=${requestScope.category}"
-                                          method="post" style="position:absolute;padding:5px">
-                                        <c:set var="category" scope="request" value="${requestScope.category}"/>
-                                        <c:if test="${requestScope.userDataTrip!=null}">
-                                            <button class="btn modal-trigger btn-floating btn-large waves-effect waves-light cyan darken-2"
-                                                    type="submit" data-target="chooseDay"
-                                                    id="btn1" onclick="$('#place_id').val('${place.id}')">
-                                                <i class="mdi-content-add"></i>
-                                            </button>
-                                        </c:if>
-                                    </form>
-                                    <div class="center-align">
-                                        <a href="portal?command=placeInformation&place_id=${place.id}"><img
-                                                class="responsive-img place-img"
-                                                src="${pageContext.request.contextPath}/upload/photo/${place.imageReference}"></a>
-                                    </div>
-                                    <a href="portal?command=placeInformation&place_id=${place.id}">
-                                        <h5><c:out value="${place.name}"/></h5></a>
-                                    <c:if test="${login!=null}">
-                                        <div style="height: 40px"></div>
-                                        <div class="bottom-right-btn">
-                                                <c:choose>
-                                                <c:when test="${place.rating==1}">
-                                                <a class="btn-floating disabled btn-small">
-                                                    <i class="material-icons">thumb_up</i>
-                                                </a>
-                                            </c:when>
-                                            <c:otherwise>
-                                                <a class="btn-floating btn-small waves-effect waves-light cyan darken-2"
-                                                   href="portal?command=rectRating&rating=1&place_id=${place.id}&category=${requestScope.category}">
-                                                    <i class="material-icons">thumb_up</i>
-                                                </a>
-                                            </c:otherwise>
-                                            </c:choose>
-                                            <c:choose>
-                                            <c:when test="${place.rating==0}">
-                                                <a class="btn-floating disabled btn-small">
-                                                <i class="material-icons">thumbs_up_down</i>
-                                            </a>
-                                            </c:when>
-                                                <c:otherwise>
-                                                    <a class="btn-floating btn-small waves-effect waves-light cyan darken-2"
-                                                       href="portal?command=rectRating&rating=0&place_id=${place.id}&category=${requestScope.category}">
-                                                        <i class="material-icons">thumbs_up_down</i>
-                                                    </a>
-                                                </c:otherwise>
-                                            </c:choose>
-                                            <c:choose>
-                                            <c:when test="${place.rating==-1}">
-                                                <a class="btn-floating disabled btn-small">
-                                                    <i class="material-icons">thumb_down</i>
-                                                </a>
-                                            </c:when>
-                                                <c:otherwise>
-                                                    <a class="btn-floating btn-small waves-effect waves-light cyan darken-2"
-                                                       href="portal?command=rectRating&rating=-1&place_id=${place.id}&category=${requestScope.category}">
-                                                        <i class="material-icons">thumb_down</i>
-                                                    </a>
-                                                </c:otherwise>
-                                            </c:choose>
-                                        </div>
-                                    </c:if>
-                                </div>
-                            </div>
-                        </c:forEach>
+                        <%--<div ></div>--%>
 
                     </div>
 
@@ -124,8 +58,6 @@
                     <a href="portal?command=place"
                        class="collection-item black-text ${requestScope.active_allplaces}"><cdg:l18n
                             key="places.all"/></a>
-
-
                 </div>
             </div>
         </div>
@@ -133,7 +65,56 @@
 </div>
 
 <jsp:include page="/views/elements/footer.jsp"/>
-<jsp:include page="/views/modals/add-place-to-route.jsp"/>
+<jsp:include page="/views/modals/add-place-to-route-recomended.jsp"/>
+<script src="${pageContext.request.contextPath}/js/pages/places.js"></script>
+<%--<jsp:include page="/views/modals/add-place-to-route.jsp"/>--%>
+
+<script id="place-info-template" type="text/x-handlebars-template">
+    {{#each this}}
+    <div class="match-col col l4 m6 s12">
+        <div class="card z-depth-2" style="padding:10px; height:95%">
+            <c:if test="${userDataTrip!=null}">
+
+                <a class="modal-trigger btn-floating btn-large waves-effect waves-light cyan darken-2" data-target="chooseDayRecomended"
+                   name onclick="$('#place_id').val('{{id}}')">
+                    <i class="mdi-content-add"></i>
+                </a>
+            </c:if>
+
+            <div class="center-align">
+                <a href="portal?command=placeInformation&place_id={{id}}"><img
+                        class="responsive-img"
+                        src="${pageContext.request.contextPath}/upload/photo/{{imageReference}}"></a>
+                <a href="portal?command=placeInformation&place_id={{id}}">
+                    <h5><c:out value="{{name}}"/></h5></a>
+                <span><c:out value="{{adress}}"/></span>
+                <c:if test="${login!=null}">
+                    <div style="height: 40px"></div>
+                    <div class="bottom-right-btn">
+                        <a onClick="like(this);" data-id="{{id}}" data-rating="{{rating}}" id="up{{id}}" class="up{{id}} btn-floating btn-floating btn-small"
+                           href="javascript:;" rel="portal?command=rectRating&rating=1&place_id={{id}}">
+                            <i class="material-icons">thumb_up</i>
+                        </a>
+
+                        <a onClick="none(this);" data-id="{{id}}" id="none{{id}}"class="none{{id}} btn-floating btn-floating btn-small"
+                           href="javascript:;" rel="portal?command=rectRating&rating=0&place_id={{id}}">
+                            <i class="material-icons">thumbs_up_down</i>
+                        </a>
+
+
+                        <a onClick="dislike(this);" data-id="{{id}}" id="down{{id}}" class="down{{id}} btn-floating btn-floating btn-small"
+                           href="javascript:;" rel="portal?command=rectRating&rating=-1&place_id={{id}}">
+                            <i class="material-icons">thumb_down</i>
+                        </a>
+
+                    </div>
+                </c:if>
+            </div>
+        </div>
+    </div>
+    {{/each}}
+</script>
+
 
 
 </body>
