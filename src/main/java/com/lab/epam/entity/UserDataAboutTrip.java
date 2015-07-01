@@ -30,6 +30,7 @@ public class UserDataAboutTrip {
     private List<Category> category;
     private Boolean isCaffees = false;
     private Map<Integer,List<Place>> placeDay = new HashMap<>();
+    private double routeTime;
     private Boolean isAutomatic = false;
     private Double timePerDay;
     private Double timeForLunch;
@@ -192,5 +193,13 @@ public class UserDataAboutTrip {
 
     public void setSortFlag(boolean sortFlag) {
         this.sortFlag = sortFlag;
+    }
+
+    public double getRouteTime() {
+        return routeTime;
+    }
+
+    public void setRouteTime(double routeTime) {
+        this.routeTime = routeTime;
     }
 }

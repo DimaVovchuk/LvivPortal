@@ -34,7 +34,9 @@ public class I18NFilter implements Filter {
             }
             bundle = ResourceBundle.getBundle("localization/bundle", locale);
             session.setAttribute("bundle", bundle);
+
         }
+        session.setAttribute("language", bundle.getLocale().toString());
         chain.doFilter(req, resp);
     }
 

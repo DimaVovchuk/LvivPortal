@@ -28,7 +28,8 @@ public class RoutesCommand implements Command {
                         HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         UserDataAboutTrip userDataTrip = (UserDataAboutTrip) session.getAttribute("userDataTrip");
-        if (userDataTrip != null) {
+        ResourceBundle bundle = (ResourceBundle) session.getAttribute("bundle");
+        if (userDataTrip != null ) {
             Map<Integer, List<Place>> placeDay = userDataTrip.getPlaceDay();
             Distance distance = new Distance();
             List<RouteOneDayPlacesInfo> routeDayPlacesInfo = new ArrayList<>();
@@ -40,8 +41,10 @@ public class RoutesCommand implements Command {
                 List<Map<String, Double>> distAndTime = new ArrayList<>();
                 RouteOneDayPlacesInfo routeOneDayInfo = new RouteOneDayPlacesInfo(j);
                 places = placeDay.get(j);
-                List<PlaceMarkerWithPhoto> placeMarkerWithPhotos = new ArrayList<>();
                 if (userDataTrip.getSortFlag()) {
+                    if(userDataTrip.getBeginPlace()!=null){
+
+                    }
                     String obj1 = "" + places.get(0).getLatitude() + " " + places.get(0).getLongitude() + "";
                     for (int i = 1; i < places.size(); i++) {
                         String obj2 = "" + places.get(i).getLatitude() + " " + places.get(i).getLongitude() + "";
@@ -51,35 +54,33 @@ public class RoutesCommand implements Command {
                             e.printStackTrace();
                         }
                     }
-                    ResourceBundle bundle = (ResourceBundle) session.getAttribute("bundle");
-                    placeMarkerWithPhotos = sortPlaces(places, distAndTime, bundle.getLocale());
+                    userDataTrip.getPlaceDay().put(j, sortPlaces(places, distAndTime, bundle.getLocale()));
                     userDataTrip.setSortFlag(false);
-                    session.setAttribute("userDataTrip",userDataTrip);
-                }else{
-                    PlaceImageService placeImageService = new PlaceImageService();
-                    PlaceDescriptionService placeDescriptionService = new PlaceDescriptionService();
-                    ResourceBundle bundle = (ResourceBundle) session.getAttribute("bundle");
-                    for (Place place : placeDay.get(j)) {
-                        PlaceDescription placeDescription = placeDescriptionService.getPlaceDescriptionByIdPlace(place.getId(), bundle.getLocale().toString());
-                        PlaceImage placeImage = placeImageService.getPlaceImageByPlaceId(place.getId());
-                        placeMarkerWithPhotos.add(new PlaceMarkerWithPhoto(place.getId(), placeDescription.getName(), place.getLatitude(), place.getLongitude(), placeImage.getReference(), placeDescription.getDescription()));
+                }
+                PlaceImageService placeImageService = new PlaceImageService();
+                List<PlaceMarkerWithPhoto> placeMarkerWithPhotos = new ArrayList<>();
+                PlaceDescriptionService placeDescriptionService = new PlaceDescriptionService();
+
+                for (Place place : userDataTrip.getPlaceDay().get(j)) {
+                    PlaceDescription placeDescription = placeDescriptionService.getPlaceDescriptionByIdPlace(place.getId(), bundle.getLocale().toString());
+                    PlaceImage placeImage = placeImageService.getPlaceImageByPlaceId(place.getId());
+                    placeMarkerWithPhotos.add(new PlaceMarkerWithPhoto(place.getId(), placeDescription.getName(), place.getLatitude(), place.getLongitude(), placeImage.getReference(), placeDescription.getDescription()));
+                }
+                session.setAttribute("userDataTrip", userDataTrip);
+                routeOneDayInfo.setPlaces(placeMarkerWithPhotos);
+                if (places.size() > 1) {
+                    for (int i = 0; i < places.size() - 1; i++) {
+                        String o1 = "" + places.get(i).getLatitude() + " " + places.get(i).getLongitude() + "";
+                        String o2 = "" + places.get(i + 1).getLatitude() + " " + places.get(i + 1).getLongitude() + "";
+                        Double time = 0.0;
+                        try {
+                            time = distance.getDistanceAndTime(o1, o2).get("time");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        routeOneDayInfo.setTotalMinutes(routeOneDayInfo.getTotalMinutes() + time.intValue()/60 /*+ places.get(i).getPlace_time()*/+15);
                     }
                 }
-                routeOneDayInfo.setPlaces(placeMarkerWithPhotos);
-//                if (places.size() > 1) {
-//                    for (int i = 0; i < places.size() - 1; i++) {
-//                        String o1 = "" + places.get(i).getLatitude() + " " + places.get(i).getLongitude() + "";
-//                        String o2 = "" + places.get(i + 1).getLatitude() + " " + places.get(i + 1).getLongitude() + "";
-//                        Double time = 0.0;
-//                        try {
-//                            time = distance.getDistanceAndTime(o1, o2).get("time");
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                        }
-//                        int time1 = time.intValue() / 60;
-//                        routeOneDayInfo.setTotalMinutes(routeOneDayInfo.getTotalMinutes() + time1 + places.get(i).getPlace_time());
-//                    }
-//                }
                 routeDayPlacesInfo.add(routeOneDayInfo);
             }
             response.setContentType("application/json");
@@ -89,7 +90,7 @@ public class RoutesCommand implements Command {
         }
     }
 
-    public List<PlaceMarkerWithPhoto> sortPlaces(List<Place> places, List<Map<String, Double>> dist, Locale language) {
+    public List<Place> sortPlaces(List<Place> places, List<Map<String, Double>> dist, Locale language) {
 
         TreeMap<Double, Place> sorted = new TreeMap<>();
         sorted.put(0.0, places.get(0));
@@ -98,21 +99,10 @@ public class RoutesCommand implements Command {
             sorted.put(stringDoubleMap.get("distance"), places.get(j));
             j++;
         }
-
         Collection<Place> values = sorted.values();
-        PlaceImageService placeImageService = new PlaceImageService();
-        List<PlaceMarkerWithPhoto> placeMarkerWithPhotos = new ArrayList<>();
-        PlaceDescriptionService placeDescriptionService = new PlaceDescriptionService();
-
-        for (Place place : values) {
-            PlaceDescription placeDescription = placeDescriptionService.getPlaceDescriptionByIdPlace(place.getId(), language.toString());
-            PlaceImage placeImage = placeImageService.getPlaceImageByPlaceId(place.getId());
-            placeMarkerWithPhotos.add(new PlaceMarkerWithPhoto(place.getId(), placeDescription.getName(), place.getLatitude(), place.getLongitude(), placeImage.getReference(), placeDescription.getDescription()));
-        }
-
-        return placeMarkerWithPhotos;
+        List<Place> list = new ArrayList<>(values);
+        return list;
     }
-
 
     private class RouteOneDayPlacesInfo {
         private Integer dayNumber;
@@ -181,3 +171,4 @@ public class RoutesCommand implements Command {
         }
     }
 }
+

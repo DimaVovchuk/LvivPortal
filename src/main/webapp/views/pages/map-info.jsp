@@ -10,8 +10,8 @@
         <a class='dropdown-select btn cyan darken-2 waves-effect waves-light' href='#' data-activates='dropdown-places'><cdg:l18n
                 key="places.categories"/></a>
         <ul id='dropdown-places' class='dropdown-content'>
-            <li><a href="portal?command=placeJSON&category=sights" class="collection-item"
-                   data-category="architectture"><cdg:l18n
+            <li><a href="portal?command=placeJSON&category=architecture" class="collection-item"
+                   data-category="architecture"><cdg:l18n
                     key="places.architecture"/></a></li>
             <div class="divider"></div>
             <li><a href="portal?command=placeJSON&category=churches" class="collection-item"
