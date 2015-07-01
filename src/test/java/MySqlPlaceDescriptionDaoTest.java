@@ -1,6 +1,5 @@
 import com.lab.epam.dao.PersistException;
 import com.lab.epam.dao.imp.MySqlPlaceDescriptionDao;
-import com.lab.epam.entity.Place;
 import com.lab.epam.entity.PlaceDescription;
 import com.lab.epam.persistant.ConnectionManager;
 import com.lab.epam.persistant.ConnectionPool;
@@ -41,44 +40,44 @@ public class MySqlPlaceDescriptionDaoTest {
         connectionPool.putback(connection);
     }
 
-    @Test
-    public void testCreate() throws Exception {
-        List list = dao.getAll();
-        PlaceDescription cat = new PlaceDescription.Builder(PLACE_ID, LOCALE, NAME, DESCRIPTION).build();
-        cat.setId(list.size()+4);
-        dao.create(cat);
-        list = dao.getAllWithoutDeleted();
-        Assert.assertNotNull(list);
-        int oldSize = list.size();
-        Assert.assertTrue(oldSize > 0);
-        dao.delete(cat);
-        list = dao.getAllWithoutDeleted();
-        Assert.assertNotNull(list);
-
-    }
-
-    @Test public void testGetByPK() throws Exception
-    {
-        PlaceDescription category = dao.getByPK(ID);
-        Assert.assertNotNull(category);
-    }
-
-    @Test
-    public void testDelete() throws Exception {
-        List list = dao.getAll();
-        PlaceDescription cat = new PlaceDescription.Builder(PLACE_ID, LOCALE, NAME, DESCRIPTION).build();
-        cat.setId(list.size()+4);
-        dao.create(cat);
-        list = dao.getAllWithoutDeleted();
-        Assert.assertNotNull(list);
-        int oldSize = list.size();
-        Assert.assertTrue(oldSize > 0);
-        dao.delete(cat);
-        list = dao.getAllWithoutDeleted();
-        Assert.assertNotNull(list);
-        int newSize = list.size();
-        Assert.assertEquals(1, oldSize - newSize);
-    }
+//    @Test
+//    public void testCreate() throws Exception {
+//        List list = dao.getAll();
+//        PlaceDescription cat = new PlaceDescription.Builder(PLACE_ID, LOCALE, NAME, DESCRIPTION).build();
+//        cat.setId(list.size()+4);
+//        dao.create(cat);
+//        list = dao.getAllWithoutDeleted();
+//        Assert.assertNotNull(list);
+//        int oldSize = list.size();
+//        Assert.assertTrue(oldSize > 0);
+//        dao.delete(cat);
+//        list = dao.getAllWithoutDeleted();
+//        Assert.assertNotNull(list);
+//
+//    }
+//
+//    @Test public void testGetByPK() throws Exception
+//    {
+//        PlaceDescription category = dao.getByPK(ID);
+//        Assert.assertNotNull(category);
+//    }
+//
+//    @Test
+//    public void testDelete() throws Exception {
+//        List list = dao.getAll();
+//        PlaceDescription cat = new PlaceDescription.Builder(PLACE_ID, LOCALE, NAME, DESCRIPTION).build();
+//        cat.setId(list.size()+4);
+//        dao.create(cat);
+//        list = dao.getAllWithoutDeleted();
+//        Assert.assertNotNull(list);
+//        int oldSize = list.size();
+//        Assert.assertTrue(oldSize > 0);
+//        dao.delete(cat);
+//        list = dao.getAllWithoutDeleted();
+//        Assert.assertNotNull(list);
+//        int newSize = list.size();
+//        Assert.assertEquals(1, oldSize - newSize);
+//    }
 
     @Test
     public void testGetAll() throws Exception {

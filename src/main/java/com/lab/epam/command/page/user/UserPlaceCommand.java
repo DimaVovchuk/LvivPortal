@@ -117,7 +117,7 @@ public class UserPlaceCommand implements Command {
                             item.setId(place.getId());
                             item.setImageReference(placeImage.getReference());
                             item.setName(placeDescription.getName());
-                            item.setAdress(place.getAdress());
+                            item.setAdress(placeDescription.getAdress());
                             // System.out.println(item.toString());
                             list.add(item);
                         }

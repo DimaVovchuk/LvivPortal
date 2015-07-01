@@ -41,13 +41,19 @@
 			</div>
 
 			<div class="row">
-				<label class="active" for="addPlaceAddress"><cdg:l18n key="editplace.placeaddress"/></label>
-				<input value="" id="addPlaceAddress" type="text" name="addPlaceAddress">
+				<label class="active" for="addPlaceAddressUA"><cdg:l18n key="editplace.placeaddressUA"/></label>
+				<input value="" id="addPlaceAddressUA" type="text" name="addPlaceAddressUA">
+			</div>
+
+			<div class="row">
+				<label class="active" for="addPlaceAddressEN"><cdg:l18n key="editplace.placeaddressEN"/></label>
+				<input value="" id="addPlaceAddressEN" type="text" name="addPlaceAddressEN">
 			</div>
 
 			<div class="row">
 				<label><cdg:l18n key="editplace.choseplacecategory"/></label>
 				<select name="newCategory">
+					<option value="6"><cdg:l18n key="editplace.otherPlaces"/></option>
 					<option value="1"><cdg:l18n key="editplace.architecture"/></option>
 					<option value="2"><cdg:l18n key="editplace.churches"/></option>
 					<option value="3"><cdg:l18n key="editplace.theatres"/></option>

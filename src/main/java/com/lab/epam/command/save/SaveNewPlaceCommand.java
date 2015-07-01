@@ -59,7 +59,8 @@ public class SaveNewPlaceCommand implements Command {
         String addPlaceNameEN = params.get("addPlaceNameEN");
         String addPlaceDescriptionUA = params.get("addPlaceDescriptionUA");
         String addPlaceDescriptionEN = params.get("addPlaceDescriptionEN");
-        String addPlaceAddress = params.get("addPlaceAddress");
+        String addPlaceAddressUA = params.get("addPlaceAddressUA");
+        String addPlaceAddressEN = params.get("addPlaceAddressEN");
         Integer addCategoryID = Integer.valueOf(params.get("newCategory"));
         String addPlaceTime = params.get("addPlaceTime");
         String addPlacePriceUA = params.get("addPlacePriceUA");
@@ -96,10 +97,10 @@ public class SaveNewPlaceCommand implements Command {
             loger.warn("DescriptionEN is pattern error");
         }
 
-        if (checkData(addPlaceAddress, CHECK_DATA) && addPlaceAddress == "") {
-            session.setAttribute("placeAddressError", 1);
+        if (checkData(addPlacePriceEN, CHECK_DATA) && addPlacePriceEN == "") {
+            session.setAttribute("placePriceENError", 1);
             errorFlag = true;
-            loger.warn("PlaceAddress is pattern error");
+            loger.warn("PlacePriceEN is pattern error");
         }
 
         if (checkData(addPlacePriceUA, CHECK_DATA) && addPlacePriceUA == "") {
@@ -141,7 +142,6 @@ public class SaveNewPlaceCommand implements Command {
         if (errorFlag) {
         } else {
             Place place = new Place();
-            place.setAdress(Decoder.decodeStringUtf8(addPlaceAddress));
             place.setLatitude(addPlaceLatitude);
             place.setLongitude(addPlacelongitude);
             place.setCategory_id(addCategoryID);
@@ -149,18 +149,20 @@ public class SaveNewPlaceCommand implements Command {
             place.setVisible(true);
             place.setPlace_time(Integer.valueOf(addPlaceTime));
             place.setDeleted(false);
+            place.setRecomended(false);
+            place.setCustom(false);
             loger.info("Object place is created " + place);
 
             lastAddedPlace = placeService.createAndReturnIndex(place);
             loger.info("lastAddedPlace is  " + lastAddedPlace);
             PlaceDescription placeDescriptionUA = new PlaceDescription(new PlaceDescription.Builder(lastAddedPlace, "UA",
-                    Decoder.decodeStringUtf8(addPlaceNameUA), Decoder.decodeStringUtf8(addPlaceDescriptionUA)));
-            placeDescriptionUA.setPhone(addPlacePhone);
+                    Decoder.decodeStringUtf8(addPlaceNameUA), Decoder.decodeStringUtf8(addPlaceDescriptionUA), Decoder.decodeStringUtf8(addPlaceAddressUA)));
+            placeDescriptionUA.setPhone(Decoder.decodeStringUtf8(addPlacePhone));
             placeDescriptionUA.setPrice(Decoder.decodeStringUtf8(addPlacePriceUA));
             loger.info("placeDescriptionUA is  " + placeDescriptionUA);
             PlaceDescription placeDescriptionEN = new PlaceDescription(new PlaceDescription.Builder(lastAddedPlace, "EN",
-                    Decoder.decodeStringUtf8(addPlaceNameEN), Decoder.decodeStringUtf8(addPlaceDescriptionEN)));
-            placeDescriptionEN.setPhone(addPlacePhone);
+                    Decoder.decodeStringUtf8(addPlaceNameEN), Decoder.decodeStringUtf8(addPlaceDescriptionEN),Decoder.decodeStringUtf8(addPlaceAddressEN)));
+            placeDescriptionEN.setPhone(Decoder.decodeStringUtf8(addPlacePhone));
             placeDescriptionEN.setPrice(Decoder.decodeStringUtf8(addPlacePriceEN));
             loger.info("placeDescriptionEN is  " + placeDescriptionEN);
 

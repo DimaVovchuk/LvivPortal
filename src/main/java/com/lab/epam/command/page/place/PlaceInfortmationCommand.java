@@ -238,21 +238,21 @@ public class PlaceInfortmationCommand implements Command {
         loger.info("Images " + userImages);
 
         request.setAttribute("place", place);
-        //loger.info("place " + place);
         request.setAttribute("placeDescription", placeDescription);
-        //loger.info("placeDescription " + placeDescription);
         request.setAttribute("placeImage", placeImage);
-        //loger.info("placeImage " + placeImage);
         request.setAttribute("placeResponse", placeResponse);
-        //loger.info("placeResponse " + placeResponse);
         request.setAttribute("userImages", userImages);
-        //loger.info("userImages " + userImages);
         request.setAttribute("users", users);
-        //loger.info("users " + users);
         request.setAttribute("infoPlacePhone", infoPlacePhone);
-        //loger.info("infoPlacePhone " + infoPlacePhone);
         request.setAttribute("infoPlacePrice", infoPlacePrice);
-        //loger.info("infoPlacePrice " + infoPlacePrice);
+        loger.info("place " + place);
+        loger.info("infoPlacePrice " + infoPlacePrice);
+        loger.info("placeDescription " + placeDescription);
+        loger.info("placeImage " + placeImage);
+        loger.info("placeResponse " + placeResponse);
+        loger.info("userImages " + userImages);
+        loger.info("users " + users);
+        loger.info("infoPlacePhone " + infoPlacePhone);
 
         request.setAttribute("place_referenceList", imList);
         //loger.info("place_reference " + place_reference);
