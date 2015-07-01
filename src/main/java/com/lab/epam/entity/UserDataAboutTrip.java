@@ -34,7 +34,7 @@ public class UserDataAboutTrip {
     private Boolean isAutomatic = false;
     private Double timePerDay;
     private Double timeForLunch;
-    private boolean sortFlag = true;
+    private Map<Integer,Boolean> sortFlag = new HashMap<>();
 
 
     public Boolean getIsFull() {
@@ -187,19 +187,19 @@ public class UserDataAboutTrip {
         this.timePerDay = timePerDay;
     }
 
-    public boolean getSortFlag() {
-        return sortFlag;
-    }
-
-    public void setSortFlag(boolean sortFlag) {
-        this.sortFlag = sortFlag;
-    }
-
     public double getRouteTime() {
         return routeTime;
     }
 
     public void setRouteTime(double routeTime) {
         this.routeTime = routeTime;
+    }
+
+    public Map<Integer, Boolean> getSortFlag() {
+        return sortFlag;
+    }
+
+    public void setSortFlag(Map<Integer, Boolean> sortFlag) {
+        this.sortFlag = sortFlag;
     }
 }

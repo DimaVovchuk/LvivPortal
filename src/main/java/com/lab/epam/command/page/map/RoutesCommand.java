@@ -29,7 +29,7 @@ public class RoutesCommand implements Command {
         HttpSession session = request.getSession();
         UserDataAboutTrip userDataTrip = (UserDataAboutTrip) session.getAttribute("userDataTrip");
         ResourceBundle bundle = (ResourceBundle) session.getAttribute("bundle");
-        if (userDataTrip != null ) {
+        if (userDataTrip != null) {
             Map<Integer, List<Place>> placeDay = userDataTrip.getPlaceDay();
             Distance distance = new Distance();
             List<RouteOneDayPlacesInfo> routeDayPlacesInfo = new ArrayList<>();
@@ -41,21 +41,22 @@ public class RoutesCommand implements Command {
                 List<Map<String, Double>> distAndTime = new ArrayList<>();
                 RouteOneDayPlacesInfo routeOneDayInfo = new RouteOneDayPlacesInfo(j);
                 places = placeDay.get(j);
-                if (userDataTrip.getSortFlag()) {
-                    if(userDataTrip.getBeginPlace()!=null){
-
-                    }
+                if (userDataTrip.getSortFlag().get(j)) {
                     String obj1 = "" + places.get(0).getLatitude() + " " + places.get(0).getLongitude() + "";
                     for (int i = 1; i < places.size(); i++) {
                         String obj2 = "" + places.get(i).getLatitude() + " " + places.get(i).getLongitude() + "";
                         try {
-                            distAndTime.add(distance.getDistanceAndTime(obj1, obj2));
+                            Map<String, Double> distanceMap = distance.getDistanceAndTime(obj1, obj2);
+                            if(distAndTime.contains(distanceMap)){
+                                distanceMap.put("distance",distanceMap.get("distance") + 0.123456789);
+                            }
+                            distAndTime.add(distanceMap);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
                     }
                     userDataTrip.getPlaceDay().put(j, sortPlaces(places, distAndTime, bundle.getLocale()));
-                    userDataTrip.setSortFlag(false);
+                    userDataTrip.getSortFlag().put(j, false);
                 }
                 PlaceImageService placeImageService = new PlaceImageService();
                 List<PlaceMarkerWithPhoto> placeMarkerWithPhotos = new ArrayList<>();
@@ -78,7 +79,7 @@ public class RoutesCommand implements Command {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        routeOneDayInfo.setTotalMinutes(routeOneDayInfo.getTotalMinutes() + time.intValue()/60 /*+ places.get(i).getPlace_time()*/+15);
+                        routeOneDayInfo.setTotalMinutes(routeOneDayInfo.getTotalMinutes() + time.intValue() / 60 /*+ places.get(i).getPlace_time()*/ + 15);
                     }
                 }
                 routeDayPlacesInfo.add(routeOneDayInfo);

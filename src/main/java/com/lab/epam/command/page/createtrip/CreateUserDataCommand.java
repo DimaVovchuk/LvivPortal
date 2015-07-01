@@ -63,7 +63,9 @@ public class CreateUserDataCommand implements Command {
         String theatres = request.getParameter("theatres");
         String placeArrive = request.getParameter("placeArrive");
         String timePerDay = request.getParameter("dayTime");
-        userDataTrip.setSortFlag(true);
+        Map<Integer,Boolean> flag = new HashMap<>();
+        flag.put(1,true);
+        userDataTrip.setSortFlag(flag);
 
         if (dontKnowDate == null) {
             if (beginTrip != null && !beginTrip.equalsIgnoreCase("")) {
