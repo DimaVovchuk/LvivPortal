@@ -137,13 +137,13 @@
                 <c:forEach items="${placeDescriptionList}" var="elem">
                     <c:choose>
                         <c:when test="${elem.locale eq 'UA'}">
-                            <p><b><cdg:l18n key="editplace.editPlaceAddressUA"/></b></p>
+                            <p><b><cdg:l18n key="editplace.placeaddressUA"/></b></p>
                             <input value="<c:out value="${placeDescriptionList[0].adress}"/>" id="editPlaceAddressUA"
                                    type="text"
                                    name="editPlaceAddressUA">
                         </c:when>
                         <c:otherwise>
-                            <p><b><cdg:l18n key="editplace.editPlaceAddressEN"/></b></p>
+                            <p><b><cdg:l18n key="editplace.placeaddressEN"/></b></p>
                             <input value="<c:out value="${placeDescriptionList[1].adress}"/>" id="editPlaceAddressEN"
                                    type="text"
                                    name="editPlaceAddressEN">

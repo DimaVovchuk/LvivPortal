@@ -15,6 +15,7 @@ public class Decoder {
         else {
             try {
                 decode =  new String (string.getBytes("ISO-8859-1"),"UTF-8");
+                decode.replace("'","`");
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }

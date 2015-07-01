@@ -102,10 +102,6 @@
 					<li><a href="/portal?command=userPlace"><i class="mdi-action-account-balance left"></i>My places</a>
 					</li>
 					<li><a href="/portal?command=allUserPhoto"><i class="mdi-image-photo left"></i>Gallery</a></li>
-					<c:if test="${role != 1}">
-						<li><a href="/portal?command=showAllCustomPlace"><i class="material-icons left">stars</i>My
-							custom places</a></li>
-					</c:if>
 					<li><a href="/portal?command=edit"><i class="mdi-action-settings left"></i>Settings</a></li>
 					<li class="divider"></li>
 					<c:choose>
