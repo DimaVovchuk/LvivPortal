@@ -28,16 +28,14 @@
 					<div class="place-page-navigation z-depth-1"></div>
 					<div class="placeCom-page-content">
 						<c:forEach items="${allUserAvatarMap}" var="elem">
-							<div class="match-col col l4 m6 s12" style="display:none">
+							<div class="match-col col l4 m6 s12">
 								<div class="card z-depth-2">
 									<div class="center-align">
-										<a href="/portal?command=companyInformation&id=${elem.value.id}"><img
-												class="responsive-img"
-												src="${pageContext.request.contextPath}/upload/photo/${elem.key.reference}"></a>
-									</div>
+									<a href="/portal?command=companyInformation&id=${elem.value.id}"><img
+										class="responsive-img" src="${pageContext.request.contextPath}/upload/photo/${elem.key.reference}"></a>
 									<a href="/portal?command=companyInformation&id=${elem.value.id}">
 										<h5><c:out value="${elem.value.name}"/></h5></a>
-										<%--<span><c:out value="${elem.value.about}"/></span>--%>
+									</div>
 								</div>
 							</div>
 						</c:forEach>

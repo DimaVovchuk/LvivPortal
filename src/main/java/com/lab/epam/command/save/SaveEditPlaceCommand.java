@@ -74,8 +74,7 @@ public class SaveEditPlaceCommand implements Command {
         String newState = params.get("newState");
         loger.info("All data waas succesful getting");
 
-        System.out.println("newVisible " + newVisible);
-        System.out.println("newState " + newState);
+
 //check input data
         if (checkData(newPlaceNameUA, CHECK_DATA) && newPlaceNameUA == "") {
             session.setAttribute("nameUAError", 1);
@@ -190,11 +189,9 @@ public class SaveEditPlaceCommand implements Command {
             loger.info("placeDescriptionEN is  " + placeDescriptionEN);
 
             placeService.update(place);
-            loger.info("place is succesful updated");
             placeDescriptionService.update(placeDescriptionUA);
-            loger.info("placeDescriptionUA is succesful updated");
             placeDescriptionService.update(placeDescriptionEN);
-            loger.info("placeDescriptionEN is succesful updated");
+
 
             save(request, files, params);
             loger.info("Method SaveNewPlaceCommand.execute() ended.");
