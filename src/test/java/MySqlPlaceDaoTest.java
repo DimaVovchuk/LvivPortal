@@ -47,21 +47,21 @@ public class MySqlPlaceDaoTest {
         connectionPool.putback(connection);
     }
 
-    @Test
-    public void testCreate() throws Exception {
-        List list = dao.getAll();
-        Place cat = new Place("ololol" + list.size()+1,"oololo","olololol",CATEGORY_ID,RATING, VISIBLE,TIME);
-        cat.setId(list.size()+1);
-        dao.create(cat);
-        list = dao.getAllWithoutDeleted();
-        Assert.assertNotNull(list);
-        int oldSize = list.size();
-        Assert.assertTrue(oldSize > 0);
-        dao.delete(cat);
-        list = dao.getAllWithoutDeleted();
-        Assert.assertNotNull(list);
-
-    }
+//    @Test
+//    public void testCreate() throws Exception {
+//        List list = dao.getAll();
+//        Place cat = new Place("ololol" + list.size()+1,"oololo","olololol",CATEGORY_ID,RATING, VISIBLE,TIME);
+//        cat.setId(list.size()+1);
+//        dao.create(cat);
+//        list = dao.getAllWithoutDeleted();
+//        Assert.assertNotNull(list);
+//        int oldSize = list.size();
+//        Assert.assertTrue(oldSize > 0);
+//        dao.delete(cat);
+//        list = dao.getAllWithoutDeleted();
+//        Assert.assertNotNull(list);
+//
+//    }
 
     @Test public void testGetByPK() throws Exception
     {
@@ -69,22 +69,22 @@ public class MySqlPlaceDaoTest {
         Assert.assertNotNull(category);
     }
 
-    @Test
-    public void testDelete() throws Exception {
-        List list = dao.getAll();
-        Place cat = new Place("ololo" + list.size()+1,"oololo","olololol",CATEGORY_ID,RATING, VISIBLE,TIME);
-        cat.setId(list.size()+1);
-        dao.create(cat);
-        list = dao.getAllWithoutDeleted();
-        Assert.assertNotNull(list);
-        int oldSize = list.size();
-        Assert.assertTrue(oldSize > 0);
-        dao.delete(cat);
-        list = dao.getAllWithoutDeleted();
-        Assert.assertNotNull(list);
-        int newSize = list.size();
-        Assert.assertEquals(1, oldSize - newSize);
-    }
+//    @Test
+//    public void testDelete() throws Exception {
+//        List list = dao.getAll();
+//        Place cat = new Place("ololo" + list.size()+1,"oololo","olololol",CATEGORY_ID,RATING, VISIBLE,TIME);
+//        cat.setId(list.size()+1);
+//        dao.create(cat);
+//        list = dao.getAllWithoutDeleted();
+//        Assert.assertNotNull(list);
+//        int oldSize = list.size();
+//        Assert.assertTrue(oldSize > 0);
+//        dao.delete(cat);
+//        list = dao.getAllWithoutDeleted();
+//        Assert.assertNotNull(list);
+//        int newSize = list.size();
+//        Assert.assertEquals(1, oldSize - newSize);
+//    }
 
     @Test
     public void testGetAll() throws Exception {

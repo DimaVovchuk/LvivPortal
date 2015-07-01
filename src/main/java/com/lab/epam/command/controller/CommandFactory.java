@@ -93,6 +93,8 @@ public class CommandFactory {
         commands.put("recomendedPlace", new RecomendedPlaceCommand());
         commands.put("recomendedPlaceload", new RecomendedPlaceLoaderCommand());
         commands.put("showAllCustomPlace", new ShowAllCustomPlaceCommand());
+        commands.put("recomendedWay", new RecomendedWayLoadCommand());
+        commands.put("recomendedWayJSON", new RecomendedWayCommand());
     }
 
     public static void createCommand(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

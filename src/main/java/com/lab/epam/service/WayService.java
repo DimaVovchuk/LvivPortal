@@ -228,5 +228,18 @@ public class WayService {
         return way_id;
     }
 
+    public List<Way> getAllWayRecomended(){
+        List<Way> ways = null;
+        try {
+            ways = mySqlWayDao.getAllWayRecomended();
+
+        } catch (PersistException e) {
+            e.printStackTrace();
+            loger.warn("Cant get all places");
+        }
+
+        return ways;
+    }
+
 }
 

@@ -31,6 +31,7 @@ public class MySqlWayDao extends AbstractJDBCDao<Way, Integer> {
     private static final String UPDATE_WAY_DAY = "UPDATE user_way SET way_days = ? WHERE user_id = ? AND way_id = ?";
     private static final String UPDATE_WAY_BEGIN_DATE = "UPDATE way SET date_begin = ? WHERE id = ?";
     private static final String UPDATE_WAY_END_DATE = "UPDATE way SET date_end = ? WHERE id = ?";
+    private static final String GET_WAY_RECOMENDED = "SELECT * FROM way WHERE recomended=true AND deleted=false AND visible=true";
 
     private class PersistGroup extends Way {
         public void setId(int id) {
@@ -243,6 +244,22 @@ public class MySqlWayDao extends AbstractJDBCDao<Way, Integer> {
         } finally {
             connection.putback(conn);
         }
+    }
+
+    public List<Way> getAllWayRecomended ()throws PersistException {
+        List<Way> list;
+        Connection conn = connection.retrieve();
+        try (PreparedStatement statement = conn.prepareStatement(GET_WAY_RECOMENDED)) {
+            ResultSet rs = statement.executeQuery();
+            list = parseResultSet(rs);
+        } catch (Exception e) {
+            throw new PersistException(e);
+        } finally {
+            connection.putback(conn);
+        }
+        return list;
+
+
     }
 
 }
