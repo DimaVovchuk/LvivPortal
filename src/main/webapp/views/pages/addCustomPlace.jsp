@@ -27,14 +27,14 @@
 		}
 
 		function updateMarkerPositionLat(latLng) {
-			document.getElementById('info').value =  latLng.lat();
+			document.getElementById('info').value = latLng.lat();
 		}
 		function updateMarkerPositionLon(latLng) {
 			document.getElementById('info1').value = latLng.lng();
 		}
 
 		function updateMarkerAddress(str) {
-			document.getElementById('address').innerHTML = str;
+			document.getElementById('address').value = str;
 		}
 
 		function initialize() {
@@ -46,7 +46,7 @@
 			});
 			var marker = new google.maps.Marker({
 				position: latLng,
-				title: 'Point A',
+				title: 'Marker',
 				map: map,
 				draggable: true
 			});
@@ -86,39 +86,166 @@
 		height: 400px;
 		float: left;
 	}
-
-	#infoPanel {
-		float: left;
-		margin-left: 10px;
-	}
-
 	#infoPanel div {
 		margin-bottom: 5px;
 	}
 </style>
 <jsp:include page="/views/elements/header.jsp"/>
 <div class="container">
-	<div id="mapCanvas"></div>
-	<form method=post action="portal?command=saveCustomPlace">
-		<%--<c:set var="command" scope="session" value="saveCustomPlace"/>--%>
-		<input type="hidden" name="command" value="saveCustomPlace">
+	<div id="edit-place">
+		<div class="row">
+			<div class="col l8 offset-l2 m12 s12" style="padding: 20px">
+				<div class="divider"></div>
+				<h4 class="center-align">Add Place</h4>
+				<div id="mapCanvas"></div>
+				<div id="markerStatus"></div>
+				<%--<div id="address"></div>--%>
+				<form method=post enctype=multipart/form-data action="/portal/editplace">
+					<c:set var="command" scope="session" value="saveCastomPlace"/>
+					<div class="center-align">
+						<h5>Add Photo...</h5>
 
-		<div id="infoPanel">
-			<b>Marker status:</b>
-			<div id="markerStatus"><i>Click and drag the marker.</i></div>
-			<b>Current position:</b>
-			<input name="info" id="info" value=""/>
-			<input name="info1" id="info1" value=""/>
+						<div class="file-field input-field" style="height: 45px">
+							<div class="btn cyan darken-2">
+								<span>Select image</span>
+								<input id="image-input" type="file" multiple name="sendfile"/>
+							</div>
+							<button id="image-clear" class="btn cyan darken-2">Clear image</button>
+						</div>
+						<div class="card z-depth-2">
+							<output id="image-preview"></output>
+						</div>
+					</div>
 
-			<b>Closest matching address:</b>
-			<div id="address"></div>
-			<button class="btn waves-effect waves-light" type="submit" name="save"><cdg:l18n
-					key="usercab.savechange"/><i class="mdi-content-send right"></i></button>
-			<button class="btn waves-effect waves-light" type="reset" name="cancel"><cdg:l18n
-					key="usercab.cancel"/></button>
+					<p><b>Name</b></p>
+					<input value="" id="placeNameUA" type="text" name="placeNameUA">
+					<p><b>Desription</b></p><input value="" id="placeNameUA" type="text" name="placeNameUA">
+					<p><b>Category</b></p>
+					<c:choose>
+						<c:when test="${editPlace.category_id eq 1}">
+							<select name="newCategory">
+								<option value="1"><cdg:l18n key="editplace.architecture"/></option>
+								<option value="2"><cdg:l18n key="editplace.architecture"/></option>
+								<option value="3"><cdg:l18n key="editplace.theatres"/></option>
+								<option value="4"><cdg:l18n key="editplace.hotels"/></option>
+								<option value="5"><cdg:l18n key="editplace.restaurants"/></option>
+							</select>
+						</c:when>
+						<c:when test="${editPlace.category_id eq 2}">
+							<select name="newCategory">
+								<option value="2"><cdg:l18n key="editplace.architecture"/></option>
+								<option value="1"><cdg:l18n key="editplace.churches"/></option>
+								<option value="3"><cdg:l18n key="editplace.theatres"/></option>
+								<option value="4"><cdg:l18n key="editplace.hotels"/></option>
+								<option value="5"><cdg:l18n key="editplace.restaurants"/></option>
+							</select>
+						</c:when>
+						<c:when test="${editPlace.category_id eq 3}">
+							<select name="newCategory">
+								<option value="3"><cdg:l18n key="editplace.theatres"/></option>
+								<option value="2"><cdg:l18n key="editplace.architecture"/></option>
+								<option value="1"><cdg:l18n key="editplace.churches"/></option>
+								<option value="4"><cdg:l18n key="editplace.hotels"/></option>
+								<option value="5"><cdg:l18n key="editplace.restaurants"/></option>
+							</select>
+						</c:when>
+						<c:when test="${editPlace.category_id eq 4}">
+							<select name="newCategory">
+								<option value="4"><cdg:l18n key="editplace.hotels"/></option>
+								<option value="3"><cdg:l18n key="editplace.theatres"/></option>
+								<option value="2"><cdg:l18n key="editplace.architecture"/></option>
+								<option value="1"><cdg:l18n key="editplace.churches"/></option>
+								<option value="5"><cdg:l18n key="editplace.restaurants"/></option>
+							</select>
+						</c:when>
+						<c:otherwise>
+							<select name="newCategory">
+								<option value="5"><cdg:l18n key="editplace.restaurants"/></option>
+								<option value="4"><cdg:l18n key="editplace.hotels"/></option>
+								<option value="3"><cdg:l18n key="editplace.theatres"/></option>
+								<option value="2"><cdg:l18n key="editplace.architecture"/></option>
+								<option value="1"><cdg:l18n key="editplace.churches"/></option>
+							</select>
+						</c:otherwise>
+					</c:choose>
+					<p><b>Price</b></p><input value="" id="placePriceUA" type="text" name="placePriceUA">
+					<p><b>Phone</b></p><input value="" id="placePhone" type="text" name="placePhone">
+					<p><b>Adrress</b></p><input value="" id="address" type="text" name="address">
+					<div class="row">
+						<div class="col s6">
+							<p><b>Latitute</b></p><input value="" id="info" type="text" name="info">
+						</div>
+						<div class="col s6">
+							<p><b>Longitute</b></p>
+							<input value="" id="info1" type="text" name="info1">
+						</div>
+					</div>
+					<p><b>Minimum time what need for visiting this place(IN MINUTE):</b></p>
+					<input value="" id="place_time" type="text" name="place_time">
+					<br>
+					<div>
+						<button class="btn waves-effect waves-light cyan darken-2" type="submit" name="save">
+							<cdg:l18n key="editplace.placesavechange"/></button>
+						<button class="btn waves-effect waves-light cyan darken-2" type="reset" name="cancel">
+							<cdg:l18n key="editplace.placecancel"/></button>
+					</div>
+				</form>
+			</div>
 		</div>
-	</form>
+	</div>
 </div>
-<%--<jsp:include page="/views/elements/footer.jsp"/>--%>
+<jsp:include page="/views/elements/footer.jsp"/>
+
+<script>
+	window.onload = function () {
+		if (window.File && window.FileList && window.FileReader) {
+			$('#image-input').on('change', function (event) {
+				var files = event.target.files;
+				var output = document.getElementById('image-preview');
+				for (var i = 0; i < files.length; i++) {
+					var file = files[i];
+					if (file.type.match('image.*')) {
+						if (files[0].size < 2097152) {
+							var picReader = new FileReader();
+							picReader.addEventListener('load', function (event) {
+								var picFile = event.target;
+								var div = document.createElement("div");
+								div.innerHTML = '<img class="image-thumbnail" src="' + picFile.result + '"/>';
+								output.insertBefore(div, null);
+							});
+							$('#image-clear, #image-preview').show();
+							picReader.readAsDataURL(file);
+						} else {
+							alert('Image Size is too big. Maximum size is 2MB.');
+							$(this).val('');
+						}
+					} else {
+						alert('You can only upload image.');
+						$(this).val('');
+					}
+				}
+			});
+		}
+	};
+
+	$('#image-input').on('click', function () {
+		$('.image-thumbnail').parent().remove();
+		$('#image-preview').hide();
+		$(this).val('');
+	});
+
+	$('#image-clear').on('click', function () {
+		$('.image-thumbnail').parent().remove();
+		$('#image-preview').hide();
+		$('#image-input').val('');
+		$(this).hide();
+	});
+
+	var placeDescriptionUA = $('#placeDescriptionUA');
+	placeDescriptionUA.html(placeDescriptionUA.html().trim());
+	var placeDescriptionEN = $('#placeDescriptionEN');
+	placeDescriptionEN.html(placeDescriptionEN.html().trim());
+</script>
+
 </body>
 </html>
