@@ -27,14 +27,17 @@
 		}
 
 		function updateMarkerPositionLat(latLng) {
-			document.getElementById('info').value = latLng.lat();
+			document.getElementById('latitude').value = latLng.lat();
+			document.getElementById('latitudeHid').value = latLng.lat();
 		}
 		function updateMarkerPositionLon(latLng) {
-			document.getElementById('info1').value = latLng.lng();
+			document.getElementById('longitude').value = latLng.lng();
+			document.getElementById('longitudeHid').value = latLng.lng();
 		}
 
 		function updateMarkerAddress(str) {
-			document.getElementById('address').value = str;
+			document.getElementById('customPlaceAdrress').value = str;
+			document.getElementById('customPlaceAdrressHid').value = str;
 		}
 
 		function initialize() {
@@ -75,8 +78,6 @@
 
 		// Onload handler to fire off the app.
 		google.maps.event.addDomListener(window, 'load', initialize);
-		var abc = document.getElementsByTagName("info1");
-		var value_to_store = abc[0].firstChild.nodeValue;
 	</script>
 </head>
 <body>
@@ -99,9 +100,8 @@
 				<h4 class="center-align">Add Place</h4>
 				<div id="mapCanvas"></div>
 				<div id="markerStatus"></div>
-				<%--<div id="address"></div>--%>
-				<form method=post enctype=multipart/form-data action="/portal/editplace">
-					<c:set var="command" scope="session" value="saveCastomPlace"/>
+				<form method=post enctype=multipart/form-data action="/portal?command=saveCustomPlace">
+					<c:set var="command" scope="session" value="saveCustomPlace"/>
 					<div class="center-align">
 						<h5>Add Photo...</h5>
 
@@ -117,9 +117,8 @@
 						</div>
 					</div>
 
-					<p><b>Name</b></p>
-					<input value="" id="placeNameUA" type="text" name="placeNameUA">
-					<p><b>Desription</b></p><input value="" id="placeNameUA" type="text" name="placeNameUA">
+					<p><b>Name</b></p><input value="" id="customPlaceName" type="text" name="customPlaceName">
+					<p><b>Desription</b></p><input value="" id="customPlaceDesc" type="text" name="customPlaceDesc">
 					<p><b>Category</b></p>
 					<c:choose>
 						<c:when test="${editPlace.category_id eq 1}">
@@ -168,16 +167,21 @@
 							</select>
 						</c:otherwise>
 					</c:choose>
-					<p><b>Price</b></p><input value="" id="placePriceUA" type="text" name="placePriceUA">
-					<p><b>Phone</b></p><input value="" id="placePhone" type="text" name="placePhone">
-					<p><b>Adrress</b></p><input value="" id="address" type="text" name="address">
+					<p><b>Price</b></p><input value="" id="customPlacePrice" type="text" name="customPlacePrice">
+					<p><b>Phone</b></p><input value="" id="customPlacePhone" type="text" name="customPlacePhone">
+					<p><b>Adrress</b></p>
+					<input value="" id="customPlaceAdrress" type="text" name="customPlaceAdrress" disabled>
+					<input value="" id="customPlaceAdrressHid" type="hidden" name="customPlaceAdrressHid">
 					<div class="row">
 						<div class="col s6">
-							<p><b>Latitute</b></p><input value="" id="info" type="text" name="info">
+							<p><b>Latitute</b></p>
+							<input value="" id="latitude" type="text" name="latitude" disabled>
+							<input value="" id="latitudeHid" type="hidden" name="latitudeHid">
 						</div>
 						<div class="col s6">
 							<p><b>Longitute</b></p>
-							<input value="" id="info1" type="text" name="info1">
+							<input value="" id="longitude" type="text" name="longitude" disabled>
+							<input value="" id="longitudeHid" type="hidden" name="longitudeHid">
 						</div>
 					</div>
 					<p><b>Minimum time what need for visiting this place(IN MINUTE):</b></p>

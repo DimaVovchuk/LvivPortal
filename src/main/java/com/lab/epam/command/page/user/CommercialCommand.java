@@ -3,8 +3,11 @@ package com.lab.epam.command.page.user;
 import com.lab.epam.command.controller.Command;
 import com.lab.epam.entity.User;
 import com.lab.epam.entity.UserImage;
+import com.lab.epam.helper.ClassName;
 import com.lab.epam.service.UserImageService;
 import com.lab.epam.service.UserService;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +23,7 @@ import java.util.Map;
  * Created by Vasyl on 27.06.2015.
  */
 public class CommercialCommand implements Command {
+    private static final Logger loger = LogManager.getLogger(ClassName.getCurrentClassName());
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         UserService userService = new UserService();
@@ -64,6 +68,7 @@ public class CommercialCommand implements Command {
                         }
                         guideAvatarMap.put(userImage, userGuideList.get(index));
                     }
+                    loger.info("guideAvatarMap "+ guideAvatarMap);
                     session.setAttribute("allUserAvatarMap",guideAvatarMap);
                     break;
                 case "agency":
@@ -76,6 +81,7 @@ public class CommercialCommand implements Command {
                         }
                         agencyAvatarMap.put(userImage, userConpanyList.get(index));
                     }
+                    loger.info("agencyAvatarMap "+ agencyAvatarMap);
                     session.setAttribute("allUserAvatarMap",agencyAvatarMap);
                     break;
                 default:
@@ -84,6 +90,7 @@ public class CommercialCommand implements Command {
             }
         } else {
             session.setAttribute("allUserAvatarMap",allUserAvatarMap);
+            loger.info("allUserAvatarMap "+ allUserAvatarMap);
         }
 
         request.getRequestDispatcher("/views/pages/commercial_page.jsp").forward(request, response);

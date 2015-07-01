@@ -125,7 +125,7 @@ public class SaveEditPlaceCommand implements Command {
             loger.warn("PlacePhone is pattern error");
         }
 
-        if (checkData(newPlaceTime, CHECK_PLACE_TIME) && newPlaceTime == "") {
+        if (checkData(newPlaceTime, CHECK_PLACE_TIME)) {
             session.setAttribute("PlaceTimeError", 1);
             errorFlag = true;
             loger.warn("PlaceTime is pattern error");
