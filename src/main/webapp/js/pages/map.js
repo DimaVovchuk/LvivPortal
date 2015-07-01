@@ -136,7 +136,24 @@ var initDayMarkers = function (dayNumber) {
 };
 
 var calcRoute = function (data) {
-    if (data.length > 1) {
+    //console.log(data.length );
+    //
+    //if (data.length > 10) {
+    //    var poly = [];
+    //    var polyOptions = {
+    //        strokeColor: '#000000',
+    //        strokeOpacity: 1.0,
+    //        strokeWeight: 3
+    //    };
+    //    for (var i = 1; i < (data.length - 1); i++) {
+    //        poly.push(new google.maps.LatLng(data[i].latitude, data[i].longitude));
+    //    }
+    //
+    //    poly = new google.maps.Polyline(polyOptions);
+    //    poly.setMap(map);
+    //}
+
+    if (data.length > 1 /*&& data.length < 10*/) {
         var start = new google.maps.LatLng(data[0].latitude, data[0].longitude);
         var image = {
             url: "",

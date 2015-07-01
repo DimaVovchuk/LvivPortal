@@ -58,7 +58,7 @@ public class Distance {
         params.put("origin", origin);
         params.put("destination", destination);
         String url = baseUrl + '?' + encodeParams(params);
-        System.out.println(url);
+//        System.out.println(url);
         JSONObject response = JsonReader.read(url);
         int i = 0;
         while(response.has("error_message")){
