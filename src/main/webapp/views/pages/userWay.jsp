@@ -16,7 +16,7 @@
 <jsp:include page="/views/elements/script.jsp"/>
 
 <body>
-
+<div class="full-height">
 <jsp:include page="/views/elements/header.jsp"/>
 <div class="user-places" id="user-places">
     <div class="places">
@@ -200,7 +200,8 @@
     </div>
 
     <jsp:include page="/views/elements/footer.jsp"/>
-
+    </div>
+    </div>
     <script>
         $(".match-col").matchHeight({
             property: 'height'

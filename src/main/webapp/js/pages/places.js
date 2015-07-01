@@ -24,13 +24,20 @@ var loadPlacesData = function (data) {
 
 var disabled = function (data) {
     var siz = data.length;
-    for (var i = 1; i < siz; i++){
-        var up_i = $("#up" + i);
+    for (var i = 0; i <= siz - 1; i++) {
+        var dat = data[i].id;
+        var up_i = $("#up" + dat);
         var rating = up_i.data('rating');
         var x = up_i.data('id');
-        if (rating=='1'){$("#up" + x).addClass('disabled');}
-        if (rating=='0'){$("#none" + x).addClass('disabled');}
-        if (rating=='-1'){$("#down" + x).addClass('disabled');}
+        if (rating == '1') {
+            $("#up" + x).addClass('disabled');
+        }
+        if (rating == '0') {
+            $("#none" + x).addClass('disabled');
+        }
+        if (rating == '-1') {
+            $("#down" + x).addClass('disabled');
+        }
     }
 };
 
@@ -133,6 +140,7 @@ var addPlace = function () {
 var initCategoriesEventsPlace = function () {
     $('#category-place').on('click', function (e) {
         e.preventDefault();
+        e.stopImmediatePropagation();
         $.ajax({
             url: window.location.origin + '/' + $(e.target).attr('href'),
             success: loadPlacesData,

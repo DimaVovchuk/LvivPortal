@@ -40,24 +40,7 @@
                 <div class="collection with-header z-depth-2">
                     <div class="collection-header"><h4><cdg:l18n key="places.categories"/></h4></div>
 <div id="category-place">
-                    <%--<a href="/portal?command=place&category=architecture"--%>
-                       <%--class="collection-item black-text ${requestScope.active_architecture}"><cdg:l18n--%>
-                            <%--key="places.architecture"/><c:set scope="session" var="category" value="architecture"/></a>--%>
-                    <%--<a href="/portal?command=place&category=churches"--%>
-                       <%--class="collection-item black-text ${requestScope.active_churches}"><cdg:l18n--%>
-                            <%--key="places.churches"/><c:set scope="session" var="category" value="churches"/></a>--%>
-                    <%--<a href="portal?command=place&category=theatres"--%>
-                       <%--class="collection-item black-text ${requestScope.active_theatres}"><cdg:l18n--%>
-                            <%--key="places.theatres"/><c:set scope="session" var="category" value="theatres"/></a>--%>
-                    <%--<a href="/portal?command=place&category=hotels"--%>
-                       <%--class="collection-item black-text ${requestScope.active_hotels}"><cdg:l18n--%>
-                            <%--key="places.hotels"/><c:set scope="session" var="category" value="hotels"/></a>--%>
-                    <%--<a href="/portal?command=place&category=restaurants"--%>
-                       <%--class="collection-item black-text ${requestScope.active_restaurants}"><cdg:l18n--%>
-                            <%--key="places.restaurants"/><c:set scope="session" var="category" value="restaurants"/></a>--%>
-                    <%--<a href="/portal?command=place"--%>
-                       <%--class="collection-item black-text ${requestScope.active_allplaces}"><cdg:l18n--%>
-                            <%--key="places.all"/></a>--%>
+
                     <a href="portal?command=placeJSON&category=architecture"  data-category="architectture"
                         class="collection-item black-text ${requestScope.active_architecture}"><cdg:l18n
                         key="places.architecture"/></a>
@@ -95,7 +78,7 @@
         <div class="card z-depth-2" style="padding:10px; height:95%">
             <c:if test="${userDataTrip!=null}">
 
-                <a class="modal-trigger btn-floating btn-large waves-effect waves-light cyan darken-2" data-target="chooseDayRecomended"
+                <a class="btn-on-img modal-trigger btn-floating btn-large waves-effect waves-light cyan darken-2" data-target="chooseDayRecomended"
                    name onclick="$('#place_id').val('{{id}}')" style="position: absolute; margin: 10px">
                     <i class="mdi-content-add"></i>
                 </a>

@@ -40,24 +40,27 @@
       <div class="col l3 m4 s5">
         <div class="collection with-header z-depth-2">
           <div class="collection-header"><h4><cdg:l18n key="places.categories"/></h4></div>
-          <a href="portal?command=place&category=architecture"
-             class="collection-item black-text ${requestScope.active_architecture}"><cdg:l18n
-                  key="places.architecture"/></a>
-          <a href="portal?command=place&category=churches"
-             class="collection-item black-text ${requestScope.active_churches}"><cdg:l18n
-                  key="places.churches"/></a>
-          <a href="portal?command=place&category=theatres"
-             class="collection-item black-text ${requestScope.active_theatres}"><cdg:l18n
-                  key="places.theatres"/></a>
-          <a href="portal?command=place&category=hotels"
-             class="collection-item black-text ${requestScope.active_hotels}"><cdg:l18n
-                  key="places.hotels"/></a>
-          <a href="portal?command=place&category=restaurants"
-             class="collection-item black-text ${requestScope.active_restaurants}"><cdg:l18n
-                  key="places.restaurants"/></a>
-          <a href="portal?command=place"
-             class="collection-item black-text ${requestScope.active_allplaces}"><cdg:l18n
-                  key="places.all"/></a>
+            <div id="recomended-category-place">
+
+                <a href="portal?command=recomendedPlace&category=architecture"  data-category="architectture"
+                   class="collection-item black-text ${requestScope.active_architecture}"><cdg:l18n
+                        key="places.architecture"/></a>
+                <a href="portal?command=recomendedPlace&category=churches"  data-category="churches"
+                   class="collection-item black-text ${requestScope.active_churches}"><cdg:l18n
+                        key="places.churches"/></a>
+                <a href="portal?command=recomendedPlace&category=theatres"  data-category="theatres"
+                   class="collection-item black-text ${requestScope.active_theatres}"><cdg:l18n
+                        key="places.theatres"/></a>
+                <a href="portal?command=recomendedPlace&category=hotels"  data-category="hotels"
+                   class="collection-item black-text ${requestScope.active_hotels}"><cdg:l18n
+                        key="places.hotels"/></a>
+                <a href="portal?command=recomendedPlace&category=restaurants"  data-category="restaurants"
+                   class="collection-item black-text ${requestScope.active_restaurants}"><cdg:l18n
+                        key="places.restaurants"/></a>
+                <a href="portal?command=recomendedPlace"
+                   class="collection-item black-text ${requestScope.active_allplaces}"><cdg:l18n
+                        key="places.all"/></a>
+            </div>
         </div>
       </div>
     </div>
@@ -88,92 +91,6 @@
   }
 </script>
 
-<%--<script>--%>
-    <%--function submitForm(form){--%>
-        <%--var url = form.attr("action");--%>
-        <%--var formData = {};--%>
-        <%--$(form).find("input[name]").each(function (index, node) {--%>
-            <%--formData[node.name] = node.value;--%>
-        <%--});--%>
-        <%--$.post(url, formData).done(function (data) {--%>
-            <%--alert(data);--%>
-        <%--});--%>
-    <%--}--%>
-<%--</script>--%>
-
-<%--<script>--%>
-    <%--$(function () {--%>
-
-        <%--$('form').on('submit', function (e) {--%>
-
-            <%--e.preventDefault();--%>
-
-            <%--$.ajax({--%>
-                <%--type: 'post',--%>
-                <%--url: window.location.origin + '/portal?command=addplace',--%>
-                <%--data: $('form').serialize(),--%>
-<%--//                success: function () {--%>
-<%--//                    alert('form was submitted');--%>
-<%--//                }--%>
-            <%--});--%>
-
-        <%--});--%>
-
-    <%--});--%>
-<%--</script>--%>
-
-<%--<script>--%>
-    <%--function like(placeholder) {--%>
-        <%--$.ajax({--%>
-            <%--url: $(placeholder).attr('rel'),--%>
-            <%--type: "GET",--%>
-            <%--success:dissable(placeholder),--%>
-            <%--error:function (){--%>
-                <%--alert("testing error");--%>
-            <%--}--%>
-        <%--});--%>
-        <%--return false;--%>
-    <%--}--%>
-<%--</script>--%>
-
-<%--<script>--%>
-    <%--function none(placeholder) {--%>
-        <%--$.ajax({--%>
-            <%--url: $(placeholder).attr('rel'),--%>
-            <%--type: "GET",--%>
-            <%--success:dissable(placeholder),--%>
-            <%--error:function (){--%>
-                <%--alert("testing error");--%>
-            <%--}--%>
-        <%--});--%>
-        <%--return false;--%>
-    <%--}--%>
-<%--</script>--%>
-
-<%--<script>--%>
-    <%--function dislike(placeholder) {--%>
-        <%--$.ajax({--%>
-            <%--url: $(placeholder).attr('rel'),--%>
-            <%--type: "GET",--%>
-            <%--success:dissable(placeholder),--%>
-            <%--error:function (){--%>
-                <%--alert("testing error");--%>
-            <%--}--%>
-        <%--});--%>
-        <%--return false;--%>
-    <%--}--%>
-<%--</script>--%>
-
-<%--<script>--%>
-    <%--function dissable(placeholder) {--%>
-        <%--var x = $(placeholder).data('id');--%>
-        <%--$("#up" + x).removeClass('disabled');--%>
-        <%--$("#none" + x).removeClass('disabled');--%>
-        <%--$("#down" + x).removeClass('disabled');--%>
-        <%--$(placeholder).addClass('disabled');--%>
-    <%--}--%>
-<%--</script>--%>
-
 
 <script id="recomended-place-info-template" type="text/x-handlebars-template">
     {{#each this}}
@@ -181,15 +98,15 @@
     <div class="card z-depth-2" style="padding:10px; height:95%">
         <c:if test="${userDataTrip!=null}">
 
-                    <a class="modal-trigger btn-floating btn-large waves-effect waves-light cyan darken-2" data-target="chooseDayRecomended"
-                            name onclick="$('#place_id').val('{{id}}')">
-                        <i class="mdi-content-add"></i>
-                    </a>
+            <a class="btn-on-img modal-trigger btn-floating btn-large waves-effect waves-light cyan darken-2" data-target="chooseDayRecomended"
+               name onclick="$('#place_id').val('{{id}}')" style="position: absolute; margin: 10px">
+                <i class="mdi-content-add"></i>
+            </a>
       </c:if>
 
       <div class="center-align">
         <a href="portal?command=placeInformation&place_id={{id}}"><img
-                class="responsive-img"
+                class="responsive-img place-img"
                 src="${pageContext.request.contextPath}/upload/photo/{{imageReference}}"></a>
         <a href="portal?command=placeInformation&place_id={{id}}">
           <h5><c:out value="{{name}}"/></h5></a>

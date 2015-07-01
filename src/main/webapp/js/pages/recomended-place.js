@@ -1,37 +1,48 @@
-var loadPlaceData = function () {
+var loadRecomendPlaceAboutData = function () {
 
     $.ajax({
         url: window.location.origin + '/portal?command=recomendedPlace',
-        success: loadPlaces,
-        error: loadPlaces
+        success: loadRecomendPlacesData,
+        error: loadRecomendPlacesData
     })
 };
 
-var loadPlaces = function (data) {
+var loadRecomendPlacesData = function (data) {
     if (!data) return false;
-    var source = $("#place-info-template").html();
-    Handlebars.registerHelper("variable_x", function(input){
-        return Session.get("x");
-    });
+    var source = $("#recomended-place-info-template").html();
     var template = Handlebars.compile(source);
     var html = template(data);
-    $('#place-info-collection').html(html);
-    imgHeight();
+    $('#recomended-place-info-collection').html(html);
+    setTimeout(function () {
+        imgHeight();
+        matchColumn();
+        paginate();
+    }, 0);
     disabled(data);
+
 };
 
-function disabled(data) {
+var disabled = function (data) {
     var siz = data.length;
-    for (var i = 1; i < siz; i++){
-        var rating = $("#up" + i).data('rating');
-        var x = $("#up" + i).data('id');
-        if (rating=='1'){$("#up" + x).addClass('disabled');}
-        if (rating=='0'){$("#none" + x).addClass('disabled');}
-        if (rating=='-1'){$("#down" + x).addClass('disabled');}
-    }
-}
+        for (var i = 0; i <= siz - 1; i++) {
+            var dat = data[i].id;
+            var up_i = $("#up" + dat);
+            var rating = up_i.data('rating');
+            var x = up_i.data('id');
+            if (rating == '1') {
+                $("#up" + x).addClass('disabled');
+            }
+            if (rating == '0') {
+                $("#none" + x).addClass('disabled');
+            }
+            if (rating == '-1') {
+                $("#down" + x).addClass('disabled');
+            }
+        }
+};
 
-function like(placeholder) {
+
+var like = function (placeholder) {
     $.ajax({
         url: $(placeholder).attr('rel'),
         type: "GET",
@@ -41,36 +52,17 @@ function like(placeholder) {
         }
     });
     return false;
-}
+};
 
-$(function () {
-
-    $('#form-add-place').on('submit', function (e) {
-
-        e.preventDefault();
-
-        $.ajax({
-            type: 'post',
-            url: window.location.origin + '/portal?command=addplace',
-            data: $('form').serialize(),
-//                success: function () {
-//                    alert('form was submitted');
-//                }
-        });
-
-    });
-
-});
-
-function dissable(placeholder) {
+var dissable = function (placeholder) {
     var x = $(placeholder).data('id');
     $("#up" + x).removeClass('disabled');
     $("#none" + x).removeClass('disabled');
     $("#down" + x).removeClass('disabled');
     $(placeholder).addClass('disabled');
-}
+};
 
-function none(placeholder) {
+var none = function (placeholder) {
     $.ajax({
         url: $(placeholder).attr('rel'),
         type: "GET",
@@ -80,9 +72,11 @@ function none(placeholder) {
         }
     });
     return false;
-}
+};
 
-function dislike(placeholder) {
+
+
+var dislike = function (placeholder) {
     $.ajax({
         url: $(placeholder).attr('rel'),
         type: "GET",
@@ -92,7 +86,7 @@ function dislike(placeholder) {
         }
     });
     return false;
-}
+};
 
 var paginate = function () {
     $('#place-page-container').pajinate({
@@ -110,7 +104,6 @@ var matchColumn = function () {
     $(".match-col").matchHeight({
         property: 'height'
     });
-    paginate();
     initModalWindows();
 };
 
@@ -120,21 +113,49 @@ var imgHeight = function () {
     img.css({
         'height': width + 'px'
     });
-    matchColumn();
 };
 
 var initRangeListeners = function () {
     var timePlace = $("#timePlace");
-    timePlace.mousemove(function (e) {
+    timePlace.mousemove(function () {
         $("#timeValue").html($(this).val());
     });
-    timePlace.change(function (e) {
+    timePlace.change(function () {
         $("#timeValue").html($(this).val());
     });
 };
 
-$(function () {
-    loadPlaceData();
+var addPlace = function () {
+    $('#form-add-place').on('submit', function (e) {
+        e.preventDefault();
+      //  e.stopImmediatePropagation();
+        $.ajax({
+            type: 'post',
+            url: window.location.origin + '/portal?command=addplace',
+            data: $('form').serialize(),
+        });
+    });
+};
 
+var initCategoriesEventsPlace = function () {
+    $('#recomended-category-place').on('click', function (e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        $.ajax({
+            url: window.location.origin + '/' + $(e.target).attr('href'),
+            success: loadRecomendPlacesData,
+            error: loadRecomendPlacesData
+        });
+    });
+};
+
+$(function () {
     initRangeListeners();
+    loadRecomendPlaceAboutData();
+    initCategoriesEventsPlace();
+
+
+    addPlace();
+
+
 });
