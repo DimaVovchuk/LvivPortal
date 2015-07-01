@@ -61,10 +61,11 @@ public class CreateUserDataCommand implements Command {
         String architecture = request.getParameter("architecture");
         String churches = request.getParameter("churches");
         String theatres = request.getParameter("theatres");
-        String lunch = request.getParameter("lunch");
         String placeArrive = request.getParameter("placeArrive");
-        String timeForLunch = request.getParameter("lunchTime");
         String timePerDay = request.getParameter("dayTime");
+        Map<Integer,Boolean> flag = new HashMap<>();
+        flag.put(1,true);
+        userDataTrip.setSortFlag(flag);
 
         if (dontKnowDate == null) {
             if (beginTrip != null && !beginTrip.equalsIgnoreCase("")) {
@@ -74,7 +75,6 @@ public class CreateUserDataCommand implements Command {
                     DateTime ending = new DateTime(begin);
                     Days d = Days.daysBetween(start, ending);
                     daysBegin = d.getDays();
-                    System.out.println("day begin " + daysBegin);
                     if (daysBegin >= 0) {
                         java.sql.Date sqltDate = new java.sql.Date(begin.getTime());
                         userDataTrip.setBeginTrip(sqltDate);
@@ -145,6 +145,7 @@ public class CreateUserDataCommand implements Command {
         if (automatic != null) {
             userDataTrip.setIsAutomatic(true);
             userDataTrip.setTimePerDay(Double.parseDouble(timePerDay));
+
             if (architecture != null || churches != null || theatres != null) {
                 listCategory = new ArrayList<>();
                 haveCategory = true;
@@ -167,12 +168,8 @@ public class CreateUserDataCommand implements Command {
 
             if (haveCategory) {
                 userDataTrip.setCategory(listCategory);
-                userDataTrip.setPlaceDay(getPlacesByTimeAndCategory(listCategory, Double.valueOf(timePerDay)));
-            }
-
-            if (lunch != null) {
-                userDataTrip.setTimeForLunch(Double.parseDouble(timeForLunch));
-                userDataTrip.setIsCaffees(true);
+                Map<Integer, List<Place>> placesByTimeAndCategory = getPlacesByTimeAndCategory(listCategory, Double.valueOf(timePerDay));
+                userDataTrip.setPlaceDay(placesByTimeAndCategory);
             }
 
         } else {

@@ -14,10 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by Admin on 23.06.2015.
@@ -78,7 +75,7 @@ public class AddPlaceUserDataTripCommand implements Command {
                         onePlaceForWay.setPlace_time(timePlace);
                         placeForWay.add(onePlaceForWay);
                         userDataAboutTrip.setIsFull(true);
-                        userDataAboutTrip.setSortFlag(true);
+                        userDataAboutTrip.getSortFlag().put(Integer.parseInt(dayNumberString),true);
                     }
                 }
             }
@@ -87,9 +84,7 @@ public class AddPlaceUserDataTripCommand implements Command {
             userDataAboutTrip.setPlaceDay(map);
             loger.info("Set map to userDataAboutTrip");
         }
-     //   System.out.println("userDataAboutTrip " + userDataAboutTrip);
         session.setAttribute("userDataTrip", userDataAboutTrip);
-        //request.getRequestDispatcher("portal?command=userPlace").forward(request, response);
 
     }
 

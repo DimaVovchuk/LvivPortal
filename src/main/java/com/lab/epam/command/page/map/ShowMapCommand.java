@@ -46,7 +46,6 @@ public class ShowMapCommand implements Command {
             }
             placeMarkerWithPhotos.add(new PlaceMarkerWithPhoto(place.getId(), placeDescription.getName(), place.getLatitude(), place.getLongitude(), placeImage.getReference(), placeDescription.getDescription()));
         }
-        session.setAttribute("language", bundle.getLocale().toString());
         request.setAttribute("places", placeMarkerWithPhotos);
         loger.info("Command ShowMapCommand.");
         request.getRequestDispatcher("/views/pages/map.jsp").forward(request, response);
