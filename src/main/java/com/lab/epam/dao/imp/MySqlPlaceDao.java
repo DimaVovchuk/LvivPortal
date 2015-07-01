@@ -27,9 +27,9 @@ public class MySqlPlaceDao extends AbstractJDBCDao<Place, Integer> {
     private static final String GET_PLACE_BY_CATEGORY_RECOMENDED = "SELECT * FROM place WHERE recomended=true AND deleted=false AND visible=true AND category_id = ?";
     private static final String GET_PLACE_RECOMENDED = "SELECT * FROM place WHERE recomended=true AND deleted=false AND visible=true";
     private static final String GET_PLACE_VISIBLE = "SELECT * FROM place WHERE deleted=false AND visible=true";
-    private static final String GET_PLACE_BY_USER_ID = "SELECT p.id, p.adress, p.latitude, p.longitude, p.category_id, p.rating, p.visible, p.place_time, p.deleted FROM place AS p JOIN user_place AS up JOIN user AS u WHERE up.user_id = u.id AND up.deleted = false AND up.place_id = p.id AND u.id = ?";
-    private static final String GET_PLACE_BY_WAY_ID_DAY_NUMBER = "SELECT p.id, p.adress, p.latitude, p.longitude, p.category_id, p.rating, p.visible, p.place_time, p.deleted FROM place AS p JOIN place_way AS pw JOIN way AS w WHERE pw.way_id = w.id AND pw.place_id = p.id AND pw.deleted = false AND w.id = ? AND pw.day_number = ?";
-    private static final String GET_PLACE_BY_WAY_ID = "SELECT p.id, p.adress, p.latitude, p.longitude, p.category_id, p.rating, p.visible, p.place_time, p.deleted FROM place AS p JOIN place_way AS pw JOIN way AS w WHERE pw.way_id = w.id AND pw.place_id = p.id AND w.id = ? AND pw.deleted = false";
+    private static final String GET_PLACE_BY_USER_ID = "SELECT p.id, p.latitude, p.longitude, p.category_id, p.rating, p.visible, p.place_time, p.deleted, p.recomended, p.custom FROM place AS p JOIN user_place AS up JOIN user AS u WHERE up.user_id = u.id AND up.deleted = false AND up.place_id = p.id AND u.id = ?";
+    private static final String GET_PLACE_BY_WAY_ID_DAY_NUMBER = "SELECT p.id, p.latitude, p.longitude, p.category_id, p.rating, p.visible, p.place_time, p.deleted, p.recomended, p.custom FROM place AS p JOIN place_way AS pw JOIN way AS w WHERE pw.way_id = w.id AND pw.place_id = p.id AND pw.deleted = false AND w.id = ? AND pw.day_number = ?";
+    private static final String GET_PLACE_BY_WAY_ID = "SELECT p.id, p.latitude, p.longitude, p.category_id, p.rating, p.visible, p.place_time, p.deleted, p.recomended, p.custom FROM place AS p JOIN place_way AS pw JOIN way AS w WHERE pw.way_id = w.id AND pw.place_id = p.id AND w.id = ? AND pw.deleted = false";
     private static final String DELETE_PLACE_BY_USER_ID_PLACE_ID = "UPDATE user_place SET deleted = true WHERE user_id = ? AND place_id = ?";
     private static final String GET_PLACE_BY_LATITUDE_LONGITUDE = "SELECT * FROM place WHERE longitude = ? AND latitude = ?";
     private static final String CREATE_PLACE_WAY = "INSERT INTO place_way (place_id, way_id, day_number, time) VALUES (?,?,?,?);";
@@ -58,20 +58,21 @@ public class MySqlPlaceDao extends AbstractJDBCDao<Place, Integer> {
         PreparedStatement ps = null;
         PreparedStatement psGetId = null;
         ResultSet rsId = null;
-        String sqlQuery = "INSERT INTO place (adress, latitude,longitude,category_id,rating,visible,place_time,deleted) VALUES (?, ?, ?, ?, ?, ?, ?, ?); ";
+        String sqlQuery = "INSERT INTO place (latitude,longitude,category_id,rating,visible,place_time,deleted,recomended,custom) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?); ";
         String sqlQueryGetId = "SELECT id FROM place WHERE id = LAST_INSERT_ID();";
             try {
                 connect.setAutoCommit(false);
                 ps = connect.prepareStatement(sqlQuery);
                 psGetId = connect.prepareStatement(sqlQueryGetId);
-                ps.setString(1, place.getAdress());
-                ps.setString(2, place.getLatitude());
-                ps.setString(3, place.getLongitude());
-                ps.setInt(4, place.getCategory_id());
-                ps.setInt(5, place.getRating());
-                ps.setBoolean(6, place.getVisible());
-                ps.setInt(7, place.getPlace_time());
-                ps.setBoolean(8, place.getDeleted());
+                ps.setString(1, place.getLatitude());
+                ps.setString(2, place.getLongitude());
+                ps.setInt(3, place.getCategory_id());
+                ps.setInt(4, place.getRating());
+                ps.setBoolean(5, place.getVisible());
+                ps.setInt(6, place.getPlace_time());
+                ps.setBoolean(7, place.getDeleted());
+                ps.setBoolean(8, place.getRecomended());
+                ps.setBoolean(9, place.getCustom());
                 ps.executeUpdate();
 
                 loger.info("before executeQuery");

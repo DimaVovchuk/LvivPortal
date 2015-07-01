@@ -13,8 +13,6 @@ import java.util.Comparator;
 public class Place implements Identified<Integer> {
     @Column("id")
     private Integer id = null;
-    @Column("adress")
-    private String adress;
     @Column("latitude")
     private String latitude;
     @Column("longitude")
@@ -27,90 +25,20 @@ public class Place implements Identified<Integer> {
     private Integer category_id;
     @Column("place_time")
     private Integer place_time;
+    @Column("recomended")
+    private Boolean recomended;
+    @Column("custom")
+    private Boolean custom;
     @Column("deleted")
     private Boolean deleted = false;
 
-    public Place(String adress, String latitude, String longitude, Integer category_id, Integer rating,  Boolean visible, Integer place_time) {
-        this.rating = rating;
-        this.adress = adress;
-        this.latitude = latitude;
-        this.longitude = longitude;
-        this.visible = visible;
-        this.category_id = category_id;
-        this.place_time = place_time;
-    }
-
-    public Place(){
-    }
-
     @Override
-    public String toString() {
-        return "Place{" +
-                "id=" + id +
-                ", adress='" + adress + '\'' +
-                ", latitude='" + latitude + '\'' +
-                ", longitude='" + longitude + '\'' +
-                ", category_id='" + category_id + '\'' +
-                ", rating=" + rating +
-                ", visible='" + visible + '\'' +
-                ", place_time='" + place_time + '\'' +
-                ", deleted=" + deleted +
-                '}';
-    }
-
     public Integer getId() {
         return id;
     }
 
     public void setId(Integer id) {
         this.id = id;
-    }
-    public Integer getRating() {
-        return rating;
-    }
-
-    public void setRating(Integer rating) {
-        this.rating = rating;
-    }
-
-    public String getAdress() {
-        return adress;
-    }
-
-    public void setAdress(String adress) {
-        this.adress = adress;
-    }
-
-    public String getLatitude() {
-        return latitude;
-    }
-
-    public void setLatitude(String latitude) {
-        this.latitude = latitude;
-    }
-
-    public String getLongitude() {
-        return longitude;
-    }
-
-    public void setLongitude(String longitude) {
-        this.longitude = longitude;
-    }
-
-    public Integer getCategory_id() {
-        return category_id;
-    }
-
-    public void setCategory_id(Integer category_id) {
-        this.category_id = category_id;
-    }
-
-    public Boolean getVisible() {
-        return visible;
-    }
-
-    public void setVisible(Boolean visible) {
-        this.visible = visible;
     }
 
     public Boolean getDeleted() {
@@ -121,6 +49,22 @@ public class Place implements Identified<Integer> {
         this.deleted = deleted;
     }
 
+    public Boolean getCustom() {
+        return custom;
+    }
+
+    public void setCustom(Boolean custom) {
+        this.custom = custom;
+    }
+
+    public Boolean getRecomended() {
+        return recomended;
+    }
+
+    public void setRecomended(Boolean recomended) {
+        this.recomended = recomended;
+    }
+
     public Integer getPlace_time() {
         return place_time;
     }
@@ -129,8 +73,65 @@ public class Place implements Identified<Integer> {
         this.place_time = place_time;
     }
 
+    public Integer getCategory_id() {
+        return category_id;
+    }
 
-   public static class PlaceComparator implements Comparator<Object> {
+    public void setCategory_id(Integer category_id) {
+        this.category_id = category_id;
+    }
+
+    public Integer getRating() {
+        return rating;
+    }
+
+    public void setRating(Integer rating) {
+        this.rating = rating;
+    }
+
+    public Boolean getVisible() {
+        return visible;
+    }
+
+    public void setVisible(Boolean visible) {
+        this.visible = visible;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+    public Place() {
+
+    }
+
+    public Place(Integer id, String latitude, String longitude, Boolean visible, Integer category_id, Integer rating, Integer place_time, Boolean recomended, Boolean custom, Boolean deleted) {
+
+        this.id = id;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.visible = visible;
+        this.category_id = category_id;
+        this.rating = rating;
+        this.place_time = place_time;
+        this.recomended = recomended;
+        this.custom = custom;
+        this.deleted = deleted;
+    }
+
+    public static class PlaceComparator implements Comparator<Object> {
         public int compare(Object cC1, Object cC2) {
             return ((Place)cC2).rating.compareTo(((Place)cC1).rating);
         }
