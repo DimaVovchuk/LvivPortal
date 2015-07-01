@@ -23,8 +23,9 @@
 <jsp:include page="/views/elements/script.jsp"/>
 
 <body>
-
+<div class="full-height">
 <jsp:include page="/views/elements/header.jsp"/>
+
 <div class="user-places" id="user-places">
     <div class="places">
         <div class="section">
@@ -107,7 +108,8 @@
 
     </div>
 </div>
-
+</div>
+</div>
 
         <div id="get-direction" class="modal">
             <div class="modal-content">
@@ -184,7 +186,7 @@
         </div>
 
 <jsp:include page="/views/elements/footer.jsp"/>
-
+</div>
 <script>
     $(".match-col").matchHeight({
         property: 'height'

@@ -22,6 +22,8 @@ public class PlaceDescription implements Identified<Integer>{
         private String description;
         @Column("deleted")
         private Boolean deleted = false;
+        @Column("adress")
+        private String adress;
         @Column("phone")
         private String phone;
         @Column("price")
@@ -32,12 +34,22 @@ public class PlaceDescription implements Identified<Integer>{
             this.name = builder.name;
             this.locale = builder.locale;
             this.description = builder.description;
+            this.adress = builder.adress;
         }
 
         public PlaceDescription(){
         }
 
-        @Override
+
+    public String getAdress() {
+        return adress;
+    }
+
+    public void setAdress(String adress) {
+        this.adress = adress;
+    }
+
+    @Override
         public String toString() {
             return "PlaceDescription{" +
                     "id=" + id +
@@ -45,6 +57,7 @@ public class PlaceDescription implements Identified<Integer>{
                     ", locale='" + locale + '\'' +
                     ", name='" + name + '\'' +
                     ", description='" + description + '\'' +
+                    ", adress='" + adress + '\'' +
                     '}';
         }
 
@@ -105,15 +118,17 @@ public class PlaceDescription implements Identified<Integer>{
         private String locale;
         private String name;
         private String description;
+        private String adress;
 
         private String phone;
         private String price;
 
-        public Builder(Integer place_id, String locale, String name, String description) {
+        public Builder(Integer place_id, String locale, String name, String description, String adress) {
             this.place_id = place_id;
             this.name = name;
             this.locale = locale;
             this.description = description;
+            this.adress = adress;
         }
 
         public Builder phone(String val) {
