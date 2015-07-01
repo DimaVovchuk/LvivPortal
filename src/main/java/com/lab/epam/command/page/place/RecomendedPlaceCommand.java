@@ -139,7 +139,7 @@ public class RecomendedPlaceCommand  implements Command {
                                         item.setId(place.getId());
                                         item.setImageReference(placeImage.getReference());
                                         item.setName(placeDescription.getName());
-                                        item.setAdress(place.getAdress());
+                                        item.setAdress(placeDescription.getAdress());
                                         item.setRating(placeRating.getRating());
                                         //  System.out.println(item.toString());
                                         list.add(item);
@@ -155,7 +155,7 @@ public class RecomendedPlaceCommand  implements Command {
                                 item.setId(place.getId());
                                 item.setImageReference(placeImage.getReference());
                                 item.setName(placeDescription.getName());
-                                item.setAdress(place.getAdress());
+                                item.setAdress(placeDescription.getAdress());
                                 item.setRating(0);
                                 //   System.out.println(item.toString());
                                 list.add(item);

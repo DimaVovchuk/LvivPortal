@@ -64,7 +64,8 @@ public class SaveEditPlaceCommand implements Command {
         String newPlacePriceUA = params.get("placePriceUA");
         String newPlacePriceEN = params.get("placePriceEN");
         String newPlacePhone = params.get("placePhone");
-        String newAdress = params.get("placeAdress");
+        String newPlaceAddressUA = params.get("editPlaceAddressUA");
+        String newPlaceAddressEN = params.get("editPlaceAddressEN");
         String newPlaceLatitude = params.get("placeLatitude");
         String newPlaceLongitude = params.get("placeLongitude");
         String newPlaceTime = params.get("place_time");
@@ -101,10 +102,16 @@ public class SaveEditPlaceCommand implements Command {
             loger.warn("DescriptionEN is pattern error");
         }
 
-        if (checkData(newAdress, CHECK_DATA) && newAdress == "") {
-            session.setAttribute("placeAddressError", 1);
+        if (checkData(newPlaceAddressUA, CHECK_DATA) && newPlaceAddressUA == "") {
+            session.setAttribute("placeAddressUAError", 1);
             errorFlag = true;
-            loger.warn("PlaceAddress is pattern error");
+            loger.warn("PlaceAddressUA is pattern error");
+        }
+
+        if (checkData(newPlaceAddressEN, CHECK_DATA) && newPlaceAddressEN == "") {
+            session.setAttribute("placeAddressENError", 1);
+            errorFlag = true;
+            loger.warn("PlaceAddressEN is pattern error");
         }
 
         if (checkData(newPlacePriceUA, CHECK_DATA) && newPlacePriceUA == "") {
@@ -146,24 +153,22 @@ public class SaveEditPlaceCommand implements Command {
         if (errorFlag) {
         } else {
             Place place = placeService.getByPK(savePlaceID);
-            place.setAdress(Decoder.decodeStringUtf8(newAdress));
             place.setLatitude(newPlaceLatitude);
             place.setLongitude(newPlaceLongitude);
             place.setCategory_id(Integer.valueOf(newCategory));
             place.setRating(Integer.valueOf(newPlaceRating));
-
-            if(newVisible == null){
-                newVisible="false";
-            }else{
-                newVisible="true";
+            if (newVisible == null) {
+                newVisible = "false";
+            } else {
+                newVisible = "true";
             }
             place.setVisible(new Boolean(newVisible));
             place.setPlace_time(Integer.valueOf(newPlaceTime));
 
-            if(newState == null){
-                newState="true";
-            }else{
-                newState="false";
+            if (newState == null) {
+                newState = "true";
+            } else {
+                newState = "false";
             }
             place.setDeleted(new Boolean(newState));
             loger.info("Object place is created " + place);
@@ -173,6 +178,7 @@ public class SaveEditPlaceCommand implements Command {
             placeDescriptionUA.setdDescription(Decoder.decodeStringUtf8(newPlaceDescriptionUA));
             placeDescriptionUA.setPhone(newPlacePhone);
             placeDescriptionUA.setPrice(Decoder.decodeStringUtf8(newPlacePriceUA));
+            placeDescriptionUA.setAdress(Decoder.decodeStringUtf8(newPlaceAddressUA));
             loger.info("placeDescriptionUA is  " + placeDescriptionUA);
 
             PlaceDescription placeDescriptionEN = placeDescriptionService.getPlaceDescriptionByIdPlace(savePlaceID, "EN");
@@ -180,6 +186,7 @@ public class SaveEditPlaceCommand implements Command {
             placeDescriptionEN.setdDescription(Decoder.decodeStringUtf8(newPlaceDescriptionEN));
             placeDescriptionEN.setPhone(newPlacePhone);
             placeDescriptionEN.setPrice(Decoder.decodeStringUtf8(newPlacePriceEN));
+            placeDescriptionEN.setAdress(Decoder.decodeStringUtf8(newPlaceAddressEN));
             loger.info("placeDescriptionEN is  " + placeDescriptionEN);
 
             placeService.update(place);
@@ -232,7 +239,7 @@ public class SaveEditPlaceCommand implements Command {
         factory.setRepository(folder);
         ServletFileUpload upload = new ServletFileUpload(factory);
 
-        long imageSize = 1024000;
+        long imageSize = 2097152;
         upload.setSizeMax(imageSize);
 
         List items = upload.parseRequest(request);

@@ -152,6 +152,22 @@ public class Place implements Identified<Integer> {
     public int hashCode() {
         return getId().hashCode();
     }
+
+    @Override
+    public String toString() {
+        return "Place{" +
+                "id=" + id +
+                ", latitude='" + latitude + '\'' +
+                ", longitude='" + longitude + '\'' +
+                ", visible=" + visible +
+                ", rating=" + rating +
+                ", category_id=" + category_id +
+                ", place_time=" + place_time +
+                ", recomended=" + recomended +
+                ", custom=" + custom +
+                ", deleted=" + deleted +
+                '}';
+    }
 }
 
 

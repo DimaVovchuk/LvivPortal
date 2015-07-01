@@ -1,6 +1,9 @@
 package com.lab.epam.command.save;
 
 import com.lab.epam.command.controller.Command;
+import com.lab.epam.entity.Decoder;
+import com.lab.epam.entity.Place;
+import com.lab.epam.entity.PlaceDescription;
 import com.lab.epam.entity.PlaceImage;
 import com.lab.epam.helper.ClassName;
 import com.lab.epam.service.PlaceDescriptionService;
@@ -114,55 +117,56 @@ public class SaveCustomPlaceCommand implements Command {
 
         if (errorFlag) {
         } else {
-//            Place place = new Place();
-//            place.setAdress(Decoder.decodeStringUtf8(customPlaceAdrress));
-//            place.setLatitude(latitude);
-//            place.setLongitude(longitude);
-//            place.setCategory_id(Integer.valueOf(customCategoryID));
-//            place.setRating(0);
-//            place.setVisible(false);
-//            place.setPlace_time(Integer.valueOf(customPlaceTime));
-//            place.setDeleted(false);
-//            loger.info("Object place is created " + place);
-//
-//            lastAddedPlace = placeService.createAndReturnIndex(place);
-//            loger.info("lastAddedPlace is  " + lastAddedPlace);
-//
-//            if(language.equalsIgnoreCase("UA")) {
-//                PlaceDescription placeDescription = new PlaceDescription(new PlaceDescription.Builder(lastAddedPlace, language,
-//                        Decoder.decodeStringUtf8(customPlaceName), Decoder.decodeStringUtf8(customPlaceDesc)));
-//                placeDescription.setPhone(customPlacePhone);
-//                placeDescription.setPrice(Decoder.decodeStringUtf8(customPlacePrice));
-//                loger.info("placeDescription is  " + placeDescription);
-//                placeDescriptionService.create(placeDescription);
-//
-//                PlaceDescription placeDescriptionEN = new PlaceDescription(new PlaceDescription.Builder(lastAddedPlace, "EN","", ""));
-//                placeDescriptionEN.setPhone(customPlacePhone);
-//                placeDescriptionEN.setPrice("");
-//                loger.info("placeDescriptionEN is  " + placeDescriptionEN);
-//                placeDescriptionService.create(placeDescriptionEN);
-//                loger.info("placeDescriptionEN is succesful added");
-//            }
-//            if(language.equalsIgnoreCase("EN")) {
-//                PlaceDescription placeDescription = new PlaceDescription(new PlaceDescription.Builder(lastAddedPlace, language,
-//                        Decoder.decodeStringUtf8(customPlaceName), Decoder.decodeStringUtf8(customPlaceDesc)));
-//                placeDescription.setPhone(customPlacePhone);
-//                placeDescription.setPrice(Decoder.decodeStringUtf8(customPlacePrice));
-//                loger.info("placeDescription is  " + placeDescription);
-//                placeDescriptionService.create(placeDescription);
-//
-//                PlaceDescription placeDescriptionUA = new PlaceDescription(new PlaceDescription.Builder(lastAddedPlace, "UA","", ""));
-//                placeDescriptionUA.setPhone(customPlacePhone);
-//                placeDescriptionUA.setPrice("");
-//                loger.info("placeDescriptionEN is  " + placeDescriptionUA);
-//                placeDescriptionService.create(placeDescriptionUA);
-//                loger.info("placeDescriptionEN is succesful added");
-//            }
-//            loger.info("placeDescription is succesful added");
-//
-//            save(request, files, params);
-//            loger.info("Method SaveCustomPlaceCommand.execute() ended.");
-//            response.sendRedirect("/portal?command=placeInformation&place_id=" + lastAddedPlace);
+            Place place = new Place();
+            place.setLatitude(latitude);
+            place.setLongitude(longitude);
+            place.setCategory_id(Integer.valueOf(customCategoryID));
+            place.setRating(0);
+            place.setVisible(false);
+            place.setPlace_time(Integer.valueOf(customPlaceTime));
+            place.setDeleted(false);
+            place.setRecomended(false);
+            place.setCustom(true);
+            loger.info("Object place is created " + place);
+
+            lastAddedPlace = placeService.createAndReturnIndex(place);
+            loger.info("lastAddedPlace is  " + lastAddedPlace);
+
+            if(language.equalsIgnoreCase("UA")) {
+                PlaceDescription placeDescription = new PlaceDescription(new PlaceDescription.Builder(lastAddedPlace, language,
+                        Decoder.decodeStringUtf8(customPlaceName), Decoder.decodeStringUtf8(customPlaceDesc),Decoder.decodeStringUtf8(customPlaceAdrress)));
+                placeDescription.setPhone(customPlacePhone);
+                placeDescription.setPrice(Decoder.decodeStringUtf8(customPlacePrice));
+                loger.info("placeDescription is  " + placeDescription);
+                placeDescriptionService.create(placeDescription);
+
+                PlaceDescription placeDescriptionEN = new PlaceDescription(new PlaceDescription.Builder(lastAddedPlace, "EN","", "",""));
+                placeDescriptionEN.setPhone(customPlacePhone);
+                placeDescriptionEN.setPrice("");
+                loger.info("placeDescriptionEN is  " + placeDescriptionEN);
+                placeDescriptionService.create(placeDescriptionEN);
+                loger.info("placeDescriptionEN is succesful added");
+            }
+            if(language.equalsIgnoreCase("EN")) {
+                PlaceDescription placeDescription = new PlaceDescription(new PlaceDescription.Builder(lastAddedPlace, language,
+                        Decoder.decodeStringUtf8(customPlaceName), Decoder.decodeStringUtf8(customPlaceDesc),Decoder.decodeStringUtf8(customPlaceAdrress)));
+                placeDescription.setPhone(customPlacePhone);
+                placeDescription.setPrice(Decoder.decodeStringUtf8(customPlacePrice));
+                loger.info("placeDescription is  " + placeDescription);
+                placeDescriptionService.create(placeDescription);
+
+                PlaceDescription placeDescriptionUA = new PlaceDescription(new PlaceDescription.Builder(lastAddedPlace, "UA","", "",""));
+                placeDescriptionUA.setPhone(customPlacePhone);
+                placeDescriptionUA.setPrice("");
+                loger.info("placeDescriptionEN is  " + placeDescriptionUA);
+                placeDescriptionService.create(placeDescriptionUA);
+                loger.info("placeDescriptionEN is succesful added");
+            }
+            loger.info("placeDescription is succesful added");
+
+            save(request, files, params);
+            loger.info("Method SaveCustomPlaceCommand.execute() ended.");
+            response.sendRedirect("/portal?command=placeInformation&place_id=" + lastAddedPlace);
         }
     }
 

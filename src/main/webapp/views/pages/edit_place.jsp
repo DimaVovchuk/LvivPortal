@@ -134,11 +134,25 @@
                     </c:choose>
                 </c:forEach>
 
+                <c:forEach items="${placeDescriptionList}" var="elem">
+                    <c:choose>
+                        <c:when test="${elem.locale eq 'UA'}">
+                            <p><b><cdg:l18n key="editplace.editPlaceAddressUA"/></b></p>
+                            <input value="<c:out value="${placeDescriptionList[0].adress}"/>" id="editPlaceAddressUA"
+                                   type="text"
+                                   name="editPlaceAddressUA">
+                        </c:when>
+                        <c:otherwise>
+                            <p><b><cdg:l18n key="editplace.editPlaceAddressEN"/></b></p>
+                            <input value="<c:out value="${placeDescriptionList[1].adress}"/>" id="editPlaceAddressEN"
+                                   type="text"
+                                   name="editPlaceAddressEN">
+                        </c:otherwise>
+                    </c:choose>
+                </c:forEach>
+
                 <p><b><cdg:l18n key="editplace.placephone"/></b></p>
                 <input value="<c:out value="${editPlacePhone}"/>" id="placePhone" type="text" name="placePhone">
-
-                <p><b><cdg:l18n key="editplace.placeaddress"/></b></p>
-                <input value="${editPlace.adress}" id="placeAdress" type="text" name="placeAdress">
 
                 <div class="row">
                     <div class="col s6">
@@ -163,6 +177,7 @@
                             <option value="3"><cdg:l18n key="editplace.theatres"/></option>
                             <option value="4"><cdg:l18n key="editplace.hotels"/></option>
                             <option value="5"><cdg:l18n key="editplace.restaurants"/></option>
+                            <option value="6"><cdg:l18n key="editplace.otherPlaces"/></option>
                         </select>
                     </c:when>
                     <c:when test="${editPlace.category_id eq 2}">
@@ -172,6 +187,7 @@
                             <option value="3"><cdg:l18n key="editplace.theatres"/></option>
                             <option value="4"><cdg:l18n key="editplace.hotels"/></option>
                             <option value="5"><cdg:l18n key="editplace.restaurants"/></option>
+                            <option value="6"><cdg:l18n key="editplace.otherPlaces"/></option>
                         </select>
                     </c:when>
                     <c:when test="${editPlace.category_id eq 3}">
@@ -181,6 +197,7 @@
                             <option value="1"><cdg:l18n key="editplace.churches"/></option>
                             <option value="4"><cdg:l18n key="editplace.hotels"/></option>
                             <option value="5"><cdg:l18n key="editplace.restaurants"/></option>
+                            <option value="6"><cdg:l18n key="editplace.otherPlaces"/></option>
                         </select>
                     </c:when>
                     <c:when test="${editPlace.category_id eq 4}">
@@ -190,10 +207,22 @@
                             <option value="2"><cdg:l18n key="editplace.architecture"/></option>
                             <option value="1"><cdg:l18n key="editplace.churches"/></option>
                             <option value="5"><cdg:l18n key="editplace.restaurants"/></option>
+                            <option value="6"><cdg:l18n key="editplace.otherPlaces"/></option>
+                        </select>
+                    </c:when>
+                    <c:when test="${editPlace.category_id eq 5}">
+                        <select name="newCategory">
+                            <option value="5"><cdg:l18n key="editplace.restaurants"/></option>
+                            <option value="6"><cdg:l18n key="editplace.otherPlaces"/></option>
+                            <option value="4"><cdg:l18n key="editplace.hotels"/></option>
+                            <option value="3"><cdg:l18n key="editplace.theatres"/></option>
+                            <option value="2"><cdg:l18n key="editplace.architecture"/></option>
+                            <option value="1"><cdg:l18n key="editplace.churches"/></option>
                         </select>
                     </c:when>
                     <c:otherwise>
                         <select name="newCategory">
+                            <option value="6"><cdg:l18n key="editplace.otherPlaces"/></option>
                             <option value="5"><cdg:l18n key="editplace.restaurants"/></option>
                             <option value="4"><cdg:l18n key="editplace.hotels"/></option>
                             <option value="3"><cdg:l18n key="editplace.theatres"/></option>
