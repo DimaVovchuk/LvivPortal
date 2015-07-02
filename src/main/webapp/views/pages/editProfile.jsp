@@ -17,17 +17,21 @@
 	<div class="row">
 		<h1><cdg:l18n key="usercab.editprofil"/></h1>
 		<hr>
-		<form method=post enctype=multipart/form-data action="portal?command=update">
+		<form method=post enctype=multipart/form-data action="portal?command=updateprofile">
 			<c:set var="command" scope="session" value="updateprofile"/>
 			<div class="col s4">
 				<div class="text-center">
 					<c:choose>
-						<c:when test="${empty avatar}">
-							<img src="${pageContext.request.contextPath}/upload/photo/user.png" width=70%
+						<c:when test="${not empty avatar and empty vk_id}">
+							<img src="${pageContext.request.contextPath}/upload/photo/${avatar}" width=70%
 							     class="circle responsive-img" name="newAvatar">
 						</c:when>
+						<c:when test="${not empty vk_id and not empty avatar}">
+							<img src="${avatar}" width=70%
+								 class="circle responsive-img" name="newAvatar">
+						</c:when>
 						<c:otherwise>
-							<img src="${pageContext.request.contextPath}/upload/photo/${avatar}" width=70%
+							<img src="${pageContext.request.contextPath}/upload/photo/photo/user.png" width=70%
 							     class="circle responsive-img" name="newAvatar">
 						</c:otherwise>
 					</c:choose>

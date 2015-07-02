@@ -32,7 +32,7 @@ public class UserImageService {
     public UserImage getByPK(Integer key){
         UserImage userImage = null;
         try {
-            userImage =  mySqlUserImageDao.getByPK(key);;
+            userImage =  mySqlUserImageDao.getByPK(key);
 
         } catch (PersistException e) {
             e.printStackTrace();

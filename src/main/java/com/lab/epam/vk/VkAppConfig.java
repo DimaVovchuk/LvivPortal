@@ -1,4 +1,4 @@
-package com.lab.epam.entity;
+package com.lab.epam.vk;
 
 /**
  * Created by Oleguk on 29.06.2015.
@@ -58,6 +58,7 @@ public class VkAppConfig {
                 "applicationID=" + applicationID +
                 ", appSecretKey='" + appSecretKey + '\'' +
                 ", siteAddress='" + siteAddress + '\'' +
+                ", permissions='" + permissions + '\'' +
                 '}';
     }
 }

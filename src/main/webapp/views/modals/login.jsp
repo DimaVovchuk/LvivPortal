@@ -22,7 +22,7 @@
                 </div>
                 <div class="form" align="right">
                         Sign in with <a href="/portal?command=authorVK"><img src="${pageContext.request.contextPath}/images/iconVK.png" width="33" height="33"></a>
-                        <a href="/portal?command==authorFB"><img src="${pageContext.request.contextPath}/images/iconFB.png" width="33" height="33"></a>
+                        <a href="/portal?command=authorFB"><img src="${pageContext.request.contextPath}/images/iconFB.png" width="33" height="33"></a>
                 </div>
                 <div class="form">
                     <button class="btn waves-effect waves-light cyan darken-2" type="submit"
