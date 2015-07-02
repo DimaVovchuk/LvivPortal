@@ -47,8 +47,8 @@ public class RoutesCommand implements Command {
                         String obj2 = "" + places.get(i).getLatitude() + " " + places.get(i).getLongitude() + "";
                         try {
                             Map<String, Double> distanceMap = distance.getDistanceAndTime(obj1, obj2);
-                            if(distAndTime.contains(distanceMap)){
-                                distanceMap.put("distance",distanceMap.get("distance") + 0.123456789);
+                            if (distAndTime.contains(distanceMap)) {
+                                distanceMap.put("distance", distanceMap.get("distance") + 0.123456789);
                             }
                             distAndTime.add(distanceMap);
                         } catch (JSONException e) {

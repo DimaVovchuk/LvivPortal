@@ -37,7 +37,7 @@
 
         <script id="place-info-template" type="text/x-handlebars-template">
             {{#each this}}
-            <a href="#" onclick="myclick('{{imageReference}}')" class="collection-item black-text">
+            <a href="#" onclick="myclick('{{id}}')" class="collection-item black-text">
                 <img class="circle responsive-img"
                      src="${pageContext.request.contextPath}/upload/photo/{{imageReference}}">
 
@@ -60,7 +60,7 @@
             <a href="#" id="map-day${dayNumber}" data-day="${dayNumber}" data-show="1" class="btn cyan darken-2 map-day-trigger">Show on map</a>
             <div id="places-day{{dayNumber}}" class="collection animated fadeInLeft">
                 {{#each places}}
-                <a href="#" onclick="myclick('{{imageReference}}')" class="collection-item black-text">
+                <a href="#" onclick="myclick('{{placeId}}')" class="collection-item black-text">
                     <img class="circle responsive-img" src="${pageContext.request.contextPath}/upload/photo/{{imageReference}}">
                     <div class="valign-wrapper" style="height:100%">
                         <div class="valign">
@@ -76,5 +76,7 @@
         <script id="route-empty-template" type="text/x-handlebars-template">
             <h5 style="padding: 10px">Add places to the itinerary</h5>
         </script>
+
+
     </div>
 </div>

@@ -87,20 +87,26 @@ var initDayTrigger = function () {
         $('#places-day' + day).toggle();
     })
 };
-
+var count = 0;
 var initMapDayTrigger = function () {
     $(document).on('click', '.map-day-trigger', function (e) {
         e.preventDefault();
         var show = $(e.currentTarget).data('show');
+
         var day = $(e.currentTarget).data('day');
-        if (show === 1) {
+        if (show === 1 && count == 0 ) {
+            count ++;
+
+            console.log(count);
             $(e.currentTarget).data('show', 0);
             $('#map-day' + day).html('Hide from map');
             initDayMarkers(day - 1);
             hideMarkers();
             showRoutesMarkers(day - 1)
         }
-        if (show === 0) {
+        if (show === 0 ) {
+            count--
+            console.log(count);
             $(e.currentTarget).data('show', 1);
             $('#map-day' + day).html('Show on map');
             directionsDisplay.set('directions', null);
@@ -114,7 +120,6 @@ var initMapDayTrigger = function () {
 
 var map;
 var lvivMap = new google.maps.LatLng(49.8426, 24.0278);
-
 var routesData;
 
 var initBlankMap = function () {
@@ -136,7 +141,7 @@ var initDayMarkers = function (dayNumber) {
 };
 
 var calcRoute = function (data) {
-    //console.log(data.length );
+
     //
     //if (data.length > 10) {
     //    var poly = [];
@@ -152,8 +157,8 @@ var calcRoute = function (data) {
     //    poly = new google.maps.Polyline(polyOptions);
     //    poly.setMap(map);
     //}
-
     if (data.length > 1 /*&& data.length < 10*/) {
+
         var start = new google.maps.LatLng(data[0].latitude, data[0].longitude);
         var image = {
             url: "",
@@ -203,12 +208,13 @@ var calcRoute = function (data) {
             optimizeWaypoints: true,
             travelMode: google.maps.TravelMode.WALKING
         };
+
+        directionsService.route(request, function (response, status) {
+            if (status == google.maps.DirectionsStatus.OK) {
+                directionsDisplay.setDirections(response);
+            }
+        });
     }
-    directionsService.route(request, function (response, status) {
-        if (status == google.maps.DirectionsStatus.OK) {
-            directionsDisplay.setDirections(response);
-        }
-    });
 };
 
 /* *** MAIN *** */
@@ -221,4 +227,5 @@ $(function () {
 
     //loadDayData();
     //google.maps.event.addDomListener(window, 'load', initDayMarkers);
+
 });
