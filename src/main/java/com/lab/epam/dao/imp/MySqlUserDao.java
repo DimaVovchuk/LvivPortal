@@ -6,7 +6,6 @@ import com.lab.epam.entity.Category;
 import com.lab.epam.entity.User;
 import com.lab.epam.persistant.ConnectionManager;
 import com.lab.epam.persistant.ConnectionPool;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -26,6 +25,7 @@ public class MySqlUserDao extends AbstractJDBCDao<User, Integer> {
     public static final String checkLoginSQL = "SELECT * FROM USER WHERE login=?";
     public static final String getRoleID = "SELECT role_id FROM USER WHERE login=?";
     public static final String getUserByRole = "SELECT * FROM USER WHERE role_id=?";
+    public static final String getUserByVkId = "SELECT * FROM USER WHERE vk_id=?";
     private ConnectionPool connection = ConnectionManager.getConnection();
 
     private class PersistGroup extends Category {
@@ -75,6 +75,34 @@ public class MySqlUserDao extends AbstractJDBCDao<User, Integer> {
         Connection conn = connection.retrieve();
         try (PreparedStatement statement = conn.prepareStatement(getUserByEmailSQL)) {
             statement.setString(1, email);
+            ResultSet rs = statement.executeQuery();
+            user = parseResultSet(rs).get(0);
+        } catch (Exception e) {
+        } finally {
+            connection.putback(conn);
+        }
+        return user;
+    }
+
+    public User getUserByVkId(int vk_id) {
+        User user = new User();
+        Connection conn = connection.retrieve();
+        try (PreparedStatement statement = conn.prepareStatement(getUserByVkId)) {
+            statement.setInt(1, vk_id);
+            ResultSet rs = statement.executeQuery();
+            user = parseResultSet(rs).get(0);
+        } catch (Exception e) {
+        } finally {
+            connection.putback(conn);
+        }
+        return user;
+    }
+
+    public User getUserByVkId(String vk_id) {
+        User user = new User();
+        Connection conn = connection.retrieve();
+        try (PreparedStatement statement = conn.prepareStatement(getUserByVkId)) {
+            statement.setString(1, vk_id);
             ResultSet rs = statement.executeQuery();
             user = parseResultSet(rs).get(0);
         } catch (Exception e) {

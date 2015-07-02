@@ -38,6 +38,8 @@ public class User implements Identified<Integer> {
     private Boolean deleted = false;
     @Column("company_name")
     private String companyName;
+    @Column("vk_id")
+    private String vk_id = null;
 
     public User(Builder builder) {
 
@@ -74,6 +76,7 @@ public class User implements Identified<Integer> {
                 ", avatar=" + avatar +
                 ", deleted=" + deleted +
                 ", companyName=" + companyName +
+                ", vk_id=" + vk_id +
                 '}';
     }
 
@@ -91,6 +94,14 @@ public class User implements Identified<Integer> {
 
     protected void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getVkId() {
+        return vk_id;
+    }
+
+    public void setVkId(String vk_id) {
+        this.vk_id = vk_id;
     }
 
     public Integer getRating() {
