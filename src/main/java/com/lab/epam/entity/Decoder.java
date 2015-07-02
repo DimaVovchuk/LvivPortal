@@ -9,18 +9,20 @@ public class Decoder {
 
     public static String decodeStringUtf8(String string){
         String decode = null;
+        String newLine= null;
         if (string == null){
             return string;
         }
         else {
             try {
                 decode =  new String (string.getBytes("ISO-8859-1"),"UTF-8");
-                decode.replace("'","`");
+                newLine = decode.replace("'","`");
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
         }
-        return decode;
+        System.out.println("newLine " + newLine);
+        return newLine;
     }
 
 }

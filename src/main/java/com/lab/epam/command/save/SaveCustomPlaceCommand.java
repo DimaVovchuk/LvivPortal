@@ -145,8 +145,7 @@ public class SaveCustomPlaceCommand implements Command {
                 placeDescriptionEN.setPrice("");
                 loger.info("placeDescriptionEN is  " + placeDescriptionEN);
                 placeDescriptionService.create(placeDescriptionEN);
-                loger.info("placeDescriptionEN is succesful added");
-            }
+             }
             if(language.equalsIgnoreCase("EN")) {
                 PlaceDescription placeDescription = new PlaceDescription(new PlaceDescription.Builder(lastAddedPlace, language,
                         Decoder.decodeStringUtf8(customPlaceName), Decoder.decodeStringUtf8(customPlaceDesc),Decoder.decodeStringUtf8(customPlaceAdrress)));
@@ -160,9 +159,7 @@ public class SaveCustomPlaceCommand implements Command {
                 placeDescriptionUA.setPrice("");
                 loger.info("placeDescriptionEN is  " + placeDescriptionUA);
                 placeDescriptionService.create(placeDescriptionUA);
-                loger.info("placeDescriptionEN is succesful added");
             }
-            loger.info("placeDescription is succesful added");
 
             save(request, files, params);
             loger.info("Method SaveCustomPlaceCommand.execute() ended.");
