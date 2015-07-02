@@ -31,6 +31,7 @@ public class UserPlaceJSONCommand implements Command {
     private PlaceService placeService = new PlaceService();
     private PlaceDescriptionService placeDescriptionService = new PlaceDescriptionService();
     private PlaceImageService placeImageService = new PlaceImageService();
+    List<PlaceDescriptionAndPhoto> userPlacePageInfo = new ArrayList<>();
     private HttpServletRequest request;
     String language;
 
@@ -57,13 +58,12 @@ public class UserPlaceJSONCommand implements Command {
 
         if (user != null) {
             Integer userId = user.getId();
-            //Integer roleId = user.getRoleID();
-             places = placeService.getPlaceByUserId(userId);
 
             String userPlaceCategory = request.getParameter("userPlaceCategory");
+            String usepPlaceCategorySesion = (String) session.getAttribute("userPlaceCategory");
             System.out.println("userPlaceCategory " + userPlaceCategory);
             if (userPlaceCategory == null) {
-                userPlaceCategory = "";
+                userPlaceCategory = usepPlaceCategorySesion;
             }
 
             if (userPlaceCategory != null) {
@@ -84,16 +84,15 @@ public class UserPlaceJSONCommand implements Command {
                 places = placeService.getPlaceByUserId(userId);
             }
 
-            loger.info("places size is " + places.size());
             if (places != null && !places.isEmpty()) {
                 placeDescriptions = getPlaceDescriptionByPlace(places);
                 placeImage = getPlaceImageByPlace(places);
+                userPlacePageInfo = getPlaceDescriptionAndPhotoList(places, placeDescriptions, placeImage);
+                session.setAttribute("userPlaceCtegory",userPlaceCategory);
             }
         }
-        List<PlaceDescriptionAndPhoto> userPlacePageInfo = new ArrayList<>();
-        if (places != null && !places.isEmpty()) {
-            userPlacePageInfo = getPlaceDescriptionAndPhotoList(places, placeDescriptions, placeImage);
-        }
+
+
         // request.setAttribute("places ", places);
         // request.setAttribute("placeImages ", placeImage);
         //request.setAttribute("placeDescriptions ", placeDescriptions);

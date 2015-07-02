@@ -24,7 +24,6 @@ public class PlaceInfortmationCommand implements Command {
 
     public void execute(HttpServletRequest request,
                         HttpServletResponse response) throws ServletException, IOException {
-
         String message = request.getParameter("message");
         loger.info("Message is " + message);
 

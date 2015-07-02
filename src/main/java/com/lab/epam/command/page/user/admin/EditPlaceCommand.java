@@ -24,8 +24,7 @@ public class EditPlaceCommand implements Command{
     private static final Logger loger = LogManager.getLogger(ClassName.getCurrentClassName());
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        String editPlaceIDSring = request.getParameter("editPlaceID");
-        String editPlaceIDSring = "1";
+        String editPlaceIDSring = request.getParameter("editPlaceID");
         HttpSession session = request.getSession();
         loger.info("start EditPlaceCommand");
 

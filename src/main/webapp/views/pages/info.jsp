@@ -51,7 +51,7 @@
                         </c:if>
                         <h5><cdg:l18n key="place.address"/></h5>
 
-                        <p>${place.adress}</p>
+                        <p>${placeDescription.adress}</p>
                     </div>
                 </div>
                 <c:if test="${sessionScope.userDataTrip != null}">
