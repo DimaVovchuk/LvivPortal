@@ -18,7 +18,7 @@
 
       <div class="row">
         <div class="col s4">
-          <input name="dayNumber" type="number" min="1" max="${userDataTrip.dayCount}"/>
+          <input name="dayNumber" type="number" value ="1" min="1" max="${userDataTrip.dayCount}"/>
         </div>
         <div class="col s8">
           <cdg:l18n key="map.route.daylower"/>

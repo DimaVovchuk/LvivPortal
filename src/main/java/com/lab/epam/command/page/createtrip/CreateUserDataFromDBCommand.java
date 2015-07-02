@@ -40,6 +40,7 @@ public class CreateUserDataFromDBCommand implements Command {
         //System.out.println("way_idString " + way_idString);
         if (way_idString != null){
             way_id = Integer.parseInt(way_idString);
+            userDataTrip.setWay_id(way_id);
             Way way = wayService.getByPK(way_id);
             if (way.getBegin() != null){
                 userDataTrip.setBeginTrip(way.getBegin());

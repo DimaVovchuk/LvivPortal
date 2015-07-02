@@ -2,15 +2,13 @@
  * Created by Admin on 01.07.2015.
  */
 var loadPlaceAboutData = function () {
-
     $.ajax({
-        url: window.location.origin + '/portal?command=placeJSON',
-        success: loadPlacesData,
-        error: loadPlacesData
+        url: window.location.origin + '/portal?command=recomendedWayJSON',
+        success: loadWaysData,
     })
 };
 
-var loadPlacesData = function (data) {
+var loadWaysData = function (data) {
     if (!data) return false;
     var source = $("#recomended-way-info-template").html();
     var template = Handlebars.compile(source);
@@ -58,6 +56,7 @@ var like = function (placeholder) {
 };
 
 var dissable = function (placeholder) {
+    //loadPlaceAboutData();
     var x = $(placeholder).data('id');
     $("#up" + x).removeClass('disabled');
     $("#none" + x).removeClass('disabled');
@@ -145,8 +144,6 @@ $(function () {
     loadPlaceAboutData();
     initCategoriesEventsPlace();
 
-
-    addPlace();
 
 
 });

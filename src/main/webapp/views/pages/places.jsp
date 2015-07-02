@@ -60,7 +60,13 @@
                            class="collection-item black-text ${requestScope.active_allplaces}"><cdg:l18n
                                 key="places.all"/></a>
                     </div>
-
+                    <form id="frmSearch">
+                        <input type="text" id="txtSearch" name="txtSearch" alt="Search Criteria"
+                               onkeyup="searchSuggest();" autocomplete="off" />
+                        <div id="search_suggest">
+                        </div>
+                        <input type="submit" id="cmdSearch" name="cmdSearch" value="Search" alt="Run Search" />
+                    </form>
                 </div>
             </div>
         </div>
@@ -70,6 +76,7 @@
 <jsp:include page="/views/elements/footer.jsp"/>
 <jsp:include page="/views/modals/add-place-to-route-recomended.jsp"/>
 <script src="${pageContext.request.contextPath}/js/pages/places.js"></script>
+<script language="JavaScript" type="text/javascript" src="${pageContext.request.contextPath}/js/ajax_search.js"></script>
 <%--<jsp:include page="/views/modals/add-place-to-route.jsp"/>--%>
 
 <script id="place-info-template" type="text/x-handlebars-template">

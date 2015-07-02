@@ -23,9 +23,9 @@
 <jsp:include page="/views/elements/script.jsp"/>
 
 <body>
-<div class="full-height">
-<jsp:include page="/views/elements/header.jsp"/>
 
+<jsp:include page="/views/elements/header.jsp"/>
+<div class="full-height">
 <div class="user-places" id="user-places">
     <div class="places">
         <div class="section">
@@ -44,7 +44,7 @@
 
 
                                 <div class="card-image waves-effect waves-block waves-light">
-                                    <img class="activator"
+                                    <img class="activator responsive-img place-img"
                                          src="${pageContext.request.contextPath}/upload/photo/${waysPlaceImage[i].imageReference}"
                                          style="width: 100%">
                                 </div>
@@ -184,9 +184,9 @@
                 </c:choose>
             </div>
         </div>
-
-<jsp:include page="/views/elements/footer.jsp"/>
 </div>
+<jsp:include page="/views/elements/footer.jsp"/>
+
 <script>
     $(".match-col").matchHeight({
         property: 'height'

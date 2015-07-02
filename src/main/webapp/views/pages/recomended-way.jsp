@@ -29,30 +29,13 @@
   <div class="user-places" id="user-places">
     <div class="places">
       <div class="section">
-        <h3 class="center-align"><cdg:l18n key="way.head"/></h3>
+        <h3 class="center-align"><cdg:l18n key="recomended.way"/></h3>
 
         <div class="row">
-          <div class="col l9 m8 s7">
+          <div class="col l12 m18 s36">
+            <div id="recomended-way-info-collection">
 
-          </div>
-
-
-          <div class="col l3 m4 s5">
-
-            <div class="collection with-header z-depth-2">
-              <div class="collection-header"><h4><cdg:l18n key="ways"/></h4></div>
-              <a href="/portal?command=userWays"
-                 class="collection-item black-text ${requestScope.active_architecture}"><cdg:l18n
-                      key="current.route"/></a>
-              <a href="/portal?command=userAllWay"
-                 class="collection-item black-text ${requestScope.active_churches}"><cdg:l18n
-                      key="get.all.route"/></a>
-              <a href="#sure-save"
-                 class="modal-trigger collection-item black-text ${requestScope.active_theatres}"><cdg:l18n
-                      key="save.way"/></a>
             </div>
-
-
           </div>
 
 
@@ -88,34 +71,56 @@
   <jsp:include page="/views/elements/footer.jsp"/>
 </div>
 
-<script id="place-info-template" type="text/x-handlebars-template">
+<script id="recomended-way-info-template" type="text/x-handlebars-template">
   {{#each this}}
-  <div class="match-col col l4 m6 s9">
+  <div class="match-col col l3 m4 s9">
     <div class="card z-depth-2" style="padding:10px; height:95%">
       <div class="card-image waves-effect waves-block waves-light">
-        <img class="activator"
-             src="${pageContext.request.contextPath}/upload/photo/{{imageReference}"
+
+        <img class="activator responsive-img place-img"
+             src="${pageContext.request.contextPath}/upload/photo/{{imageReference}}"
              style="width: 100%">
+
       </div>
       <div class="card-content">
                                     <span class="card-title activator grey-text text-darken-4"><div align="center">
-                                      <h6>{{beginDate}} - {{endDate}}</h6>
+                                      <p><h6><a a class="modal-trigger" onclick="$('#way_id').val('{{id}}')"
+                                                href="#get-direction"><cdg:l18n key="get.directions"/></a></h6></p>
                                     </div></span>
-        <p><a a class="modal-trigger" onclick="$('#way_id').val('{{id}}')" href="#get-direction"><cdg:l18n key="get.directions"/></a></p>
+        <div>
+          <%--<p><cdg:l18n key="rating.way"/>: <c:out value="{{rating_way}}"/></p>--%>
+        </div>
+<c:if test="${login!=null}">
+        <div style="height: 40px"></div>
+        <div class="bottom-right-btn">
+          <a onClick="like(this);" data-id="{{id}}" data-rating="{{rating}}" id="up{{id}}" class="up{{id}} btn-floating btn-floating btn-small"
+             href="javascript:" rel="/portal?command=rectRatingWay&rating=1&way_id={{id}}">
+            <i class="material-icons">thumb_up</i>
+          </a>
+
+          <a onClick="none(this);" data-id="{{id}}" id="none{{id}}"class="none{{id}} btn-floating btn-floating btn-small"
+             href="javascript:" rel="/portal?command=rectRatingWay&rating=0&way_id={{id}}">
+            <i class="material-icons">thumbs_up_down</i>
+          </a>
+
+
+          <a onClick="dislike(this);" data-id="{{id}}" id="down{{id}}" class="down{{id}} btn-floating btn-floating btn-small"
+             href="javascript:" rel="/portal?command=rectRatingWay&rating=-1&way_id={{id}}">
+            <i class="material-icons">thumb_down</i>
+          </a>
+
+        </div>
       </div>
+  </c:if>
       <div class="card-reveal">
         <span class="card-title grey-text text-darken-4"><cdg:l18n key="places.way"/></span>
         <p>
           {{#each place}}
 
-        <div class=" match-colum col l6 m9 s18">
-          <a href="portal?command=placeInformation&place_id={{place_id}}"><c:out
-                  value="{{name}}"/></a>
-        </div>
-        <div class="match-colum col l6 m9 s18">
-            <%--<a href="portal?command=placeInformation&place_id=${place_image.place_id}">--%>
-            <%--<c:out value="${place_image.name}"/></a>--%>
-        </div>
+
+          <p><a href="portal?command=placeInformation&place_id={{place_id}}"><c:out
+                  value="{{name}}"/></a></p>
+
         {{/each}}
         </p>
       </div>

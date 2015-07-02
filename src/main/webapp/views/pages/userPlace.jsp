@@ -15,8 +15,9 @@
 <jsp:include page="/views/elements/script.jsp"/>
 
 <body>
-<div class="full-height">
+
 	<jsp:include page="/views/elements/header.jsp"/>
+	<div class="full-height">
 	<div clacc="user-places" id="user-places">
 		<div class="places">
 			<div class="section">
@@ -48,10 +49,12 @@
 					</div>
 				</div>
 			</div>
-			<jsp:include page="/views/elements/footer.jsp"/>
-			<jsp:include page="/views/modals/add-place-to-route-recomended.jsp"/>
 		</div>
 	</div>
+	</div>
+			<jsp:include page="/views/elements/footer.jsp"/>
+			<jsp:include page="/views/modals/add-place-to-route-recomended.jsp"/>
+
 	<script src="${pageContext.request.contextPath}/js/pages/userFavorPlacePage.js"></script>
 	<script id="userPlace-info-template" type="text/x-handlebars-template">
 		{{#each this}}
@@ -115,7 +118,7 @@
 		</div>
 	</div>
 
-</div>
+
 <script>
 	$('.datepicker').pickadate({
 		selectMonths: true, // Creates a dropdown to control month

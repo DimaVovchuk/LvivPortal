@@ -105,4 +105,15 @@ public class PlaceDescriptionService {
         }
         return placeDescriptionList;
     }
+
+    public List<PlaceDescription>  getAllPlaceBySearch(String str){
+        List<PlaceDescription> placeDescriptionList = null;
+        try {
+            placeDescriptionList =  mySqlPlaceDescriptionDao.getAllPlaceBySearch(str);
+        } catch (PersistException e) {
+            e.printStackTrace();
+            loger.warn("Cant get place description by name = " + str);
+        }
+        return placeDescriptionList;
+    }
 }

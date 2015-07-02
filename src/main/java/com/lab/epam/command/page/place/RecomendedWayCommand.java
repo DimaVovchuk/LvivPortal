@@ -61,10 +61,11 @@ public class RecomendedWayCommand  implements Command {
         if (ways != null && !ways.isEmpty()) {
             way_place = getPlaceDescriptionByWay(ways);
         }
-
+//System.out.println("way_place " + way_place);
         if (user != null && ways != null){
             for (Way way: ways) {
                 WayRating wayRating = wayRatingService.getWayRatingByWayAndUser(way.getId(), user.getId());
+                System.out.println("wayRating " + wayRating.getRating() + " user " + way.getId());
                 if (wayRating == null){
                     wayRating = new WayRating(user.getId(),way.getId(),0);
                 }
@@ -77,18 +78,18 @@ public class RecomendedWayCommand  implements Command {
         if(ways != null && !ways.isEmpty()){
             waysPlaceImageRating = getWayPlaceImageRatingList(ways, way_place, wayPlaceImages, wayRatings);
         }
-        //request.setAttribute("waysPlaceImageRating", waysPlaceImageRating);
 
+        Comparator comparator = new WayPlaceImageRating.WayRatingComparator();
+        Collections.sort(waysPlaceImageRating, comparator);
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write(new Gson().toJson(waysPlaceImageRating));
-        //request.getRequestDispatcher("/views/pages/userAllWays.jsp").forward(request, response);
 
     }
 
     private List<WayPlaceImageRating> getWayPlaceImageRatingList(List<Way> ways,  Map<Integer, List<PlaceDescription>> way_place, Map<Integer,PlaceImage> wayPlaceImages, List<WayRating> wayRating){
         List<WayPlaceImageRating> list = new ArrayList<>();
-        System.out.println("ways " + ways.size() + " way_place " + way_place.size() + " wayPlaceImages " + wayPlaceImages.size());
+        int i = 0;
         if(ways != null && !ways.isEmpty()){
             for (Way way : ways) {
                 WayPlaceImageRating item = new WayPlaceImageRating();
@@ -97,16 +98,23 @@ public class RecomendedWayCommand  implements Command {
                 item.setBeginDate(way.getBegin());
                 System.out.println("end " + way.getEnd());
                 item.setEndDate(way.getEnd());
-                if (wayPlaceImages.size() <= way.getId()){
+                if (wayPlaceImages.size() <= ways.size()){
                     item.setImageReference(wayPlaceImages.get(way.getId()).getReference());
                 }
-                if (way_place.size() <= way.getId()){
+                if (way_place.size() <= ways.size()){
                     item.setPlace(way_place.get(way.getId()));
+                  //  System.out.println(way_place.get(way.getId()) + "hkllk");
                 }
-                if (wayRating.size() <= way.getId()){
-                    item.setRating(wayRating.get(way.getId()).getRating());
+                if (!wayRatings.isEmpty()){
+                    item.setRating(wayRatings.get(i).getRating());
+                    System.out.println(wayRatings.get(i).getRating());
                 }
+                else {
+                    item.setRating(0);
+                }
+                item.setRating_way(way.getRating());
                 list.add(item);
+                i++;
             }
         }
         return list;
@@ -121,9 +129,9 @@ public class RecomendedWayCommand  implements Command {
             way_id = way.getId();
             way_place_list = placeService.getPlaceByWayId(way_id);
             if (way_place_list != null && !way_place_list.isEmpty()) {
-                //      loger.info(" way_place_list are " + way_place_list + " way_id" + way_id);
+                     // loger.info(" way_place_list are " + way_place_list + " way_id" + way_id);
                 way_placeDescription_list = getPlaceDescriptionByPlace(way_place_list);
-                //        loger.info(" way_placeDescription_list are " + way_placeDescription_list);
+                        //loger.info(" way_placeDescription_list are " + way_placeDescription_list);
                 way_place.put(way_id, way_placeDescription_list);
                 wayPlaceImages.put(way_id, getPlaceImageByPlace(way_place_list));
             }

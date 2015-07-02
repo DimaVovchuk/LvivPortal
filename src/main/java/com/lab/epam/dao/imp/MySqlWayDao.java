@@ -31,6 +31,7 @@ public class MySqlWayDao extends AbstractJDBCDao<Way, Integer> {
     private static final String UPDATE_WAY_DAY = "UPDATE user_way SET way_days = ? WHERE user_id = ? AND way_id = ?";
     private static final String UPDATE_WAY_BEGIN_DATE = "UPDATE way SET date_begin = ? WHERE id = ?";
     private static final String UPDATE_WAY_END_DATE = "UPDATE way SET date_end = ? WHERE id = ?";
+    private static final String UPDATE_WAY_RATING = "UPDATE way SET rating = ? WHERE id = ?";
     private static final String GET_WAY_RECOMENDED = "SELECT * FROM way WHERE recomended=true AND deleted=false AND visible=true";
 
     private class PersistGroup extends Way {
@@ -214,6 +215,7 @@ public class MySqlWayDao extends AbstractJDBCDao<Way, Integer> {
 
     public void updateWayBeginDate(Integer way_id, Date beginDate) throws PersistException {
         Connection conn = connection.retrieve();
+        System.out.println("beginDate" + beginDate );
         try (PreparedStatement statement = conn.prepareStatement(UPDATE_WAY_BEGIN_DATE)) {
             statement.setDate(1, beginDate);
             statement.setInt(2, way_id);
@@ -231,8 +233,26 @@ public class MySqlWayDao extends AbstractJDBCDao<Way, Integer> {
 
     public void updateWayEndDate(Integer way_id, Date endDate) throws PersistException {
         Connection conn = connection.retrieve();
+        System.out.println("endDate" + endDate );
         try (PreparedStatement statement = conn.prepareStatement(UPDATE_WAY_END_DATE)) {
             statement.setDate(1, endDate);
+            statement.setInt(2, way_id);
+            int count = statement.executeUpdate();
+            if (count != 1) {
+                throw new PersistException("On persist modify more then 1 record: " + count);
+            } else {
+            }
+        } catch (Exception e) {
+            throw new PersistException(e);
+        } finally {
+            connection.putback(conn);
+        }
+    }
+
+    public void updateWayRating(Integer way_id, Integer rating) throws PersistException {
+        Connection conn = connection.retrieve();
+        try (PreparedStatement statement = conn.prepareStatement(UPDATE_WAY_RATING)) {
+            statement.setInt(1, rating);
             statement.setInt(2, way_id);
             int count = statement.executeUpdate();
             if (count != 1) {

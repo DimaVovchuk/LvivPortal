@@ -137,6 +137,19 @@ var addPlace = function () {
     });
 };
 
+var searchPlace = function () {
+    $('#frmSearch').on('submit', function (e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        $.ajax({
+            url: window.location.origin + '/portal?command=placeJSON',
+            data: $('#frmSearch').serialize(),
+            success: loadPlacesData,
+            error: loadPlacesData
+        });
+    });
+};
+
 var initCategoriesEventsPlace = function () {
     $('#category-place').on('click', function (e) {
         e.preventDefault();
@@ -153,7 +166,7 @@ $(function () {
     initRangeListeners();
     loadPlaceAboutData();
     initCategoriesEventsPlace();
-
+    searchPlace();
 
     addPlace();
 

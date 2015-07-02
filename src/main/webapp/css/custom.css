@@ -777,4 +777,20 @@ footer.page-footer {
     color: #FFFFFF;
 }
 
+.suggest_link {
+    background-color: #FFFFFF;
+    padding: 2px 6px 2px 6px;
+}
+
+.suggest_link_over {
+    background-color: #3366CC;
+    padding: 2px 6px 2px 6px;
+}
+
+#search_suggest {
+    /*position: absolute;*/
+    background-color: #FFFFFF;
+    text-align: left;
+    border: 1px solid #000000;
+}
 

@@ -34,7 +34,7 @@ public class MySqlWayRatingDao  extends AbstractJDBCDao<WayRating, Integer> {
     }
 
     public Class getClassModel() {
-        return PlaceRating.class;
+        return WayRating.class;
     }
 
     public WayRating getWayRatingByWayAndUser(Integer way_id, Integer user_id) throws PersistException {

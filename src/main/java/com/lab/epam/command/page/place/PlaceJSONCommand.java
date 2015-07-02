@@ -23,6 +23,14 @@ public class PlaceJSONCommand implements Command {
         PlaceImageService placeImageService = new PlaceImageService();
         PlaceRatingService placeRatingService = new PlaceRatingService();
         UserService userService = new UserService();
+        Integer place_id;
+        PlaceImage placeImage;
+        PlaceDescription placeDescription;
+        PlaceRating placeRating;
+        List<PlaceRating> placeRatings = new ArrayList<>();
+        List<PlaceDescription> placeDescriptions = new ArrayList<>();
+        List<PlaceDescription> placeDesc = new ArrayList<>();
+        List<PlaceImage> placeImages = new ArrayList<>();
 
         HttpSession session = request.getSession();
 
@@ -30,12 +38,19 @@ public class PlaceJSONCommand implements Command {
         Locale locale = resourceBandle.getLocale();
         String language = locale.getLanguage();
 
-        List<Place> places = null;
+        String login = (String) session.getAttribute("login");
+        User user = null;
+        if (login != null) {
+            user = userService.getUserByLogin(login);
+        }
+
+        List<Place> places = new ArrayList<>();
         List<Place> placeForWay;
         UserDataAboutTrip userDataAboutTrip = (UserDataAboutTrip) session.getAttribute("userDataTrip");
         placeForWay = (ArrayList<Place>) session.getAttribute("placeForWay");
         String dayNumberString = request.getParameter("dayNumber");
         Integer dayNumber = 0;
+
         if (dayNumberString != null) {
             dayNumber = Integer.parseInt(dayNumberString);
         }
@@ -69,74 +84,90 @@ public class PlaceJSONCommand implements Command {
         session.setAttribute("userDataTrip", userDataAboutTrip);
 
         String category = request.getParameter("category");
-        System.out.println("category " + category);
-        if (category == null) {
-            category = "";
-        }
-        if (category != null) {
-            switch (category) {
-                case "architecture":
-                    places = servicePlace.getPlaceByCategory(1);
-                    break;
-                case "churches":
-                    places = servicePlace.getPlaceByCategory(2);
-                    break;
-                case "theatres":
-                    places = servicePlace.getPlaceByCategory(3);
-                    break;
-                case "hotels":
-                    places = servicePlace.getPlaceByCategory(4);
-                    break;
-                case "restaurants":
-                    places = servicePlace.getPlaceByCategory(5);
-                    break;
-                default:
-                    places = servicePlace.getAllPlaceVisible();
-                    break;
-            }
-        } else {
-            places = servicePlace.getAllPlaceVisible();
-        }
-      //  session.setAttribute("category", null);
-        List<PlaceDescription> placeDescriptions = new ArrayList<>();
-        List<PlaceImage> placeImages = new ArrayList<>();
+        String searchString = request.getParameter("txtSearch");
 
-        Comparator comparator = new Place.PlaceComparator();
-        Collections.sort(places, comparator);
-        Integer place_id;
-        PlaceImage placeImage;
-        PlaceDescription placeDescription;
-        PlaceRating placeRating;
-        List<PlaceRating> placeRatings = new ArrayList<>();
+        if(searchString != null){
+            placeDesc = placeDescriptionService.getAllPlaceBySearch(searchString);
+            if (placeDesc != null && !placeDesc.isEmpty()){
+                for (PlaceDescription placeDescript: placeDesc){
+                    place_id = placeDescript.getPlace_id();
+                    placeDescript = placeDescriptionService.getPlaceDescriptionByIdPlace(place_id, language);
+                    placeDescriptions.add(placeDescript);
 
-        String login = (String)session.getAttribute("login");
-        User user = null;
-        if (login != null){
-            user = userService.getUserByLogin(login);
-        }
+                    Place place = servicePlace.getByPK(place_id);
+                    places.add(place);
+                    placeImage = placeImageService.getPlaceImageByPlaceId(place_id);
+                    if (placeImage == null || !isInFolder(placeImage.getReference(), request)) {
+                        placeImage = new PlaceImage(place_id, "default_building.jpg");
+                    }
+                    placeImages.add(placeImage);
+                    if (user != null) {
+                        placeRating = placeRatingService.getPlaceRatingByPlaceAndUser(place_id, user.getId());
+                        if (placeRating == null) {
+                            placeRating = new PlaceRating(user.getId(), place_id, 0);
+                        }
+                        placeRatings.add(placeRating);
 
-        for (Place place : places) {
-            place_id = place.getId();
-            placeDescription = placeDescriptionService.getPlaceDescriptionByIdPlace(place_id, language);
-            placeDescriptions.add(placeDescription);
-            placeImage = placeImageService.getPlaceImageByPlaceId(place_id);
-            if (placeImage == null || !isInFolder(placeImage.getReference(), request)) {
-                placeImage = new PlaceImage(place_id, "default_building.jpg");
-            }
-            placeImages.add(placeImage);
-            if (user != null){
-                placeRating = placeRatingService.getPlaceRatingByPlaceAndUser(place_id,user.getId());
-                if (placeRating == null){
-                    placeRating = new PlaceRating(user.getId(),place_id,0);
+                    }
+                    System.out.println("placeDescript in " + placeDescript);
                 }
-                placeRatings.add(placeRating);
+            }
+
+        } else {
+
+            if (category == null) {
+                category = "";
+            }
+            if (category != null) {
+                switch (category) {
+                    case "architecture":
+                        places = servicePlace.getPlaceByCategory(1);
+                        break;
+                    case "churches":
+                        places = servicePlace.getPlaceByCategory(2);
+                        break;
+                    case "theatres":
+                        places = servicePlace.getPlaceByCategory(3);
+                        break;
+                    case "hotels":
+                        places = servicePlace.getPlaceByCategory(4);
+                        break;
+                    case "restaurants":
+                        places = servicePlace.getPlaceByCategory(5);
+                        break;
+                    default:
+                        places = servicePlace.getAllPlaceVisible();
+                        break;
+                }
+            } else {
+                places = servicePlace.getAllPlaceVisible();
+            }
+            //  session.setAttribute("category", null);
+
+            Comparator comparator = new Place.PlaceComparator();
+            Collections.sort(places, comparator);
+
+            for (Place place : places) {
+                place_id = place.getId();
+                placeDescription = placeDescriptionService.getPlaceDescriptionByIdPlace(place_id, language);
+                placeDescriptions.add(placeDescription);
+                placeImage = placeImageService.getPlaceImageByPlaceId(place_id);
+                if (placeImage == null || !isInFolder(placeImage.getReference(), request)) {
+                    placeImage = new PlaceImage(place_id, "default_building.jpg");
+                }
+                placeImages.add(placeImage);
+                if (user != null) {
+                    placeRating = placeRatingService.getPlaceRatingByPlaceAndUser(place_id, user.getId());
+                    if (placeRating == null) {
+                        placeRating = new PlaceRating(user.getId(), place_id, 0);
+                    }
+                    placeRatings.add(placeRating);
+
+                }
 
             }
 
         }
-
-
-
         List<PlaceDescriptionAndPhoto> placesPageInfo = getPlaceDescriptionAndPhotoList(places, placeDescriptions, placeImages, placeRatings);
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");

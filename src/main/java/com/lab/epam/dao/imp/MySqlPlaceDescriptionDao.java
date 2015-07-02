@@ -22,6 +22,7 @@ public class MySqlPlaceDescriptionDao extends AbstractJDBCDao<PlaceDescription, 
     private static final Logger loger = LogManager.getLogger(ClassName.getCurrentClassName());
     private static final String GET_LOCALE_DESCRIPTIONS_BY_PLACE = "SELECT * FROM place_description WHERE place_id = ? AND locale = ? AND deleted = false";
     private static final String GET_ALL_INFORMATION_BY_PLACE = "SELECT * FROM place_description WHERE place_id = ?";
+    private static final String GET_PLACE_BY_SEARCH = "SELECT * FROM place_description WHERE name LIKE '";
 
 
     ConnectionPool connection = ConnectionManager.getConnection();
@@ -89,5 +90,28 @@ public class MySqlPlaceDescriptionDao extends AbstractJDBCDao<PlaceDescription, 
         loger.info("Method getAllInformationAboutPlace ended");
         return list;
     }
+
+    public List<PlaceDescription> getAllPlaceBySearch(String str) throws PersistException {
+        loger.info("Method getAllInformationAboutPlace started");
+        List<PlaceDescription> list =null;
+        Connection conn = connection.retrieve();
+        String sql = GET_PLACE_BY_SEARCH + str + "%'";
+        try (PreparedStatement statement = conn.prepareStatement(sql)) {
+            ResultSet rs = statement.executeQuery();
+            list = parseResultSet(rs);
+        } catch (Exception e) {
+            loger.warn(e.getMessage());
+        } finally {
+            connection.putback(conn);
+        }
+
+        if (list == null || list.size() == 0) {
+            loger.warn("Record with name = " + str + " not found.");
+            throw new PersistException("Record with name = " + str + " not found.");
+        }
+        loger.info("Method getAllPlaceBySearch ended");
+        return list;
+    }
+
 
 }

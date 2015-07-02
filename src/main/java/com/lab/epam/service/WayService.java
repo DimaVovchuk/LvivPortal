@@ -62,8 +62,13 @@ public class WayService {
         return way;
     }
 
-    public void update(Way object) throws PersistException{
-        mySqlWayDao.update(object);
+    public void update(Way object){
+        try {
+            mySqlWayDao.update(object);
+        } catch (PersistException e) {
+            e.printStackTrace();
+            loger.warn("Cant update place rating");
+        }
     }
 
     public void delete(Way object) throws PersistException{
@@ -170,6 +175,16 @@ public class WayService {
     public void updateWayEndDate(Integer way_id, Date endDate){
         try {
             mySqlWayDao.updateWayEndDate(way_id, endDate);
+
+        } catch (PersistException e) {
+            e.printStackTrace();
+            loger.warn("Cant update endDate by" + " way_id " + way_id);
+        }
+    }
+
+    public void updateWayRating(Integer way_id, Integer rating){
+        try {
+            mySqlWayDao.updateWayRating(way_id, rating);
 
         } catch (PersistException e) {
             e.printStackTrace();

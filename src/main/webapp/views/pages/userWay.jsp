@@ -16,8 +16,9 @@
 <jsp:include page="/views/elements/script.jsp"/>
 
 <body>
-<div class="full-height">
+
 <jsp:include page="/views/elements/header.jsp"/>
+<div class="full-height">
 <div class="user-places" id="user-places">
     <div class="places">
         <div class="section">
@@ -93,24 +94,6 @@
                             </a>
                         </div>
 
-                            <%--</c:when>--%>
-                            <%--<c:otherwise>--%>
-                            <%--<div class="match-col col l4 m6 s9" style="display:none">--%>
-                            <%--<div class="card-image waves-effect waves-block waves-light">--%>
-                            <%--<img class="activator" src="images/office.jpg">--%>
-                            <%--</div>--%>
-                            <%--<div class="card-content">--%>
-                            <%--<span class="card-title activator grey-text text-darken-4">Card Titlemore_vert</span>--%>
-                            <%--<p><a href="#">This is a link</a></p>--%>
-                            <%--</div>--%>
-                            <%--<div class="card-reveal">--%>
-                            <%--<span class="card-title grey-text text-darken-4">Card Titleclose</span>--%>
-                            <%--<p>Here is some more information about this product that is only revealed once clicked on.</p>--%>
-                            <%--</div>--%>
-                            <%--</div>--%>
-
-                            <%--</c:otherwise>--%>
-                            <%--</c:choose>--%>
                         </c:when>
                         <c:otherwise>
                             <div align="center">
@@ -198,10 +181,10 @@
             </c:choose>
         </div>
     </div>
-
+</div>
+</div>
     <jsp:include page="/views/elements/footer.jsp"/>
-    </div>
-    </div>
+
     <script>
         $(".match-col").matchHeight({
             property: 'height'

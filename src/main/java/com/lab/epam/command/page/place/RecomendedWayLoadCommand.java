@@ -23,7 +23,7 @@ public class RecomendedWayLoadCommand implements Command {
         //String category = request.getParameter("category");
         loger.info("Way Loader.");
         //request.setAttribute("category", category);
-        request.getRequestDispatcher("/views/pages/recomended-place.jsp").forward(request, response);
+        request.getRequestDispatcher("/views/pages/recomended-way.jsp").forward(request, response);
     }
 
 
