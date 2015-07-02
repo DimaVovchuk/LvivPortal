@@ -26,9 +26,7 @@
 				<div class="row">
 					<div class="col l9 m8 s7">
 						<div class="row z-depth-2">
-							<%--<c:forEach var="place" items="${requestScope.places}">--%>
 							<div id="userPlace-info-collection" class="place-page-content"></div>
-							<%--</c:forEach>--%>
 						</div>
 					</div>
 					<div class="col l3 m4 s5">
@@ -37,13 +35,12 @@
 							<div id="userPlacecategory-place">
 								<a href="portal?command=userPlaceJSONCommand&userPlaceCategory=favoritePlaces"
 								   data-category="favoritePlaces"
-								   class="collection-item black-text ${requestScope.active_hotels}">Favorite Place</a>
+								   class="collection-item black-text ">Favorite Place</a>
 								<a href="portal?command=userPlaceJSONCommand&userPlaceCategory=customPlaces"
 								   data-category="customPlaces"
-								   class="collection-item black-text ${requestScope.active_restaurants}">Custom
-									Place</a>
+								   class="collection-item black-text ">Custom Place</a>
 								<a href="portal?command=userPlaceJSONCommand"
-								   class="collection-item black-text ${requestScope.active_allplaces}">All Place</a>
+								   class="collection-item black-text">All Place</a>
 							</div>
 						</div>
 					</div>
@@ -57,6 +54,7 @@
 
 	<script src="${pageContext.request.contextPath}/js/pages/userFavorPlacePage.js"></script>
 	<script id="userPlace-info-template" type="text/x-handlebars-template">
+
 		{{#each this}}
 		<div class="match-col col l4 m6 s12">
 			<div class="card z-depth-2" style="padding:10px; height:95%">
@@ -64,9 +62,10 @@
 				      method="post" style="position:absolute;padding:5px">
 					<button class="btn modal-trigger btn-floating btn-large waves-effect waves-light red darken-2"
 					        type="submit" data-target="delete-place"
-					        id="btn" onclick="$('#place_id').val('{{id}}')">
+					        id="btn" onclick="$('#place_id_delete').val('{{id}}')">
 						<i class="material-icons">delete</i>
 					</button>
+
 					<c:if test="${userDataTrip!=null}">
 						<button class="btn modal-trigger btn-floating btn-large waves-effect waves-light cyan darken-2"
 						        type="submit" data-target="chooseDayRecomended"
@@ -75,12 +74,14 @@
 						</button>
 					</c:if>
 				</form>
+
 				<a href="portal?command=placeInformation&place_id={{id}}"><img
 						class="responsive-img place-img"
 						src="${pageContext.request.contextPath}/upload/photo/{{imageReference}}"></a>
 				<a href="portal?command=placeInformation&place_id={{id}}">
 					<h5><c:out value="{{name}}"/></h5></a>
 						<c:out value="{{adress}}"/>
+
 				<div class="right-align"></div>
 			</div>
 		</div>
@@ -96,22 +97,16 @@
 	<div id="delete-place" class="modal">
 		<div class="modal-content">
 			<p><cdg:l18n key="sure.delete"/></p>
-
-			<form id="sure" action="/portal/deletePlace" method="post">
+			<form id="delete-favor-place">
 				<input type="hidden" name="command" value="deletePlace">
-
-				<div class="input-field col s6">
-					<input placeholder="Placeholder" id="place_id" name="place_id" type="hidden">
-				</div>
-
-				<div class="ok-footer">
+					<input id="place_id_delete" name="place_id_delete" type="hidden">
+					<div class="ok-footer">
 					<div class="modal-footer">
 						<button class="btn waves-effect waves-light cyan darken-2" type="submit" value="true"
 						        name="yes">Ok
 						</button>
-						<button class="btn waves-effect waves-light cyan darken-2" type="submit" value="false" name="no"
-								>Cancel
-						</button>
+						<a class="modal-action modal-close btn waves-effect waves-light cyan darken-2">Cancel
+						</a>
 					</div>
 				</div>
 			</form>

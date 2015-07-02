@@ -75,6 +75,18 @@ var addPlace = function () {
     });
 };
 
+var deletedFavorPlace = function () {
+    $('#delete-favor-place').on('submit', function (e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        $.ajax({
+            url: window.location.origin + '/portal?command=deletePlace',
+            data: $('#delete-favor-place').serialize(),
+            success: loadPlaceAboutData,
+            error: loadPlaceAboutData
+        });
+    });
+};
 $(function () {
     initRangeListeners();
     loadPlaceAboutData();

@@ -31,7 +31,7 @@
 								 class="circle responsive-img" name="newAvatar">
 						</c:when>
 						<c:otherwise>
-							<img src="${pageContext.request.contextPath}/upload/photo/photo/user.png" width=70%
+							<img src="${pageContext.request.contextPath}/upload/photo/user.png" width=70%
 							     class="circle responsive-img" name="newAvatar">
 						</c:otherwise>
 					</c:choose>

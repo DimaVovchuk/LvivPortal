@@ -33,7 +33,7 @@ public class DeletePlaceCommand implements Command {
         String no = request.getParameter("no");
 
         if (yes != null){
-            String place_idString = request.getParameter("place_id");
+            String place_idString = request.getParameter("place_id_delete");
             loger.info("Place id is " + place_idString);
             Integer place_id = null;
             if (place_idString != null){
