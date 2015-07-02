@@ -58,7 +58,7 @@ public class UserPlaceJSONCommand implements Command {
         if (user != null) {
             Integer userId = user.getId();
             //Integer roleId = user.getRoleID();
-//            places = placeService.getPlaceByUserId(userId);
+             places = placeService.getPlaceByUserId(userId);
 
             String userPlaceCategory = request.getParameter("userPlaceCategory");
             System.out.println("userPlaceCategory " + userPlaceCategory);
@@ -69,18 +69,12 @@ public class UserPlaceJSONCommand implements Command {
             if (userPlaceCategory != null) {
                 switch (userPlaceCategory) {
                     case "favoritePlaces":
-//                        for(int index = 0; index < allPlaces.size(); index++) {
-//                            Place favorPlace = allPlaces.get(index);
-//                            if(favorPlace.getCustom() ==false)
-//                            places.add(favorPlace);
-//                        }
+                        loger.info("userId before favoritePlaces " + userId);
+                        places = placeService.getAllVisbleUserFavorPlace(userId);
                         break;
                     case "customPlaces":
-//                        for(int index = 0; index < allPlaces.size(); index++) {
-//                            Place customPlace = allPlaces.get(index);
-//                            if(customPlace.getCustom() ==false)
-//                                places.add(customPlace);
-//                        }
+                        loger.info("userId before customPlaces " + userId);
+                        places = placeService.getAllVisbleUserCustomPlace(userId);
                         break;
                     default:
                         places = placeService.getPlaceByUserId(userId);
@@ -90,12 +84,13 @@ public class UserPlaceJSONCommand implements Command {
                 places = placeService.getPlaceByUserId(userId);
             }
 
+            loger.info("places size is " + places.size());
             if (places != null && !places.isEmpty()) {
                 placeDescriptions = getPlaceDescriptionByPlace(places);
                 placeImage = getPlaceImageByPlace(places);
             }
         }
-        List<PlaceDescriptionAndPhoto> userPlacePageInfo = null;
+        List<PlaceDescriptionAndPhoto> userPlacePageInfo = new ArrayList<>();
         if (places != null && !places.isEmpty()) {
             userPlacePageInfo = getPlaceDescriptionAndPhotoList(places, placeDescriptions, placeImage);
         }
@@ -119,7 +114,7 @@ public class UserPlaceJSONCommand implements Command {
             placeDescription = placeDescriptionService.getPlaceDescriptionByIdPlace(place_id, language);
             placeDescriptions.add(placeDescription);
         }
-        System.out.println("placeDescriptions size is " + placeDescriptions.size());
+        loger.info("placeDescriptions size is " + placeDescriptions.size());
         return placeDescriptions;
     }
 
