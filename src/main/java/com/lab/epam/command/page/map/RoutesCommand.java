@@ -101,6 +101,7 @@ public class RoutesCommand implements Command {
             j++;
         }
         Collection<Place> values = sorted.values();
+        System.out.println(values);
         List<Place> list = new ArrayList<>(values);
         return list;
     }

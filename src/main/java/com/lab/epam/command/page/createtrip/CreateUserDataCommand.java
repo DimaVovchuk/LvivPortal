@@ -63,9 +63,7 @@ public class CreateUserDataCommand implements Command {
         String theatres = request.getParameter("theatres");
         String placeArrive = request.getParameter("placeArrive");
         String timePerDay = request.getParameter("dayTime");
-        Map<Integer,Boolean> flag = new HashMap<>();
-        flag.put(1,true);
-        userDataTrip.setSortFlag(flag);
+        userDataTrip.getSortFlag().put(1,true);
 
         if (dontKnowDate == null) {
             if (beginTrip != null && !beginTrip.equalsIgnoreCase("")) {
@@ -225,11 +223,6 @@ public class CreateUserDataCommand implements Command {
             tempTime = tempTime + 900 + t;
             j++;
         }
-
-        tempTime /= 60;
-        double minutes = tempTime % 60;
-        double hours = (tempTime - minutes) / 60;
-        System.out.println(hours + "/" + minutes);
 
         Map<Integer, List<Place>> map = new HashMap<>();
         map.put(1, result);

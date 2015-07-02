@@ -8,10 +8,8 @@
     var markerClusterer;
 
     function myclick(id) {
-
         <c:forEach var="i" begin="0" end="${fn:length(places)-1}">
         if ("${places[i].placeId}" == id) {
-            console.log(markers[${i}]);
             google.maps.event.trigger(markers[${i}], "click");
         }
         </c:forEach>
