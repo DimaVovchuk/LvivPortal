@@ -65,22 +65,16 @@ public class FBResponseCommand implements Command {
                 session.setAttribute("avatar", userImage.getReference());
                 request.getRequestDispatcher("/views/pages/user-cabinet.jsp").forward(request, response);
             } else {
-                user = new User();
                 json = new JSONObject(graph);
                 String id = (String)json.get("id");
                 String first_name = (String) json.get("first_name");
                 String last_name = (String) json.get("last_name");
                 String email = (String) json.get("email");
 
-                user.setVkId(id);
-                user.setName(first_name);
-                user.setSurname(last_name);
-                user.setMail(email);
-
                 session.setAttribute("vk_id", id);
                 session.setAttribute("avatar", photo);
-                session.setAttribute("userForEdit", user);
-                request.getRequestDispatcher("/views/pages/editProfile.jsp").forward(request, response);
+
+                request.getRequestDispatcher("/portal?command=signUpForm&first=" + first_name + "&last=" + last_name + "&email=" + email).include(request, response);
             }
 
         } catch (JSONException e) {

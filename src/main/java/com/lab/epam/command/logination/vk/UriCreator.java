@@ -20,7 +20,7 @@ public class UriCreator {
         return "https://oauth.vk.com/access_token?client_id=" + appId + "&client_secret=" + appKey + "&code=" + code;
     }
 
-    public String userInfoUri(int vkUserId, TokenAccess token) {
+    public String userInfoUri(String vkUserId, TokenAccess token) {
         return METHOD_URI + "users.get?" + 
                 "uids=" + vkUserId + "&" + 
                 "fields=" + USER_FIELDS + "&" +

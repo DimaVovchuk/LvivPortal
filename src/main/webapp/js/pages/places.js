@@ -133,9 +133,20 @@ var addPlace = function () {
             type: 'post',
             url: window.location.origin + '/portal?command=addplace',
             data: $('form').serialize(),
+            success: loadWindow,
+            error: loadWindow,
         });
     });
 };
+
+var loadWindow = function (data) {
+    if (data == "1"){
+        $('#place-is-added').openModal();
+    }
+    else{
+        $('#place-is-in-db').openModal();
+    }
+}
 
 var searchPlace = function () {
     $('#frmSearch').on('submit', function (e) {
@@ -149,6 +160,8 @@ var searchPlace = function () {
         });
     });
 };
+
+
 
 var initCategoriesEventsPlace = function () {
     $('#category-place').on('click', function (e) {

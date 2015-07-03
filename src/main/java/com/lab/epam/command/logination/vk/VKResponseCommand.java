@@ -47,7 +47,6 @@ public class VKResponseCommand implements Command {
         }
         String uri = new UriCreator().userInfoUri(token.getVkUserId(), token);
         String url = executeGet(uri);
-        System.out.println(url);
         url = url.substring(13, url.length()-2);
         try {
             json = new JSONObject(url);
@@ -78,26 +77,20 @@ public class VKResponseCommand implements Command {
                 session.setAttribute("vk_id", token.getVkUserId());
                 session.setAttribute("avatar", userImage.getReference());
                 request.getRequestDispatcher("/views/pages/user-cabinet.jsp").forward(request, response);
+
             } else {
-                user = new User();
                 json = new JSONObject(url);
-                int uid = json.getInt("uid");
+                String vk_id = token.getVkUserId();
                 String first_name = (String) json.get("first_name");
                 String last_name = (String) json.get("last_name");
-                String home_phone = (String) json.get("home_phone");
-                String about = (String) json.get("about");
+                String email = token.getEmail();
+                String phone = (String) json.get("home_phone");
+                //String about = (String) json.get("about");
 
-                user.setMail(token.getEmail());
-                user.setVkId(String.valueOf(uid));
-                user.setName(first_name);
-                user.setSurname(last_name);
-                user.setPhone(home_phone);
-                user.setAbout(about);
-
-                session.setAttribute("vk_id", token.getVkUserId());
                 session.setAttribute("avatar", photo);
-                session.setAttribute("userForEdit", user);
-                request.getRequestDispatcher("/views/pages/editProfile.jsp").forward(request, response);
+                session.setAttribute("vk_id", vk_id);
+
+                request.getRequestDispatcher("/portal?command=signUpForm&first=" + first_name + "&last=" + last_name + "&phone=" + phone + "&email=" + email).include(request, response);
             }
         }
         catch (JSONException e) {

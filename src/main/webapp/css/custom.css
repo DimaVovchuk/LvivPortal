@@ -769,6 +769,13 @@ footer.page-footer {
     margin-top: 10%;
 }
 
+.place-in-db {
+    width: 400px;
+    margin-top: 10%;
+    align-content: center;
+}
+
+
 #user-trip-save-singin .ok-footer .modal-footer .btn {
     float: right;
     margin: 20px 10px;
@@ -788,8 +795,13 @@ footer.page-footer {
 }
 
 .suggest_link_over {
-    background-color: #3366CC;
+    background-color: #58ACFA;
     padding: 2px 6px 2px 6px;
+}
+
+#search_suggest {
+    font-family: sans-serif;
+    font-size: small;
 }
 
 #search_suggest {
@@ -797,5 +809,67 @@ footer.page-footer {
     background-color: #FFFFFF;
     text-align: left;
     border: 1px solid #000000;
+}
+
+.form-wrapper {
+    width: 300px;
+    height: 20px;
+    padding: 8px;
+    margin: 10px auto;
+    background-color: #ffffff;
+}
+.form-wrapper #txtSearch {
+    width: 210px;
+    height: 20px;
+    padding: 10px 5px;
+    float: left;
+    font: bold 16px 'lucida sans', 'trebuchet MS', 'Tahoma';
+    border: 1px solid #ccc;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.form-wrapper #txtSearch:focus {
+    outline: 0;
+    border-color: #aaa;
+}
+.form-wrapper #txtSearch::-webkit-input-placeholder {
+    color: #999;
+    font-weight: normal;
+}
+
+.form-wrapper #txtSearch:-moz-placeholder {
+    color: #999;
+    font-weight: normal;
+}
+.form-wrapper #txtSearch:-ms-input-placeholder {
+    color: #999;
+    font-weight: normal;
+}
+
+.form-wrapper #cmdSearch {
+    float: right;
+    border: 1px solid #00748f;
+    height: 42px;
+    width: 60px;
+    padding: 0;
+    cursor: pointer;
+    font: bold 12px Arial, Helvetica;
+    color: #fafafa;
+    text-transform: uppercase;
+    background-color: #58ACFA;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+.form-wrapper #cmdSearch:hover,
+.form-wrapper #cmdSearch:focus {
+    background-color: #31b2c3;
+   }
+
+
+.form-wrapper #cmdSearch::-moz-focus-inner {
+    border: 0;
 }
 

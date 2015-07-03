@@ -1,5 +1,6 @@
 package com.lab.epam.command.page.place;
 
+import com.google.gson.Gson;
 import com.lab.epam.command.controller.Command;
 import com.lab.epam.entity.Place;
 import com.lab.epam.entity.UserDataAboutTrip;
@@ -33,6 +34,7 @@ public class AddPlaceUserDataTripCommand implements Command {
         placeForWay = (ArrayList<Place>) session.getAttribute("placeForWay");
         String dayNumberString = request.getParameter("dayNumber");
         String timePlaceString = request.getParameter("timePlace");
+        Integer isAdded = 0;
 
 
         Integer dayNumber = 0;
@@ -76,6 +78,7 @@ public class AddPlaceUserDataTripCommand implements Command {
                         placeForWay.add(onePlaceForWay);
                         userDataAboutTrip.setIsFull(true);
                         userDataAboutTrip.getSortFlag().put(Integer.parseInt(dayNumberString),true);
+                        isAdded = 1;
                     }
                 }
             }
@@ -84,8 +87,11 @@ public class AddPlaceUserDataTripCommand implements Command {
             userDataAboutTrip.setPlaceDay(map);
             loger.info("Set map to userDataAboutTrip");
         }
-        session.setAttribute("userDataTrip", userDataAboutTrip);
-
+        System.out.println(isAdded);
+        session.setAttribute("isAdded", isAdded);
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+          response.getWriter().write(new Gson().toJson(isAdded));
     }
 
 }

@@ -26,6 +26,8 @@ public class PlaceDescriptionService {
         }
     }
 
+
+
     public PlaceDescription getByPK(Integer key){
         PlaceDescription placesDescription = null;
         try {
@@ -64,6 +66,19 @@ public class PlaceDescriptionService {
         } catch (PersistException e) {
             e.printStackTrace();
             loger.warn("Cant get all place description");
+        }
+
+        return placesDescription;
+    }
+
+    public List<PlaceDescription> getPlaceByLanguege(String language){
+        List<PlaceDescription> placesDescription = null;
+        try {
+            placesDescription = mySqlPlaceDescriptionDao.getPlaceByLanguege(language);
+
+        } catch (PersistException e) {
+            e.printStackTrace();
+            loger.warn("Cant get place description by language");
         }
 
         return placesDescription;

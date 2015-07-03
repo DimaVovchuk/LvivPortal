@@ -22,6 +22,7 @@ public class MySqlPlaceDescriptionDao extends AbstractJDBCDao<PlaceDescription, 
     private static final Logger loger = LogManager.getLogger(ClassName.getCurrentClassName());
     private static final String GET_LOCALE_DESCRIPTIONS_BY_PLACE = "SELECT * FROM place_description WHERE place_id = ? AND locale = ? AND deleted = false";
     private static final String GET_ALL_INFORMATION_BY_PLACE = "SELECT * FROM place_description WHERE place_id = ?";
+    private static final String GET_ALL_INFORMATION_BY_LANGUAGE = "SELECT * FROM place_description WHERE locale = ?";
     private static final String GET_PLACE_BY_SEARCH = "SELECT * FROM place_description WHERE name LIKE '";
 
 
@@ -86,6 +87,28 @@ public class MySqlPlaceDescriptionDao extends AbstractJDBCDao<PlaceDescription, 
         if (list == null || list.size() == 0) {
             loger.warn("Record with PK = " + place_id + " not found.");
             throw new PersistException("Record with PK = " + place_id + " not found.");
+        }
+        loger.info("Method getAllInformationAboutPlace ended");
+        return list;
+    }
+
+    public List<PlaceDescription> getPlaceByLanguege(String language) throws PersistException {
+        loger.info("Method getAllInformationAboutPlace started");
+        List<PlaceDescription> list =null;
+        Connection conn = connection.retrieve();
+        try (PreparedStatement statement = conn.prepareStatement(GET_ALL_INFORMATION_BY_LANGUAGE)) {
+            statement.setString(1, language);
+            ResultSet rs = statement.executeQuery();
+            list = parseResultSet(rs);
+        } catch (Exception e) {
+            loger.warn(e.getMessage());
+        } finally {
+            connection.putback(conn);
+        }
+
+        if (list == null || list.size() == 0) {
+            loger.warn("Record with place = " + language + " not found.");
+            throw new PersistException("Record with place = " + language + " not found.");
         }
         loger.info("Method getAllInformationAboutPlace ended");
         return list;
