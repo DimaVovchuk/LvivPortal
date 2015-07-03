@@ -17,8 +17,6 @@ public class FBConnection {
     public static final String FB_APP_ID = "1616018115311923";
     public static final String FB_APP_SECRET = "7ef4548354d3bd6509648ff6f262df86";
     public static final String REDIRECT_URI = "http://localhost:8080/portal?command=authorRespFB";
-    //public static final String PERMISSIONS = "id,first_name,last_name,email,user_about_me,picture";
-
 
     static String accessToken = "";
 
