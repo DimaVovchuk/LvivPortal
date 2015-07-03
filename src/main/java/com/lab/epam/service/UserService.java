@@ -55,6 +55,14 @@ public class UserService {
         return mySqlUserDao.getUserByLogin(login);
     }
 
+    public User getUserByVkId(int vk_id) {
+        return mySqlUserDao.getUserByVkId(vk_id);
+    }
+
+    public User getUserByVkId(String vk_id) {
+        return mySqlUserDao.getUserByVkId(vk_id);
+    }
+
     public User getUserByPhone(String phone) {
         return mySqlUserDao.getUserByPhone(phone);
     }

@@ -9,7 +9,7 @@ var initSidebar = function () {
 };
 
 var linkProcess = function (id) {
-    var windowIDList = ['#map-itinerary', '#map-places'];
+    var windowIDList = ['#map-itinerary', '#map-places', '#map-custom'];
     var li = '#li-' + id;
     var map = '#map-' + id;
     $(li).addClass('active');
@@ -87,13 +87,15 @@ var initDayTrigger = function () {
         $('#places-day' + day).toggle();
     })
 };
-
+var count = 0;
 var initMapDayTrigger = function () {
     $(document).on('click', '.map-day-trigger', function (e) {
         e.preventDefault();
         var show = $(e.currentTarget).data('show');
+
         var day = $(e.currentTarget).data('day');
-        if (show === 1) {
+        if (show === 1 && count == 0) {
+            count++;
             $(e.currentTarget).data('show', 0);
             $('#map-day' + day).html('Hide from map');
             initDayMarkers(day - 1);
@@ -101,20 +103,28 @@ var initMapDayTrigger = function () {
             showRoutesMarkers(day - 1)
         }
         if (show === 0) {
+            count--;
             $(e.currentTarget).data('show', 1);
             $('#map-day' + day).html('Show on map');
-            directionsDisplay.set('directions', null);
+            for(var i = 0; i < directionsDisplays.length; i++){
+                directionsDisplays[i].set('directions', null);
+            }
             hideMarkers();
             showMarkers();
         }
     })
 };
+var directionsDisplays = [];
+var getdirectionsDisplays = function (directionsDisplay) {
+    directionsDisplays.push(directionsDisplay);
+};
+
+
 
 /* *** MAP *** */
 
 var map;
 var lvivMap = new google.maps.LatLng(49.8426, 24.0278);
-
 var routesData;
 
 var initBlankMap = function () {
@@ -125,36 +135,43 @@ var initBlankMap = function () {
     map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 };
 
-var directionsDisplay;
-var directionsService = new google.maps.DirectionsService();
 
 var initDayMarkers = function (dayNumber) {
-    directionsDisplay = new google.maps.DirectionsRenderer();
-    directionsDisplay.setMap(map);
-    directionsDisplay.setOptions({suppressMarkers: true});
-    calcRoute(routesData[dayNumber].places);
+
+    var points = [];
+    var points1 = [];
+    var len = (routesData[dayNumber].places.length);
+    if (len > 10) {
+        for (var i = 0; i <= len - 10; i++) {
+            points.push(new google.maps.LatLng(routesData[dayNumber].places[i].latitude, routesData[dayNumber].places[i].longitude));
+        }
+        for (i = len - 10; i < len; i++) {
+            points1.push(new google.maps.LatLng(routesData[dayNumber].places[i].latitude, routesData[dayNumber].places[i].longitude));
+        }
+        calcRoute(points1);
+        calcRoute(points);
+    } else {
+        for (i = 0; i < (routesData[dayNumber].places.length); i++) {
+            points.push(new google.maps.LatLng(routesData[dayNumber].places[i].latitude, routesData[dayNumber].places[i].longitude));
+        }
+        calcRoute(points);
+    }
+
+    //calcRoute(routesData[dayNumber].places);
+
+
 };
 
 var calcRoute = function (data) {
-    //console.log(data.length );
-    //
-    //if (data.length > 10) {
-    //    var poly = [];
-    //    var polyOptions = {
-    //        strokeColor: '#000000',
-    //        strokeOpacity: 1.0,
-    //        strokeWeight: 3
-    //    };
-    //    for (var i = 1; i < (data.length - 1); i++) {
-    //        poly.push(new google.maps.LatLng(data[i].latitude, data[i].longitude));
-    //    }
-    //
-    //    poly = new google.maps.Polyline(polyOptions);
-    //    poly.setMap(map);
-    //}
+    var directionsDisplay;
+    var directionsService = new google.maps.DirectionsService();
+    directionsDisplay = new google.maps.DirectionsRenderer();
+    directionsDisplay.setMap(map);
+    directionsDisplay.setOptions({suppressMarkers: true});
+    if (data.length > 1 && data.length <= 10) {
 
-    if (data.length > 1 /*&& data.length < 10*/) {
-        var start = new google.maps.LatLng(data[0].latitude, data[0].longitude);
+        //var start = new google.maps.LatLng(data[0].latitude, data[0].longitude);
+        var start = data[0];
         var image = {
             url: "",
             scaledSize: new google.maps.Size(40, 30),
@@ -162,11 +179,13 @@ var calcRoute = function (data) {
             anchor: new google.maps.Point(0, 0)
         };
         new google.maps.Marker({
-            position: new google.maps.LatLng(data[0].latitude, data[0].longitude),
+            //position: new google.maps.LatLng(data[0].latitude, data[0].longitude),
+            position: data[0],
             icon: image,
             map: map
         });
-        var end = new google.maps.LatLng(data[data.length - 1].latitude, data[data.length - 1].longitude);
+        //var end = new google.maps.LatLng(data[data.length - 1].latitude, data[data.length - 1].longitude);
+        var end = data[data.length - 1];
         image = {
             url: "",
             scaledSize: new google.maps.Size(40, 30),
@@ -174,7 +193,8 @@ var calcRoute = function (data) {
             anchor: new google.maps.Point(0, 0)
         };
         new google.maps.Marker({
-            position: new google.maps.LatLng(data[data.length - 1].latitude, data[data.length - 1].longitude),
+            //position: new google.maps.LatLng(data[data.length - 1].latitude, data[data.length - 1].longitude),
+            position: data[data.length - 1],
             icon: image,
             map: map
         });
@@ -182,7 +202,8 @@ var calcRoute = function (data) {
 
         for (var i = 1; i < (data.length - 1); i++) {
             waypts.push({
-                location: new google.maps.LatLng(data[i].latitude, data[i].longitude)
+                //location: new google.maps.LatLng(data[i].latitude, data[i].longitude)
+                location: data[i]
             });
             image = {
                 url: "",
@@ -191,7 +212,8 @@ var calcRoute = function (data) {
                 anchor: new google.maps.Point(0, 0)
             };
             new google.maps.Marker({
-                position: new google.maps.LatLng(data[i].latitude, data[i].longitude),
+                //position: new google.maps.LatLng(data[i].latitude, data[i].longitude),
+                position: data[i],
                 icon: image,
                 map: map
             });
@@ -203,12 +225,34 @@ var calcRoute = function (data) {
             optimizeWaypoints: true,
             travelMode: google.maps.TravelMode.WALKING
         };
+
+        directionsService.route(request, function (response, status) {
+            if (status == google.maps.DirectionsStatus.OK) {
+                directionsDisplay.setDirections(response);
+            }
+        });
+        getdirectionsDisplays(directionsDisplay);
     }
-    directionsService.route(request, function (response, status) {
-        if (status == google.maps.DirectionsStatus.OK) {
-            directionsDisplay.setDirections(response);
-        }
-    });
+    //if (data.length > 10) {
+    //    var poly;
+    //    var polyOptions = {
+    //        strokeColor: '#000000',
+    //        strokeOpacity: 1.0,
+    //        strokeWeight: 3
+    //    };
+    //    poly = new google.maps.Polyline(polyOptions);
+    //
+    //    poly = new google.maps.Polyline(polyOptions);
+    //    poly.setMap(map);
+    //
+    //    var path = poly.getPath();
+    //
+    //    for (var i = 1; i < (data.length - 1); i++) {
+    //        var lL = new google.maps.LatLng(data[i].latitude, data[i].longitude);
+    //        path.push(lL);
+    //    }
+    //
+    //}
 };
 
 /* *** MAIN *** */
@@ -221,4 +265,5 @@ $(function () {
 
     //loadDayData();
     //google.maps.event.addDomListener(window, 'load', initDayMarkers);
+
 });

@@ -27,6 +27,8 @@ public class EditProfileCommand implements Command {
 
         HttpSession session = request.getSession();
         String login = (String)session.getAttribute("login");
+        String vk_id = (String)session.getAttribute("vk_id");
+        String avatar = (String)session.getAttribute("avatar");
         ResourceBundle resourceBandle = (ResourceBundle)session.getAttribute("bundle");
         Locale locale = resourceBandle.getLocale();
         language = locale.getLanguage();
@@ -48,8 +50,12 @@ public class EditProfileCommand implements Command {
                 userImage = new UserImage(user.getId(),"user.png");
             }
             session.setAttribute("userForEdit", user);
-            session.setAttribute("avatar", userImage.getReference());
-        } else{
+            if (vk_id == null) {
+                session.setAttribute("avatar", userImage.getReference());
+            } else {
+                session.setAttribute("avatar", avatar);
+            }
+        } else {
             request.setAttribute("errorMsg", "Data base error");
         }
 

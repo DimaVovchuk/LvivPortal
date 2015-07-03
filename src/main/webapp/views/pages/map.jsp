@@ -26,6 +26,9 @@
                 <li id="li-places" class="link-process" data-type="places"><a href="#"><i class="small mdi-action-account-balance white-text"></i>
                     <span class="nav-text white-text">Places</span>
                 </a>
+                <li id="li-custom" class="link-process" data-type="custom"><a href="#"><i class="small material-icons">local_see</i>
+                    <span class="nav-text white-text">Custom</span>
+                </a>
                 </li>
             </ul>
         </nav>

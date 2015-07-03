@@ -1,6 +1,5 @@
 package com.lab.epam.command.page.createtrip;
 
-import com.google.gson.Gson;
 import com.lab.epam.command.controller.Command;
 import com.lab.epam.entity.Place;
 import com.lab.epam.entity.UserDataAboutTrip;
@@ -12,7 +11,6 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -38,29 +36,33 @@ public class CreateUserDataFromDBCommand implements Command {
         Integer way_id;
         Map<Integer, List<Place>> placesMap = new HashMap<>();
         //System.out.println("way_idString " + way_idString);
-        if (way_idString != null){
+        if (way_idString != null) {
             way_id = Integer.parseInt(way_idString);
             userDataTrip.setWay_id(way_id);
             Way way = wayService.getByPK(way_id);
-            if (way.getBegin() != null){
+            if (way.getBegin() != null) {
                 userDataTrip.setBeginTrip(way.getBegin());
             }
-            if (way.getEnd() != null){
+            if (way.getEnd() != null) {
                 userDataTrip.setEndTrip(way.getEnd());
             }
             userDataTrip.setIsSaved(true);
             userDataTrip.setIsFull(true);
             userDataTrip.setDayCount(way.getWay_days());
-            for (int i = 1; i <= userDataTrip.getDayCount(); i++){
+
+            for (int i = 1; i <= userDataTrip.getDayCount(); i++) {
                 List<Place> place = placeService.getPlaceByWayIdDayNumber(way_id, i);
-                if (place != null && !place.isEmpty()){
+                if (place != null && !place.isEmpty()) {
                     placesMap.put(i, place);
                 }
             }
             userDataTrip.setPlaceDay(placesMap);
+            for (int i = 1; i <= userDataTrip.getPlaceDay().size(); i++) {
+                userDataTrip.getSortFlag().put(i, false);
+            }
             loger.info("userDataTrip is created");
             System.out.println("userDataTrip " + userDataTrip);
-        } else{
+        } else {
             loger.warn("Any way_id");
         }
         session.setAttribute("userDataTrip", userDataTrip);

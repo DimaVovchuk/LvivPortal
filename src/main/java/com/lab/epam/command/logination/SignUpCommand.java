@@ -51,6 +51,7 @@ public class SignUpCommand implements Command {
         String password = request.getParameter("password");
         String phone = request.getParameter("phone");
         Integer role = Integer.valueOf(request.getParameter("role"));
+        String vk_id = (String) session.getAttribute("vk_id");
 
         UserService userService = new UserService();
         boolean checkEmail = userService.checkEmail(email);
@@ -157,6 +158,7 @@ public class SignUpCommand implements Command {
                 user.setStatus(1);
                 user.setRoleID(role);
                 user.setCompanyName(companyName);
+                user.setVkId(vk_id);
 
                 userService.create(user);
                 session.setAttribute("avatar", user.getAvatar());

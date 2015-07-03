@@ -9,7 +9,10 @@ import com.lab.epam.command.delete.DeletePlaceCommand;
 import com.lab.epam.command.email.*;
 import com.lab.epam.command.locale.LocaleCommand;
 import com.lab.epam.command.logination.*;
+import com.lab.epam.command.logination.fb.FBAuthorizationCommand;
+import com.lab.epam.command.logination.fb.FBResponseCommand;
 import com.lab.epam.command.logination.vk.VkAuthorizationCommand;
+import com.lab.epam.command.logination.vk.VKResponseCommand;
 import com.lab.epam.command.page.createtrip.AddDayCommand;
 import com.lab.epam.command.page.createtrip.CountDaysCommand;
 import com.lab.epam.command.page.createtrip.CreateUserDataCommand;
@@ -88,8 +91,10 @@ public class CommandFactory {
         commands.put("addCustomPlace", new AddCustomPlaceCommand());
         commands.put("saveCustomPlace", new SaveCustomPlaceCommand());
         commands.put("authorVK", new VkAuthorizationCommand());
+        commands.put("authorRespVK", new VKResponseCommand());
         commands.put("deleteImageByDB", new DeleteImageCommand());
-        //commands.put("authorFB", new FbAuthorizationCommand());
+        commands.put("authorFB", new FBAuthorizationCommand());
+        commands.put("authorRespFB", new FBResponseCommand());
         commands.put("recomendedPlace", new RecomendedPlaceCommand());
         commands.put("recomendedPlaceload", new RecomendedPlaceLoaderCommand());
         commands.put("showAllCustomPlace", new ShowAllCustomPlaceCommand());
@@ -98,6 +103,7 @@ public class CommandFactory {
         commands.put("userPlaceJSONCommand", new  UserPlaceJSONCommand());
         commands.put("rectRatingWay", new  RectRatingWayCommand());
         commands.put("search", new  PlaceSearchCommand());
+        commands.put("signUpForm", new  SignUpForm());
     }
 
     public static void createCommand(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
