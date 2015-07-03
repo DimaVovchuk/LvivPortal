@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit;
 public class TokenAccess {
 
     private String token;
-    private int vkUserId;
+    private String vkUserId;
     private Date expirationMoment;
     private String email;
 
@@ -21,11 +21,11 @@ public class TokenAccess {
         this.token = token;
     }
 
-    public int getVkUserId() {
+    public String getVkUserId() {
         return vkUserId;
     }
 
-    public void setVkUserId(int id) {
+    public void setVkUserId(String id) {
         this.vkUserId = id;
     }
 

@@ -41,12 +41,12 @@
                 <div id="first-last-form" class="row animated fadeIn" style="margin-bottom: 0">
                     <div class="col s6" style="padding-right: 10px">
                         <div class="form">
-                            <input id="first" placeholder='<cdg:l18n key="login.firstname"/>' type='text' name="first">
+                            <input id="first" placeholder='<cdg:l18n key="login.firstname"/>' type='text' name="first" value="${first}">
                         </div>
                     </div>
                     <div class="col s6" style="padding-left: 10px">
                         <div class="form">
-                            <input id="last" placeholder='<cdg:l18n key="login.lastname"/>' type='text' name="last">
+                            <input id="last" placeholder='<cdg:l18n key="login.lastname"/>' type='text' name="last" value="${last}">
                         </div>
                     </div>
                 </div>
@@ -57,7 +57,7 @@
                     <input id="login" placeholder='<cdg:l18n key="login.login"/>' type='text' name="login">
                 </div>
                 <div class="form">
-                    <input id="email" placeholder='<cdg:l18n key="login.email"/>' type='email' name="email">
+                    <input id="email" placeholder='<cdg:l18n key="login.email"/>' type='email' name="email" value="${email}">
                 </div>
                 <div class="form">
                     <input id="password" placeholder='<cdg:l18n key="login.password"/>' type='password' name="password">
@@ -66,7 +66,7 @@
                     <input id="confirm" placeholder='<cdg:l18n key="login.confirm"/>' type='password' name="confirm">
                 </div>
                 <div class="form">
-                    <input id="phone" placeholder='<cdg:l18n key="login.phone"/>' type='text' name="phone">
+                    <input id="phone" placeholder='<cdg:l18n key="login.phone"/>' type='text' name="phone" value="${phone}">
                 </div>
                 <div class="form">
                     <input name="role" type="radio" id="user" value="2" checked="checked" onchange="changeRoleToggle('user')"/>
