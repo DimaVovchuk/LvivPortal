@@ -19,7 +19,7 @@ public class PlaceImageService {
 
     private static final Logger loger = LogManager.getLogger(ClassName.getCurrentClassName());
 
-    public void create(PlaceImage object){
+    public void create(PlaceImage object) {
         try {
             mySqlPlaceImageDao.create(object);
         } catch (PersistException e) {
@@ -28,10 +28,11 @@ public class PlaceImageService {
         }
     }
 
-    public PlaceImage getByPK(Integer key){
+    public PlaceImage getByPK(Integer key) {
         PlaceImage placeImage = null;
         try {
-            placeImage =  mySqlPlaceImageDao.getByPK(key);;
+            placeImage = mySqlPlaceImageDao.getByPK(key);
+            ;
 
         } catch (PersistException e) {
             e.printStackTrace();
@@ -40,7 +41,7 @@ public class PlaceImageService {
         return placeImage;
     }
 
-    public void update(PlaceImage object){
+    public void update(PlaceImage object) {
         try {
             mySqlPlaceImageDao.update(object);
         } catch (PersistException e) {
@@ -49,7 +50,7 @@ public class PlaceImageService {
         }
     }
 
-    public void delete(PlaceImage object){
+    public void delete(PlaceImage object) {
         try {
             mySqlPlaceImageDao.delete(object);
         } catch (PersistException e) {
@@ -58,7 +59,7 @@ public class PlaceImageService {
         }
     }
 
-    public List<PlaceImage> getAll(){
+    public List<PlaceImage> getAll() {
         List<PlaceImage> placeImage = null;
         try {
             placeImage = mySqlPlaceImageDao.getAll();
@@ -71,11 +72,12 @@ public class PlaceImageService {
         return placeImage;
     }
 
-    public List<PlaceImage> getAllWithoutDeleted(){
+    public List<PlaceImage> getAllWithoutDeleted() {
         List<PlaceImage> placeImage = null;
         List<PlaceImage> referenceList = null;
         try {
-            placeImage = mySqlPlaceImageDao.getAllWithoutDeleted();;
+            placeImage = mySqlPlaceImageDao.getAllWithoutDeleted();
+            ;
             referenceList = new ArrayList<>();
             for (int index = 0; index < placeImage.size(); index++) {
                 if (placeImage.get(index).getDeleted() == false)
@@ -89,10 +91,10 @@ public class PlaceImageService {
         return referenceList;
     }
 
-    public PlaceImage getPlaceImageByPlaceId(Integer place_id){
+    public PlaceImage getPlaceImageByPlaceId(Integer place_id) {
         PlaceImage placeImage = null;
         try {
-            placeImage =  mySqlPlaceImageDao.getPlaceImageByPlaceId(place_id);
+            placeImage = mySqlPlaceImageDao.getPlaceImageByPlaceId(place_id);
 
         } catch (PersistException e) {
             e.printStackTrace();
@@ -101,15 +103,19 @@ public class PlaceImageService {
         return placeImage;
     }
 
-    public List<PlaceImage> getAllPlaceImageByPlaceId(Integer place_id){
+    public List<PlaceImage> getAllPlaceImageByPlaceId(Integer place_id) {
         List<PlaceImage> placeImageList = null;
         List<PlaceImage> referenceList = null;
         try {
-            placeImageList =  mySqlPlaceImageDao.getAllPlaceImageByPlaceId(place_id);
+            placeImageList = mySqlPlaceImageDao.getAllPlaceImageByPlaceId(place_id);
             referenceList = new ArrayList<>();
-            for (int index = 0; index < placeImageList.size(); index++) {
-                if (placeImageList.get(index).getDeleted() == false)
-                    referenceList.add(placeImageList.get(index));
+            if (placeImageList != null) {
+                for (int index = 0; index < placeImageList.size(); index++) {
+                    if (placeImageList.get(index).getDeleted() == false)
+                        referenceList.add(placeImageList.get(index));
+                }
+            }else{
+                return null;
             }
         } catch (PersistException e) {
             e.printStackTrace();

@@ -88,6 +88,7 @@ public class CommandFactory {
         commands.put("addDay", new AddDayCommand());
         commands.put("companyInformation", new CompanyInformationCommand());
         commands.put("commercial", new CommercialCommand());
+        commands.put("commercialJSON", new CommercialJSONCommand());
         commands.put("addCustomPlace", new AddCustomPlaceCommand());
         commands.put("saveCustomPlace", new SaveCustomPlaceCommand());
         commands.put("authorVK", new VKAuthorizationCommand());

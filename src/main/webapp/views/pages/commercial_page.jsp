@@ -59,8 +59,41 @@
 </div>
 
 <jsp:include page="/views/elements/footer.jsp"/>
+<script src="${pageContext.request.contextPath}/js/pages/commercialPage.js"></script>
+<script id="commertial-info-template" type="text/x-handlebars-template">
 
+	{{#each this}}
+	<div class="match-col col l4 m6 s12">
+		<div class="card z-depth-2" style="padding:10px; height:95%">
+			<form name="button"
+			      method="post" style="position:absolute;padding:5px">
+				<button class="btn modal-trigger btn-floating btn-large waves-effect waves-light red darken-2"
+				        type="submit" data-target="delete-place"
+				        id="btn" onclick="$('#place_id_delete').val('{{id}}')">
+					<i class="material-icons">delete</i>
+				</button>
 
+				<c:if test="${userDataTrip!=null}">
+					<button class="btn modal-trigger btn-floating btn-large waves-effect waves-light cyan darken-2"
+					        type="submit" data-target="chooseDayRecomended"
+					        id="btn1" onclick="$('#place_id_add').val('{{id}}')">
+						<i class="mdi-content-add"></i>
+					</button>
+				</c:if>
+			</form>
+
+			<a href="portal?command=placeInformation&place_id={{id}}"><img
+					class="responsive-img place-img"
+					src="${pageContext.request.contextPath}/upload/photo/{{imageReference}}"></a>
+			<a href="portal?command=placeInformation&place_id={{id}}">
+				<h5><c:out value="{{name}}"/></h5></a>
+			<c:out value="{{adress}}"/>
+			<div id="commertial-info-collection" class="place-page-content"></div>
+			<div class="right-align"></div>
+		</div>
+	</div>
+	{{/each}}
+</script>
 
 <%--<script src="${pageContext.request.contextPath}/js/pages/places.js"></script>--%>
 </body>
