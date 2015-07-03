@@ -44,6 +44,10 @@ var initImgMaterialBox = function () {
     $('.materialboxed').materialbox();
 };
 
+var initFotorama = function () {
+    $('.fotorama').fotorama();
+};
+
 var initStartModalWindow = function () {
     var startModal = $('#start-modal').data('modal');
     if (startModal === 'emailSent') {
@@ -51,7 +55,7 @@ var initStartModalWindow = function () {
     }
 };
 
-$(document).ready(function ($) {
+$(document).ready(function () {
     initDropdownMenu();
     initSelectMenu();
     initCalendar();
@@ -59,10 +63,6 @@ $(document).ready(function ($) {
     initParallax();
     initUserSidebar();
     initImgMaterialBox();
+    initFotorama();
     initStartModalWindow();
-    /* Truncate text */
-    $(".body-content").dotdotdot({
-        ellipsis: "... ",
-        watch: "window"
-    });
 });

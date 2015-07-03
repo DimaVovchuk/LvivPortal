@@ -47,9 +47,7 @@ var initNewRouteForm = function () {
     });
     $('#automatic').change(function () {
         $('#places').animate({height: "toggle", opacity: "toggle"});
-    });
-    $('#lunch').change(function () {
-        $('#lunchTimeBox').animate({height: "toggle", opacity: "toggle"});
+        $('#dateMenu').animate({height: "toggle", opacity: "toggle"});
     });
     /* Range listeners */
     var dayTime = $("#dayTime");
@@ -58,13 +56,6 @@ var initNewRouteForm = function () {
     });
     dayTime.change(function () {
         $("#dayTimeValue").html($(this).val());
-    });
-    var lunchTime = $("#lunchTime");
-    lunchTime.mousemove(function () {
-        $("#lunchTimeValue").html($(this).val());
-    });
-    lunchTime.change(function () {
-        $("#lunchTimeValue").html($(this).val());
     });
 };
 
