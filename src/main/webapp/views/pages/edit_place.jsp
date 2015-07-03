@@ -233,7 +233,7 @@
 				<input value="<c:out value="${editPlacePhone}"/>" id="placePhone" type="text" name="placePhone">
 
 				<p><b><cdg:l18n key="editplace.placetime"/></b></p>
-				<input value="${editPlace.place_time}" id="place_time" type="text" name="place_time">
+				<input value="${editPlace.recom_time}" id="place_time" type="text" name="place_time">
 
 				<div class="row">
 					<div class="col s4">

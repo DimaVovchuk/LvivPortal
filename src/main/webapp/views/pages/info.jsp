@@ -31,8 +31,17 @@
                          data-autoplay="true" data-allowfullscreen="true" data-keyboard="true" data-width="100%"
                          data-height="70%">
                         <c:forEach items="${place_referenceList}" var="elem">
-                            <img class="materialboxed" width="200" height="200"
-                                 src="${pageContext.request.contextPath}/upload/photo/${elem.reference}">
+                            <c:choose>
+                                <c:when test="${not empty elem.reference}">
+                                    <img class="materialboxed" width="200" height="200"
+                                         src="${pageContext.request.contextPath}/upload/photo/${elem.reference}">
+                                </c:when>
+                                <c:otherwise>
+                                    <img class="materialboxed" width="200" height="200"
+                                         src="${pageContext.request.contextPath}/upload/photo/default_building.jpg">
+                                </c:otherwise>
+                            </c:choose>
+
                         </c:forEach>
                     </div>
                     <div class="section">

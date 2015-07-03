@@ -34,7 +34,7 @@ public class SaveNewPlaceCommand implements Command {
     private static final Logger loger = LogManager.getLogger(ClassName.getCurrentClassName());
     private static final String CHECK_DATA = "^[^<>/{}]+$";
     private static final String CHECK_PHONE = "([0-9]{6,15})";
-    private static final String CHECK_PLACE_TIME = "([0-9])";
+    private static final String CHECK_PLACE_TIME = "([0-9]*)";
     private static final String CHECK_COORDINATE = "([0-9]+([.][0-9]+))";
     private static Integer lastAddedPlace = null;
 
@@ -121,7 +121,7 @@ public class SaveNewPlaceCommand implements Command {
             loger.warn("PlacePhone is pattern error");
         }
 
-        if (checkData(addPlaceTime, CHECK_PLACE_TIME) && addPlaceTime == "") {
+        if (checkData(addPlaceTime, CHECK_PLACE_TIME)) {
             session.setAttribute("PlaceTimeError", 1);
             errorFlag = true;
             loger.warn("PlaceTime is pattern error");
@@ -147,10 +147,16 @@ public class SaveNewPlaceCommand implements Command {
             place.setCategory_id(addCategoryID);
             place.setRating(0);
             place.setVisible(true);
-            place.setPlace_time(Integer.valueOf(addPlaceTime));
+            place.setPlace_time(0);
             place.setDeleted(false);
             place.setRecomended(false);
             place.setCustom(false);
+            try{
+                place.setRecom_time(Integer.valueOf(addPlaceTime));
+            } catch (Exception e){
+                place.setRecom_time(0);
+                loger.warn(e.getMessage());
+            }
             loger.info("Object place is created " + place);
 
             lastAddedPlace = placeService.createAndReturnIndex(place);

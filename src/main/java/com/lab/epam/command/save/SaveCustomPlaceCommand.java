@@ -34,8 +34,9 @@ public class SaveCustomPlaceCommand implements Command {
     private static final Logger loger = LogManager.getLogger(ClassName.getCurrentClassName());
     private static final String CHECK_DATA = "^[^<>/{}]+$";
     private static final String CHECK_PHONE = "([0-9]{6,15})";
-    private static final String CHECK_PLACE_TIME = "([0-9])";
+    private static final String CHECK_PLACE_TIME = "([0-9]*)";
     private static Integer lastAddedPlace = null;
+
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         loger.info("Command SaveCustomPlaceCommand.");
@@ -55,6 +56,9 @@ public class SaveCustomPlaceCommand implements Command {
         } catch (FileUploadException e) {
             loger.warn(e.getMessage());
         }
+        System.out.println("before userID ");
+        Integer userID = (Integer) session.getAttribute("usedID");
+        System.out.println("userID " + userID);
 
         String customPlaceName = params.get("customPlaceName");
         String customPlaceDesc = params.get("customPlaceDesc");
@@ -123,45 +127,57 @@ public class SaveCustomPlaceCommand implements Command {
             place.setCategory_id(Integer.valueOf(customCategoryID));
             place.setRating(0);
             place.setVisible(false);
-            place.setPlace_time(Integer.valueOf(customPlaceTime));
+            place.setPlace_time(0);
             place.setDeleted(false);
             place.setRecomended(false);
             place.setCustom(true);
+
+            System.out.println("customPlaceTime " + customPlaceTime);
+            try{
+                place.setRecom_time(Integer.valueOf(customPlaceTime));
+            } catch (Exception e){
+                place.setRecom_time(0);
+                loger.warn(e.getMessage());
+            }
             loger.info("Object place is created " + place);
 
             lastAddedPlace = placeService.createAndReturnIndex(place);
             loger.info("lastAddedPlace is  " + lastAddedPlace);
 
-            if(language.equalsIgnoreCase("UA")) {
+            if (language.equalsIgnoreCase("UA")) {
                 PlaceDescription placeDescription = new PlaceDescription(new PlaceDescription.Builder(lastAddedPlace, language,
-                        Decoder.decodeStringUtf8(customPlaceName), Decoder.decodeStringUtf8(customPlaceDesc),Decoder.decodeStringUtf8(customPlaceAdrress)));
+                        Decoder.decodeStringUtf8(customPlaceName), Decoder.decodeStringUtf8(customPlaceDesc), Decoder.decodeStringUtf8(customPlaceAdrress)));
                 placeDescription.setPhone(customPlacePhone);
                 placeDescription.setPrice(Decoder.decodeStringUtf8(customPlacePrice));
                 loger.info("placeDescription is  " + placeDescription);
                 placeDescriptionService.create(placeDescription);
 
-                PlaceDescription placeDescriptionEN = new PlaceDescription(new PlaceDescription.Builder(lastAddedPlace, "EN","", "",""));
+                PlaceDescription placeDescriptionEN = new PlaceDescription(new PlaceDescription.Builder(lastAddedPlace, "EN", "", "", ""));
                 placeDescriptionEN.setPhone(customPlacePhone);
                 placeDescriptionEN.setPrice("");
+
                 loger.info("placeDescriptionEN is  " + placeDescriptionEN);
                 placeDescriptionService.create(placeDescriptionEN);
-             }
-            if(language.equalsIgnoreCase("EN")) {
+            }
+            if (language.equalsIgnoreCase("EN")) {
                 PlaceDescription placeDescription = new PlaceDescription(new PlaceDescription.Builder(lastAddedPlace, language,
-                        Decoder.decodeStringUtf8(customPlaceName), Decoder.decodeStringUtf8(customPlaceDesc),Decoder.decodeStringUtf8(customPlaceAdrress)));
+                        Decoder.decodeStringUtf8(customPlaceName), Decoder.decodeStringUtf8(customPlaceDesc), Decoder.decodeStringUtf8(customPlaceAdrress)));
                 placeDescription.setPhone(customPlacePhone);
                 placeDescription.setPrice(Decoder.decodeStringUtf8(customPlacePrice));
                 loger.info("placeDescription is  " + placeDescription);
                 placeDescriptionService.create(placeDescription);
 
-                PlaceDescription placeDescriptionUA = new PlaceDescription(new PlaceDescription.Builder(lastAddedPlace, "UA","", "",""));
+                PlaceDescription placeDescriptionUA = new PlaceDescription(new PlaceDescription.Builder(lastAddedPlace, "UA", "", "", ""));
                 placeDescriptionUA.setPhone(customPlacePhone);
                 placeDescriptionUA.setPrice("");
                 loger.info("placeDescriptionEN is  " + placeDescriptionUA);
                 placeDescriptionService.create(placeDescriptionUA);
             }
 
+            System.out.println("id " + userID + "lastAddedPlace " + lastAddedPlace);
+            placeService.createPlaceUser(lastAddedPlace,userID);
             save(request, files, params);
+
             loger.info("Method SaveCustomPlaceCommand.execute() ended.");
             response.sendRedirect("/portal?command=placeInformation&place_id=" + lastAddedPlace);
         }

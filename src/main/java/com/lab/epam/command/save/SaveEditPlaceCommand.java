@@ -34,7 +34,7 @@ public class SaveEditPlaceCommand implements Command {
     private static final Logger loger = LogManager.getLogger(ClassName.getCurrentClassName());
     private static final String CHECK_DATA = "^[^<>/{}]+$";
     private static final String CHECK_PHONE = "([0-9]{6,15})";
-    private static final String CHECK_PLACE_TIME = "([0-9])";
+    private static final String CHECK_PLACE_TIME = "([0-9]*)";
     private static final String CHECK_COORDINATE = "([0-9]+([.][0-9]+))";
     private static Integer savePlaceID = null;
 
@@ -155,6 +155,12 @@ public class SaveEditPlaceCommand implements Command {
             place.setLatitude(newPlaceLatitude);
             place.setLongitude(newPlaceLongitude);
             place.setCategory_id(Integer.valueOf(newCategory));
+            try{
+                place.setRecom_time(Integer.valueOf(newPlaceTime));
+            } catch (Exception e){
+                place.setRecom_time(0);
+                loger.warn(e.getMessage());
+            }
             place.setRating(Integer.valueOf(newPlaceRating));
             if (newVisible == null) {
                 newVisible = "false";
