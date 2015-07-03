@@ -1,7 +1,6 @@
 package com.lab.epam.command.logination.vk;
 
 import com.lab.epam.vk.TokenAccess;
-//import org.apache.commons.lang3.StringUtils;
 
 public class UriCreator {
 

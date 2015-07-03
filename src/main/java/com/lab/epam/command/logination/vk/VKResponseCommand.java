@@ -58,23 +58,17 @@ public class VKResponseCommand implements Command {
             if (userServ.getUserByVkId(token.getVkUserId()).getVkId() != null) {
                 user = userServ.getUserByVkId(token.getVkUserId());
 
-                session.setAttribute("first", user.getName());
-                session.setAttribute("last", user.getSurname());
-                session.setAttribute("companyname", user.getCompanyName());
                 session.setAttribute("login", user.getLogin());
-                session.setAttribute("email", user.getMail());
-                session.setAttribute("password", user.getPassword());
-                session.setAttribute("phone", user.getPhone());
+                session.setAttribute("usedID", user.getId());
+                session.setAttribute("vk_id", token.getVkUserId());
                 session.setAttribute("role", user.getRoleID());
-                session.setAttribute("about", user.getAbout());
 
                 if (user.getAvatar() != null) {
                     userImage = userImageService.getByPK(user.getAvatar());
                 } else {
                     userImage = new UserImage(user.getId(), photo);
                 }
-                session.setAttribute("userForEdit", user);
-                session.setAttribute("vk_id", token.getVkUserId());
+
                 session.setAttribute("avatar", userImage.getReference());
                 request.getRequestDispatcher("/views/pages/user-cabinet.jsp").forward(request, response);
 
@@ -85,11 +79,9 @@ public class VKResponseCommand implements Command {
                 String last_name = (String) json.get("last_name");
                 String email = token.getEmail();
                 String phone = (String) json.get("home_phone");
-                //String about = (String) json.get("about");
 
                 session.setAttribute("avatar", photo);
                 session.setAttribute("vk_id", vk_id);
-
                 request.getRequestDispatcher("/portal?command=signUpForm&first=" + first_name + "&last=" + last_name + "&phone=" + phone + "&email=" + email).include(request, response);
             }
         }

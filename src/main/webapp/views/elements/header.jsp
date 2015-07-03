@@ -87,19 +87,21 @@
 				</ul>
 
 				<ul class="side-nav" id="user-navbar">
-					<c:if test="${usedID != null and avatar != null}">
+					<c:choose>
+						<c:when test="${not empty avatar and empty vk_id}">
 						<li class="center-align" style="padding-top: 10px"><img class="circle responsive-img"
 						                                                        src="${pageContext.request.contextPath}/upload/photo/${avatar}"
 						                                                        width="160"></li>
-					</c:if>
-					<c:if test="${avatar == null}">
+						</c:when>
+						<c:when test="${not empty vk_id and not empty avatar}">
+						<li class="center-align" style="padding-top: 10px"><img class="circle responsive-img" src="${avatar}" width="160"></li>
+						</c:when>
+						<c:otherwise>
 						<li class="center-align" style="padding-top: 10px"><img class="circle responsive-img"
 						                                                        src="${pageContext.request.contextPath}/upload/photo/user.png"
 						                                                        width="160"></li>
-					</c:if>
-					<c:if test="${vk_id != null}">
-						<li class="center-align" style="padding-top: 10px"><img class="circle responsive-img" src="${avatar}" width="160"></li>
-					</c:if>
+						</c:otherwise>
+					</c:choose>
 
 					<li><a href="/portal?command=userWays"><i class="mdi-maps-directions-bike left"></i>My routes</a>
 					</li>
