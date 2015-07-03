@@ -37,6 +37,27 @@
             </div>
 
             <div class="col l3 m4 s5">
+                <div class="collection with-header z-depth-2" id="search-place">
+                    <form id="frmSearch" class="form-wrapper">
+                        <input type="search" id="txtSearch" name="txtSearch" alt="Search Criteria"
+                               onkeyup="searchSuggest();"
+                               autocomplete="off" />
+                        <input type="submit" id="cmdSearch" name="cmdSearch" value="Search" alt="Run Search" />
+
+                    </form>
+                    <br><p><div id="search_suggest" style="border-color: #ffffff;">
+                </div></p>
+
+                        <%--<form id="frmSearch">--%>
+                            <%--<input type="text" id="txtSearch" name="txtSearch" alt="Search Criteria"--%>
+                                   <%--onkeyup="searchSuggest();"  requiredautocomplete="off" />--%>
+                            <%--<input type="submit" id="cmdSearch" name="cmdSearch" value="Search" alt="Run Search" />--%>
+                            <%--<div id="search_suggest">--%>
+                            <%--</div>--%>
+
+                        <%--</form>--%>
+                </div>
+
                 <div class="collection with-header z-depth-2">
                     <div class="collection-header"><h4><cdg:l18n key="places.categories"/></h4></div>
                     <div id="category-place">
@@ -60,13 +81,7 @@
                            class="collection-item black-text ${requestScope.active_allplaces}"><cdg:l18n
                                 key="places.all"/></a>
                     </div>
-                    <form id="frmSearch">
-                        <input type="text" id="txtSearch" name="txtSearch" alt="Search Criteria"
-                               onkeyup="searchSuggest();" autocomplete="off" />
-                        <div id="search_suggest">
-                        </div>
-                        <input type="submit" id="cmdSearch" name="cmdSearch" value="Search" alt="Run Search" />
-                    </form>
+
                 </div>
             </div>
         </div>
@@ -75,6 +90,8 @@
 
 <jsp:include page="/views/elements/footer.jsp"/>
 <jsp:include page="/views/modals/add-place-to-route-recomended.jsp"/>
+<jsp:include page="/views/modals/place-is-added.jsp"/>
+<jsp:include page="/views/modals/place-is-in-db.jsp"/>
 <script src="${pageContext.request.contextPath}/js/pages/places.js"></script>
 <script language="JavaScript" type="text/javascript" src="${pageContext.request.contextPath}/js/ajax_search.js"></script>
 <%--<jsp:include page="/views/modals/add-place-to-route.jsp"/>--%>
@@ -124,6 +141,16 @@
     </div>
     {{/each}}
 </script>
+
+<script>
+    $(document).click(function() {
+        notActive();
+    });
+    $("#search-place").click(function(event) {
+        event.stopPropagation();
+    });
+</script>
+
 
 </body>
 </html>
