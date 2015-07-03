@@ -9,7 +9,7 @@ var initSidebar = function () {
 };
 
 var linkProcess = function (id) {
-    var windowIDList = ['#map-itinerary', '#map-places'];
+    var windowIDList = ['#map-itinerary', '#map-places', '#map-custom'];
     var li = '#li-' + id;
     var map = '#map-' + id;
     $(li).addClass('active');
@@ -145,13 +145,13 @@ var initDayMarkers = function (dayNumber) {
         for (var i = 0; i <= len - 10; i++) {
             points.push(new google.maps.LatLng(routesData[dayNumber].places[i].latitude, routesData[dayNumber].places[i].longitude));
         }
-        for (var i = len - 10; i < len; i++) {
+        for (i = len - 10; i < len; i++) {
             points1.push(new google.maps.LatLng(routesData[dayNumber].places[i].latitude, routesData[dayNumber].places[i].longitude));
         }
         calcRoute(points1);
         calcRoute(points);
     } else {
-        for (var i = 0; i < (routesData[dayNumber].places.length); i++) {
+        for (i = 0; i < (routesData[dayNumber].places.length); i++) {
             points.push(new google.maps.LatLng(routesData[dayNumber].places[i].latitude, routesData[dayNumber].places[i].longitude));
         }
         calcRoute(points);

@@ -34,49 +34,51 @@
         </ul>
 
         <div id="place-info-collection" class="collection"></div>
+    </div>
 
-        <script id="place-info-template" type="text/x-handlebars-template">
-            {{#each this}}
-            <a href="#" onclick="myclick('{{id}}')" class="collection-item black-text">
-                <img class="circle responsive-img"
-                     src="${pageContext.request.contextPath}/upload/photo/{{imageReference}}">
-
-                <div class="valign-wrapper" style="height:100%">
-                    <div class="valign">
-                        <div class="truncate"><b>{{name}}</b><br>{{adress}}</div>
-                    </div>
-                </div>
-            </a>
-            {{/each}}
-        </script>
-
-        <script id="route-info-template" type="text/x-handlebars-template">
-            {{#each this}}
-            <c:set var="dayNumber" value="{{dayNumber}}"/>
-            <a href="#" data-day="${dayNumber}" class="day-trigger collection-item black-text blue-grey lighten-4 waves-effect waves-light">
-                <cdg:l18n key="map.route.day"/> {{dayNumber}} <br>
-                <cdg:l18n key="map.route.totaltime"/>: {{hours}} <cdg:l18n key="map.route.hours"/> {{minutes}} <cdg:l18n key="map.route.minutes"/>
-            </a>
-            <a href="#" id="map-day${dayNumber}" data-day="${dayNumber}" data-show="1" class="btn cyan darken-2 map-day-trigger">Show on map</a>
-            <div id="places-day{{dayNumber}}" class="collection animated fadeInLeft">
-                {{#each places}}
-                <a href="#" onclick="myclick('{{placeId}}')" class="collection-item black-text">
-                    <img class="circle responsive-img" src="${pageContext.request.contextPath}/upload/photo/{{imageReference}}">
-                    <div class="valign-wrapper" style="height:100%">
-                        <div class="valign">
-                            <div class="truncate"><b>{{name}}</b><br>{{adress}}</div>
-                        </div>
-                    </div>
-                </a>
-                {{/each}}
-            </div>
-            {{/each}}
-        </script>
-
-        <script id="route-empty-template" type="text/x-handlebars-template">
-            <h5 style="padding: 10px">Add places to the itinerary</h5>
-        </script>
-
-
+    <div id="map-custom" class="animated fadeInDown">
+        Custom places
     </div>
 </div>
+
+<script id="place-info-template" type="text/x-handlebars-template">
+    {{#each this}}
+    <a href="#" onclick="myclick('{{id}}')" class="collection-item black-text">
+        <img class="circle responsive-img"
+             src="${pageContext.request.contextPath}/upload/photo/{{imageReference}}">
+
+        <div class="valign-wrapper" style="height:100%">
+            <div class="valign">
+                <div class="truncate"><b>{{name}}</b><br>{{adress}}</div>
+            </div>
+        </div>
+    </a>
+    {{/each}}
+</script>
+
+<script id="route-info-template" type="text/x-handlebars-template">
+    {{#each this}}
+    <c:set var="dayNumber" value="{{dayNumber}}"/>
+    <a href="#" data-day="${dayNumber}" class="day-trigger collection-item black-text blue-grey lighten-4 waves-effect waves-light">
+        <cdg:l18n key="map.route.day"/> {{dayNumber}} <br>
+        <cdg:l18n key="map.route.totaltime"/>: {{hours}} <cdg:l18n key="map.route.hours"/> {{minutes}} <cdg:l18n key="map.route.minutes"/>
+    </a>
+    <a href="#" id="map-day${dayNumber}" data-day="${dayNumber}" data-show="1" class="btn cyan darken-2 map-day-trigger">Show on map</a>
+    <div id="places-day{{dayNumber}}" class="collection animated fadeInLeft">
+        {{#each places}}
+        <a href="#" onclick="myclick('{{placeId}}')" class="collection-item black-text">
+            <img class="circle responsive-img" src="${pageContext.request.contextPath}/upload/photo/{{imageReference}}">
+            <div class="valign-wrapper" style="height:100%">
+                <div class="valign">
+                    <div class="truncate"><b>{{name}}</b><br>{{adress}}</div>
+                </div>
+            </div>
+        </a>
+        {{/each}}
+    </div>
+    {{/each}}
+</script>
+
+<script id="route-empty-template" type="text/x-handlebars-template">
+    <h5 style="padding: 10px">Add places to the itinerary</h5>
+</script>
