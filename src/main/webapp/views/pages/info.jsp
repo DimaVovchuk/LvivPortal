@@ -198,15 +198,13 @@
 
 <div id="editplace" class="modal">
     <div class="modal-content">
-        <h4>Do you want to edit this place?</h4>
+        <h5><cdg:l18n key="info.edit.title"/></h5>
 
         <form id="edit_place" action="/portal?command=editPlace" method="post">
             <input type="hidden" name="command" value="editPlace">
-            <input placeholder="Placeholder" id="editPlaceID" name="editPlaceID" type="hidden"
-                   value="${place.id}">
-            <button class="btn waves-effect waves-light cyan darken-2" type="submit">YES</button>
-            <button type="reset" class="btn modal-close waves-effect waves-light cyan darken-2">NO
-            </button>
+            <input placeholder="Placeholder" id="editPlaceID" name="editPlaceID" type="hidden" value="${place.id}">
+            <button class="btn waves-effect waves-light cyan darken-2" type="submit"><cdg:l18n key="yes"/></button>
+            <button type="reset" class="btn modal-close waves-effect waves-light cyan darken-2"><cdg:l18n key="no"/></button>
         </form>
 
     </div>
