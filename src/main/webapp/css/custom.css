@@ -709,9 +709,22 @@ footer.page-footer {
 }
 
                                         /* *** COMPANY PAGE *** */
-#company-page {
-    min-height: calc(100% - 64px - 50px);
+#company-page .collection {
+    margin: 0;
 }
+
+#company-page .collection-item {
+    height: 120px;
+}
+
+#company-page .collection-item img {
+    width: 100px;
+    height: 100px;
+    float: left;
+    margin-right: 20px;
+}
+
+
 
 
 /* Olya CSS */

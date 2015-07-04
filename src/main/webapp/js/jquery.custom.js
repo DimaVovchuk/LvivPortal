@@ -48,6 +48,10 @@ var initFotorama = function () {
     $('.fotorama').fotorama();
 };
 
+var initCollapsible = function () {
+  $('.collapsible').collapsible();
+};
+
 var initStartModalWindow = function () {
     var startModal = $('#start-modal').data('modal');
     if (startModal === 'emailSent') {
@@ -64,5 +68,6 @@ $(document).ready(function () {
     initUserSidebar();
     initImgMaterialBox();
     initFotorama();
+    initCollapsible();
     initStartModalWindow();
 });

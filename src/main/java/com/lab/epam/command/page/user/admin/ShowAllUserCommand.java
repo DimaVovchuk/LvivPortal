@@ -85,7 +85,7 @@ public class ShowAllUserCommand implements Command{
             loger.info("Show all user.");
         }
 
-        request.getRequestDispatcher("/views/pages/admin_cabinet.jsp").forward(request, response);
+        request.getRequestDispatcher("/views/pages/admin-users.jsp").forward(request, response);
     }
 
     private void showAllUser(Map<User, String> userRole,RoleService roleService, UserService userService,HttpServletRequest request){
