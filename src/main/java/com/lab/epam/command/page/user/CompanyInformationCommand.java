@@ -2,7 +2,10 @@ package com.lab.epam.command.page.user;
 
 import com.lab.epam.command.controller.Command;
 import com.lab.epam.entity.*;
+import com.lab.epam.helper.ClassName;
 import com.lab.epam.service.*;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +19,7 @@ import java.util.*;
  * Created by Vasyl on 27.06.2015.
  */
 public class CompanyInformationCommand implements Command {
+    private static final Logger loger = LogManager.getLogger(ClassName.getCurrentClassName());
     private List<Place> places = new ArrayList<>();
     private List<PlaceDescription> placeDescriptions = new ArrayList<>();
     private List<PlaceImage> placeImage = new ArrayList<>();
@@ -69,8 +73,8 @@ public class CompanyInformationCommand implements Command {
         if (userID != null) {
             Integer id = Integer.valueOf(userID);
             userWayList = wayService.getWaysByUserId(id);
+            allWayInfo.clear();
             if (userWayList != null && !userWayList.isEmpty()) {
-                allWayInfo.clear();
                 for (Way oneWay :userWayList) {
                     wayPlaces = placeService.getPlaceByWayId(oneWay.getId());
 
@@ -85,7 +89,10 @@ public class CompanyInformationCommand implements Command {
 
                     allWayInfo.put(oneWay,wayPlacesPageInfo);
                 }
+            } else{
+                request.setAttribute("allWayInfo", allWayInfo);
             }
+
             request.setAttribute("allWayInfo", allWayInfo);
         }
 
