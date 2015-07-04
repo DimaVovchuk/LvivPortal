@@ -3,6 +3,7 @@ package com.lab.epam.command.logination.vk;
 import com.lab.epam.command.controller.Command;
 import com.lab.epam.entity.User;
 import com.lab.epam.entity.UserImage;
+import com.lab.epam.helper.ClassName;
 import com.lab.epam.service.UserImageService;
 import com.lab.epam.vk.TokenAccess;
 import com.lab.epam.vk.VkObject;
@@ -14,6 +15,8 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.json.JSONException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -27,15 +30,22 @@ import org.json.JSONObject;
  * Created by Oleguk on 29.06.2015.
  */
 public class VKResponseCommand implements Command {
+    private static final Logger loger = LogManager.getLogger(ClassName.getCurrentClassName());
+
     private final HttpClient httpclient = new DefaultHttpClient();
+    UserImageService userImageService = null;
+    UserImage userImage = null;
+    UserService userServ = null;
+    User user = null;
+    JSONObject json = null;
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        UserService userServ = null;
-        UserImageService userImageService = null;
-        User user = null;
-        UserImage userImage = null;
-        JSONObject json = null;
+        loger.info("Command VKResponseCommand");
+        userServ = new UserService();
+        userImageService = new UserImageService();
+        userImage = new UserImage();
+        user = new User();
         HttpSession session = request.getSession();
 
         VkObject vkObj = (VkObject)session.getAttribute("vObj");
@@ -62,14 +72,16 @@ public class VKResponseCommand implements Command {
                 session.setAttribute("usedID", user.getId());
                 session.setAttribute("vk_id", token.getVkUserId());
                 session.setAttribute("role", user.getRoleID());
+                session.setAttribute("avatar_id", user.getAvatar());
 
                 if (user.getAvatar() != null) {
                     userImage = userImageService.getByPK(user.getAvatar());
                 } else {
                     userImage = new UserImage(user.getId(), photo);
                 }
+                session.setAttribute("ava", userImage.getReference());
 
-                session.setAttribute("avatar", userImage.getReference());
+                loger.info("User sign in with vk");
                 request.getRequestDispatcher("/views/pages/user-cabinet.jsp").forward(request, response);
 
             } else {
@@ -80,8 +92,10 @@ public class VKResponseCommand implements Command {
                 String email = token.getEmail();
                 String phone = (String) json.get("home_phone");
 
-                session.setAttribute("avatar", photo);
+                session.setAttribute("ava", photo);
                 session.setAttribute("vk_id", vk_id);
+
+                loger.info("User sign up with vk");
                 request.getRequestDispatcher("/portal?command=signUpForm&first=" + first_name + "&last=" + last_name + "&phone=" + phone + "&email=" + email).include(request, response);
             }
         }

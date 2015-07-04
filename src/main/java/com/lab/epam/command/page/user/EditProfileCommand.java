@@ -28,7 +28,7 @@ public class EditProfileCommand implements Command {
         HttpSession session = request.getSession();
         String login = (String)session.getAttribute("login");
         String vk_id = (String)session.getAttribute("vk_id");
-        String avatar = (String)session.getAttribute("avatar");
+        String ava = (String)session.getAttribute("ava");
         ResourceBundle resourceBandle = (ResourceBundle)session.getAttribute("bundle");
         Locale locale = resourceBandle.getLocale();
         language = locale.getLanguage();
@@ -46,15 +46,21 @@ public class EditProfileCommand implements Command {
             UserImage userImage = null;
             if(user.getAvatar() != null){
                 userImage = userImageService.getByPK(user.getAvatar());
-            }else{
+                session.setAttribute("ava", userImage.getReference());
+            }else if (user.getVkId() != null) {
+                session.setAttribute("ava", ava);
+            } else {
                 userImage = new UserImage(user.getId(),"user.png");
+                session.setAttribute("ava", userImage.getReference());
             }
             session.setAttribute("userForEdit", user);
-            if (vk_id == null) {
-                session.setAttribute("avatar", userImage.getReference());
+            session.setAttribute("avatar_id", user.getAvatar());
+            session.setAttribute("vk_id", vk_id);
+            /*if (vk_id == null) {
+                session.setAttribute("ava", userImage.getReference());
             } else {
-                session.setAttribute("avatar", avatar);
-            }
+                session.setAttribute("ava", ava);
+            }*/
         } else {
             request.setAttribute("errorMsg", "Data base error");
         }

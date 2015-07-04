@@ -22,12 +22,12 @@
 			<div class="col s4">
 				<div class="text-center">
 					<c:choose>
-						<c:when test="${not empty avatar and empty vk_id}">
-							<img src="${pageContext.request.contextPath}/upload/photo/${avatar}" width=70%
+						<c:when test="${not empty ava and not empty avatar_id}">
+							<img src="${pageContext.request.contextPath}/upload/photo/${ava}" width=70%
 							     class="circle responsive-img" name="newAvatar">
 						</c:when>
-						<c:when test="${not empty vk_id and not empty avatar}">
-							<img src="${avatar}" width=70%
+						<c:when test="${not empty ava and not empty vk_id and empty avatar_id}">
+							<img src="${ava}" width=70%
 								 class="circle responsive-img" name="newAvatar">
 						</c:when>
 						<c:otherwise>
