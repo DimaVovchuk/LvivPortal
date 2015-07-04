@@ -56,8 +56,24 @@
                     <c:forEach var="place" items="${placesInfo}">
                         place id:${place.id}<br>
                         place name:${place.name}<br>
-                        place description:${place.imageReference}<br>
+                        place photo:${place.imageReference}<br>
+                        place adrress:${place.adress}<br>
+                        place rating:${place.rating}<br>
+                    </c:forEach>
 
+                    <br>
+                    <br>
+                    <br>
+                    <c:forEach var="mapelem" items="${allWayInfo}">
+                        way name:${mapelem.key.name}<br>
+                        <c:forEach var="listelem" items="${mapelem.value}">
+                            wayplase id: ${listelem.id}<br>
+                            way place name:${listelem.name}<br>
+                            way place adrress:${listelem.adress}<br>
+                            way place photo:${listelem.imageReference}<br>
+                            way place rating:${listelem.rating}<br>
+                        </c:forEach>
+                        ------------------------
                     </c:forEach>
                 </div>
             </div>

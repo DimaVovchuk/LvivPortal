@@ -17,63 +17,32 @@ public class Way implements Identified<Integer> {
     private Integer rating;
     @Column("name")
     private String name;
+    @Column("visible")
+    private Boolean visible;
     @Column("way_days")
     private Integer way_days;
     @Column("way_time")
     private Integer way_time;
-    @Column("visible")
-    private Boolean visible;
-
-    public Date getBegin() {
-        return begin;
-    }
-
-    public void setBegin(Date begin) {
-        this.begin = begin;
-    }
-
-    public Date getEnd() {
-        return end;
-    }
-
-    public void setEnd(Date end) {
-        this.end = end;
-    }
-
-    public Integer getWay_time() {
-        return way_time;
-    }
-
-    public void setWay_time(Integer way_time) {
-        this.way_time = way_time;
-    }
-
-    public Integer getWay_days() {
-        return way_days;
-    }
-
-    public void setWay_days(Integer way_days) {
-        this.way_days = way_days;
-    }
-
     @Column("date_begin")
-
     private Date begin;
     @Column("date_end")
     private Date end;
     @Column("deleted")
     private Boolean deleted = false;
+    @Column("recomended")
+    private Boolean recomended;
 
-    public Way(Integer id, Integer rating, String name, Integer way_days, Integer way_time, Boolean visible, Date begin, Date end, Boolean deleted) {
+    public Way(Integer id, Integer rating, String name, Boolean visible, Integer way_days, Integer way_time, Date begin, Date end, Boolean deleted, Boolean recomended) {
         this.id = id;
         this.rating = rating;
         this.name = name;
+        this.visible = visible;
         this.way_days = way_days;
         this.way_time = way_time;
-        this.visible = visible;
         this.begin = begin;
         this.end = end;
         this.deleted = deleted;
+        this.recomended = recomended;
     }
 
     public Way(Integer rating, Date begin, Date end, Integer way_days){
@@ -86,22 +55,11 @@ public class Way implements Identified<Integer> {
     public Way(){
     }
 
-    @Override
-    public String toString() {
-        return "Way{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", rating=" + rating +
-                ", visible='" + visible + '\'' +
-                ", deleted=" + deleted +
-                '}';
-    }
-
     public Integer getId() {
         return id;
     }
 
-    protected void setId(Integer id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -129,11 +87,67 @@ public class Way implements Identified<Integer> {
         this.visible = visible;
     }
 
+    public Integer getWay_days() {
+        return way_days;
+    }
+
+    public void setWay_days(Integer way_days) {
+        this.way_days = way_days;
+    }
+
+    public Integer getWay_time() {
+        return way_time;
+    }
+
+    public void setWay_time(Integer way_time) {
+        this.way_time = way_time;
+    }
+
+    public Date getBegin() {
+        return begin;
+    }
+
+    public void setBegin(Date begin) {
+        this.begin = begin;
+    }
+
+    public Date getEnd() {
+        return end;
+    }
+
+    public void setEnd(Date end) {
+        this.end = end;
+    }
+
     public Boolean getDeleted() {
         return deleted;
     }
 
     public void setDeleted(Boolean deleted) {
         this.deleted = deleted;
+    }
+
+    public Boolean getRecomended() {
+        return recomended;
+    }
+
+    public void setRecomended(Boolean recomended) {
+        this.recomended = recomended;
+    }
+
+    @Override
+    public String toString() {
+        return "Way{" +
+                "id=" + id +
+                ", rating=" + rating +
+                ", name='" + name + '\'' +
+                ", visible=" + visible +
+                ", way_days=" + way_days +
+                ", way_time=" + way_time +
+                ", begin=" + begin +
+                ", end=" + end +
+                ", deleted=" + deleted +
+                ", recomended=" + recomended +
+                '}';
     }
 }

@@ -30,6 +30,7 @@ public class UserWaysCommand implements Command {
     private Map<Integer, PlaceImage> wayPlaceImages = new HashMap<>();
     private PlaceImageService placeImageService = new PlaceImageService();
     private HttpServletRequest request;
+
     String language;
 
 
