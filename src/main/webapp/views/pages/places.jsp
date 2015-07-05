@@ -87,7 +87,8 @@
         </div>
     </div>
 </div>
-
+<div id="isInDB"><cdg:l18n key="place.added"/></div>
+<div id="notInDB"><cdg:l18n key="place.is.db"/></div>
 <jsp:include page="/views/elements/footer.jsp"/>
 <jsp:include page="/views/modals/add-place-to-route-recomended.jsp"/>
 <jsp:include page="/views/modals/place-is-added.jsp"/>
@@ -142,6 +143,7 @@
     {{/each}}
 </script>
 
+
 <script>
     $(document).click(function() {
         notActive();
@@ -151,6 +153,15 @@
     });
 </script>
 
-
+<script>
+    var loadWindow = function (data) {
+        if (data == "1"){
+            Materialize.toast('<cdg:l18n key="place.added"/>', 4000);
+        }
+        else{
+            Materialize.toast('<cdg:l18n key="place.is.db"/>', 4000);
+        }
+    }
+</script>
 </body>
 </html>
