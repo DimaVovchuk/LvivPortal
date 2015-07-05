@@ -2,6 +2,7 @@ package com.lab.epam.dao.imp;
 
 import com.lab.epam.dao.AbstractJDBCDao;
 import com.lab.epam.dao.PersistException;
+import com.lab.epam.entity.FavoritePlacesByRating;
 import com.lab.epam.entity.Place;
 import com.lab.epam.helper.ClassName;
 import com.lab.epam.persistant.ConnectionManager;
@@ -13,6 +14,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -42,6 +44,8 @@ public class MySqlPlaceDao extends AbstractJDBCDao<Place, Integer> {
     private static final String GET_ALL_VISIBLE_FAVOR_PLACE = "SELECT p.id, p.latitude, p.longitude, p.category_id, p.rating, p.visible, p.place_time, p.deleted, p.recomended, p.custom,p.recom_time\n" +
             "FROM place AS p JOIN user_place AS up JOIN user AS u WHERE up.user_id = u.id AND up.place_id = p.id AND p.custom = false AND\n" +
             " p.visible = true AND p.deleted=false and up.deleted =false AND u.id = ?";
+    private static final String GET_PLACE_BY_RATING = "SELECT up.*, COUNT(place_id) FROM user_place up JOIN place p ON up.place_id=p.id\n" +
+            " WHERE up.deleted=false AND p.deleted = false AND p.visible = true GROUP BY place_id ORDER BY COUNT(place_id) DESC;";
 
     private class PersistGroup extends Place {
         public void setId(int id) {
@@ -54,6 +58,32 @@ public class MySqlPlaceDao extends AbstractJDBCDao<Place, Integer> {
 
     public Class getClassModel() {
         return Place.class;
+    }
+
+    public List<FavoritePlacesByRating> getPlacesByRating() throws PersistException {
+        List<FavoritePlacesByRating> FavoritePlacesByRatinList = new ArrayList<>();
+        Connection conn = connection.retrieve();
+        try (PreparedStatement statement = conn.prepareStatement(GET_PLACE_BY_RATING)) {
+            ResultSet rs = statement.executeQuery();
+            try {
+                while (rs.next()) {
+                    FavoritePlacesByRating fpbr = new FavoritePlacesByRating();
+                    fpbr.setId(rs.getInt("id"));
+                    fpbr.setUser_id(rs.getInt("user_id"));
+                    fpbr.setPlace_id(rs.getInt("place_id"));
+                    fpbr.setDeleted(rs.getBoolean("deleted"));
+                    fpbr.setCount(rs.getInt(5));
+                    FavoritePlacesByRatinList.add(fpbr);
+                }
+            } catch (SQLException ex) {
+                loger.error(ex.getMessage());
+            }
+        } catch (Exception e) {
+            throw new PersistException(e);
+        } finally {
+            connection.putback(conn);
+        }
+        return FavoritePlacesByRatinList;
     }
 
     public List<Place> getAllVisibleUserCustomPlace(Integer usedID) throws PersistException {

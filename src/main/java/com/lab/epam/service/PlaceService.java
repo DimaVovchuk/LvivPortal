@@ -2,6 +2,7 @@ package com.lab.epam.service;
 
 import com.lab.epam.dao.PersistException;
 import com.lab.epam.dao.imp.MySqlPlaceDao;
+import com.lab.epam.entity.FavoritePlacesByRating;
 import com.lab.epam.entity.Place;
 import com.lab.epam.helper.ClassName;
 import org.apache.log4j.LogManager;
@@ -305,5 +306,15 @@ public class PlaceService {
             loger.warn("Cant find user custom places");
         }
         return list;
+    }
+
+    public List<FavoritePlacesByRating> getPlacesByRating(){
+        List<FavoritePlacesByRating> placeRating = null;
+        try {
+            placeRating = mySqlPlaceDao.getPlacesByRating();
+        } catch (PersistException e) {
+            e.printStackTrace();
+        }
+        return placeRating;
     }
 }

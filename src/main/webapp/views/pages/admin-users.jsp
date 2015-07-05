@@ -64,6 +64,9 @@
                                 <c:if test="${elem.key.status == 1}">
                                     <cdg:l18n key="admin.active"/>
                                 </c:if>
+                                <c:if test="${elem.key.status == 2}">
+                                    <cdg:l18n key="admin.notactive"/>
+                                </c:if>
                                 <c:if test="${elem.key.status == 3}">
                                     <cdg:l18n key="admin.disabled"/>
                                 </c:if>

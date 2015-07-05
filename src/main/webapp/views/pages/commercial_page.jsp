@@ -24,23 +24,20 @@
 
 			<div class="row">
 				<div class="col l9 m8 s7">
-					<div id="place-page-container" class="row z-depth-2">
-						<div class="place-page-navigation z-depth-1"></div>
 						<div id="commertial-info-collection" class="place-page-content"></div>
-					</div>
-				</div>
+			</div>
 
 				<div class="col l3 m4 s5">
 					<div class="collection with-header z-depth-2">
 						<div class="collection-header"><h4>Commertial</h4></div>
-						<div id="userPlacecategory-place">
+						<%--<div id="userRolecategory-role">--%>
 							<a href="/portal?command=commercial&comertsRole=guide"
 							   class="collection-item black-text ">Travel guide</a>
 							<a href="/portal?command=commercial&comertsRole=agency"
 							   class="collection-item black-text ">Travel agency</a>
 							<a href="/portal?command=commercial"
 							   class="collection-item black-text">Show all</a>
-						</div>
+						<%--</div>--%>
 					</div>
 				</div>
 			</div>
