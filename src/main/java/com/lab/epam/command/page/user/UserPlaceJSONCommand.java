@@ -83,7 +83,8 @@ public class UserPlaceJSONCommand implements Command {
             } else {
                 places = placeService.getPlaceByUserId(userId);
             }
-
+            System.out.println("places " + places);
+            System.out.println("userPlaceCategory " + userPlaceCategory);
             if (places != null && !places.isEmpty()) {
                 placeDescriptions = getPlaceDescriptionByPlace(places);
                 placeImage = getPlaceImageByPlace(places);

@@ -13,6 +13,11 @@ var loadPlacesData = function (data) {
     var template = Handlebars.compile(source);
     var html = template(data);
     $('#userPlace-info-collection').html(html);
+    setTimeout(function () {
+        imgHeight();
+        matchColumn();
+        paginate();
+    }, 0);
 
 };
 
@@ -75,6 +80,16 @@ var addPlace = function () {
     });
 };
 
+var recommendPlace = function (str) {
+        e.preventDefault();
+        // e.stopImmediatePropagation();
+        $.ajax({
+            type: 'post',
+            url: window.location.origin + '/portal?command=recommendPlace&place_id' + str,
+            data: $('form').serialize(),
+        });
+};
+
 var deletedFavorPlace = function () {
     $('#delete-favor-place').on('submit', function (e) {
         e.preventDefault();
@@ -91,10 +106,5 @@ $(function () {
     initRangeListeners();
     loadPlaceAboutData();
     initCategoriesEventsPlace();
-    setTimeout(function () {
-        imgHeight();
-        matchColumn();
-        paginate();
-    }, 500);
     addPlace();
 });
