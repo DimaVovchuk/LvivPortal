@@ -11,8 +11,8 @@ import com.lab.epam.command.locale.LocaleCommand;
 import com.lab.epam.command.logination.*;
 import com.lab.epam.command.logination.fb.FBAuthorizationCommand;
 import com.lab.epam.command.logination.fb.FBResponseCommand;
-import com.lab.epam.command.logination.vk.VKAuthorizationCommand;
-import com.lab.epam.command.logination.vk.VKResponseCommand;
+
+import com.lab.epam.command.logination.vk.*;
 import com.lab.epam.command.page.createtrip.AddDayCommand;
 import com.lab.epam.command.page.createtrip.CountDaysCommand;
 import com.lab.epam.command.page.createtrip.CreateUserDataCommand;
@@ -106,6 +106,7 @@ public class CommandFactory {
         commands.put("rectRatingWay", new  RectRatingWayCommand());
         commands.put("search", new  PlaceSearchCommand());
         commands.put("signUpForm", new  SignUpForm());
+        commands.put("recommendPlace", new  RecommendedPlaceCommand());
         commands.put("statisticTest", new StatisticTestCommand());
     }
 

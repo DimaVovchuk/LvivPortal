@@ -87,8 +87,7 @@ public class AddPlaceUserDataTripCommand implements Command {
             userDataAboutTrip.setPlaceDay(map);
             loger.info("Set map to userDataAboutTrip");
         }
-        System.out.println(isAdded);
-        session.setAttribute("isAdded", isAdded);
+        session.setAttribute("userDataTrib", userDataAboutTrip);
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
           response.getWriter().write(new Gson().toJson(isAdded));

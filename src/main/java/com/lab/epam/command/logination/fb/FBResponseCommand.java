@@ -3,8 +3,11 @@ package com.lab.epam.command.logination.fb;
 import com.lab.epam.command.controller.Command;
 import com.lab.epam.entity.User;
 import com.lab.epam.entity.UserImage;
+import com.lab.epam.helper.ClassName;
 import com.lab.epam.service.UserImageService;
 import com.lab.epam.service.UserService;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.json.JSONException;
 import org.json.JSONObject;
 import javax.servlet.*;
@@ -17,16 +20,25 @@ import java.io.IOException;
  * Created by Oleguk on 30.06.2015.
  */
 public class FBResponseCommand implements Command {
+    private static final Logger loger = LogManager.getLogger(ClassName.getCurrentClassName());
+
     private String code = "";
+    UserImageService userImageService = null;
+    UserImage userImage = null;
+    UserService userServ = null;
+    User user = null;
+    JSONObject json = null;
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        loger.info("Command FBResponseCommand");
+
+        userServ = new UserService();
+        userImageService = new UserImageService();
+        userImage = new UserImage();
+        user = new User();
         HttpSession session = request.getSession();
-        UserService userServ = null;
-        User user = null;
-        UserImageService userImageService = null;
-        UserImage userImage = null;
-        JSONObject json = null;
+
         code = request.getParameter("code");
 
         if (code == null || code.equals("")) {
@@ -46,13 +58,16 @@ public class FBResponseCommand implements Command {
                 session.setAttribute("usedID", user.getId());
                 session.setAttribute("vk_id", json.getString("id"));
                 session.setAttribute("role", user.getRoleID());
+                session.setAttribute("avatar_id", user.getAvatar());
 
                 if (user.getAvatar() != null) {
                     userImage = userImageService.getByPK(user.getAvatar());
                 } else {
                     userImage = new UserImage(user.getId(), photo);
                 }
-                session.setAttribute("avatar", userImage.getReference());
+                session.setAttribute("ava", userImage.getReference());
+
+                loger.info("User sign in with facebook");
                 request.getRequestDispatcher("/views/pages/user-cabinet.jsp").forward(request, response);
             } else {
                 json = new JSONObject(graph);
@@ -61,8 +76,9 @@ public class FBResponseCommand implements Command {
                 String last_name = (String) json.get("last_name");
                 String email = (String) json.get("email");
                 session.setAttribute("vk_id", id);
-                session.setAttribute("avatar", photo);
+                session.setAttribute("ava", photo);
 
+                loger.info("User sign up with facebook");
                 request.getRequestDispatcher("/portal?command=signUpForm&first=" + first_name + "&last=" + last_name + "&email=" + email).include(request, response);
             }
         } catch (JSONException e) {

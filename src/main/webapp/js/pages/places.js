@@ -139,13 +139,8 @@ var addPlace = function () {
     });
 };
 
-var loadWindow = function (data) {
-    if (data == "1"){
-        $('#place-is-added').openModal();
-    }
-    else{
-        $('#place-is-in-db').openModal();
-    }
+function encode_utf8(s) {
+    return unescape(encodeURIComponent(s));
 }
 
 var searchPlace = function () {

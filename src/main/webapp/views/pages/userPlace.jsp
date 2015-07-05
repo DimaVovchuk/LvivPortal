@@ -58,9 +58,9 @@
 			<div class="card z-depth-2" style="padding:10px; height:95%">
 				<form name="button"
 				      method="post" style="position:absolute;padding:5px">
-					<button class="btn modal-trigger btn-floating btn-large waves-effect waves-light red darken-2"
-					        type="submit" data-target="delete-place"
-					        id="btn" onclick="$('#place_id_delete').val('{{id}}')">
+					<button class="btn modal-trigger btn-floating btn-large waves-effect waves-light yellow darken-2"
+							data-target="delete-place"
+					        id="btn-recomend" onclick="recommendPlace('{{id}}')">
 						<i class="material-icons">delete</i>
 					</button>
 
@@ -71,6 +71,12 @@
 							<i class="mdi-content-add"></i>
 						</button>
 					</c:if>
+
+					<button class="btn modal-trigger btn-floating btn-large waves-effect waves-light red darken-2"
+							type="submit" data-target="delete-place"
+							id="btn" onclick="$('#place_id_delete').val('{{id}}')">
+						<i class="material-icons">delete</i>
+					</button>
 				</form>
 
 				<a href="portal?command=placeInformation&place_id={{id}}"><img
