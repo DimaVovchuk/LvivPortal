@@ -15,7 +15,6 @@
 <jsp:include page="/views/elements/script.jsp"/>
 
 <body>
-
 	<jsp:include page="/views/elements/header.jsp"/>
 	<div class="full-height">
 	<div clacc="user-places" id="user-places">
@@ -54,7 +53,6 @@
 
 	<script src="${pageContext.request.contextPath}/js/pages/userFavorPlacePage.js"></script>
 	<script id="userPlace-info-template" type="text/x-handlebars-template">
-
 		{{#each this}}
 		<div class="match-col col l4 m6 s12">
 			<div class="card z-depth-2" style="padding:10px; height:95%">

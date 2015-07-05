@@ -41,13 +41,14 @@ public class SignInCommand implements Command {
             session.setAttribute("login", login);
             session.setAttribute("usedID", userID);
             session.setAttribute("role", user.getRoleID());
-            String avatar = null;
+            String ava = null;
             if (user.getAvatar() != null) {
                 UserImageService userImageService = new UserImageService();
                 UserImage userImagee = userImageService.getByPK(user.getAvatar());
-                avatar = userImagee.getReference();
+                ava = userImagee.getReference();
             }
-            session.setAttribute("avatar", avatar);
+            session.setAttribute("ava", ava);
+            session.setAttribute("avatar_id", user.getAvatar());
 
             loger.info("User " + login + " signing in ");
             request.getRequestDispatcher("/views/pages/user-cabinet.jsp").forward(request, response);
