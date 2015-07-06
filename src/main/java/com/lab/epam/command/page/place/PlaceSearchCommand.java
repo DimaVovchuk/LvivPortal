@@ -59,11 +59,12 @@ public class PlaceSearchCommand implements Command {
                     }
                     if (count >= searchParth.length){
                         if (countPlace < 10) {
-                            PlaceImage plIm = placeImageService.getPlaceImageByPlaceId(place.getId());
+                            PlaceImage plIm = placeImageService.getPlaceImageByPlaceId(place.getPlace_id());
                             if (plIm == null || !isInFolder(plIm.getReference(), request)){
                                 plIm = new PlaceImage(place.getId(), "default_building.jpg");
                             }
                             searchResult += place.getName() + "*" + plIm.getReference() + "\n";
+                            System.out.println("searchResult " + searchResult);
                             countPlace++;
                         }
                     }
@@ -84,7 +85,7 @@ public class PlaceSearchCommand implements Command {
                                 String str = results.get(fail);
                                 String[] strArray = str.split("\n");
                                 if (strArray.length < 10){
-                                    PlaceImage plIm = placeImageService.getPlaceImageByPlaceId(place.getId());
+                                    PlaceImage plIm = placeImageService.getPlaceImageByPlaceId(place.getPlace_id());
                                     if (plIm == null || !isInFolder(plIm.getReference(), request)){
                                         plIm = new PlaceImage(place.getId(), "default_building.jpg");
                                     }
@@ -93,7 +94,7 @@ public class PlaceSearchCommand implements Command {
                                 }
                                 results.put(fail, str);
                             }else{
-                                PlaceImage plIm = placeImageService.getPlaceImageByPlaceId(place.getId());
+                                PlaceImage plIm = placeImageService.getPlaceImageByPlaceId(place.getPlace_id());
                                 if (plIm == null || !isInFolder(plIm.getReference(), request)){
                                     plIm = new PlaceImage(place.getId(), "default_building.jpg");
                                 }
@@ -137,30 +138,6 @@ public class PlaceSearchCommand implements Command {
             }
         }
         Integer distance = n - count;
-
-//        Integer dis = s2.length() - s1.length();
-//        int[] D1;
-//        int[] D2 = new int[n + 1];
-//
-//        for(int i = 0; i <= n; i ++)
-//            D2[i] = i;
-//
-//        for(int i = 1; i <= m; i ++) {
-//            D1 = D2;
-//            D2 = new int[n + 1];
-//            for(int j = 0; j <= n; j ++) {
-//                if(j == 0) D2[j] = i;
-//                else {
-//                    int cost = (s1.charAt(i - 1) != s2.charAt(j - 1)) ? 1 : 0;
-//                    if(D2[j - 1] < D1[j] && D2[j - 1] < D1[j - 1] + cost)
-//                        D2[j] = D2[j - 1] + 1;
-//                    else if(D1[j] < D1[j - 1] + cost)
-//                        D2[j] = D1[j] + 1;
-//                    else
-//                        D2[j] = D1[j - 1] + cost;
-//                }
-//            }
-//        }
         return distance;
     }
 

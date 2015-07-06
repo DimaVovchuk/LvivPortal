@@ -42,11 +42,7 @@ public class CommercialJSONCommand implements Command{
         UserImageService userImageService = new UserImageService();
 
         String userRole = request.getParameter("comertsRole");
-        String usepRoleSesion = (String) session.getAttribute("comertsRole");
-        System.out.println("comertsRole " + userRole);
-        if (userRole == null) {
-            userRole = usepRoleSesion;
-        }
+
         if (userRole != null) {
             switch (userRole) {
                 case "guide":
@@ -61,7 +57,6 @@ public class CommercialJSONCommand implements Command{
                     }
                     loger.info("guideAvatarMap "+ guideAvatarList);
                     allUserAvatarList.addAll(guideAvatarList);
-                    session.setAttribute("allUserAvatarMap",guideAvatarList);
                     break;
                 case "agency":
                     for(int index = 0; index < userConpanyList.size();index++) {
@@ -75,7 +70,6 @@ public class CommercialJSONCommand implements Command{
                     }
                     loger.info("agencyAvatarMap "+ agencyAvatarList);
                     allUserAvatarList.addAll(agencyAvatarList);
-                    session.setAttribute("allUserAvatarMap",agencyAvatarList);
                     break;
                 default:
                     for(int index = 0; index < allCommercialUser.size();index++) {
@@ -87,7 +81,6 @@ public class CommercialJSONCommand implements Command{
                         }
                         allUserAvatarList.add(getCompanyGuideImage(allCommercialUser.get(index), userImage));
                     }
-                    session.setAttribute("allUserAvatarMap",allUserAvatarList);
                     break;
             }
         } else {
@@ -100,11 +93,8 @@ public class CommercialJSONCommand implements Command{
                 }
                 allUserAvatarList.add(getCompanyGuideImage(allCommercialUser.get(index), userImage));
             }
-            session.setAttribute("allUserAvatarMap",allUserAvatarList);
             loger.info("allUserAvatarMap "+ allUserAvatarList);
         }
-//System.out.println("allUserAvatarList " + allUserAvatarList);
-        session.setAttribute("userPlaceCtegory",userRole);
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write(new Gson().toJson(allUserAvatarList));

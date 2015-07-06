@@ -83,7 +83,7 @@
                     </div>
                 </div>
                 <c:if test="${sessionScope.userDataTrip != null}">
-                    <a class="waves-effect waves-light btn modal-trigger cyan darken-2" href="#chooseDay"
+                    <a class="waves-effect waves-light btn modal-trigger cyan darken-2" href="#chooseDayRecomended"
                        onclick="$('#place_id').val('${place.id}')">
                         <cdg:l18n key="place.add2route"/>
                     </a>
@@ -134,35 +134,6 @@
                     </form>
                 </div>
             </c:if>
-                <%--<c:forEach var="users" items="${users}">--%>
-                    <%--<c:forEach var="placeResponse" items="${placeResponse}">--%>
-                        <%--<c:if test="${users.id==placeResponse.user_id}">--%>
-                            <%--<div class="card">--%>
-                                <%--<div class="valign-wrapper">--%>
-                                    <%--<div class="valign">--%>
-                                        <%--<c:forEach var="userImages" items="${userImages}">--%>
-                                            <%--<c:if test="${users.id==userImages.user_id}">--%>
-                                                <%--<a href="#"><img--%>
-                                                        <%--src="${pageContext.request.contextPath}/upload/photo/${userImages.reference}"--%>
-                                                        <%--class="avatar"/></a>--%>
-                                            <%--</c:if>--%>
-                                        <%--</c:forEach>--%>
-                                    <%--</div>--%>
-                                    <%--<div class="valign">--%>
-                                        <%--<a href="#"><h5><c:out value="${users.login}"/></h5></a>--%>
-
-                                        <%--<p><c:out value="${placeResponse.description}"/></p>--%>
-                                        <%--<c:forEach var="placeRatings" items="${placeRatings}">--%>
-                                            <%--<c:if test="${users.id==placeRatings.user_id}">--%>
-                                                <%--<p><c:out value="${placeRatings.rating}"/></p>--%>
-                                            <%--</c:if>--%>
-                                        <%--</c:forEach>--%>
-                                    <%--</div>--%>
-                                <%--</div>--%>
-                            <%--</div>--%>
-                        <%--</c:if>--%>
-                    <%--</c:forEach>--%>
-                <%--</c:forEach>--%>
 
                 <c:forEach var="response" items="${userImageDescription}">
 
@@ -190,64 +161,10 @@
 
             </div>
 
-            <div class="col l3 m4 s5">
-                <div class="collection with-header z-depth-2">
-                    <div class="collection-header"><h4><cdg:l18n key="places.categories"/></h4></div>
-                    <a href="portal?command=place&category=architecture"
-                       class="collection-item black-text ${requestScope.active_architecture}"><cdg:l18n
-                            key="places.architecture"/></a>
-                    <a href="portal?command=place&category=churches"
-                       class="collection-item black-text ${requestScope.active_churches}"><cdg:l18n
-                            key="places.churches"/></a>
-                    <a href="portal?command=place&category=theatres"
-                       class="collection-item black-text ${requestScope.active_theatres}"><cdg:l18n
-                            key="places.theatres"/></a>
-                    <a href="portal?command=place&category=hotels"
-                       class="collection-item black-text ${requestScope.active_hotels}"><cdg:l18n
-                            key="places.hotels"/></a>
-                    <a href="portal?command=place&category=restaurants"
-                       class="collection-item black-text ${requestScope.active_restaurants}"><cdg:l18n
-                            key="places.restaurants"/></a>
-                    <a href="portal?command=place"
-                       class="collection-item black-text ${requestScope.active_allplaces}"><cdg:l18n
-                            key="places.all"/></a>
-                </div>
-            </div>
         </div>
     </div>
 </div>
 
-<div id="choose-day" class="modal">
-    <div class="modal-content">
-        <h5 class="center-align">Choose day</h5>
-
-        <form id="choose_day" action="/portal?command=placeInformation" method="post">
-            <input type="hidden" name="command" value="placeInformation">
-            <input type="hidden" name="place_id" value="${place.id}">
-            <select name="dayNumber">
-                <option disabled selected>Choose your option</option>
-                <c:forEach var="i" begin="1" end="${userDataTrip.dayCount}">
-                    <option width="10px" value="${i}"><c:out value="${i}"/></option>
-                </c:forEach>
-            </select>
-            <br>
-            <button class="btn waves-effect waves-light cyan darken-2" type="submit">
-                OK
-            </button>
-        </form>
-        <br>
-        <a class="waves-effect waves-light btn" href="portal?command=savePlace&place_id=${place_id}">Favorite Place</a>
-
-        <form action="portal?command=savePlace&place_id=${place_id}" method="post">
-            <button class="btn waves-effect waves-light cyan darken-2" type="submit"
-                    >Favorite Place
-            </button>
-        </form>
-    </div>
-    <div class="modal-footer">
-
-    </div>
-</div>
 
 <div id="editplace" class="modal">
     <div class="modal-content">
@@ -264,8 +181,20 @@
 </div>
 
 <jsp:include page="/views/elements/footer.jsp"/>
-<jsp:include page="/views/modals/add-place-to-route.jsp"/>
+<%--<jsp:include page="/views/modals/add-place-to-route.jsp"/>--%>
+<jsp:include page="/views/modals/add-place-to-route-recomended.jsp"/>
 <script src="${pageContext.request.contextPath}/js/pages/info.js"></script>
+
+<script>
+    var loadWindow = function (data) {
+        if (data == "1"){
+            Materialize.toast('<cdg:l18n key="place.added"/>', 4000);
+        }
+        else{
+            Materialize.toast('<cdg:l18n key="place.is.db"/>', 4000);
+        }
+    }
+</script>
 
 </body>
 </html>
