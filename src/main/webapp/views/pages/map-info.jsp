@@ -37,7 +37,87 @@
     </div>
 
     <div id="map-custom" class="animated fadeInDown">
-        Custom places
+        <h5 class="center-align"><cdg:l18n key="addnewcustomplace.title"/></h5>
+
+        <div class="divider"></div>
+        <form method=post enctype=multipart/form-data>
+            <c:set var="command" scope="session" value="saveCustomPlace"/>
+            <div class="file-field input-field">
+                <div class="btn cyan darken-2 waves-effect waves-light">
+                    <span><cdg:l18n key="editplace.addphoto"/></span>
+                    <input id="image-input" type="file" multiple name="sendfile"/>
+                </div>
+            </div>
+            <div class="section">
+                <output id="image-preview"></output>
+            </div>
+            <a id="image-clear" class="btn cyan darken-2 waves-effect waves-light" style="display: none"><cdg:l18n
+                    key="editplace.clearimage"/></a>
+
+            <div class="input-field">
+                <input id="customPlaceName" type="text" name="customPlaceName">
+                <label for="customPlaceName"><cdg:l18n key="addnewcustomplace.name"/></label>
+            </div>
+
+            <div class="input-field">
+                <input id="customPlaceDesc" type="text" name="customPlaceDesc">
+                <label for="customPlaceDesc"><cdg:l18n key="addnewcustomplace.description"/></label>
+            </div>
+
+            <b><cdg:l18n key="editplace.choseplacecategory"/></b>
+            <select name="newCategory">
+                <option value="6"><cdg:l18n key="editplace.otherPlaces"/></option>
+                <option value="1"><cdg:l18n key="editplace.architecture"/></option>
+                <option value="2"><cdg:l18n key="editplace.churches"/></option>
+                <option value="3"><cdg:l18n key="editplace.theatres"/></option>
+                <option value="4"><cdg:l18n key="editplace.hotels"/></option>
+                <option value="5"><cdg:l18n key="editplace.restaurants"/></option>
+            </select>
+
+            <div class="input-field">
+                <input id="customPlacePrice" type="text" name="customPlacePrice">
+                <label for="customPlacePrice"><cdg:l18n key="addnewcustomplace.price"/></label>
+            </div>
+
+            <div class="input-field">
+                <input id="customPlacePhone" type="text" name="customPlacePhone">
+                <label for="customPlacePhone"><cdg:l18n key="editplace.placephone"/></label>
+            </div>
+
+            <div class="input-field">
+                <input id="place_time" type="text" name="place_time">
+                <label for="place_time"><cdg:l18n key="editplace.placetime"/></label>
+            </div>
+
+            <div class="input-field">
+                <input value="" id="customPlaceAdrress" type="text" name="customPlaceAdrress" disabled>
+                <label for="customPlaceAdrress"><cdg:l18n key="addnewcustomplace.adrress"/></label>
+            </div>
+
+            <input value="" id="customPlaceAdrressHid" type="hidden" name="customPlaceAdrressHid">
+
+            <div class="row">
+                <div class="col s6">
+                    <div class="input-field">
+                        <input value="" id="latitude" type="text" name="latitude" disabled>
+                        <input value="" id="latitudeHid" type="hidden" name="latitudeHid">
+                        <label for="latitude"><cdg:l18n key="editplace.placealat"/></label>
+                    </div>
+                </div>
+                <div class="col s6">
+                    <div class="input-field">
+                        <input value="" id="longitude" type="text" name="longitude" disabled>
+                        <input value="" id="longitudeHid" type="hidden" name="longitudeHid">
+                        <label for="longitude"><cdg:l18n key="editplace.placealon"/></label>
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn waves-effect waves-light cyan darken-2" type="submit" name="save"
+                    style="margin-bottom: 10px"><cdg:l18n key="editplace.placesavechange"/></button>
+            <button class="btn waves-effect waves-light cyan darken-2" type="reset" name="cancel"><cdg:l18n
+                    key="editplace.placecancel"/></button>
+        </form>
     </div>
 </div>
 
@@ -59,15 +139,19 @@
 <script id="route-info-template" type="text/x-handlebars-template">
     {{#each this}}
     <c:set var="dayNumber" value="{{dayNumber}}"/>
-    <a href="#" data-day="${dayNumber}" class="day-trigger collection-item black-text blue-grey lighten-4 waves-effect waves-light">
+    <a href="#" data-day="${dayNumber}"
+       class="day-trigger collection-item black-text blue-grey lighten-4 waves-effect waves-light">
         <cdg:l18n key="map.route.day"/> {{dayNumber}} <br>
-        <cdg:l18n key="map.route.totaltime"/>: {{hours}} <cdg:l18n key="map.route.hours"/> {{minutes}} <cdg:l18n key="map.route.minutes"/>
+        <cdg:l18n key="map.route.totaltime"/>: {{hours}} <cdg:l18n key="map.route.hours"/> {{minutes}} <cdg:l18n
+            key="map.route.minutes"/>
     </a>
-    <a href="#" id="map-day${dayNumber}" data-day="${dayNumber}" data-show="1" class="btn cyan darken-2 map-day-trigger">Show on map</a>
+    <a href="#" id="map-day${dayNumber}" data-day="${dayNumber}" data-show="1"
+       class="btn cyan darken-2 map-day-trigger">Show on map</a>
     <div id="places-day{{dayNumber}}" class="collection animated fadeInLeft">
         {{#each places}}
         <a href="#" onclick="myclick('{{placeId}}')" class="collection-item black-text">
             <img class="circle responsive-img" src="${pageContext.request.contextPath}/upload/photo/{{imageReference}}">
+
             <div class="valign-wrapper" style="height:100%">
                 <div class="valign">
                     <div class="truncate"><b>{{name}}</b><br>{{adress}}</div>
