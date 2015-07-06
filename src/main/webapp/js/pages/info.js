@@ -130,10 +130,34 @@ var dislike = function (placeholder) {
     return false;
 };
 
+var addToFavorite = function (placeholder) {
+    alert($(placeholder).attr('rel'));
+  //  e.preventDefault();
+//    e.stopImmediatePropagation();
+    $.ajax({
+        url: $(placeholder).attr('rel'),
+        type: "POST",
+        success: loadAddFavorite,
+        error: loadAddFavorite,
+    });
+    return false;
+};
 
+var addToFavorite = function () {
+    $('#add-to-favorite').on('click', function (e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        $.ajax({
+            url: window.location.origin + '/' + $(e.target).attr('href'),
+            success: loadPlacesData,
+            error: loadPlacesData
+        });
+    });
+};
 
 
 $(function () {
     disabled();
     addPlace();
+    //addToFavorite;
 });

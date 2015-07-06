@@ -21,8 +21,8 @@ public class UserDataAboutTrip {
     }
 
     private Integer way_id = 0;
-    private String beginPlace;
-    private String endPlace;
+    private Integer beginPlace;
+    private Integer endPlace;
     private Date beginTrip;
     private Date endTrip;
     private Boolean dontKnowDate = false;
@@ -34,6 +34,7 @@ public class UserDataAboutTrip {
     private Boolean isAutomatic = false;
     private Double timePerDay;
     private Double timeForLunch;
+    private String name;
     private Map<Integer,Boolean> sortFlag = new HashMap<>();
 
 
@@ -116,11 +117,11 @@ public class UserDataAboutTrip {
         this.category = category;
     }
 
-    public String getEndPlace() {
+    public Integer getEndPlace() {
         return endPlace;
     }
 
-    public void setEndPlace(String endPlace) {
+    public void setEndPlace(Integer endPlace) {
         this.endPlace = endPlace;
     }
 
@@ -140,12 +141,12 @@ public class UserDataAboutTrip {
         this.placeDay = placeDay;
     }
 
-    public String getBeginPlace() {
+    public Integer getBeginPlace() {
 
         return beginPlace;
     }
 
-    public void setBeginPlace(String beginPlace) {
+    public void setBeginPlace(Integer beginPlace) {
         this.beginPlace = beginPlace;
     }
 
@@ -158,8 +159,9 @@ public class UserDataAboutTrip {
     public String toString() {
         return "UserDataAboutTrip{" +
                 "dayCount=" + dayCount +
-                ", beginPlace='" + beginPlace + '\'' +
-                ", endPlace='" + endPlace + '\'' +
+                ", way_id=" + way_id +
+                ", beginPlace=" + beginPlace +
+                ", endPlace=" + endPlace +
                 ", beginTrip=" + beginTrip +
                 ", endTrip=" + endTrip +
                 ", dontKnowDate=" + dontKnowDate +
@@ -167,8 +169,45 @@ public class UserDataAboutTrip {
                 ", category=" + category +
                 ", isCaffees=" + isCaffees +
                 ", placeDay=" + placeDay +
+                ", routeTime=" + routeTime +
                 ", isAutomatic=" + isAutomatic +
+                ", timePerDay=" + timePerDay +
+                ", timeForLunch=" + timeForLunch +
+                ", name='" + name + '\'' +
+                ", sortFlag=" + sortFlag +
+                ", isFull=" + isFull +
+                ", isSaved=" + isSaved +
                 '}';
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public UserDataAboutTrip(Integer dayCount, Boolean isSaved, Boolean isFull, Map<Integer, Boolean> sortFlag, String name, Double timeForLunch, Double timePerDay, Boolean isAutomatic, double routeTime, Map<Integer, List<Place>> placeDay, Boolean isCaffees, List<Category> category, Boolean withOutBegin, Boolean dontKnowDate, Date endTrip, Date beginTrip, Integer endPlace, Integer beginPlace, Integer way_id) {
+        this.dayCount = dayCount;
+        this.isSaved = isSaved;
+        this.isFull = isFull;
+        this.sortFlag = sortFlag;
+        this.name = name;
+        this.timeForLunch = timeForLunch;
+        this.timePerDay = timePerDay;
+        this.isAutomatic = isAutomatic;
+        this.routeTime = routeTime;
+        this.placeDay = placeDay;
+        this.isCaffees = isCaffees;
+        this.category = category;
+        this.withOutBegin = withOutBegin;
+        this.dontKnowDate = dontKnowDate;
+        this.endTrip = endTrip;
+        this.beginTrip = beginTrip;
+        this.endPlace = endPlace;
+        this.beginPlace = beginPlace;
+        this.way_id = way_id;
     }
 
     public Double getTimeForLunch() {

@@ -28,6 +28,7 @@
             </div>
         </div>
 
+
         <input id="automatic" value="automatic" name="automatic" type="checkbox"/>
         <label for="automatic"><cdg:l18n key="plan.automatic"/></label>
 
@@ -52,6 +53,14 @@
                 <label for="theatres"><cdg:l18n key="places.theatres"/></label><br>
             </p>
         </div>
+
+                <input type="search" id="txtSearch" name="txtSearch" alt="Search Criteria"
+                       onkeyup="searchSuggest();"
+                       autocomplete="off" />
+                <label for="txtSearch"><cdg:l18n key="places.saerch"/></label><br>
+
+            <br><p>
+        <div id="search_suggest" style="border-color: #ffffff;"></div></p>
 
         <div class="section">
             <button class="btn waves-effect waves-light cyan darken-2" type="submit">OK</button>
@@ -87,3 +96,5 @@
         }
     });
 </script>
+
+<script language="JavaScript" type="text/javascript" src="${pageContext.request.contextPath}/js/ajax_search.js"></script>

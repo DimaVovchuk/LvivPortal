@@ -2,11 +2,10 @@ package com.lab.epam.command.page.createtrip;
 
 import com.google.gson.Gson;
 import com.lab.epam.command.controller.Command;
-import com.lab.epam.entity.Category;
-import com.lab.epam.entity.Place;
-import com.lab.epam.entity.UserDataAboutTrip;
+import com.lab.epam.entity.*;
 import com.lab.epam.helper.ClassName;
 import com.lab.epam.service.CategoryService;
+import com.lab.epam.service.PlaceDescriptionService;
 import com.lab.epam.service.PlaceService;
 import com.lab.epam.workWithMap.Distance;
 import org.apache.log4j.LogManager;
@@ -54,6 +53,7 @@ public class CreateUserDataCommand implements Command {
 
         List<Category> listCategory = null;
         Boolean haveCategory = false;
+        PlaceDescriptionService placeSesc = new PlaceDescriptionService();
         String beginTrip = request.getParameter("startDate");
         String endTrip = request.getParameter("endDate");
         String dontKnowDate = request.getParameter("dontKnowDate");
@@ -61,9 +61,13 @@ public class CreateUserDataCommand implements Command {
         String architecture = request.getParameter("architecture");
         String churches = request.getParameter("churches");
         String theatres = request.getParameter("theatres");
-        String placeArrive = request.getParameter("placeArrive");
+        String placeArrive = request.getParameter("txtSearch");
         String timePerDay = request.getParameter("dayTime");
+        //String name = request.getParameter("name");
         userDataTrip.getSortFlag().put(1,true);
+        placeArrive = Decoder.decodeStringUtf8(placeArrive);
+        System.out.println("placeArrive " + placeArrive);
+
 
         if (dontKnowDate == null) {
             if (beginTrip != null && !beginTrip.equalsIgnoreCase("")) {
@@ -134,7 +138,18 @@ public class CreateUserDataCommand implements Command {
             if (placeArrive.equalsIgnoreCase("withoutPlaceArrive")) {
                 userDataTrip.setWithOutBegin(true);
             } else {
-                userDataTrip.setBeginPlace(placeArrive);
+                placeArrive = placeArrive.trim();
+                placeArrive = placeArrive.toLowerCase();
+                System.out.println("placeArrive " + placeArrive);
+                List<PlaceDescription> plDesc = placeSesc.getAllPlaceBySearch(placeArrive);
+                if (plDesc != null && !plDesc.isEmpty()){
+                    PlaceDescription place = plDesc.iterator().next();
+                    Integer place_id = place.getPlace_id();
+                    System.out.println("place_id " + place_id);
+                    if (place_id != null && place_id > 0){
+                        userDataTrip.setBeginPlace(place_id);
+                    }
+                }
             }
         } else {
             userDataTrip.setWithOutBegin(true);
@@ -176,6 +191,7 @@ public class CreateUserDataCommand implements Command {
 
         HttpSession session = request.getSession();
         session.setAttribute("userDataTrip", userDataTrip);
+        System.out.println("userDataTrip " + userDataTrip);
 
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");

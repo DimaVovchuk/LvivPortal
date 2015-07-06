@@ -7,6 +7,16 @@
     </div>
 
     <div id="map-places" class="animated fadeInDown" style="display: none">
+        <div class="collection with-header z-depth-2" id="search-place">
+            <form id="frmSearch" class="form-wrapper">
+                <input type="search" id="txtSearch" name="txtSearch" alt="Search Criteria"
+                       onkeyup="searchSuggest();"
+                       autocomplete="off" />
+                <input type="submit" id="cmdSearch" name="cmdSearch" value="Search" alt="Run Search" />
+            </form>
+            <br><p><div id="search_suggest" style="border-color: #ffffff;">
+        </div></p>
+        </div>
         <a class='dropdown-select btn cyan darken-2 waves-effect waves-light' href='#' data-activates='dropdown-places'><cdg:l18n
                 key="places.categories"/></a>
         <ul id='dropdown-places' class='dropdown-content'>
@@ -135,7 +145,7 @@
     </a>
     {{/each}}
 </script>
-
+<script language="JavaScript" type="text/javascript" src="${pageContext.request.contextPath}/js/ajax_search.js"></script>
 <script id="route-info-template" type="text/x-handlebars-template">
     {{#each this}}
     <c:set var="dayNumber" value="{{dayNumber}}"/>

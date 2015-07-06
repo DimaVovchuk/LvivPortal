@@ -90,7 +90,7 @@
                 </c:if>
                 <c:if test="${sessionScope.login != null}">
                     <a class="waves-effect waves-light btn modal-trigger cyan darken-2"
-                       href="portal?command=savePlace&place_id=${place_id}"><cdg:l18n key="place.favorite"/></a>
+                       href="javascript:" rel="/portal?command=savePlace&place_id=${place_id}" onClick="addToFavorite(this);"><cdg:l18n key="place.favorite"/></a>
                 </c:if>
                 <c:if test="${sessionScope.role == 1}">
                     <button class="waves-effect waves-light btn modal-trigger cyan darken-2" data-target="editplace"

@@ -869,6 +869,7 @@ footer.page-footer {
     padding: 8px;
     margin: 10px auto;
     background-color: #ffffff;
+    margin-top: 0px;
 }
 .form-wrapper #txtSearch {
     width: 210px;

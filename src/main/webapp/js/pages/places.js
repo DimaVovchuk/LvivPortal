@@ -17,7 +17,7 @@ var loadPlacesData = function (data) {
         imgHeight();
         matchColumn();
         paginate();
-    }, 0);
+    }, 200);
     disabled(data);
 
 };

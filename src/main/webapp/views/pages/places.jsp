@@ -36,17 +36,17 @@
                 </div>
             </div>
 
-            <div class="col l3 m4 s5">
+            <div class="col l3 m4 s5" style="margin-top: 0px">
                 <div class="collection with-header z-depth-2" id="search-place">
                     <form id="frmSearch" class="form-wrapper">
                         <input type="search" id="txtSearch" name="txtSearch" alt="Search Criteria"
                                onkeyup="searchSuggest();"
                                autocomplete="off" />
                         <input type="submit" id="cmdSearch" name="cmdSearch" value="Search" alt="Run Search" />
-
                     </form>
                     <br><p><div id="search_suggest" style="border-color: #ffffff;">
                 </div></p>
+                </div>
 
                         <%--<form id="frmSearch">--%>
                             <%--<input type="text" id="txtSearch" name="txtSearch" alt="Search Criteria"--%>
@@ -56,7 +56,7 @@
                             <%--</div>--%>
 
                         <%--</form>--%>
-                </div>
+
 
                 <div class="collection with-header z-depth-2">
                     <div class="collection-header"><h4><cdg:l18n key="places.categories"/></h4></div>
