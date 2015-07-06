@@ -107,7 +107,7 @@ var initMapDayTrigger = function () {
             count--;
             $(e.currentTarget).data('show', 1);
             $('#map-day' + day).html('Show on map');
-            for(var i = 0; i < directionsDisplays.length; i++){
+            for (var i = 0; i < directionsDisplays.length; i++) {
                 directionsDisplays[i].set('directions', null);
             }
             hideMarkers();
@@ -124,6 +124,7 @@ var getdirectionsDisplays = function (directionsDisplay) {
 var initImageMultiloadPreview = function () {
     window.onload = function () {
         if (window.File && window.FileList && window.FileReader) {
+            initCustom();
             $('#image-input').on('change', function (event) {
                 var files = event.target.files;
                 var output = document.getElementById('image-preview');
@@ -167,6 +168,73 @@ var initImageMultiloadPreview = function () {
     });
 };
 
+//**********************************
+var geocoder = new google.maps.Geocoder();
+
+function geocodePosition(pos) {
+    geocoder.geocode({
+        latLng: pos
+    }, function (responses) {
+        if (responses && responses.length > 0) {
+            updateMarkerAddress(responses[0].formatted_address);
+        } else {
+            updateMarkerAddress('Cannot determine address at this location.');
+        }
+    });
+}
+
+function updateMarkerStatus(str) {
+    document.getElementById('markerStatus').innerHTML = str;
+}
+
+function updateMarkerPositionLat(latLng) {
+    document.getElementById('latitude').value = latLng.lat();
+    document.getElementById('latitudeHid').value = latLng.lat();
+}
+function updateMarkerPositionLon(latLng) {
+    document.getElementById('longitude').value = latLng.lng();
+    document.getElementById('longitudeHid').value = latLng.lng();
+}
+
+function updateMarkerAddress(str) {
+    document.getElementById('customPlaceAdrress').value = str;
+    document.getElementById('customPlaceAdrressHid').value = str;
+}
+
+
+function initCustom() {
+    var latLng = new google.maps.LatLng(49.8426, 24.0278);
+    var marker = new google.maps.Marker({
+        position: latLng,
+        title: 'Marker',
+        map: map,
+        draggable: true
+    });
+
+    // Update current position info.
+    updateMarkerPositionLat(latLng);
+    updateMarkerPositionLon(latLng);
+    geocodePosition(latLng);
+
+    // Add dragging event listeners.
+    google.maps.event.addListener(marker, 'dragstart', function () {
+        updateMarkerAddress('Dragging...');
+    });
+
+    google.maps.event.addListener(marker, 'drag', function () {
+        updateMarkerStatus('Dragging...');
+        updateMarkerPositionLat(marker.getPosition());
+        updateMarkerPositionLon(marker.getPosition());
+    });
+
+    google.maps.event.addListener(marker, 'dragend', function () {
+        updateMarkerStatus('Drag ended');
+        geocodePosition(marker.getPosition());
+    });
+}
+//**********************************
+
+
 /* *** MAP *** */
 var map;
 var lvivMap = new google.maps.LatLng(49.8426, 24.0278);
@@ -199,7 +267,6 @@ var initDayMarkers = function (dayNumber) {
         }
         calcRoute(points);
     }
-    //calcRoute(routesData[dayNumber].places);
 };
 
 var calcRoute = function (data) {

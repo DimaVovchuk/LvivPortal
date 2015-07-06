@@ -33,20 +33,27 @@ public class Sender {
             }
         });
 
-        try {
-            MimeMessage  message = new MimeMessage(session);
-            //from
-            message.setFrom(new InternetAddress(username));
-            //to
-            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail));
-            //Subject
-            message.setSubject(subject);
-            //Text
-            message.setText(text,"UTF-8", "html");
+        MimeMessage message = new MimeMessage(session);
 
-            Transport.send(message);
-        } catch (MessagingException e) {
-            throw new RuntimeException(e);
-        }
+        Thread myThready = new Thread(new Runnable() {
+            public void run()
+            {
+                try {
+                    //from
+                    message.setFrom(new InternetAddress(username));
+                    //to
+                    message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail));
+                    //Subject
+                    message.setSubject(subject);
+                    //Text
+                    message.setText(text, "UTF-8", "html");
+                    Transport.send(message);
+                } catch (MessagingException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        myThready.start();
+
     }
 }

@@ -79,8 +79,17 @@ public class RoutesCommand implements Command {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        routeOneDayInfo.setTotalMinutes(routeOneDayInfo.getTotalMinutes() + time.intValue() / 60 /*+ places.get(i).getPlace_time()*/ + 15);
+                        if (places.get(i).getPlace_time() == 0) {
+                            routeOneDayInfo.setTotalMinutes(routeOneDayInfo.getTotalMinutes() + time.intValue() / 60 + places.get(i).getRecom_time());
+                        } else {
+                            routeOneDayInfo.setTotalMinutes(routeOneDayInfo.getTotalMinutes() + time.intValue() / 60 + places.get(i).getPlace_time());
+                        }
                     }
+                }
+                if (places.get(places.size()-1).getPlace_time() == 0) {
+                    routeOneDayInfo.setTotalMinutes(routeOneDayInfo.getTotalMinutes() + places.get(places.size()-1).getRecom_time());
+                } else {
+                    routeOneDayInfo.setTotalMinutes(routeOneDayInfo.getTotalMinutes() + places.get(places.size()-1).getPlace_time());
                 }
                 routeDayPlacesInfo.add(routeOneDayInfo);
             }
@@ -101,7 +110,6 @@ public class RoutesCommand implements Command {
             j++;
         }
         Collection<Place> values = sorted.values();
-        System.out.println(values);
         List<Place> list = new ArrayList<>(values);
         return list;
     }

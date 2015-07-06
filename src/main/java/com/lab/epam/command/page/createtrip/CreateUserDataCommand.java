@@ -200,7 +200,7 @@ public class CreateUserDataCommand implements Command {
         });
         result.add(places.get(0));
         places.remove(0);
-        Double tempTime = 900.0;
+        Integer tempTime = places.get(0).getRecom_time()*60;
         int j = 0;
         Distance distance = new Distance();
         while (true) {
@@ -209,18 +209,22 @@ public class CreateUserDataCommand implements Command {
             }
             String o1 = "" + result.get(j).getLatitude() + " " + result.get(j).getLongitude() + "";
             String o2 = "" + places.get(0).getLatitude() + " " + places.get(0).getLongitude() + "";
-            double t = 0;
+            Double t = 0.0;
             try {
                 t = distance.getDistanceAndTime(o1, o2).get("time");
             } catch (IOException | JSONException e) {
                 e.printStackTrace();
             }
-            if ((tempTime + 900 + t) > time) {
+            if (((time - tempTime) > 900) && (time - (tempTime + (places.get(j).getRecom_time()*60) + t) < 0)) {
+                places.remove(0);
+                continue;
+            }
+            if ((time - tempTime) < 900) {
                 break;
             }
             result.add(places.get(j));
             places.remove(0);
-            tempTime = tempTime + 900 + t;
+            tempTime = tempTime + (places.get(j).getRecom_time()*60) + t.intValue();
             j++;
         }
 

@@ -106,7 +106,6 @@ public class PlaceDescriptionService {
             e.printStackTrace();
             loger.warn("Cant get place description by place_id = " + place_id);
         }
-
         return placeDescription;
     }
 

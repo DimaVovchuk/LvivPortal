@@ -38,7 +38,7 @@
 
     <div id="map-custom" class="animated fadeInDown">
         <h5 class="center-align"><cdg:l18n key="addnewcustomplace.title"/></h5>
-
+        <div id="markerStatus"></div>
         <div class="divider"></div>
         <form method=post enctype=multipart/form-data>
             <c:set var="command" scope="session" value="saveCustomPlace"/>
