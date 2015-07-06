@@ -93,34 +93,42 @@
 				<ul class="side-nav" id="user-navbar">
 					<c:choose>
 						<c:when test="${not empty ava and not empty avatar_id}">
-						<li class="center-align" style="padding-top: 10px"><img class="circle responsive-img"
-						                                                        src="${pageContext.request.contextPath}/upload/photo/${ava}"
-						                                                        width="160"></li>
+							<li class="center-align" style="padding-top: 10px"><img class="circle responsive-img"
+							                                                        src="${pageContext.request.contextPath}/upload/photo/${ava}"
+							                                                        width="160"></li>
 						</c:when>
 						<c:when test="${not empty ava and not empty vk_id and empty avatar_id}">
-						<li class="center-align" style="padding-top: 10px"><img class="circle responsive-img" src="${ava}" width="160"></li>
+							<li class="center-align" style="padding-top: 10px"><img class="circle responsive-img"
+							                                                        src="${ava}" width="160"></li>
 						</c:when>
 						<c:otherwise>
-						<li class="center-align" style="padding-top: 10px"><img class="circle responsive-img"
-						                                                        src="${pageContext.request.contextPath}/upload/photo/user.png"
-						                                                        width="160"></li>
+							<li class="center-align" style="padding-top: 10px"><img class="circle responsive-img"
+							                                                        src="${pageContext.request.contextPath}/upload/photo/user.png"
+							                                                        width="160"></li>
 						</c:otherwise>
 					</c:choose>
 
-					<li><a href="/portal?command=userWays"><i class="mdi-maps-directions-bike left"></i>My routes</a>
+					<li><a href="/portal?command=userWays"><i class="mdi-maps-directions-bike left"></i><cdg:l18n
+							key="header.myrotes"/></a>
 					</li>
-					<li><a href="/portal?command=userPlace"><i class="mdi-action-account-balance left"></i>My places</a>
+					<li><a href="/portal?command=userPlace"><i class="mdi-action-account-balance left"></i><cdg:l18n
+							key="header.myplaces"/></a>
 					</li>
-					<li><a href="/portal?command=allUserPhoto"><i class="mdi-image-photo left"></i>Gallery</a></li>
-					<li><a href="/portal?command=edit"><i class="mdi-action-settings left"></i>Settings</a></li>
+					<c:if test="${role != 1 and role != 2}">
+						<li><a href="/portal?command=allUserPhoto"><i class="mdi-image-photo left"></i><cdg:l18n
+								key="header.gallery"/></a></li>
+					</c:if>
+					<li><a href="/portal?command=edit"><i class="mdi-action-settings left"></i><cdg:l18n
+							key="header.settings"/></a></li>
 					<li class="divider"></li>
 					<c:choose>
 						<c:when test="${userDataTrip != null && userDataTrip.isSaved == false && userDataTrip.isFull == true}">
 							<li><a class="modal-trigger" href="#sure-save-sign-out"><i
-									class="mdi-navigation-close left"></i>Sign out</a></li>
+									class="mdi-navigation-close left"></i><cdg:l18n key="header.signout"/></a></li>
 						</c:when>
 						<c:otherwise>
-							<li><a href="/portal?command=signOut"><i class="mdi-navigation-close left"></i>Sign out</a>
+							<li><a href="/portal?command=signOut"><i class="mdi-navigation-close left"></i><cdg:l18n
+									key="header.signout"/></a>
 							</li>
 						</c:otherwise>
 					</c:choose>
