@@ -124,7 +124,7 @@ var getdirectionsDisplays = function (directionsDisplay) {
 var initImageMultiloadPreview = function () {
     window.onload = function () {
         if (window.File && window.FileList && window.FileReader) {
-            initCustom();
+            initCustom()
             $('#image-input').on('change', function (event) {
                 var files = event.target.files;
                 var output = document.getElementById('image-preview');
@@ -183,10 +183,6 @@ function geocodePosition(pos) {
     });
 }
 
-function updateMarkerStatus(str) {
-    document.getElementById('markerStatus').innerHTML = str;
-}
-
 function updateMarkerPositionLat(latLng) {
     document.getElementById('latitude').value = latLng.lat();
     document.getElementById('latitudeHid').value = latLng.lat();
@@ -200,7 +196,6 @@ function updateMarkerAddress(str) {
     document.getElementById('customPlaceAdrress').value = str;
     document.getElementById('customPlaceAdrressHid').value = str;
 }
-
 
 function initCustom() {
     var latLng = new google.maps.LatLng(49.8426, 24.0278);
@@ -217,18 +212,13 @@ function initCustom() {
     geocodePosition(latLng);
 
     // Add dragging event listeners.
-    google.maps.event.addListener(marker, 'dragstart', function () {
-        updateMarkerAddress('Dragging...');
-    });
 
     google.maps.event.addListener(marker, 'drag', function () {
-        updateMarkerStatus('Dragging...');
         updateMarkerPositionLat(marker.getPosition());
         updateMarkerPositionLon(marker.getPosition());
     });
 
     google.maps.event.addListener(marker, 'dragend', function () {
-        updateMarkerStatus('Drag ended');
         geocodePosition(marker.getPosition());
     });
 }
