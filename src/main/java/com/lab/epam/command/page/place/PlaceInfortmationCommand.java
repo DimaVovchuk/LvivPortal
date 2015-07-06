@@ -27,12 +27,12 @@ public class PlaceInfortmationCommand implements Command {
         String message = request.getParameter("message");
         loger.info("Message is " + message);
 
-        Integer rating = 0;
-        String ratingString = request.getParameter("rating");
-
-        if (ratingString != null) {
-            rating = Integer.parseInt(ratingString);
-        }
+          Integer rating = 0;
+//        String ratingString = request.getParameter("rating");
+//
+//        if (ratingString != null) {
+//            rating = Integer.parseInt(ratingString);
+//        }
 
         String place_idString = request.getParameter("place_id");
         request.setAttribute("place_id", place_idString);
@@ -47,6 +47,7 @@ public class PlaceInfortmationCommand implements Command {
         PlaceRatingService placeRatingService = new PlaceRatingService();
 
         PlaceDescriptionService placeDescriptionService = new PlaceDescriptionService();
+        List <UserImageDescription> userImageDescription = new ArrayList<>();
         PlaceImageService placeImageService = new PlaceImageService();
         UserService userService = new UserService();
         UserImageService userImageService = new UserImageService();
@@ -182,11 +183,17 @@ public class PlaceInfortmationCommand implements Command {
         if (placeImage == null) {
             loger.info("Not place image for place_id " + place_id);
         }
-
+        if (login != null) {
+            User us = userService.getUserByLogin(login);
+            placeRating = placeRatingService.getPlaceRatingByPlaceAndUser(place_id, us.getId());
+            if (placeRating != null) {
+                rating = placeRating.getRating();
+            }
+        }
         placeResponse = placeResponseService.getPlaceResponseByPlace(place_id);
         //loger.info("Place responses for place_id " + place_id + " is " + placeResponse);
         if (placeResponse == null){
-           // loger.info("Not place response for place_id " + place_id);
+            loger.info("Not place response for place_id " + place_id);
         } else{
             for (PlaceResponse placeRespons: placeResponse) {
                 loger.info("Place response " + placeRespons);
@@ -205,53 +212,47 @@ public class PlaceInfortmationCommand implements Command {
                         }
 
                     }
+                    if (user.getAvatar() != null) {
+                        userImage = userImageService.getByPK(user.getAvatar());
+                    } else {
+                        userImage = new UserImage(user.getId(), "default-avatar.png");
+                    }
 
-                    userImage = userImageService.getUserImageByUserIdOne(user.getId());
-                }
-                if (userImage != null) {
-                    for (UserImage im : userImages) {
-                        if (im.getId() == userImage.getId()) {
-                            isInUserImageArray = true;
-                        }
-                    }
-                    if (!isInUserImageArray) {
-                        userImages.add(userImage);
-                    }
-                }
-                placeRating = placeRatingService.getPlaceRatingByPlaceAndUser(place_id, user.getId());
-                if (placeRating != null) {
-                    if (placeRatings != null) {
-                        for (PlaceRating plrat : placeRatings) {
-                            if (plrat.getId() == placeRating.getId()) {
-                                isInPlaceRating = true;
+                    if (userImage != null) {
+                        for (UserImage im : userImages) {
+                            if (im.getId() == userImage.getId()) {
+                                isInUserImageArray = true;
                             }
                         }
-                        if (!isInPlaceRating) {
-                            placeRatings.add(placeRating);
+                        if (!isInUserImageArray) {
+                            userImages.add(userImage);
                         }
                     }
                 }
             }
+            userImageDescription = createUserImageDescription(users, userImages, placeResponse);
         }
 
-        loger.info("Images " + userImages);
+        //loger.info("Images " + userImages);
 
         request.setAttribute("place", place);
         request.setAttribute("placeDescription", placeDescription);
         request.setAttribute("placeImage", placeImage);
-        request.setAttribute("placeResponse", placeResponse);
-        request.setAttribute("userImages", userImages);
-        request.setAttribute("users", users);
+        request.setAttribute("userImageDescription", userImageDescription);
+       // request.setAttribute("placeResponse", placeResponse);
+       // request.setAttribute("userImages", userImages);
+       // request.setAttribute("users", users);
         request.setAttribute("infoPlacePhone", infoPlacePhone);
         request.setAttribute("infoPlacePrice", infoPlacePrice);
-        loger.info("place " + place);
-        loger.info("infoPlacePrice " + infoPlacePrice);
-        loger.info("placeDescription " + placeDescription);
-        loger.info("placeImage " + placeImage);
-        loger.info("placeResponse " + placeResponse);
-        loger.info("userImages " + userImages);
-        loger.info("users " + users);
-        loger.info("infoPlacePhone " + infoPlacePhone);
+        request.setAttribute("rating", rating);
+//        loger.info("place " + place);
+//        loger.info("infoPlacePrice " + infoPlacePrice);
+//        loger.info("placeDescription " + placeDescription);
+//        loger.info("placeImage " + placeImage);
+//        loger.info("placeResponse " + placeResponse);
+//        loger.info("userImages " + userImages);
+//        loger.info("users " + users);
+//        loger.info("infoPlacePhone " + infoPlacePhone);
 
         request.setAttribute("place_referenceList", imList);
         //loger.info("place_reference " + place_reference);
@@ -268,6 +269,24 @@ public class PlaceInfortmationCommand implements Command {
 
     }
 
+    private List<UserImageDescription> createUserImageDescription(List<User> users, List<UserImage> userImages, List<PlaceResponse> placeResponses){
+        List<UserImageDescription> list = new ArrayList<>();
+        for(User user: users){
+            for (UserImage userImage: userImages){
+                for (PlaceResponse placeResponse: placeResponses){
+                    if (user.getId() == userImage.getUser_id() && user.getId() == placeResponse.getUser_id()){
+                        UserImageDescription item = new UserImageDescription();
+                        item.setLogin(user.getLogin());
+                        item.setDescription(placeResponse.getDescription());
+                        item.setReference(userImage.getReference());
+                        list.add(item);
+                    }
+                }
+            }
+        }
+        return list;
+    }
+
     private Boolean isInFolder(String fileName, HttpServletRequest request) {
         ClassLoader classLoader = getClass().getClassLoader();
         String realPath = request.getRealPath("/upload/photo/");
@@ -281,5 +300,7 @@ public class PlaceInfortmationCommand implements Command {
         }
         return false;
     }
+
+
 
 }

@@ -32,6 +32,7 @@ public class MySqlWayDao extends AbstractJDBCDao<Way, Integer> {
     private static final String UPDATE_WAY_END_DATE = "UPDATE way SET date_end = ? WHERE id = ?";
     private static final String UPDATE_WAY_RATING = "UPDATE way SET rating = ? WHERE id = ?";
     private static final String GET_WAY_RECOMENDED = "SELECT * FROM way WHERE recomended=true AND deleted=false AND visible=true";
+    private static final String SET_WAY_IS_RECOMMENDED = "UPDATE way SET is_recommend = true WHERE id = ?";
 
     private class PersistGroup extends Way {
         public void setId(int id) {
@@ -277,7 +278,26 @@ public class MySqlWayDao extends AbstractJDBCDao<Way, Integer> {
             connection.putback(conn);
         }
         return list;
+    }
 
+    public void setWayIsRecommended(Integer way_id) throws PersistException {
+        Connection conn = connection.retrieve();
+        try (PreparedStatement statement = conn.prepareStatement(SET_WAY_IS_RECOMMENDED)) {
+            try {
+                statement.setInt(1, way_id);
+            } catch (Exception e) {
+                throw new PersistException(e);
+            }
+            int count = statement.executeUpdate();
+            if (count != 1) {
+                throw new PersistException("On insert modify more then 1 record: " + count);
+            }
+        } catch (Exception e) {
+            loger.warn("Cant set is recommended from " + way_id + " way_id");
+            throw new PersistException(e);
+        } finally {
+            connection.putback(conn);
+        }
 
     }
 

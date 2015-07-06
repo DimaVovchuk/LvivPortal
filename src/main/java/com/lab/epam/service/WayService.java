@@ -256,5 +256,15 @@ public class WayService {
         return ways;
     }
 
+    public void setWayIsRecommended(Integer way_id) {
+        try {
+            mySqlWayDao.setWayIsRecommended(way_id);
+
+        } catch (PersistException e) {
+            e.printStackTrace();
+            loger.warn("Cant set is_recommended by way_id " + way_id);
+        }
+    }
+
 }
 

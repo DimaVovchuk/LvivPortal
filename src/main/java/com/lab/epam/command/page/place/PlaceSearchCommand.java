@@ -3,12 +3,15 @@ package com.lab.epam.command.page.place;
 import com.lab.epam.command.controller.Command;
 import com.lab.epam.entity.Decoder;
 import com.lab.epam.entity.PlaceDescription;
+import com.lab.epam.entity.PlaceImage;
 import com.lab.epam.service.PlaceDescriptionService;
+import com.lab.epam.service.PlaceImageService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
@@ -21,6 +24,7 @@ public class PlaceSearchCommand implements Command {
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         PlaceDescriptionService placeDescriptionService = new PlaceDescriptionService();
+        PlaceImageService placeImageService = new PlaceImageService();
 
         HttpSession session = request.getSession();
 
@@ -31,12 +35,12 @@ public class PlaceSearchCommand implements Command {
 
         String searchString = request.getParameter("search");
         searchString = Decoder.decodeStringUtf8(searchString);
-     //   System.out.println("searchString " + searchString);
+        //System.out.println("searchString " + searchString);
         List<PlaceDescription> placeDescriptions = new ArrayList<>();
         Map<Integer, String> results = new HashMap<>();
         Integer countPlace = 0;
 
-        if (searchString != null) {
+        if (searchString != null && !searchString.equals("")) {
             searchString = searchString.toLowerCase();
             String[] searchParth = searchString.split(" ");
             placeDescriptions = placeDescriptionService.getPlaceByLanguege(language);//getAllPlaceBySearch(searchString);
@@ -55,7 +59,11 @@ public class PlaceSearchCommand implements Command {
                     }
                     if (count >= searchParth.length){
                         if (countPlace < 10) {
-                            searchResult += place.getName() + "\n";
+                            PlaceImage plIm = placeImageService.getPlaceImageByPlaceId(place.getId());
+                            if (plIm == null || !isInFolder(plIm.getReference(), request)){
+                                plIm = new PlaceImage(place.getId(), "default_building.jpg");
+                            }
+                            searchResult += place.getName() + "*" + plIm.getReference() + "\n";
                             countPlace++;
                         }
                     }
@@ -76,11 +84,21 @@ public class PlaceSearchCommand implements Command {
                                 String str = results.get(fail);
                                 String[] strArray = str.split("\n");
                                 if (strArray.length < 10){
-                                    str += place.getName() + "\n";
+                                    PlaceImage plIm = placeImageService.getPlaceImageByPlaceId(place.getId());
+                                    if (plIm == null || !isInFolder(plIm.getReference(), request)){
+                                        plIm = new PlaceImage(place.getId(), "default_building.jpg");
+                                    }
+                                    str += place.getName() + "*" + plIm.getReference() + "\n";
+                                    //str += place.getName() + "\n";
                                 }
                                 results.put(fail, str);
                             }else{
-                                String str = place.getName() + "\n";
+                                PlaceImage plIm = placeImageService.getPlaceImageByPlaceId(place.getId());
+                                if (plIm == null || !isInFolder(plIm.getReference(), request)){
+                                    plIm = new PlaceImage(place.getId(), "default_building.jpg");
+                                }
+                                //str += place.getName() + " " + plIm.getReference() + "\n";
+                                String str = place.getName() + "*" + plIm.getReference() + "\n";//place.getName() + "\n";
                                 results.put(fail, str);
                             }
                         }
@@ -145,4 +163,18 @@ public class PlaceSearchCommand implements Command {
 //        }
         return distance;
     }
+
+    private Boolean isInFolder(String fileName, HttpServletRequest request) {
+        ClassLoader classLoader = getClass().getClassLoader();
+        String realPath = request.getRealPath("/upload/photo/");
+        File f = new File(realPath);
+        String[] list = f.list();
+        for (String file : list) {
+            if (fileName.equals(file)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

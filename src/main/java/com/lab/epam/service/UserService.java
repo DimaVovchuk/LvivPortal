@@ -87,7 +87,19 @@ public class UserService {
         return mySqlUserDao.getRoleID(login);
     }
 
-    public List<User> getUserByRole(Integer statusID){
+    public List<User> getUserByRole(Integer statusID) {
         return mySqlUserDao.getUserByRole(statusID);
+    }
+
+    public Integer getQuantityOfAllUsers() {
+        return mySqlUserDao.getQuantityOfAllUsers();
+    }
+
+    public Integer getQuantityUsersByRoleId(Integer roleID) {
+        return mySqlUserDao.getQuantityUsersByRoleId(roleID);
+    }
+
+    public Integer getQuantityUsersByStatusId(Integer statusID) {
+        return mySqlUserDao.getQuantityUsersByStatusId(statusID);
     }
 }

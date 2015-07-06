@@ -71,24 +71,30 @@ var initRangeListeners = function () {
 var addPlace = function () {
     $('#form-add-place').on('submit', function (e) {
         e.preventDefault();
-       // e.stopImmediatePropagation();
+        e.stopImmediatePropagation();
         $.ajax({
             type: 'post',
             url: window.location.origin + '/portal?command=addplace',
             data: $('form').serialize(),
+            success: loadWindow,
+            error: loadWindow,
         });
     });
 };
 
-var recommendPlace = function (str) {
-        e.preventDefault();
-        // e.stopImmediatePropagation();
-        $.ajax({
-            type: 'post',
-            url: window.location.origin + '/portal?command=recommendPlace&place_id' + str,
-            data: $('form').serialize(),
-        });
+var recommendPlace = function (placeholder) {
+    $.ajax({
+        url: $(placeholder).attr('rel'),
+        type: "POST",
+        success:recommendResult,
+        error:function (){
+            alert("testing error");
+        }
+    });
+    return false;
 };
+
+
 
 var deletedFavorPlace = function () {
     $('#delete-favor-place').on('submit', function (e) {

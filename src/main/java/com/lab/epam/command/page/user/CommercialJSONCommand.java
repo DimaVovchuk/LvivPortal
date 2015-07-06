@@ -60,6 +60,7 @@ public class CommercialJSONCommand implements Command{
                         guideAvatarList.add(getCompanyGuideImage(userGuideList.get(index), userImage));
                     }
                     loger.info("guideAvatarMap "+ guideAvatarList);
+                    allUserAvatarList.addAll(guideAvatarList);
                     session.setAttribute("allUserAvatarMap",guideAvatarList);
                     break;
                 case "agency":
@@ -73,6 +74,7 @@ public class CommercialJSONCommand implements Command{
                         agencyAvatarList.add(getCompanyGuideImage(userConpanyList.get(index), userImage));
                     }
                     loger.info("agencyAvatarMap "+ agencyAvatarList);
+                    allUserAvatarList.addAll(agencyAvatarList);
                     session.setAttribute("allUserAvatarMap",agencyAvatarList);
                     break;
                 default:
@@ -101,7 +103,7 @@ public class CommercialJSONCommand implements Command{
             session.setAttribute("allUserAvatarMap",allUserAvatarList);
             loger.info("allUserAvatarMap "+ allUserAvatarList);
         }
-
+//System.out.println("allUserAvatarList " + allUserAvatarList);
         session.setAttribute("userPlaceCtegory",userRole);
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");

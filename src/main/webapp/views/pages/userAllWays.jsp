@@ -44,6 +44,10 @@
 
 
                                 <div class="card-image waves-effect waves-block waves-light">
+                                    <a onClick="recommendWay(this);" class="btn-on-img btn-floating btn-large waves-effect waves-light yellow darken-2"
+                                       href="javascript:" rel="/portal?command=recommendWay&way_id=${waysPlaceImage[i].id}">
+                                        <i class="material-icons">grade</i>
+                                    </a>
                                     <img class="activator responsive-img place-img"
                                          src="${pageContext.request.contextPath}/upload/photo/${waysPlaceImage[i].imageReference}"
                                          style="width: 100%">
@@ -187,6 +191,7 @@
 </div>
 <jsp:include page="/views/elements/footer.jsp"/>
 
+
 <script>
     $(".match-col").matchHeight({
         property: 'height'
@@ -199,7 +204,20 @@
     });
 </script>
 
+<script>
+    var recommendResultWay = function (data) {
+        alert(data);
+        if (data == "1"){
+            Materialize.toast('<cdg:l18n key="way.recommended"/>', 4000);
+        }
+        else{
+            Materialize.toast('<cdg:l18n key="way.not.recommended"/>', 4000);
+        }
+    }
+</script>
+
 <script src="${pageContext.request.contextPath}/js/pages/places.js"></script>
+<script src="${pageContext.request.contextPath}/js/pages/userAllWay.js"></script>
 
 </body>
 </html>

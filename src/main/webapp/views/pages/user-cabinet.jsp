@@ -71,6 +71,11 @@
 <br>
 <li><a href="/portal?command=addCustomPlace"></i>Add custom place</a></li>
 <br>
+<br>
+<li><a href="/portal?command=statisticTest"></i>statistic test</a></li>
+<br>
+
+
 <jsp:include page="/views/elements/footer.jsp"/>
 
 

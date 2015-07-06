@@ -26,6 +26,9 @@ public class MySqlUserDao extends AbstractJDBCDao<User, Integer> {
     public static final String getRoleID = "SELECT role_id FROM USER WHERE login=?";
     public static final String getUserByRole = "SELECT * FROM USER WHERE role_id=?";
     public static final String getUserByVkId = "SELECT * FROM USER WHERE vk_id=?";
+    public static final String getQuantityOfAllUsers = "SELECT COUNT(*) FROM user;";
+    public static final String getQuantityUsersByRoleId = "SELECT COUNT(role_id) FROM user where role_id = ? GROUP BY role_id";
+    public static final String getQuantityUsersByStatusId = "SELECT COUNT(status_id) FROM user where status_id = ? GROUP BY status_id";
     private ConnectionPool connection = ConnectionManager.getConnection();
 
     private class PersistGroup extends Category {
@@ -39,6 +42,53 @@ public class MySqlUserDao extends AbstractJDBCDao<User, Integer> {
 
     public Class getClassModel() {
         return User.class;
+    }
+
+    public Integer getQuantityOfAllUsers() {
+        Integer quantity = 0;
+        Connection conn = connection.retrieve();
+        try (PreparedStatement statement = conn.prepareStatement(getQuantityOfAllUsers)) {
+            ResultSet rs = statement.executeQuery();
+            if(rs.next()) {
+                quantity = rs.getInt(1);
+            }
+        } catch (Exception e) {
+        } finally {
+            connection.putback(conn);
+        }
+        return quantity;
+    }
+
+    public Integer getQuantityUsersByRoleId(Integer roleID) {
+        Integer quantity = 0;
+        Connection conn = connection.retrieve();
+        try (PreparedStatement statement = conn.prepareStatement(getQuantityUsersByRoleId)) {
+            statement.setInt(1, roleID);
+            ResultSet rs = statement.executeQuery();
+            if(rs.next()) {
+                quantity = rs.getInt(1);
+            }
+        } catch (Exception e) {
+        } finally {
+            connection.putback(conn);
+        }
+        return quantity;
+    }
+
+    public Integer getQuantityUsersByStatusId(Integer statusID) {
+        Integer quantity = 0;
+        Connection conn = connection.retrieve();
+        try (PreparedStatement statement = conn.prepareStatement(getQuantityUsersByStatusId)) {
+            statement.setInt(1, statusID);
+            ResultSet rs = statement.executeQuery();
+            if(rs.next()) {
+                quantity = rs.getInt(1);
+            }
+        } catch (Exception e) {
+        } finally {
+            connection.putback(conn);
+        }
+        return quantity;
     }
 
     public List<User> getUserByRole(Integer statusID){

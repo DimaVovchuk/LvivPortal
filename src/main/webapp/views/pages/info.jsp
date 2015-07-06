@@ -26,6 +26,7 @@
         </div>
         <div class="row" style="margin-left: 20px">
             <div class="col l9 m8 s7">
+
                 <div class="card">
                     <div class="fotorama" data-transition="crossfade" data-nav="thumbs" data-loop="true"
                          data-autoplay="true" data-allowfullscreen="true" data-keyboard="true" data-width="100%"
@@ -61,6 +62,24 @@
                         <h5><cdg:l18n key="place.address"/></h5>
 
                         <p>${placeDescription.adress}</p>
+                    <c:if test="${login!=null}">
+                        <div class="bottom-right-btn form" id="like-place-info" align="right">
+                            <a onClick="like(this);" data-id="${placeDescription.place_id}" data-rating="${rating}" id="up" class="up btn-floating btn-floating btn-small"
+                               href="javascript:" rel="/portal?command=rectRating&rating=1&place_id=${placeDescription.place_id}">
+                                <i class="material-icons">thumb_up</i>
+                            </a>
+
+                            <a onClick="none(this);" data-id="${placeDescription.place_id}" id="none"class="none btn-floating btn-floating btn-small"
+                               href="javascript:" rel="/portal?command=rectRating&rating=0&place_id=${placeDescription.place_id}">
+                                <i class="material-icons">thumbs_up_down</i>
+                            </a>
+
+                            <a onClick="dislike(this);" data-id="${placeDescription.place_id}" id="down" class="down btn-floating btn-floating btn-small"
+                               href="javascript:" rel="/portal?command=rectRating&rating=-1&place_id=${placeDescription.place_id}">
+                                <i class="material-icons">thumb_down</i>
+                            </a>
+                        </div>
+</c:if>
                     </div>
                 </div>
                 <c:if test="${sessionScope.userDataTrip != null}">
@@ -79,7 +98,7 @@
                         <cdg:l18n key="button.edit"/>
                     </button>
                 </c:if>
-
+            <c:if test="${login!=null}">
                 <div class="card">
                     <h5><cdg:l18n key="place.comment"/></h5>
 
@@ -92,21 +111,21 @@
                                       class="materialize-textarea"></textarea>
                             <label for="textarea"><cdg:l18n key="place.message"/></label>
                         </div>
-                        <div class="form">
-                            <span><cdg:l18n key="place.rating"/></span>
-                            <input type="radio" name="rating" value="1" id="rating-up">
-                            <label for="rating-up">
-                                <span class="btn-floating btn-small waves-effect waves-light">
-                                    <i class="material-icons">thumb_up</i>
-                                </span>
-                            </label>
-                            <input type="radio" name="rating" value="-1" id="rating-down">
-                            <label for="rating-down">
-                                <span class="btn-floating btn-small waves-effect waves-light">
-                                    <i class="material-icons">thumb_down</i>
-                                </span>
-                            </label>
-                        </div>
+                        <%--<div class="form">--%>
+                            <%--<span><cdg:l18n key="place.rating"/></span>--%>
+                            <%--<input type="radio" name="rating" value="1" id="rating-up">--%>
+                            <%--<label for="rating-up">--%>
+                                <%--<span class="btn-floating btn-small waves-effect waves-light">--%>
+                                    <%--<i class="material-icons">thumb_up</i>--%>
+                                <%--</span>--%>
+                            <%--</label>--%>
+                            <%--<input type="radio" name="rating" value="-1" id="rating-down">--%>
+                            <%--<label for="rating-down">--%>
+                                <%--<span class="btn-floating btn-small waves-effect waves-light">--%>
+                                    <%--<i class="material-icons">thumb_down</i>--%>
+                                <%--</span>--%>
+                            <%--</label>--%>
+                        <%--</div>--%>
                         <div class="section">
                             <div class="divider"></div>
                         </div>
@@ -114,36 +133,61 @@
                                 key="place.sendcomment"/></button>
                     </form>
                 </div>
+            </c:if>
+                <%--<c:forEach var="users" items="${users}">--%>
+                    <%--<c:forEach var="placeResponse" items="${placeResponse}">--%>
+                        <%--<c:if test="${users.id==placeResponse.user_id}">--%>
+                            <%--<div class="card">--%>
+                                <%--<div class="valign-wrapper">--%>
+                                    <%--<div class="valign">--%>
+                                        <%--<c:forEach var="userImages" items="${userImages}">--%>
+                                            <%--<c:if test="${users.id==userImages.user_id}">--%>
+                                                <%--<a href="#"><img--%>
+                                                        <%--src="${pageContext.request.contextPath}/upload/photo/${userImages.reference}"--%>
+                                                        <%--class="avatar"/></a>--%>
+                                            <%--</c:if>--%>
+                                        <%--</c:forEach>--%>
+                                    <%--</div>--%>
+                                    <%--<div class="valign">--%>
+                                        <%--<a href="#"><h5><c:out value="${users.login}"/></h5></a>--%>
 
-                <c:forEach var="users" items="${users}">
-                    <c:forEach var="placeResponse" items="${placeResponse}">
-                        <c:if test="${users.id==placeResponse.user_id}">
-                            <div class="card">
-                                <div class="valign-wrapper">
-                                    <div class="valign">
-                                        <c:forEach var="userImages" items="${userImages}">
-                                            <c:if test="${users.id==userImages.user_id}">
-                                                <a href="#"><img
-                                                        src="${pageContext.request.contextPath}/upload/photo/${userImages.reference}"
-                                                        class="avatar"/></a>
-                                            </c:if>
-                                        </c:forEach>
-                                    </div>
-                                    <div class="valign">
-                                        <a href="#"><h5><c:out value="${users.login}"/></h5></a>
+                                        <%--<p><c:out value="${placeResponse.description}"/></p>--%>
+                                        <%--<c:forEach var="placeRatings" items="${placeRatings}">--%>
+                                            <%--<c:if test="${users.id==placeRatings.user_id}">--%>
+                                                <%--<p><c:out value="${placeRatings.rating}"/></p>--%>
+                                            <%--</c:if>--%>
+                                        <%--</c:forEach>--%>
+                                    <%--</div>--%>
+                                <%--</div>--%>
+                            <%--</div>--%>
+                        <%--</c:if>--%>
+                    <%--</c:forEach>--%>
+                <%--</c:forEach>--%>
 
-                                        <p><c:out value="${placeResponse.description}"/></p>
-                                        <c:forEach var="placeRatings" items="${placeRatings}">
-                                            <c:if test="${users.id==placeRatings.user_id}">
-                                                <p><c:out value="${placeRatings.rating}"/></p>
-                                            </c:if>
-                                        </c:forEach>
-                                    </div>
-                                </div>
-                            </div>
-                        </c:if>
-                    </c:forEach>
+                <c:forEach var="response" items="${userImageDescription}">
+
+                <div class="card">
+                <div class="valign-wrapper">
+                <div class="valign">
+
+                <a href="#"><img
+                src="${pageContext.request.contextPath}/upload/photo/${response.reference}"
+                class="avatar"/></a>
+
+                </div>
+                <div class="valign">
+                <a href="#"><h5><c:out value="${response.login}"/></h5></a>
+
+                <p><c:out value="${response.description}"/></p>
+
+                </div>
+                </div>
+                </div>
+
                 </c:forEach>
+
+
+
             </div>
 
             <div class="col l3 m4 s5">
@@ -221,6 +265,7 @@
 
 <jsp:include page="/views/elements/footer.jsp"/>
 <jsp:include page="/views/modals/add-place-to-route.jsp"/>
+<script src="${pageContext.request.contextPath}/js/pages/info.js"></script>
 
 </body>
 </html>
