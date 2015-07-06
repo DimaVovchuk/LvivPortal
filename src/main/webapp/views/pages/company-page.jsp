@@ -57,7 +57,7 @@
                         <c:choose>
                             <c:when test="${userInfo.role_id == 3}">
                                 <cdg:l18n key="login.firstname"/>: ${userInfo.name}<br>
-                                <cdg:l18n key="login.secondname"/>: ${userInfo.surname}<br>
+                                <cdg:l18n key="login.lastname"/>: ${userInfo.surname}<br>
                             </c:when>
                         </c:choose>
                         <c:choose>

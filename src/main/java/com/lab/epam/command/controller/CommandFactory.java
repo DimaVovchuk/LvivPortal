@@ -13,7 +13,7 @@ import com.lab.epam.command.logination.fb.FBAuthorizationCommand;
 import com.lab.epam.command.logination.fb.FBResponseCommand;
 
 import com.lab.epam.command.logination.vk.*;
-import com.lab.epam.command.page.AboutCommand;
+import com.lab.epam.command.page.about.AboutCommand;
 import com.lab.epam.command.page.createtrip.AddDayCommand;
 import com.lab.epam.command.page.createtrip.CountDaysCommand;
 import com.lab.epam.command.page.createtrip.CreateUserDataCommand;
@@ -27,6 +27,7 @@ import com.lab.epam.command.page.photo.ShowAllUserPhoto;
 import com.lab.epam.command.page.photo.UpLoadPictureCommand;
 import com.lab.epam.command.page.place.*;
 import com.lab.epam.command.page.user.*;
+import com.lab.epam.command.page.user.admin.AdminLoginationCommand;
 import com.lab.epam.command.page.user.admin.EditPlaceCommand;
 import com.lab.epam.command.page.user.admin.ShowAllUserCommand;
 import com.lab.epam.command.page.user.admin.StatisticTestCommand;
@@ -93,7 +94,7 @@ public class CommandFactory {
         commands.put("commercialJSON", new CommercialJSONCommand());
         commands.put("addCustomPlace", new AddCustomPlaceCommand());
         commands.put("saveCustomPlace", new SaveCustomPlaceCommand());
-        commands.put("authorVK", new VkAuthorizationCommand());
+        commands.put("authorVK", new VKAuthorizationCommand());
         commands.put("authorRespVK", new VKResponseCommand());
         commands.put("deleteImageByDB", new DeleteImageCommand());
         commands.put("authorFB", new FBAuthorizationCommand());
@@ -113,6 +114,7 @@ public class CommandFactory {
         commands.put("statisticTest", new StatisticTestCommand());
         commands.put("recommendPlace", new  RecommendPlaceCommand());
         commands.put("recommendWay", new  RecommendWayCommand());
+        commands.put("adminLogination", new AdminLoginationCommand());
     }
 
     public static void createCommand(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

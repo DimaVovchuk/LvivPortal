@@ -118,8 +118,11 @@
 						<li><a href="/portal?command=allUserPhoto"><i class="mdi-image-photo left"></i><cdg:l18n
 								key="header.gallery"/></a></li>
 					</c:if>
+					<li><a href="/portal?command=commercial"><i class="material-icons left">assignment_ind</i><cdg:l18n
+							key="header.agenceguide"/></a></li>
 					<li><a href="/portal?command=edit"><i class="mdi-action-settings left"></i><cdg:l18n
 							key="header.settings"/></a></li>
+
 					<li class="divider"></li>
 					<c:choose>
 						<c:when test="${userDataTrip != null && userDataTrip.isSaved == false && userDataTrip.isFull == true}">

@@ -36,7 +36,5 @@ public class SendChangePassMailCommand implements Command {
         }
         loger.info("Command SendChangePassMailCommand");
         response.sendRedirect("portal?command=index");
-
-
     }
 }

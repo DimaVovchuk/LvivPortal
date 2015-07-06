@@ -51,7 +51,18 @@ public class SignInCommand implements Command {
             session.setAttribute("avatar_id", user.getAvatar());
 
             loger.info("User " + login + " signing in ");
-            request.getRequestDispatcher("/views/pages/user-cabinet.jsp").forward(request, response);
+//            request.getRequestDispatcher("/views/pages/user-cabinet.jsp").forward(request, response);
+            Integer roleID = user.getRoleID();
+            if(roleID.equals(1)) {
+                request.getRequestDispatcher("/portal?command=adminLogination").forward(request, response);
+            }
+            if(roleID.equals(2)) {
+                String page = request.getRequestURI();
+                request.getRequestDispatcher(page).forward(request, response);
+            }
+            if(roleID.equals(3) || roleID.equals(4)) {
+                request.getRequestDispatcher("/portal?command=companyInformation&id=" + userID).forward(request, response);
+            }
         } else {
             session.setAttribute("loginError", 1);
             loger.info("login or password is incorrect");
