@@ -140,14 +140,20 @@ public class CreateUserDataCommand implements Command {
             } else {
                 placeArrive = placeArrive.trim();
                 placeArrive = placeArrive.toLowerCase();
-                System.out.println("placeArrive " + placeArrive);
                 List<PlaceDescription> plDesc = placeSesc.getAllPlaceBySearch(placeArrive);
+                PlaceService placeService = new PlaceService();
                 if (plDesc != null && !plDesc.isEmpty()){
                     PlaceDescription place = plDesc.iterator().next();
                     Integer place_id = place.getPlace_id();
-                    System.out.println("place_id " + place_id);
+                    Place firstPlace = placeService.getByPK(place_id);
                     if (place_id != null && place_id > 0){
                         userDataTrip.setBeginPlace(place_id);
+                        Map<Integer,List<Place>> map = new HashMap<>();
+                        List<Place> list= new ArrayList<>();
+                        list.add(firstPlace);
+                        map.put(1,list);
+                        userDataTrip.setPlaceDay(map);
+                       // userDataTrip.getPlaceDay().get(1).set(0,firstPlace);
                     }
                 }
             }

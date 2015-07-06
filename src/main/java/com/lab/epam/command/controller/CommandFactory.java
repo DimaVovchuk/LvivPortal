@@ -94,7 +94,7 @@ public class CommandFactory {
         commands.put("commercialJSON", new CommercialJSONCommand());
         commands.put("addCustomPlace", new AddCustomPlaceCommand());
         commands.put("saveCustomPlace", new SaveCustomPlaceCommand());
-        commands.put("authorVK", new VKAuthorizationCommand());
+        commands.put("authorVK", new VkAuthorizationCommand());
         commands.put("authorRespVK", new VKResponseCommand());
         commands.put("deleteImageByDB", new DeleteImageCommand());
         commands.put("authorFB", new FBAuthorizationCommand());

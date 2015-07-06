@@ -145,7 +145,7 @@ public class UserWaysCommand implements Command {
             for (Place place : places) {
                 place_id = place.getId();
                 PlaceImage placeImage = placeImageService.getPlaceImageByPlaceId(place_id);
-                if (placeImage.getReference() == null || !isInFolder(placeImage.getReference())) {
+                if (placeImage == null || placeImage.getReference() == null || !isInFolder(placeImage.getReference())) {
                     placeImage = new PlaceImage(place_id, "default_building.jpg");
                 }
                 placeImages.add(placeImage);

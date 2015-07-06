@@ -65,6 +65,9 @@ public class RoutesCommand implements Command {
                 for (Place place : userDataTrip.getPlaceDay().get(j)) {
                     PlaceDescription placeDescription = placeDescriptionService.getPlaceDescriptionByIdPlace(place.getId(), bundle.getLocale().toString());
                     PlaceImage placeImage = placeImageService.getPlaceImageByPlaceId(place.getId());
+                    if (placeImage == null || placeImage.getReference() == null) {
+                        placeImage = new PlaceImage(place.getId(), "default_building.jpg");
+                    }
                     placeMarkerWithPhotos.add(new PlaceMarkerWithPhoto(place.getId(), placeDescription.getName(), place.getLatitude(), place.getLongitude(), placeImage.getReference(), placeDescription.getDescription()));
                 }
                 session.setAttribute("userDataTrip", userDataTrip);
@@ -86,10 +89,10 @@ public class RoutesCommand implements Command {
                         }
                     }
                 }
-                if (places.get(places.size()-1).getPlace_time() == 0) {
-                    routeOneDayInfo.setTotalMinutes(routeOneDayInfo.getTotalMinutes() + places.get(places.size()-1).getRecom_time());
+                if (places.get(places.size() - 1).getPlace_time() == 0) {
+                    routeOneDayInfo.setTotalMinutes(routeOneDayInfo.getTotalMinutes() + places.get(places.size() - 1).getRecom_time());
                 } else {
-                    routeOneDayInfo.setTotalMinutes(routeOneDayInfo.getTotalMinutes() + places.get(places.size()-1).getPlace_time());
+                    routeOneDayInfo.setTotalMinutes(routeOneDayInfo.getTotalMinutes() + places.get(places.size() - 1).getPlace_time());
                 }
                 routeDayPlacesInfo.add(routeOneDayInfo);
             }

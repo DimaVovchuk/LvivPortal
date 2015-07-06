@@ -35,6 +35,8 @@ public class SendChangePassMailCommand implements Command {
             SendEmail.sender("Change password",s,email);
         }
         loger.info("Command SendChangePassMailCommand");
-        response.sendRedirect("portal?command=index");
+        //response.sendRedirect("portal?command=index");
+
+
     }
 }
