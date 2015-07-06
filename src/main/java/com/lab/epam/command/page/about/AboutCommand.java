@@ -1,4 +1,4 @@
-package com.lab.epam.command.page;
+package com.lab.epam.command.page.about;
 
 import com.lab.epam.command.controller.Command;
 import com.lab.epam.helper.ClassName;
