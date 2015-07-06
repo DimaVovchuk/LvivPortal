@@ -84,30 +84,29 @@
                 <label for="customPlacePhone"><cdg:l18n key="editplace.placephone"/></label>
             </div>
 
-            <div class="input-field">
-                <input id="place_time" type="text" name="place_time">
-                <label for="place_time"><cdg:l18n key="editplace.placetime"/></label>
+            <div class="input-field" style="margin-top: 0">
+                <cdg:l18n key="editplace.placetime"/>
+                <input id="place_time" type="number" name="place_time">
             </div>
 
             <div class="input-field">
-                <input value="" id="customPlaceAdrress" type="text" name="customPlaceAdrress" disabled>
+                <input value=" " id="customPlaceAdrress" type="text" name="customPlaceAdrress" disabled>
+                <input id="customPlaceAdrressHid" type="hidden" name="customPlaceAdrressHid">
                 <label for="customPlaceAdrress"><cdg:l18n key="addnewcustomplace.adrress"/></label>
             </div>
 
-            <input value="" id="customPlaceAdrressHid" type="hidden" name="customPlaceAdrressHid">
-
             <div class="row">
-                <div class="col s6">
+                <div class="col s6" style="padding-right: 10px">
                     <div class="input-field">
-                        <input value="" id="latitude" type="text" name="latitude" disabled>
-                        <input value="" id="latitudeHid" type="hidden" name="latitudeHid">
+                        <input value=" " id="latitude" type="text" name="latitude" disabled>
+                        <input id="latitudeHid" type="hidden" name="latitudeHid">
                         <label for="latitude"><cdg:l18n key="editplace.placealat"/></label>
                     </div>
                 </div>
-                <div class="col s6">
+                <div class="col s6" style="padding-left: 10px">
                     <div class="input-field">
-                        <input value="" id="longitude" type="text" name="longitude" disabled>
-                        <input value="" id="longitudeHid" type="hidden" name="longitudeHid">
+                        <input value=" " id="longitude" type="text" name="longitude" disabled>
+                        <input id="longitudeHid" type="hidden" name="longitudeHid">
                         <label for="longitude"><cdg:l18n key="editplace.placealon"/></label>
                     </div>
                 </div>

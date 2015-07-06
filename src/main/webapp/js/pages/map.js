@@ -13,7 +13,11 @@ var linkProcess = function (id) {
     var windowIDList = ['#map-itinerary', '#map-places', '#map-custom'];
     var li = '#li-' + id;
     var map = '#map-' + id;
-    $(li).addClass('active');
+    if (id == 'custom') {
+        customMarkerVisible();
+    } else {
+        customMarkerUnvisible();
+    }
     $(map).show();
     windowIDList.forEach(function (item) {
         if (item !== map) {
@@ -124,7 +128,6 @@ var getdirectionsDisplays = function (directionsDisplay) {
 var initImageMultiloadPreview = function () {
     window.onload = function () {
         if (window.File && window.FileList && window.FileReader) {
-            initCustom()
             $('#image-input').on('change', function (event) {
                 var files = event.target.files;
                 var output = document.getElementById('image-preview');
@@ -167,71 +170,6 @@ var initImageMultiloadPreview = function () {
         $(this).hide();
     });
 };
-
-//**********************************
-var geocoder = new google.maps.Geocoder();
-
-function geocodePosition(pos) {
-    geocoder.geocode({
-        latLng: pos
-    }, function (responses) {
-        if (responses && responses.length > 0) {
-            updateMarkerAddress(responses[0].formatted_address);
-        } else {
-            updateMarkerAddress('Cannot determine address at this location.');
-        }
-    });
-}
-
-function updateMarkerPositionLat(latLng) {
-    document.getElementById('latitude').value = latLng.lat();
-    document.getElementById('latitudeHid').value = latLng.lat();
-}
-function updateMarkerPositionLon(latLng) {
-    document.getElementById('longitude').value = latLng.lng();
-    document.getElementById('longitudeHid').value = latLng.lng();
-}
-
-function updateMarkerAddress(str) {
-    document.getElementById('customPlaceAdrress').value = str;
-    document.getElementById('customPlaceAdrressHid').value = str;
-}
-var customMarker;
-function initCustom() {
-    var latLng = new google.maps.LatLng(49.8426, 24.0278);
-    customMarker = new google.maps.Marker({
-        position: latLng,
-        title: 'Marker',
-        map: map,
-        visible: true,
-        draggable: true
-    });
-
-    // Update current position info.
-    updateMarkerPositionLat(latLng);
-    updateMarkerPositionLon(latLng);
-    geocodePosition(latLng);
-
-    // Add dragging event listeners.
-
-    google.maps.event.addListener(customMarker, 'drag', function () {
-        updateMarkerPositionLat(customMarker.getPosition());
-        updateMarkerPositionLon(customMarker.getPosition());
-    });
-
-    google.maps.event.addListener(customMarker, 'dragend', function () {
-        geocodePosition(customMarker.getPosition());
-    });
-}
-
-function customMarkerUnvisible(){
-    customMarker.setVisible(false);
-}
-function customMarkerVisible(){
-    customMarker.setVisible(true);
-}
-//**********************************
-
 
 /* *** MAP *** */
 var map;
@@ -338,11 +276,73 @@ var calcRoute = function (data) {
     }
 };
 
-/* *** MAIN *** */
+/* Geocode position */
+function geocodePosition(pos) {
+    var geocoder = new google.maps.Geocoder();
+    geocoder.geocode({
+        latLng: pos
+    }, function (responses) {
+        if (responses && responses.length > 0) {
+            updateMarkerAddress(responses[0].formatted_address);
+        } else {
+            updateMarkerAddress('Cannot determine address at this location.');
+        }
+    });
+}
 
+function updateMarkerPositionLat(latLng) {
+    document.getElementById('latitude').value = latLng.lat();
+    document.getElementById('latitudeHid').value = latLng.lat();
+}
+
+function updateMarkerPositionLon(latLng) {
+    document.getElementById('longitude').value = latLng.lng();
+    document.getElementById('longitudeHid').value = latLng.lng();
+}
+
+function updateMarkerAddress(str) {
+    document.getElementById('customPlaceAdrress').value = str;
+    document.getElementById('customPlaceAdrressHid').value = str;
+}
+
+var customMarker;
+
+function initCustom() {
+    var latLng = new google.maps.LatLng(49.8426, 24.0278);
+    customMarker = new google.maps.Marker({
+        position: latLng,
+        title: 'Marker',
+        map: map,
+        visible: true,
+        draggable: true
+    });
+    // Update current position info.
+    updateMarkerPositionLat(latLng);
+    updateMarkerPositionLon(latLng);
+    geocodePosition(latLng);
+    // Add dragging event listeners.
+    google.maps.event.addListener(customMarker, 'drag', function () {
+        updateMarkerPositionLat(customMarker.getPosition());
+        updateMarkerPositionLon(customMarker.getPosition());
+    });
+    google.maps.event.addListener(customMarker, 'dragend', function () {
+        geocodePosition(customMarker.getPosition());
+    });
+    customMarkerUnvisible();
+}
+
+function customMarkerUnvisible() {
+    customMarker.setVisible(false);
+}
+
+function customMarkerVisible() {
+    customMarker.setVisible(true);
+}
+
+/* *** MAIN *** */
 $(function () {
-    initSidebar();
-    /* MAP */
     initBlankMap();
     google.maps.event.addDomListener(window, 'load', initStartMarkers);
+    initSidebar();
+    initCustom();
 });

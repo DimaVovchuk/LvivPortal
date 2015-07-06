@@ -535,6 +535,16 @@ header img.text-middle {
     font-weight: 500;
 }
 
+#map-info #map-custom input {
+    margin-bottom: 5px;
+    height: 2.5em;
+    line-height: 2.5em;
+}
+
+#map-info #map-custom input[type=text]:disabled {
+    color: #000;
+}
+
 #map-info #map-custom .btn {
     padding: 0 10px;
     width: 100%;
@@ -552,6 +562,7 @@ header img.text-middle {
 
 #map-info #map-custom .input-field label {
     color: #000;
+    left: 0;
 }
 
 #map-info #map-custom .dropdown-content li {
