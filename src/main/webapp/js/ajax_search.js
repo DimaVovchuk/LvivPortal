@@ -44,30 +44,22 @@ function handleSearchSuggest() {
         //alert(str);
         //ss.innerHTML += str;
         for(i=0; i < str.length; i++) {
-            var suggest = '<div onmouseover="javascript:suggestOver(this);" ';
+            if (str[i] != '') {
+                var strImg = str[i].split("*");
+            var suggest = '<div class="row"> <div class=" match-colum col l6 m9 s18">';
+            suggest += '<img src="/upload/photo/' + strImg[1] + '"style="width: 100%"></div>';
+            suggest += '<div class=" match-colum col l6 m9 s18">';
+            suggest += '<div onmouseover="javascript:suggestOver(this);" ';
             suggest += 'onmouseout="javascript:suggestOut(this);" ';
             suggest += 'onclick="javascript:setSearch(this.innerHTML);" ';
-            suggest += 'class="suggest_link">' + str[i] + '</div>';
+            suggest += 'class="suggest_link">' + strImg[0] + '</div>';
+            suggest += '</div></div>';
             ss.innerHTML += suggest;
+        }
         }
     }
 }
 
-
-
-//function window(){
-//
-//    $('.menu tr.mainmenu td').mouseover(function() {
-//        var N = $(this).attr('id').replace('mm-', '');
-//        $('.menu tr.secondary-menu').css('display', 'none');
-//        $('.menu tr#sm-' + N).css('display', 'table-row');
-//    });
-//
-//    $('.menu').mouseout(function() {
-//        $('.menu tr.secondary-menu').css('display', 'none');
-//        $('.menu tr.active').css('display', 'table-row');
-//    });
-//}
 
 function suggestOver(div_value) {
     div_value.className = 'suggest_link_over';
@@ -77,8 +69,10 @@ function suggestOut(div_value) {
     div_value.className = 'suggest_link';
 }
     function setSearch(value) {
-    document.getElementById('txtSearch').value = value;
-    document.getElementById('search_suggest').innerHTML = '';
+        if (value != ''){
+            document.getElementById('txtSearch').value = value;
+            document.getElementById('search_suggest').innerHTML = '';
+        }
 }
 function notActive() {
     document.getElementById('search_suggest').innerHTML = '';

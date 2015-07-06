@@ -306,4 +306,14 @@ public class PlaceService {
         }
         return list;
     }
+
+    public void setPlaceIsRecommended(Integer place_id) {
+        try {
+            mySqlPlaceDao.setPlaceIsRecommended(place_id);
+
+        } catch (PersistException e) {
+            e.printStackTrace();
+            loger.warn("Cant set is_recommended by place_id " + place_id);
+        }
+    }
 }

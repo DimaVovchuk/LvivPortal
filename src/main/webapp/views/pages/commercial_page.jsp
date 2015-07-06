@@ -33,12 +33,12 @@
 				<div class="col l3 m4 s5">
 					<div class="collection with-header z-depth-2">
 						<div class="collection-header"><h4>Commertial</h4></div>
-						<div id="userPlacecategory-place">
-							<a href="/portal?command=commercial&comertsRole=guide"
+						<div id="category-place">
+							<a href="portal?command=commercialJSON&comertsRole=guide"
 							   class="collection-item black-text ">Travel guide</a>
-							<a href="/portal?command=commercial&comertsRole=agency"
+							<a href="portal?command=commercialJSON&comertsRole=agency"
 							   class="collection-item black-text ">Travel agency</a>
-							<a href="/portal?command=commercial"
+							<a href="portal?command=commercialJSON"
 							   class="collection-item black-text">Show all</a>
 						</div>
 					</div>
@@ -55,7 +55,7 @@
 	<div class="match-col col l4 m6 s12">
 		<div class="card z-depth-2" style="padding:10px; height:95%">
 			<a href="/portal?command=companyInformation&id={{id}}"><img
-					class="place-img" src="${pageContext.request.contextPath}/upload/photo/{{reference}}"></a>
+					class="responsive-img place-img" src="${pageContext.request.contextPath}/upload/photo/{{reference}}"></a>
 			<a href="/portal?command=companyInformation&id={{id}}">
 				<h5><c:out value="{{name}}"/></h5></a>
 		</div>

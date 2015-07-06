@@ -17,74 +17,8 @@ var loadPlacesData = function (data) {
         matchColumn();
         paginate();
     }, 0);
-    disabled(data);
 };
 
-var disabled = function (data) {
-    var siz = data.length;
-    for (var i = 0; i <= siz - 1; i++) {
-        var dat = data[i].id;
-        var up_i = $("#up" + dat);
-        var rating = up_i.data('rating');
-        var x = up_i.data('id');
-        if (rating == '1') {
-            $("#up" + x).addClass('disabled');
-        }
-        if (rating == '0') {
-            $("#none" + x).addClass('disabled');
-        }
-        if (rating == '-1') {
-            $("#down" + x).addClass('disabled');
-        }
-    }
-};
-
-
-var like = function (placeholder) {
-    $.ajax({
-        url: $(placeholder).attr('rel'),
-        type: "GET",
-        success:dissable(placeholder),
-        error:function (){
-            alert("testing error");
-        }
-    });
-    return false;
-};
-
-var dissable = function (placeholder) {
-    var x = $(placeholder).data('id');
-    $("#up" + x).removeClass('disabled');
-    $("#none" + x).removeClass('disabled');
-    $("#down" + x).removeClass('disabled');
-    $(placeholder).addClass('disabled');
-};
-
-var none = function (placeholder) {
-    $.ajax({
-        url: $(placeholder).attr('rel'),
-        type: "GET",
-        success:dissable(placeholder),
-        error:function (){
-            alert("testing error");
-        }
-    });
-    return false;
-};
-
-
-
-var dislike = function (placeholder) {
-    $.ajax({
-        url: $(placeholder).attr('rel'),
-        type: "GET",
-        success:dissable(placeholder),
-        error:function (){
-            alert("testing error");
-        }
-    });
-    return false;
-};
 
 var paginate = function () {
     $('#place-page-container').pajinate({
@@ -128,6 +62,7 @@ var initCategoriesEventsPlace = function () {
     $('#category-place').on('click', function (e) {
         e.preventDefault();
         e.stopImmediatePropagation();
+       // alert(window.location.origin + '/' + $(e.target).attr('href'));
         $.ajax({
             url: window.location.origin + '/' + $(e.target).attr('href'),
             success: loadPlacesData,

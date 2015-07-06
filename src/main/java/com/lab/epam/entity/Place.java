@@ -31,6 +31,8 @@ public class Place implements Identified<Integer> {
     private Integer recom_time;
     @Column("custom")
     private Boolean custom;
+    @Column("is_recommended")
+    private Boolean is_recommended;
     @Column("deleted")
     private Boolean deleted = false;
 
@@ -41,6 +43,14 @@ public class Place implements Identified<Integer> {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Boolean getIs_recommended() {
+        return is_recommended;
+    }
+
+    public void setIs_recommended(Boolean is_recommended) {
+        this.is_recommended = is_recommended;
     }
 
     public Boolean getDeleted() {
@@ -127,7 +137,7 @@ public class Place implements Identified<Integer> {
 
     }
 
-    public Place(Integer id, String latitude, String longitude, Boolean visible, Integer category_id, Integer rating, Integer place_time, Boolean recomended, Boolean custom, Boolean deleted, Integer recom_time) {
+    public Place(Integer id, String latitude, String longitude, Boolean visible, Integer category_id, Integer rating, Integer place_time, Boolean recomended, Boolean custom, Boolean deleted, Integer recom_time, Boolean is_recommended) {
 
         this.id = id;
         this.latitude = latitude;
@@ -140,6 +150,7 @@ public class Place implements Identified<Integer> {
         this.custom = custom;
         this.deleted = deleted;
         this.recom_time = recom_time;
+        this.is_recommended = is_recommended;
     }
 
     public static class PlaceComparator implements Comparator<Object> {

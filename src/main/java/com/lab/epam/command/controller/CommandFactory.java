@@ -105,7 +105,8 @@ public class CommandFactory {
         commands.put("rectRatingWay", new  RectRatingWayCommand());
         commands.put("search", new  PlaceSearchCommand());
         commands.put("signUpForm", new  SignUpForm());
-        commands.put("recommendPlace", new  RecommendedPlaceCommand());
+        commands.put("recommendPlace", new  RecommendPlaceCommand());
+        commands.put("recommendWay", new  RecommendWayCommand());
     }
 
     public static void createCommand(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -86,7 +86,7 @@ public class PlaceJSONCommand implements Command {
         String category = request.getParameter("category");
         String searchString = request.getParameter("txtSearch");
 
-        if(searchString != null){
+        if(searchString != null && !searchString.equals("")){
             placeDesc = placeDescriptionService.getAllPlaceBySearch(searchString);
             if (placeDesc != null && !placeDesc.isEmpty()){
                 for (PlaceDescription placeDescript: placeDesc){
