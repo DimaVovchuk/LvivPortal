@@ -36,6 +36,8 @@
 									</li>
 								</c:otherwise>
 							</c:choose>
+							<li class="${requestScope.active_places}"><a href="/portal?command=about"><cdg:l18n
+									key="header.about"/></a></li>
 							<c:set var="pageNumber" scope="request" value="1"/>
 							<li><a class="dropdown-button" href="#" data-activates="lang-dropdown"><cdg:l18n
 									key="header.lang"/><i
@@ -60,6 +62,8 @@
 									</li>
 								</c:otherwise>
 							</c:choose>
+							<li class="${requestScope.active_places}"><a href="/portal?command=about"><cdg:l18n
+									key="header.about"/></a></li>
 							<c:set var="pageNumber" scope="request" value="1"/>
 							<li><a class="dropdown-button" href="#" data-activates="lang-dropdown"><cdg:l18n
 									key="header.lang"/><i
@@ -88,13 +92,13 @@
 
 				<ul class="side-nav" id="user-navbar">
 					<c:choose>
-						<c:when test="${not empty avatar and empty vk_id}">
+						<c:when test="${not empty ava and not empty avatar_id}">
 						<li class="center-align" style="padding-top: 10px"><img class="circle responsive-img"
-						                                                        src="${pageContext.request.contextPath}/upload/photo/${avatar}"
+						                                                        src="${pageContext.request.contextPath}/upload/photo/${ava}"
 						                                                        width="160"></li>
 						</c:when>
-						<c:when test="${not empty vk_id and not empty avatar}">
-						<li class="center-align" style="padding-top: 10px"><img class="circle responsive-img" src="${avatar}" width="160"></li>
+						<c:when test="${not empty ava and not empty vk_id and empty avatar_id}">
+						<li class="center-align" style="padding-top: 10px"><img class="circle responsive-img" src="${ava}" width="160"></li>
 						</c:when>
 						<c:otherwise>
 						<li class="center-align" style="padding-top: 10px"><img class="circle responsive-img"

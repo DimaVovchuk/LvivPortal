@@ -13,6 +13,7 @@ import com.lab.epam.command.logination.fb.FBAuthorizationCommand;
 import com.lab.epam.command.logination.fb.FBResponseCommand;
 
 import com.lab.epam.command.logination.vk.*;
+import com.lab.epam.command.page.AboutCommand;
 import com.lab.epam.command.page.createtrip.AddDayCommand;
 import com.lab.epam.command.page.createtrip.CountDaysCommand;
 import com.lab.epam.command.page.createtrip.CreateUserDataCommand;
@@ -106,6 +107,8 @@ public class CommandFactory {
         commands.put("rectRatingWay", new  RectRatingWayCommand());
         commands.put("search", new  PlaceSearchCommand());
         commands.put("signUpForm", new  SignUpForm());
+        commands.put("about", new AboutCommand());
+        commands.put("send", new SendContactUsMailCommand());
         commands.put("recommendPlace", new  RecommendedPlaceCommand());
         commands.put("statisticTest", new StatisticTestCommand());
     }
