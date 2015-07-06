@@ -25,7 +25,7 @@
                     <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Photo</th>
+                        <th>Image</th>
                         <th>Info</th>
                         <th></th>
                     </tr>
@@ -33,14 +33,11 @@
                     <tfoot>
                     <tr>
                         <th>ID</th>
-                        <th>Photo</th>
+                        <th>Image</th>
                         <th>Info</th>
                         <th></th>
                     </tr>
                     </tfoot>
-                    <tbody id="admin-places-table">
-
-                    </tbody>
                 </table>
             </div>
         </div>
@@ -49,41 +46,45 @@
 </div>
 
 <jsp:include page="/views/elements/footer.jsp"/>
-<script src="${pageContext.request.contextPath}/js/pages/admin-places.js"></script>
-
-<script id="admin-places-template" type="text/x-handlebars-template">
-    {{#each this}}
-    <tr>
-        <td>{{id}}</td>
-        <td><img class="circle responsive-img" src="${pageContext.request.contextPath}/upload/photo/{{imageReference}}" style="width: 50px; height: 50px"></td>
-        <td>
-            {{name}}<br>
-            {{adress}}
-        </td>
-        <td></td>
-    </tr>
-    {{/each}}
-</script>
 
 <script>
-    loadPlaces();
+    var loadPlaces = function () {
+        $.ajax({
+            url: window.location.origin + '/portal?command=placeJSON',
+            success: updatePlaces,
+            error: updatePlaces
+        })
+    };
 
-    $('#admin-page-table').dataTable({
-        "language": {
-            "lengthMenu": '<span style="color: #000; font-size: 15px"><cdg:l18n key="admin.tabledisplay"/></span>' +
-            '<select id="table-display-number" class="browser-default">' +
-            '   <option value="10">10</option>' +
-            '   <option value="25">25</option>' +
-            '   <option value="50">50</option>' +
-            '   <option value="100">100</option>' +
-            '</select>',
-            search: '<span style="color: #000; font-size: 15px"><cdg:l18n key="button.search"/></span>',
-            "zeroRecords": "Nothing found - sorry",
-            "info": "Showing page _PAGE_ of _PAGES_",
-            "infoEmpty": "No records available",
-            "infoFiltered": "(filtered from _MAX_ total records)"
+    var updatePlaces = function (data) {
+        var table = $('#admin-page-table').DataTable({
+            language: {
+                lengthMenu: '<span style="color: #000; font-size: 15px"><cdg:l18n key="admin.tabledisplay"/></span>' +
+                '<select id="table-display-number" class="browser-default">' +
+                '   <option value="10">10</option>' +
+                '   <option value="25">25</option>' +
+                '   <option value="50">50</option>' +
+                '   <option value="100">100</option>' +
+                '</select>',
+                search: '<span style="color: #000; font-size: 15px"><cdg:l18n key="button.search"/></span>',
+                zeroRecords: "Nothing found - sorry",
+                info: "Showing page _PAGE_ of _PAGES_",
+                infoEmpty: "No records available",
+                infoFiltered: "(filtered from _MAX_ total records)"
+            }
+        });
+        for (var i = 0; i < data.length; i++) {
+            var image = '<img class="circle responsive-img" src="/upload/photo/' + data[i].imageReference + '" style="width: 50px; height: 50px">';
+            var info = data[i].name + '<br>' + data[i].adress;
+            var buttons = '<a href="#" class="btn cyan darken-2 waves-effect waves-light" style="margin-right: 5px">Edit</a>' +
+                    '<a href="#" class="btn cyan darken-2 waves-effect waves-light" style="margin-right: 5px">Delete</a>';
+            var row = [ data[i].id, image, info, buttons];
+
+            table.row.add(row).draw();
         }
-    });
+    };
+
+    loadPlaces();
 </script>
 
 </body>

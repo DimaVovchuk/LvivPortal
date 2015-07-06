@@ -13,6 +13,7 @@ import com.lab.epam.command.logination.fb.FBAuthorizationCommand;
 import com.lab.epam.command.logination.fb.FBResponseCommand;
 
 import com.lab.epam.command.logination.vk.*;
+import com.lab.epam.command.page.AboutCommand;
 import com.lab.epam.command.page.createtrip.AddDayCommand;
 import com.lab.epam.command.page.createtrip.CountDaysCommand;
 import com.lab.epam.command.page.createtrip.CreateUserDataCommand;
@@ -28,6 +29,7 @@ import com.lab.epam.command.page.place.*;
 import com.lab.epam.command.page.user.*;
 import com.lab.epam.command.page.user.admin.EditPlaceCommand;
 import com.lab.epam.command.page.user.admin.ShowAllUserCommand;
+import com.lab.epam.command.page.user.admin.StatisticTestCommand;
 import com.lab.epam.command.save.*;
 
 import javax.servlet.ServletException;
@@ -105,6 +107,10 @@ public class CommandFactory {
         commands.put("rectRatingWay", new  RectRatingWayCommand());
         commands.put("search", new  PlaceSearchCommand());
         commands.put("signUpForm", new  SignUpForm());
+        commands.put("about", new AboutCommand());
+        commands.put("send", new SendContactUsMailCommand());
+        commands.put("recommendPlace", new  RecommendedPlaceCommand());
+        commands.put("statisticTest", new StatisticTestCommand());
         commands.put("recommendPlace", new  RecommendPlaceCommand());
         commands.put("recommendWay", new  RecommendWayCommand());
     }

@@ -33,8 +33,8 @@
 				<div class="col l3 m4 s5">
 					<div class="collection with-header z-depth-2">
 						<div class="collection-header"><h4>Commertial</h4></div>
-						<div id="category-place">
-							<a href="portal?command=commercialJSON&comertsRole=guide"
+						<div id="userPlacecategory-place">
+							<a href="/portal?command=commercial&comertsRole=guide"
 							   class="collection-item black-text ">Travel guide</a>
 							<a href="portal?command=commercialJSON&comertsRole=agency"
 							   class="collection-item black-text ">Travel agency</a>
