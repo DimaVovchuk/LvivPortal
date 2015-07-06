@@ -16,10 +16,9 @@
 <jsp:include page="/views/elements/header.jsp"/>
 <div class="row">
     <div class="col s12 m8 l8">
-        <h3 class="center-align"><cdg:l18n key="about.about"/></h3>
-
         <div class="row">
             <div class="offset-m1 col s12 m11">
+                <h3 class="center-align"><cdg:l18n key="about.about"/></h3>
                 <div class="card">
                     <div class="card-image">
                         <img src="${pageContext.request.contextPath}/upload/photo/lviv.jpg">
