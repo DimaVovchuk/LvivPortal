@@ -24,22 +24,25 @@
 
 				<div class="row">
 					<div class="col l9 m8 s7">
-						<div class="row z-depth-2">
+						<div id="place-page-container" class="row z-depth-2">
+
+							<div class="place-page-navigation z-depth-1"></div>
+
 							<div id="userPlace-info-collection" class="place-page-content"></div>
 						</div>
 					</div>
 					<div class="col l3 m4 s5">
 						<div class="collection with-header z-depth-2">
-							<div class="collection-header"><h4>Categories</h4></div>
+							<div class="collection-header"><h4><cdg:l18n key="category.place"/></h4></div>
 							<div id="userPlacecategory-place">
 								<a href="portal?command=userPlaceJSONCommand&userPlaceCategory=favoritePlaces"
 								   data-category="favoritePlaces"
-								   class="collection-item black-text ">Favorite Place</a>
+								   class="collection-item black-text "><cdg:l18n key="favorite.place"/></a>
 								<a href="portal?command=userPlaceJSONCommand&userPlaceCategory=customPlaces"
 								   data-category="customPlaces"
-								   class="collection-item black-text ">Custom Place</a>
+								   class="collection-item black-text "><cdg:l18n key="custom.place"/></a>
 								<a href="portal?command=userPlaceJSONCommand"
-								   class="collection-item black-text">All Place</a>
+								   class="collection-item black-text"><cdg:l18n key="all.place"/></a>
 							</div>
 						</div>
 					</div>
@@ -92,6 +95,10 @@
 			</div>
 		</div>
 		{{/each}}
+	</script>
+
+	<script id="userPlace-info-template-fail" type="text/x-handlebars-template">
+	<h3 align="center"><cdg:l18n key="any.places"/></h3>
 	</script>
 
 	<script>

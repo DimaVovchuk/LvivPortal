@@ -60,13 +60,9 @@ public class UserPlaceJSONCommand implements Command {
             Integer userId = user.getId();
 
             String userPlaceCategory = request.getParameter("userPlaceCategory");
-            String usepPlaceCategorySesion = (String) session.getAttribute("userPlaceCategory");
-            System.out.println("userPlaceCategory " + userPlaceCategory);
-            if (userPlaceCategory == null) {
-                userPlaceCategory = usepPlaceCategorySesion;
-            }
 
             if (userPlaceCategory != null) {
+                places.clear();
                 switch (userPlaceCategory) {
                     case "favoritePlaces":
                         loger.info("userId before favoritePlaces " + userId);
@@ -83,21 +79,13 @@ public class UserPlaceJSONCommand implements Command {
             } else {
                 places = placeService.getPlaceByUserId(userId);
             }
-            System.out.println("places " + places);
-            System.out.println("userPlaceCategory " + userPlaceCategory);
+            userPlacePageInfo.clear();
             if (places != null && !places.isEmpty()) {
                 placeDescriptions = getPlaceDescriptionByPlace(places);
                 placeImage = getPlaceImageByPlace(places);
                 userPlacePageInfo = getPlaceDescriptionAndPhotoList(places, placeDescriptions, placeImage);
-                session.setAttribute("userPlaceCtegory",userPlaceCategory);
             }
         }
-
-
-        // request.setAttribute("places ", places);
-        // request.setAttribute("placeImages ", placeImage);
-        //request.setAttribute("placeDescriptions ", placeDescriptions);
-        //request.setAttribute("userPlacePageInfo ", userPlacePageInfo);
 
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");

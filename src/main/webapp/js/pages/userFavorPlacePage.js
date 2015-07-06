@@ -9,16 +9,22 @@ var loadPlaceAboutData = function () {
 
 var loadPlacesData = function (data) {
     if (!data) return false;
-    var source = $("#userPlace-info-template").html();
-    var template = Handlebars.compile(source);
-    var html = template(data);
-    $('#userPlace-info-collection').html(html);
-    setTimeout(function () {
-        imgHeight();
-        matchColumn();
-        paginate();
-    }, 0);
-
+    if (data.length > 0) {
+        var source = $("#userPlace-info-template").html();
+        var template = Handlebars.compile(source);
+        var html = template(data);
+        $('#userPlace-info-collection').html(html);
+        setTimeout(function () {
+            imgHeight();
+            matchColumn();
+            paginate();
+        }, 200);
+    } else{
+        var source = $("#userPlace-info-template-fail").html();
+        var template = Handlebars.compile(source);
+        var html = template(data);
+        $('#userPlace-info-collection').html(html);
+    }
 };
 
 var paginate = function () {

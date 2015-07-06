@@ -26,10 +26,13 @@ public class PlaceJSONCommand implements Command {
         Integer place_id;
         PlaceImage placeImage;
         PlaceDescription placeDescription;
+        PlaceDescription placeD;
         PlaceRating placeRating;
         List<PlaceRating> placeRatings = new ArrayList<>();
         List<PlaceDescription> placeDescriptions = new ArrayList<>();
+        List<PlaceDescription> placeDs = new ArrayList<>();
         List<PlaceDescription> placeDesc = new ArrayList<>();
+        List<PlaceDescription> placeDescPeriod = new ArrayList<>();
         List<PlaceImage> placeImages = new ArrayList<>();
 
         HttpSession session = request.getSession();
@@ -85,9 +88,66 @@ public class PlaceJSONCommand implements Command {
 
         String category = request.getParameter("category");
         String searchString = request.getParameter("txtSearch");
+        Integer countPlace = 0;
+        Map<Integer, List<PlaceDescription>> results = new HashMap<>();
 
         if(searchString != null && !searchString.equals("")){
-            placeDesc = placeDescriptionService.getAllPlaceBySearch(searchString);
+            searchString = searchString.toLowerCase();
+            String[] searchParth = searchString.split(" ");
+            placeDs = placeDescriptionService.getPlaceByLanguege(language);//getAllPlaceBySearch(searchString);
+            if (placeDs != null && !placeDs.isEmpty()) {
+                for (PlaceDescription place : placeDs) {
+                    String name = place.getName().replaceAll("\"", "");
+                    name = name.toLowerCase();
+                    String[] nameParth = name.split(" ");
+                    Integer count = 0;
+                    for (String parth : nameParth) {
+                        for (String res : searchParth) {
+                            if (parth.contains(res)) {
+                                count++;
+                            }
+                        }
+                    }
+                    if (count >= searchParth.length) {
+                        if (countPlace < 10) {
+                            placeDesc.add(place);
+                            countPlace++;
+                        }
+                    }
+
+                }
+                if (placeDesc.isEmpty()) {
+                    Integer fail = 0;
+                    for (int i = 1; i <= 3; i++) {
+                        results.put(i, new ArrayList<PlaceDescription>());
+                    }
+                    for (PlaceDescription place : placeDs) {
+                        String name = place.getName().replaceAll("\"", "");
+                        name = name.toLowerCase();
+                        fail = distanse(name, searchString);
+                        if (fail <= 3) {
+                                List<PlaceDescription> pl = results.get(fail);
+                                if (pl.size() < 10) {
+                                    pl.add(place);
+                                }
+                                results.put(fail, pl);
+
+                        }
+                    }
+                    if (!results.isEmpty()) {
+                        for (int i = 1; i <= 15; i++) {
+                            List<PlaceDescription> pl = results.get(i);
+                            System.out.println("results.get(i); " + results.get(i));
+                            if (pl != null && !pl.isEmpty()) {
+                                placeDesc = pl;
+                                break;
+                            }
+                        }
+                    }
+                }
+
+
+                System.out.println("placeDesc " + placeDesc);
             if (placeDesc != null && !placeDesc.isEmpty()){
                 for (PlaceDescription placeDescript: placeDesc){
                     place_id = placeDescript.getPlace_id();
@@ -109,8 +169,8 @@ public class PlaceJSONCommand implements Command {
                         placeRatings.add(placeRating);
 
                     }
-                    System.out.println("placeDescript in " + placeDescript);
                 }
+            }
             }
 
         } else {
@@ -142,7 +202,6 @@ public class PlaceJSONCommand implements Command {
             } else {
                 places = servicePlace.getAllPlaceVisible();
             }
-            //  session.setAttribute("category", null);
 
             Comparator comparator = new Place.PlaceComparator();
             Collections.sort(places, comparator);
@@ -230,7 +289,22 @@ public class PlaceJSONCommand implements Command {
         return false;
     }
 
-
+    private Integer distanse(String s1, String s2){
+        Integer m = s1.length();
+        Integer n = s2.length();
+        char[] charS2 = s2.toCharArray();
+        Integer count = 0;
+        if (charS2.length >= 2){
+            for (int i = 0; i < charS2.length - 1; i++){
+                String s = new StringBuilder().append(charS2[i]).append(charS2[i + 1]).toString();;
+                if (s1.contains(s)){
+                    count++;
+                }
+            }
+        }
+        Integer distance = n - count;
+        return distance;
+    }
 
 }
 

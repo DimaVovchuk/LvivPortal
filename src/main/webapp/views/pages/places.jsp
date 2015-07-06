@@ -155,7 +155,6 @@
 <script>
     var loadWindow = function (data) {
         if (data == "1"){
-            alert(data);
             Materialize.toast('<cdg:l18n key="place.added"/>', 4000);
         }
         else{
