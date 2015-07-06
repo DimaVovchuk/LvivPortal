@@ -47,6 +47,8 @@ public class MySqlPlaceDao extends AbstractJDBCDao<Place, Integer> {
     private static final String SET_PLACE_IS_RECOMMENDED = "UPDATE place SET is_recommended = true WHERE id = ?";
     private static final String GET_PLACE_BY_RATING = "SELECT up.*, COUNT(place_id) FROM user_place up JOIN place p ON up.place_id=p.id\n" +
             " WHERE up.deleted=false AND p.deleted = false AND p.visible = true GROUP BY place_id ORDER BY COUNT(place_id) DESC;";
+    private static final String INSERT_INTO_PLACE = "INSERT INTO place (latitude,longitude,category_id,rating,visible,place_time,deleted,recomended,custom) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?); ";
+    private static final String GET_LAST_PLACE_INDEX = "SELECT id FROM place WHERE id = LAST_INSERT_ID();";
 
     private class PersistGroup extends Place {
         public void setId(int id) {
@@ -123,8 +125,8 @@ public class MySqlPlaceDao extends AbstractJDBCDao<Place, Integer> {
         PreparedStatement ps = null;
         PreparedStatement psGetId = null;
         ResultSet rsId = null;
-        String sqlQuery = "INSERT INTO place (latitude,longitude,category_id,rating,visible,place_time,deleted,recomended,custom) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?); ";
-        String sqlQueryGetId = "SELECT id FROM place WHERE id = LAST_INSERT_ID();";
+        String sqlQuery = INSERT_INTO_PLACE;
+        String sqlQueryGetId = GET_LAST_PLACE_INDEX;
         try {
             connect.setAutoCommit(false);
             ps = connect.prepareStatement(sqlQuery);
