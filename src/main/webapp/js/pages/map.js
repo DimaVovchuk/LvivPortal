@@ -196,13 +196,14 @@ function updateMarkerAddress(str) {
     document.getElementById('customPlaceAdrress').value = str;
     document.getElementById('customPlaceAdrressHid').value = str;
 }
-
+var customMarker;
 function initCustom() {
     var latLng = new google.maps.LatLng(49.8426, 24.0278);
-    var marker = new google.maps.Marker({
+    customMarker = new google.maps.Marker({
         position: latLng,
         title: 'Marker',
         map: map,
+        visible: true,
         draggable: true
     });
 
@@ -213,14 +214,21 @@ function initCustom() {
 
     // Add dragging event listeners.
 
-    google.maps.event.addListener(marker, 'drag', function () {
-        updateMarkerPositionLat(marker.getPosition());
-        updateMarkerPositionLon(marker.getPosition());
+    google.maps.event.addListener(customMarker, 'drag', function () {
+        updateMarkerPositionLat(customMarker.getPosition());
+        updateMarkerPositionLon(customMarker.getPosition());
     });
 
-    google.maps.event.addListener(marker, 'dragend', function () {
-        geocodePosition(marker.getPosition());
+    google.maps.event.addListener(customMarker, 'dragend', function () {
+        geocodePosition(customMarker.getPosition());
     });
+}
+
+function customMarkerUnvisible(){
+    customMarker.setVisible(false);
+}
+function customMarkerVisible(){
+    customMarker.setVisible(true);
 }
 //**********************************
 
