@@ -30,7 +30,7 @@ public class ShowMapCommand implements Command {
     public void execute(HttpServletRequest request,
                         HttpServletResponse response) throws ServletException, IOException {
         PlaceService placeService = new PlaceService();
-        List<Place> all = placeService.getAll();
+        List<Place> all = placeService.getAllWithoutDeleted();
         PlaceImageService placeImageService = new PlaceImageService();
 
         List<PlaceMarkerWithPhoto> placeMarkerWithPhotos = new ArrayList<>();
@@ -39,6 +39,7 @@ public class ShowMapCommand implements Command {
         ResourceBundle bundle = (ResourceBundle) session.getAttribute("bundle");
 
         for (Place place : all) {
+
             PlaceDescription placeDescription = placeDescriptionService.getPlaceDescriptionByIdPlace(place.getId(), bundle.getLocale().toString());
             PlaceImage placeImage = placeImageService.getPlaceImageByPlaceId(place.getId());
             if(placeImage== null){

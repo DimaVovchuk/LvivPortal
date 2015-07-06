@@ -12,6 +12,7 @@ import org.apache.log4j.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,6 +26,7 @@ public class ShowAllUserCommand implements Command{
     private static final Logger loger = LogManager.getLogger(ClassName.getCurrentClassName());
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
         loger.info("ShowAllUserCommand command");
         List<User> userList = new ArrayList<>();
         Map<User, String> userRole = new HashMap<User, String>();
@@ -56,6 +58,7 @@ public class ShowAllUserCommand implements Command{
             userChangeRole.setRoleID(changeRoleID);
             try {
                 userService.update(userChangeRole);
+                session.setAttribute("role", changeRoleID);
                 showAllUser(userRole,roleService,userService,request);
                 loger.info("user role is succesful changed ");
             } catch (PersistException e) {
@@ -72,6 +75,7 @@ public class ShowAllUserCommand implements Command{
             userChangeStatus.setStatus(changeStatus);
             try {
                 userService.update(userChangeStatus);
+                session.setAttribute("statusID", changeStatus);
                 showAllUser(userRole, roleService, userService, request);
                 loger.info("user status is succesful changed ");
             } catch (PersistException e) {

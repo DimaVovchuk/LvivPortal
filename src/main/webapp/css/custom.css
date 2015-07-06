@@ -524,6 +524,45 @@ header img.text-middle {
     margin-right: 20px;
 }
 
+#map-info #map-custom {
+    padding: 0 10px;
+    height: calc(100% - 64px);
+    overflow-y: auto;
+}
+
+#map-info #map-custom h5 {
+    font-size: 1.5em;
+    font-weight: 500;
+}
+
+#map-info #map-custom .btn {
+    padding: 0 10px;
+    width: 100%;
+    height: 2.5em;
+    line-height: 2.5em;
+}
+
+#map-info #map-custom .image-thumbnail {
+    margin: 5px;
+}
+
+#map-info #map-custom .file-field {
+    height: 23px;
+}
+
+#map-info #map-custom .input-field label {
+    color: #000;
+}
+
+#map-info #map-custom .dropdown-content li {
+    line-height: 1.2em;
+}
+
+#map-info #map-custom .dropdown-content li>span {
+    color: #000;
+    font-size: 1em;
+}
+
 #map-canvas .card {
      margin: 0;
      max-width: 300px;

@@ -34,7 +34,7 @@ private static final Logger loger = LogManager.getLogger(ClassName.getCurrentCla
                 response.sendRedirect("portal?command=index");
                 return;
             }
-            userByLogin.setStatus(2);
+            userByLogin.setStatus(1);
             loger.info("User " +login+ " is activated");
         }
         try {

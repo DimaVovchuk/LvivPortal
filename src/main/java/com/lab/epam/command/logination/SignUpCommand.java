@@ -155,13 +155,14 @@ public class SignUpCommand implements Command {
                 user.setMail(email);
                 user.setPassword(password);
                 user.setPhone(phone);
-                user.setStatus(1);
+                user.setStatus(2);
                 user.setRoleID(role);
                 user.setCompanyName(companyName);
                 user.setVkId(vk_id);
 
                 userService.create(user);
                 session.setAttribute("ava", user.getAvatar());
+                session.setAttribute("statusID", 2);
                 ResourceBundle bundle = (ResourceBundle) session.getAttribute("bundle");
                 String md5phone = MD5Creator.getMD5(phone);
                 String s = new String(bundle.getString("confirm.message").getBytes("ISO-8859-1"), "windows-1251") + " -> <a href = 'http://localhost:8080/portal?command=confirm&user=" + login + "&param=" + md5phone + "'> http://localhost:8080/portal?command=confirm&user=" + login + "&param=" + md5phone + " <a>";

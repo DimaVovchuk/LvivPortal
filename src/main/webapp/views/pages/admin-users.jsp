@@ -84,6 +84,7 @@
                                         <input type="hidden" name="changeStatucID" value="1">
                                     </c:if>
                                 </form>
+
                                 <c:if test="${elem.key.status == 1}">
                                     <button type="submit" form="change-status${elem.key.id}"
                                             class="btn cyan darken-2 waves-effect waves-light"><cdg:l18n key="admin.disable"/>
