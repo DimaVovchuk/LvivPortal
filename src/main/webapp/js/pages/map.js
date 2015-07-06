@@ -6,6 +6,7 @@ var initSidebar = function () {
     loadRoutes();
     initDayTrigger();
     initMapDayTrigger();
+    initImageMultiloadPreview();
 };
 
 var linkProcess = function (id) {
@@ -119,10 +120,54 @@ var getdirectionsDisplays = function (directionsDisplay) {
     directionsDisplays.push(directionsDisplay);
 };
 
+/* Sidebar - Custom */
+var initImageMultiloadPreview = function () {
+    window.onload = function () {
+        if (window.File && window.FileList && window.FileReader) {
+            $('#image-input').on('change', function (event) {
+                var files = event.target.files;
+                var output = document.getElementById('image-preview');
+                for (var i = 0; i < files.length; i++) {
+                    var file = files[i];
+                    if (file.type.match('image.*')) {
+                        if (files[0].size < 2097152) {
+                            var picReader = new FileReader();
+                            picReader.addEventListener('load', function (event) {
+                                var picFile = event.target;
+                                var div = document.createElement("div");
+                                div.innerHTML = '<img class="image-thumbnail" src="' + picFile.result + '"/>';
+                                output.insertBefore(div, null);
+                            });
+                            $('#image-clear, #image-preview').show();
+                            picReader.readAsDataURL(file);
+                        } else {
+                            alert('Image Size is too big. Maximum size is 2MB.');
+                            $(this).val('');
+                        }
+                    } else {
+                        alert('You can only upload image files.');
+                        $(this).val('');
+                    }
+                }
+            })
+        }
+    };
 
+    $('#image-input').on('click', function () {
+        $('.image-thumbnail').parent().remove();
+        $('#image-preview').hide();
+        $(this).val('');
+    });
+
+    $('#image-clear').on('click', function () {
+        $('.image-thumbnail').parent().remove();
+        $('#image-preview').hide();
+        $('#image-input').val('');
+        $(this).hide();
+    });
+};
 
 /* *** MAP *** */
-
 var map;
 var lvivMap = new google.maps.LatLng(49.8426, 24.0278);
 var routesData;
@@ -135,9 +180,7 @@ var initBlankMap = function () {
     map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 };
 
-
 var initDayMarkers = function (dayNumber) {
-
     var points = [];
     var points1 = [];
     var len = (routesData[dayNumber].places.length);
@@ -156,10 +199,7 @@ var initDayMarkers = function (dayNumber) {
         }
         calcRoute(points);
     }
-
     //calcRoute(routesData[dayNumber].places);
-
-
 };
 
 var calcRoute = function (data) {
@@ -169,7 +209,6 @@ var calcRoute = function (data) {
     directionsDisplay.setMap(map);
     directionsDisplay.setOptions({suppressMarkers: true});
     if (data.length > 1 && data.length <= 10) {
-
         //var start = new google.maps.LatLng(data[0].latitude, data[0].longitude);
         var start = data[0];
         var image = {
@@ -199,7 +238,6 @@ var calcRoute = function (data) {
             map: map
         });
         var waypts = [];
-
         for (var i = 1; i < (data.length - 1); i++) {
             waypts.push({
                 //location: new google.maps.LatLng(data[i].latitude, data[i].longitude)
@@ -233,26 +271,6 @@ var calcRoute = function (data) {
         });
         getdirectionsDisplays(directionsDisplay);
     }
-    //if (data.length > 10) {
-    //    var poly;
-    //    var polyOptions = {
-    //        strokeColor: '#000000',
-    //        strokeOpacity: 1.0,
-    //        strokeWeight: 3
-    //    };
-    //    poly = new google.maps.Polyline(polyOptions);
-    //
-    //    poly = new google.maps.Polyline(polyOptions);
-    //    poly.setMap(map);
-    //
-    //    var path = poly.getPath();
-    //
-    //    for (var i = 1; i < (data.length - 1); i++) {
-    //        var lL = new google.maps.LatLng(data[i].latitude, data[i].longitude);
-    //        path.push(lL);
-    //    }
-    //
-    //}
 };
 
 /* *** MAIN *** */
@@ -262,8 +280,4 @@ $(function () {
     /* MAP */
     initBlankMap();
     google.maps.event.addDomListener(window, 'load', initStartMarkers);
-
-    //loadDayData();
-    //google.maps.event.addDomListener(window, 'load', initDayMarkers);
-
 });
