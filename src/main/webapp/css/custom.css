@@ -329,38 +329,51 @@ header img.text-middle {
 }
 
                                         /* *** PLACES *** */
-
-.places .row {
+#places .row {
     margin-left: 20px;
 }
 
-.places .col .section {
+#places .col .section {
     margin: 10px;
     padding: 20px;
 }
 
-.places .card {
+#places .card {
     padding: 10px;
     height: 95%;
 }
 
-.places .card img {
+#places .card img {
     margin-left: auto;
     margin-right: auto;
 }
 
-.places .collection .collection-item.active {
+#places .collection .collection-item.active {
     background: #0ab2d2;
 }
 
-.places .bottom-right-btn {
+#places .bottom-right-btn {
     position: absolute;
     bottom: 10px;
     right: 10px;
 }
 
-.places .btn-floating.disabled {
+#places .btn-floating.disabled {
     background-color: #ffc400;
+}
+
+#places .search-box {
+    border-top: 40px solid #0ab2d2;
+}
+
+#places .search-box .input-field {
+    margin-top: 0;
+
+}
+
+#places .search-box .input-field label {
+    color: #000;
+    font-size: 20px;
 }
 
 .place-page-navigation {
