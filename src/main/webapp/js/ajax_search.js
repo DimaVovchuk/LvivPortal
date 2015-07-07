@@ -2,7 +2,6 @@
  * Created by Admin on 02.07.2015.
  */
 function getXmlHttpRequestObject() {
-    //alert("getXmlHttpRequestObject");
     if (window.XMLHttpRequest) {
         return new XMLHttpRequest();
     } else if(window.ActiveXObject) {
@@ -16,7 +15,6 @@ function searchSuggest() {
 
     if (searchReq.readyState == 4 || searchReq.readyState == 0) {
         var str = encode_utf8(document.getElementById('txtSearch').value);
-        alert(str);
         if(str == ''){
             notActive();
         }else{
@@ -50,7 +48,6 @@ function decode_utf8(s) {
 }
 
 function handleSearchSuggest() {
-    alert("handleSearchSuggest")
     if (searchReq.readyState == 4) {
         var ss = document.getElementById('search_suggest')
         ss.innerHTML = '';
