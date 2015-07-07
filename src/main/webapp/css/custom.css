@@ -507,7 +507,7 @@ header img.text-middle {
 
 #map-info #place-info-collection {
     margin: 0;
-    height: calc(100% - 100px);
+    height: calc(100% - 64px - 36px - 36px);
     overflow-y: auto;
 }
 
@@ -663,7 +663,7 @@ header img.text-middle {
     }
 
     #map-info #place-info-collection {
-        height: calc(100% - 92px);
+        height: calc(100% - 92px - 36px);
     }
 
     #map-info #route-info-collection {
