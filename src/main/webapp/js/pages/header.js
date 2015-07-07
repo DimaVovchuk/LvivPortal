@@ -78,9 +78,32 @@ var activePageHeaderLink = function () {
     })
 };
 
+var checkReloadPages = function (data) {
+    if (data == "success"){
+        document.location.reload(true);
+    }
+    else{
+    }
+}
+var reloadPage = function () {
+    $('#sign-in-form').on('submit', function (e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        $.ajax({
+            type: 'post',
+            url: window.location.origin + '/portal?command=signIn',
+            data: $('form').serialize(),
+            success: checkReloadPages,
+            error: checkReloadPages,
+        });
+    });
+};
+
 $(function () {
     initMobileSidebar();
     initLoginForm();
     initNewRouteForm();
     activePageHeaderLink();
+    reloadPage();
+    checkReloadPages();
 });

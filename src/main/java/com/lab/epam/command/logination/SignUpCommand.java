@@ -1,6 +1,7 @@
 package com.lab.epam.command.logination;
 
 import com.lab.epam.command.controller.Command;
+import com.lab.epam.entity.Decoder;
 import com.lab.epam.entity.User;
 import com.lab.epam.helper.ClassName;
 import com.lab.epam.md5.MD5Creator;
@@ -43,11 +44,11 @@ public class SignUpCommand implements Command {
         HttpSession session = request.getSession();
         loger.info("Command SignUpCommand.");
         boolean errorFlag = false;
-        String name = request.getParameter("first");
-        String surname = request.getParameter("last");
-        String companyName = request.getParameter("companyname");
-        String login = request.getParameter("login");
-        String email = request.getParameter("email");
+        String name = Decoder.decodeStringUtf8(request.getParameter("first"));
+        String surname = Decoder.decodeStringUtf8(request.getParameter("last"));
+        String companyName = Decoder.decodeStringUtf8(request.getParameter("companyname"));
+        String login = Decoder.decodeStringUtf8(request.getParameter("login"));
+        String email = Decoder.decodeStringUtf8(request.getParameter("email"));
         String password = request.getParameter("password");
         String phone = request.getParameter("phone");
         Integer role = Integer.valueOf(request.getParameter("role"));
