@@ -97,6 +97,8 @@ public class VKResponseCommand implements Command {
                     session.setAttribute("vk_id", vk_id);
 
                     loger.info("User sign up with vk");
+                    response.setCharacterEncoding("UTF-8");
+                    request.setCharacterEncoding("UTF-8");
                     request.getRequestDispatcher("/portal?command=signUpForm&first=" + first_name + "&last=" + last_name + "&phone=" + phone + "&email=" + email).include(request, response);
                 }
             } catch (JSONException e) {

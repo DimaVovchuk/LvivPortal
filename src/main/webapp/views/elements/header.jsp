@@ -158,9 +158,13 @@
 					<li><a href="/portal?command=userPlace"><i class="mdi-action-account-balance left"></i><cdg:l18n
 							key="header.myplaces"/></a>
 					</li>
-					<c:if test="${role != 1 and role != 2}">
-						<li><a href="/portal?command=allUserPhoto"><i class="mdi-image-photo left"></i><cdg:l18n
-								key="header.gallery"/></a></li>
+						<c:if test="${role != 1 and role != 2}">
+							<li><a href="/portal?command=allUserPhoto"><i class="mdi-image-photo left"></i><cdg:l18n
+									key="header.gallery"/></a></li>
+						</c:if>
+					<c:if test="${role == 2}">
+						<li><a href="/portal?command=recomendedWay"><i class="material-icons left">grade</i><cdg:l18n
+								key="recomended.way"/></a></li>
 					</c:if>
 					<li><a href="/portal?command=commercial"><i class="material-icons left">assignment_ind</i><cdg:l18n
 							key="header.agenceguide"/></a></li>

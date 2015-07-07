@@ -75,8 +75,11 @@ public class FBResponseCommand implements Command {
                     String email = (String) json.get("email");
                     session.setAttribute("vk_id", id);
                     session.setAttribute("ava", photo);
+                    //System.out.println("/portal?command=signUpForm&first=" + json.get("first_name") + "&last=" + json.get("last_name") + "&email=" + email);
 
                     loger.info("User sign up with facebook");
+                    response.setCharacterEncoding("UTF-8");
+                    request.setCharacterEncoding("UTF-8");
                     request.getRequestDispatcher("/portal?command=signUpForm&first=" + first_name + "&last=" + last_name + "&email=" + email).include(request, response);
                 }
             } catch (JSONException e) {

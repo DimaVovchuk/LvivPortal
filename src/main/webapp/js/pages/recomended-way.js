@@ -14,12 +14,12 @@ var loadWaysData = function (data) {
     var template = Handlebars.compile(source);
     var html = template(data);
     $('#recomended-way-info-collection').html(html);
+    disabled(data);
     setTimeout(function () {
         imgHeight();
         matchColumn();
         paginate();
     }, 200);
-    disabled(data);
 
 };
 
@@ -44,6 +44,7 @@ var disabled = function (data) {
 
 
 var like = function (placeholder) {
+
     $.ajax({
         url: $(placeholder).attr('rel'),
         type: "GET",
@@ -56,7 +57,7 @@ var like = function (placeholder) {
 };
 
 var dissable = function (placeholder) {
-    //loadPlaceAboutData();
+
     var x = $(placeholder).data('id');
     $("#up" + x).removeClass('disabled');
     $("#none" + x).removeClass('disabled');
@@ -79,6 +80,7 @@ var none = function (placeholder) {
 
 
 var dislike = function (placeholder) {
+    alert($(placeholder).attr('rel') + dislike);
     $.ajax({
         url: $(placeholder).attr('rel'),
         type: "GET",
