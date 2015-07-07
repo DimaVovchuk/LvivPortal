@@ -51,7 +51,7 @@
 					<cdg:l18n key="company.about"/>: ${adminData.about}<br><br>
 					<br>
 					<a class="btn cyan darken-2 waves-effect waves-light" href="/portal?command=edit"><i
-							class="mdi-action-settings left"></i>Edit profile</a>
+							class="mdi-action-settings left"></i><cdg:l18n key="admin.editprofile"/></a>
 				</div>
 			</div>
 
@@ -60,13 +60,18 @@
 			</div>
 
 			<div class="section center-align">
-				<a class="btn cyan darken-2 waves-effect waves-light"
-				   href="/portal?command=showAllUser&requestType=showAllUser"><i
-						class="mdi-action-settings left"></i>Edit users</a>
-				<a class="btn cyan darken-2 waves-effect waves-light" href="#"><i
-						class="mdi-action-settings left"></i>Edit places</a>
-				<a class="btn cyan darken-2 waves-effect waves-light" href="#"><i
-						class="mdi-action-settings left"></i>Add new place</a>
+				<a class="btn cyan darken-2 waves-effect waves-light" href="/portal?command=showAllUser&requestType=showAllUser"><i
+						class="mdi-action-settings left"></i><cdg:l18n key="admin.allusers"/></a>
+				<a class="btn cyan darken-2 waves-effect waves-light" href="/portal?command=editPlace"><i
+						class="mdi-action-settings left"></i><cdg:l18n key="admin.edit.place"/></a>
+				<a class="btn cyan darken-2 waves-effect waves-light" href="/portal?command=addNewPlace"><i
+						class="mdi-action-settings left"></i><cdg:l18n key="admin.addnewplace"/></a>
+				<a class="btn cyan darken-2 waves-effect waves-light" href="/portal?command=adminStatistic"><i
+						class="mdi-action-settings left"></i><cdg:l18n key="statistic.title"/></a>
+				<a class="btn cyan darken-2 waves-effect waves-light" href="/portal?command=сonfirmCustomPlace"><i
+						class="mdi-action-settings left"></i><cdg:l18n key="admin.confirm.custom.place"/></a>
+				<a class="btn cyan darken-2 waves-effect waves-light" href="/portal?command=сonfirmRecommendedPlace"><i
+						class="mdi-action-settings left"></i><cdg:l18n key="admin.confirm.recommended.place"/></a>
 			</div>
 		</div>
 	</div>
