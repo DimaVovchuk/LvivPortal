@@ -145,8 +145,8 @@ public class CreateUserDataCommand implements Command {
                 if (plDesc != null && !plDesc.isEmpty()){
                     PlaceDescription place = plDesc.iterator().next();
                     Integer place_id = place.getPlace_id();
-                    Place firstPlace = placeService.getByPK(place_id);
                     if (place_id != null && place_id > 0){
+                        Place firstPlace = placeService.getByPK(place_id);
                         userDataTrip.setBeginPlace(place_id);
                         Map<Integer,List<Place>> map = new HashMap<>();
                         List<Place> list= new ArrayList<>();

@@ -305,13 +305,39 @@ function updateMarkerAddress(str) {
     document.getElementById('customPlaceAdrressHid').value = str;
 }
 
-var customMarker;
 
+//*****************************
+
+var autocomplete;
+
+function fillInAddress() {
+    var place = autocomplete.getPlace();
+    geocodePosition(place.geometry.location);
+    updateMarkerPositionLat(place.geometry.location);
+    updateMarkerPositionLon(place.geometry.location);
+    customMarker.setPosition(place.geometry.location);
+    map.setCenter(place.geometry.location);
+}
+
+//*****************************
+
+var customMarker;
 function initCustom() {
+    var options = {
+        location: new google.maps.LatLng(49.8426, 24.0278),
+        radius: 10000,
+        types: ['geocode'],
+        componentRestrictions: {country: "ua"}
+    };
+    autocomplete = new google.maps.places.Autocomplete((document.getElementById('customPlaceAdrress')), options);
+    google.maps.event.addListener(autocomplete, 'place_changed', function () {
+        fillInAddress();
+    });
+
     var latLng = new google.maps.LatLng(49.8426, 24.0278);
     customMarker = new google.maps.Marker({
         position: latLng,
-        title: 'Marker',
+        title: 'Custom place',
         map: map,
         visible: true,
         draggable: true
@@ -332,17 +358,17 @@ function initCustom() {
 }
 
 function customMarkerUnvisible() {
-    //showMarkers();
-    customMarker.setVisible(false);
+    ////showMarkers();
+    //customMarker.setVisible(false);
 }
 
 function customMarkerVisible() {
-   // hideMarkers();
-    customMarker.setVisible(true);
-    map.setOptions({
-        zoom: 15,
-        center: lvivMap
-    });
+    // hideMarkers();
+    // customMarker.setVisible(true);
+    // map.setOptions({
+    //     zoom: 15,
+    //     center: lvivMap
+    // });
 }
 
 /* *** MAIN *** */

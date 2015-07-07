@@ -100,7 +100,7 @@
             </div>
 
             <div class="input-field">
-                <input value=" " id="customPlaceAdrress" type="text" name="customPlaceAdrress" disabled>
+                <input value=" " id="customPlaceAdrress" type="text" name="customPlaceAdrress">
                 <input id="customPlaceAdrressHid" type="hidden" name="customPlaceAdrressHid">
                 <label for="customPlaceAdrress"><cdg:l18n key="addnewcustomplace.adrress"/></label>
             </div>
