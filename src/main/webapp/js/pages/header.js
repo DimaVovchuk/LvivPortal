@@ -59,8 +59,28 @@ var initNewRouteForm = function () {
     });
 };
 
+var activePageHeaderLink = function () {
+    $('.header-link').each(function () {
+        var link = $(this).data('link');
+        var location = window.location.href;
+        if ((/^.*(portal\?command=index).*$/.test(location) || /^(http:\/\/localhost:8080\/)$/.test(location)) && link === 'index') {
+            $(this).addClass('active');
+        }
+        if (/^.*(portal\?command=place).*$/.test(location) && link === 'places') {
+            $(this).addClass('active');
+        }
+        if (/^.*(portal\?command=showMap).*$/.test(location) && link === 'plan') {
+            $(this).addClass('active');
+        }
+        if (/^.*(portal\?command=about).*$/.test(location) && link === 'about') {
+            $(this).addClass('active');
+        }
+    })
+};
+
 $(function () {
     initMobileSidebar();
     initLoginForm();
     initNewRouteForm();
+    activePageHeaderLink();
 });
