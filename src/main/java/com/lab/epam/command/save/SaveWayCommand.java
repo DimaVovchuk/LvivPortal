@@ -40,6 +40,7 @@ public class SaveWayCommand implements Command {
         Boolean isFull = false;
         placeForWay = (UserDataAboutTrip)session.getAttribute("userDataTrip");
         String login = (String)session.getAttribute("login");
+        String name = request.getParameter("name");
         User user = null;
         if (login != null){
             user = userService.getUserByLogin(login);
@@ -53,7 +54,9 @@ public class SaveWayCommand implements Command {
                 if (placesDay != null && !placesDay.isEmpty()){
                     wayDays = placeForWay.getDayCount();
                     Way wayNew = new Way(0, beginTrip, endTrip, wayDays);
-
+                    if (name != null){
+                        wayNew.setName(name);
+                    }
                     Set<Integer> keys = placesDay.keySet();
                     Collection<List<Place>> values = placesDay.values();
                     for (Integer key : keys) {

@@ -210,11 +210,11 @@ public class WayService {
                     for (Integer key : keys) {
                         List<Place> places = placesDay.get(key);
                         for (Place place : places) {
-                            if (!place.getVisible()) {
-                                servicePlace.create(conn, place);
-                                place = servicePlace.getPlaceByLongitudeLatitude(conn, place.getLongitude(), place.getLatitude());
-                                loger.info("Create castom place is successfull");
-                            }
+//                            if (!place.getVisible()) {
+//                                servicePlace.create(conn, place);
+//                                place = servicePlace.getPlaceByLongitudeLatitude(conn, place.getLongitude(), place.getLatitude());
+//                                loger.info("Create castom place is successfull with id " + place.getId());
+//                            }
                             servicePlace.createPlaceWay(conn, place.getId(), way.getId(), key, place.getPlace_time());
                             loger.info("Create place_way is successfull");
                         }

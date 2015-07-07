@@ -130,7 +130,6 @@ public class MySqlPlaceDescriptionDao extends AbstractJDBCDao<PlaceDescription, 
 
         if (list == null || list.size() == 0) {
             loger.warn("Record with name = " + str + " not found.");
-            throw new PersistException("Record with name = " + str + " not found.");
         }
         loger.info("Method getAllPlaceBySearch ended");
         return list;

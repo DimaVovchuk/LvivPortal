@@ -7,18 +7,31 @@
     </div>
 
     <div id="map-places" class="animated fadeInDown" style="display: none">
-        <nav>
-            <div class="nav-wrapper">
-                <form id="frmSearch">
+        <%--<nav>--%>
+            <%--<div class="nav-wrapper">--%>
+                <%--<form id="frmSearch">--%>
+                    <%--<div class="input-field">--%>
+                        <%--<input id="txtSearch" type="search" name="txtSearch" alt="Search Criteria"--%>
+                               <%--onkeyup="searchSuggest()"--%>
+                               <%--autocomplete="off" required>--%>
+                        <%--<label for="txtSearch"><i class="material-icons">search</i></label>--%>
+                    <%--</div>--%>
+                <%--</form>--%>
+            <%--</div>--%>
+            <%--<p><div id="search_suggest" style="border-color: #ffffff;"></div></p>--%>
+        <%--</nav>--%>
+
+            <div class="z-depth-2 search-box" id="search-place">
+                <form id="frmSearch" style="padding: 0 10px">
                     <div class="input-field">
-                        <input id="txtSearch" type="search" name="txtSearch" alt="Search Criteria"
-                               onkeyup="searchSuggest()"
-                               autocomplete="off" required>
-                        <label for="txtSearch"><i class="material-icons">search</i></label>
+                        <input id="txtSearch" type="search" name="txtSearch" alt="Search Criteria" onkeyup="searchSuggest()" autocomplete="off" required>
+                        <label for="txtSearch"><i class="material-icons">search</i><span style="margin-left: 10px">Search</span></label>
                     </div>
                 </form>
+
+                <p><div id="search_suggest" style="border-color: #ffffff;"></div></p>
             </div>
-        </nav>
+
 
         <a class='dropdown-select btn cyan darken-2 waves-effect waves-light' href='#' data-activates='dropdown-places'><cdg:l18n
                 key="places.categories"/></a>
@@ -147,6 +160,37 @@
         </div>
     </a>
     {{/each}}
+</script>
+<script>
+    $(function () {
+        $('#frmSearch').on('submit', function (e) {
+            notActive();
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            $.ajax({
+                url: window.location.origin + '/portal?command=placeJSON',
+                data: $('#frmSearch').serialize(),
+                success: loadPlacesData,
+                error: loadPlacesData
+            });
+        });
+    });
+
+    $(document).click(function() {
+        notActive();
+    });
+    $("#search-place").click(function(event) {
+        event.stopPropagation();
+    });
+
+    var loadPlacesData = function (data) {
+        if (!data) return false;
+        var source = $("#place-info-template").html();
+        var template = Handlebars.compile(source);
+        var html = template(data);
+        $('#place-info-collection').html(html);
+
+    };
 </script>
 <script language="JavaScript" type="text/javascript"
         src="${pageContext.request.contextPath}/js/ajax_search.js"></script>

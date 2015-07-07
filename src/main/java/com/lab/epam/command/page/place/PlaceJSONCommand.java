@@ -90,9 +90,13 @@ public class PlaceJSONCommand implements Command {
         String searchString = request.getParameter("txtSearch");
         Integer countPlace = 0;
         Map<Integer, List<PlaceDescription>> results = new HashMap<>();
-
         if(searchString != null && !searchString.equals("")){
+            searchString = searchString.trim();
             searchString = searchString.toLowerCase();
+            placeDesc = placeDescriptionService.getAllPlaceBySearch(searchString);
+            if (placeDesc == null || placeDesc.isEmpty()  || !placeDesc.iterator().next().getName().equalsIgnoreCase(searchString)){
+                placeDesc.clear();
+                searchString = searchString.toLowerCase();
             String[] searchParth = searchString.split(" ");
             placeDs = placeDescriptionService.getPlaceByLanguege(language);//getAllPlaceBySearch(searchString);
             if (placeDs != null && !placeDs.isEmpty()) {
@@ -126,18 +130,17 @@ public class PlaceJSONCommand implements Command {
                         name = name.toLowerCase();
                         fail = distanse(name, searchString);
                         if (fail <= 3) {
-                                List<PlaceDescription> pl = results.get(fail);
-                                if (pl.size() < 10) {
-                                    pl.add(place);
-                                }
-                                results.put(fail, pl);
+                            List<PlaceDescription> pl = results.get(fail);
+                            if (pl.size() < 10) {
+                                pl.add(place);
+                            }
+                            results.put(fail, pl);
 
                         }
                     }
                     if (!results.isEmpty()) {
                         for (int i = 1; i <= 15; i++) {
                             List<PlaceDescription> pl = results.get(i);
-                            System.out.println("results.get(i); " + results.get(i));
                             if (pl != null && !pl.isEmpty()) {
                                 placeDesc = pl;
                                 break;
@@ -145,9 +148,8 @@ public class PlaceJSONCommand implements Command {
                         }
                     }
                 }
-
-
-                System.out.println("placeDesc " + placeDesc);
+            }
+            }
             if (placeDesc != null && !placeDesc.isEmpty()){
                 for (PlaceDescription placeDescript: placeDesc){
                     place_id = placeDescript.getPlace_id();
@@ -170,7 +172,6 @@ public class PlaceJSONCommand implements Command {
 
                     }
                 }
-            }
             }
 
         } else {
@@ -249,9 +250,7 @@ public class PlaceJSONCommand implements Command {
                                         item.setName(placeDescription.getName());
                                         item.setAdress(placeDescription.getAdress());
                                         item.setRating(placeRating.getRating());
-                                        //  System.out.println(item.toString());
                                         list.add(item);
-                                        // System.out.println(item.toString());
                                     }
                                 }
                             }
@@ -265,7 +264,6 @@ public class PlaceJSONCommand implements Command {
                                 item.setName(placeDescription.getName());
                                 item.setAdress(placeDescription.getAdress());
                                 item.setRating(0);
-                                //   System.out.println(item.toString());
                                 list.add(item);
                             }
                         }

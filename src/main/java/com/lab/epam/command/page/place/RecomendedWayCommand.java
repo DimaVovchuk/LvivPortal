@@ -65,7 +65,6 @@ public class RecomendedWayCommand  implements Command {
         if (user != null && ways != null){
             for (Way way: ways) {
                 WayRating wayRating = wayRatingService.getWayRatingByWayAndUser(way.getId(), user.getId());
-                System.out.println("wayRating " + wayRating.getRating() + " user " + way.getId());
                 if (wayRating == null){
                     wayRating = new WayRating(user.getId(),way.getId(),0);
                 }

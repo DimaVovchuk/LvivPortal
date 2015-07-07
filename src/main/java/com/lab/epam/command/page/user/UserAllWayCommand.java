@@ -70,7 +70,7 @@ public class UserAllWayCommand implements Command {
         }
 
         List<WayPlaceImage> waysPlaceImage = null;
-        if (ways != null && !ways.isEmpty()) {
+        if(ways != null && !ways.isEmpty()){
             waysPlaceImage = getWayPlaceImageList(ways, way_place, wayPlaceImages);
         }
         request.setAttribute("places", places);
@@ -82,10 +82,10 @@ public class UserAllWayCommand implements Command {
 
     }
 
-    private List<WayPlaceImage> getWayPlaceImageList(List<Way> ways, Map<Integer, List<PlaceDescription>> way_place, Map<Integer, PlaceImage> wayPlaceImages) {
+    private List<WayPlaceImage> getWayPlaceImageList(List<Way> ways,  Map<Integer, List<PlaceDescription>> way_place, Map<Integer,PlaceImage> wayPlaceImages){
         List<WayPlaceImage> list = new ArrayList<>();
         System.out.println("ways " + ways.size() + " way_place " + way_place.size() + " wayPlaceImages " + wayPlaceImages.size());
-        if (ways != null && !ways.isEmpty()) {
+        if(ways != null && !ways.isEmpty()){
             for (Way way : ways) {
                 WayPlaceImage item = new WayPlaceImage();
                 item.setId(way.getId());
@@ -93,10 +93,12 @@ public class UserAllWayCommand implements Command {
                 item.setBeginDate(way.getBegin());
                 System.out.println("end " + way.getEnd());
                 item.setEndDate(way.getEnd());
-                if (wayPlaceImages.size() <= way.getId() && wayPlaceImages.get(way.getId()) != null) {
-                    item.setImageReference(wayPlaceImages.get(way.getId()).getReference());
+                if (wayPlaceImages.size() <= way.getId()){
+                    if (wayPlaceImages.get(way.getId()) != null){
+                        item.setImageReference(wayPlaceImages.get(way.getId()).getReference());
+                    }
                 }
-                if (way_place.size() <= way.getId() && wayPlaceImages.get(way.getId()) != null) {
+                if (way_place.size() <= way.getId()){
                     item.setPlace(way_place.get(way.getId()));
                 }
                 list.add(item);
@@ -105,7 +107,7 @@ public class UserAllWayCommand implements Command {
         return list;
     }
 
-    private Map<Integer, List<PlaceDescription>> getPlaceDescriptionByWay(List<Way> ways) {
+    private Map<Integer, List<PlaceDescription>> getPlaceDescriptionByWay (List < Way > ways) {
         List<PlaceDescription> way_placeDescription_list = new ArrayList<>();
         List<Place> way_place_list = new ArrayList<>();
         Map<Integer, List<PlaceDescription>> way_place = new HashMap<>();
@@ -143,7 +145,7 @@ public class UserAllWayCommand implements Command {
         return placeImages;
     }
 
-    private List<PlaceDescription> getPlaceDescriptionByPlace(List<Place> places) {
+    private List<PlaceDescription> getPlaceDescriptionByPlace (List < Place > places) {
         Integer place_id;
         PlaceDescription placeDescription;
         List<PlaceDescription> placeDescriptions = new ArrayList<>();
