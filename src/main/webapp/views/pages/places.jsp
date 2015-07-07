@@ -78,6 +78,9 @@
                         <a href="portal?command=placeJSON&category=restaurants" data-category="restaurants"
                            class="collection-item black-text ${requestScope.active_restaurants}"><cdg:l18n
                                 key="places.restaurants"/></a>
+                        <a href="portal?command=recomendedPlace" data-category="recommended"
+                           class="collection-item black-text ${requestScope.active_restaurants}"><cdg:l18n
+                                key="places.restaurants"/></a>
                         <a href="portal?command=placeJSON"
                            class="collection-item black-text ${requestScope.active_allplaces}"><cdg:l18n
                                 key="places.all"/></a>

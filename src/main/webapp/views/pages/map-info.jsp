@@ -183,14 +183,6 @@
         event.stopPropagation();
     });
 
-    var loadPlacesData = function (data) {
-        if (!data) return false;
-        var source = $("#place-info-template").html();
-        var template = Handlebars.compile(source);
-        var html = template(data);
-        $('#place-info-collection').html(html);
-
-    };
 </script>
 <script language="JavaScript" type="text/javascript"
         src="${pageContext.request.contextPath}/js/ajax_search.js"></script>
