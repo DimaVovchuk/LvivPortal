@@ -54,13 +54,13 @@
             </p>
         </div>
 
-                <input type="search" id="txtSearch" name="txtSearch" alt="Search Criteria"
-                       onkeyup="searchSuggest();"
+                <input type="search" id="txtSearchRoute" name="txtSearch" alt="Search Criteria"
+                       onkeyup="searchSuggestRoute();"
                        autocomplete="off" />
-                <label for="txtSearch"><cdg:l18n key="places.saerch"/></label><br>
+                <label for="txtSearchRoute"><cdg:l18n key="places.saerch"/></label><br>
 
             <br><p>
-        <div id="search_suggest" style="border-color: #ffffff;"></div></p>
+        <div id="search_suggest_route" style="border-color: #ffffff; width: 50%"></div></p>
 
         <div class="section">
             <button class="btn waves-effect waves-light cyan darken-2" type="submit">OK</button>

@@ -26,6 +26,7 @@ var linkProcess = function (id) {
     });
 };
 
+
 var initLinkProcess = function () {
     $('.link-process').on('click', function (e) {
         var type = $(e.currentTarget).data('type');

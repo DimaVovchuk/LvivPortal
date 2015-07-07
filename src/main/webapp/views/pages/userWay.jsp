@@ -129,62 +129,12 @@
         </div>
     </div>
 
-    <div id="sure-save" class="modal">
-        <div id="user-trip-save" class="modal-content">
-            <c:choose>
-                <c:when test="${userDataTrip.isSaved == false && userDataTrip.isFull != false}">
-                    <p><cdg:l18n key="sure.save"/></p>
 
-                    <div class="ok-footer">
-                        <div class="modal-footer">
-                            <a class="btn waves-effect waves-light cyan darken-2" href="/portal?command=saveWay">Ok
-                            </a>
-                        </div>
-                    </div>
-                </c:when>
-                <c:when test="${userDataTrip == null}">
-                    <p><cdg:l18n key="any.current.route"/></p>
-
-                    <div class="ok-footer">
-                        <div class="modal-footer">
-                            <a class="modal-action modal-close btn waves-effect waves-light cyan darken-2">Ok
-                            </a>
-                        </div>
-                    </div>
-                </c:when>
-                <c:when test="${userDataTrip.isFull == false}">
-                    <p><cdg:l18n key="any.place.way"/></p>
-
-                    <div class="ok-footer">
-                        <div class="modal-footer">
-                            <a class="modal-action modal-close btn waves-effect waves-light cyan darken-2">Ok
-                            </a>
-                        </div>
-                    </div>
-                </c:when>
-                <c:otherwise>
-                    <div class="ok-footer">
-                        <div class="modal-footer">
-                            <p><cdg:l18n key="sure.already.saved"/></p>
-                            <a class="btn waves-effect waves-light cyan darken-2" href="/portal?command=updateWay">
-                                <cdg:l18n key="update"/>
-                            </a>
-                            <a class="btn waves-effect waves-light cyan darken-2" href="/portal?command=saveWay">
-                                <cdg:l18n key="save"/>
-                            </a>
-                            <a class="modal-action modal-close btn waves-effect waves-light cyan darken-2">
-                                <cdg:l18n key="cancel"/>
-                            </a>
-                        </div>
-                    </div>
-                </c:otherwise>
-            </c:choose>
-        </div>
-    </div>
 </div>
 </div>
     <jsp:include page="/views/elements/footer.jsp"/>
-
+    <jsp:include page="/views/modals/sure-save-way.jsp"/>
+    <jsp:include page="/views/modals/name-way.jsp"/>
     <script>
         $(".match-col").matchHeight({
             property: 'height'

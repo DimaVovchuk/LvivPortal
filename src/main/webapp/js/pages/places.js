@@ -137,6 +137,7 @@ var addPlace = function () {
 
 var searchPlace = function () {
     $('#frmSearch').on('submit', function (e) {
+        notActive();
         e.preventDefault();
         e.stopImmediatePropagation();
         $.ajax({

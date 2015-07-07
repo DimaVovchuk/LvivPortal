@@ -964,18 +964,81 @@ footer.page-footer {
     font: bold 12px Arial, Helvetica;
     color: #fafafa;
     text-transform: uppercase;
-    background-color: #58ACFA;
+    background-color: #31b2c3;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
     border-radius: 5px;
 }
 .form-wrapper #cmdSearch:hover,
 .form-wrapper #cmdSearch:focus {
-    background-color: #31b2c3;
+    background-color: #008B8B;
    }
 
 
 .form-wrapper #cmdSearch::-moz-focus-inner {
+    border: 0;
+}
+
+.form-wrapper-map {
+    width: 250px;
+    height: 15px;
+    padding: 4px;
+    margin: 2px auto;
+    background-color: #ffffff;
+    margin-top: 0px;
+}
+.form-wrapper-map #txtSearch {
+    width: 180px;
+    height: 10px;
+    padding: 10px 5px;
+    float: left;
+    font: bold 16px 'lucida sans', 'trebuchet MS', 'Tahoma';
+    border: 1px solid #ccc;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.form-wrapper-map #txtSearch:focus {
+    outline: 0;
+    border-color: #aaa;
+}
+.form-wrapper-map #txtSearch::-webkit-input-placeholder {
+    color: #999;
+    font-weight: normal;
+}
+
+.form-wrapper-map #txtSearch:-moz-placeholder {
+    color: #999;
+    font-weight: normal;
+}
+.form-wrapper-map #txtSearch:-ms-input-placeholder {
+    color: #999;
+    font-weight: normal;
+}
+
+.form-wrapper-map #cmdSearch {
+    float: right;
+    border: 1px solid #00748f;
+    height: 30px;
+    width: 45px;
+    padding: 0;
+    cursor: pointer;
+    font: bold 10px Arial, Helvetica;
+    color: #fafafa;
+    text-transform: uppercase;
+    background-color: #31b2c3;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+.form-wrapper-map #cmdSearch:hover,
+.form-wrapper-map #cmdSearch:focus {
+    background-color: #008B8B;
+}
+
+
+.form-wrapper-map #cmdSearch::-moz-focus-inner {
     border: 0;
 }
 

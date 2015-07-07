@@ -7,8 +7,8 @@
     </div>
 
     <div id="map-places" class="animated fadeInDown" style="display: none">
-        <div class="collection with-header z-depth-2" id="search-place">
-            <form id="frmSearch" class="form-wrapper">
+        <div class="collection with-header z-depth-2" id="search-place" style="margin-top: 0px">
+            <form id="frmSearch" class="form-wrapper-map">
                 <input type="search" id="txtSearch" name="txtSearch" alt="Search Criteria"
                        onkeyup="searchSuggest();"
                        autocomplete="off" />
@@ -17,6 +17,7 @@
             <br><p><div id="search_suggest" style="border-color: #ffffff;">
         </div></p>
         </div>
+        <%--</div>--%>
         <a class='dropdown-select btn cyan darken-2 waves-effect waves-light' href='#' data-activates='dropdown-places'><cdg:l18n
                 key="places.categories"/></a>
         <ul id='dropdown-places' class='dropdown-content'>
@@ -143,6 +144,37 @@
         </div>
     </a>
     {{/each}}
+</script>
+<script>
+    $(function () {
+        $('#frmSearch').on('submit', function (e) {
+            notActive();
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            $.ajax({
+                url: window.location.origin + '/portal?command=placeJSON',
+                data: $('#frmSearch').serialize(),
+                success: loadPlacesData,
+                error: loadPlacesData
+            });
+        });
+    });
+
+    $(document).click(function() {
+        notActive();
+    });
+    $("#search-place").click(function(event) {
+        event.stopPropagation();
+    });
+
+    var loadPlacesData = function (data) {
+        if (!data) return false;
+        var source = $("#place-info-template").html();
+        var template = Handlebars.compile(source);
+        var html = template(data);
+        $('#place-info-collection').html(html);
+
+    };
 </script>
 <script language="JavaScript" type="text/javascript" src="${pageContext.request.contextPath}/js/ajax_search.js"></script>
 <script id="route-info-template" type="text/x-handlebars-template">

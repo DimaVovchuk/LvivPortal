@@ -82,14 +82,14 @@ public class WayRatingService {
         return wayRating;
     }
 
-    public WayRating getWayRatingByWayAndUser(Integer place_id, Integer user_id){
+    public WayRating getWayRatingByWayAndUser(Integer way_id, Integer user_id){
         WayRating wayRating = null;
         try {
-            wayRating = mySqlWayRatingDao.getWayRatingByWayAndUser(place_id, user_id);
+            wayRating = mySqlWayRatingDao.getWayRatingByWayAndUser(way_id, user_id);
 
         } catch (PersistException e) {
             e.printStackTrace();
-            loger.warn("Cant get place rating by place_id " + place_id + " and user_id " + user_id);
+            loger.warn("Cant get place rating by way_id " + way_id + " and user_id " + user_id);
         }
 
         return wayRating;
