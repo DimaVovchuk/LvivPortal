@@ -17,7 +17,7 @@
 
 <jsp:include page="/views/elements/header.jsp"/>
 
-<div class="places">
+<div id="places">
     <div class="section">
         <h3 class="center-align"><cdg:l18n key="places.head"/></h3>
 
@@ -31,14 +31,13 @@
             </div>
 
             <div class="col l3 m4 s5">
-                <div class="z-depth-2" id="search-place">
-                    <form id="frmSearch" class="form-wrapper">
-                        <input type="search" id="txtSearch" name="txtSearch" alt="Search Criteria"
-                               onkeyup="searchSuggest();"
-                               autocomplete="off"/>
-                        <input type="submit" id="cmdSearch" name="cmdSearch" value="Search" alt="Run Search"/>
+                <div class="z-depth-2 search-box" id="search-place">
+                    <form id="frmSearch" style="padding: 0 10px">
+                        <div class="input-field">
+                            <input id="txtSearch" type="search" name="txtSearch" alt="Search Criteria" onkeyup="searchSuggest()" autocomplete="off" required>
+                            <label for="txtSearch"><i class="material-icons">search</i><span style="margin-left: 10px">Search</span></label>
+                        </div>
                     </form>
-                    <br>
 
                     <p><div id="search_suggest" style="border-color: #ffffff;"></div></p>
                 </div>
