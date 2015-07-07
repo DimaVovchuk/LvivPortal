@@ -21,11 +21,11 @@ import java.util.*;
 /**
  * Created by Vasyl on 04.07.2015.
  */
-public class StatisticTestCommand implements Command {
+public class AdminStatisticCommand implements Command {
     private static final Logger loger = LogManager.getLogger(ClassName.getCurrentClassName());
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        loger.info("Command StatisticTestCommand");
+        loger.info("Command AdminStatisticCommand");
         /*Statistic page*/
         HttpSession session = request.getSession();
         ResourceBundle resourceBandle = (ResourceBundle) session.getAttribute("bundle");
@@ -73,7 +73,7 @@ public class StatisticTestCommand implements Command {
         usersQuantityStatusList.add(df.format((Double.valueOf(bannedUsers) / allUserQuantity) * 100));
         request.setAttribute("statusList", usersQuantityStatusList);
 
-        loger.info("Command StatisticTestCommand ended");
+        loger.info("Command AdminStatisticCommand ended");
         request.getRequestDispatcher("/views/pages/statisticTest.jsp").forward(request, response);
     }
 }

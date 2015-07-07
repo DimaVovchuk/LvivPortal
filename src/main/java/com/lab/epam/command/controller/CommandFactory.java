@@ -30,7 +30,7 @@ import com.lab.epam.command.page.user.*;
 import com.lab.epam.command.page.user.admin.ShowAdminCabinetCommand;
 import com.lab.epam.command.page.user.admin.EditPlaceCommand;
 import com.lab.epam.command.page.user.admin.ShowAllUserCommand;
-import com.lab.epam.command.page.user.admin.StatisticTestCommand;
+import com.lab.epam.command.page.user.admin.AdminStatisticCommand;
 import com.lab.epam.command.save.*;
 
 import javax.servlet.ServletException;
@@ -94,7 +94,7 @@ public class CommandFactory {
         commands.put("commercialJSON", new CommercialJSONCommand());
         commands.put("addCustomPlace", new AddCustomPlaceCommand());
         commands.put("saveCustomPlace", new SaveCustomPlaceCommand());
-        commands.put("authorVK", new VkAuthorizationCommand());
+        commands.put("authorVK", new VKAuthorizationCommand());
         commands.put("authorRespVK", new VKResponseCommand());
         commands.put("deleteImageByDB", new DeleteImageCommand());
         commands.put("authorFB", new FBAuthorizationCommand());
@@ -111,10 +111,12 @@ public class CommandFactory {
         commands.put("about", new AboutCommand());
         commands.put("send", new SendContactUsMailCommand());
         commands.put("recommendPlace", new  RecommendedPlaceCommand());
-        commands.put("statisticTest", new StatisticTestCommand());
+        commands.put("adminStatistic", new AdminStatisticCommand());
         commands.put("recommendPlace", new  RecommendPlaceCommand());
         commands.put("recommendWay", new  RecommendWayCommand());
         commands.put("adminCabinet", new ShowAdminCabinetCommand());
+        commands.put("ñonfirmCustomPlace", new ConfirmCustomPlaceCommand());
+        commands.put("ñonfirmRecommendedPlace", new ConfirmRecommendedPlaceCommand());
     }
 
     public static void createCommand(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
