@@ -774,8 +774,27 @@ footer.page-footer {
     margin-right: 20px;
 }
 
+                                        /* *** ABOUT PAGE *** */
+#about .about-info p {
+    text-indent: 30px;
+    text-align: justify;
+    margin-bottom: 20px;
+}
 
+#about .about-info ul {
+    text-indent: 30px;
+    margin-bottom: 20px;
+}
 
+#about .about-info li {
+    list-style-type: disc;
+    list-style-position: inside;
+}
+
+#about label {
+    color: #000;
+    margin-right: 10px;
+}
 
 /* Olya CSS */
 
@@ -880,8 +899,9 @@ footer.page-footer {
     padding: 8px;
     margin: 10px auto;
     background-color: #ffffff;
-    margin-top: 0px;
+    margin-top: 0;
 }
+
 .form-wrapper #txtSearch {
     width: 210px;
     height: 20px;
