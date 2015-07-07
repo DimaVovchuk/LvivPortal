@@ -27,7 +27,7 @@ import com.lab.epam.command.page.photo.ShowAllUserPhoto;
 import com.lab.epam.command.page.photo.UpLoadPictureCommand;
 import com.lab.epam.command.page.place.*;
 import com.lab.epam.command.page.user.*;
-import com.lab.epam.command.page.user.admin.AdminLoginationCommand;
+import com.lab.epam.command.page.user.admin.ShowAdminCabinetCommand;
 import com.lab.epam.command.page.user.admin.EditPlaceCommand;
 import com.lab.epam.command.page.user.admin.ShowAllUserCommand;
 import com.lab.epam.command.page.user.admin.StatisticTestCommand;
@@ -114,7 +114,7 @@ public class CommandFactory {
         commands.put("statisticTest", new StatisticTestCommand());
         commands.put("recommendPlace", new  RecommendPlaceCommand());
         commands.put("recommendWay", new  RecommendWayCommand());
-        commands.put("adminLogination", new AdminLoginationCommand());
+        commands.put("adminCabinet", new ShowAdminCabinetCommand());
     }
 
     public static void createCommand(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
