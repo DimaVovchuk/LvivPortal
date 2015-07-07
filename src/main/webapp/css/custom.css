@@ -65,7 +65,7 @@ a h5:hover {
     font-size: 14px;
 }
 
-                                        /* *** HEADER *** */
+/* *** HEADER *** */
 header nav ul li:hover,
 header nav ul li.active {
     background: #0ab2d2;
@@ -93,7 +93,7 @@ header img.text-middle {
     vertical-align: middle;
 }
 
-                                        /* *** BANNER *** */
+/* *** BANNER *** */
 .banner .parallax-container {
     height: 500px;
     border-top: 10px solid #0097a7;
@@ -120,7 +120,7 @@ header img.text-middle {
     padding-bottom: 2em;
 }
 
-                                        /* *** LOGIN *** */
+/* *** LOGIN *** */
 #sign-in {
     position: fixed;
     width: 500px;
@@ -281,7 +281,7 @@ header img.text-middle {
     padding: 20px;
 }
 
-                                        /* *** PLAN TRIP *** */
+/* *** PLAN TRIP *** */
 #set-date-time {
     width: 500px;
     max-height: 100%;
@@ -314,7 +314,7 @@ header img.text-middle {
     width: 100%;
 }
 
-                                        /* *** INDEX *** */
+/* *** INDEX *** */
 .index .row {
     margin: 20px;
 }
@@ -328,7 +328,7 @@ header img.text-middle {
     height: 300px;
 }
 
-                                        /* *** PLACES *** */
+/* *** PLACES *** */
 #places .row {
     margin-left: 20px;
 }
@@ -418,17 +418,17 @@ header img.text-middle {
     margin-right: 20px;
 }
 
-#place-info [type="radio"]:not(:checked)+label,
-#place-info [type="radio"]:checked+label {
+#place-info [type="radio"]:not(:checked) + label,
+#place-info [type="radio"]:checked + label {
     padding-left: 0;
     margin-left: 20px;
 }
 
-#place-info [type="radio"]:not(:checked)+label span {
+#place-info [type="radio"]:not(:checked) + label span {
     background-color: #0097a7;
 }
 
-#place-info [type="radio"]:checked+label span {
+#place-info [type="radio"]:checked + label span {
     background-color: #ffc400;
 }
 
@@ -440,7 +440,7 @@ header img.text-middle {
     height: 2em;
 }
 
-                                        /* *** EDIT PLACE *** */
+/* *** EDIT PLACE *** */
 #edit-place .material-placeholder {
     display: inline-block;
     padding: 10px;
@@ -450,19 +450,20 @@ header img.text-middle {
     position: relative;
 }
 
-#edit-place .image-thumbnail{
+#edit-place .image-thumbnail {
     height: 100px;
     margin: 10px;
     float: left;
 }
 
-#edit-place .dropdown-content li>span {
+#edit-place .dropdown-content li > span {
     color: #000;
 }
 
 #edit-place .switch label {
     color: #000;
 }
+
 /* *** ADD CUSTOM PLACE *** */
 #mapCanvas {
     width: 100%;
@@ -470,7 +471,7 @@ header img.text-middle {
     float: left;
 }
 
-                                        /* *** MAP *** */
+/* *** MAP *** */
 .map .row .col {
     padding: 0;
 }
@@ -582,15 +583,31 @@ header img.text-middle {
     line-height: 1.2em;
 }
 
-#map-info #map-custom .dropdown-content li>span {
+#map-info #map-custom .dropdown-content li > span {
     color: #000;
     font-size: 1em;
 }
 
+#map-info nav {
+    background-color: #0ab2d2;
+    height: 36px;
+    line-height: 36px;
+}
+
+#map-info form,
+#map-info input[type=search] {
+    margin-bottom: 0;
+}
+
+#map-info .nav-wrapper i {
+    height: 28px;
+    line-height: 36px;
+}
+
 #map-canvas .card {
-     margin: 0;
-     max-width: 300px;
-     max-height: 300px;
+    margin: 0;
+    max-width: 300px;
+    max-height: 300px;
 }
 
 #map-canvas .card-image {
@@ -603,7 +620,7 @@ header img.text-middle {
 }
 
 #map-canvas .card-content {
-     padding: 0;
+    padding: 0;
 }
 
 #map-canvas .card-action {
@@ -728,7 +745,7 @@ header img.text-middle {
     width: 100%;
 }
 
-                                             /* *** FOOTER *** */
+/* *** FOOTER *** */
 footer.page-footer {
     margin-top: 0;
     padding-top: 0;
@@ -739,7 +756,7 @@ footer.page-footer {
     height: 300px;
 }
 
-                                            /* *** ADMIN PAGE *** */
+/* *** ADMIN PAGE *** */
 #admin-page {
     min-height: calc(100% - 64px - 50px);
 }
@@ -771,7 +788,7 @@ footer.page-footer {
     }
 }
 
-                                        /* *** COMPANY PAGE *** */
+/* *** COMPANY PAGE *** */
 #company-page .collection {
     margin: 0;
 }
@@ -787,7 +804,7 @@ footer.page-footer {
     margin-right: 20px;
 }
 
-                                        /* *** EDIT PROFILE PAGE *** */
+/* *** EDIT PROFILE PAGE *** */
 #edit-profile .file-field .btn {
     padding: 0 10px;
 }
@@ -796,7 +813,7 @@ footer.page-footer {
     margin-left: 80px;
 }
 
-                                        /* *** ABOUT PAGE *** */
+/* *** ABOUT PAGE *** */
 #about .about-info p {
     text-indent: 30px;
     text-align: justify;
@@ -839,11 +856,11 @@ footer.page-footer {
     min-height: calc(100% - 64px - 50px);
 }
 
-#user-places a{
+#user-places a {
     color: #000;
 }
 
-#close-png{
+#close-png {
     padding: 0;
     margin: 0;
 }
@@ -879,7 +896,6 @@ footer.page-footer {
     align-content: center;
 }
 
-
 #user-trip-save-singin .ok-footer .modal-footer .btn {
     float: right;
     margin: 20px 10px;
@@ -889,7 +905,7 @@ footer.page-footer {
     align-items: center;
 }
 
-#cancel-route a{
+#cancel-route a {
     color: #FFFFFF;
 }
 
@@ -940,6 +956,7 @@ footer.page-footer {
     outline: 0;
     border-color: #aaa;
 }
+
 .form-wrapper #txtSearch::-webkit-input-placeholder {
     color: #999;
     font-weight: normal;
@@ -949,6 +966,7 @@ footer.page-footer {
     color: #999;
     font-weight: normal;
 }
+
 .form-wrapper #txtSearch:-ms-input-placeholder {
     color: #999;
     font-weight: normal;
@@ -969,11 +987,11 @@ footer.page-footer {
     -webkit-border-radius: 5px;
     border-radius: 5px;
 }
+
 .form-wrapper #cmdSearch:hover,
 .form-wrapper #cmdSearch:focus {
     background-color: #31b2c3;
-   }
-
+}
 
 .form-wrapper #cmdSearch::-moz-focus-inner {
     border: 0;
