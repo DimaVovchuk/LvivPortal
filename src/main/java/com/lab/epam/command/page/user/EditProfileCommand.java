@@ -66,6 +66,8 @@ public class EditProfileCommand implements Command {
         }
 
         loger.info("Command Edit Profile.");
+        response.setCharacterEncoding("UTF-8");
+        request.setCharacterEncoding("UTF-8");
         request.getRequestDispatcher("/views/pages/editProfile.jsp").forward(request, response);
     }
 }
