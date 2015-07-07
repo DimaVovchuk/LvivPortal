@@ -774,6 +774,15 @@ footer.page-footer {
     margin-right: 20px;
 }
 
+                                        /* *** EDIT PROFILE PAGE *** */
+#edit-profile .file-field .btn {
+    padding: 0 10px;
+}
+
+#edit-profile .file-field input.file-path {
+    margin-left: 80px;
+}
+
                                         /* *** ABOUT PAGE *** */
 #about .about-info p {
     text-indent: 30px;
