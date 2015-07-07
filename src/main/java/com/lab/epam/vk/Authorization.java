@@ -60,11 +60,15 @@ public class Authorization {
     private TokenAccess parserAccessToken(String context) throws JSONException {
         TokenAccess token = new TokenAccess();
         JSONObject json = new JSONObject(context);
-        token.setToken(json.getString("access_token"));
-        token.setVkUserId(json.getString("user_id"));
-        token.setExpirationMoment(json.getLong("expires_in"));
-        if (!json.isNull("email"))
-            token.setEmail(json.getString("email"));
+        if (json.has("access_token")) {
+            token.setToken(json.getString("access_token"));
+            token.setVkUserId(json.getString("user_id"));
+            token.setExpirationMoment(json.getLong("expires_in"));
+            if (!json.isNull("email"))
+                token.setEmail(json.getString("email"));
+        } else {
+            return null;
+        }
         return token;
     }
 }

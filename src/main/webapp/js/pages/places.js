@@ -1,5 +1,4 @@
 var loadPlaceAboutData = function () {
-
     $.ajax({
         url: window.location.origin + '/portal?command=placeJSON',
         success: loadPlacesData,
@@ -19,7 +18,6 @@ var loadPlacesData = function (data) {
         paginate();
     }, 200);
     disabled(data);
-
 };
 
 var disabled = function (data) {
@@ -73,8 +71,6 @@ var none = function (placeholder) {
     });
     return false;
 };
-
-
 
 var dislike = function (placeholder) {
     $.ajax({
@@ -134,14 +130,10 @@ var addPlace = function () {
             url: window.location.origin + '/portal?command=addplace',
             data: $('form').serialize(),
             success: loadWindow,
-            error: loadWindow,
+            error: loadWindow
         });
     });
 };
-
-function encode_utf8(s) {
-    return unescape(encodeURIComponent(s));
-}
 
 var searchPlace = function () {
     $('#frmSearch').on('submit', function (e) {
@@ -156,12 +148,13 @@ var searchPlace = function () {
     });
 };
 
-
-
 var initCategoriesEventsPlace = function () {
-    $('#category-place').on('click', function (e) {
+    $('.category-place').on('click', function (e) {
         e.preventDefault();
         e.stopImmediatePropagation();
+        var category = $(this).data('category');
+        $('.category-place').removeClass('active');
+        $(this).addClass('active');
         $.ajax({
             url: window.location.origin + '/' + $(e.target).attr('href'),
             success: loadPlacesData,
@@ -174,9 +167,7 @@ $(function () {
     initRangeListeners();
     loadPlaceAboutData();
     initCategoriesEventsPlace();
+
     searchPlace();
-
     addPlace();
-
-
 });

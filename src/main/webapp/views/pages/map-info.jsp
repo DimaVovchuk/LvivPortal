@@ -7,16 +7,19 @@
     </div>
 
     <div id="map-places" class="animated fadeInDown" style="display: none">
-        <div class="collection with-header z-depth-2" id="search-place">
-            <form id="frmSearch" class="form-wrapper">
-                <input type="search" id="txtSearch" name="txtSearch" alt="Search Criteria"
-                       onkeyup="searchSuggest();"
-                       autocomplete="off" />
-                <input type="submit" id="cmdSearch" name="cmdSearch" value="Search" alt="Run Search" />
-            </form>
-            <br><p><div id="search_suggest" style="border-color: #ffffff;">
-        </div></p>
-        </div>
+        <nav>
+            <div class="nav-wrapper">
+                <form id="frmSearch">
+                    <div class="input-field">
+                        <input id="txtSearch" type="search" name="txtSearch" alt="Search Criteria"
+                               onkeyup="searchSuggest()"
+                               autocomplete="off" required>
+                        <label for="txtSearch"><i class="material-icons">search</i></label>
+                    </div>
+                </form>
+            </div>
+        </nav>
+
         <a class='dropdown-select btn cyan darken-2 waves-effect waves-light' href='#' data-activates='dropdown-places'><cdg:l18n
                 key="places.categories"/></a>
         <ul id='dropdown-places' class='dropdown-content'>
@@ -48,6 +51,7 @@
 
     <div id="map-custom" class="animated fadeInDown">
         <h5 class="center-align"><cdg:l18n key="addnewcustomplace.title"/></h5>
+
         <div id="markerStatus"></div>
         <div class="divider"></div>
         <form method=post enctype=multipart/form-data>
@@ -144,7 +148,8 @@
     </a>
     {{/each}}
 </script>
-<script language="JavaScript" type="text/javascript" src="${pageContext.request.contextPath}/js/ajax_search.js"></script>
+<script language="JavaScript" type="text/javascript"
+        src="${pageContext.request.contextPath}/js/ajax_search.js"></script>
 <script id="route-info-template" type="text/x-handlebars-template">
     {{#each this}}
     <c:set var="dayNumber" value="{{dayNumber}}"/>

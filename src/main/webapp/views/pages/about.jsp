@@ -14,99 +14,78 @@
 
 <body>
 <jsp:include page="/views/elements/header.jsp"/>
-<div class="row">
-    <div class="col s12 m8 l8">
-        <div class="row">
-            <div class="offset-m1 col s12 m11">
-                <h3 class="center-align"><cdg:l18n key="about.about"/></h3>
 
-                <div class="card">
-                    <div class="card-image">
-                        <img src="${pageContext.request.contextPath}/upload/photo/lviv.jpg">
-                    </div>
-                    <div class="card-content">
-                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<cdg:l18n key="about.text1"/></p><br>
+<h3 class="center-align"><cdg:l18n key="about.about"/></h3>
 
-                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<cdg:l18n key="about.text2"/></p>
-
-                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<cdg:l18n key="about.text3"/></p>
-
-                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<cdg:l18n key="about.text4"/></p>
-
-                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<cdg:l18n key="about.text5"/></p>
-
-                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<cdg:l18n key="about.text6"/></p><br>
-
-                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<cdg:l18n key="about.text7"/></p><br>
-
-                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<cdg:l18n key="about.text8"/></p><br>
-
-                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<cdg:l18n key="about.text9"/></p>
-                    </div>
+<div id="about">
+    <div class="row">
+        <div class="col l8 offset-l2 m10 offset-m1 s12 about-info">
+            <div class="card z-depth-2">
+                <div class="card-image">
+                    <img src="${pageContext.request.contextPath}/upload/photo/lviv.jpg">
+                </div>
+                <div class="card-content">
+                    <cdg:l18n key="about.text"/>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="col s12 m4 l4">
-        <form action="/portal?command=send" method="post">
-            <div class="collection with-header z-depth-2">
-                <div class="row">
-                    <div class="col s12 m10 l11">
-                        <h4 class="center-align"><cdg:l18n key="about.contactus"/></h4>
+        <div class="col l8 offset-l2 m10 offset-m1 s12">
+            <div class="card z-depth-2">
+                <div class="card-content">
+                    <form action="/portal?command=send" method="post">
                         <div class="row">
-                            <div class="input-field col s12">
-                                <i class="mdi-action-account-circle prefix"></i>
-                                <label class="active" for="NewName"><cdg:l18n key="about.name"/></label>
-                                <input id="NewName" type="text" name="name">
-                            </div>
-                        </div>
+                            <div class="col l8 offset-l2 m10 offset-m1 s12">
+                                <h5 class="center-align"><cdg:l18n key="about.contactus"/></h5>
 
-                        <div class="row">
-                            <div class="input-field col s12">
-                                <i class="material-icons prefix">email</i>
-                                <input id="icon_prefix" type="text" class="validate" name="<cdg:l18n key="message.email"/>">
-                                <label for="icon_prefix"><cdg:l18n key="about.email"/></label>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="input-field col s12">
-                                <i class="material-icons prefix">message</i>
-                                <div class="row">
-                                    <div class="offset-s1 input-field col s11">
-                                        <select id="icon_pref" name="theme">
-                                            <option value="" disabled selected><cdg:l18n key="message.themechoose"/></option>
-                                            <option value="<cdg:l18n key="message.theme1"/>"><cdg:l18n key="message.theme1"/></option>
-                                            <option value="<cdg:l18n key="message.themevalue"/>"><cdg:l18n key="message.theme2"/></option>
-                                            <option value="<cdg:l18n key="message.theme3"/>"><cdg:l18n key="message.theme3"/></option>
-                                        </select>
-                                        <label for="icon_pref"><cdg:l18n key="message.theme"/></label>
-                                    </div>
+                                <div class="input-field">
+                                    <i class="mdi-action-account-circle prefix"></i>
+                                    <input id="NewName" type="text" name="name">
+                                    <label for="NewName"><cdg:l18n key="about.name"/></label>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="input-field col s12">
+
+                                <div class="input-field">
+                                    <i class="material-icons prefix">email</i>
+                                    <input id="icon_prefix" type="email" name="<cdg:l18n key='message.email'/>">
+                                    <label for="icon_prefix"><cdg:l18n key="about.email"/></label>
+                                </div>
+
+                                <p><i class="material-icons" style="font-size: 2em">message</i><span style="margin-left: 30px"><cdg:l18n
+                                        key="message.themechoose"/></span></p>
+
+                                <div class="input-field">
+                                    <input name="theme" type="radio" id="theme1"
+                                           value="<cdg:l18n key="message.theme1"/>"/>
+                                    <label for="theme1"><cdg:l18n key="message.theme1"/></label>
+                                    <input name="theme" type="radio" id="theme2"
+                                           value="<cdg:l18n key="message.themevalue"/>"/>
+                                    <label for="theme2"><cdg:l18n key="message.theme2"/></label>
+                                    <input name="theme" type="radio" id="theme3"
+                                           value="<cdg:l18n key="message.theme3"/>"/>
+                                    <label for="theme3"><cdg:l18n key="message.theme3"/></label>
+                                </div>
+                                <br>
+
+                                <div class="input-field">
                                     <i class="material-icons prefix">mode_edit</i>
                                     <textarea id="icon_prefix2" class="materialize-textarea" name="message"></textarea>
                                     <label for="icon_prefix2"><cdg:l18n key="about.message"/></label>
                                 </div>
-                            </div>
-                            <div class="form-group center-align">
-                                <label class="col-md-3 control-label"></label>
-                                <button class="btn waves-effect waves-light" type="submit"><cdg:l18n
-                                        key="about.sendmessage"/>
-                                    <i class="mdi-content-send right"></i>
-                                </button>
+
+                                <div class="center-align">
+                                    <button class="btn waves-effect waves-light cyan darken-2" type="submit"><cdg:l18n
+                                            key="about.sendmessage"/></button>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
-        </form>
+        </div>
     </div>
 </div>
 
 <jsp:include page="/views/elements/footer.jsp"/>
+
 </body>
 </html>

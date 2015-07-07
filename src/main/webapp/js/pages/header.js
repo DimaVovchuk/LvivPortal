@@ -59,8 +59,51 @@ var initNewRouteForm = function () {
     });
 };
 
+var activePageHeaderLink = function () {
+    $('.header-link').each(function () {
+        var link = $(this).data('link');
+        var location = window.location.href;
+        if ((/^.*(portal\?command=index).*$/.test(location) || /^(http:\/\/localhost:8080\/)$/.test(location)) && link === 'index') {
+            $(this).addClass('active');
+        }
+        if (/^.*(portal\?command=place).*$/.test(location) && link === 'places') {
+            $(this).addClass('active');
+        }
+        if (/^.*(portal\?command=showMap).*$/.test(location) && link === 'plan') {
+            $(this).addClass('active');
+        }
+        if (/^.*(portal\?command=about).*$/.test(location) && link === 'about') {
+            $(this).addClass('active');
+        }
+    })
+};
+
+var checkReloadPages = function (data) {
+    if (data == "success"){
+        document.location.reload(true);
+    }
+    else{
+    }
+}
+var reloadPage = function () {
+    $('#sign-in-form').on('submit', function (e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        $.ajax({
+            type: 'post',
+            url: window.location.origin + '/portal?command=signIn',
+            data: $('form').serialize(),
+            success: checkReloadPages,
+            error: checkReloadPages,
+        });
+    });
+};
+
 $(function () {
     initMobileSidebar();
     initLoginForm();
     initNewRouteForm();
+    activePageHeaderLink();
+    reloadPage();
+    checkReloadPages();
 });

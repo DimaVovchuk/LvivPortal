@@ -55,52 +55,57 @@ public class VKResponseCommand implements Command {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        String uri = new UriCreator().userInfoUri(token.getVkUserId(), token);
-        String url = executeGet(uri);
-        url = url.substring(13, url.length()-2);
-        try {
-            json = new JSONObject(url);
-            vkObj.setAccessToken(token);
-            userServ = new UserService();
-
-            String photo = (String) json.get("photo_200");
-
-            if (userServ.getUserByVkId(token.getVkUserId()).getVkId() != null) {
-                user = userServ.getUserByVkId(token.getVkUserId());
-
-                session.setAttribute("login", user.getLogin());
-                session.setAttribute("usedID", user.getId());
-                session.setAttribute("vk_id", token.getVkUserId());
-                session.setAttribute("role", user.getRoleID());
-                session.setAttribute("avatar_id", user.getAvatar());
-
-                if (user.getAvatar() != null) {
-                    userImage = userImageService.getByPK(user.getAvatar());
-                } else {
-                    userImage = new UserImage(user.getId(), photo);
-                }
-                session.setAttribute("ava", userImage.getReference());
-
-                loger.info("User sign in with vk");
-                request.getRequestDispatcher("/views/pages/user-cabinet.jsp").forward(request, response);
-
-            } else {
+        if (token != null) {
+            String uri = new UriCreator().userInfoUri(token.getVkUserId(), token);
+            String url = executeGet(uri);
+            url = url.substring(13, url.length() - 2);
+            try {
                 json = new JSONObject(url);
-                String vk_id = token.getVkUserId();
-                String first_name = (String) json.get("first_name");
-                String last_name = (String) json.get("last_name");
-                String email = token.getEmail();
-                String phone = (String) json.get("home_phone");
+                vkObj.setAccessToken(token);
+                userServ = new UserService();
 
-                session.setAttribute("ava", photo);
-                session.setAttribute("vk_id", vk_id);
+                String photo = (String) json.get("photo_200");
 
-                loger.info("User sign up with vk");
-                request.getRequestDispatcher("/portal?command=signUpForm&first=" + first_name + "&last=" + last_name + "&phone=" + phone + "&email=" + email).include(request, response);
+                if (userServ.getUserByVkId(token.getVkUserId()).getVkId() != null) {
+                    user = userServ.getUserByVkId(token.getVkUserId());
+
+                    session.setAttribute("login", user.getLogin());
+                    session.setAttribute("usedID", user.getId());
+                    session.setAttribute("vk_id", token.getVkUserId());
+                    session.setAttribute("role", user.getRoleID());
+                    session.setAttribute("avatar_id", user.getAvatar());
+
+                    if (user.getAvatar() != null) {
+                        userImage = userImageService.getByPK(user.getAvatar());
+                    } else {
+                        userImage = new UserImage(user.getId(), photo);
+                    }
+                    session.setAttribute("ava", userImage.getReference());
+
+                    loger.info("User sign in with vk");
+                    request.getRequestDispatcher("/views/pages/user-cabinet.jsp").forward(request, response);
+
+                } else {
+                    json = new JSONObject(url);
+                    String vk_id = token.getVkUserId();
+                    String first_name = (String) json.get("first_name");
+                    String last_name = (String) json.get("last_name");
+                    String email = token.getEmail();
+                    String phone = (String) json.get("home_phone");
+
+                    session.setAttribute("ava", photo);
+                    session.setAttribute("vk_id", vk_id);
+
+                    loger.info("User sign up with vk");
+                    response.setCharacterEncoding("UTF-8");
+                    request.setCharacterEncoding("UTF-8");
+                    request.getRequestDispatcher("/portal?command=signUpForm&first=" + first_name + "&last=" + last_name + "&phone=" + phone + "&email=" + email).include(request, response);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-        }
-        catch (JSONException e) {
-            e.printStackTrace();
+        } else {
+            request.getRequestDispatcher("/portal?command=index").forward(request, response);
         }
     }
 

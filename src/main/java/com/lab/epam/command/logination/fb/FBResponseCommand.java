@@ -41,48 +41,53 @@ public class FBResponseCommand implements Command {
 
         code = request.getParameter("code");
 
-        if (code == null || code.equals("")) {
-            throw new RuntimeException("ERROR: Didn't get code parameter in callback.");
-        }
-        FBConnection fbConnection = new FBConnection();
-        String accessToken = fbConnection.getAccessToken(code);
-        FBGraph fbGraph = new FBGraph(accessToken);
-        String graph = fbGraph.getFBGraph();
-        try {
-            json = new JSONObject(graph);
-            String photo = "http://graph.facebook.com/" + json.get("id") + "/picture?width=200&height=200";
-            userServ = new UserService();
-            if (userServ.getUserByVkId((String)json.get("id")).getVkId() != null) {
-                user = userServ.getUserByVkId(json.getString("id"));
-                session.setAttribute("login", user.getLogin());
-                session.setAttribute("usedID", user.getId());
-                session.setAttribute("vk_id", json.getString("id"));
-                session.setAttribute("role", user.getRoleID());
-                session.setAttribute("avatar_id", user.getAvatar());
-
-                if (user.getAvatar() != null) {
-                    userImage = userImageService.getByPK(user.getAvatar());
-                } else {
-                    userImage = new UserImage(user.getId(), photo);
-                }
-                session.setAttribute("ava", userImage.getReference());
-
-                loger.info("User sign in with facebook");
-                request.getRequestDispatcher("/views/pages/user-cabinet.jsp").forward(request, response);
-            } else {
+        if (code != null) {
+            FBConnection fbConnection = new FBConnection();
+            String accessToken = fbConnection.getAccessToken(code);
+            FBGraph fbGraph = new FBGraph(accessToken);
+            String graph = fbGraph.getFBGraph();
+            try {
                 json = new JSONObject(graph);
-                String id = (String)json.get("id");
-                String first_name = (String) json.get("first_name");
-                String last_name = (String) json.get("last_name");
-                String email = (String) json.get("email");
-                session.setAttribute("vk_id", id);
-                session.setAttribute("ava", photo);
+                String photo = "http://graph.facebook.com/" + json.get("id") + "/picture?width=200&height=200";
+                userServ = new UserService();
+                if (userServ.getUserByVkId((String) json.get("id")).getVkId() != null) {
+                    user = userServ.getUserByVkId(json.getString("id"));
+                    session.setAttribute("login", user.getLogin());
+                    session.setAttribute("usedID", user.getId());
+                    session.setAttribute("vk_id", json.getString("id"));
+                    session.setAttribute("role", user.getRoleID());
+                    session.setAttribute("avatar_id", user.getAvatar());
 
-                loger.info("User sign up with facebook");
-                request.getRequestDispatcher("/portal?command=signUpForm&first=" + first_name + "&last=" + last_name + "&email=" + email).include(request, response);
+                    if (user.getAvatar() != null) {
+                        userImage = userImageService.getByPK(user.getAvatar());
+                    } else {
+                        userImage = new UserImage(user.getId(), photo);
+                    }
+                    session.setAttribute("ava", userImage.getReference());
+
+                    loger.info("User sign in with facebook");
+                    request.getRequestDispatcher("/views/pages/user-cabinet.jsp").forward(request, response);
+                } else {
+                    json = new JSONObject(graph);
+                    String id = (String) json.get("id");
+                    String first_name = (String) json.get("first_name");
+                    String last_name = (String) json.get("last_name");
+                    String email = (String) json.get("email");
+                    session.setAttribute("vk_id", id);
+                    session.setAttribute("ava", photo);
+                    //System.out.println("/portal?command=signUpForm&first=" + json.get("first_name") + "&last=" + json.get("last_name") + "&email=" + email);
+
+                    loger.info("User sign up with facebook");
+                    response.setCharacterEncoding("UTF-8");
+                    request.setCharacterEncoding("UTF-8");
+                    request.getRequestDispatcher("/portal?command=signUpForm&first=" + first_name + "&last=" + last_name + "&email=" + email).include(request, response);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+                throw new RuntimeException("ERROR: Didn't get code parameter in callback.");
             }
-        } catch (JSONException e) {
-            e.printStackTrace();
+        } else {
+            request.getRequestDispatcher("/portal?command=index").forward(request, response);
         }
     }
 }

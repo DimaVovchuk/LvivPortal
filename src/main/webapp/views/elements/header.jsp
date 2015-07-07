@@ -20,49 +20,64 @@
 						</ul>
 
 						<ul class="right hide-on-med-and-down">
-							<li class="${requestScope.active_home}"><a href="/portal?command=index"><cdg:l18n
+							<li class="header-link" data-link="index"><a href="/portal?command=index"><cdg:l18n
 									key="header.home"/></a></li>
-							<li class="${requestScope.active_places}"><a href="/portal?command=place"><cdg:l18n
+							<li class="header-link" data-link="places"><a href="/portal?command=place"><cdg:l18n
 									key="header.places"/></a></li>
 							<c:choose>
 								<c:when test="${userDataTrip != null }">
-									<li class="${requestScope.active_plan}"><a href="/portal?command=showMap"><cdg:l18n
-											key="header.plan"/></a></li>
+									<li><a href="/portal?command=showMap"><cdg:l18n key="header.plan"/></a></li>
 								</c:when>
 								<c:otherwise>
-									<li class="${requestScope.active_plan}"><a class="modal-trigger"
-									                                           href="#set-date-time"><cdg:l18n
-											key="header.plan"/></a>
-									</li>
+									<li class="header-link" data-link="plan"><a class="modal-trigger"
+									                                            href="#set-date-time"><cdg:l18n
+											key="header.plan"/></a></li>
 								</c:otherwise>
 							</c:choose>
-							<li class="${requestScope.active_places}"><a href="/portal?command=about"><cdg:l18n
+							<li class="header-link" data-link="about"><a href="/portal?command=about"><cdg:l18n
 									key="header.about"/></a></li>
 							<c:set var="pageNumber" scope="request" value="1"/>
 							<li><a class="dropdown-button" href="#" data-activates="lang-dropdown"><cdg:l18n
-									key="header.lang"/><i
-									class="mdi-navigation-arrow-drop-down right"></i></a></li>
+									key="header.lang"/><i class="mdi-navigation-arrow-drop-down right"></i></a></li>
+						</ul>
+
+						<ul class="side-nav" id="mobile-navbar">
+							<li class="header-link" data-link="index"><a href="/portal?command=index"><cdg:l18n
+									key="header.home"/></a></li>
+							<li class="header-link" data-link="places"><a href="/portal?command=place"><cdg:l18n
+									key="header.places"/></a></li>
+							<c:choose>
+								<c:when test="${userDataTrip != null }">
+									<li class="header-link" data-link="plan"><a href="/portal?command=showMap"><cdg:l18n
+											key="header.plan"/></a></li>
+								</c:when>
+								<c:otherwise>
+									<li><a class="modal-trigger" href="#set-date-time"><cdg:l18n key="header.plan"/></a>
+									</li>
+								</c:otherwise>
+							</c:choose>
+							<li class="header-link" data-link="about"><a href="/portal?command=about"><cdg:l18n
+									key="header.about"/></a></li>
+							<c:set var="pageNumber" scope="request" value="1"/>
 						</ul>
 					</c:when>
 					<c:otherwise>
 						<ul class="right hide-on-med-and-down">
-							<li class="${requestScope.active_home}"><a href="/portal?command=index"><cdg:l18n
+							<li class="header-link" data-link="index"><a href="/portal?command=index"><cdg:l18n
 									key="header.home"/></a></li>
-							<li class="${requestScope.active_places}"><a href="/portal?command=place"><cdg:l18n
+							<li class="header-link" data-link="places"><a href="/portal?command=place"><cdg:l18n
 									key="header.places"/></a></li>
 							<c:choose>
 								<c:when test="${userDataTrip != null }">
-									<li class="${requestScope.active_plan}"><a href="/portal?command=showMap"><cdg:l18n
+									<li class="header-link" data-link="plan"><a href="/portal?command=showMap"><cdg:l18n
 											key="header.plan"/></a></li>
 								</c:when>
 								<c:otherwise>
-									<li class="${requestScope.active_plan}"><a class="modal-trigger"
-									                                           href="#set-date-time"><cdg:l18n
-											key="header.plan"/></a>
+									<li><a class="modal-trigger" href="#set-date-time"><cdg:l18n key="header.plan"/></a>
 									</li>
 								</c:otherwise>
 							</c:choose>
-							<li class="${requestScope.active_places}"><a href="/portal?command=about"><cdg:l18n
+							<li class="header-link" data-link="about"><a href="/portal?command=about"><cdg:l18n
 									key="header.about"/></a></li>
 							<c:set var="pageNumber" scope="request" value="1"/>
 							<li><a class="dropdown-button" href="#" data-activates="lang-dropdown"><cdg:l18n
@@ -73,41 +88,65 @@
 									key="header.sign"/></a>
 							</li>
 						</ul>
+
+						<ul class="side-nav" id="mobile-navbar">
+							<li class="header-link" data-link="index"><a href="/portal?command=index"><cdg:l18n
+									key="header.home"/></a></li>
+							<li class="header-link" data-link="places"><a href="/portal?command=place"><cdg:l18n
+									key="header.places"/></a></li>
+							<c:choose>
+								<c:when test="${userDataTrip != null }">
+									<li class="header-link" data-link="plan"><a href="/portal?command=showMap"><cdg:l18n
+											key="header.plan"/></a></li>
+								</c:when>
+								<c:otherwise>
+									<li><a class="modal-trigger" href="#set-date-time"><cdg:l18n key="header.plan"/></a>
+									</li>
+								</c:otherwise>
+							</c:choose>
+							<li class="header-link" data-link="about"><a href="/portal?command=about"><cdg:l18n
+									key="header.about"/></a></li>
+							<c:set var="pageNumber" scope="request" value="1"/>
+							<li class="divider"></li>
+							<li><a class="modal-trigger" href="#sign-in"><i
+									class="mdi-action-account-circle right"></i><cdg:l18n key="header.sign"/></a>
+							</li>
+						</ul>
 					</c:otherwise>
 				</c:choose>
 
-				<ul class="side-nav" id="mobile-navbar">
-					<li class="${requestScope.active_home}"><a href="/portal?command=index"><cdg:l18n
-							key="header.home"/></a></li>
-					<li class="${requestScope.active_places}"><a href="/portal?command=place"><cdg:l18n
-							key="header.places"/></a></li>
-					<li class="${requestScope.active_plan}"><a class="modal-trigger" href="#set-date-time"><cdg:l18n
-							key="header.plan"/></a></li>
-					<c:set var="pageNumber" scope="request" value="1"/>
-					<li class="divider"></li>
-					<li><a class="modal-trigger" href="#sign-in"><i
-							class="mdi-action-account-circle right"></i><cdg:l18n key="header.sign"/></a>
-					</li>
-				</ul>
-
 				<ul class="side-nav" id="user-navbar">
-					<c:choose>
-						<c:when test="${not empty ava and not empty avatar_id}">
-							<li class="center-align" style="padding-top: 10px"><img class="circle responsive-img"
-							                                                        src="${pageContext.request.contextPath}/upload/photo/${ava}"
-							                                                        width="160"></li>
+					<%--<c:choose>--%>
+					<%--<c:when test="${not empty ava and not empty avatar_id}">--%>
+					<%--<li class="center-align" style="padding-top: 10px"><img class="circle responsive-img"--%>
+					<%--src="${pageContext.request.contextPath}/upload/photo/${ava}"--%>
+					<%--width="160"></li>--%>
+					<%--</c:when>--%>
+					<%--<c:when test="${not empty ava and not empty vk_id and empty avatar_id}">--%>
+					<%--<li class="center-align" style="padding-top: 10px"><img class="circle responsive-img"--%>
+					<%--src="${ava}" width="160"></li>--%>
+					<%--</c:when>--%>
+					<%--<c:otherwise>--%>
+					<%--<li class="center-align" style="padding-top: 10px"><img class="circle responsive-img"--%>
+					                                                        <%--src="${pageContext.request.contextPath}/upload/photo/user.png"--%>
+					                                                        <%--width="160"></li>--%>
+					<%--</c:otherwise>--%>
+					<%--</c:choose>--%>
+						<li class="center-align" style="padding-top: 10px"><img class="circle responsive-img"
+							                                             src="${pageContext.request.contextPath}/upload/photo/${avatarReference}" width="160"></li>
+						<c:choose>
+						<c:when test="${role == 1}">
+							<li><a href="/portal?command=adminCabinet"><i class="material-icons left">perm_identity</i><cdg:l18n
+										key="header.mycabinet"/></a></li>
 						</c:when>
-						<c:when test="${not empty ava and not empty vk_id and empty avatar_id}">
-							<li class="center-align" style="padding-top: 10px"><img class="circle responsive-img"
-							                                                        src="${ava}" width="160"></li>
+						<c:when test="${role == 3 and role == 4}">
+							<li><a href="/portal?command=companyInformation&id=" + ${userID}><i
+									class="material-icons left">perm_identity</i><cdg:l18n
+									key="header.mycabinet"/></a></li>
 						</c:when>
 						<c:otherwise>
-							<li class="center-align" style="padding-top: 10px"><img class="circle responsive-img"
-							                                                        src="${pageContext.request.contextPath}/upload/photo/user.png"
-							                                                        width="160"></li>
 						</c:otherwise>
 					</c:choose>
-
 					<li><a href="/portal?command=userWays"><i class="mdi-maps-directions-bike left"></i><cdg:l18n
 							key="header.myrotes"/></a>
 					</li>
@@ -164,4 +203,3 @@
 <script src="${pageContext.request.contextPath}/js/pages/header.js"></script>
 <script src='${pageContext.request.contextPath}/js/<cdg:l18n key="validator.js"/>'></script>
 <div id="start-modal" data-modal="${requestScope.modal}"></div>
-

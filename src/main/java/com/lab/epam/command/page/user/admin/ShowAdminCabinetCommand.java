@@ -18,7 +18,7 @@ import java.io.IOException;
 /**
  * Created by Vasyl on 06.07.2015.
  */
-public class AdminLoginationCommand implements Command {
+public class ShowAdminCabinetCommand implements Command {
     private static final Logger loger = LogManager.getLogger(ClassName.getCurrentClassName());
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
