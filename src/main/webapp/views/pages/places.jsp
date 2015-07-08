@@ -20,9 +20,12 @@
     <div class="section">
         <h3 class="center-align"><cdg:l18n key="places.head"/></h3>
 
+
         <div class="row">
+
             <div class="col l9 m8 s7">
                 <div id="place-page-container" class="row z-depth-2">
+
                     <div class="place-page-navigation z-depth-1"></div>
                     <div id="place-info-collection" class="place-page-content"></div>
                 </div>
@@ -41,9 +44,20 @@
                     <div id="search_suggest" style="border: none"></div>
                 </div>
 
+                        <%--<form id="frmSearch">--%>
+                            <%--<input type="text" id="txtSearch" name="txtSearch" alt="Search Criteria"--%>
+                                   <%--onkeyup="searchSuggest();"  requiredautocomplete="off" />--%>
+                            <%--<input type="submit" id="cmdSearch" name="cmdSearch" value="Search" alt="Run Search" />--%>
+                            <%--<div id="search_suggest">--%>
+                            <%--</div>--%>
+
+                        <%--</form>--%>
+
+
                 <div class="collection with-header z-depth-2">
                     <div class="collection-header"><h4><cdg:l18n key="places.categories"/></h4></div>
                     <div id="category-place">
+
                         <a href="portal?command=placeJSON&category=architecture" data-category="architectture"
                            class="collection-item black-text category-place"><cdg:l18n
                                 key="places.architecture"/></a>
@@ -59,10 +73,14 @@
                         <a href="portal?command=placeJSON&category=restaurants" data-category="restaurants"
                            class="collection-item black-text category-place"><cdg:l18n
                                 key="places.restaurants"/></a>
+                        <a href="portal?command=recomendedPlace" data-category="recommended"
+                           class="collection-item black-text ${requestScope.active_recommend}"><cdg:l18n
+                                key="header.recommend"/></a>
                         <a href="portal?command=placeJSON"
                            class="collection-item black-text category-place active"><cdg:l18n
                                 key="places.all"/></a>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -91,6 +109,7 @@
                     <i class="mdi-content-add"></i>
                 </a>
             </c:if>
+
             <div class="center-align">
                 <a href="/portal?command=placeInformation&place_id={{id}}"><img
                         class="responsive-img place-img"
@@ -113,11 +132,13 @@
                             <i class="material-icons">thumbs_up_down</i>
                         </a>
 
+
                         <a onClick="dislike(this);" data-id="{{id}}" id="down{{id}}"
                            class="down{{id}} btn-floating btn-floating btn-small"
                            href="javascript:" rel="/portal?command=rectRating&rating=-1&place_id={{id}}">
                             <i class="material-icons">thumb_down</i>
                         </a>
+
                     </div>
                 </c:if>
             </div>
@@ -125,6 +146,7 @@
     </div>
     {{/each}}
 </script>
+
 
 <script>
     $(document).click(function () {

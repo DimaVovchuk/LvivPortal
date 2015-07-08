@@ -62,15 +62,15 @@
 			<div class="section center-align">
 				<a class="btn cyan darken-2 waves-effect waves-light" href="/portal?command=showAllUser&requestType=showAllUser"><i
 						class="mdi-action-settings left"></i><cdg:l18n key="admin.allusers"/></a>
-				<a class="btn cyan darken-2 waves-effect waves-light" href="/portal?command=editPlace"><i
+				<a class="btn cyan darken-2 waves-effect waves-light" href="/portal?command=editPlacesAdminPage"><i
 						class="mdi-action-settings left"></i><cdg:l18n key="admin.edit.place"/></a>
 				<a class="btn cyan darken-2 waves-effect waves-light" href="/portal?command=addNewPlace"><i
 						class="mdi-action-settings left"></i><cdg:l18n key="admin.addnewplace"/></a>
 				<a class="btn cyan darken-2 waves-effect waves-light" href="/portal?command=adminStatistic"><i
 						class="mdi-action-settings left"></i><cdg:l18n key="statistic.title"/></a>
-				<a class="btn cyan darken-2 waves-effect waves-light" href="/portal?command=сonfirmCustomPlace"><i
+				<a class="btn cyan darken-2 waves-effect waves-light" href="/portal?command=adminConfirmCustomPlace"><i
 						class="mdi-action-settings left"></i><cdg:l18n key="admin.confirm.custom.place"/></a>
-				<a class="btn cyan darken-2 waves-effect waves-light" href="/portal?command=сonfirmRecommendedPlace"><i
+				<a class="btn cyan darken-2 waves-effect waves-light" href="/portal?command=adminConfirmRecommendedPlace"><i
 						class="mdi-action-settings left"></i><cdg:l18n key="admin.confirm.recommended.place"/></a>
 			</div>
 		</div>

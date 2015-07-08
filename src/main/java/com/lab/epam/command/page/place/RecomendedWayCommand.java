@@ -112,6 +112,9 @@ public class RecomendedWayCommand  implements Command {
                     item.setRating(0);
                 }
                 item.setRating_way(way.getRating());
+                if (way.getName() != null){
+                    item.setName(way.getName());
+                }
                 list.add(item);
                 i++;
             }

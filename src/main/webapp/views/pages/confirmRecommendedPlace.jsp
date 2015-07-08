@@ -21,7 +21,7 @@
 
 		<div class="row">
 			<div class="col l10 offset-l1 m12 s12">
-				<table id="admin-custom-page-table" class="display" cellspacing="0" width="100%">
+				<table id="admin-recom-page-table" class="display" cellspacing="0" width="100%">
 					<thead>
 					<tr>
 						<th>ID</th>
@@ -50,14 +50,14 @@
 <script>
 	var loadPlaces = function () {
 		$.ajax({
-			url: window.location.origin + '/portal?command=confirmCustomPlaceJSON',
+			url: window.location.origin + '/portal?command=confirmRecommendedPlaceJSON',
 			success: updatePlaces,
 			error: updatePlaces
 		})
 	};
 
 	var updatePlaces = function (data) {
-		var table = $('#admin-custom-page-table').DataTable({
+		var table = $('#admin-recom-page-table').DataTable({
 			language: {
 				lengthMenu: '<span style="color: #000; font-size: 15px"><cdg:l18n key="admin.tabledisplay"/></span>' +
 				'<select id="table-display-number" class="browser-default">' +

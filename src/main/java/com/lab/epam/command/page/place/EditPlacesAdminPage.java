@@ -11,13 +11,13 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Created by Галинка on 07.07.2015.
+ * Created by Vasyl on 07.07.2015.
  */
-public class ConfirmRecommendedPlaceCommand implements Command{
+public class EditPlacesAdminPage implements Command{
     private static final Logger loger = LogManager.getLogger(ClassName.getCurrentClassName());
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        loger.info("ConfirmRecommendedPlaceCommand start.");
-        request.getRequestDispatcher("/views/pages/confirmRecommendedPlace.jsp").forward(request, response);
+        loger.info("EditPlacesAdminPage start.");
+        request.getRequestDispatcher("/views/pages/admin-places.jsp").forward(request, response);
     }
 }

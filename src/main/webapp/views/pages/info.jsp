@@ -194,6 +194,15 @@
             Materialize.toast('<cdg:l18n key="place.is.db"/>', 4000);
         }
     }
+
+    var loadAddPlaceFavorite = function (data) {
+        if (data == "1"){
+            Materialize.toast('<cdg:l18n key="place.added.favorite"/>', 4000);
+        }
+        else{
+            Materialize.toast('<cdg:l18n key="place.is.favorite"/>', 4000);
+        }
+    }
 </script>
 
 </body>
