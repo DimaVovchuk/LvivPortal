@@ -27,13 +27,7 @@
                 <div id="place-page-container" class="row z-depth-2">
 
                     <div class="place-page-navigation z-depth-1"></div>
-
-                    <div id="place-info-collection" class="place-page-content">
-
-                        <%--<div ></div>--%>
-
-                    </div>
-
+                    <div id="place-info-collection" class="place-page-content"></div>
                 </div>
             </div>
 
@@ -41,12 +35,13 @@
                 <div class="z-depth-2 search-box" id="search-place">
                     <form id="frmSearch" style="padding: 0 10px">
                         <div class="input-field">
-                            <input id="txtSearch" type="search" name="txtSearch" alt="Search Criteria" onkeyup="searchSuggest()" autocomplete="off" required>
+                            <input id="txtSearch" type="search" name="txtSearch" alt="Search Criteria"
+                                   onkeyup="searchSuggest()" autocomplete="off" required>
                             <label for="txtSearch"><i class="material-icons">search</i><span style="margin-left: 10px">Search</span></label>
                         </div>
                     </form>
 
-                    <p><div id="search_suggest" style="border-color: #ffffff;"></div></p>
+                    <div id="search_suggest" style="border: none"></div>
                 </div>
 
                         <%--<form id="frmSearch">--%>
@@ -64,25 +59,25 @@
                     <div id="category-place">
 
                         <a href="portal?command=placeJSON&category=architecture" data-category="architectture"
-                           class="collection-item black-text ${requestScope.active_architecture}"><cdg:l18n
+                           class="collection-item black-text category-place"><cdg:l18n
                                 key="places.architecture"/></a>
                         <a href="portal?command=placeJSON&category=churches" data-category="churches"
-                           class="collection-item black-text ${requestScope.active_churches}"><cdg:l18n
+                           class="collection-item black-text category-place"><cdg:l18n
                                 key="places.churches"/></a>
                         <a href="portal?command=placeJSON&category=theatres" data-category="theatres"
-                           class="collection-item black-text ${requestScope.active_theatres}"><cdg:l18n
+                           class="collection-item black-text category-place"><cdg:l18n
                                 key="places.theatres"/></a>
                         <a href="portal?command=placeJSON&category=hotels" data-category="hotels"
-                           class="collection-item black-text ${requestScope.active_hotels}"><cdg:l18n
+                           class="collection-item black-text category-place"><cdg:l18n
                                 key="places.hotels"/></a>
                         <a href="portal?command=placeJSON&category=restaurants" data-category="restaurants"
-                           class="collection-item black-text ${requestScope.active_restaurants}"><cdg:l18n
+                           class="collection-item black-text category-place"><cdg:l18n
                                 key="places.restaurants"/></a>
                         <a href="portal?command=recomendedPlace" data-category="recommended"
                            class="collection-item black-text ${requestScope.active_recommend}"><cdg:l18n
                                 key="header.recommend"/></a>
                         <a href="portal?command=placeJSON"
-                           class="collection-item black-text ${requestScope.active_allplaces}"><cdg:l18n
+                           class="collection-item black-text category-place active"><cdg:l18n
                                 key="places.all"/></a>
                     </div>
 
@@ -154,20 +149,20 @@
 
 
 <script>
-    $(document).click(function() {
+    $(document).click(function () {
         notActive();
     });
-    $("#search-place").click(function(event) {
+    $("#search-place").click(function (event) {
         event.stopPropagation();
     });
 </script>
 
 <script>
     var loadWindow = function (data) {
-        if (data == "1"){
+        if (data == "1") {
             Materialize.toast('<cdg:l18n key="place.added"/>', 4000);
         }
-        else{
+        else {
             Materialize.toast('<cdg:l18n key="place.is.db"/>', 4000);
         }
     }
