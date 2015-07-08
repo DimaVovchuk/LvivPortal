@@ -1,10 +1,7 @@
 package com.lab.epam.command.save;
 
 import com.lab.epam.command.controller.Command;
-import com.lab.epam.entity.Place;
-import com.lab.epam.entity.User;
-import com.lab.epam.entity.UserDataAboutTrip;
-import com.lab.epam.entity.Way;
+import com.lab.epam.entity.*;
 import com.lab.epam.helper.ClassName;
 import com.lab.epam.service.PlaceService;
 import com.lab.epam.service.UserService;
@@ -41,6 +38,8 @@ public class SaveWayCommand implements Command {
         placeForWay = (UserDataAboutTrip)session.getAttribute("userDataTrip");
         String login = (String)session.getAttribute("login");
         String name = request.getParameter("name");
+        name = Decoder.decodeStringUtf8(name);
+        System.out.println("name " + name);
         User user = null;
         if (login != null){
             user = userService.getUserByLogin(login);
@@ -55,6 +54,9 @@ public class SaveWayCommand implements Command {
                     wayDays = placeForWay.getDayCount();
                     Way wayNew = new Way(0, beginTrip, endTrip, wayDays);
                     if (name != null){
+                        wayNew.setName(name);
+                    }else {
+                        name = "way";
                         wayNew.setName(name);
                     }
                     Set<Integer> keys = placesDay.keySet();
