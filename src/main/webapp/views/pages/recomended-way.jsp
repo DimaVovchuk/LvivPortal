@@ -84,6 +84,7 @@
       </div>
       <div class="card-content">
                                     <span class="card-title activator grey-text text-darken-4"><div align="center">
+                                      <p><h6><cdg:l18n key="way.name"/> - {{name}}</h6></p>
                                       <p><h6><a a class="modal-trigger" onclick="$('#way_id').val('{{id}}')"
                                                 href="#get-direction"><cdg:l18n key="get.directions"/></a></h6></p>
                                     </div></span>

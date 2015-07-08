@@ -10,7 +10,26 @@ public class WayPlaceImage {
 
     private Integer id;
     private String imageReference;
+    private String name;
     private Date beginDate;
+
+    public WayPlaceImage(Integer id, String imageReference, Date beginDate, String name, Date endDate, List<PlaceDescription> place) {
+        this.id = id;
+        this.imageReference = imageReference;
+        this.beginDate = beginDate;
+        this.name = name;
+        this.endDate = endDate;
+        this.place = place;
+    }
+
+    public String getName() {
+
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public Date getEndDate() {
         return endDate;

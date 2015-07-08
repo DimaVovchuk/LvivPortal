@@ -42,18 +42,30 @@
                         <div class="match-col col l4 m6 s9">
                             <div class="card z-depth-2" style="padding:10px; height:95%">
 
-
+                                <form method="post" style="padding:5px">
                                 <div class="card-image waves-effect waves-block waves-light">
-                                    <a onClick="recommendWay(this);" class="btn-on-img btn-floating btn-large waves-effect waves-light yellow darken-2"
+
+
+                                    <button class="btn modal-trigger btn-floating btn-large waves-effect waves-light red darken-2"
+                                            type="submit" data-target="delete-way"
+                                            onclick="$('#way_id_delete').val('${waysPlaceImage[i].id}')">
+                                        <i class="material-icons">delete</i>
+                                    </button>
+                                    <a onClick="recommendWay(this);" class="btn-floating btn-large waves-effect waves-light yellow darken-2"
                                        href="javascript:" rel="/portal?command=recommendWay&way_id=${waysPlaceImage[i].id}">
                                         <i class="material-icons">grade</i>
                                     </a>
                                     <img class="activator responsive-img place-img"
                                          src="${pageContext.request.contextPath}/upload/photo/${waysPlaceImage[i].imageReference}"
                                          style="width: 100%">
+
                                 </div>
+                                </form>
+
                                 <div class="card-content">
                                     <span class="card-title activator grey-text text-darken-4"><div align="center">
+
+                                        <h6><cdg:l18n key="way.name"/> - ${waysPlaceImage[i].name}</h6>
                                         <h6>${waysPlaceImage[i].beginDate} - ${waysPlaceImage[i].endDate}</h6>
                                     </div></span>
                                     <p><a a class="modal-trigger" onclick="$('#way_id').val('${waysPlaceImage[i].id}')" href="#get-direction"><cdg:l18n key="get.directions"/></a></p>
@@ -138,6 +150,26 @@
             </div>
         </div>
 </div>
+
+<div id="delete-way" class="modal">
+    <div class="modal-content">
+        <p><cdg:l18n key="sure.delete.way"/></p>
+        <form action="/portal/deleteWay" method="post">
+            <input type="hidden" name="command" value="deleteWay">
+            <input id="way_id_delete" name="way_id" type="hidden">
+            <div class="ok-footer">
+                <div class="modal-footer">
+                    <button class="btn waves-effect waves-light cyan darken-2" type="submit" value="true"
+                            name="yes">Ok
+                    </button>
+                    <a class="modal-action modal-close btn waves-effect waves-light cyan darken-2">Cancel
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
 <jsp:include page="/views/elements/footer.jsp"/>
 <jsp:include page="/views/modals/sure-save-way.jsp"/>
 <jsp:include page="/views/modals/name-way.jsp"/>
@@ -165,6 +197,11 @@
         }
     }
 </script>
+
+<script>
+
+</script>
+
 
 <script src="${pageContext.request.contextPath}/js/pages/places.js"></script>
 <script src="${pageContext.request.contextPath}/js/pages/userAllWay.js"></script>

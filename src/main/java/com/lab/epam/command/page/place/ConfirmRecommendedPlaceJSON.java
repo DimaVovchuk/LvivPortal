@@ -1,9 +1,16 @@
-package com.lab.epam.command.page.user;
+package com.lab.epam.command.page.place;
 
+import com.google.gson.Gson;
 import com.lab.epam.command.controller.Command;
-import com.lab.epam.entity.*;
+import com.lab.epam.entity.Place;
+import com.lab.epam.entity.PlaceDescription;
+import com.lab.epam.entity.PlaceDescriptionAndPhoto;
+import com.lab.epam.entity.PlaceImage;
 import com.lab.epam.helper.ClassName;
-import com.lab.epam.service.*;
+import com.lab.epam.service.PlaceDescriptionService;
+import com.lab.epam.service.PlaceImageService;
+import com.lab.epam.service.PlaceService;
+import com.lab.epam.service.UserService;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -13,93 +20,46 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 /**
- * Created by Vasyl on 27.06.2015.
+ * Created by Vasyl on 08.07.2015.
  */
-public class CompanyInformationCommand implements Command {
+public class ConfirmRecommendedPlaceJSON implements Command {
     private static final Logger loger = LogManager.getLogger(ClassName.getCurrentClassName());
     private List<Place> places = new ArrayList<>();
     private List<PlaceDescription> placeDescriptions = new ArrayList<>();
     private List<PlaceImage> placeImage = new ArrayList<>();
-    private UserService userService = new UserService();
     private PlaceService placeService = new PlaceService();
-    private UserImageService userImageService = new UserImageService();
-    private PlaceImageService placeImageService = new PlaceImageService();
     private PlaceDescriptionService placeDescriptionService = new PlaceDescriptionService();
-    private List<Place> wayPlaces = new ArrayList<>();
-    private List<PlaceDescription> wayPlaceDescriptions = new ArrayList<>();
-    private List<PlaceImage> wayPlaceImage = new ArrayList<>();
-    private String language;
+    private PlaceImageService placeImageService = new PlaceImageService();
+    private List<PlaceDescriptionAndPhoto> allConfirmRecommendedPlace = new ArrayList<>();
     private HttpServletRequest request;
-    private WayService wayService = new WayService();
-    private Map<Way, List<PlaceDescriptionAndPhoto>> allWayInfo = new HashMap<>();
-
+    private String language;
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        UserService userservice = new UserService();
         HttpSession session = request.getSession();
-        Map<Way, List<PlaceDescriptionAndPhoto>> wayListMap = null;
-        List<Way> userWayList = null;
         ResourceBundle resourceBandle = (ResourceBundle) session.getAttribute("bundle");
         Locale locale = resourceBandle.getLocale();
         language = locale.getLanguage();
         this.request = request;
 
+        places = placeService.getAllConfirmRecommendedPlace();
 
-        String userID = request.getParameter("id");
-        System.out.println("userID in compInfo " + userID);
-        if (userID != null) {
-            Integer id = Integer.valueOf(userID);
-            User userData = userService.getByPK(id);
-            UserImage avatar = userImageService.getUserImageByUserIdOne(id);
-            List<UserImage> userGalery = userImageService.getUserImageByUserId(id);
-
-            places = placeService.getPlaceByUserId(id);
-            if (places != null && !places.isEmpty()) {
-                placeDescriptions = getPlaceDescriptionByPlace(places);
-                placeImage = getPlaceImageByPlace(places);
-            }
-            List<PlaceDescriptionAndPhoto> placesPageInfo = null;
-            if (places != null && !places.isEmpty()) {
-                placesPageInfo = getPlaceDescriptionAndPhotoList(places, placeDescriptions, placeImage);
-            }
-
-            request.setAttribute("placesInfo", placesPageInfo);
-            session.setAttribute("userInfo", userData);
-            session.setAttribute("avatar", avatar);
-            session.setAttribute("userGalery", userGalery);
+        allConfirmRecommendedPlace.clear();
+        if (places != null && !places.isEmpty()) {
+            placeDescriptions = getPlaceDescriptionByPlace(places);
+            placeImage = getPlaceImageByPlace(places);
+            allConfirmRecommendedPlace = getPlaceDescriptionAndPhotoList(places, placeDescriptions, placeImage);
         }
-
-        if (userID != null) {
-            Integer id = Integer.valueOf(userID);
-            userWayList = wayService.getWaysByUserId(id);
-            allWayInfo.clear();
-            if (userWayList != null && !userWayList.isEmpty()) {
-                for (Way oneWay :userWayList) {
-                    wayPlaces = placeService.getPlaceByWayId(oneWay.getId());
-
-                    if (wayPlaces != null && !wayPlaces.isEmpty()) {
-                        wayPlaceDescriptions = getPlaceDescriptionByPlace(wayPlaces);
-                        wayPlaceImage = getPlaceImageByPlace(wayPlaces);
-                    }
-                    List<PlaceDescriptionAndPhoto> wayPlacesPageInfo = null;
-                    if (wayPlaces != null && !wayPlaces.isEmpty()) {
-                        wayPlacesPageInfo = getPlaceDescriptionAndPhotoList(wayPlaces, wayPlaceDescriptions, wayPlaceImage);
-                    }
-
-                    allWayInfo.put(oneWay,wayPlacesPageInfo);
-                }
-            } else{
-                request.setAttribute("allWayInfo", allWayInfo);
-            }
-
-            request.setAttribute("allWayInfo", allWayInfo);
-        }
-
-        request.getRequestDispatcher("/views/pages/company-page.jsp").forward(request, response);
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write(new Gson().toJson(allConfirmRecommendedPlace));
     }
-
     private List<PlaceDescription> getPlaceDescriptionByPlace(List<Place> places) {
         Integer place_id;
         PlaceDescription placeDescription;
@@ -109,10 +69,9 @@ public class CompanyInformationCommand implements Command {
             placeDescription = placeDescriptionService.getPlaceDescriptionByIdPlace(place_id, language);
             placeDescriptions.add(placeDescription);
         }
-        System.out.println("placeDescriptions size is " + placeDescriptions.size());
+        loger.info("placeDescriptions size is " + placeDescriptions.size());
         return placeDescriptions;
     }
-
 
     private List<PlaceImage> getPlaceImageByPlace(List<Place> places) {
         List<PlaceImage> placeImage = new ArrayList<>();
@@ -151,7 +110,6 @@ public class CompanyInformationCommand implements Command {
         }
         return list;
     }
-
 
     private Boolean isInFolder(String fileName) {
         ClassLoader classLoader = getClass().getClassLoader();

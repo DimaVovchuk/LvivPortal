@@ -162,20 +162,61 @@
     {{/each}}
 </script>
 <script>
-    $(function () {
-        $('#frmSearch').on('submit', function (e) {
-            notActive();
-            e.preventDefault();
-            e.stopImmediatePropagation();
-            $.ajax({
-                url: window.location.origin + '/portal?command=placeJSON',
-                data: $('#frmSearch').serialize(),
-                success: loadPlacesData,
-                error: loadPlacesData
-            });
+//    $(function () {
+//        $('#frmSearch').on('submit', function (e) {
+//            notActive();
+//            e.preventDefault();
+//            e.stopImmediatePropagation();
+//            $.ajax({
+//                url: window.location.origin + '/portal?command=placeJSON',
+//                data: $('#frmSearch').serialize(),
+//                success: loadPlacesData,
+//                error: loadPlacesData
+//            });
+//        });
+//    });
+
+var searchPlace = function () {
+    var str = encode_utf8(document.getElementById('txtSearch').value);
+    //alert(str);
+    notActive();
+    var strArr = str.split(" ");
+    str='';
+    for(i=0; i < strArr.length; i++) {
+        if (i == strArr.length - 1){
+            str += strArr[i];
+        } else{
+            str += strArr[i] + '+';
+        }
+    }
+    $.ajax({
+        url: window.location.origin + '/portal?command=placeJSON&txtSearch=' + str,
+        success: loadPlacesData,
+        error: loadPlacesData
+    });
+};
+
+    $('#frmSearch').on('submit', function (e) {
+        notActive();
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        $.ajax({
+            type: 'post',
+            url: window.location.origin + '/portal?command=placeJSON',
+            data: $('#frmSearch').serialize(),
+            success: loadPlacesData,
+            error: loadPlacesData
         });
     });
 
+var loadPlacesData = function (data) {
+    if (!data) return false;
+    var source = $("#place-info-template").html();
+    var template = Handlebars.compile(source);
+    var html = template(data);
+    $('#place-info-collection').html(html);
+    notActive();
+};
     $(document).click(function() {
         notActive();
     });

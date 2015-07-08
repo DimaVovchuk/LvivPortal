@@ -89,9 +89,9 @@ public class UserAllWayCommand implements Command {
             for (Way way : ways) {
                 WayPlaceImage item = new WayPlaceImage();
                 item.setId(way.getId());
-                System.out.println("beginn " + way.getBegin());
+                //System.out.println("beginn " + way.getBegin());
                 item.setBeginDate(way.getBegin());
-                System.out.println("end " + way.getEnd());
+                //System.out.println("end " + way.getEnd());
                 item.setEndDate(way.getEnd());
                 if (wayPlaceImages.size() <= way.getId()){
                     if (wayPlaceImages.get(way.getId()) != null){
@@ -100,6 +100,9 @@ public class UserAllWayCommand implements Command {
                 }
                 if (way_place.size() <= way.getId()){
                     item.setPlace(way_place.get(way.getId()));
+                }
+                if (way.getName() != null){
+                    item.setName(way.getName());
                 }
                 list.add(item);
             }
@@ -167,7 +170,7 @@ public class UserAllWayCommand implements Command {
                 if (placeImage == null) {
                     place_id = place.getId();
                     placeImage = placeImageService.getPlaceImageByPlaceId(place_id);
-                    if (placeImage.getReference() == null || !isInFolder(placeImage.getReference())) {
+                    if (placeImage == null || placeImage.getReference() == null || !isInFolder(placeImage.getReference())) {
                         placeImage = new PlaceImage(place_id, "default_building.jpg");
                     }
                 }

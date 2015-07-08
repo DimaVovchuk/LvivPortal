@@ -17,6 +17,28 @@ public class WayPlaceImageRating {
     private Integer rating;
     private Integer rating_way;
 
+    public WayPlaceImageRating(Integer id, String imageReference, Date beginDate, Date endDate, List<PlaceDescription> place, Integer rating, Integer rating_way, String name) {
+        this.id = id;
+        this.imageReference = imageReference;
+        this.beginDate = beginDate;
+        this.endDate = endDate;
+        this.place = place;
+        this.rating = rating;
+        this.rating_way = rating_way;
+        this.name = name;
+    }
+
+    public String getName() {
+
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    private String name;
+
     public WayPlaceImageRating() {
     }
 

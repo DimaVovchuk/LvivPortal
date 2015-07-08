@@ -136,21 +136,43 @@ var addPlace = function () {
 };
 
 var searchPlace = function () {
+    var str = encode_utf8(document.getElementById('txtSearch').value);
+    notActive();
+    var strArr = str.split(" ");
+    str='';
+    for(i=0; i < strArr.length; i++) {
+        if (i == strArr.length - 1){
+            str += strArr[i];
+        } else{
+        str += strArr[i] + '+';
+        }
+    }
+        $.ajax({
+            url: window.location.origin + '/portal?command=placeJSON&txtSearch=' + str,
+            success: loadPlacesData,
+            error: loadPlacesData
+        });
+};
+
+var searchPlaceEnter = function () {
     $('#frmSearch').on('submit', function (e) {
         notActive();
         e.preventDefault();
         e.stopImmediatePropagation();
+       // e.stopPropagation();
         $.ajax({
+            type: 'post',
             url: window.location.origin + '/portal?command=placeJSON',
             data: $('#frmSearch').serialize(),
             success: loadPlacesData,
             error: loadPlacesData
         });
     });
-};
+
+}
 
 var initCategoriesEventsPlace = function () {
-    $('.category-place').on('click', function (e) {
+    $('#category-place').on('click', function (e) {
         e.preventDefault();
         e.stopImmediatePropagation();
         var category = $(this).data('category');
@@ -169,6 +191,6 @@ $(function () {
     loadPlaceAboutData();
     initCategoriesEventsPlace();
 
-    searchPlace();
+    searchPlaceEnter();
     addPlace();
 });

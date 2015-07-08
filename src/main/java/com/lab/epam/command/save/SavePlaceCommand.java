@@ -1,5 +1,6 @@
 package com.lab.epam.command.save;
 
+import com.google.gson.Gson;
 import com.lab.epam.command.controller.Command;
 import com.lab.epam.entity.User;
 import com.lab.epam.helper.ClassName;
@@ -28,6 +29,7 @@ public class SavePlaceCommand implements Command {
 
         UserService userService = new UserService();
         PlaceService placeService = new PlaceService();
+        Integer is_saved = 0;
 
         String place_idString = request.getParameter("place_id");
         loger.info("Place id is " + place_idString);
@@ -45,13 +47,12 @@ public class SavePlaceCommand implements Command {
         if (user != null && place_id != 0){
             if (placeService.getPlaceByUserIdPlaceId(place_id, user.getId()) == null){
                 placeService.createPlaceUser(place_id, user.getId());
-               // System.out.println(placeService.getPlaceByUserIdPlaceId(place_id, user.getId()));
+                is_saved = 1;
             }
         }
-        request.setAttribute("place_id", place_id);
-        request.getRequestDispatcher("portal?command=placeInformation").forward(request, response);
-
-
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write(new Gson().toJson(is_saved));
     }
 
 

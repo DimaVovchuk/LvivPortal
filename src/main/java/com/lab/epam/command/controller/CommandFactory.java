@@ -20,6 +20,7 @@ import com.lab.epam.command.page.createtrip.CreateUserDataCommand;
 import com.lab.epam.command.page.createtrip.CreateUserDataFromDBCommand;
 import com.lab.epam.command.page.delete.DeleteDayCommand;
 import com.lab.epam.command.page.delete.DeletePlaceFromTripCommand;
+import com.lab.epam.command.page.delete.DeleteWayCommand;
 import com.lab.epam.command.page.index.IndexCommand;
 import com.lab.epam.command.page.map.RoutesCommand;
 import com.lab.epam.command.page.map.ShowMapCommand;
@@ -94,7 +95,7 @@ public class CommandFactory {
         commands.put("commercialJSON", new CommercialJSONCommand());
         commands.put("addCustomPlace", new AddCustomPlaceCommand());
         commands.put("saveCustomPlace", new SaveCustomPlaceCommand());
-        commands.put("authorVK", new VKAuthorizationCommand());
+        //commands.put("authorVK", new VKAuthorizationCommand());
         commands.put("authorRespVK", new VKResponseCommand());
         commands.put("deleteImageByDB", new DeleteImageCommand());
         commands.put("authorFB", new FBAuthorizationCommand());
@@ -117,6 +118,12 @@ public class CommandFactory {
         commands.put("adminCabinet", new ShowAdminCabinetCommand());
         commands.put("ñonfirmCustomPlace", new ConfirmCustomPlaceCommand());
         commands.put("ñonfirmRecommendedPlace", new ConfirmRecommendedPlaceCommand());
+        commands.put("deleteWay", new DeleteWayCommand());
+        commands.put("adminConfirmCustomPlace", new ConfirmCustomPlaceCommand());
+        commands.put("adminConfirmRecommendedPlace", new ConfirmRecommendedPlaceCommand());
+        commands.put("editPlacesAdminPage", new EditPlacesAdminPage());
+        commands.put("confirmCustomPlaceJSON", new ConfirmCustomPlaceJSON());
+        commands.put("confirmRecommendedPlaceJSON", new ConfirmRecommendedPlaceJSON());
     }
 
     public static void createCommand(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -327,4 +327,26 @@ public class PlaceService {
             loger.warn("Cant set is_recommended by place_id " + place_id);
         }
     }
+
+    public List<Place> getAllConfirmCustomPlace() {
+        List<Place> list=null;
+        try {
+            list = mySqlPlaceDao.getAllConfirmCustomPlace();
+        } catch (PersistException e) {
+            e.printStackTrace();
+            loger.warn("Cant find user custom places");
+        }
+        return list;
+    }
+
+    public List<Place> getAllConfirmRecommendedPlace() {
+        List<Place> list=null;
+        try {
+            list = mySqlPlaceDao.getAllConfirmRecommendedPlace();
+        } catch (PersistException e) {
+            e.printStackTrace();
+            loger.warn("Cant find user Recommended places");
+        }
+        return list;
+    }
 }
