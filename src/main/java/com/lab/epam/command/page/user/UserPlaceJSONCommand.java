@@ -31,9 +31,9 @@ public class UserPlaceJSONCommand implements Command {
     private PlaceService placeService = new PlaceService();
     private PlaceDescriptionService placeDescriptionService = new PlaceDescriptionService();
     private PlaceImageService placeImageService = new PlaceImageService();
-    List<PlaceDescriptionAndPhoto> userPlacePageInfo = new ArrayList<>();
+    private List<PlaceDescriptionAndPhoto> userPlacePageInfo = new ArrayList<>();
     private HttpServletRequest request;
-    String language;
+    private String language;
 
     public void execute(HttpServletRequest request,
                         HttpServletResponse response) throws ServletException, IOException {

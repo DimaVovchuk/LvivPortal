@@ -146,12 +146,12 @@
 										key="header.mycabinet"/></a></li>
 						</c:when>
 						<c:when test="${role == 3}">
-							<li><a href="/portal?command=companyInformation&id=" + ${userID}><i
+							<li><a href="/portal?command=companyInformation&id=${sessionScope.userID}"><i
 									class="material-icons left">perm_identity</i><cdg:l18n
 									key="header.mycabinet"/></a></li>
 						</c:when>
 							<c:when test="${role == 4}">
-								<li><a href="/portal?command=companyInformation&id=" + ${userID}><i
+								<li><a href="/portal?command=companyInformation&id=${sessionScope.userID}"><i
 										class="material-icons left">perm_identity</i><cdg:l18n
 										key="header.mycabinet"/></a></li>
 							</c:when>

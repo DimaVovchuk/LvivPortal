@@ -810,6 +810,19 @@ footer.page-footer {
     margin-right: 20px;
 }
 
+#company-response-form {
+    width: 500px;
+    max-width: 80%;
+}
+
+#company-gallery-modal {
+    padding: 20px;
+}
+
+#company-gallery-modal .card {
+    padding: 20px;
+}
+
 /* *** EDIT PROFILE PAGE *** */
 #edit-profile .file-field .btn {
     padding: 0 10px;

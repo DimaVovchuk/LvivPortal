@@ -119,6 +119,11 @@ public class CommandFactory {
         commands.put("ñonfirmCustomPlace", new ConfirmCustomPlaceCommand());
         commands.put("ñonfirmRecommendedPlace", new ConfirmRecommendedPlaceCommand());
         commands.put("deleteWay", new DeleteWayCommand());
+        commands.put("adminConfirmCustomPlace", new ConfirmCustomPlaceCommand());
+        commands.put("adminConfirmRecommendedPlace", new ConfirmRecommendedPlaceCommand());
+        commands.put("editPlacesAdminPage", new EditPlacesAdminPage());
+        commands.put("confirmCustomPlaceJSON", new ConfirmCustomPlaceJSON());
+        commands.put("confirmRecommendedPlaceJSON", new ConfirmRecommendedPlaceJSON());
     }
 
     public static void createCommand(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
