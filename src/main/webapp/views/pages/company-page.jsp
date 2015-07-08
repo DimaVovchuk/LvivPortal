@@ -70,6 +70,12 @@
                         <cdg:l18n key="company.about"/>: ${userInfo.about}<br><br>
                         <cdg:l18n key="company.rating"/>: ${userInfo.rating}
                     </p>
+
+                    <p>
+                        <a href="#company-response-form"
+                           class="modal-trigger btn cyan darken-2 waves-effect waves-light"><cdg:l18n
+                                key="company.response"/></a>
+                    </p>
                 </div>
             </div>
 
@@ -80,16 +86,11 @@
             <h4 class="center-align"><cdg:l18n key="company.gallery"/></h4>
 
             <div class="card" style="padding: 10px">
-                <div class="center-align">
-                    <div class="fotorama" data-transition="crossfade" data-nav="thumbs" data-loop="true"
-                         data-autoplay="true" data-allowfullscreen="true" data-keyboard="true" data-width="100%"
-                         data-height="50%" data-fit="scaledown">
-                        <c:forEach items="${userGalery}" var="elem">
-                            <img class="materialboxed" width="200" height="200"
-                                 src="${pageContext.request.contextPath}/upload/photo/${elem.reference}">
-                        </c:forEach>
-                    </div>
-                </div>
+                <c:forEach items="${userGalery}" var="elem">
+                    <a href="" class="modal-trigger company-gallery-trigger" data-image="${elem.reference}">
+                        <img class="responsive-img" width="200" src="${pageContext.request.contextPath}/upload/photo/${elem.reference}">
+                    </a>
+                </c:forEach>
             </div>
 
             <div class="section">
@@ -158,11 +159,63 @@
     </div>
 </div>
 
+<div id="company-response-form" class="modal">
+    <form action="">
+        <div class="modal-content" style="padding: 10px 20px">
+            <div class="input-field">
+                <i class="material-icons prefix">mode_edit</i>
+                <textarea id="icon_prefix2" class="materialize-textarea" name="message"></textarea>
+                <label for="icon_prefix2"><cdg:l18n key="company.response"/></label>
+            </div>
+        </div>
+        <div class="divider"></div>
+        <div class="section center-align">
+            <button class="btn waves-effect waves-light cyan darken-2 modal-action modal-close" type="submit">
+                <cdg:l18n key="about.sendmessage"/></button>
+        </div>
+    </form>
+</div>
+
+<div id="company-gallery-modal" class="modal">
+    <div class="section center-align">
+        <img src="" id="company-gallery-modal-image" class="responsive-img" style="max-width: 80%; max-height: 70%">
+    </div>
+
+    <div class="card">
+        <form action="" method="post">
+            <div class="input-field">
+            <textarea id="gallery-comment" class="materialize-textarea"></textarea>
+                <label for="gallery-comment"><cdg:l18n key="place.message"/></label>
+            </div>
+            <div class="section">
+                <div class="divider"></div>
+            </div>
+            <button type="submit" class="waves-effect waves-light btn cyan darken-2"><cdg:l18n
+                    key="place.sendcomment"/></button>
+        </form>
+    </div>
+
+    <div class="card valign-wrapper">
+        <div class="valign">
+            <a href="#"><img src="${pageContext.request.contextPath}/upload/photo/user.png"/></a>
+        </div>
+        <div class="valign" style="margin-left: 20px">
+            Comment
+        </div>
+    </div>
+</div>
+
 <jsp:include page="/views/elements/footer.jsp"/>
 
 <script>
     $(".match-col").matchHeight({
         property: 'height'
+    });
+
+    $('.company-gallery-trigger').on('click', function () {
+        var image = '${pageContext.request.contextPath}/upload/photo/' + $(this).data('image');
+        $('#company-gallery-modal-image').attr('src', image);
+        $('#company-gallery-modal').openModal();
     });
 
     var img = $('.place-img');
