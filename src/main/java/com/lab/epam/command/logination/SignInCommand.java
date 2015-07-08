@@ -41,7 +41,7 @@ public class SignInCommand implements Command {
         if (userStatus !=2 && user.getPassword() != null && user.getPassword().equals(MD5Creator.getMD5(password + login))) {
             Integer userID = user.getId();
             session.setAttribute("login", login);
-            session.setAttribute("usedID", userID);
+            session.setAttribute("userID", userID);
             session.setAttribute("role", user.getRoleID());
 
             String avatarReference = null;

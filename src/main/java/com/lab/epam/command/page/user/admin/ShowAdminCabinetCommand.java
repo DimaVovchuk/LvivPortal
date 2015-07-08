@@ -24,7 +24,7 @@ public class ShowAdminCabinetCommand implements Command {
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         loger.info("Admin Logination Command");
         HttpSession session = request.getSession();
-        Integer userID = (Integer) session.getAttribute("usedID");
+        Integer userID = (Integer) session.getAttribute("userID");
         loger.info("userID " + userID);
 
         UserService userService = new UserService();

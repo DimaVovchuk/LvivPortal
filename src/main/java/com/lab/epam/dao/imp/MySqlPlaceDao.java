@@ -49,6 +49,10 @@ public class MySqlPlaceDao extends AbstractJDBCDao<Place, Integer> {
             " WHERE up.deleted=false AND p.deleted = false AND p.visible = true GROUP BY place_id ORDER BY COUNT(place_id) DESC;";
     private static final String INSERT_INTO_PLACE = "INSERT INTO place (latitude,longitude,category_id,rating,visible,place_time,deleted,recomended,custom) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?); ";
     private static final String GET_LAST_PLACE_INDEX = "SELECT id FROM place WHERE id = LAST_INSERT_ID();";
+    private static final String GET_ALL_CONFIRM_CUSTOM_PLACE = "SELECT p.id, p.latitude, p.longitude, p.category_id, p.rating, p.visible, p.place_time, p.deleted, p.recomended, p.custom,p.recom_time, p.is_recommended \n" +
+            "FROM place AS p JOIN user_place AS up WHERE up.place_id = p.id and p.custom = true and p.deleted=false and up.deleted =false AND p.is_recommended = true";
+    private static final String GET_ALL_CONFIRM_RECOMMENDED_PLACE = "SELECT p.id, p.latitude, p.longitude, p.category_id, p.rating, p.visible, p.place_time, p.deleted, p.recomended, p.custom,p.recom_time, p.is_recommended \n" +
+            "FROM place AS p JOIN user_place AS up WHERE up.place_id = p.id and p.visible = true and p.custom = false and p.deleted=false and up.deleted =false AND p.is_recommended = true";
 
     private class PersistGroup extends Place {
         public void setId(int id) {
@@ -87,6 +91,34 @@ public class MySqlPlaceDao extends AbstractJDBCDao<Place, Integer> {
             connection.putback(conn);
         }
         return FavoritePlacesByRatinList;
+    }
+
+    public List<Place> getAllConfirmRecommendedPlace() throws PersistException {
+        List<Place> list;
+        Connection conn = connection.retrieve();
+        try (PreparedStatement statement = conn.prepareStatement(GET_ALL_CONFIRM_RECOMMENDED_PLACE)) {
+            ResultSet rs = statement.executeQuery();
+            list = parseResultSet(rs);
+        } catch (Exception e) {
+            throw new PersistException(e);
+        } finally {
+            connection.putback(conn);
+        }
+        return list;
+    }
+
+    public List<Place> getAllConfirmCustomPlace() throws PersistException {
+        List<Place> list;
+        Connection conn = connection.retrieve();
+        try (PreparedStatement statement = conn.prepareStatement(GET_ALL_CONFIRM_CUSTOM_PLACE)) {
+            ResultSet rs = statement.executeQuery();
+            list = parseResultSet(rs);
+        } catch (Exception e) {
+            throw new PersistException(e);
+        } finally {
+            connection.putback(conn);
+        }
+        return list;
     }
 
     public List<Place> getAllVisibleUserCustomPlace(Integer usedID) throws PersistException {
