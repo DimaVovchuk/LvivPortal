@@ -82,7 +82,8 @@
             <div class="card" style="padding: 10px">
                 <div class="center-align">
                     <div class="fotorama" data-transition="crossfade" data-nav="thumbs" data-loop="true"
-                         data-autoplay="true" data-allowfullscreen="true" data-keyboard="true" data-width="100%" data-height="50%" data-fit="scaledown">
+                         data-autoplay="true" data-allowfullscreen="true" data-keyboard="true" data-width="100%"
+                         data-height="50%" data-fit="scaledown">
                         <c:forEach items="${userGalery}" var="elem">
                             <img class="materialboxed" width="200" height="200"
                                  src="${pageContext.request.contextPath}/upload/photo/${elem.reference}">
@@ -100,7 +101,14 @@
             <ul class="collapsible" data-collapsible="accordion">
                 <c:forEach var="mapelem" items="${allWayInfo}">
                     <li>
-                        <div class="collapsible-header"><cdg:l18n key="company.routename"/>:${mapelem.key.name}</div>
+                        <div class="collapsible-header row">
+                            <div class="col s6 left-align">
+                                <cdg:l18n key="company.routename"/>: ${mapelem.key.name}
+                            </div>
+                            <div class="col s6 right-align">
+                                <a href="#" style="text-transform: uppercase"><cdg:l18n key="company.order.route"/></a>
+                            </div>
+                        </div>
                         <div class="collapsible-body">
                             <div class="collection">
                                 <c:forEach var="listelem" items="${mapelem.value}">
@@ -110,7 +118,9 @@
 
                                         <div class="valign-wrapper" style="height:100%">
                                             <div class="valign">
-                                                <div class="truncate"><b>${listelem.name}</b><br>${listelem.adress}<br><cdg:l18n key="company.rating"/>: ${listelem.rating}
+                                                <div class="truncate">
+                                                    <b>${listelem.name}</b><br>${listelem.adress}<br><cdg:l18n
+                                                        key="company.rating"/>: ${listelem.rating}
                                                 </div>
                                             </div>
                                         </div>
