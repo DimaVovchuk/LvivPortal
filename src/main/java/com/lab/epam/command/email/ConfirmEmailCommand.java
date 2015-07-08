@@ -4,8 +4,10 @@ import com.lab.epam.command.controller.Command;
 import com.lab.epam.dao.PersistException;
 import com.lab.epam.dao.imp.MySqlUserDao;
 import com.lab.epam.entity.User;
+import com.lab.epam.entity.UserImage;
 import com.lab.epam.helper.ClassName;
 import com.lab.epam.md5.MD5Creator;
+import com.lab.epam.service.UserImageService;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -29,6 +31,7 @@ private static final Logger loger = LogManager.getLogger(ClassName.getCurrentCla
         MySqlUserDao mySqlUserDao = new MySqlUserDao();
         User userByLogin = mySqlUserDao.getUserByLogin(login);
         String md5Phone = MD5Creator.getMD5(userByLogin.getPhone());
+        HttpSession session = request.getSession();
         if(md5Phone.equals(param)){
             if(userByLogin.getStatus() == 3){
                 response.sendRedirect("portal?command=index");
@@ -43,10 +46,26 @@ private static final Logger loger = LogManager.getLogger(ClassName.getCurrentCla
             e.printStackTrace();
             loger.warn("Cant update user");
         }
-        HttpSession session = request.getSession();
+
+        String avatarReference = null;
+        Integer userAvatarID = userByLogin.getAvatar();
+
+        if (userAvatarID != null && userAvatarID!=0) {
+            UserImageService userImageService = new UserImageService();
+            UserImage userImagee = userImageService.getByPK(userAvatarID);
+            avatarReference = userImagee.getReference();
+        }
+
+        if(avatarReference !=null) {
+            session.setAttribute("avatarReference", avatarReference);
+        } else{
+            session.setAttribute("avatarReference", "user.png");
+        }
+
         session.setAttribute("login",login);
         session.setAttribute("usedID", userByLogin.getId());
         session.setAttribute("role",userByLogin.getRoleID());
+        session.setAttribute("avatarReference",avatarReference);
         loger.info("User " +login+ " signing in ");
         response.sendRedirect("portal?command=index");
     }
