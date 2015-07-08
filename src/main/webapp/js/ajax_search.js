@@ -103,6 +103,8 @@ function suggestOut(div_value) {
         if (value != ''){
             document.getElementById('txtSearch').value = value;
             document.getElementById('search_suggest').innerHTML = '';
+            searchPlace();
+            //document.forms["myform"].submit();//
         }
 }
 
@@ -110,6 +112,7 @@ function setSearchRoute(value) {
     if (value != ''){
         document.getElementById('txtSearchRoute').value = value;
         document.getElementById('search_suggest_route').innerHTML = '';
+        searchPlace();
     }
 }
 

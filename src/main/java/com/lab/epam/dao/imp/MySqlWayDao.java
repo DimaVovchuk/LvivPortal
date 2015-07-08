@@ -301,6 +301,7 @@ public class MySqlWayDao extends AbstractJDBCDao<Way, Integer> {
 
     }
 
+
 }
 
 
