@@ -91,8 +91,9 @@
         <div>
           <%--<p><cdg:l18n key="rating.way"/>: <c:out value="{{rating_way}}"/></p>--%>
         </div>
-<c:if test="${login!=null}">
         <div style="height: 40px"></div>
+<c:if test="${login!=null}">
+
         <div class="bottom-right-btn">
           <a onClick="like(this);" data-id="{{id}}" data-rating="{{rating}}" id="up{{id}}" class="up{{id}} btn-floating btn-floating btn-small"
              href="javascript:" rel="/portal?command=rectRatingWay&rating=1&way_id={{id}}">
@@ -111,8 +112,9 @@
           </a>
 
         </div>
-      </div>
+
   </c:if>
+      </div>
       <div class="card-reveal">
         <span class="card-title grey-text text-darken-4"><cdg:l18n key="places.way"/></span>
         <p>
