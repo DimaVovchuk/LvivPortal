@@ -24,6 +24,8 @@
 									key="header.home"/></a></li>
 							<li class="header-link" data-link="places"><a href="/portal?command=place"><cdg:l18n
 									key="header.places"/></a></li>
+							<li class="header-link" data-link="recommended"><a href="/portal?command=recomendedWay"><cdg:l18n
+									key="recomended.way"/></a></li>
 							<c:choose>
 								<c:when test="${userDataTrip != null }">
 									<li><a href="/portal?command=showMap"><cdg:l18n key="header.plan"/></a></li>
@@ -46,6 +48,8 @@
 									key="header.home"/></a></li>
 							<li class="header-link" data-link="places"><a href="/portal?command=place"><cdg:l18n
 									key="header.places"/></a></li>
+							<li class="header-link" data-link="recommended"><a href="/portal?command=recomendedWay"><cdg:l18n
+									key="recomended.way"/></a></li>
 							<c:choose>
 								<c:when test="${userDataTrip != null }">
 									<li class="header-link" data-link="plan"><a href="/portal?command=showMap"><cdg:l18n
@@ -67,6 +71,8 @@
 									key="header.home"/></a></li>
 							<li class="header-link" data-link="places"><a href="/portal?command=place"><cdg:l18n
 									key="header.places"/></a></li>
+							<li class="header-link" data-link="recommended"><a href="/portal?command=recomendedWay"><cdg:l18n
+									key="recomended.way"/></a></li>
 							<c:choose>
 								<c:when test="${userDataTrip != null }">
 									<li class="header-link" data-link="plan"><a href="/portal?command=showMap"><cdg:l18n
@@ -162,10 +168,6 @@
 							<li><a href="/portal?command=allUserPhoto"><i class="mdi-image-photo left"></i><cdg:l18n
 									key="header.gallery"/></a></li>
 						</c:if>
-					<c:if test="${role == 2}">
-						<li><a href="/portal?command=recomendedWay"><i class="material-icons left">grade</i><cdg:l18n
-								key="recomended.way"/></a></li>
-					</c:if>
 					<li><a href="/portal?command=commercial"><i class="material-icons left">assignment_ind</i><cdg:l18n
 							key="header.agenceguide"/></a></li>
 					<li><a href="/portal?command=edit"><i class="mdi-action-settings left"></i><cdg:l18n

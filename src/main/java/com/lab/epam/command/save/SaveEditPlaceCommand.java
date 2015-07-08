@@ -227,7 +227,7 @@ public class SaveEditPlaceCommand implements Command {
             session.setAttribute("placeDescriptionList", placeDescriptionList);
             session.setAttribute("editPlacePhone", placeDescriptionEN.getPhone());
 
-            response.sendRedirect("/portal?command=editPlace");
+            response.sendRedirect("/portal?command=editPlacesAdminPage");
         }
     }
 
