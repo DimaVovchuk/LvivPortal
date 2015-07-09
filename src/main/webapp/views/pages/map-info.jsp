@@ -118,7 +118,7 @@
 
             <div class="input-field" style="margin-top: 0">
                 <cdg:l18n key="editplace.placetime"/>
-                <input id="place_time" type="number" name="place_time">
+                <input id="place_time" type="number" name="place_time" min="0">
             </div>
 
             <div class="input-field">

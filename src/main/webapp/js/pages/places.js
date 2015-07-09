@@ -169,10 +169,10 @@ var searchPlaceEnter = function () {
         });
     });
 
-}
+};
 
 var initCategoriesEventsPlace = function () {
-    $('#category-place').on('click', function (e) {
+    $('.category-place').on('click', function (e) {
         e.preventDefault();
         e.stopImmediatePropagation();
         var category = $(this).data('category');
