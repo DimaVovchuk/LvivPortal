@@ -72,9 +72,9 @@
                     </p>
 
                     <p>
-                        <a href="#company-response-form"
-                           class="modal-trigger btn cyan darken-2 waves-effect waves-light"><cdg:l18n
-                                key="company.response"/></a>
+                        <a class="btn waves-effect waves-light cyan darken-2 modal-action modal-close modal-trigger" href="#orderWayModel"
+                           onclick="$('#sendOrderOnMail').attr('rel','/portal?command=orderWaySendMail&wayId=0&gidId=${pageContext.request.getParameter('id')}&type=message');"
+                           style="text-transform: uppercase"><cdg:l18n key="company.response"/></a>
                     </p>
                 </div>
             </div>
@@ -87,8 +87,10 @@
 
             <div class="card" style="padding: 10px">
                 <c:forEach items="${userGalery}" var="elem">
-                    <a href="" class="modal-trigger company-gallery-trigger" data-id="${elem.id}"  data-image="${elem.reference}">
-                        <img class="responsive-img" width="200" src="${pageContext.request.contextPath}/upload/photo/${elem.reference}">
+                    <a href="" class="modal-trigger company-gallery-trigger" data-id="${elem.id}"
+                       data-image="${elem.reference}">
+                        <img class="responsive-img" width="200"
+                             src="${pageContext.request.contextPath}/upload/photo/${elem.reference}">
                     </a>
                 </c:forEach>
             </div>
@@ -107,8 +109,8 @@
                                 <cdg:l18n key="company.routename"/>: ${mapelem.key.name}
                             </div>
                             <div class="col s6 right-align">
-                                <a onclick="orderWaySendMail(this);" href="javascript:"
-                                   rel="/portal?command=orderWaySendMail&wayId=${mapelem.key.id}&gidId=${pageContext.request.getParameter('id')}"
+                                <a class="modal-trigger" href="#orderWayModel"
+                                   onclick="$('#sendOrderOnMail').attr('rel','/portal?command=orderWaySendMail&wayId=${mapelem.key.id}&gidId=${pageContext.request.getParameter('id')}&type=way');"
                                    style="text-transform: uppercase"><cdg:l18n key="company.order"/></a>
                             </div>
                         </div>
@@ -153,7 +155,9 @@
                                 <cdg:l18n key="company.rating"/>: ${place.rating}
                             </div>
                             <div class="section center-align">
-                                <a href="#" style="text-transform: uppercase"><cdg:l18n key="company.order"/></a>
+                                <a class="modal-trigger" href="#orderWayModel"
+                                   onclick="$('#sendOrderOnMail').attr('rel','/portal?command=orderWaySendMail&wayId=${place.id}&gidId=${pageContext.request.getParameter('id')}&type=place');"
+                                   style="text-transform: uppercase"><cdg:l18n key="company.order"/></a>
                             </div>
                         </div>
                     </div>
@@ -164,26 +168,41 @@
     </div>
 </div>
 
-<div id="company-response-form" class="modal">
-    <form action="">
-        <div class="modal-content" style="padding: 10px 20px">
-            <div class="input-field">
-                <i class="material-icons prefix">mode_edit</i>
-                <textarea id="icon_prefix2" class="materialize-textarea" name="message"></textarea>
-                <label for="icon_prefix2"><cdg:l18n key="company.response"/></label>
-            </div>
+<div id="orderWayModel" class="modal">
+    <div class="modal-content" style="padding: 10px 20px">
+        <div class="input-field">
+            <i class="material-icons prefix">mode_edit</i>
+            <textarea id="textarea1" class="materialize-textarea" name="message"></textarea>
+            <label for="textarea1"><cdg:l18n key="company.response"/></label>
         </div>
-        <div class="center-align">
-            <button class="btn waves-effect waves-light cyan darken-2 modal-action modal-close" type="submit"
-                    style="margin-bottom: 20px">
-                <cdg:l18n key="about.sendmessage"/></button>
-        </div>
-    </form>
+    </div>
+    <div class="center-align">
+        <a id="sendOrderOnMail" onclick="orderWaySendMail(this);" href="javascript:"
+           rel="" class="btn waves-effect waves-light cyan darken-2 modal-action modal-close"
+           style="margin-bottom: 20px"> <cdg:l18n
+                key="about.sendmessage"/></a>
+    </div>
 </div>
+
+
+<%--<div id="orderWayModel" class="modal">--%>
+<%--<div class="modal-content">--%>
+<%--<h4>ORDER ROUTE</h4>--%>
+
+<%--<p>Your wishes: </p>--%>
+<%--<textarea id="textarea1" class="materialize-textarea"></textarea>--%>
+<%--</div>--%>
+<%--<div class="modal-footer">--%>
+<%--<a id="sendOrderOnMail" onclick="orderWaySendMail(this);" href="javascript:"--%>
+<%--rel="" class="modal-action modal-close waves-effect waves-green btn-flat">SEND</a>--%>
+<%--</div>--%>
+<%--</div>--%>
+
 
 <div id="company-gallery-modal" class="modal">
     <div class="section center-align">
         <img src="" id="company-gallery-modal-image" class="responsive-img" style="max-width: 80%; max-height: 70%">
+
         <div align="center"></div>
     </div>
 
@@ -191,7 +210,7 @@
         <form name="image-send-comment" id="image-send-comment" action="" method="post">
             <div class="input-field">
                 <input id="image_id" name="image_id" type="hidden"/>
-            <textarea name="gallery-comment" id="gallery-comment" class="materialize-textarea" value=""></textarea>
+                <textarea name="gallery-comment" id="gallery-comment" class="materialize-textarea" value=""></textarea>
                 <label for="gallery-comment"><cdg:l18n key="place.message"/></label>
             </div>
             <div class="section">
@@ -215,7 +234,7 @@
     $('.company-gallery-trigger').on('click', function () {
         var image = '${pageContext.request.contextPath}/upload/photo/' + $(this).data('image');
         $.ajax({
-            url: window.location.origin + '/portal?command=imageResponseJSON&image_id='  + $(this).data('id'),
+            url: window.location.origin + '/portal?command=imageResponseJSON&image_id=' + $(this).data('id'),
             success: loadResponse,
             error: loadResponse
         })
@@ -256,8 +275,7 @@
         document.getElementById("image-send-comment").reset()
         $('#company-gallery-modal').closeModal();
 
-           // $('.company-gallery-trigger').click();
-
+        // $('.company-gallery-trigger').click();
 
 
     }
@@ -269,15 +287,28 @@
     });
 
     var orderWaySendMail = function (placeholder) {
+        var text = $('#textarea1').val();
         $.ajax({
-            url: $(placeholder).attr('rel'),
-            success:sendMail()
+            url: $(placeholder).attr('rel') + "&text=" + text,
+            success: sendMail()
         });
     };
 
     var sendMail = function (data) {
-            Materialize.toast('<cdg:l18n key="mail.sanded"/>', 4000);
+        Materialize.toast('<cdg:l18n key="mail.sanded"/>', 4000);
     }
+
+    $(document).ready(function () {
+        $('.modal-trigger').leanModal();
+    });
+
+    $('.modal-trigger').leanModal({
+                dismissible: true, // Modal can be dismissed by clicking outside of the modal
+                opacity: .5, // Opacity of modal background
+                in_duration: 300, // Transition in duration
+                out_duration: 200, // Transition out duration
+            }
+    );
 
 </script>
 
@@ -285,7 +316,8 @@
     {{#each this}}
     <div class="card valign-wrapper">
         <div class="valign">
-            <a href="#"><img src="${pageContext.request.contextPath}/upload/photo/{{avaterReference}}" style="height:70px; weight:70px"/></a>
+            <a href="#"><img src="${pageContext.request.contextPath}/upload/photo/{{avaterReference}}"
+                             style="height:70px; weight:70px"/></a>
         </div>
         <div class="valign" style="margin-left: 20px">
             {{description}}
