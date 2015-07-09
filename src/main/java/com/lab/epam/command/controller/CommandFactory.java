@@ -11,8 +11,8 @@ import com.lab.epam.command.locale.LocaleCommand;
 import com.lab.epam.command.logination.*;
 import com.lab.epam.command.logination.fb.FBAuthorizationCommand;
 import com.lab.epam.command.logination.fb.FBResponseCommand;
-
-import com.lab.epam.command.logination.vk.*;
+import com.lab.epam.command.logination.vk.VKResponseCommand;
+import com.lab.epam.command.logination.vk.VkAuthorizationCommand;
 import com.lab.epam.command.page.about.AboutCommand;
 import com.lab.epam.command.page.createtrip.AddDayCommand;
 import com.lab.epam.command.page.createtrip.CountDaysCommand;
@@ -28,10 +28,11 @@ import com.lab.epam.command.page.photo.ShowAllUserPhoto;
 import com.lab.epam.command.page.photo.UpLoadPictureCommand;
 import com.lab.epam.command.page.place.*;
 import com.lab.epam.command.page.user.*;
-import com.lab.epam.command.page.user.admin.ShowAdminCabinetCommand;
-import com.lab.epam.command.page.user.admin.EditPlaceCommand;
-import com.lab.epam.command.page.user.admin.ShowAllUserCommand;
 import com.lab.epam.command.page.user.admin.AdminStatisticCommand;
+import com.lab.epam.command.page.user.admin.EditPlaceCommand;
+import com.lab.epam.command.page.user.admin.ShowAdminCabinetCommand;
+import com.lab.epam.command.page.user.admin.ShowAllUserCommand;
+import com.lab.epam.command.page.user.company.OrderWaySendMail;
 import com.lab.epam.command.save.*;
 
 import javax.servlet.ServletException;
@@ -95,7 +96,7 @@ public class CommandFactory {
         commands.put("commercialJSON", new CommercialJSONCommand());
         commands.put("addCustomPlace", new AddCustomPlaceCommand());
         commands.put("saveCustomPlace", new SaveCustomPlaceCommand());
-        //commands.put("authorVK", new VKAuthorizationCommand());
+        commands.put("authorVK", new VkAuthorizationCommand());
         commands.put("authorRespVK", new VKResponseCommand());
         commands.put("deleteImageByDB", new DeleteImageCommand());
         commands.put("authorFB", new FBAuthorizationCommand());
@@ -116,14 +117,15 @@ public class CommandFactory {
         commands.put("recommendPlace", new  RecommendPlaceCommand());
         commands.put("recommendWay", new  RecommendWayCommand());
         commands.put("adminCabinet", new ShowAdminCabinetCommand());
-        commands.put("ñonfirmCustomPlace", new ConfirmCustomPlaceCommand());
-        commands.put("ñonfirmRecommendedPlace", new ConfirmRecommendedPlaceCommand());
+        commands.put("?onfirmCustomPlace", new ConfirmCustomPlaceCommand());
+        commands.put("?onfirmRecommendedPlace", new ConfirmRecommendedPlaceCommand());
         commands.put("deleteWay", new DeleteWayCommand());
         commands.put("adminConfirmCustomPlace", new ConfirmCustomPlaceCommand());
         commands.put("adminConfirmRecommendedPlace", new ConfirmRecommendedPlaceCommand());
         commands.put("editPlacesAdminPage", new EditPlacesAdminPage());
         commands.put("confirmCustomPlaceJSON", new ConfirmCustomPlaceJSON());
         commands.put("confirmRecommendedPlaceJSON", new ConfirmRecommendedPlaceJSON());
+        commands.put("orderWaySendMail", new OrderWaySendMail());
         commands.put("imageResponseJSON", new CommercialImageCommentCommand());
         commands.put("addImageResponse", new AddImageResponseCommand());
     }

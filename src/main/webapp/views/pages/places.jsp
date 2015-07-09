@@ -44,43 +44,39 @@
                     <div id="search_suggest" style="border: none"></div>
                 </div>
 
-                        <%--<form id="frmSearch">--%>
-                            <%--<input type="text" id="txtSearch" name="txtSearch" alt="Search Criteria"--%>
-                                   <%--onkeyup="searchSuggest();"  requiredautocomplete="off" />--%>
-                            <%--<input type="submit" id="cmdSearch" name="cmdSearch" value="Search" alt="Run Search" />--%>
-                            <%--<div id="search_suggest">--%>
-                            <%--</div>--%>
+                <%--<form id="frmSearch">--%>
+                <%--<input type="text" id="txtSearch" name="txtSearch" alt="Search Criteria"--%>
+                <%--onkeyup="searchSuggest();"  requiredautocomplete="off" />--%>
+                <%--<input type="submit" id="cmdSearch" name="cmdSearch" value="Search" alt="Run Search" />--%>
+                <%--<div id="search_suggest">--%>
+                <%--</div>--%>
 
-                        <%--</form>--%>
+                <%--</form>--%>
 
 
                 <div class="collection with-header z-depth-2">
                     <div class="collection-header"><h4><cdg:l18n key="places.categories"/></h4></div>
-                    <div id="category-place">
-
-                        <a href="portal?command=placeJSON&category=architecture" data-category="architectture"
-                           class="collection-item black-text category-place"><cdg:l18n
-                                key="places.architecture"/></a>
-                        <a href="portal?command=placeJSON&category=churches" data-category="churches"
-                           class="collection-item black-text category-place"><cdg:l18n
-                                key="places.churches"/></a>
-                        <a href="portal?command=placeJSON&category=theatres" data-category="theatres"
-                           class="collection-item black-text category-place"><cdg:l18n
-                                key="places.theatres"/></a>
-                        <a href="portal?command=placeJSON&category=hotels" data-category="hotels"
-                           class="collection-item black-text category-place"><cdg:l18n
-                                key="places.hotels"/></a>
-                        <a href="portal?command=placeJSON&category=restaurants" data-category="restaurants"
-                           class="collection-item black-text category-place"><cdg:l18n
-                                key="places.restaurants"/></a>
-                        <a href="portal?command=recomendedPlace" data-category="recommended"
-                           class="collection-item black-text ${requestScope.active_recommend}"><cdg:l18n
-                                key="header.recommend"/></a>
-                        <a href="portal?command=placeJSON"
-                           class="collection-item black-text category-place active"><cdg:l18n
-                                key="places.all"/></a>
-                    </div>
-
+                    <a href="portal?command=placeJSON&category=architecture" data-category="architectture"
+                       class="collection-item black-text category-place"><cdg:l18n
+                            key="places.architecture"/></a>
+                    <a href="portal?command=placeJSON&category=churches" data-category="churches"
+                       class="collection-item black-text category-place"><cdg:l18n
+                            key="places.churches"/></a>
+                    <a href="portal?command=placeJSON&category=theatres" data-category="theatres"
+                       class="collection-item black-text category-place"><cdg:l18n
+                            key="places.theatres"/></a>
+                    <a href="portal?command=placeJSON&category=hotels" data-category="hotels"
+                       class="collection-item black-text category-place"><cdg:l18n
+                            key="places.hotels"/></a>
+                    <a href="portal?command=placeJSON&category=restaurants" data-category="restaurants"
+                       class="collection-item black-text category-place"><cdg:l18n
+                            key="places.restaurants"/></a>
+                    <a href="portal?command=recomendedPlace" data-category="recommended"
+                       class="collection-item black-text category-place"><cdg:l18n
+                            key="header.recommend"/></a>
+                    <a href="portal?command=placeJSON"
+                       class="collection-item black-text category-place active"><cdg:l18n
+                            key="places.all"/></a>
                 </div>
             </div>
         </div>

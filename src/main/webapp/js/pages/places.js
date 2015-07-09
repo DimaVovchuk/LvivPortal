@@ -135,6 +135,7 @@ var addPlace = function () {
     });
 };
 
+
 var searchPlace = function () {
     var str = encode_utf8(document.getElementById('txtSearch').value);
     notActive();
@@ -169,10 +170,10 @@ var searchPlaceEnter = function () {
         });
     });
 
-}
+};
 
 var initCategoriesEventsPlace = function () {
-    $('#category-place').on('click', function (e) {
+    $('.category-place').on('click', function (e) {
         e.preventDefault();
         e.stopImmediatePropagation();
         var category = $(this).data('category');

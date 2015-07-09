@@ -14,7 +14,7 @@
                     <h4 class="white-text"><cdg:l18n key="banner.head"/></h4>
                     <h5 class="white-text"><cdg:l18n key="banner.text"/></h5>
                     <br>
-                    <a class="waves-effect waves-light btn-large cyan darken-2"><cdg:l18n key="header.plan"/></a>
+                    <a class="waves-effect waves-light btn-large cyan darken-2 modal-trigger" href="#set-date-time"><cdg:l18n key="header.plan"/></a>
                 </div>
             </div>
         </div>

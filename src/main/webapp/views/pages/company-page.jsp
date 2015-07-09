@@ -102,12 +102,14 @@
             <ul class="collapsible" data-collapsible="accordion">
                 <c:forEach var="mapelem" items="${allWayInfo}">
                     <li>
-                        <div class="collapsible-header row">
+                        <div class="collapsible-header">
                             <div class="col s6 left-align">
                                 <cdg:l18n key="company.routename"/>: ${mapelem.key.name}
                             </div>
                             <div class="col s6 right-align">
-                                <a href="#" style="text-transform: uppercase"><cdg:l18n key="company.order.route"/></a>
+                                <a onclick="orderWaySendMail(this);" href="javascript:"
+                                   rel="/portal?command=orderWaySendMail&wayId=${mapelem.key.id}&gidId=${pageContext.request.getParameter('id')}"
+                                   style="text-transform: uppercase"><cdg:l18n key="company.order"/></a>
                             </div>
                         </div>
                         <div class="collapsible-body">
@@ -150,6 +152,9 @@
                                 <c:out value="${place.adress}"/><br>
                                 <cdg:l18n key="company.rating"/>: ${place.rating}
                             </div>
+                            <div class="section center-align">
+                                <a href="#" style="text-transform: uppercase"><cdg:l18n key="company.order"/></a>
+                            </div>
                         </div>
                     </div>
                 </c:forEach>
@@ -168,9 +173,9 @@
                 <label for="icon_prefix2"><cdg:l18n key="company.response"/></label>
             </div>
         </div>
-        <div class="divider"></div>
-        <div class="section center-align">
-            <button class="btn waves-effect waves-light cyan darken-2 modal-action modal-close" type="submit">
+        <div class="center-align">
+            <button class="btn waves-effect waves-light cyan darken-2 modal-action modal-close" type="submit"
+                    style="margin-bottom: 20px">
                 <cdg:l18n key="about.sendmessage"/></button>
         </div>
     </form>
@@ -262,6 +267,18 @@
     img.css({
         'height': width + 'px'
     });
+
+    var orderWaySendMail = function (placeholder) {
+        $.ajax({
+            url: $(placeholder).attr('rel'),
+            success:sendMail()
+        });
+    };
+
+    var sendMail = function (data) {
+            Materialize.toast('<cdg:l18n key="mail.sanded"/>', 4000);
+    }
+
 </script>
 
 <script id="response-info-template" type="text/x-handlebars-template">

@@ -48,7 +48,6 @@ public class CompanyInformationCommand implements Command {
 
 
         String userID = request.getParameter("id");
-        System.out.println("userID in compInfo " + userID);
         if (userID != null) {
             Integer id = Integer.valueOf(userID);
             User userData = userService.getByPK(id);
@@ -87,12 +86,12 @@ public class CompanyInformationCommand implements Command {
                     if (wayPlaces != null && !wayPlaces.isEmpty()) {
                         wayPlacesPageInfo = getPlaceDescriptionAndPhotoList(wayPlaces, wayPlaceDescriptions, wayPlaceImage);
                     }
-
                     allWayInfo.put(oneWay,wayPlacesPageInfo);
                 }
-            } else{
-                request.setAttribute("allWayInfo", allWayInfo);
             }
+//            else{
+//                request.setAttribute("allWayInfo", allWayInfo);
+//            }
 
             request.setAttribute("allWayInfo", allWayInfo);
         }
@@ -109,7 +108,7 @@ public class CompanyInformationCommand implements Command {
             placeDescription = placeDescriptionService.getPlaceDescriptionByIdPlace(place_id, language);
             placeDescriptions.add(placeDescription);
         }
-        System.out.println("placeDescriptions size is " + placeDescriptions.size());
+//        System.out.println("placeDescriptions size is " + placeDescriptions.size());
         return placeDescriptions;
     }
 
@@ -142,6 +141,7 @@ public class CompanyInformationCommand implements Command {
                             item.setImageReference(placeImage.getReference());
                             item.setName(placeDescription.getName());
                             item.setAdress(placeDescription.getAdress());
+                            item.setRating(place.getRating());
                             // System.out.println(item.toString());
                             list.add(item);
                         }

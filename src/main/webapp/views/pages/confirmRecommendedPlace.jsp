@@ -76,7 +76,7 @@
 		for (var i = 0; i < data.length; i++) {
 			var image = '<img class="circle responsive-img" src="/upload/photo/' + data[i].imageReference + '" style="width: 50px; height: 50px">';
 			var info = data[i].name + '<br>' + data[i].adress;
-			var buttons = '<a href="#" class="btn cyan darken-2 waves-effect waves-light" style="margin-right: 5px"><cdg:l18n key="admin.edit.places.confirm"/></a>' +
+			var buttons = '<a href="/portal?command=editPlace&editPlaceID=' + data[i].id+'&recomended=confirm" class="btn cyan darken-2 waves-effect waves-light" style="margin-right: 5px"><cdg:l18n key="admin.edit.places.confirm"/></a>' +
 					'<a href="#" class="btn cyan darken-2 waves-effect waves-light" style="margin-right: 5px"><cdg:l18n key="admin.edit.places.cancel"/></a>';
 			var row = [ data[i].id, image, info, buttons];
 

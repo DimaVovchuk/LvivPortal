@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="cdg" uri="customtags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <div id="map-info">
     <div id="map-itinerary" class="animated fadeInDown">
         <div id="route-info-collection" class="collection"></div>
@@ -8,34 +9,38 @@
 
     <div id="map-places" class="animated fadeInDown" style="display: none">
         <%--<nav>--%>
-            <%--<div class="nav-wrapper">--%>
-                <%--<form id="frmSearch">--%>
-                    <%--<div class="input-field">--%>
-                        <%--<input id="txtSearch" type="search" name="txtSearch" alt="Search Criteria"--%>
-                               <%--onkeyup="searchSuggest()"--%>
-                               <%--autocomplete="off" required>--%>
-                        <%--<label for="txtSearch"><i class="material-icons">search</i></label>--%>
-                    <%--</div>--%>
-                <%--</form>--%>
-            <%--</div>--%>
-            <%--<p><div id="search_suggest" style="border-color: #ffffff;"></div></p>--%>
+        <%--<div class="nav-wrapper">--%>
+        <%--<form id="frmSearch">--%>
+        <%--<div class="input-field">--%>
+        <%--<input id="txtSearch" type="search" name="txtSearch" alt="Search Criteria"--%>
+        <%--onkeyup="searchSuggest()"--%>
+        <%--autocomplete="off" required>--%>
+        <%--<label for="txtSearch"><i class="material-icons">search</i></label>--%>
+        <%--</div>--%>
+        <%--</form>--%>
+        <%--</div>--%>
+        <%--<p><div id="search_suggest" style="border-color: #ffffff;"></div></p>--%>
         <%--</nav>--%>
 
-            <div class="z-depth-2 search-box" id="search-place">
-                <form id="frmSearch" style="padding: 0 10px">
-                    <div class="input-field">
-                        <input id="txtSearch" type="search" name="txtSearch" alt="Search Criteria" onfocus="searchSuggestMap()" onkeyup="searchSuggestMap()" autocomplete="off" required>
-                        <label for="txtSearch"><i class="material-icons">search</i><span style="margin-left: 10px">Search</span></label>
-                    </div>
-                </form>
-
-                <p><div id="search_suggest" style="border-color: #ffffff;"></div></p>
-            </div>
+        <div class="z-depth-2 search-box" id="search-place">
+            <nav>
+                <div class="nav-wrapper">
+                    <form id="frmSearch" style="padding: 0 10px">
+                        <div class="input-field">
+                            <input id="txtSearch" type="search" name="txtSearch" alt="Search Criteria"
+                                   onkeyup="searchSuggest()" autocomplete="off" required>
+                            <label for="txtSearch"><i class="material-icons">search</i></label>
+                        </div>
+                    </form>
+                </div>
+            </nav>
+            <div id="search_suggest" class="z-depth-2" style="border: none"></div>
+        </div>
 
 
         <a class='dropdown-select btn cyan darken-2 waves-effect waves-light' href='#' data-activates='dropdown-places'><cdg:l18n
                 key="places.categories"/></a>
-        <ul id='dropdown-places' class='dropdown-content'>
+        <ul id='dropdown-places' class='dropdown-content' style="z-index: 1000">
             <li><a href="portal?command=placeJSON&category=architecture" class="collection-item"
                    data-category="architecture"><cdg:l18n
                     key="places.architecture"/></a></li>
@@ -113,7 +118,7 @@
 
             <div class="input-field" style="margin-top: 0">
                 <cdg:l18n key="editplace.placetime"/>
-                <input id="place_time" type="number" name="place_time">
+                <input id="place_time" type="number" name="place_time" min="0">
             </div>
 
             <div class="input-field">
@@ -158,43 +163,48 @@
                 <div class="truncate"><b>{{name}}</b><br>{{adress}}</div>
             </div>
         </div>
+        <div style="right: 5px; position: absolute">
+            <button class="btn-floating waves-effect waves-light cyan darken-2" style="top: -42px;"><i
+                    class="material-icons">add</i></button>
+        </div>
     </a>
     {{/each}}
 </script>
-<script>
-//    $(function () {
-//        $('#frmSearch').on('submit', function (e) {
-//            notActive();
-//            e.preventDefault();
-//            e.stopImmediatePropagation();
-//            $.ajax({
-//                url: window.location.origin + '/portal?command=placeJSON',
-//                data: $('#frmSearch').serialize(),
-//                success: loadPlacesData,
-//                error: loadPlacesData
-//            });
-//        });
-//    });
 
-var searchPlace = function () {
-    var str = encode_utf8(document.getElementById('txtSearch').value);
-    //alert(str);
-    notActive();
-    var strArr = str.split(" ");
-    str='';
-    for(i=0; i < strArr.length; i++) {
-        if (i == strArr.length - 1){
-            str += strArr[i];
-        } else{
-            str += strArr[i] + '+';
+<script>
+    //    $(function () {
+    //        $('#frmSearch').on('submit', function (e) {
+    //            notActive();
+    //            e.preventDefault();
+    //            e.stopImmediatePropagation();
+    //            $.ajax({
+    //                url: window.location.origin + '/portal?command=placeJSON',
+    //                data: $('#frmSearch').serialize(),
+    //                success: loadPlacesData,
+    //                error: loadPlacesData
+    //            });
+    //        });
+    //    });
+
+    var searchPlace = function () {
+        var str = encode_utf8(document.getElementById('txtSearch').value);
+        //alert(str);
+        notActive();
+        var strArr = str.split(" ");
+        str = '';
+        for (i = 0; i < strArr.length; i++) {
+            if (i == strArr.length - 1) {
+                str += strArr[i];
+            } else {
+                str += strArr[i] + '+';
+            }
         }
-    }
-    $.ajax({
-        url: window.location.origin + '/portal?command=placeJSON&txtSearch=' + str,
-        success: loadPlacesData,
-        error: loadPlacesData
-    });
-};
+        $.ajax({
+            url: window.location.origin + '/portal?command=placeJSON&txtSearch=' + str,
+            success: loadPlacesData,
+            error: loadPlacesData
+        });
+    };
 
     $('#frmSearch').on('submit', function (e) {
         notActive();
