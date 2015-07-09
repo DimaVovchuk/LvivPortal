@@ -88,7 +88,8 @@
             <div class="card" style="padding: 10px">
                 <c:forEach items="${userGalery}" var="elem">
                     <a href="" class="modal-trigger company-gallery-trigger" data-image="${elem.reference}">
-                        <img class="responsive-img" width="200" src="${pageContext.request.contextPath}/upload/photo/${elem.reference}">
+                        <img class="responsive-img" width="200"
+                             src="${pageContext.request.contextPath}/upload/photo/${elem.reference}">
                     </a>
                 </c:forEach>
             </div>
@@ -107,7 +108,9 @@
                                 <cdg:l18n key="company.routename"/>: ${mapelem.key.name}
                             </div>
                             <div class="col s6 right-align">
-                                <a href="#" style="text-transform: uppercase"><cdg:l18n key="company.order"/></a>
+                                <a onclick="orderWaySendMail(this);" href="javascript:"
+                                   rel="/portal?command=orderWaySendMail&wayId=${mapelem.key.id}&gidId=${pageContext.request.getParameter('id')}"
+                                   style="text-transform: uppercase"><cdg:l18n key="company.order"/></a>
                             </div>
                         </div>
                         <div class="collapsible-body">
@@ -172,7 +175,8 @@
             </div>
         </div>
         <div class="center-align">
-            <button class="btn waves-effect waves-light cyan darken-2 modal-action modal-close" type="submit" style="margin-bottom: 20px">
+            <button class="btn waves-effect waves-light cyan darken-2 modal-action modal-close" type="submit"
+                    style="margin-bottom: 20px">
                 <cdg:l18n key="about.sendmessage"/></button>
         </div>
     </form>
@@ -186,7 +190,7 @@
     <div class="card">
         <form action="" method="post">
             <div class="input-field">
-            <textarea id="gallery-comment" class="materialize-textarea"></textarea>
+                <textarea id="gallery-comment" class="materialize-textarea"></textarea>
                 <label for="gallery-comment"><cdg:l18n key="place.message"/></label>
             </div>
             <button type="submit" class="waves-effect waves-light btn cyan darken-2"><cdg:l18n
@@ -222,6 +226,18 @@
     img.css({
         'height': width + 'px'
     });
+
+    var orderWaySendMail = function (placeholder) {
+        $.ajax({
+            url: $(placeholder).attr('rel'),
+            success:sendMail()
+        });
+    };
+
+    var sendMail = function (data) {
+            Materialize.toast('<cdg:l18n key="mail.sanded"/>', 4000);
+    }
+
 </script>
 
 </body>
