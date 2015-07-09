@@ -191,6 +191,8 @@ public class CreateUserDataCommand implements Command {
                 userDataTrip.setCategory(listCategory);
                 Map<Integer, List<Place>> placesByTimeAndCategory = getPlacesByTimeAndCategory(listCategory, Double.valueOf(timePerDay));
                 userDataTrip.setPlaceDay(placesByTimeAndCategory);
+                userDataTrip.setIsSaved(false);
+                userDataTrip.setIsFull(true);
             }
 
         } else {
