@@ -43,6 +43,7 @@ public class SaveEditPlaceCommand implements Command {
         loger.info("Command SaveNewPlace.");
         HttpSession session = request.getSession();
         savePlaceID = (Integer) session.getAttribute("editPlaceID");
+
         List files = new ArrayList();
         Map<String, String> params = new HashMap<String, String>();
         PlaceService placeService = new PlaceService();
@@ -72,8 +73,14 @@ public class SaveEditPlaceCommand implements Command {
         String newCategory = params.get("newCategory");
         String newVisible = params.get("newVisible");
         String newState = params.get("newState");
+        String customIDSring = (String) session.getAttribute("customIDSring");
+        String recomendetIDSring = (String) session.getAttribute("recomendetIDSring");
+
         loger.info("All data waas succesful getting");
 
+
+        System.out.println("customIDSring in SaveEditPlaceCommand " + customIDSring);
+        System.out.println("recomendetIDSring in SaveEditPlaceCommand " + recomendetIDSring);
 
 //check input data
         if (checkData(newPlaceNameUA, CHECK_DATA) && newPlaceNameUA == "") {
@@ -175,6 +182,16 @@ public class SaveEditPlaceCommand implements Command {
             } else {
                 newState = "false";
             }
+            if(recomendetIDSring !=null && recomendetIDSring!=""){
+                place.setRecomended(true);
+            }else{
+                place.setRecomended(false);
+            }
+            if(customIDSring !=null && customIDSring!=""){
+                place.setRecomended(true);
+            }else{
+                place.setRecomended(false);
+            }
             place.setDeleted(new Boolean(newState));
             loger.info("Object place is created " + place);
 
@@ -227,7 +244,15 @@ public class SaveEditPlaceCommand implements Command {
             session.setAttribute("placeDescriptionList", placeDescriptionList);
             session.setAttribute("editPlacePhone", placeDescriptionEN.getPhone());
 
-            response.sendRedirect("/portal?command=editPlacesAdminPage");
+            if(customIDSring !=null && customIDSring!=""){
+                session.setAttribute("customIDSring","");
+                response.sendRedirect("/portal?command=adminConfirmCustomPlace");
+            }else if(recomendetIDSring !=null && recomendetIDSring!=""){
+                session.setAttribute("recomendetIDSring","");
+                response.sendRedirect("/portal?command=adminConfirmRecommendedPlace");
+            } else {
+                response.sendRedirect("/portal?command=editPlacesAdminPage");
+            }
         }
     }
 

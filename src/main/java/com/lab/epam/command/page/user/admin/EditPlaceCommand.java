@@ -25,6 +25,12 @@ public class EditPlaceCommand implements Command{
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String editPlaceIDSring = request.getParameter("editPlaceID");
+        String customIDSring = request.getParameter("custom");
+        String recomendetIDSring = request.getParameter("recomended");
+
+        System.out.println("customIDSring " + customIDSring);
+        System.out.println("recomendetIDSring " + recomendetIDSring);
+
         HttpSession session = request.getSession();
         loger.info("start EditPlaceCommand");
 
@@ -34,6 +40,15 @@ public class EditPlaceCommand implements Command{
             loger.info("edit place id is " + editPlaceID);
             //get place
             Place place = placeService.getByPK(editPlaceID);
+
+            if(customIDSring !=null && customIDSring!=""){
+                place.setRecomended(true);
+                place.setVisible(true);
+            }
+            if(recomendetIDSring !=null && recomendetIDSring != "") {
+                place.setRecomended(true);
+            }
+
             session.setAttribute("editPlace", place);
             session.setAttribute("editPlaceID",editPlaceID);
 
@@ -75,6 +90,12 @@ public class EditPlaceCommand implements Command{
                 loger.warn(e.getMessage());
             }
 
+        }
+        if(customIDSring !=null && customIDSring!=""){
+            session.setAttribute("customIDSring",customIDSring);
+        }
+        if(recomendetIDSring !=null && recomendetIDSring!=""){
+            session.setAttribute("recomendetIDSring",recomendetIDSring);
         }
         request.getRequestDispatcher("/views/pages/edit_place.jsp").forward(request, response);
     }
