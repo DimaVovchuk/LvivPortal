@@ -28,12 +28,12 @@
 									key="recomended.way"/></a></li>
 							<c:choose>
 								<c:when test="${userDataTrip != null }">
-									<li><a href="/portal?command=showMap"><cdg:l18n key="header.plan"/></a></li>
+									<li><a href="/portal?command=showMap"><cdg:l18n key="header.map"/></a></li>
 								</c:when>
 								<c:otherwise>
 									<li class="header-link" data-link="plan"><a class="modal-trigger"
 									                                            href="#set-date-time"><cdg:l18n
-											key="header.plan"/></a></li>
+											key="header.map"/></a></li>
 								</c:otherwise>
 							</c:choose>
 							<li class="header-link" data-link="about"><a href="/portal?command=about"><cdg:l18n
@@ -53,10 +53,10 @@
 							<c:choose>
 								<c:when test="${userDataTrip != null }">
 									<li class="header-link" data-link="plan"><a href="/portal?command=showMap"><cdg:l18n
-											key="header.plan"/></a></li>
+											key="header.map"/></a></li>
 								</c:when>
 								<c:otherwise>
-									<li><a class="modal-trigger" href="#set-date-time"><cdg:l18n key="header.plan"/></a>
+									<li><a class="modal-trigger" href="#set-date-time"><cdg:l18n key="header.map"/></a>
 									</li>
 								</c:otherwise>
 							</c:choose>
@@ -76,10 +76,10 @@
 							<c:choose>
 								<c:when test="${userDataTrip != null }">
 									<li class="header-link" data-link="plan"><a href="/portal?command=showMap"><cdg:l18n
-											key="header.plan"/></a></li>
+											key="header.map"/></a></li>
 								</c:when>
 								<c:otherwise>
-									<li><a class="modal-trigger" href="#set-date-time"><cdg:l18n key="header.plan"/></a>
+									<li><a class="modal-trigger" href="#set-date-time"><cdg:l18n key="header.map"/></a>
 									</li>
 								</c:otherwise>
 							</c:choose>
@@ -103,10 +103,10 @@
 							<c:choose>
 								<c:when test="${userDataTrip != null }">
 									<li class="header-link" data-link="plan"><a href="/portal?command=showMap"><cdg:l18n
-											key="header.plan"/></a></li>
+											key="header.map"/></a></li>
 								</c:when>
 								<c:otherwise>
-									<li><a class="modal-trigger" href="#set-date-time"><cdg:l18n key="header.plan"/></a>
+									<li><a class="modal-trigger" href="#set-date-time"><cdg:l18n key="header.map"/></a>
 									</li>
 								</c:otherwise>
 							</c:choose>
