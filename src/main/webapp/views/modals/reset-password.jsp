@@ -8,22 +8,13 @@
 
         <div class="divider"></div>
         <div class="section">
-            <form id="reset-send-email-form" action="portal?command=sendEmail" method="post">
-                <div class="form">
-                    <input placeholder="<cdg:l18n key="login.email"/>" name="email" type="email"/>
-                </div>
-                <div class="section">
-                    <button class="btn cyan darken-2" type="submit">OK</button>
-                </div>
-            </form>
+            <div class="form">
+                <input id="reset-send-email-email" placeholder="<cdg:l18n key="login.email"/>" name="email" type="email"/>
+            </div>
+            <div class="section">
+                <button id="reset-send-email-submit" class="btn cyan darken-2">OK</button>
+            </div>
         </div>
-    </div>
-
-    <div id="reset-send-email-info" class="modal">
-        <p class="center-align"><cdg:l18n key="reset.email.info"/></p>
-
-        <div class="divider"></div>
-        <button class="btn cyan darken-2 modal-action modal-close">OK</button>
     </div>
 
     <div id="reset-confirm" class="modal">
@@ -46,11 +37,20 @@
             </form>
         </div>
     </div>
-
-    <div id="reset-confirm-info" class="modal">
-        <p class="center-align"><cdg:l18n key="reset.changed"/></p>
-
-        <div class="divider"></div>
-        <button class="btn cyan darken-2 modal-action modal-close">OK</button>
-    </div>
 </div>
+
+<script>
+    var sendResetPasswordEmail = function (email) {
+        $('#reset-send-email').closeModal();
+        $('.login-form').closeModal();
+        Materialize.toast('<cdg:l18n key="login.mailsent"/> ' + email, 5000);
+    };
+
+    $('#reset-send-email-submit').on('click', function () {
+        var email = $('#reset-send-email-email').val();
+        $.ajax({
+            url: "portal?command=sendEmail&email=" + email,
+            success: sendResetPasswordEmail(email)
+        });
+    });
+</script>

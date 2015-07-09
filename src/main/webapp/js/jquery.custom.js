@@ -54,8 +54,12 @@ var initCollapsible = function () {
 
 var initStartModalWindow = function () {
     var startModal = $('#start-modal').data('modal');
-    if (startModal === 'emailSent') {
-        $('#reset-send-email-info').openModal();
+    console.log(startModal);
+    if (startModal == 'resetSendEmail') {
+        $('#reset-send-email').openModal();
+    }
+    if (startModal == 'resetConfirm') {
+        $('#reset-confirm').openModal();
     }
 };
 

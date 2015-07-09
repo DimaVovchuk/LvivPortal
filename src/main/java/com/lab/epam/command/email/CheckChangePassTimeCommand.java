@@ -13,9 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-/**
- * Created by Dima on 14-Jun-15.
- */
 public class CheckChangePassTimeCommand implements Command {
     private static final Logger loger = LogManager.getLogger(ClassName.getCurrentClassName());
 
@@ -30,10 +27,11 @@ public class CheckChangePassTimeCommand implements Command {
         long time = Long.parseLong(request.getParameter("param"));
         long timeMillis = System.currentTimeMillis();
         if((timeMillis-time)<3600000){
-            session.setAttribute("confirmed",1);
+            request.setAttribute("modal", "resetConfirm");
+        } else {
+            request.setAttribute("modal", "resetSendEmail");
         }
         loger.info("Command CheckChangePassTimeCommand.");
-        request.getRequestDispatcher("/views/pages/ResetEmail.jsp").forward(request, response);
-
+        request.getRequestDispatcher("/views/pages/index.jsp").forward(request, response);
     }
 }

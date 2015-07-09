@@ -84,7 +84,8 @@ var checkReloadPages = function (data) {
     }
     else{
     }
-}
+};
+
 var reloadPage = function () {
     $('#sign-in-form').on('submit', function (e) {
         e.preventDefault();
@@ -94,7 +95,7 @@ var reloadPage = function () {
             url: window.location.origin + '/portal?command=signIn',
             data: $('form').serialize(),
             success: checkReloadPages,
-            error: checkReloadPages,
+            error: checkReloadPages
         });
     });
 };
