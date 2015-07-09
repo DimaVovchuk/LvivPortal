@@ -142,6 +142,7 @@ public class CompanyInformationCommand implements Command {
                             item.setImageReference(placeImage.getReference());
                             item.setName(placeDescription.getName());
                             item.setAdress(placeDescription.getAdress());
+                            item.setRating(place.getRating());
                             // System.out.println(item.toString());
                             list.add(item);
                         }

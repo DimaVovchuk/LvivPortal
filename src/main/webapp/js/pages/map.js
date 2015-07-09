@@ -354,7 +354,6 @@ function initCustom() {
 }
 
 function customMarkerUnvisible() {
-    ////showMarkers();
     customMarker.setVisible(false);
 }
 

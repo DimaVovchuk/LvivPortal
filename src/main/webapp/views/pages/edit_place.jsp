@@ -72,7 +72,8 @@
 							<span><cdg:l18n key="editplace.selectimage"/></span>
 							<input id="image-input" type="file" multiple name="sendfile"/>
 						</div>
-						<button id="image-clear" class="btn cyan darken-2"><cdg:l18n key="editplace.clearimage"/></button>
+						<button id="image-clear" class="btn cyan darken-2"><cdg:l18n
+								key="editplace.clearimage"/></button>
 					</div>
 					<div class="card z-depth-2">
 						<output id="image-preview"></output>
