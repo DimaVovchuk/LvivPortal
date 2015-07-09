@@ -36,7 +36,7 @@
                     <form id="frmSearch" style="padding: 0 10px">
                         <div class="input-field">
                             <input id="txtSearch" type="search" name="txtSearch" alt="Search Criteria"
-                                   onkeyup="searchSuggest()" autocomplete="off" required>
+                                   onfocus="searchSuggest()" onkeyup="searchSuggest()" autocomplete="off" required>
                             <label for="txtSearch"><i class="material-icons">search</i><span style="margin-left: 10px">Search</span></label>
                         </div>
                     </form>

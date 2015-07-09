@@ -124,6 +124,8 @@ public class CommandFactory {
         commands.put("editPlacesAdminPage", new EditPlacesAdminPage());
         commands.put("confirmCustomPlaceJSON", new ConfirmCustomPlaceJSON());
         commands.put("confirmRecommendedPlaceJSON", new ConfirmRecommendedPlaceJSON());
+        commands.put("imageResponseJSON", new CommercialImageCommentCommand());
+        commands.put("addImageResponse", new AddImageResponseCommand());
     }
 
     public static void createCommand(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

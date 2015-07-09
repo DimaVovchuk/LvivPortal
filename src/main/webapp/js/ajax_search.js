@@ -25,6 +25,20 @@ function searchSuggest() {
     }
 }
 
+function searchSuggestMap() {
+
+    if (searchReq.readyState == 4 || searchReq.readyState == 0) {
+        var str = encode_utf8(document.getElementById('txtSearch').value);
+        if(str == ''){
+            notActive();
+        }else{
+            searchReq.open("POST", '/portal?command=search&search=' + str, true);
+            searchReq.onreadystatechange = handleSearchSuggestMap;
+            searchReq.send(null);
+        }
+    }
+}
+
 function searchSuggestRoute() {
 
     if (searchReq.readyState == 4 || searchReq.readyState == 0) {
@@ -55,16 +69,44 @@ function handleSearchSuggest() {
         for(i=0; i < str.length; i++) {
             if (str[i] != '') {
                 var strImg = str[i].split("*");
-            var suggest = '<div class="row"> <div class=" match-colum col l3 m5 s9">';
-            suggest += '<img class="circle" align="center" src="/upload/photo/' + strImg[1] + '"style="width: 60px; height:60px"></div>';
-            suggest += '<div class=" match-colum col l9 m14 s27">';
-            suggest += '<div onmouseover="javascript:suggestOver(this);" ';
-            suggest += 'onmouseout="javascript:suggestOut(this);" ';
-            suggest += 'onclick="javascript:setSearch(this.innerHTML);" ';
-            suggest += 'class="suggest_link">' + strImg[0] + '</div>';
-            suggest += '</div></div>';
+                var suggest = '<div onmouseover="javascript:suggestOver(this);" ';
+                suggest += 'onmouseout="javascript:suggestOut(this);" ';
+                suggest += 'onclick="javascript:setSearch('+i+');" ';
+                suggest += 'class="suggest_link">'
+                suggest += '<div class="row">';
+                suggest += '<div class=" match-colum col l3 m5 s9">'
+                suggest += '<img class="circle" src="/upload/photo/' + strImg[1] + '"style="width: 100%; height:100%"></div>';
+                suggest += '<div class=" match-colum col l9 m14 s27" id="nameOLOLOLO'+i+'">';
+                suggest += strImg[0];
+                suggest +=  '</div>';
+                suggest += '</div></div>';
             ss.innerHTML += suggest;
         }
+        }
+    }
+}
+
+function handleSearchSuggestMap() {
+    if (searchReq.readyState == 4) {
+        var ss = document.getElementById('search_suggest')
+        ss.innerHTML = '';
+        var str = searchReq.responseText.split("\n");
+        for(i=0; i < str.length; i++) {
+            if (str[i] != '') {
+                var strImg = str[i].split("*");
+                var suggest = '<div onmouseover="javascript:suggestOver(this);" ';
+                suggest += 'onmouseout="javascript:suggestOut(this);" ';
+                suggest += 'onclick="javascript:setSearchMap('+i+');" ';
+                suggest += 'class="suggest_link">'
+                suggest += '<div class="row">';
+                suggest += '<div class=" match-colum col l3 m5 s9">'
+                suggest += '<img class="circle" src="/upload/photo/' + strImg[1] + '"style="width: 100%;"></div>';
+                suggest += '<div class=" match-colum col l9 m14 s27" id="nameOLOLOLO'+i+'">';
+                suggest += strImg[0];
+                suggest +=  '</div>';
+                suggest += '</div></div>';
+                ss.innerHTML += suggest;
+            }
         }
     }
 }
@@ -77,13 +119,16 @@ function handleSearchSuggestRoute() {
         for(i=0; i < str.length; i++) {
             if (str[i] != '') {
                 var strImg = str[i].split("*");
-                var suggest = '<div class="row"> <div class=" match-colum col l3 m5 s9">';
-                suggest += '<img class="circle" src="/upload/photo/' + strImg[1] + '"style="width: 100%; height:100%"></div>';
-                suggest += '<div class=" match-colum col l9 m14 s27">';
-                suggest += '<div onmouseover="javascript:suggestOver(this);" ';
+                var suggest = '<div onmouseover="javascript:suggestOver(this);" ';
                 suggest += 'onmouseout="javascript:suggestOut(this);" ';
-                suggest += 'onclick="javascript:setSearchRoute(this.innerHTML);" ';
-                suggest += 'class="suggest_link">' + strImg[0] + '</div>';
+                suggest += 'onclick="javascript:setSearchRoute('+i+');" ';
+                suggest += 'class="suggest_link">'
+                suggest += '<div class="row">';
+                suggest += '<div class=" match-colum col l3 m5 s9">'
+                suggest += '<img class="circle" src="/upload/photo/' + strImg[1] + '"style="width: 100%; height:100%"></div>';
+                suggest += '<div class=" match-colum col l9 m14 s27" id="nameOLO'+i+'">';
+                suggest += strImg[0];
+                suggest +=  '</div>';
                 suggest += '</div></div>';
                 ss.innerHTML += suggest;
             }
@@ -100,17 +145,28 @@ function suggestOut(div_value) {
     div_value.className = 'suggest_link';
 }
     function setSearch(value) {
-        if (value != ''){
-            document.getElementById('txtSearch').value = value;
-            document.getElementById('search_suggest').innerHTML = '';
-            searchPlace();
-            //document.forms["myform"].submit();//
+        var val = document.getElementById('nameOLOLOLO'+value).innerHTML;
+        if (val != ''){
+           // document.getElementById('txtSearch').value = val;
+           // document.getElementById('search_suggest').innerHTML = '';
+           // searchPlace();
+            document.location.href = window.location.origin + '/portal?command=placeInformation&txtSearch=' + val;
         }
 }
 
+function setSearchMap(value) {
+    var val = document.getElementById('nameOLOLOLO'+value).innerHTML;
+    if (val != ''){
+         document.getElementById('txtSearch').value = val;
+         document.getElementById('search_suggest').innerHTML = '';
+         searchPlace();
+    }
+}
+
 function setSearchRoute(value) {
-    if (value != ''){
-        document.getElementById('txtSearchRoute').value = value;
+    var val = document.getElementById('nameOLO'+value).innerHTML;
+    if (val != ''){
+        document.getElementById('txtSearchRoute').value = val;
         document.getElementById('search_suggest_route').innerHTML = '';
         searchPlace();
     }

@@ -13,34 +13,20 @@
   <div id="user-trip-save" class="modal-content">
     <c:choose>
       <c:when test="${userDataTrip.isSaved == false && userDataTrip.isFull != false}">
-        <p><cdg:l18n key="sure.save"/></p>
-
+        <%--<p><cdg:l18n key="sure.save"/></p>--%>
+        <p><cdg:l18n key="name.route"/></p>
+        <form action="/portal?command=saveWay" method="post">
+          <input id="name" value="way" name="name" type="text"/>
+          <label for="name"><cdg:l18n key="plan.name"/></label>
         <div class="ok-footer">
           <div class="modal-footer">
-            <a class="btn modal-action modal-close modal-trigger waves-effect waves-light cyan darken-2" data-target="name-way">Ok
-            </a>
-          </div>
-        </div>
-      </c:when>
-      <c:when test="${userDataTrip == null}">
-        <p><cdg:l18n key="any.current.route"/></p>
+            <%--<a class="btn modal-action modal-close modal-trigger waves-effect waves-light cyan darken-2" data-target="name-way">Ok--%>
+            <%--</a>--%>
+              <button class="btn waves-effect waves-light cyan darken-2" type="submit" name="ok" value="ok">OK</button>
 
-        <div class="ok-footer">
-          <div class="modal-footer">
-            <a class="modal-action modal-close btn waves-effect waves-light cyan darken-2">Ok
-            </a>
           </div>
         </div>
-      </c:when>
-      <c:when test="${userDataTrip.isFull == false}">
-        <p><cdg:l18n key="any.place.way"/></p>
-
-        <div class="ok-footer">
-          <div class="modal-footer">
-            <a class="modal-action modal-close btn waves-effect waves-light cyan darken-2">Ok
-            </a>
-          </div>
-        </div>
+        </form>
       </c:when>
       <c:otherwise>
         <div class="ok-footer">

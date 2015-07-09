@@ -87,7 +87,7 @@
 
             <div class="card" style="padding: 10px">
                 <c:forEach items="${userGalery}" var="elem">
-                    <a href="" class="modal-trigger company-gallery-trigger" data-image="${elem.reference}">
+                    <a href="" class="modal-trigger company-gallery-trigger" data-id="${elem.id}"  data-image="${elem.reference}">
                         <img class="responsive-img" width="200" src="${pageContext.request.contextPath}/upload/photo/${elem.reference}">
                     </a>
                 </c:forEach>
@@ -179,12 +179,14 @@
 <div id="company-gallery-modal" class="modal">
     <div class="section center-align">
         <img src="" id="company-gallery-modal-image" class="responsive-img" style="max-width: 80%; max-height: 70%">
+        <div align="center"></div>
     </div>
 
     <div class="card">
-        <form action="" method="post">
+        <form name="image-send-comment" id="image-send-comment" action="" method="post">
             <div class="input-field">
-            <textarea id="gallery-comment" class="materialize-textarea"></textarea>
+                <input id="image_id" name="image_id" type="hidden"/>
+            <textarea name="gallery-comment" id="gallery-comment" class="materialize-textarea" value=""></textarea>
                 <label for="gallery-comment"><cdg:l18n key="place.message"/></label>
             </div>
             <div class="section">
@@ -195,14 +197,7 @@
         </form>
     </div>
 
-    <div class="card valign-wrapper">
-        <div class="valign">
-            <a href="#"><img src="${pageContext.request.contextPath}/upload/photo/user.png"/></a>
-        </div>
-        <div class="valign" style="margin-left: 20px">
-            Comment
-        </div>
-    </div>
+    <div id="response-info-collection"></div>
 </div>
 
 <jsp:include page="/views/elements/footer.jsp"/>
@@ -214,15 +209,72 @@
 
     $('.company-gallery-trigger').on('click', function () {
         var image = '${pageContext.request.contextPath}/upload/photo/' + $(this).data('image');
+        $.ajax({
+            url: window.location.origin + '/portal?command=imageResponseJSON&image_id='  + $(this).data('id'),
+            success: loadResponse,
+            error: loadResponse
+        })
         $('#company-gallery-modal-image').attr('src', image);
+        $('#image_id').attr('value', $(this).data('id'));
         $('#company-gallery-modal').openModal();
     });
+
+    var loadResponse = function (data) {
+        if (!data) return false;
+        var source = $("#response-info-template").html();
+        var template = Handlebars.compile(source);
+        var html = template(data);
+        $('#response-info-collection').html(html);
+    };
+
+    $('#image-send-comment').on('submit', function (e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        $.ajax({
+            type: 'post',
+            url: window.location.origin + '/portal?command=addImageResponse',
+            data: $('#image-send-comment').serialize(),
+            clearForm: true,
+            resetForm: true,
+            success: loadWindow,
+            error: loadWindow
+        });
+    });
+
+    var loadWindow = function (data) {
+        if (data == "1") {
+            Materialize.toast('<cdg:l18n key="comment.sended"/>', 4000);
+        }
+        else {
+            Materialize.toast('<cdg:l18n key="comment.not.sended"/>', 4000);
+        }
+        document.getElementById("image-send-comment").reset()
+        $('#company-gallery-modal').closeModal();
+
+           // $('.company-gallery-trigger').click();
+
+
+
+    }
 
     var img = $('.place-img');
     var width = img.width();
     img.css({
         'height': width + 'px'
     });
+</script>
+
+<script id="response-info-template" type="text/x-handlebars-template">
+    {{#each this}}
+    <div class="card valign-wrapper">
+        <div class="valign">
+            <a href="#"><img src="${pageContext.request.contextPath}/upload/photo/{{avaterReference}}" style="height:70px; weight:70px"/></a>
+        </div>
+        <div class="valign" style="margin-left: 20px">
+            {{description}}
+        </div>
+    </div>
+    {{/each}}
 </script>
 
 </body>
