@@ -50,9 +50,9 @@ public class MySqlPlaceDao extends AbstractJDBCDao<Place, Integer> {
     private static final String INSERT_INTO_PLACE = "INSERT INTO place (latitude,longitude,category_id,rating,visible,place_time,deleted,recomended,custom) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?); ";
     private static final String GET_LAST_PLACE_INDEX = "SELECT id FROM place WHERE id = LAST_INSERT_ID();";
     private static final String GET_ALL_CONFIRM_CUSTOM_PLACE = "SELECT p.id, p.latitude, p.longitude, p.category_id, p.rating, p.visible, p.place_time, p.deleted, p.recomended, p.custom,p.recom_time, p.is_recommended \n" +
-            "FROM place AS p JOIN user_place AS up WHERE up.place_id = p.id and p.custom = true and p.visible=false and p.recomended=false and p.deleted=false and up.deleted =false AND p.is_recommended = true";
+            "FROM place AS p WHERE p.custom = true and p.visible=false and p.recomended=false and p.deleted=false and p.is_recommended = true";
     private static final String GET_ALL_CONFIRM_RECOMMENDED_PLACE = "SELECT p.id, p.latitude, p.longitude, p.category_id, p.rating, p.visible, p.place_time, p.deleted, p.recomended, p.custom,p.recom_time, p.is_recommended \n" +
-            "FROM place AS p JOIN user_place AS up WHERE up.place_id = p.id and p.visible = true and p.recomended=false and p.custom = false and p.deleted=false and up.deleted =false AND p.is_recommended = true";
+            "FROM place AS p WHERE p.visible = true and p.recomended=false and p.custom = false and p.deleted=false and p.is_recommended = true";
 
     private class PersistGroup extends Place {
         public void setId(int id) {

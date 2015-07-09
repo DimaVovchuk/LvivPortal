@@ -14,40 +14,37 @@ import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
-
 /**
  * Created by Vasyl on 27.06.2015.
  */
 public class CompanyInformationCommand implements Command {
     private static final Logger loger = LogManager.getLogger(ClassName.getCurrentClassName());
     private List<Place> places = new ArrayList<>();
-    private List<PlaceDescription> placeDescriptions = new ArrayList<>();
-    private List<PlaceImage> placeImage = new ArrayList<>();
     private UserService userService = new UserService();
     private PlaceService placeService = new PlaceService();
     private UserImageService userImageService = new UserImageService();
     private PlaceImageService placeImageService = new PlaceImageService();
     private PlaceDescriptionService placeDescriptionService = new PlaceDescriptionService();
     private List<Place> wayPlaces = new ArrayList<>();
-    private List<PlaceDescription> wayPlaceDescriptions = new ArrayList<>();
-    private List<PlaceImage> wayPlaceImage = new ArrayList<>();
     private String language;
     private HttpServletRequest request;
     private WayService wayService = new WayService();
-    private Map<Way, List<PlaceDescriptionAndPhoto>> allWayInfo = new HashMap<>();
+//    private Map<Way, List<PlaceDescriptionAndPhoto>> allWayInfo = new HashMap<>();
+    PlaceImage image = null;
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        Map<Way, List<PlaceDescriptionAndPhoto>> wayListMap = null;
         List<Way> userWayList = null;
         ResourceBundle resourceBandle = (ResourceBundle) session.getAttribute("bundle");
         Locale locale = resourceBandle.getLocale();
         language = locale.getLanguage();
         this.request = request;
+        List<PlaceDescriptionAndPhoto> placesPageInfo = new ArrayList<>();
 
 
         String userID = request.getParameter("id");
+        System.out.println("userID in compInfo " + userID);
         if (userID != null) {
             Integer id = Integer.valueOf(userID);
             User userData = userService.getByPK(id);
@@ -56,102 +53,61 @@ public class CompanyInformationCommand implements Command {
 
             places = placeService.getPlaceByUserId(id);
             if (places != null && !places.isEmpty()) {
-                placeDescriptions = getPlaceDescriptionByPlace(places);
-                placeImage = getPlaceImageByPlace(places);
+                for (Place place : places) {
+                    placesPageInfo.add(getPlaceDescriptionAndPhotoList(place));
+                }
             }
-            List<PlaceDescriptionAndPhoto> placesPageInfo = null;
-            if (places != null && !places.isEmpty()) {
-                placesPageInfo = getPlaceDescriptionAndPhotoList(places, placeDescriptions, placeImage);
+
+            userWayList = wayService.getWaysByUserId(id);
+            UserDataAboutTrip userDataTrip = new UserDataAboutTrip();
+            Map<Way, Map<Integer, List<PlaceDescriptionAndPhoto>>> allWaysPlaseInfo = new HashMap<>();
+
+            if (userWayList != null && !userWayList.isEmpty()) {
+                for (Way oneWay : userWayList) {
+                   Map<Integer, List<PlaceDescriptionAndPhoto>> placesMap = new HashMap<>();
+                    wayPlaces = placeService.getPlaceByWayId(oneWay.getId());
+                    List<PlaceDescriptionAndPhoto> wayPlacesPageInfo = new ArrayList<>();
+                    userDataTrip.setDayCount(oneWay.getWay_days());
+                    for (int i = 1; i <= userDataTrip.getDayCount(); i++) {
+                        List<Place> places = placeService.getPlaceByWayIdDayNumber(oneWay.getId(), i);
+                        List<PlaceDescriptionAndPhoto> wayPlacesPageInfoList = new ArrayList<>();
+                        if (places != null && !places.isEmpty()) {
+                            for (Place place : places) {
+                                wayPlacesPageInfoList.add(getPlaceDescriptionAndPhotoList(place));
+                        }
+                            placesMap.put(i, wayPlacesPageInfoList);
+                        }
+                    }
+                    allWaysPlaseInfo.put(oneWay,placesMap);
+                }
+            } else {
+                request.setAttribute("allWayInfo", allWaysPlaseInfo);
             }
 
             request.setAttribute("placesInfo", placesPageInfo);
-            session.setAttribute("userInfo", userData);
-            session.setAttribute("avatar", avatar);
-            session.setAttribute("userGalery", userGalery);
+            request.setAttribute("userInfo", userData);
+            request.setAttribute("avatar", avatar);
+            request.setAttribute("userGalery", userGalery);
+            request.setAttribute("allWayInfo", allWaysPlaseInfo);
         }
-
-        if (userID != null) {
-            Integer id = Integer.valueOf(userID);
-            userWayList = wayService.getWaysByUserId(id);
-            allWayInfo.clear();
-            if (userWayList != null && !userWayList.isEmpty()) {
-                for (Way oneWay :userWayList) {
-                    wayPlaces = placeService.getPlaceByWayId(oneWay.getId());
-
-                    if (wayPlaces != null && !wayPlaces.isEmpty()) {
-                        wayPlaceDescriptions = getPlaceDescriptionByPlace(wayPlaces);
-                        wayPlaceImage = getPlaceImageByPlace(wayPlaces);
-                    }
-                    List<PlaceDescriptionAndPhoto> wayPlacesPageInfo = null;
-                    if (wayPlaces != null && !wayPlaces.isEmpty()) {
-                        wayPlacesPageInfo = getPlaceDescriptionAndPhotoList(wayPlaces, wayPlaceDescriptions, wayPlaceImage);
-                    }
-                    allWayInfo.put(oneWay,wayPlacesPageInfo);
-                }
-            }
-//            else{
-//                request.setAttribute("allWayInfo", allWayInfo);
-//            }
-
-            request.setAttribute("allWayInfo", allWayInfo);
-        }
-
         request.getRequestDispatcher("/views/pages/company-page.jsp").forward(request, response);
     }
 
-    private List<PlaceDescription> getPlaceDescriptionByPlace(List<Place> places) {
-        Integer place_id;
-        PlaceDescription placeDescription;
-        List<PlaceDescription> placeDescriptions = new ArrayList<>();
-        for (Place place : places) {
-            place_id = place.getId();
-            placeDescription = placeDescriptionService.getPlaceDescriptionByIdPlace(place_id, language);
-            placeDescriptions.add(placeDescription);
+    private PlaceDescriptionAndPhoto getPlaceDescriptionAndPhotoList(Place place) {
+        Integer currentPlaceID = null;
+        PlaceDescriptionAndPhoto item = new PlaceDescriptionAndPhoto();
+        currentPlaceID = place.getId();
+        item.setId(currentPlaceID);
+        image = placeImageService.getPlaceImageByPlaceId(currentPlaceID);
+        if (image == null || !isInFolder(image.getReference())) {
+            image = new PlaceImage(currentPlaceID, "default_building.jpg");
         }
-//        System.out.println("placeDescriptions size is " + placeDescriptions.size());
-        return placeDescriptions;
+        item.setImageReference(image.getReference());
+        item.setName(placeDescriptionService.getPlaceDescriptionByIdPlace(currentPlaceID, language).getName());
+        item.setAdress(placeDescriptionService.getPlaceDescriptionByIdPlace(currentPlaceID, language).getAdress());
+        item.setRating(place.getRating());
+        return item;
     }
-
-
-    private List<PlaceImage> getPlaceImageByPlace(List<Place> places) {
-        List<PlaceImage> placeImage = new ArrayList<>();
-        PlaceImage image;
-        Integer place_id;
-        for (Place place : places) {
-            place_id = place.getId();
-            image = placeImageService.getPlaceImageByPlaceId(place_id);
-            if (image == null || !isInFolder(image.getReference())) {
-                image = new PlaceImage(place_id, "default_building.jpg");
-            }
-            placeImage.add(image);
-        }
-        System.out.println("placeImage size is " + placeImage.size());
-        return placeImage;
-    }
-
-    private List<PlaceDescriptionAndPhoto> getPlaceDescriptionAndPhotoList(List<Place> places, List<PlaceDescription> placeDescriptions, List<PlaceImage> placeImages) {
-        List<PlaceDescriptionAndPhoto> list = new ArrayList<>();
-        for (PlaceDescription placeDescription : placeDescriptions) {
-            for (Place place : places) {
-                for (PlaceImage placeImage : placeImages) {
-                    if (place.getId() == placeDescription.getPlace_id()) {
-                        if (place.getId() == placeImage.getPlace_id()) {
-                            PlaceDescriptionAndPhoto item = new PlaceDescriptionAndPhoto();
-                            item.setId(place.getId());
-                            item.setImageReference(placeImage.getReference());
-                            item.setName(placeDescription.getName());
-                            item.setAdress(placeDescription.getAdress());
-                            item.setRating(place.getRating());
-                            // System.out.println(item.toString());
-                            list.add(item);
-                        }
-                    }
-                }
-            }
-        }
-        return list;
-    }
-
 
     private Boolean isInFolder(String fileName) {
         ClassLoader classLoader = getClass().getClassLoader();
@@ -164,5 +120,57 @@ public class CompanyInformationCommand implements Command {
             }
         }
         return false;
+    }
+
+    private class WayDayPlaces{
+        Integer wayID;
+        String wayName;
+        Integer dayNubmer;
+        List<Place> dayPlaceList;
+
+        public WayDayPlaces() {
+        }
+
+        public Integer getWayID() {
+            return wayID;
+        }
+
+        public void setWayID(Integer wayID) {
+            this.wayID = wayID;
+        }
+
+        public String getWayName() {
+            return wayName;
+        }
+
+        public void setWayName(String wayName) {
+            this.wayName = wayName;
+        }
+
+        public Integer getDayNubmer() {
+            return dayNubmer;
+        }
+
+        public void setDayNubmer(Integer dayNubmer) {
+            this.dayNubmer = dayNubmer;
+        }
+
+        public List<Place> getDayPlaceList() {
+            return dayPlaceList;
+        }
+
+        public void setDayPlaceList(List<Place> dayPlaceList) {
+            this.dayPlaceList = dayPlaceList;
+        }
+
+        @Override
+        public String toString() {
+            return "WayDayPlaces{" +
+                    "wayID=" + wayID +
+                    ", wayName='" + wayName + '\'' +
+                    ", dayNubmer=" + dayNubmer +
+                    ", dayPlaceList=" + dayPlaceList +
+                    '}';
+        }
     }
 }

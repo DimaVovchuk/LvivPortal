@@ -33,7 +33,7 @@ import java.util.regex.Pattern;
 public class SaveEditPlaceCommand implements Command {
     private static final Logger loger = LogManager.getLogger(ClassName.getCurrentClassName());
     private static final String CHECK_DATA = "^[^<>/{}]+$";
-    private static final String CHECK_PHONE = "([0-9]{6,15})";
+//    private static final String CHECK_PHONE = "([0-9]{6,15})";
     private static final String CHECK_PLACE_TIME = "([0-9]*)";
     private static final String CHECK_COORDINATE = "([0-9]+([.][0-9]+))";
     private static Integer savePlaceID = null;
@@ -132,11 +132,11 @@ public class SaveEditPlaceCommand implements Command {
             loger.warn("PlacePriceEN is pattern error");
         }
 
-        if (checkData(newPlacePhone, CHECK_PHONE) && newPlacePhone == "") {
-            session.setAttribute("PlacePhoneError", 1);
-            errorFlag = true;
-            loger.warn("PlacePhone is pattern error");
-        }
+//        if (checkData(newPlacePhone, CHECK_PHONE) && newPlacePhone == "") {
+//            session.setAttribute("PlacePhoneError", 1);
+//            errorFlag = true;
+//            loger.warn("PlacePhone is pattern error");
+//        }
 
         if (checkData(newPlaceTime, CHECK_PLACE_TIME)) {
             session.setAttribute("PlaceTimeError", 1);
@@ -182,16 +182,15 @@ public class SaveEditPlaceCommand implements Command {
             } else {
                 newState = "false";
             }
+
             if(recomendetIDSring !=null && recomendetIDSring!=""){
                 place.setRecomended(true);
-            }else{
-                place.setRecomended(false);
             }
+
             if(customIDSring !=null && customIDSring!=""){
                 place.setRecomended(true);
-            }else{
-                place.setRecomended(false);
             }
+
             place.setDeleted(new Boolean(newState));
             loger.info("Object place is created " + place);
 

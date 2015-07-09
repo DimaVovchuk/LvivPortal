@@ -42,7 +42,7 @@
             </div>
         </div>
     </div>
-
+    <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a>
 </div>
 
 <jsp:include page="/views/elements/footer.jsp"/>
@@ -76,9 +76,9 @@
         for (var i = 0; i < data.length; i++) {
             var image = '<img class="circle responsive-img" src="/upload/photo/' + data[i].imageReference + '" style="width: 50px; height: 50px">';
             var info = data[i].name + '<br>' + data[i].adress;
-            console.log(data[i].id);
+
             var buttons = '<a href="/portal?command=editPlace&editPlaceID=' + data[i].id+'" class="btn cyan darken-2 waves-effect waves-light" style="margin-right: 5px"><cdg:l18n key="admin.edit.places.edit"/></a>' +
-                    '<a href="#" class="btn cyan darken-2 waves-effect waves-light" style="margin-right: 5px"><cdg:l18n key="admin.edit.places.delete"/></a>';
+                    '<button data-target="adminPlaceDelete" class="btn cyan darken-2 waves-effect waves-light btn modal-trigger" style="margin-right: 5px"><cdg:l18n key="admin.edit.places.delete"/></button>';
             var row = [ data[i].id, image, info, buttons];
 
             table.row.add(row).draw();
@@ -87,6 +87,14 @@
 
     loadPlaces();
 </script>
-
+<div id="adminPlaceDelete" class="modal">
+    <div class="modal-content">
+        <h4>Modal Header</h4>
+        <p>A bunch of text</p>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+    </div>
+</div>
 </body>
 </html>

@@ -15,11 +15,11 @@ import java.io.IOException;
 /**
  * Created by Oleguk on 29.06.2015.
  */
-public class VkAuthorizationCommand implements Command {
+public class VKAuthorizationCommand implements Command {
     private static final Logger loger = LogManager.getLogger(ClassName.getCurrentClassName());
     private VkObject vObj = null;
 
-    public VkAuthorizationCommand() {
+    public VKAuthorizationCommand() {
         vObj = new VkObject(4974533);
         vObj.vkConfig().setAppSecretKey("1vgWKZCPSQmY0ymy3BFr");
         vObj.vkConfig().setPermissions("email");
