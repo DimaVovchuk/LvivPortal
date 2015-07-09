@@ -239,27 +239,28 @@
 				<div class="row">
 					<div class="col s4">
 						<p><b><cdg:l18n key="editplace.placevis"/></b></p>
-
-						<div class="switch">
-							<c:choose>
-								<c:when test="${editPlace.visible}">
-									<label>
-										<cdg:l18n key="editplace.placeunvisible"/>
-										<input name="newVisible" type="checkbox" checked="checked">
-										<span class="lever"></span>
-										<cdg:l18n key="editplace.placevisible"/>
-									</label>
-								</c:when>
-								<c:otherwise>
-									<label>
-										<cdg:l18n key="editplace.placeunvisible"/>
-										<input name="newVisible" type="checkbox">
-										<span class="lever"></span>
-										<cdg:l18n key="editplace.placevisible"/>
-									</label>
-								</c:otherwise>
-							</c:choose>
-						</div>
+						<c:if test="${sessionScope.role == 1}">
+							<div class="switch">
+								<c:choose>
+									<c:when test="${editPlace.visible}">
+										<label>
+											<cdg:l18n key="editplace.placeunvisible"/>
+											<input name="newVisible" type="checkbox" checked="checked">
+											<span class="lever"></span>
+											<cdg:l18n key="editplace.placevisible"/>
+										</label>
+									</c:when>
+									<c:otherwise>
+										<label>
+											<cdg:l18n key="editplace.placeunvisible"/>
+											<input name="newVisible" type="checkbox">
+											<span class="lever"></span>
+											<cdg:l18n key="editplace.placevisible"/>
+										</label>
+									</c:otherwise>
+								</c:choose>
+							</div>
+						</c:if>
 					</div>
 					<div class="col s4">
 						<p><b><cdg:l18n key="editplace.placestat"/></b></p>

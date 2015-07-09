@@ -288,7 +288,7 @@ public class PlaceService {
     }
 
     public List<Place> getAllVisbleUserCustomPlace(Integer usedID) {
-        List<Place> list=null;
+        List<Place> list = null;
         try {
             list = mySqlPlaceDao.getAllVisibleUserCustomPlace(usedID);
         } catch (PersistException e) {
@@ -297,8 +297,9 @@ public class PlaceService {
         }
         return list;
     }
+
     public List<Place> getAllVisbleUserFavorPlace(Integer usedID) {
-        List<Place> list=null;
+        List<Place> list = null;
         try {
             list = mySqlPlaceDao.getAllVisibleUserFavorPlace(usedID);
         } catch (PersistException e) {
@@ -308,7 +309,7 @@ public class PlaceService {
         return list;
     }
 
-    public List<FavoritePlacesByRating> getPlacesByRating(){
+    public List<FavoritePlacesByRating> getPlacesByRating() {
         List<FavoritePlacesByRating> placeRating = null;
         try {
             placeRating = mySqlPlaceDao.getPlacesByRating();
@@ -329,7 +330,7 @@ public class PlaceService {
     }
 
     public List<Place> getAllConfirmCustomPlace() {
-        List<Place> list=null;
+        List<Place> list = null;
         try {
             list = mySqlPlaceDao.getAllConfirmCustomPlace();
         } catch (PersistException e) {
@@ -340,7 +341,7 @@ public class PlaceService {
     }
 
     public List<Place> getAllConfirmRecommendedPlace() {
-        List<Place> list=null;
+        List<Place> list = null;
         try {
             list = mySqlPlaceDao.getAllConfirmRecommendedPlace();
         } catch (PersistException e) {
@@ -348,5 +349,16 @@ public class PlaceService {
             loger.warn("Cant find user Recommended places");
         }
         return list;
+    }
+
+    public Integer getCheckCustomEditID(Integer loginedUserID, Integer editPlaceID) {
+        Integer id = 0;
+        try {
+            id = mySqlPlaceDao.getCheckCustomEditID(loginedUserID, editPlaceID);
+        } catch (PersistException e) {
+            e.printStackTrace();
+            loger.warn("Cant find user Recommended places");
+        }
+        return id;
     }
 }
