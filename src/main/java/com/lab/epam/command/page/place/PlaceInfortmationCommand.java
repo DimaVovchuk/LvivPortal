@@ -34,19 +34,38 @@ public class PlaceInfortmationCommand implements Command {
 //            rating = Integer.parseInt(ratingString);
 //        }
 
+        PlaceService servicePlace = new PlaceService();
+        PlaceResponseService placeResponseService = new PlaceResponseService();
+        PlaceRatingService placeRatingService = new PlaceRatingService();
+        PlaceDescriptionService placeDescriptionService = new PlaceDescriptionService();
+
+        String txtSearch = request.getParameter("txtSearch");
         String place_idString = request.getParameter("place_id");
         request.setAttribute("place_id", place_idString);
-        Integer place_id = Integer.parseInt(place_idString);
+        Integer place_id = 0;
+        if (txtSearch != null && !txtSearch.isEmpty()){
+            List<PlaceDescription> pl = placeDescriptionService.getAllPlaceBySearch(txtSearch);
+            if (pl != null && !pl.isEmpty()) {
+                PlaceDescription plD = pl.iterator().next();
+                place_id = plD.getPlace_id();
+            }
+        } if (place_id == 0) {
+            if (place_idString != null){
+                place_id = Integer.parseInt(place_idString);
+            }
+        }
+
+
         loger.info("Place with id " + place_id);
 
         //String place_reference = request.getParameter("place_reference");
         // loger.info("place_reference is " + place_reference);
 
-        PlaceService servicePlace = new PlaceService();
-        PlaceResponseService placeResponseService = new PlaceResponseService();
-        PlaceRatingService placeRatingService = new PlaceRatingService();
+//        PlaceService servicePlace = new PlaceService();
+//        PlaceResponseService placeResponseService = new PlaceResponseService();
+//        PlaceRatingService placeRatingService = new PlaceRatingService();
 
-        PlaceDescriptionService placeDescriptionService = new PlaceDescriptionService();
+
         List <UserImageDescription> userImageDescription = new ArrayList<>();
         PlaceImageService placeImageService = new PlaceImageService();
         UserService userService = new UserService();

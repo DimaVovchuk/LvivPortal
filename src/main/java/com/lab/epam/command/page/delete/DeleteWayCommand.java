@@ -2,6 +2,7 @@ package com.lab.epam.command.page.delete;
 
 import com.lab.epam.command.controller.Command;
 import com.lab.epam.entity.User;
+import com.lab.epam.entity.UserDataAboutTrip;
 import com.lab.epam.helper.ClassName;
 import com.lab.epam.service.UserService;
 import com.lab.epam.service.WayService;
@@ -26,6 +27,7 @@ public class DeleteWayCommand implements Command {
         Integer way_id = 0;
         HttpSession sesion = request.getSession();
         String login = (String)sesion.getAttribute("login");
+        UserDataAboutTrip userDataTrip = (UserDataAboutTrip) sesion.getAttribute("userDataTrip");
         Integer user_id = 0;
 
         WayService wayService = new WayService();
@@ -45,6 +47,15 @@ public class DeleteWayCommand implements Command {
         if (way_id != 0 && user_id != 0){
             wayService.deleteWaysByUserIdWayId(user_id, way_id);
         }
+        System.out.println("way_id " + way_id);
+        if (userDataTrip != null){
+            if (userDataTrip.getWay_id() != null && userDataTrip.getWay_id().equals(way_id)){
+                    userDataTrip.setIsSaved(false);
+                    userDataTrip.setIsFull(true);
+            }
+        }
+        System.out.println("userDataTrip " + userDataTrip);
+        sesion.setAttribute("userDataTrip", userDataTrip);
         response.sendRedirect("/portal?command=userAllWay");
 
 

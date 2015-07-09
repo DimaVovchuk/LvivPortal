@@ -306,9 +306,6 @@ function updateMarkerAddress(str) {
     document.getElementById('customPlaceAdrressHid').value = str;
 }
 
-
-//*****************************
-
 var autocomplete;
 
 function fillInAddress() {
@@ -319,8 +316,6 @@ function fillInAddress() {
     customMarker.setPosition(place.geometry.location);
     map.setCenter(place.geometry.location);
 }
-
-//*****************************
 
 var customMarker;
 function initCustom() {
@@ -363,7 +358,12 @@ function customMarkerUnvisible() {
 }
 
 function customMarkerVisible() {
+    // hideMarkers();
      customMarker.setVisible(true);
+     map.setOptions({
+         zoom: 15,
+         center: customMarker.position
+     });
 }
 
 /* *** MAIN *** */

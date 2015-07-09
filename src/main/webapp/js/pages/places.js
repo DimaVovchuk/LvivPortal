@@ -135,6 +135,7 @@ var addPlace = function () {
     });
 };
 
+
 var searchPlace = function () {
     var str = encode_utf8(document.getElementById('txtSearch').value);
     notActive();

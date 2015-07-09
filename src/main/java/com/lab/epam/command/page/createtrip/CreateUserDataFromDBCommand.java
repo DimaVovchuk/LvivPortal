@@ -35,7 +35,6 @@ public class CreateUserDataFromDBCommand implements Command {
         String way_idString = request.getParameter("way_id");
         Integer way_id;
         Map<Integer, List<Place>> placesMap = new HashMap<>();
-        //System.out.println("way_idString " + way_idString);
         if (way_idString != null) {
             way_id = Integer.parseInt(way_idString);
             userDataTrip.setWay_id(way_id);

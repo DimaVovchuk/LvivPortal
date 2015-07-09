@@ -219,18 +219,18 @@
         });
     });
 
-    var loadPlacesData = function (data) {
-        if (!data) return false;
-        var source = $("#place-info-template").html();
-        var template = Handlebars.compile(source);
-        var html = template(data);
-        $('#place-info-collection').html(html);
-        notActive();
-    };
-    $(document).click(function () {
+var loadPlacesData = function (data) {
+    if (!data) return false;
+    var source = $("#place-info-template").html();
+    var template = Handlebars.compile(source);
+    var html = template(data);
+    $('#place-info-collection').html(html);
+    notActive();
+};
+    $(document).click(function() {
         notActive();
     });
-    $("#search-place").click(function (event) {
+    $("#search-place").click(function(event) {
         event.stopPropagation();
     });
 

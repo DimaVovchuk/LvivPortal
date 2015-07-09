@@ -64,7 +64,7 @@ public class PlaceSearchCommand implements Command {
                                 plIm = new PlaceImage(place.getId(), "default_building.jpg");
                             }
                             searchResult += place.getName() + "*" + plIm.getReference() + "\n";
-                            System.out.println("searchResult " + searchResult);
+                           // System.out.println("searchResult " + searchResult);
                             countPlace++;
                         }
                     }

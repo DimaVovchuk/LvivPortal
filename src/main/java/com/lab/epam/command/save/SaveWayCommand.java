@@ -81,7 +81,6 @@ public class SaveWayCommand implements Command {
         }
         loger.info("You create new way in DB");
         placeForWay.setIsFull(isFull);
-      //  request.setAttribute("isFull", isFull);
         session.setAttribute("userDataTrip", placeForWay);
         response.sendRedirect("portal?command=userWays");
 
