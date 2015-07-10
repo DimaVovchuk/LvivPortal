@@ -18,6 +18,10 @@ import java.io.IOException;
 public class Authorization {
     private VkAppConfig vkAppConf;
 
+    public Authorization() {
+
+    }
+
     public Authorization(VkAppConfig vkAppConf) {
         this.vkAppConf = vkAppConf;
     }
