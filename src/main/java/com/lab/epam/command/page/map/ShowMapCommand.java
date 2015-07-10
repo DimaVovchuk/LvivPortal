@@ -45,7 +45,7 @@ public class ShowMapCommand implements Command {
             if(placeImage== null){
                 placeImage = new PlaceImage(place.getId(),"default_building.jpg");
             }
-            placeMarkerWithPhotos.add(new PlaceMarkerWithPhoto(place.getId(), placeDescription.getName(), place.getLatitude(), place.getLongitude(), placeImage.getReference(), placeDescription.getDescription()));
+            placeMarkerWithPhotos.add(new PlaceMarkerWithPhoto(place.getId(), placeDescription.getName(), place.getLatitude(), place.getLongitude(), placeImage.getReference(), placeDescription.getDescription(), place.getRecom_time()));
         }
         request.setAttribute("places", placeMarkerWithPhotos);
         loger.info("Command ShowMapCommand.");
