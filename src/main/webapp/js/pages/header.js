@@ -86,6 +86,10 @@ var checkReloadPages = function (data) {
     }
 };
 
+//var loadSignInWindow = function (data) {
+//    Materialize.toast('You are loggined', 4000);
+//}
+
 var reloadPage = function () {
     $('#sign-in-form').on('submit', function (e) {
         e.preventDefault();

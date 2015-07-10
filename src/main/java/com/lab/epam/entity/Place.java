@@ -186,7 +186,9 @@ public class Place implements Identified<Integer> {
                 ", category_id=" + category_id +
                 ", place_time=" + place_time +
                 ", recomended=" + recomended +
+                ", recom_time=" + recom_time +
                 ", custom=" + custom +
+                ", is_recommended=" + is_recommended +
                 ", deleted=" + deleted +
                 '}';
     }

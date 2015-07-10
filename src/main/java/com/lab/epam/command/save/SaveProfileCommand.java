@@ -52,7 +52,7 @@ public class SaveProfileCommand implements Command {
 
         try {
             init(request, params, files);
-            save(request, files, params);
+            save(request, files);
             response.setContentType("text/html; charset=windows-1251");
         } catch (FileUploadException e) {
             loger.warn(e.getMessage());
@@ -162,7 +162,7 @@ public class SaveProfileCommand implements Command {
         }
     }
 
-    private static void save(HttpServletRequest request, List files, Map params) throws IOException {
+    private static void save(HttpServletRequest request, List files) throws IOException {
         try {
             for (Iterator i = files.iterator(); i.hasNext(); ) {
                 FileItem item = (FileItem) i.next();
@@ -173,18 +173,20 @@ public class SaveProfileCommand implements Command {
                 Matcher m = p.matcher(imageName);
                 boolean matches = !m.matches();
                 if (!matches) {
-                    Integer usedID = (Integer) session.getAttribute("usedID");
+                    Integer userID = (Integer) session.getAttribute("userID");
                     UserImageService userImageService = new UserImageService();
                     UserService userService = new UserService();
-                    UserImage userImage = new UserImage(usedID, imageName);
+                    UserImage userImage = new UserImage(userID, imageName);
                     userImageService.create(userImage);
 
-                    List<UserImage> allImageList = userImageService.getUserImageByUserId(usedID);
-                    UserImage lastUploadHpoto = allImageList.get(allImageList.size() - 1);
-                    Integer lastImageIndex = lastUploadHpoto.getId();
-                    User user = userService.getByPK(usedID);
-                    user.setAvatar(lastImageIndex);
-                    userService.update(user);
+                    List<UserImage> allImageList = userImageService.getUserImageByUserId(userID);
+                    if (allImageList.size() >= 1) {
+                        UserImage lastUploadHpoto = allImageList.get(allImageList.size() - 1);
+                        Integer lastImageIndex = lastUploadHpoto.getId();
+                        User user = userService.getByPK(userID);
+                        user.setAvatar(lastImageIndex);
+                        userService.update(user);
+                    }
                     loger.info("File is successfully uploaded in database to Avatar image");
 
                     String realPath = request.getRealPath("/upload/photo/" + File.separator + imageName);

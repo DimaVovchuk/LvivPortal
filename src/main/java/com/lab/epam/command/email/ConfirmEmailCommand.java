@@ -63,7 +63,7 @@ private static final Logger loger = LogManager.getLogger(ClassName.getCurrentCla
         }
 
         session.setAttribute("login",login);
-        session.setAttribute("usedID", userByLogin.getId());
+        session.setAttribute("userID", userByLogin.getId());
         session.setAttribute("role",userByLogin.getRoleID());
         session.setAttribute("avatarReference",avatarReference);
         loger.info("User " +login+ " signing in ");

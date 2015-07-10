@@ -1,7 +1,9 @@
 package com.lab.epam.command.page.user.admin;
 
 import com.lab.epam.command.controller.Command;
+import com.lab.epam.entity.Place;
 import com.lab.epam.helper.ClassName;
+import com.lab.epam.service.PlaceService;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -20,19 +22,33 @@ public class AdminCancelCommand implements Command {
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String page = request.getParameter("page");
         String deletedPlaceId = request.getParameter("id");
-        if(page.equals("custom")){
-            System.out.println("custom id " + deletedPlaceId);
-        }
-        if(page.equals("recom")){
-            System.out.println("recom id " + deletedPlaceId);
-        }
-        if(page.equals("recomWay")){
-            System.out.println("recomWay id " + deletedPlaceId);
-        }
-        if(page.equals("editPlace")){
-            System.out.println("editPlace id " + deletedPlaceId);
-        }
+        PlaceService placeService=new PlaceService();
+        System.out.println("deletedPlaceId " + deletedPlaceId);
+        if(deletedPlaceId!=null && deletedPlaceId!="") {
+            Integer placeID = Integer.valueOf(deletedPlaceId);
+            Place place = placeService.getByPK(placeID);
+            if (page.equals("custom")) {
+              System.out.println("custom id " + deletedPlaceId);
+                place.setIs_recommended(false);
+                System.out.println(place);
+                placeService.update(place);
+            }
+            if (page.equals("recom")) {
 
+
+                System.out.println("recom id " + deletedPlaceId);
+            }
+            if (page.equals("recomWay")) {
+
+
+                System.out.println("recomWay id " + deletedPlaceId);
+            }
+            if (page.equals("editPlace")) {
+//                System.out.println("editPlace id " + deletedPlaceId);
+                place.setDeleted(true);
+                placeService.update(place);
+            }
+        }
 
         loger.info("Command AdminCancelCommand");
     }

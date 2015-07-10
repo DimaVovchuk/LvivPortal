@@ -29,7 +29,7 @@
 					                                        width="33" height="33"></a>
 				</div>
 				<div class="form">
-					<button class="btn modal-action modal-close waves-effect waves-light cyan darken-2" type="submit"
+					<button class="btn modal-action waves-effect waves-light cyan darken-2" type="submit"
 							>OK
 					</button>
 				</div>
@@ -39,7 +39,7 @@
 		<div class='register'>
 			<h2><cdg:l18n key="login.createtxt"/></h2>
 
-			<form id="sign-up-form" action="/portal?command=signUp" method="post">
+			<form id="sign-up-form" action="#" method="post">
 				<input type="hidden" name="command" value="signUp">
 
 				<div id="first-last-form" class="row animated fadeIn" style="margin-bottom: 0">
@@ -87,7 +87,7 @@
 					<label class="radio-label" for="company"><cdg:l18n key="role.company"/></label>
 				</div>
 				<div class="form">
-					<button class="btn waves-effect waves-light cyan darken-2" type="submit">OK
+					<button class="btn modal-action modal-close waves-effect waves-light cyan darken-2" type="submit">OK
 					</button>
 				</div>
 			</form>
@@ -98,3 +98,25 @@
 	</div>
 </div>
 
+<script>
+	var SignUp = function () {
+		$('#sign-up-form').on('submit', function (e) {
+			e.preventDefault();
+			e.stopImmediatePropagation();
+			$.ajax({
+				type: 'post',
+				url: window.location.origin + '/portal?command=signUp',
+				data: $('#sign-up-form').serialize(),
+				success: loadWindow,
+				error: loadWindow
+			});
+		});
+	};
+
+	var loadWindow = function (data) {
+		Materialize.toast('<cdg:l18n key="login.signup.tost"/>', 4000);
+	}
+	$(function () {
+		SignUp();
+	});
+</script>

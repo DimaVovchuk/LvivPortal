@@ -169,7 +169,7 @@ public class SignUpCommand implements Command {
                 String s = new String(bundle.getString("confirm.message").getBytes("ISO-8859-1"), "windows-1251") + " -> <a href = 'http://localhost:8080/portal?command=confirm&user=" + login + "&param=" + md5phone + "'> http://localhost:8080/portal?command=confirm&user=" + login + "&param=" + md5phone + " <a>";
                 SendEmail.sender("Lviv Portal", s, email);
                 loger.info("New user was added");
-                request.getRequestDispatcher("/views/pages/user-cabinet.jsp").forward(request, response);
+//                request.getRequestDispatcher("/views/pages/user-cabinet.jsp").forward(request, response);
             } catch (Exception e) {
                 loger.info("Adding new user was failed");
                 loger.error(e.getMessage());
