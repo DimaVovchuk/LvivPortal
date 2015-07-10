@@ -13,6 +13,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,6 +25,7 @@ public class MySqlWayDao extends AbstractJDBCDao<Way, Integer> {
     private static final Logger loger = LogManager.getLogger(ClassName.getCurrentClassName());
 
     private static final String GET_WAY_BY_USER_ID = "SELECT w.id, w.rating, w.name, w.visible, w.way_days, w.way_time, w.date_begin, w.date_end, w.deleted, w.recomended FROM way AS w JOIN user_way AS uw JOIN user AS u WHERE uw.user_id = u.id AND uw.way_id = w.id AND uw.deleted='false' AND u.id = ?";
+    private static final String GET_WAY_BY_WAY_ID = "SELECT w.id, w.rating, w.name, w.visible, w.way_days, w.way_time, w.date_begin, w.date_end, w.deleted, w.recomended FROM way AS w JOIN user_way AS uw JOIN user AS u WHERE uw.user_id = u.id AND uw.way_id = w.id AND uw.deleted='false' AND uw.way_id = ?";
     private static final String DELETE_WAY_BY_USER_ID_WAY_ID = "UPDATE user_way SET deleted = true WHERE user_id = ? AND way_id = ?";
     private static final String GET_LAST_ADDED = "SELECT * FROM way ORDER BY id DESC LIMIT 0,1";
     private static final String CREATE_USER_WAY = "INSERT INTO user_way (user_id, way_id, way_days) VALUES (?,?,?);";
@@ -33,7 +35,7 @@ public class MySqlWayDao extends AbstractJDBCDao<Way, Integer> {
     private static final String UPDATE_WAY_RATING = "UPDATE way SET rating = ? WHERE id = ?";
     private static final String GET_WAY_RECOMENDED = "SELECT * FROM way WHERE recomended=true AND deleted=false AND visible=true";
     private static final String SET_WAY_IS_RECOMMENDED = "UPDATE way SET is_recommend = true WHERE id = ?";
-
+    private static final String GET_ALL_CONFIRM_RECOMMENDED_WAY ="SELECT w.id, w.rating, w.name, w.visible, w.way_days, w.way_time, w.date_begin, w.date_end, w.deleted, w.recomended, w.is_recommend FROM way AS w WHERE w.deleted=false AND w.visible=true AND w.recomended=false AND w.is_recommend=true";
     private class PersistGroup extends Way {
         public void setId(int id) {
             super.setId(id);
@@ -63,6 +65,49 @@ public class MySqlWayDao extends AbstractJDBCDao<Way, Integer> {
             }
         } catch (Exception e) {
             loger.warn("Cant get ways from user with " + user_id + " user_id");
+            throw new PersistException(e);
+        } finally {
+            connection.putback(conn);
+        }
+        return list;
+
+    }
+    public List<Way> getAllConfirmRecommendedWay() throws PersistException {
+        List<Way> wayList = new ArrayList<>();
+        Connection conn = connection.retrieve();
+         try (PreparedStatement statement = conn.prepareStatement(GET_ALL_CONFIRM_RECOMMENDED_WAY)) {
+            ResultSet rs = statement.executeQuery();
+            //  loger.info("Get last way is succesfull ");
+             wayList = parseResultSet(rs);
+            //loger.info("Parse result with Transformer is succesfull");
+            if (wayList.size() <= 0){
+                loger.info("DB has any ways");
+                return null;
+            }
+            if (wayList.size() > 1){
+                loger.info("DB has more than one last way");
+            }
+        } catch (Exception e) {
+            loger.warn("Can not get all confirm recommended way.");
+            throw new PersistException(e);
+        }
+        return wayList;
+    }
+
+    public List<Way> getWaysByWayId(Integer way_id) throws PersistException {
+
+        List<Way> list;
+        Connection conn = connection.retrieve();
+        try (PreparedStatement statement = conn.prepareStatement(GET_WAY_BY_WAY_ID)) {
+            statement.setInt(1, way_id);
+            ResultSet rs = statement.executeQuery();
+            list = parseResultSet(rs);
+            if (list.size() <= 0){
+                loger.info("DB has any ways from way with " + way_id + " way_id");
+                return null;
+            }
+        } catch (Exception e) {
+            loger.warn("Cant get ways from way with " + way_id + " way_id");
             throw new PersistException(e);
         } finally {
             connection.putback(conn);

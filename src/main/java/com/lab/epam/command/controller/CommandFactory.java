@@ -127,6 +127,9 @@ public class CommandFactory {
         commands.put("imageResponseJSON", new CommercialImageCommentCommand());
         commands.put("addImageResponse", new AddImageResponseCommand());
         commands.put("rectRatingUser", new RectUserRatingCommand());
+        commands.put("adminConfirmRecommendedWay", new ConfirmRecommendedWayCommand());
+        commands.put("restoreDeletedPlace", new RestoreDeletedPlaceCommand());
+        commands.put("restoreDeletedPlaceJSON", new RestoreDeletedPlaceJSON());
         commands.put("adminCancelCommand", new AdminCancelCommand());
     }
 

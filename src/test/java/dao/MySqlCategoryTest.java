@@ -1,8 +1,9 @@
+package dao;
+
+import com.lab.epam.dao.Identified;
 import com.lab.epam.dao.PersistException;
-import com.lab.epam.dao.imp.MySqlPlaceDao;
-import com.lab.epam.dao.imp.MySqlPlaceImageDao;
-import com.lab.epam.entity.Place;
-import com.lab.epam.entity.PlaceImage;
+import com.lab.epam.dao.imp.MySqlCategoryDao;
+import com.lab.epam.entity.Category;
 import com.lab.epam.persistant.ConnectionManager;
 import com.lab.epam.persistant.ConnectionPool;
 import junit.framework.Assert;
@@ -15,23 +16,22 @@ import java.sql.SQLException;
 import java.util.List;
 
 /**
- * Created by Admin on 20.06.2015.
+ * Created by Admin on 19.06.2015.
  */
-public class MySqlPlaceImageDaoTest {
+public class MySqlCategoryTest {
 
     private Connection connection;
     ConnectionPool connectionPool;
-    private MySqlPlaceImageDao dao;
+    private MySqlCategoryDao dao;
+    private static final String CATEGORY = "Architectural sights";
     private static final Integer ID = 1;
-    private static final Integer  PLACE_ID = 1;
-    private static final String  REFERENCE = "new.jpg";
 
     @Before
     public void setUp() throws PersistException, SQLException {
         connectionPool = ConnectionManager.getConnection();
         connection = connectionPool.retrieve();
         connection.setAutoCommit(false);
-        dao = new MySqlPlaceImageDao();
+        dao = new MySqlCategoryDao();
     }
 
     @After
@@ -43,7 +43,7 @@ public class MySqlPlaceImageDaoTest {
     @Test
     public void testCreate() throws Exception {
         List list = dao.getAll();
-        PlaceImage cat = new PlaceImage(PLACE_ID, REFERENCE);
+        Category cat = new Category("ololol");
         cat.setId(list.size()+1);
         dao.create(cat);
         list = dao.getAllWithoutDeleted();
@@ -58,14 +58,14 @@ public class MySqlPlaceImageDaoTest {
 
     @Test public void testGetByPK() throws Exception
     {
-        PlaceImage category = dao.getByPK(ID);
+        Category category = dao.getByPK(ID);
         Assert.assertNotNull(category);
     }
 
     @Test
     public void testDelete() throws Exception {
         List list = dao.getAll();
-        PlaceImage cat = new PlaceImage(PLACE_ID, REFERENCE);
+        Category cat = new Category("ololol");
         cat.setId(list.size()+1);
         dao.create(cat);
         list = dao.getAllWithoutDeleted();
@@ -97,9 +97,9 @@ public class MySqlPlaceImageDaoTest {
     }
 
     @Test
-    public void testGetPlaceImageByPlaceId() throws Exception {
-        PlaceImage list = dao.getPlaceImageByPlaceId(PLACE_ID);
-        Assert.assertNotNull(list);
+    public void testGetCategoryByName() throws Exception {
+        Category category = dao.getCategoryByName(CATEGORY);
+        Assert.assertNotNull(category);
     }
 
 }
