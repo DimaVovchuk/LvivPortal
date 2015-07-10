@@ -7,6 +7,7 @@ var initSidebar = function () {
     initDayTrigger();
     initMapDayTrigger();
     initImageMultiloadPreview();
+    initMapCheckboxListener();
 };
 
 var linkProcess = function (id) {
@@ -170,6 +171,12 @@ var initImageMultiloadPreview = function () {
         $('#image-input').val('');
         $(this).hide();
     });
+};
+
+var initMapCheckboxListener = function () {
+  $('#custom-additional-check').change(function () {
+      $('#custom-additional').animate({height: "toggle", opacity: "toggle"});
+  })
 };
 
 /* *** MAP *** */
