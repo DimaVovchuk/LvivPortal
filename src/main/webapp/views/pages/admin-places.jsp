@@ -24,7 +24,6 @@
                 <table id="admin-page-table" class="display" cellspacing="0" width="100%">
                     <thead>
                     <tr>
-                        <th>ID</th>
                         <th>Image</th>
                         <th>Info</th>
                         <th></th>
@@ -32,7 +31,6 @@
                     </thead>
                     <tfoot>
                     <tr>
-                        <th>ID</th>
                         <th>Image</th>
                         <th>Info</th>
                         <th></th>
@@ -42,7 +40,6 @@
             </div>
         </div>
     </div>
-    <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a>
 </div>
 
 <div id="adminPlaceDelete" class="modal">
@@ -88,14 +85,21 @@
                 info: "Showing page _PAGE_ of _PAGES_",
                 infoEmpty: "No records available",
                 infoFiltered: "(filtered from _MAX_ total records)"
-            }
+            },
+            columns : [
+                {"width": "10%"},
+                {"width": "50%"},
+                {"width": "40%"}
+            ]
         });
         for (var i = 0; i < data.length; i++) {
-            var image = '<img class="circle responsive-img" src="/upload/photo/' + data[i].imageReference + '" style="width: 50px; height: 50px">';
+            var image = '<div class="center-align"><img class="circle responsive-img" src="/upload/photo/' + data[i].imageReference + '" style="width: 50px; height: 50px"></div>';
             var info = data[i].name + '<br>' + data[i].adress;
-            var buttons = '<a href="/portal?command=editPlace&editPlaceID=' + data[i].id + '" class="btn cyan darken-2 waves-effect waves-light" style="margin-right: 5px"><cdg:l18n key="admin.edit.places.edit"/></a>' +
-                    '<button class="btn cyan darken-2 waves-effect waves-light delete-btn" style="margin-right: 5px" onclick="deleteBtnAction(' + data[i].id + ')"><cdg:l18n key="admin.edit.places.delete"/></button>';
-            var row = [data[i].id, image, info, buttons];
+            var buttons = '<div class="right-align">' +
+                    '<a href="/portal?command=editPlace&editPlaceID=' + data[i].id + '" class="btn cyan darken-2 waves-effect waves-light" style="margin-right: 5px"><cdg:l18n key="admin.edit.places.edit"/></a>' +
+                    '<button class="btn cyan darken-2 waves-effect waves-light delete-btn" style="margin-right: 5px" onclick="deleteBtnAction(' + data[i].id + ')"><cdg:l18n key="admin.edit.places.delete"/></button>' +
+                    '</div>';
+            var row = [image, info, buttons];
 
             table.row.add(row).draw();
         }
