@@ -56,7 +56,6 @@ public class TransformerTest {
         User user = userDao.getByPK(5);
         Map<String, Object> columns = transformer.getObjectColumns(user);
         Assert.assertNotNull(columns);
-        System.out.println(columns.size());
         Assert.assertTrue(columns.size() > 0);
     }
 
@@ -65,7 +64,6 @@ public class TransformerTest {
         User user = userDao.getByPK(5);
         List<String> rows = transformer.setRowInDB(user);
         Assert.assertNotNull(rows);
-        System.out.println(rows.size());
         Assert.assertTrue(rows.size() > 0);
     }
 
@@ -75,7 +73,6 @@ public class TransformerTest {
         ResultSet rs = statement.executeQuery();
         List<User> rowsToObj = transformer.rowToObject(rs);
         Assert.assertNotNull(rowsToObj);
-        System.out.println(rowsToObj.size());
         Assert.assertTrue(rowsToObj.size() > 0);
     }*/
 }

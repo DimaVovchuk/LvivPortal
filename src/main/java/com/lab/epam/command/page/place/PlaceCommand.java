@@ -27,7 +27,6 @@ public class PlaceCommand implements Command {
 
         String category = request.getParameter("category");
         loger.info("Place Loader.");
-        System.out.println("category " + category);
         request.setAttribute("category", category);
         request.getRequestDispatcher("/views/pages/places.jsp").forward(request, response);
         }

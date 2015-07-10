@@ -162,9 +162,9 @@ public class MySqlWayDao extends AbstractJDBCDao<Way, Integer> {
         Connection conn = connection.retrieve();
         try (PreparedStatement statement = conn.prepareStatement(GET_LAST_ADDED)) {
             ResultSet rs = statement.executeQuery();
-          //  loger.info("Get last way is succesfull ");
+            loger.info("Get last way is succesfull ");
             list = parseResultSet(rs);
-            //loger.info("Parse result with Transformer is succesfull");
+            loger.info("Parse result with Transformer is succesfull");
             if (list.size() <= 0){
                 loger.info("DB has any ways");
                 return null;
@@ -215,7 +215,7 @@ public class MySqlWayDao extends AbstractJDBCDao<Way, Integer> {
             if (count != 1) {
                 throw new PersistException("On persist modify more then 1 record: " + count);
             } else {
-                //   System.out.println("Create is succesfule");
+                loger.info("Create is successful");
             }
         } catch (Exception e) {
             throw new PersistException(e);
@@ -233,7 +233,7 @@ public class MySqlWayDao extends AbstractJDBCDao<Way, Integer> {
             if (count != 1) {
                 throw new PersistException("On persist modify more then 1 record: " + count);
             } else {
-                //   System.out.println("Create is succesfule");
+                loger.info("Create is successful");
             }
         } catch (Exception e) {
             throw new PersistException(e);
@@ -260,7 +260,6 @@ public class MySqlWayDao extends AbstractJDBCDao<Way, Integer> {
 
     public void updateWayBeginDate(Integer way_id, Date beginDate) throws PersistException {
         Connection conn = connection.retrieve();
-        System.out.println("beginDate" + beginDate );
         try (PreparedStatement statement = conn.prepareStatement(UPDATE_WAY_BEGIN_DATE)) {
             statement.setDate(1, beginDate);
             statement.setInt(2, way_id);
@@ -278,7 +277,6 @@ public class MySqlWayDao extends AbstractJDBCDao<Way, Integer> {
 
     public void updateWayEndDate(Integer way_id, Date endDate) throws PersistException {
         Connection conn = connection.retrieve();
-        System.out.println("endDate" + endDate );
         try (PreparedStatement statement = conn.prepareStatement(UPDATE_WAY_END_DATE)) {
             statement.setDate(1, endDate);
             statement.setInt(2, way_id);

@@ -46,7 +46,6 @@ public class CompanyInformationCommand implements Command {
         String login = (String) session.getAttribute("login");
         Integer company_id = null;
         String userID = request.getParameter("id");
-//        System.out.println("userID in compInfo " + userID);
         if (userID != null) {
             Integer id = Integer.valueOf(userID);
             User userData = userService.getByPK(id);

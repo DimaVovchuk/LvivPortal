@@ -21,7 +21,6 @@ public class Decoder {
                 e.printStackTrace();
             }
         }
-        System.out.println("newLine " + newLine);
         return newLine;
     }
 

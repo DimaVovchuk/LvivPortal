@@ -35,12 +35,9 @@ public class AddImageResponseCommand implements Command {
         Integer isCreated = 0;
 
         String image_idString = request.getParameter("image_id");
-        //System.out.println("image_idString " + image_idString);
         String description = request.getParameter("gallery-comment");
-        //System.out.println("gallery-comment " + description);
         HttpSession session = request.getSession();
         String login = (String) session.getAttribute("login");
-        //System.out.println("login " + login);
         Integer user_id = 0;
         if (login != null){
             User user = userService.getUserByLogin(login);

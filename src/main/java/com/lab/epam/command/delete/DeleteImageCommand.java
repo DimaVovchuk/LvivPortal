@@ -64,7 +64,6 @@ public class DeleteImageCommand implements Command {
         String realPath = request.getRealPath("/upload/photo/");
         File f = new File(realPath);
         String[] list = f.list();
-        System.out.println(list);
         for (String file : list) {
             if (fileName.equals(file)) {
                 return true;

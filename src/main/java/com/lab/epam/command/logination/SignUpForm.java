@@ -18,8 +18,6 @@ public class SignUpForm implements Command {
         String last_name = request.getParameter("last");
         String email = request.getParameter("email");
         String phone = request.getParameter("phone");
-        //System.out.println(first_name);
-        //System.out.println(last_name);
 
         request.setAttribute("first", first_name);
         request.setAttribute("last", last_name);

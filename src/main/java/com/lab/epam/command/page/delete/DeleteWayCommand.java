@@ -47,14 +47,12 @@ public class DeleteWayCommand implements Command {
         if (way_id != 0 && user_id != 0){
             wayService.deleteWaysByUserIdWayId(user_id, way_id);
         }
-        System.out.println("way_id " + way_id);
         if (userDataTrip != null){
             if (userDataTrip.getWay_id() != null && userDataTrip.getWay_id().equals(way_id)){
                     userDataTrip.setIsSaved(false);
                     userDataTrip.setIsFull(true);
             }
         }
-        System.out.println("userDataTrip " + userDataTrip);
         sesion.setAttribute("userDataTrip", userDataTrip);
         response.sendRedirect("/portal?command=userAllWay");
 

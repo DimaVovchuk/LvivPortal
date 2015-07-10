@@ -20,14 +20,14 @@
         <nav class="side-icon blue-grey darken-2 z-depth-5">
             <ul class="center-align">
                 <li id="li-itinerary" class="link-process active" data-type="itinerary"><a href="#"><i class="small mdi-notification-event-note white-text"></i>
-                    <span class="nav-text white-text">Itinerary</span>
+                    <span class="nav-text white-text"><cdg:l18n key="map.itinerary"/></span>
                 </a>
                 </li>
                 <li id="li-places" class="link-process" data-type="places"><a href="#"><i class="small mdi-action-account-balance white-text"></i>
-                    <span class="nav-text white-text">Places</span>
+                    <span class="nav-text white-text"><cdg:l18n key="map.places"/></span>
                 </a>
                 <li id="li-custom" class="link-process" data-type="custom"><a href="#"><i class="small material-icons">local_see</i>
-                    <span class="nav-text white-text">Custom</span>
+                    <span class="nav-text white-text"><cdg:l18n key="map.custom"/></span>
                 </a>
                 </li>
             </ul>

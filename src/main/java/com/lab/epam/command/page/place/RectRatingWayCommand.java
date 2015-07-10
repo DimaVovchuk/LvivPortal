@@ -63,16 +63,12 @@ public class RectRatingWayCommand implements Command {
                     Integer placeRating = way.getRating();
                     way.setRating(placeRating - ratingOld + ratingNew);
                     wayService.updateWayRating(way_id, way.getRating());
-//                    System.out.println(place);
                     wayService.update(way);
                 }
             }else {
                 wayRatingService.create(new WayRating(user.getId(),way_id,ratingNew));
                 Way way = wayService.getByPK(way_id);
                 Integer wayRating = way.getRating();
-                //   System.out.println("place " + place);
-                // System.out.println("placeRating " + placeRating);
-                //System.out.println("ratingNew " + ratingNew);
                 way.setRating(wayRating + ratingNew);
                 wayService.updateWayRating(way_id, wayRating + ratingNew);
                 wayService.update(way);

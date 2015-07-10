@@ -66,7 +66,6 @@ public class CreateUserDataCommand implements Command {
         //String name = request.getParameter("name");
         userDataTrip.getSortFlag().put(1,true);
         placeArrive = Decoder.decodeStringUtf8(placeArrive);
-        System.out.println("placeArrive " + placeArrive);
 
 
         if (dontKnowDate == null) {
@@ -201,7 +200,6 @@ public class CreateUserDataCommand implements Command {
 
         HttpSession session = request.getSession();
         session.setAttribute("userDataTrip", userDataTrip);
-        System.out.println("userDataTrip " + userDataTrip);
 
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");

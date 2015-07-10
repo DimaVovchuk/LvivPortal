@@ -79,10 +79,6 @@ public class SaveEditPlaceCommand implements Command {
 
         loger.info("All data waas succesful getting");
 
-
-        System.out.println("customIDSring in SaveEditPlaceCommand " + customIDSring);
-        System.out.println("recomendetIDSring in SaveEditPlaceCommand " + recomendetIDSring);
-
 //check input data
         if (checkData(newPlaceNameUA, CHECK_DATA) && newPlaceNameUA == "") {
             session.setAttribute("nameUAError", 1);
@@ -335,7 +331,6 @@ public class SaveEditPlaceCommand implements Command {
         String realPath = request.getRealPath("/upload/photo/");
         File f = new File(realPath);
         String[] list = f.list();
-        System.out.println(list);
         for (String file : list) {
             if (fileName.equals(file)) {
                 return true;

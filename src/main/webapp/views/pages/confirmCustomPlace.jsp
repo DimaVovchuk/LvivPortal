@@ -25,16 +25,16 @@
                     <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Image</th>
-                        <th>Info</th>
+                        <th><cdg:l18n key="admin.edit.places.image"/></th>
+                        <th><cdg:l18n key="admin.edit.places.info"/></th>
                         <th></th>
                     </tr>
                     </thead>
                     <tfoot>
                     <tr>
                         <th>ID</th>
-                        <th>Image</th>
-                        <th>Info</th>
+                        <th><cdg:l18n key="admin.edit.places.image"/></th>
+                        <th><cdg:l18n key="admin.edit.places.info"/></th>
                         <th></th>
                     </tr>
                     </tfoot>
@@ -47,7 +47,7 @@
 
 <div id="confirmCustomPlaceCencel" class="modal">
     <div class="modal-content">
-        <h4>Delete this place</h4>
+        <h4><cdg:l18n key="admin.edit.places.deleteplace"/></h4>
 
         <div id="place-id"></div>
         <a id="delPlace" onclick="cancelPlace();" href="javascript:"

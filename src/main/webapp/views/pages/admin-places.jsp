@@ -24,15 +24,15 @@
                 <table id="admin-page-table" class="display" cellspacing="0" width="100%">
                     <thead>
                     <tr>
-                        <th>Image</th>
-                        <th>Info</th>
+                        <th><cdg:l18n key="admin.edit.places.image"/></th>
+                        <th><cdg:l18n key="admin.edit.places.info"/></th>
                         <th></th>
                     </tr>
                     </thead>
                     <tfoot>
                     <tr>
-                        <th>Image</th>
-                        <th>Info</th>
+                        <th><cdg:l18n key="admin.edit.places.image"/></th>
+                        <th><cdg:l18n key="admin.edit.places.info"/></th>
                         <th></th>
                     </tr>
                     </tfoot>
@@ -44,7 +44,7 @@
 
 <div id="adminPlaceDelete" class="modal">
     <div class="modal-content">
-        <h4>Delete this place</h4>
+        <h4><cdg:l18n key="admin.edit.places.deleteplace"/></h4>
 
         <div id="place-id"></div>
         <a id="delPlace" onclick="deletePlace();" href="javascript:"

@@ -463,7 +463,7 @@ public class MySqlPlaceDao extends AbstractJDBCDao<Place, Integer> {
             if (count != 1) {
                 throw new PersistException("On persist modify more then 1 record: " + count);
             } else {
-                //   System.out.println("Create is succesfule");
+                loger.info("Create is successful");
             }
         } catch (Exception e) {
             throw new PersistException(e);
@@ -482,7 +482,7 @@ public class MySqlPlaceDao extends AbstractJDBCDao<Place, Integer> {
             if (count != 1) {
                 throw new PersistException("On persist modify more then 1 record: " + count);
             } else {
-                //   System.out.println("Create is succesfule");
+                loger.info("Create is successful");
             }
         } catch (Exception e) {
             throw new PersistException(e);
@@ -499,7 +499,7 @@ public class MySqlPlaceDao extends AbstractJDBCDao<Place, Integer> {
             if (count != 1) {
                 throw new PersistException("On persist modify more then 1 record: " + count);
             } else {
-                //System.out.println("Create user_place is succesfule");
+                loger.info("Create user_place is successful");
             }
         } catch (Exception e) {
             throw new PersistException(e);

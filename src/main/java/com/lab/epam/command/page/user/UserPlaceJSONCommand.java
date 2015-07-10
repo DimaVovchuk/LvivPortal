@@ -118,7 +118,7 @@ public class UserPlaceJSONCommand implements Command {
             }
             placeImage.add(image);
         }
-        System.out.println("placeImage size is " + placeImage.size());
+        loger.info("placeImage size is " + placeImage.size());
         return placeImage;
     }
 
@@ -134,7 +134,6 @@ public class UserPlaceJSONCommand implements Command {
                             item.setImageReference(placeImage.getReference());
                             item.setName(placeDescription.getName());
                             item.setAdress(placeDescription.getAdress());
-                            // System.out.println(item.toString());
                             list.add(item);
                         }
                     }

@@ -60,7 +60,6 @@ public class CreateUserDataFromDBCommand implements Command {
                 userDataTrip.getSortFlag().put(i, false);
             }
             loger.info("userDataTrip is created");
-            System.out.println("userDataTrip " + userDataTrip);
         } else {
             loger.warn("Any way_id");
         }

@@ -14,7 +14,6 @@ public class JsonReaderTest {
     @Test
     public void readTest() throws Exception {
         JSONObject json = JsonReader.read(URL);
-        System.out.println(json);
         Assert.assertNotNull(json);
         Assert.assertTrue(json.length() > 0);
     }

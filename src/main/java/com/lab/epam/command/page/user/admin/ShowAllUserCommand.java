@@ -37,14 +37,12 @@ public class ShowAllUserCommand implements Command{
         Integer changeStatus = null;
 
         String requestType = request.getParameter("requestType");
-        System.out.println("requestType " + requestType);
 
         String servletUserIdString = request.getParameter("servletUserId");
         loger.info("servletUserIdString "  + servletUserIdString);
         if(servletUserIdString != null){
             servletUserId = Integer.valueOf(servletUserIdString);
             loger.info("User id is "  + servletUserId);
-            System.out.println("servletUserId " + servletUserId);
         }
 
 

@@ -35,7 +35,6 @@ public class PlaceSearchCommand implements Command {
 
         String searchString = request.getParameter("search");
         searchString = Decoder.decodeStringUtf8(searchString);
-        //System.out.println("searchString " + searchString);
         List<PlaceDescription> placeDescriptions = new ArrayList<>();
         Map<Integer, String> results = new HashMap<>();
         Integer countPlace = 0;
@@ -64,7 +63,6 @@ public class PlaceSearchCommand implements Command {
                                 plIm = new PlaceImage(place.getId(), "default_building.jpg");
                             }
                             searchResult += place.getName() + "*" + plIm.getReference() + "\n";
-                           // System.out.println("searchResult " + searchResult);
                             countPlace++;
                         }
                     }
@@ -77,7 +75,6 @@ public class PlaceSearchCommand implements Command {
                     }
                     for (PlaceDescription place : placeDescriptions) {
                         String name = place.getName().replaceAll("\"", "");
-                        //System.out.println("Ololol");
                         name = name.toLowerCase();
                         fail = distanse(name, searchString);
                         if( fail <= 3){

@@ -5,7 +5,7 @@
 <html>
 <head>
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<title>Comertial Page</title>
+	<title><cdg:l18n key="commercial.header"/></title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	<meta name="keywords" content=""/>
@@ -20,7 +20,7 @@
 <div class="full-height">
 	<div class="places">
 		<div class="section">
-			<h3 class="center-align">Commertial page</h3>
+			<h3 class="center-align"><cdg:l18n key="commercial.header"/></h3>
 
 			<div class="row">
 				<div class="col l9 m8 s7">
@@ -32,14 +32,14 @@
 
 				<div class="col l3 m4 s5">
 					<div class="collection with-header z-depth-2">
-						<div class="collection-header"><h4>Commertial</h4></div>
+						<div class="collection-header"><h4 class="center-align"><cdg:l18n key="commercial.name"/></h4></div>
 						<div id="category-place">
 							<a href="portal?command=commercialJSON&comertsRole=guide"
-							   class="collection-item black-text ">Travel guide</a>
+							   class="collection-item black-text "><cdg:l18n key="commercial.guide"/></a>
 							<a href="portal?command=commercialJSON&comertsRole=agency"
-							   class="collection-item black-text ">Travel agency</a>
+							   class="collection-item black-text "><cdg:l18n key="commercial.agency"/></a>
 							<a href="portal?command=commercialJSON"
-							   class="collection-item black-text">Show all</a>
+							   class="collection-item black-text"><cdg:l18n key="commercial.showall"/></a>
 						</div>
 					</div>
 				</div>

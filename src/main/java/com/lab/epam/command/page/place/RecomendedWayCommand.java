@@ -61,7 +61,6 @@ public class RecomendedWayCommand  implements Command {
         if (ways != null && !ways.isEmpty()) {
             way_place = getPlaceDescriptionByWay(ways);
         }
-//System.out.println("way_place " + way_place);
         if (user != null && ways != null){
             for (Way way: ways) {
                 WayRating wayRating = wayRatingService.getWayRatingByWayAndUser(way.getId(), user.getId());
@@ -93,20 +92,16 @@ public class RecomendedWayCommand  implements Command {
             for (Way way : ways) {
                 WayPlaceImageRating item = new WayPlaceImageRating();
                 item.setId(way.getId());
-                System.out.println("beginn " + way.getBegin());
                 item.setBeginDate(way.getBegin());
-                System.out.println("end " + way.getEnd());
                 item.setEndDate(way.getEnd());
                 if (wayPlaceImages.size() <= ways.size()){
                     item.setImageReference(wayPlaceImages.get(way.getId()).getReference());
                 }
                 if (way_place.size() <= ways.size()){
                     item.setPlace(way_place.get(way.getId()));
-                  //  System.out.println(way_place.get(way.getId()) + "hkllk");
                 }
                 if (!wayRatings.isEmpty()){
                     item.setRating(wayRatings.get(i).getRating());
-                    System.out.println(wayRatings.get(i).getRating());
                 }
                 else {
                     item.setRating(0);

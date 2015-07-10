@@ -20,7 +20,6 @@ public class RecommendedPlaceCommand implements Command {
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String place_id = request.getParameter("place_id");
-        System.out.println("place_id " + place_id);
         loger.info("In RecommendedPlaceCommand");
         //request.getRequestDispatcher("/views/pages/addCustomPlace.jsp").forward(request, response);
     }

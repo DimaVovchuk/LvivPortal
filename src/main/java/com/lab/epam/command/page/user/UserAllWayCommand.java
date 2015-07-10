@@ -84,14 +84,11 @@ public class UserAllWayCommand implements Command {
 
     private List<WayPlaceImage> getWayPlaceImageList(List<Way> ways,  Map<Integer, List<PlaceDescription>> way_place, Map<Integer,PlaceImage> wayPlaceImages){
         List<WayPlaceImage> list = new ArrayList<>();
-        System.out.println("ways " + ways.size() + " way_place " + way_place.size() + " wayPlaceImages " + wayPlaceImages.size());
         if(ways != null && !ways.isEmpty()){
             for (Way way : ways) {
                 WayPlaceImage item = new WayPlaceImage();
                 item.setId(way.getId());
-                //System.out.println("beginn " + way.getBegin());
                 item.setBeginDate(way.getBegin());
-                //System.out.println("end " + way.getEnd());
                 item.setEndDate(way.getEnd());
                 if (wayPlaceImages.size() <= way.getId()){
                     if (wayPlaceImages.get(way.getId()) != null){

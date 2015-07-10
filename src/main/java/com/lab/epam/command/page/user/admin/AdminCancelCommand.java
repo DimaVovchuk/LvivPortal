@@ -49,6 +49,18 @@ public class AdminCancelCommand implements Command {
                 placeService.update(place);
             }
         }
+        if(page.equals("custom")){
+            loger.info("custom id " + deletedPlaceId);
+        }
+        if(page.equals("recom")){
+            loger.info("recom id " + deletedPlaceId);
+        }
+        if(page.equals("recomWay")){
+            loger.info("recomWay id " + deletedPlaceId);
+        }
+        if(page.equals("editPlace")){
+            loger.info("editPlace id " + deletedPlaceId);
+        }
 
         loger.info("Command AdminCancelCommand");
     }

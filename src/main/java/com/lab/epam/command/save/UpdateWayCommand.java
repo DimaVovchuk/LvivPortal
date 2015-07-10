@@ -75,7 +75,6 @@ public class UpdateWayCommand implements Command {
             }
             userDataTripOld.setPlaceDay(placesMap);
             loger.info("userDataTripOld is created");
-            //System.out.println("userDataTripOld " + userDataTripOld);
         } else{
             loger.warn("Any way_id");
         }
@@ -93,7 +92,6 @@ public class UpdateWayCommand implements Command {
 
             Map<Integer, List<Place>> placesOld = userDataTripOld.getPlaceDay();
             Map<Integer, List<Place>> places = userDataTrip.getPlaceDay();
-            System.out.println("placesOld " + placesOld);
             if (placesOld != null && !placesOld.isEmpty() && places != null && !places.isEmpty()){
                 Set<Integer> keys = places.keySet();
                 for (Integer day: keys){

@@ -34,19 +34,15 @@ public class DeleteDayCommand implements Command {
         if (dayString != null){
             day = Integer.parseInt(dayString);
         }
-        //System.out.println(day + " day");
-        //System.out.println(placeDay + " 1 placeDay");
         if (day != null && placeDay != null && !placeDay.isEmpty()){
             size = placeDay.size();
             placeDay.remove(day);
-          //System.out.println(placeDay  + " 2 placeDay");
             if (day < size){
                 for (int i = day + 1; i <= size; i++){
                     List <Place> places = placeDay.get(i);
                     placeDay.put(i - 1, places);
                 }
                 placeDay.remove(size);
-                System.out.println(placeDay  + " 3 placeDay");
             }
         }
         if (!placeDay.isEmpty()){

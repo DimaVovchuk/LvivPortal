@@ -70,9 +70,6 @@ public class RectUserRatingCommand implements Command {
                 userRatingService.create(new UserRating(user.getId(),company_id,ratingNew));
                 User company = userService.getByPK(company_id);
                 Integer user_Rating = company.getRating();
-                //   System.out.println("place " + place);
-                // System.out.println("placeRating " + placeRating);
-                //System.out.println("ratingNew " + ratingNew);
                 company.setRating(user_Rating + ratingNew);
                 try {
                     userService.update(company);

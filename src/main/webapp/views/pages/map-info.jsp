@@ -194,7 +194,7 @@
 </script>
 
 <script id="route-empty-template" type="text/x-handlebars-template">
-    <h5 style="padding: 10px">Add places to the itinerary</h5>
+    <h5 style="padding: 10px"><cdg:l18n key="map.route.addroute"/></h5>
 </script>
 
 <script>

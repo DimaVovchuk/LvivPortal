@@ -56,9 +56,7 @@ public class SaveCustomPlaceCommand implements Command {
         } catch (FileUploadException e) {
             loger.warn(e.getMessage());
         }
-        System.out.println("before userID ");
         Integer userID = (Integer) session.getAttribute("userID");
-        System.out.println("userID " + userID);
 
         String customPlaceName = params.get("customPlaceName");
         String customPlaceDesc = params.get("customPlaceDesc");
@@ -70,17 +68,6 @@ public class SaveCustomPlaceCommand implements Command {
         String longitude = params.get("longitudeHid");
         String customPlaceTime = params.get("place_time");
         loger.info("All data waas succesful getting");
-
-        System.out.println("customPlaceName " + customPlaceName);
-        System.out.println("customPlaceDesc " + customPlaceDesc);
-        System.out.println("customCategoryID " + customCategoryID);
-        System.out.println("customPlacePrice " + customPlacePrice);
-        System.out.println("customPlacePhone " + customPlacePhone);
-        System.out.println("customPlaceAdrress " + customPlaceAdrress);
-        System.out.println("latitude " + latitude);
-        System.out.println("longitude " + longitude);
-        System.out.println("customPlaceTime " + customPlaceTime);
-        System.out.println("language " + language);
 
         //check input data
         if (checkData(customPlaceName, CHECK_DATA)) {
@@ -132,7 +119,6 @@ public class SaveCustomPlaceCommand implements Command {
             place.setRecomended(false);
             place.setCustom(true);
 
-            System.out.println("customPlaceTime " + customPlaceTime);
             try{
                 place.setRecom_time(Integer.valueOf(customPlaceTime));
             } catch (Exception e){
@@ -174,7 +160,6 @@ public class SaveCustomPlaceCommand implements Command {
                 placeDescriptionService.create(placeDescriptionUA);
             }
 
-            System.out.println("id " + userID + "lastAddedPlace " + lastAddedPlace);
             placeService.createPlaceUser(lastAddedPlace,userID);
             save(request, files, params);
 

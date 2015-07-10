@@ -39,10 +39,8 @@ public class CommercialImageCommentCommand implements Command {
         if (image_idString != null){
             image_id = Integer.parseInt(image_idString);
         }
-//System.out.println("image_id " + image_id);
         if (image_id != null){
             imageResponses = imageResponseService.getImageResponseByImage(image_id);
-            System.out.println("imageResponses " + imageResponses);
         }
         if (imageResponses != null && !imageResponses.isEmpty()) {
             for (ImageResponse imRes : imageResponses) {

@@ -40,7 +40,6 @@ public class SaveWayCommand implements Command {
         String login = (String)session.getAttribute("login");
         String name = request.getParameter("name");
         name = Decoder.decodeStringUtf8(name);
-        //System.out.println("name " + name);
         User user = null;
         if (login != null){
             user = userService.getUserByLogin(login);

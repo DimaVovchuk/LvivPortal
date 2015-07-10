@@ -141,9 +141,7 @@ public class RecomendedPlaceCommand  implements Command {
                                         item.setName(placeDescription.getName());
                                         item.setAdress(placeDescription.getAdress());
                                         item.setRating(placeRating.getRating());
-                                        //  System.out.println(item.toString());
                                         list.add(item);
-                                        // System.out.println(item.toString());
                                     }
                                 }
                             }
@@ -157,7 +155,6 @@ public class RecomendedPlaceCommand  implements Command {
                                 item.setName(placeDescription.getName());
                                 item.setAdress(placeDescription.getAdress());
                                 item.setRating(0);
-                                //   System.out.println(item.toString());
                                 list.add(item);
                             }
                         }

@@ -41,6 +41,5 @@ public class MyTestClass {
         System.out.println(mw.getAll());*/
        // sc.create(new Category("sdvfsd"));
        //su.create(new User.Builder("niceapple91","niceapple91","niceapple91","olya.podgornayaoi@gmail.com","password","0982713999",2).rating(2).status(20).build());
-        System.out.println(su.getByPK(8));
     }
 }
