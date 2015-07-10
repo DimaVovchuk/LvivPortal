@@ -27,15 +27,17 @@ public class ShowAdminCabinetCommand implements Command {
         Integer userID = (Integer) session.getAttribute("userID");
         loger.info("userID " + userID);
 
-        UserService userService = new UserService();
-        User user = userService.getByPK(userID);
-        Integer avatar_id = user.getAvatar();
-        UserImageService adminAvatar = new UserImageService();
-        UserImage avatarUserImage = adminAvatar.getByPK(avatar_id);
+        if(userID!=null) {
+            UserService userService = new UserService();
+            User user = userService.getByPK(userID);
+            Integer avatar_id = user.getAvatar();
+            UserImageService adminAvatar = new UserImageService();
+            UserImage avatarUserImage = adminAvatar.getByPK(avatar_id);
 
-        request.setAttribute("adminData", user);
-        request.setAttribute("adminAvatar",avatarUserImage.getReference());
-        loger.info("Admin Logination Command ended");
-        request.getRequestDispatcher("/views/pages/admin-page.jsp").forward(request, response);
+            request.setAttribute("adminData", user);
+            request.setAttribute("adminAvatar", avatarUserImage.getReference());
+            loger.info("Admin Logination Command ended");
+            request.getRequestDispatcher("/views/pages/admin-page.jsp").forward(request, response);
+        }
     }
 }

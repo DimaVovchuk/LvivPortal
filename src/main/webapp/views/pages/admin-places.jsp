@@ -5,7 +5,7 @@
 <html>
 
 <head>
-    <title><cdg:l18n key="admin.title"/></title>
+	<title><cdg:l18n key="admin.title"/></title>
 </head>
 
 <jsp:include page="/views/elements/css.jsp"/>
@@ -16,8 +16,8 @@
 
 <div id="admin-page">
 
-    <div class="section">
-        <h3 class="center-align"><cdg:l18n key="admin.title"/></h3>
+	<div class="section">
+		<h3 class="center-align"><cdg:l18n key="admin.title"/></h3>
 
         <div class="row">
             <div class="col l10 offset-l1 m12 s12">
@@ -43,15 +43,17 @@
 </div>
 
 <div id="adminPlaceDelete" class="modal">
-    <div class="modal-content">
-        <h4>Modal Header</h4>
-
-        <div id="place-id"></div>
-        <p>A bunch of text</p>
-    </div>
-    <div class="modal-footer">
-        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
-    </div>
+	<div class="modal-content">
+		<h4>Delete this place</h4>
+		<form id="admindeleteplace" action="#" method="post">
+			<input type="hidden" name="command" value="adminDeletePlace">
+			<%--<input id="place_id" name="place_id" type="hidden">--%>
+			<div id="place-id"></div>
+			<button type="submit" class="btn waves-effect waves-light cyan darken-2">OK</button>
+			<button type="reset" class="btn modal-close waves-effect waves-light cyan darken-2"><cdg:l18n
+					key="button.cancel"/></button>
+		</form>
+	</div>
 </div>
 
 <jsp:include page="/views/elements/footer.jsp"/>

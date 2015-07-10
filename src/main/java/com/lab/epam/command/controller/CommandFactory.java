@@ -28,10 +28,7 @@ import com.lab.epam.command.page.photo.ShowAllUserPhoto;
 import com.lab.epam.command.page.photo.UpLoadPictureCommand;
 import com.lab.epam.command.page.place.*;
 import com.lab.epam.command.page.user.*;
-import com.lab.epam.command.page.user.admin.AdminStatisticCommand;
-import com.lab.epam.command.page.user.admin.EditPlaceCommand;
-import com.lab.epam.command.page.user.admin.ShowAdminCabinetCommand;
-import com.lab.epam.command.page.user.admin.ShowAllUserCommand;
+import com.lab.epam.command.page.user.admin.*;
 import com.lab.epam.command.page.user.company.OrderWaySendMail;
 import com.lab.epam.command.page.user.company.RectUserRatingCommand;
 import com.lab.epam.command.save.*;
@@ -118,8 +115,8 @@ public class CommandFactory {
         commands.put("recommendPlace", new  RecommendPlaceCommand());
         commands.put("recommendWay", new  RecommendWayCommand());
         commands.put("adminCabinet", new ShowAdminCabinetCommand());
-        commands.put("?onfirmCustomPlace", new ConfirmCustomPlaceCommand());
-        commands.put("?onfirmRecommendedPlace", new ConfirmRecommendedPlaceCommand());
+        commands.put("confirmCustomPlace", new ConfirmCustomPlaceCommand());
+        commands.put("confirmRecommendedPlace", new ConfirmRecommendedPlaceCommand());
         commands.put("deleteWay", new DeleteWayCommand());
         commands.put("adminConfirmCustomPlace", new ConfirmCustomPlaceCommand());
         commands.put("adminConfirmRecommendedPlace", new ConfirmRecommendedPlaceCommand());
@@ -130,6 +127,7 @@ public class CommandFactory {
         commands.put("imageResponseJSON", new CommercialImageCommentCommand());
         commands.put("addImageResponse", new AddImageResponseCommand());
         commands.put("rectRatingUser", new RectUserRatingCommand());
+        commands.put("adminDeletePlace", new AdminDeletePlaceCommand());
     }
 
     public static void createCommand(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

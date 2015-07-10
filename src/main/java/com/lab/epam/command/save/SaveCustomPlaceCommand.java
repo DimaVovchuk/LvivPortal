@@ -83,7 +83,7 @@ public class SaveCustomPlaceCommand implements Command {
         System.out.println("language " + language);
 
         //check input data
-        if (checkData(customPlaceName, CHECK_DATA) && customPlaceName == "") {
+        if (checkData(customPlaceName, CHECK_DATA)) {
             session.setAttribute("nameUAError", 1);
             errorFlag = true;
             loger.warn("NameUA is pattern error");
