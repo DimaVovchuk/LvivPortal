@@ -13,7 +13,7 @@ public class SignUpForm implements Command {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-                
+
         String first_name = request.getParameter("first");
         String last_name = request.getParameter("last");
         String email = request.getParameter("email");

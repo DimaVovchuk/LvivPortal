@@ -24,6 +24,7 @@ public class MySqlWayDao extends AbstractJDBCDao<Way, Integer> {
     private static final Logger loger = LogManager.getLogger(ClassName.getCurrentClassName());
 
     private static final String GET_WAY_BY_USER_ID = "SELECT w.id, w.rating, w.name, w.visible, w.way_days, w.way_time, w.date_begin, w.date_end, w.deleted, w.recomended FROM way AS w JOIN user_way AS uw JOIN user AS u WHERE uw.user_id = u.id AND uw.way_id = w.id AND uw.deleted='false' AND u.id = ?";
+    private static final String GET_WAY_BY_WAY_ID = "SELECT w.id, w.rating, w.name, w.visible, w.way_days, w.way_time, w.date_begin, w.date_end, w.deleted, w.recomended FROM way AS w JOIN user_way AS uw JOIN user AS u WHERE uw.user_id = u.id AND uw.way_id = w.id AND uw.deleted='false' AND uw.way_id = ?";
     private static final String DELETE_WAY_BY_USER_ID_WAY_ID = "UPDATE user_way SET deleted = true WHERE user_id = ? AND way_id = ?";
     private static final String GET_LAST_ADDED = "SELECT * FROM way ORDER BY id DESC LIMIT 0,1";
     private static final String CREATE_USER_WAY = "INSERT INTO user_way (user_id, way_id, way_days) VALUES (?,?,?);";
@@ -63,6 +64,28 @@ public class MySqlWayDao extends AbstractJDBCDao<Way, Integer> {
             }
         } catch (Exception e) {
             loger.warn("Cant get ways from user with " + user_id + " user_id");
+            throw new PersistException(e);
+        } finally {
+            connection.putback(conn);
+        }
+        return list;
+
+    }
+
+    public List<Way> getWaysByWayId(Integer way_id) throws PersistException {
+
+        List<Way> list;
+        Connection conn = connection.retrieve();
+        try (PreparedStatement statement = conn.prepareStatement(GET_WAY_BY_WAY_ID)) {
+            statement.setInt(1, way_id);
+            ResultSet rs = statement.executeQuery();
+            list = parseResultSet(rs);
+            if (list.size() <= 0){
+                loger.info("DB has any ways from way with " + way_id + " way_id");
+                return null;
+            }
+        } catch (Exception e) {
+            loger.warn("Cant get ways from way with " + way_id + " way_id");
             throw new PersistException(e);
         } finally {
             connection.putback(conn);

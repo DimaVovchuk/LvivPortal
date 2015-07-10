@@ -1,3 +1,5 @@
+package dao;
+
 import com.lab.epam.dao.PersistException;
 import com.lab.epam.dao.imp.MySqlPlaceDescriptionDao;
 import com.lab.epam.entity.PlaceDescription;

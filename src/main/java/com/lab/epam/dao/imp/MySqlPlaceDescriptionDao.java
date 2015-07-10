@@ -116,7 +116,7 @@ public class MySqlPlaceDescriptionDao extends AbstractJDBCDao<PlaceDescription, 
 
     public List<PlaceDescription> getAllPlaceBySearch(String str) throws PersistException {
         loger.info("Method getAllInformationAboutPlace started");
-        List<PlaceDescription> list =null;
+        List<PlaceDescription> list = null;
         Connection conn = connection.retrieve();
         String sql = GET_PLACE_BY_SEARCH + str + "%'";
         try (PreparedStatement statement = conn.prepareStatement(sql)) {

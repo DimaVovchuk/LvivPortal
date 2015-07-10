@@ -28,7 +28,7 @@ public class VkAuthorizationCommand implements Command {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        loger.info("Command VkAuthorizationCommand");
         HttpSession session = request.getSession();
         session.setAttribute("vObj", vObj);
         vObj.getAuth().autorize(response);
