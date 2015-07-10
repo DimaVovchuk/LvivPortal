@@ -244,7 +244,7 @@ public class SaveEditPlaceCommand implements Command {
             session.setAttribute("placeDescriptionList", placeDescriptionList);
             session.setAttribute("editPlacePhone", placeDescriptionEN.getPhone());
 
-            if(checkCustomEditID !=0){
+            if(checkCustomEditID!=null && checkCustomEditID !=0){
                 session.setAttribute("checkCustomEditID",0);
                 response.sendRedirect("/portal?command=placeInformation&place_id=" + savePlaceID);
             } else if(customIDSring !=null && customIDSring!=""){

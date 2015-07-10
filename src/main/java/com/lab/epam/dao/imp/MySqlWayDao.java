@@ -13,6 +13,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -33,7 +34,7 @@ public class MySqlWayDao extends AbstractJDBCDao<Way, Integer> {
     private static final String UPDATE_WAY_RATING = "UPDATE way SET rating = ? WHERE id = ?";
     private static final String GET_WAY_RECOMENDED = "SELECT * FROM way WHERE recomended=true AND deleted=false AND visible=true";
     private static final String SET_WAY_IS_RECOMMENDED = "UPDATE way SET is_recommend = true WHERE id = ?";
-
+    private static final String GET_ALL_CONFIRM_RECOMMENDED_WAY ="SELECT w.id, w.rating, w.name, w.visible, w.way_days, w.way_time, w.date_begin, w.date_end, w.deleted, w.recomended, w.is_recommend FROM way AS w WHERE w.deleted=false AND w.visible=true AND w.recomended=false AND w.is_recommend=true";
     private class PersistGroup extends Way {
         public void setId(int id) {
             super.setId(id);
@@ -69,6 +70,27 @@ public class MySqlWayDao extends AbstractJDBCDao<Way, Integer> {
         }
         return list;
 
+    }
+    public List<Way> getAllConfirmRecommendedWay() throws PersistException {
+        List<Way> wayList = new ArrayList<>();
+        Connection conn = connection.retrieve();
+         try (PreparedStatement statement = conn.prepareStatement(GET_ALL_CONFIRM_RECOMMENDED_WAY)) {
+            ResultSet rs = statement.executeQuery();
+            //  loger.info("Get last way is succesfull ");
+             wayList = parseResultSet(rs);
+            //loger.info("Parse result with Transformer is succesfull");
+            if (wayList.size() <= 0){
+                loger.info("DB has any ways");
+                return null;
+            }
+            if (wayList.size() > 1){
+                loger.info("DB has more than one last way");
+            }
+        } catch (Exception e) {
+            loger.warn("Can not get all confirm recommended way.");
+            throw new PersistException(e);
+        }
+        return wayList;
     }
 
     public void create(Connection conn, Way way) throws PersistException {

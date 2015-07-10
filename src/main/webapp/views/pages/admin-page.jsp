@@ -102,11 +102,30 @@
                         </a>
                         <a class="collection-item avatar black-text"
                            href="/portal?command=adminConfirmRecommendedPlace">
-                            <i class="material-icons circle cyan darken-2">thumb_up</i>
+                            <i class="material-icons circle cyan darken-2">grade</i>
 
                             <div class="valign-wrapper">
                             <span style="text-transform: uppercase"><b><cdg:l18n
                                     key="admin.confirm.recommended.place"/></b></span>
+                            </div>
+                        </a>
+
+                        <a class="collection-item avatar black-text"
+                           href="/portal?command=adminConfirmRecommendedWay">
+                            <i class="material-icons circle cyan darken-2">grade</i>
+
+                            <div class="valign-wrapper">
+                            <span style="text-transform: uppercase"><b><cdg:l18n
+                                    key="admin.confirm.recommended.way"/></b></span>
+                            </div>
+                        </a>
+
+                        <a class="collection-item avatar black-text"
+                           href="/portal?command=restoreDeletedPlace">
+                            <i class="material-icons circle cyan darken-2">grade</i>
+
+                            <div class="valign-wrapper">
+                            <span style="text-transform: uppercase"><b>Restore place</b></span>
                             </div>
                         </a>
                     </div>

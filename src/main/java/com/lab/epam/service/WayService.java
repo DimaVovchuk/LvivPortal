@@ -1,9 +1,7 @@
 package com.lab.epam.service;
 
 import com.lab.epam.dao.PersistException;
-import com.lab.epam.dao.imp.MySqlCategoryDao;
 import com.lab.epam.dao.imp.MySqlWayDao;
-import com.lab.epam.entity.Category;
 import com.lab.epam.entity.Place;
 import com.lab.epam.entity.Way;
 import com.lab.epam.helper.ClassName;
@@ -15,7 +13,7 @@ import org.apache.log4j.Logger;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.SQLException;
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -30,7 +28,7 @@ public class WayService {
     MySqlWayDao mySqlWayDao = new MySqlWayDao();
     PlaceService servicePlace = new PlaceService();
 
-    public void create(Way object){
+    public void create(Way object) {
         try {
             mySqlWayDao.create(object);
 
@@ -40,7 +38,7 @@ public class WayService {
         }
     }
 
-    public void create(Connection conn, Way object){
+    public void create(Connection conn, Way object) {
         try {
             mySqlWayDao.create(conn, object);
 
@@ -50,7 +48,7 @@ public class WayService {
         }
     }
 
-    public Way getByPK(Integer key){
+    public Way getByPK(Integer key) {
         Way way = null;
         try {
             way = mySqlWayDao.getByPK(key);
@@ -62,7 +60,7 @@ public class WayService {
         return way;
     }
 
-    public void update(Way object){
+    public void update(Way object) {
         try {
             mySqlWayDao.update(object);
         } catch (PersistException e) {
@@ -71,22 +69,23 @@ public class WayService {
         }
     }
 
-    public void delete(Way object) throws PersistException{
+    public void delete(Way object) throws PersistException {
         mySqlWayDao.delete(object);
     }
 
-    public List<Way> getAll() throws PersistException{
+    public List<Way> getAll() throws PersistException {
         return mySqlWayDao.getAll();
     }
 
-    public List<Way> getAllWithoutDeleted() throws PersistException{
+    public List<Way> getAllWithoutDeleted() throws PersistException {
         return mySqlWayDao.getAllWithoutDeleted();
     }
 
-    public List<Way> getWaysByUserId(Integer user_id){
+    public List<Way> getWaysByUserId(Integer user_id) {
         List<Way> ways = null;
         try {
-            ways = mySqlWayDao.getWaysByUserId(user_id);;
+            ways = mySqlWayDao.getWaysByUserId(user_id);
+            ;
 
         } catch (PersistException e) {
             e.printStackTrace();
@@ -96,7 +95,7 @@ public class WayService {
         return ways;
     }
 
-    public void deleteWaysByUserIdWayId(Integer user_id, Integer way_id){
+    public void deleteWaysByUserIdWayId(Integer user_id, Integer way_id) {
         try {
             mySqlWayDao.deleteWaysByUserIdWayId(user_id, way_id);
 
@@ -106,10 +105,11 @@ public class WayService {
         }
     }
 
-    public Way getLastAdded(){
+    public Way getLastAdded() {
         Way way = null;
         try {
-            way = mySqlWayDao.getLastAdded();;
+            way = mySqlWayDao.getLastAdded();
+            ;
 
         } catch (PersistException e) {
             e.printStackTrace();
@@ -119,7 +119,7 @@ public class WayService {
         return way;
     }
 
-    public Way getLastAdded(Connection conn){
+    public Way getLastAdded(Connection conn) {
         Way way = null;
         try {
             way = mySqlWayDao.getLastAdded(conn);
@@ -132,7 +132,7 @@ public class WayService {
         return way;
     }
 
-    public void createUserWay(Integer user_id, Integer way_id, Integer day){
+    public void createUserWay(Integer user_id, Integer way_id, Integer day) {
         try {
             mySqlWayDao.createUserWay(user_id, way_id, day);
 
@@ -142,7 +142,7 @@ public class WayService {
         }
     }
 
-    public void createUserWay(Connection conn, Integer user_id, Integer way_id, Integer day){
+    public void createUserWay(Connection conn, Integer user_id, Integer way_id, Integer day) {
         try {
             mySqlWayDao.createUserWay(conn, user_id, way_id, day);
 
@@ -152,7 +152,7 @@ public class WayService {
         }
     }
 
-    public void updateWayDay(Integer user_id, Integer way_id, Integer day){
+    public void updateWayDay(Integer user_id, Integer way_id, Integer day) {
         try {
             mySqlWayDao.updateWayDay(user_id, way_id, day);
 
@@ -162,17 +162,17 @@ public class WayService {
         }
     }
 
-    public void updateWayBeginDate(Integer way_id, Date beginDate){
+    public void updateWayBeginDate(Integer way_id, Date beginDate) {
         try {
             mySqlWayDao.updateWayBeginDate(way_id, beginDate);
 
         } catch (PersistException e) {
             e.printStackTrace();
-            loger.warn("Cant update beginDate" +  way_id  + "way_id");
+            loger.warn("Cant update beginDate" + way_id + "way_id");
         }
     }
 
-    public void updateWayEndDate(Integer way_id, Date endDate){
+    public void updateWayEndDate(Integer way_id, Date endDate) {
         try {
             mySqlWayDao.updateWayEndDate(way_id, endDate);
 
@@ -182,7 +182,7 @@ public class WayService {
         }
     }
 
-    public void updateWayRating(Integer way_id, Integer rating){
+    public void updateWayRating(Integer way_id, Integer rating) {
         try {
             mySqlWayDao.updateWayRating(way_id, rating);
 
@@ -192,13 +192,13 @@ public class WayService {
         }
     }
 
-    public Integer createUserWay(Way wayNew, Map<Integer,List<Place>> placesDay, Integer userId, Boolean isFull) {
+    public Integer createUserWay(Way wayNew, Map<Integer, List<Place>> placesDay, Integer userId, Boolean isFull) {
 
         ConnectionPool connection = ConnectionManager.getConnection();
         Connection conn = connection.retrieve();
         Integer way_id = null;
         try {
-            if(isFull) {
+            if (isFull) {
                 conn.setAutoCommit(false);
                 create(conn, wayNew);
                 Way way = getLastAdded(conn);
@@ -228,11 +228,11 @@ public class WayService {
                 try {
                     System.err.print("Transaction is being rolled back");
                     conn.rollback();
-                } catch(SQLException excep) {
+                } catch (SQLException excep) {
                     e.printStackTrace();
                 }
             }
-        }finally {
+        } finally {
             try {
                 conn.setAutoCommit(true);
             } catch (SQLException e) {
@@ -243,7 +243,7 @@ public class WayService {
         return way_id;
     }
 
-    public List<Way> getAllWayRecomended(){
+    public List<Way> getAllWayRecomended() {
         List<Way> ways = null;
         try {
             ways = mySqlWayDao.getAllWayRecomended();
@@ -266,5 +266,16 @@ public class WayService {
         }
     }
 
+    public List<Way> getAllConfirmRecommendedWay() {
+        List<Way> wayList = new ArrayList<>();
+        try {
+            wayList = mySqlWayDao.getAllConfirmRecommendedWay();
+
+        } catch (PersistException e) {
+            e.printStackTrace();
+            loger.warn("Can not get all confirm recommended way.");
+        }
+        return wayList;
+    }
 }
 
