@@ -30,8 +30,6 @@
     <script src="${pageContext.request.contextPath}/js/jquery.custom.js"></script>
     <!-- External -->
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyCL9BI_9U8ba_Zf_ldHd9KrYFtBtK7cTzI&libraries=places&signed_in=true&language=${language}"></script>
-    <%--<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>--%>
-
     <!-- Google fonts -->
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,400italic,700italic,700' rel='stylesheet prefetch'>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">

@@ -127,26 +127,17 @@ public class CommandFactory {
         commands.put("imageResponseJSON", new CommercialImageCommentCommand());
         commands.put("addImageResponse", new AddImageResponseCommand());
         commands.put("rectRatingUser", new RectUserRatingCommand());
-        commands.put("adminDeletePlace", new AdminDeletePlaceCommand());
+        commands.put("adminCancelCommand", new AdminCancelCommand());
     }
 
     public static void createCommand(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String command = request.getParameter("command");
 
-//        boolean isMultipart = ServletFileUpload.isMultipartContent(request);
-//        if(command==null && isMultipart){
-//            command = "upLoad";
-//        }
-
         if (request.getContentType() != null && request.getContentType().toLowerCase().indexOf("multipart/form-data") > -1 ){
             HttpSession session = request.getSession();
             command = (String)session.getAttribute("command");
         }
-
-        System.out.println(command);
-
-
             if (commands.containsKey(command)) {
                 Command commamdExecute = commands.get(command);
                 commamdExecute.execute(request, response);

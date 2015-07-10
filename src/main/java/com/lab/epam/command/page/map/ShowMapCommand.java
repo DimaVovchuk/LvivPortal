@@ -30,16 +30,19 @@ public class ShowMapCommand implements Command {
     public void execute(HttpServletRequest request,
                         HttpServletResponse response) throws ServletException, IOException {
         PlaceService placeService = new PlaceService();
-        List<Place> all = placeService.getAllWithoutDeleted();
+        List<Place> all = placeService.getAllPlaceVisible();
+        Integer userID = (Integer) request.getSession().getAttribute("userID");
+        if(userID !=null){
+            List<Place> custom = placeService.getAllVisbleUserCustomPlace(userID);
+            all.addAll(custom);
+        }
         PlaceImageService placeImageService = new PlaceImageService();
-
         List<PlaceMarkerWithPhoto> placeMarkerWithPhotos = new ArrayList<>();
         PlaceDescriptionService placeDescriptionService = new PlaceDescriptionService();
         HttpSession session = request.getSession();
         ResourceBundle bundle = (ResourceBundle) session.getAttribute("bundle");
 
         for (Place place : all) {
-
             PlaceDescription placeDescription = placeDescriptionService.getPlaceDescriptionByIdPlace(place.getId(), bundle.getLocale().toString());
             PlaceImage placeImage = placeImageService.getPlaceImageByPlaceId(place.getId());
             if(placeImage== null){

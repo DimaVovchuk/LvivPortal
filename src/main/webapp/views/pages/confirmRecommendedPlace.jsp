@@ -3,15 +3,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE HTML>
 <html>
-
 <head>
 	<title><cdg:l18n key="admin.title"/></title>
 </head>
-
 <jsp:include page="/views/elements/css.jsp"/>
-
 <body>
-
 <jsp:include page="/views/elements/header.jsp"/>
 
 <div id="admin-page">
@@ -45,9 +41,39 @@
 
 </div>
 
+<div id="confirmRecomPlaceCencel" class="modal">
+	<div class="modal-content">
+		<h4>Delete this place</h4>
+
+		<div id="place-id"></div>
+		<a id="delPlace" onclick="cancelPlace();" href="javascript:"
+		   rel="" class="btn waves-effect waves-light cyan darken-2 modal-action modal-close"> OK </a>
+
+		<button type="reset" class="btn modal-close waves-effect waves-light cyan darken-2"><cdg:l18n
+				key="button.cancel"/></button>
+	</div>
+</div>
+
 <jsp:include page="/views/elements/footer.jsp"/>
 
 <script>
+
+	var cancelPlace = function () {
+		$.ajax({
+			url: window.location.origin + '/portal?command=adminCancelCommand&page=recom&id=' + currentId,
+			success: cancelPlaceToast()
+		});
+	};
+	var currentId;
+	var cancelPlaceToast = function () {
+		Materialize.toast('Place was canceled', 4000);
+	}
+
+	var cancelBtnAction = function (id) {
+		currentId = id;
+		$('#confirmRecomPlaceCencel').openModal();
+	};
+
 	var loadPlaces = function () {
 		$.ajax({
 			url: window.location.origin + '/portal?command=confirmRecommendedPlaceJSON',
@@ -77,7 +103,7 @@
 			var image = '<img class="circle responsive-img" src="/upload/photo/' + data[i].imageReference + '" style="width: 50px; height: 50px">';
 			var info = data[i].name + '<br>' + data[i].adress;
 			var buttons = '<a href="/portal?command=editPlace&editPlaceID=' + data[i].id+'&recomended=confirm" class="btn cyan darken-2 waves-effect waves-light" style="margin-right: 5px"><cdg:l18n key="admin.edit.places.confirm"/></a>' +
-					'<a href="#" class="btn cyan darken-2 waves-effect waves-light" style="margin-right: 5px"><cdg:l18n key="admin.edit.places.cancel"/></a>';
+					'<button class="btn cyan darken-2 waves-effect waves-light delete-btn" style="margin-right: 5px" onclick="cancelBtnAction(' + data[i].id + ')"><cdg:l18n key="admin.edit.places.cancel"/></button>';
 			var row = [ data[i].id, image, info, buttons];
 
 			table.row.add(row).draw();

@@ -32,6 +32,7 @@ public class CompanyInformationCommand implements Command {
     private WayService wayService = new WayService();
     PlaceImage image = null;
 
+
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();

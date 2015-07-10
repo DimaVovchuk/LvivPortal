@@ -25,17 +25,18 @@ public class ConfirmChangePassCommand implements Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        String login = (String) session.getAttribute("login");
+        Integer userID = (Integer) session.getAttribute("userID");
         UserService userService = new UserService();
-        User user = userService.getUserByLogin(login);
+        User user = userService.getByPK(userID);
         String password = request.getParameter("password");
-        String md5 = MD5Creator.getMD5(password+login);
+        String md5 = MD5Creator.getMD5(password+user.getLogin());
         user.setPassword(md5);
         try {
             userService.update(user);
         } catch (PersistException e) {
             e.printStackTrace();
         }
+        loger.info("Command ConfirmChangePassCommand");
         request.getRequestDispatcher("/views/pages/index.jsp").forward(request, response);
     }
 }

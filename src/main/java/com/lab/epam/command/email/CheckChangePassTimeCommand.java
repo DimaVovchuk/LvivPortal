@@ -23,7 +23,7 @@ public class CheckChangePassTimeCommand implements Command {
         UserService userService = new UserService();
         User user = userService.geUserByEmail(email);
         HttpSession session = request.getSession();
-        session.setAttribute("login",user.getLogin());
+        session.setAttribute("userID",user.getId());
         long time = Long.parseLong(request.getParameter("param"));
         long timeMillis = System.currentTimeMillis();
         if((timeMillis-time)<3600000){
