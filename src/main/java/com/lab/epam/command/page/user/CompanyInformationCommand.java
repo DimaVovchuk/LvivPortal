@@ -30,7 +30,6 @@ public class CompanyInformationCommand implements Command {
     private String language;
     private HttpServletRequest request;
     private WayService wayService = new WayService();
-//    private Map<Way, List<PlaceDescriptionAndPhoto>> allWayInfo = new HashMap<>();
     PlaceImage image = null;
 
     @Override
@@ -46,11 +45,11 @@ public class CompanyInformationCommand implements Command {
         String login = (String) session.getAttribute("login");
         Integer company_id = null;
         String userID = request.getParameter("id");
-        System.out.println("userID in compInfo " + userID);
+//        System.out.println("userID in compInfo " + userID);
         if (userID != null) {
             Integer id = Integer.valueOf(userID);
             User userData = userService.getByPK(id);
-            UserImage avatar = userImageService.getUserImageByUserIdOne(id);
+            UserImage avatar = userImageService.getByPK(userData.getAvatar());
             List<UserImage> userGalery = userImageService.getUserImageByUserId(id);
 
             places = placeService.getPlaceByUserId(id);
@@ -137,57 +136,5 @@ public class CompanyInformationCommand implements Command {
             }
         }
         return false;
-    }
-
-    private class WayDayPlaces{
-        Integer wayID;
-        String wayName;
-        Integer dayNubmer;
-        List<Place> dayPlaceList;
-
-        public WayDayPlaces() {
-        }
-
-        public Integer getWayID() {
-            return wayID;
-        }
-
-        public void setWayID(Integer wayID) {
-            this.wayID = wayID;
-        }
-
-        public String getWayName() {
-            return wayName;
-        }
-
-        public void setWayName(String wayName) {
-            this.wayName = wayName;
-        }
-
-        public Integer getDayNubmer() {
-            return dayNubmer;
-        }
-
-        public void setDayNubmer(Integer dayNubmer) {
-            this.dayNubmer = dayNubmer;
-        }
-
-        public List<Place> getDayPlaceList() {
-            return dayPlaceList;
-        }
-
-        public void setDayPlaceList(List<Place> dayPlaceList) {
-            this.dayPlaceList = dayPlaceList;
-        }
-
-        @Override
-        public String toString() {
-            return "WayDayPlaces{" +
-                    "wayID=" + wayID +
-                    ", wayName='" + wayName + '\'' +
-                    ", dayNubmer=" + dayNubmer +
-                    ", dayPlaceList=" + dayPlaceList +
-                    '}';
-        }
     }
 }

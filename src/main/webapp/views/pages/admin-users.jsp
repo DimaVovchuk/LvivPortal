@@ -24,13 +24,12 @@
                 <table id="admin-page-table" class="display" cellspacing="0" width="100%">
                     <thead>
                     <tr>
-                        <th><cdg:l18n key="admin.userid"/></th>
-                        <th><cdg:l18n key="admin.rating"/></th>
                         <th><cdg:l18n key="login.firstname"/></th>
                         <th><cdg:l18n key="login.lastname"/></th>
                         <th><cdg:l18n key="login.login"/></th>
                         <th><cdg:l18n key="login.email"/></th>
                         <th><cdg:l18n key="login.phone"/></th>
+                        <th><cdg:l18n key="admin.rating"/></th>
                         <th><cdg:l18n key="admin.status"/></th>
                         <th><cdg:l18n key="admin.role"/></th>
                         <th></th>
@@ -38,13 +37,12 @@
                     </thead>
                     <tfoot>
                     <tr>
-                        <th><cdg:l18n key="admin.userid"/></th>
-                        <th><cdg:l18n key="admin.rating"/></th>
                         <th><cdg:l18n key="login.firstname"/></th>
                         <th><cdg:l18n key="login.lastname"/></th>
                         <th><cdg:l18n key="login.login"/></th>
                         <th><cdg:l18n key="login.email"/></th>
                         <th><cdg:l18n key="login.phone"/></th>
+                        <th><cdg:l18n key="admin.rating"/></th>
                         <th><cdg:l18n key="admin.status"/></th>
                         <th><cdg:l18n key="admin.role"/></th>
                         <th></th>
@@ -53,13 +51,12 @@
                     <tbody>
                     <c:forEach items="${requestScope.AllUsers}" var="elem">
                         <tr>
-                            <td>${elem.key.id}</td>
-                            <td>${elem.key.rating}</td>
                             <td>${elem.key.name}</td>
                             <td>${elem.key.surname}</td>
                             <td>${elem.key.login}</td>
                             <td>${elem.key.mail}</td>
                             <td>${elem.key.phone}</td>
+                            <td>${elem.key.rating}</td>
                             <td>
                                 <c:if test="${elem.key.status == 1}">
                                     <cdg:l18n key="admin.active"/>
@@ -69,7 +66,7 @@
                                 </c:if>
                             </td>
                             <td>${elem.value}</td>
-                            <td>
+                            <td class="right-align">
                                 <form id="change-status${elem.key.id}" action="#" method="post">
                                     <input type="hidden" name="command" value="showAllUser">
                                     <input type="hidden" name="requestType" value="changeStatus">

@@ -13,15 +13,16 @@ public class PlaceMarkerWithPhoto {
     private String longitude;
     private String imageReference;
     private String description;
+    private Integer time;
 
-    public PlaceMarkerWithPhoto(Integer placeId,String name,String latitude,String longitude,String imageReference,String description) {
+    public PlaceMarkerWithPhoto(Integer placeId, String name, String latitude, String longitude, String imageReference, String description, Integer time) {
         this.placeId = placeId;
         this.name = name;
         this.latitude = latitude;
         this.longitude = longitude;
         this.imageReference = imageReference;
         this.description = description;
-
+        this.time = time;
     }
 
     public String getImageReference() {
@@ -71,4 +72,9 @@ public class PlaceMarkerWithPhoto {
     public void setPlaceId(Integer placeId) {
         this.placeId = placeId;
     }
+
+    public Integer getTime() { return time; }
+
+    public void setTime(Integer time) { this.time = time; }
+
 }

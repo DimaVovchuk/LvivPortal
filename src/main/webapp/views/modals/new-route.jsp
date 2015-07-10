@@ -26,6 +26,12 @@
                 <input id="dontKnowDate" value="dontKnowDate" name="dontKnowDate" type="checkbox"/>
                 <label for="dontKnowDate"><cdg:l18n key="plan.dontknowdate"/></label>
             </div>
+
+            <input type="search" id="txtSearchRoute" name="txtSearch" placeholder="<cdg:l18n key="places.saerch"/>" alt="Search Criteria"
+                   onkeyup="searchSuggestRoute();"
+                   autocomplete="off" />
+
+            <div id="search_suggest_route" style="border-color: #ffffff; width: 50%"></div>
         </div>
 
 
@@ -54,13 +60,10 @@
             </p>
         </div>
 
-                <input type="search" id="txtSearchRoute" name="txtSearch" alt="Search Criteria"
-                       onkeyup="searchSuggestRoute();"
-                       autocomplete="off" />
-                <label for="txtSearchRoute"><cdg:l18n key="places.saerch"/></label><br>
 
-            <br><p>
-        <div id="search_suggest_route" style="border-color: #ffffff; width: 50%"></div></p>
+                <br>
+
+            <br><p></p>
 
         <div class="section">
             <button class="btn waves-effect waves-light cyan darken-2" type="submit">OK</button>

@@ -68,7 +68,12 @@ public class RoutesCommand implements Command {
                     if (placeImage == null || placeImage.getReference() == null) {
                         placeImage = new PlaceImage(place.getId(), "default_building.jpg");
                     }
-                    placeMarkerWithPhotos.add(new PlaceMarkerWithPhoto(place.getId(), placeDescription.getName(), place.getLatitude(), place.getLongitude(), placeImage.getReference(), placeDescription.getDescription()));
+                    if (place.getPlace_time() != 0) {
+                        placeMarkerWithPhotos.add(new PlaceMarkerWithPhoto(place.getId(), placeDescription.getName(), place.getLatitude(), place.getLongitude(), placeImage.getReference(), placeDescription.getDescription(), place.getPlace_time()));
+                    } else {
+                        placeMarkerWithPhotos.add(new PlaceMarkerWithPhoto(place.getId(), placeDescription.getName(), place.getLatitude(), place.getLongitude(), placeImage.getReference(), placeDescription.getDescription(), place.getRecom_time()));
+
+                    }
                 }
                 session.setAttribute("userDataTrip", userDataTrip);
                 routeOneDayInfo.setPlaces(placeMarkerWithPhotos);

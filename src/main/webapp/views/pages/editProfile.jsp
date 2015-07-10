@@ -95,6 +95,7 @@
                                     <i class="material-icons prefix black-text">email</i>
                                     <label class="active" for="mail"><cdg:l18n key="usercab.mail"/></label>
                                     <input value="${userForEdit.mail}" id="mail" type="text" name="mail" disabled>
+                                    <input type="hidden" id="hiddenMail" value="${userForEdit.mail}">
                                 </div>
 
                                 <div class="input-field">
@@ -115,8 +116,7 @@
 
                     <div class="divider"></div>
 
-                    <p class="center-align"><cdg:l18n key="usercab.youmay"/> <a
-                            href="/portal?command=resetEmail"><cdg:l18n
+                    <p class="center-align"><cdg:l18n key="usercab.youmay"/> <a id="reset-send-email-link" href="#"><cdg:l18n
                             key="usercab.change"/></a> <cdg:l18n key="usercab.yourpas"/></p>
 
                     <div class="section center-align">
@@ -131,6 +131,20 @@
         </form>
     </div>
 </div>
+
+<script>
+    var sendResetPasswordEmail = function (email) {
+        Materialize.toast('<cdg:l18n key="login.mailsent"/> ' + email, 5000);
+    };
+
+    $('#reset-send-email-link').on('click', function () {
+        var email = $('#hiddenMail').val();
+        $.ajax({
+            url: "portal?command=sendEmail&email=" + email,
+            success: sendResetPasswordEmail(email)
+        });
+    });
+</script>
 
 <jsp:include page="/views/elements/footer.jsp"/>
 

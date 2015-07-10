@@ -130,7 +130,7 @@
                     <li>
                         <div class="collapsible-header">
                             <div class="col s6 left-align">
-                                <cdg:l18n key="company.routename"/>: ${mapelem.key.name}
+                                <cdg:l18n key="company.routename"/>: <b>${mapelem.key.name}</b>
                             </div>
                             <div class="col s6 right-align">
                                 <a class="modal-trigger" href="#orderWayModel"
@@ -138,29 +138,37 @@
                                    style="text-transform: uppercase"><cdg:l18n key="company.order"/></a>
                             </div>
                         </div>
+
                         <div class="collapsible-body">
                             <c:forEach var="MapPlaceElem" items="${mapelem.value}">
-                                day <b>${MapPlaceElem.key}</b>
 
-                                <div class="collection">
-                                    <a href="#" class="collection-item black-text">
-                                        <c:forEach var="listWayPlace" items="${MapPlaceElem.value}">
-                                            <img class="circle responsive-img"
-                                                 src="${pageContext.request.contextPath}/upload/photo/${listWayPlace.imageReference}">
+                                <ul class="collapsible popout" data-collapsible="accordion">
+                                    <li>
+                                        <div class="collapsible-header grey lighten-3">
+                                            <b><cdg:l18n key="map.route.day"/> ${MapPlaceElem.key}</b>
+                                        </div>
+                                        <div class="collapsible-body">
+                                            <div class="collection">
+                                                <c:forEach var="listWayPlace" items="${MapPlaceElem.value}">
+                                                    <a href="#" class="collection-item black-text">
+                                                        <img class="circle responsive-img"
+                                                             src="${pageContext.request.contextPath}/upload/photo/${listWayPlace.imageReference}">
 
-                                            <div class="valign-wrapper" style="height:100%">
-                                                <div class="valign">
-                                                    <div class="truncate">
+                                                        <div class="valign-wrapper" style="height:100%">
+                                                            <div class="valign">
+                                                                <div class="truncate">
 
-                                                        <b>${listWayPlace.name}</b><br>${listWayPlace.adress}<br><cdg:l18n
-                                                            key="company.rating"/>: ${listWayPlace.rating}
-                                                    </div>
-                                                </div>
+                                                                    <b>${listWayPlace.name}</b><br>${listWayPlace.adress}<br><cdg:l18n
+                                                                        key="company.rating"/>: ${listWayPlace.rating}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                </c:forEach>
                                             </div>
-                                        </c:forEach>
-                                    </a>
-
-                                </div>
+                                        </div>
+                                    </li>
+                                </ul>
                             </c:forEach>
                         </div>
                     </li>

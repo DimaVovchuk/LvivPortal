@@ -20,39 +20,38 @@ import java.util.List;
 /**
  * Created by Vasyl on 21.06.2015.
  */
-public class EditPlaceCommand implements Command{
+public class EditPlaceCommand implements Command {
     private static final Logger loger = LogManager.getLogger(ClassName.getCurrentClassName());
+
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
         String editPlaceIDSring = request.getParameter("editPlaceID");
         String customIDSring = request.getParameter("custom");
         String recomendetIDSring = request.getParameter("recomended");
 
-        System.out.println("customIDSring " + customIDSring);
-        System.out.println("recomendetIDSring " + recomendetIDSring);
 
-        HttpSession session = request.getSession();
         loger.info("start EditPlaceCommand");
 
-        if(editPlaceIDSring !=null){
+        if (editPlaceIDSring != null) {
             Integer editPlaceID = Integer.valueOf(editPlaceIDSring);
             PlaceService placeService = new PlaceService();
             loger.info("edit place id is " + editPlaceID);
             //get place
             Place place = placeService.getByPK(editPlaceID);
 
-            if(customIDSring !=null && customIDSring!=""){
+            if (customIDSring != null && customIDSring != "") {
                 place.setRecomended(true);
                 place.setVisible(true);
             }
-            if(recomendetIDSring !=null && recomendetIDSring != "") {
+            if (recomendetIDSring != null && recomendetIDSring != "") {
                 place.setRecomended(true);
             }
 
             session.setAttribute("editPlace", place);
-            session.setAttribute("editPlaceID",editPlaceID);
+            session.setAttribute("editPlaceID", editPlaceID);
 
-            if(place.getVisible() == null){
+            if (place.getVisible() == null) {
                 place.setVisible(true);
             }
             loger.info("edit place is: " + place.toString());
@@ -60,24 +59,24 @@ public class EditPlaceCommand implements Command{
             //get all place image
             PlaceImageService placeImageService = new PlaceImageService();
             List<PlaceImage> placeImageList = placeImageService.getAllPlaceImageByPlaceId(editPlaceID);
-            List<PlaceImage> referenceList =new ArrayList<>();
-            if(placeImageList != null) {
+            List<PlaceImage> referenceList = new ArrayList<>();
+            if (placeImageList != null) {
                 for (int index = 0; index < placeImageList.size(); index++) {
                     String reference = placeImageList.get(index).getReference();
-                    if (isInFolder(reference, request) && placeImageList.get(index).getDeleted()==false)
+                    if (isInFolder(reference, request) && placeImageList.get(index).getDeleted() == false)
                         referenceList.add(placeImageList.get(index));
                 }
-            } else{
-                PlaceImage placeImage = new PlaceImage(editPlaceID,"default_building.jpg");
+            } else {
+                PlaceImage placeImage = new PlaceImage(editPlaceID, "default_building.jpg");
                 referenceList.add(placeImage);
             }
             session.setAttribute("placeImageList", referenceList);
 
             //get place description
-            PlaceDescriptionService  placeDescriptionService = new PlaceDescriptionService();
+            PlaceDescriptionService placeDescriptionService = new PlaceDescriptionService();
             List<PlaceDescription> placeDescriptionList = placeDescriptionService.getPlaceDescriptionByIdPlace(editPlaceID);
             session.setAttribute("placeDescriptionList", placeDescriptionList);
-            session.setAttribute("editPlacePhone",placeDescriptionList.get(0).getPhone());
+            session.setAttribute("editPlacePhone", placeDescriptionList.get(0).getPhone());
             loger.info("edit place description are " + placeDescriptionList);
 
             //get category name
@@ -91,11 +90,11 @@ public class EditPlaceCommand implements Command{
             }
 
         }
-        if(customIDSring !=null && customIDSring!=""){
-            session.setAttribute("customIDSring",customIDSring);
+        if (customIDSring != null && customIDSring != "") {
+            session.setAttribute("customIDSring", customIDSring);
         }
-        if(recomendetIDSring !=null && recomendetIDSring!=""){
-            session.setAttribute("recomendetIDSring",recomendetIDSring);
+        if (recomendetIDSring != null && recomendetIDSring != "") {
+            session.setAttribute("recomendetIDSring", recomendetIDSring);
         }
         request.getRequestDispatcher("/views/pages/edit_place.jsp").forward(request, response);
     }

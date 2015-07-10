@@ -41,7 +41,8 @@
     <div id="map-canvas"></div>
 </div>
 
-<jsp:include page="geotag.jsp"/>
+<jsp:include page="/views/pages/geotag.jsp"/>
+<jsp:include page="/views/modals/add-place-to-route-recomended.jsp"/>
 <script src="${pageContext.request.contextPath}/js/pages/map.js"></script>
 
 </body>

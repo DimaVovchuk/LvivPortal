@@ -57,7 +57,7 @@ public class SaveCustomPlaceCommand implements Command {
             loger.warn(e.getMessage());
         }
         System.out.println("before userID ");
-        Integer userID = (Integer) session.getAttribute("usedID");
+        Integer userID = (Integer) session.getAttribute("userID");
         System.out.println("userID " + userID);
 
         String customPlaceName = params.get("customPlaceName");

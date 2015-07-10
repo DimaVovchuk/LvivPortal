@@ -25,6 +25,7 @@ public class PlaceInfortmationCommand implements Command {
     public void execute(HttpServletRequest request,
                         HttpServletResponse response) throws ServletException, IOException {
         String message = request.getParameter("message");
+        HttpSession session = request.getSession();
         loger.info("Message is " + message);
 
           Integer rating = 0;
@@ -38,9 +39,10 @@ public class PlaceInfortmationCommand implements Command {
         PlaceResponseService placeResponseService = new PlaceResponseService();
         PlaceRatingService placeRatingService = new PlaceRatingService();
         PlaceDescriptionService placeDescriptionService = new PlaceDescriptionService();
-
         String txtSearch = request.getParameter("txtSearch");
         String place_idString = request.getParameter("place_id");
+        Integer loginedUserID = (Integer) session.getAttribute("userID");
+
         request.setAttribute("place_id", place_idString);
         Integer place_id = 0;
         if (txtSearch != null && !txtSearch.isEmpty()){
@@ -54,7 +56,8 @@ public class PlaceInfortmationCommand implements Command {
                 place_id = Integer.parseInt(place_idString);
             }
         }
-
+        Integer checkCustomEditID = servicePlace.getCheckCustomEditID(loginedUserID, place_id);
+        session.setAttribute("checkCustomEditID", checkCustomEditID);
 
         loger.info("Place with id " + place_id);
 
@@ -86,8 +89,6 @@ public class PlaceInfortmationCommand implements Command {
                 imList.add(new PlaceImage(place_id, "default_building.jpg"));
             }
         }
-
-        HttpSession session = request.getSession();
 
         List<Place> placeForWay;
         UserDataAboutTrip userDataAboutTrip = (UserDataAboutTrip) session.getAttribute("userDataTrip");

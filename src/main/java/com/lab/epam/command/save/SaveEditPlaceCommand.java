@@ -75,6 +75,7 @@ public class SaveEditPlaceCommand implements Command {
         String newState = params.get("newState");
         String customIDSring = (String) session.getAttribute("customIDSring");
         String recomendetIDSring = (String) session.getAttribute("recomendetIDSring");
+        Integer checkCustomEditID = (Integer) session.getAttribute("checkCustomEditID");
 
         loger.info("All data waas succesful getting");
 
@@ -243,7 +244,10 @@ public class SaveEditPlaceCommand implements Command {
             session.setAttribute("placeDescriptionList", placeDescriptionList);
             session.setAttribute("editPlacePhone", placeDescriptionEN.getPhone());
 
-            if(customIDSring !=null && customIDSring!=""){
+            if(checkCustomEditID !=0){
+                session.setAttribute("checkCustomEditID",0);
+                response.sendRedirect("/portal?command=placeInformation&place_id=" + savePlaceID);
+            } else if(customIDSring !=null && customIDSring!=""){
                 session.setAttribute("customIDSring","");
                 response.sendRedirect("/portal?command=adminConfirmCustomPlace");
             }else if(recomendetIDSring !=null && recomendetIDSring!=""){

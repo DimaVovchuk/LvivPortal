@@ -801,6 +801,14 @@ footer.page-footer {
     width: 48%;
 }
 
+#admin-page .collection .collection-item.avatar {
+    height: 62px;
+}
+
+#admin-page .collection .valign-wrapper {
+    height: 42px;
+}
+
 @media (max-width: 600px) {
     #admin-page {
         min-height: calc(100% - 56px - 50px);
