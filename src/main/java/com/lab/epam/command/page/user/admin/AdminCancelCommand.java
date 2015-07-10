@@ -22,13 +22,13 @@ public class AdminCancelCommand implements Command {
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String page = request.getParameter("page");
         String deletedPlaceId = request.getParameter("id");
-        PlaceService placeService=new PlaceService();
+        PlaceService placeService = new PlaceService();
         System.out.println("deletedPlaceId " + deletedPlaceId);
-        if(deletedPlaceId!=null && deletedPlaceId!="") {
+        if (deletedPlaceId != null && !deletedPlaceId.equals("")) {
             Integer placeID = Integer.valueOf(deletedPlaceId);
-            Place place = placeService.getByPK(placeID);
             if (page.equals("custom")) {
-              System.out.println("custom id " + deletedPlaceId);
+                Place place = placeService.getByPK(placeID);
+                System.out.println("custom id " + deletedPlaceId);
                 place.setIs_recommended(false);
                 System.out.println(place);
                 placeService.update(place);
@@ -44,23 +44,34 @@ public class AdminCancelCommand implements Command {
                 System.out.println("recomWay id " + deletedPlaceId);
             }
             if (page.equals("editPlace")) {
+                Place place = placeService.getByPK(placeID);
 //                System.out.println("editPlace id " + deletedPlaceId);
                 place.setDeleted(true);
                 placeService.update(place);
             }
         }
-        if(page.equals("custom")){
+        if (page.equals("custom")) {
             loger.info("custom id " + deletedPlaceId);
         }
-        if(page.equals("recom")){
+        if (page.equals("recom")) {
             loger.info("recom id " + deletedPlaceId);
         }
-        if(page.equals("recomWay")){
+        if (page.equals("recomWay")) {
             loger.info("recomWay id " + deletedPlaceId);
         }
-        if(page.equals("editPlace")){
+        if (page.equals("editPlace")) {
             loger.info("editPlace id " + deletedPlaceId);
         }
+        if (page.equals("restore")) {
+            loger.info("restore id " + deletedPlaceId);
+        }
+        if (page.equals("confirmRecomWay")) {
+            loger.info("confirmRecomWay id " + deletedPlaceId);
+        }
+        if (page.equals("cancelRecomWay")) {
+            loger.info("cancelRecomWay id " + deletedPlaceId);
+        }
+
 
         loger.info("Command AdminCancelCommand");
     }

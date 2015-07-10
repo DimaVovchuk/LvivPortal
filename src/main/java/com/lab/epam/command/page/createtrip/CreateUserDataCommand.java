@@ -239,16 +239,16 @@ public class CreateUserDataCommand implements Command {
             } catch (IOException | JSONException e) {
                 e.printStackTrace();
             }
-            if (((time - tempTime) > 900) && (time - (tempTime + (places.get(j).getRecom_time()*60) + t) < 0)) {
+            if (((time - tempTime) > 900) && (time - (tempTime + (places.get(0).getRecom_time()*60) + t) < 0)) {
                 places.remove(0);
                 continue;
             }
             if ((time - tempTime) < 900) {
                 break;
             }
-            result.add(places.get(j));
+            result.add(places.get(0));
+            tempTime = tempTime + (places.get(0).getRecom_time()*60) + t.intValue();
             places.remove(0);
-            tempTime = tempTime + (places.get(j).getRecom_time()*60) + t.intValue();
             j++;
         }
 

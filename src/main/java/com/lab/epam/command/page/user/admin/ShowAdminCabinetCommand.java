@@ -20,6 +20,7 @@ import java.io.IOException;
  */
 public class ShowAdminCabinetCommand implements Command {
     private static final Logger loger = LogManager.getLogger(ClassName.getCurrentClassName());
+
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         loger.info("Admin Logination Command");
@@ -27,15 +28,16 @@ public class ShowAdminCabinetCommand implements Command {
         Integer userID = (Integer) session.getAttribute("userID");
         loger.info("userID " + userID);
 
-        if(userID!=null) {
+        if (userID != null) {
             UserService userService = new UserService();
             User user = userService.getByPK(userID);
             Integer avatar_id = user.getAvatar();
-            UserImageService adminAvatar = new UserImageService();
-            UserImage avatarUserImage = adminAvatar.getByPK(avatar_id);
-
+            if (avatar_id != null) {
+                UserImageService adminAvatar = new UserImageService();
+                UserImage avatarUserImage = adminAvatar.getByPK(avatar_id);
+                request.setAttribute("adminAvatar", avatarUserImage.getReference());
+            }
             request.setAttribute("adminData", user);
-            request.setAttribute("adminAvatar", avatarUserImage.getReference());
             loger.info("Admin Logination Command ended");
             request.getRequestDispatcher("/views/pages/admin-page.jsp").forward(request, response);
         }
