@@ -66,7 +66,7 @@
 
   var loadPlaces = function () {
     $.ajax({
-      url: window.location.origin + '/portal?command=placeJSON',
+      url: window.location.origin + '/portal?command=restoreDeletedPlaceJSON',
       success: updatePlaces,
       error: updatePlaces
     })
@@ -98,7 +98,7 @@
       var image = '<div class="center-align"><img class="circle responsive-img" src="/upload/photo/' + data[i].imageReference + '" style="width: 50px; height: 50px"></div>';
       var info = data[i].name + '<br>' + data[i].adress;
       var buttons = '<div class="right-align">' +
-              '<button class="btn cyan darken-2 waves-effect waves-light delete-btn" style="margin-right: 5px" onclick="restoreBtnAction(' + data[i].id + ')">Restore</button>' +
+              '<button class="btn cyan darken-2 waves-effect waves-light delete-btn" style="margin-right: 5px" onclick="restoreBtnAction(' + data[i].id + ')"><cdg:l18n key="admin.restore.page.restore"/></button>' +
               '</div>';
       var row = [image, info, buttons];
 

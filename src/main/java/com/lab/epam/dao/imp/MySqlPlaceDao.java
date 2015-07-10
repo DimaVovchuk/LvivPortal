@@ -55,6 +55,7 @@ public class MySqlPlaceDao extends AbstractJDBCDao<Place, Integer> {
             "FROM place AS p WHERE p.visible = true and p.recomended=false and p.custom = false and p.deleted=false and p.is_recommended = true";
     private static final String GET_CHECK_CUSTOM_ID="SELECT up.place_id FROM user_place AS up JOIN place AS p WHERE up.place_id=p.id AND p.visible=false AND p.deleted=false AND up.deleted=false\n" +
             "AND up.user_id=? AND up.place_id=?";
+    private static final String GET_ALL_DELETED_PLACE="SELECT * FROM place AS p WHERE p.deleted=true AND p.visible=true";
 
     private class PersistGroup extends Place {
         public void setId(int id) {
@@ -94,6 +95,21 @@ public class MySqlPlaceDao extends AbstractJDBCDao<Place, Integer> {
         }
         return FavoritePlacesByRatinList;
     }
+
+    public List<Place> getAllDeletedPlace() throws PersistException {
+        List<Place> list;
+        Connection conn = connection.retrieve();
+        try (PreparedStatement statement = conn.prepareStatement(GET_ALL_DELETED_PLACE)) {
+            ResultSet rs = statement.executeQuery();
+            list = parseResultSet(rs);
+        } catch (Exception e) {
+            throw new PersistException(e);
+        } finally {
+            connection.putback(conn);
+        }
+        return list;
+    }
+
     public Integer getCheckCustomEditID(Integer loginedUserID, Integer editPlaceID) throws PersistException {
         Integer id = 0;
         Connection conn = connection.retrieve();
@@ -109,7 +125,6 @@ public class MySqlPlaceDao extends AbstractJDBCDao<Place, Integer> {
         } finally {
             connection.putback(conn);
         }
-//        System.out.println("getCheckCustomEditID id is " + id);
         return id;
     }
 

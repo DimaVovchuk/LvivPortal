@@ -361,4 +361,15 @@ public class PlaceService {
         }
         return id;
     }
+
+    public List<Place> getAllDeletedPlace() {
+        List<Place> list = null;
+        try {
+            list = mySqlPlaceDao.getAllDeletedPlace();
+        } catch (PersistException e) {
+            e.printStackTrace();
+            loger.warn("Cant get all deleted place");
+        }
+        return list;
+    }
 }
