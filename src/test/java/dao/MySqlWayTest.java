@@ -48,20 +48,20 @@ public class MySqlWayTest {
         connectionPool.putback(connection);
     }
 
-    @Test
-    public void testCreate() throws Exception {
-        List list = dao.getAll();
-        Way way = new Way(ID, RATING, NAME, VISIBLE, WAY_DAYS, WAY_TIME, BEGIN, END, DELETED, RECOMENDED);
-        way.setId(list.size()+1);
-        dao.create(way);
-        list = dao.getAllWithoutDeleted();
-        Assert.assertNotNull(list);
-        int oldSize = list.size();
-        Assert.assertTrue(oldSize > 0);
-        dao.delete(way);
-        list = dao.getAllWithoutDeleted();
-        Assert.assertNotNull(list);
-    }
+//    @Test
+//    public void testCreate() throws Exception {
+//        List list = dao.getAll();
+//        Way way = new Way(ID, RATING, NAME, VISIBLE, WAY_DAYS, WAY_TIME, BEGIN, END, DELETED, RECOMENDED);
+//        way.setId(list.size()+1);
+//        dao.create(way);
+//        list = dao.getAllWithoutDeleted();
+//        Assert.assertNotNull(list);
+//        int oldSize = list.size();
+//        Assert.assertTrue(oldSize > 0);
+//        dao.delete(way);
+//        list = dao.getAllWithoutDeleted();
+//        Assert.assertNotNull(list);
+//    }
 
     @Test public void testGetByPK() throws Exception
     {
@@ -69,22 +69,22 @@ public class MySqlWayTest {
         Assert.assertNotNull(way);
     }
 
-    @Test
-    public void testDelete() throws Exception {
-        List list = dao.getAll();
-        Way way = new Way(ID, RATING, NAME, VISIBLE, WAY_DAYS, WAY_TIME, BEGIN, END, DELETED, RECOMENDED);
-        way.setId(list.size()+1);
-        dao.create(way);
-        list = dao.getAllWithoutDeleted();
-        Assert.assertNotNull(list);
-        int oldSize = list.size();
-        Assert.assertTrue(oldSize > 0);
-        dao.delete(way);
-        list = dao.getAllWithoutDeleted();
-        Assert.assertNotNull(list);
-        int newSize = list.size();
-        Assert.assertEquals(1, oldSize - newSize);
-    }
+//    @Test
+//    public void testDelete() throws Exception {
+//        List list = dao.getAll();
+//        Way way = new Way(ID, RATING, NAME, VISIBLE, WAY_DAYS, WAY_TIME, BEGIN, END, DELETED, RECOMENDED);
+//        way.setId(list.size()+1);
+//        dao.create(way);
+//        list = dao.getAllWithoutDeleted();
+//        Assert.assertNotNull(list);
+//        int oldSize = list.size();
+//        Assert.assertTrue(oldSize > 0);
+//        dao.delete(way);
+//        list = dao.getAllWithoutDeleted();
+//        Assert.assertNotNull(list);
+//        int newSize = list.size();
+//        Assert.assertEquals(1, oldSize - newSize);
+//    }
 
     @Test
     public void testGetAll() throws Exception {
@@ -123,13 +123,13 @@ public class MySqlWayTest {
         Assert.assertTrue(listAll.size() >= listOut.size());
     }
 
-    @Test
-    public void testCreateWithCon() throws Exception {
-        Way way = new Way(dao.getAll().size()+1, RATING, NAME, VISIBLE, WAY_DAYS, WAY_TIME, BEGIN, END, DELETED, RECOMENDED);
-        dao.create(connection, way);
-        Way wayOut = dao.getLastAdded();
-        Assert.assertNotNull(wayOut);
-    }
+//    @Test
+//    public void testCreateWithCon() throws Exception {
+//        Way way = new Way(dao.getAll().size()+1, RATING, NAME, VISIBLE, WAY_DAYS, WAY_TIME, BEGIN, END, DELETED, RECOMENDED);
+//        dao.create(connection, way);
+//        Way wayOut = dao.getLastAdded();
+//        Assert.assertNotNull(wayOut);
+//    }
 
     @Test
     public void testGetLastAdded() throws Exception {

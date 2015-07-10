@@ -36,7 +36,7 @@ public class SaveProfileCommand implements Command {
     private static final String CHECK_PHONE = "([0-9]{6,15})";
     private static final String CHECK_ABOUT = "^[^<>/{}]+$";
     private static final String CHECK_AGENCY_NAME = "^[^<>/{}]+$";
-
+    private UserImageService userImageService = new UserImageService();
     @Override
     public void execute(HttpServletRequest request,
                         HttpServletResponse response) throws ServletException, IOException {
@@ -120,6 +120,7 @@ public class SaveProfileCommand implements Command {
 
         if (errorFlag) {
         } else {
+
             user.setName(Decoder.decodeStringUtf8(name));
             user.setSurname(Decoder.decodeStringUtf8(surname));
             user.setCompanyName(Decoder.decodeStringUtf8(companyName));
@@ -129,14 +130,21 @@ public class SaveProfileCommand implements Command {
 
             try {
                 userService.update(user);
+                Integer avatarID = user.getAvatar();
+                if(avatarID!=null) {
+                    UserImage avatar = userImageService.getByPK(avatarID);
+                    String avatarReference = avatar.getReference();
+                    session.setAttribute("avatarReference", avatarReference);
+                }
             } catch (PersistException e) {
                 loger.info("User is not update");
             }
+
             response.sendRedirect("/portal?command=edit");
         }
     }
 
-    private static void init(HttpServletRequest request, Map params, List files) throws FileUploadException {
+    private void init(HttpServletRequest request, Map params, List files) throws FileUploadException {
         DiskFileItemFactory factory = new DiskFileItemFactory();
         File folder = new File("c:\\tmp");
         if (folder.exists()) {
@@ -162,7 +170,7 @@ public class SaveProfileCommand implements Command {
         }
     }
 
-    private static void save(HttpServletRequest request, List files) throws IOException {
+    private void save(HttpServletRequest request, List files) throws IOException {
         try {
             for (Iterator i = files.iterator(); i.hasNext(); ) {
                 FileItem item = (FileItem) i.next();
@@ -173,24 +181,23 @@ public class SaveProfileCommand implements Command {
                 Matcher m = p.matcher(imageName);
                 boolean matches = !m.matches();
                 if (!matches) {
-                    Integer userID = (Integer) session.getAttribute("userID");
-                    UserImageService userImageService = new UserImageService();
-                    UserService userService = new UserService();
-                    UserImage userImage = new UserImage(userID, imageName);
-                    userImageService.create(userImage);
+                    if(imageName != null) {
+                        Integer userID = (Integer) session.getAttribute("userID");
+                        UserService userService = new UserService();
+                        UserImage userImage = new UserImage(userID, imageName);
+                        userImageService.create(userImage);
 
-                    List<UserImage> allImageList = userImageService.getUserImageByUserId(userID);
-                    if (allImageList.size() >= 1) {
-                        UserImage lastUploadHpoto = allImageList.get(allImageList.size() - 1);
-                        Integer lastImageIndex = lastUploadHpoto.getId();
-                        User user = userService.getByPK(userID);
-                        user.setAvatar(lastImageIndex);
-                        userService.update(user);
+                        List<UserImage> allImageList = userImageService.getUserImageByUserId(userID);
+                        if (allImageList.size() >= 1) {
+                            UserImage lastUploadHpoto = allImageList.get(allImageList.size() - 1);
+                            Integer lastImageIndex = lastUploadHpoto.getId();
+                            User user = userService.getByPK(userID);
+                            user.setAvatar(lastImageIndex);
+                            userService.update(user);
+                        }
+                        loger.info("File is successfully uploaded in database to Avatar image");
                     }
-                    loger.info("File is successfully uploaded in database to Avatar image");
-
                     String realPath = request.getRealPath("/upload/photo/" + File.separator + imageName);
-
                     final File file = new File(realPath);
                     FileOutputStream fos = new FileOutputStream(file);
                     fos.write(item.get());

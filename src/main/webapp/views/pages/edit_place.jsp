@@ -25,22 +25,27 @@
 			<h5 class="center-align"><cdg:l18n key="editplace.photogallery"/></h5>
 
 			<div class="row">
-				<c:forEach items="${placeImageList}" var="elem">
-					<c:if test="${elem.deleted eq false}">
-						<div class="col l3 m4 s6" style="height: 200px">
-							<img class="materialboxed responsive-img"
-							     src="${pageContext.request.contextPath}/upload/photo/${elem.reference}">
+				<c:if test="${empty placeImageList}">
+					<h5 class="center-align"><cdg:l18n key="editplace.editPlace.no.photo"/></h5>
+				</c:if>
+				<c:if test="${not empty placeImageList }">
+					<c:forEach items="${placeImageList}" var="elem">
+						<c:if test="${elem.deleted eq false}">
+							<div class="col l3 m4 s6" style="height: 200px">
+								<img class="materialboxed responsive-img"
+								     src="${pageContext.request.contextPath}/upload/photo/${elem.reference}">
 
-							<div class="center-align" style="margin-top: -35px">
-								<button class="btn btn-floating modal-trigger cyan darken-2" type="submit"
-								        data-target="deleteImage"
-								        id="btn1" onclick="$('#deleteImageID').val('${elem.id}')"><i
-										class="material-icons">delete</i>
-								</button>
+								<div class="center-align" style="margin-top: -35px">
+									<button class="btn btn-floating modal-trigger cyan darken-2" type="submit"
+									        data-target="deleteImage"
+									        id="btn1" onclick="$('#deleteImageID').val('${elem.id}')"><i
+											class="material-icons">delete</i>
+									</button>
+								</div>
 							</div>
-						</div>
-					</c:if>
-				</c:forEach>
+						</c:if>
+					</c:forEach>
+				</c:if>
 			</div>
 
 			<div id="deleteImage" class="modal">

@@ -35,7 +35,7 @@ public class MySqlWayDao extends AbstractJDBCDao<Way, Integer> {
     private static final String UPDATE_WAY_RATING = "UPDATE way SET rating = ? WHERE id = ?";
     private static final String GET_WAY_RECOMENDED = "SELECT * FROM way WHERE recomended=true AND deleted=false AND visible=true";
     private static final String SET_WAY_IS_RECOMMENDED = "UPDATE way SET is_recommend = true WHERE id = ?";
-    private static final String GET_ALL_CONFIRM_RECOMMENDED_WAY ="SELECT w.id, w.rating, w.name, w.visible, w.way_days, w.way_time, w.date_begin, w.date_end, w.deleted, w.recomended, w.is_recommend FROM way AS w WHERE w.deleted=false AND w.visible=true AND w.recomended=false AND w.is_recommend=true";
+    private static final String GET_ALL_CONFIRM_RECOMMENDED_WAY ="SELECT * FROM way AS w WHERE w.deleted=false AND w.visible=true AND w.recomended=false AND w.is_recommend=true";
     private class PersistGroup extends Way {
         public void setId(int id) {
             super.setId(id);

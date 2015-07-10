@@ -11,34 +11,36 @@
 <jsp:include page="/views/elements/header.jsp"/>
 
 <div id="admin-page">
+	<div class="row">
+		<div class="col l8 offset-l2 m12 s12 z-depth-2" style="padding: 20px">
+			<div class="row">
+				<div class="section">
+					<h3 class="center-align"><cdg:l18n key="admin.title"/></h3>
 
-	<div class="section">
-		<h3 class="center-align"><cdg:l18n key="admin.title"/></h3>
-
-		<div class="row">
-			<div class="col l10 offset-l1 m12 s12">
-				<table id="admin-recom-page-table" class="display" cellspacing="0" width="100%">
-					<thead>
-					<tr>
-						<th>ID</th>
-						<th><cdg:l18n key="admin.edit.places.image"/></th>
-						<th><cdg:l18n key="admin.edit.places.info"/></th>
-						<th></th>
-					</tr>
-					</thead>
-					<tfoot>
-					<tr>
-						<th>ID</th>
-						<th><cdg:l18n key="admin.edit.places.image"/></th>
-						<th><cdg:l18n key="admin.edit.places.info"/></th>
-						<th></th>
-					</tr>
-					</tfoot>
-				</table>
+					<div class="row">
+						<div class="col l10 offset-l1 m12 s12">
+							<table id="admin-page-table" class="display" cellspacing="0" width="100%">
+								<thead>
+								<tr>
+									<th><cdg:l18n key="admin.edit.places.image"/></th>
+									<th><cdg:l18n key="admin.edit.places.info"/></th>
+									<th></th>
+								</tr>
+								</thead>
+								<tfoot>
+								<tr>
+									<th><cdg:l18n key="admin.edit.places.image"/></th>
+									<th><cdg:l18n key="admin.edit.places.info"/></th>
+									<th></th>
+								</tr>
+								</tfoot>
+							</table>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
-
 </div>
 
 <div id="confirmRecomPlaceCencel" class="modal">
@@ -83,7 +85,7 @@
 	};
 
 	var updatePlaces = function (data) {
-		var table = $('#admin-recom-page-table').DataTable({
+		var table = $('#admin-page-table').DataTable({
 			language: {
 				lengthMenu: '<span style="color: #000; font-size: 15px"><cdg:l18n key="admin.tabledisplay"/></span>' +
 				'<select id="table-display-number" class="browser-default">' +
@@ -97,14 +99,20 @@
 				info: "Showing page _PAGE_ of _PAGES_",
 				infoEmpty: "No records available",
 				infoFiltered: "(filtered from _MAX_ total records)"
-			}
+			},
+			columns: [
+				{"width": "10%"},
+				{"width": "50%"},
+				{"width": "40%"}
+			]
 		});
 		for (var i = 0; i < data.length; i++) {
-			var image = '<img class="circle responsive-img" src="/upload/photo/' + data[i].imageReference + '" style="width: 50px; height: 50px">';
+			var image = '<div class="center-align"><img class="circle responsive-img" src="/upload/photo/' + data[i].imageReference + '" style="width: 50px; height: 50px"></div>';
 			var info = data[i].name + '<br>' + data[i].adress;
-			var buttons = '<a href="/portal?command=editPlace&editPlaceID=' + data[i].id+'&recomended=confirm" class="btn cyan darken-2 waves-effect waves-light" style="margin-right: 5px"><cdg:l18n key="admin.edit.places.confirm"/></a>' +
+			var buttons = '<div class="right-align">' + '<a href="/portal?command=editPlace&editPlaceID=' + data[i].id + '&recomended=confirm" class="btn cyan darken-2 waves-effect waves-light" style="margin-right: 5px"><cdg:l18n key="admin.edit.places.confirm"/></a>' +
 					'<button class="btn cyan darken-2 waves-effect waves-light delete-btn" style="margin-right: 5px" onclick="cancelBtnAction(' + data[i].id + ')"><cdg:l18n key="admin.edit.places.cancel"/></button>';
-			var row = [ data[i].id, image, info, buttons];
+			'</div>';
+			var row = [image, info, buttons];
 
 			table.row.add(row).draw();
 		}

@@ -31,8 +31,10 @@ public class Way implements Identified<Integer> {
     private Boolean deleted = false;
     @Column("recomended")
     private Boolean recomended;
+    @Column("is_recommend")
+    private Boolean is_recommend;
 
-    public Way(Integer id, Integer rating, String name, Boolean visible, Integer way_days, Integer way_time, Date begin, Date end, Boolean deleted, Boolean recomended) {
+    public Way(Integer id, Integer rating, String name, Boolean visible, Integer way_days, Integer way_time, Date begin, Date end, Boolean deleted, Boolean recomended, Boolean is_recommended) {
         this.id = id;
         this.rating = rating;
         this.name = name;
@@ -43,6 +45,7 @@ public class Way implements Identified<Integer> {
         this.end = end;
         this.deleted = deleted;
         this.recomended = recomended;
+        this.is_recommend = is_recommended;
     }
 
     public Way(Integer rating, Date begin, Date end, Integer way_days){
@@ -135,6 +138,14 @@ public class Way implements Identified<Integer> {
         this.recomended = recomended;
     }
 
+    public Boolean getIs_recommended() {
+        return is_recommend;
+    }
+
+    public void setIs_recommended(Boolean is_recommended) {
+        this.is_recommend = is_recommended;
+    }
+
     @Override
     public String toString() {
         return "Way{" +
@@ -148,6 +159,7 @@ public class Way implements Identified<Integer> {
                 ", end=" + end +
                 ", deleted=" + deleted +
                 ", recomended=" + recomended +
+                ", is_recommended=" + is_recommend +
                 '}';
     }
 }

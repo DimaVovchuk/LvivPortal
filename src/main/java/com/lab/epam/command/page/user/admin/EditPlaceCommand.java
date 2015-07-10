@@ -2,9 +2,15 @@ package com.lab.epam.command.page.user.admin;
 
 import com.lab.epam.command.controller.Command;
 import com.lab.epam.dao.PersistException;
-import com.lab.epam.entity.*;
+import com.lab.epam.entity.Category;
+import com.lab.epam.entity.Place;
+import com.lab.epam.entity.PlaceDescription;
+import com.lab.epam.entity.PlaceImage;
 import com.lab.epam.helper.ClassName;
-import com.lab.epam.service.*;
+import com.lab.epam.service.CategoryService;
+import com.lab.epam.service.PlaceDescriptionService;
+import com.lab.epam.service.PlaceImageService;
+import com.lab.epam.service.PlaceService;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -67,8 +73,8 @@ public class EditPlaceCommand implements Command {
                         referenceList.add(placeImageList.get(index));
                 }
             } else {
-                PlaceImage placeImage = new PlaceImage(editPlaceID, "default_building.jpg");
-                referenceList.add(placeImage);
+                //PlaceImage placeImage = new PlaceImage(editPlaceID, "default_building.jpg");
+               // referenceList.add(placeImage);
             }
             session.setAttribute("placeImageList", referenceList);
 

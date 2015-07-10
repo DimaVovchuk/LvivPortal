@@ -2,8 +2,10 @@ package com.lab.epam.command.page.user.admin;
 
 import com.lab.epam.command.controller.Command;
 import com.lab.epam.entity.Place;
+import com.lab.epam.entity.Way;
 import com.lab.epam.helper.ClassName;
 import com.lab.epam.service.PlaceService;
+import com.lab.epam.service.WayService;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -23,55 +25,50 @@ public class AdminCancelCommand implements Command {
         String page = request.getParameter("page");
         String deletedPlaceId = request.getParameter("id");
         PlaceService placeService = new PlaceService();
-        System.out.println("deletedPlaceId " + deletedPlaceId);
+        WayService wayService = new WayService();
+
         if (deletedPlaceId != null && !deletedPlaceId.equals("")) {
-            Integer placeID = Integer.valueOf(deletedPlaceId);
+            Integer objectID = Integer.valueOf(deletedPlaceId);
+
             if (page.equals("custom")) {
-                Place place = placeService.getByPK(placeID);
-                System.out.println("custom id " + deletedPlaceId);
+                Place place = placeService.getByPK(objectID);
                 place.setIs_recommended(false);
-                System.out.println(place);
                 placeService.update(place);
             }
+
             if (page.equals("recom")) {
-
-
-                System.out.println("recom id " + deletedPlaceId);
+                Place place = placeService.getByPK(objectID);
+                place.setIs_recommended(false);
+                placeService.update(place);
             }
-            if (page.equals("recomWay")) {
 
-
-                System.out.println("recomWay id " + deletedPlaceId);
+            if (page.equals("confirmRecomWay")) {
+                Way way = wayService.getByPK(objectID);
+                way.setRecomended(true);
+                way.setIs_recommended(false);
+                System.out.println("confirmRecomWay " + way);
+                wayService.update(way);
             }
+
+            if (page.equals("cancelRecomWay")) {
+                Way way = wayService.getByPK(objectID);
+                way.setIs_recommended(false);
+                System.out.println("cancelRecomWay " + way);
+                wayService.update(way);
+            }
+
             if (page.equals("editPlace")) {
-                Place place = placeService.getByPK(placeID);
-//                System.out.println("editPlace id " + deletedPlaceId);
+                Place place = placeService.getByPK(objectID);
                 place.setDeleted(true);
                 placeService.update(place);
             }
-        }
-        if (page.equals("custom")) {
-            loger.info("custom id " + deletedPlaceId);
-        }
-        if (page.equals("recom")) {
-            loger.info("recom id " + deletedPlaceId);
-        }
-        if (page.equals("recomWay")) {
-            loger.info("recomWay id " + deletedPlaceId);
-        }
-        if (page.equals("editPlace")) {
-            loger.info("editPlace id " + deletedPlaceId);
-        }
-        if (page.equals("restore")) {
-            loger.info("restore id " + deletedPlaceId);
-        }
-        if (page.equals("confirmRecomWay")) {
-            loger.info("confirmRecomWay id " + deletedPlaceId);
-        }
-        if (page.equals("cancelRecomWay")) {
-            loger.info("cancelRecomWay id " + deletedPlaceId);
-        }
 
+            if (page.equals("restore")) {
+                Place place = placeService.getByPK(objectID);
+                place.setDeleted(false);
+                placeService.update(place);
+            }
+        }
 
         loger.info("Command AdminCancelCommand");
     }
