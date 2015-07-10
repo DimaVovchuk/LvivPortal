@@ -8,19 +8,6 @@
     </div>
 
     <div id="map-places" class="animated fadeInDown" style="display: none">
-        <%--<nav>--%>
-        <%--<div class="nav-wrapper">--%>
-        <%--<form id="frmSearch">--%>
-        <%--<div class="input-field">--%>
-        <%--<input id="txtSearch" type="search" name="txtSearch" alt="Search Criteria"--%>
-        <%--onkeyup="searchSuggest()"--%>
-        <%--autocomplete="off" required>--%>
-        <%--<label for="txtSearch"><i class="material-icons">search</i></label>--%>
-        <%--</div>--%>
-        <%--</form>--%>
-        <%--</div>--%>
-        <%--<p><div id="search_suggest" style="border-color: #ffffff;"></div></p>--%>
-        <%--</nav>--%>
 
         <div class="z-depth-2 search-box" id="search-place">
             <nav>
@@ -28,7 +15,7 @@
                     <form id="frmSearch" style="padding: 0 10px">
                         <div class="input-field">
                             <input id="txtSearch" type="search" name="txtSearch" alt="Search Criteria"
-                                   onkeyup="searchSuggest()" autocomplete="off" required>
+                                   onfocus="searchSuggestMap()" onkeyup="searchSuggestMap()" autocomplete="off" required>
                             <label for="txtSearch"><i class="material-icons">search</i></label>
                         </div>
                     </form>
@@ -152,6 +139,8 @@
     </div>
 </div>
 
+<jsp:include page="/views/modals/add-place-to-route-recomended.jsp"/>
+
 <script id="place-info-template" type="text/x-handlebars-template">
     {{#each this}}
     <a href="#" onclick="myclick('{{id}}')" class="collection-item black-text">
@@ -164,7 +153,7 @@
             </div>
         </div>
         <div style="right: 5px; position: absolute">
-            <button class="btn-floating waves-effect waves-light cyan darken-2" style="top: -42px;"><i
+            <button class="btn-floating modal-trigger waves-effect waves-light cyan darken-2" style="top: -42px;"><i
                     class="material-icons">add</i></button>
         </div>
     </a>
@@ -188,7 +177,6 @@
 
     var searchPlace = function () {
         var str = encode_utf8(document.getElementById('txtSearch').value);
-        //alert(str);
         notActive();
         var strArr = str.split(" ");
         str = '';
@@ -233,6 +221,7 @@ var loadPlacesData = function (data) {
     $("#search-place").click(function(event) {
         event.stopPropagation();
     });
+
 
 </script>
 <script language="JavaScript" type="text/javascript"

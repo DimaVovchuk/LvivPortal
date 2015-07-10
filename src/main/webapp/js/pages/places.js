@@ -1,9 +1,17 @@
 var loadPlaceAboutData = function () {
-    $.ajax({
-        url: window.location.origin + '/portal?command=placeJSON',
-        success: loadPlacesData,
-        error: loadPlacesData
-    })
+    if (getCategory('category') != null){
+        $.ajax({
+            url: window.location.origin + '/portal?command=placeJSON&category='+ getCategory('category'),
+            success: loadPlacesData,
+            error: loadPlacesData
+        })
+    } else {
+        $.ajax({
+            url: window.location.origin + '/portal?command=placeJSON',
+            success: loadPlacesData,
+            error: loadPlacesData
+        })
+    }
 };
 
 var loadPlacesData = function (data) {
@@ -19,6 +27,11 @@ var loadPlacesData = function (data) {
     }, 200);
     disabled(data);
 };
+
+var getCategory = function (name){
+    if(name=(new RegExp('[?&]'+encodeURIComponent(name)+'=([^&]*)')).exec(location.search))
+        return decodeURIComponent(name[1]);
+}
 
 var disabled = function (data) {
     var siz = data.length;

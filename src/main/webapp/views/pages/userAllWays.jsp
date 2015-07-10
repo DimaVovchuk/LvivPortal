@@ -66,9 +66,14 @@
                                     <span class="card-title activator grey-text text-darken-4"><div align="center">
 
                                         <h6><cdg:l18n key="way.name"/> - ${waysPlaceImage[i].name}</h6>
+                                        <c:if test="${waysPlaceImage[i].beginDate!=null}">
                                         <h6>${waysPlaceImage[i].beginDate} - ${waysPlaceImage[i].endDate}</h6>
+                                        </c:if>
                                     </div></span>
-                                    <p><a a class="modal-trigger" onclick="$('#way_id').val('${waysPlaceImage[i].id}')" href="#get-direction"><cdg:l18n key="get.directions"/></a></p>
+                                    <div align="center">
+                                        <a class="btn modal-trigger waves-effect waves-light cyan darken-2" onclick="$('#way_id').val('${waysPlaceImage[i].id}')"
+                                          href="#get-direction"><cdg:l18n key="get.directions"/></a>
+                                    </div>
                                 </div>
                                 <div class="card-reveal">
                                     <span class="card-title grey-text text-darken-4"><cdg:l18n key="places.way"/></span>

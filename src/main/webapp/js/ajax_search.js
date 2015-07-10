@@ -73,10 +73,11 @@ function handleSearchSuggest() {
                 suggest += 'onmouseout="javascript:suggestOut(this);" ';
                 suggest += 'onclick="javascript:setSearch('+i+');" ';
                 suggest += 'class="suggest_link">'
-                suggest += '<div class="row">';
-                suggest += '<div class=" match-colum col l3 m5 s9">'
-                suggest += '<img class="circle" src="/upload/photo/' + strImg[1] + '"style="width: 100%; height:100%"></div>';
-                suggest += '<div class=" match-colum col l9 m14 s27" id="nameOLOLOLO'+i+'">';
+                suggest += '<div class="collection">';//'<div class="row">';
+                suggest += '<div class="collection-item valign-wrapper" style="height: 60px">';//'<div class=" match-colum col l3 m5 s9">'
+                suggest += '<div class="valign">';
+                suggest += '<img class="circle responsive-img" src="/upload/photo/' + strImg[1] + '"style="width: ;"></div>';
+                suggest += '<div class="valign" id="nameOLOLOLO'+i+'">';
                 suggest += strImg[0];
                 suggest +=  '</div>';
                 suggest += '</div></div>';
@@ -98,10 +99,11 @@ function handleSearchSuggestMap() {
                 suggest += 'onmouseout="javascript:suggestOut(this);" ';
                 suggest += 'onclick="javascript:setSearchMap('+i+');" ';
                 suggest += 'class="suggest_link">'
-                suggest += '<div class="row">';
-                suggest += '<div class=" match-colum col l3 m5 s9">'
-                suggest += '<img class="circle" src="/upload/photo/' + strImg[1] + '"style="width: 100%;"></div>';
-                suggest += '<div class=" match-colum col l9 m14 s27" id="nameOLOLOLO'+i+'">';
+                suggest += '<div class="collection">';//'<div class="row">';
+                suggest += '<div class="collection-item valign-wrapper" style="height: 60px">';//'<div class=" match-colum col l3 m5 s9">'
+                suggest += '<div class="valign">';
+                suggest += '<img class="circle responsive-img" src="/upload/photo/' + strImg[1] + '"style="width: ;"></div>';
+                suggest += '<div class="valign" id="nameOLOLOLO'+i+'">';
                 suggest += strImg[0];
                 suggest +=  '</div>';
                 suggest += '</div></div>';
@@ -110,6 +112,8 @@ function handleSearchSuggestMap() {
         }
     }
 }
+
+
 
 function handleSearchSuggestRoute() {
     if (searchReq.readyState == 4) {
@@ -123,10 +127,11 @@ function handleSearchSuggestRoute() {
                 suggest += 'onmouseout="javascript:suggestOut(this);" ';
                 suggest += 'onclick="javascript:setSearchRoute('+i+');" ';
                 suggest += 'class="suggest_link">'
-                suggest += '<div class="row">';
-                suggest += '<div class=" match-colum col l3 m5 s9">'
-                suggest += '<img class="circle" src="/upload/photo/' + strImg[1] + '"style="width: 100%; height:100%"></div>';
-                suggest += '<div class=" match-colum col l9 m14 s27" id="nameOLO'+i+'">';
+                suggest += '<div class="collection">';//'<div class="row">';
+                suggest += '<div class="collection-item valign-wrapper" style="height: 60px">';//'<div class=" match-colum col l3 m5 s9">'
+                suggest += '<div class="valign">';
+                suggest += '<img class="circle responsive-img" src="/upload/photo/' + strImg[1] + '"style="width: ;"></div>';
+                suggest += '<div class="valign" id="nameOLO'+i+'">';
                 suggest += strImg[0];
                 suggest +=  '</div>';
                 suggest += '</div></div>';

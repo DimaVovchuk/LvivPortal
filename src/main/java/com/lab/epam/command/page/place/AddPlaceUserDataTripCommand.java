@@ -52,6 +52,8 @@ public class AddPlaceUserDataTripCommand implements Command {
         Place onePlaceForWay = null;
         Boolean isInWay = false;
 
+        loger.info("placeId " + placeId + " userDataAboutTrip " + userDataAboutTrip + " dayNumber " + dayNumber);
+
         if (placeId != null && userDataAboutTrip != null && dayNumber != 0) {
             onePlaceForWay = servicePlace.getByPK(Integer.parseInt(placeId));
             loger.info("Get place is successfull");

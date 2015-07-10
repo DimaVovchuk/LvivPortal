@@ -24,6 +24,7 @@ public class CompanyInformationCommand implements Command {
     private PlaceService placeService = new PlaceService();
     private UserImageService userImageService = new UserImageService();
     private PlaceImageService placeImageService = new PlaceImageService();
+    private UserRatingService userRatingService = new UserRatingService();
     private PlaceDescriptionService placeDescriptionService = new PlaceDescriptionService();
     private List<Place> wayPlaces = new ArrayList<>();
     private String language;
@@ -42,7 +43,8 @@ public class CompanyInformationCommand implements Command {
         this.request = request;
         List<PlaceDescriptionAndPhoto> placesPageInfo = new ArrayList<>();
 
-
+        String login = (String) session.getAttribute("login");
+        Integer company_id = null;
         String userID = request.getParameter("id");
         System.out.println("userID in compInfo " + userID);
         if (userID != null) {
@@ -84,11 +86,26 @@ public class CompanyInformationCommand implements Command {
                 request.setAttribute("allWayInfo", allWaysPlaseInfo);
             }
 
+            Integer companyRatingByUser = 0;
+            if (userID != null && login != null){
+                User user = userService.getUserByLogin(login);
+                company_id = Integer.valueOf(userID);
+                if (user != null){
+                    UserRating userRating = userRatingService.getUseRatingByCompanyAndUser(company_id, user.getId());
+                    if (userRating != null){
+                        companyRatingByUser = userRating.getRating();
+                    }
+                }
+
+            }
+
             request.setAttribute("placesInfo", placesPageInfo);
             request.setAttribute("userInfo", userData);
             request.setAttribute("avatar", avatar);
             request.setAttribute("userGalery", userGalery);
             request.setAttribute("allWayInfo", allWaysPlaseInfo);
+            request.setAttribute("companyRatingByUser", companyRatingByUser);
+            request.setAttribute("company_id", company_id);
         }
         request.getRequestDispatcher("/views/pages/company-page.jsp").forward(request, response);
     }

@@ -19,6 +19,9 @@
 
 <div id="company-page" class="full-height">
     <div class="row">
+
+
+
         <div class="col l8 offset-l2 m10 offset-m1 s12 z-depth-2">
             <c:choose>
                 <c:when test="${userInfo.role_id == 3}">
@@ -76,6 +79,27 @@
                            onclick="$('#sendOrderOnMail').attr('rel','/portal?command=orderWaySendMail&wayId=0&gidId=${pageContext.request.getParameter('id')}&type=message');"
                            style="text-transform: uppercase"><cdg:l18n key="company.response"/></a>
                     </p>
+                </div>
+                <div class="bottom-right-btn" align="right">
+                    <a onClick="like(this);" data-rating="${companyRatingByUser}" id="up"
+                       class="up btn-floating btn-floating btn-small" onload="disabled();"
+                       href="javascript:" rel="/portal?command=rectRatingUser&rating=1&company_id=${company_id}">
+                        <i class="material-icons">thumb_up</i>
+                    </a>
+
+                    <a onClick="none(this);" id="none"
+                       class="none btn-floating btn-floating btn-small"
+                       href="javascript:" rel="/portal?command=rectRatingUser&rating=0&company_id=${company_id}">
+                        <i class="material-icons">thumbs_up_down</i>
+                    </a>
+
+
+                    <a onClick="dislike(this);" id="down"
+                       class="down btn-floating btn-floating btn-small"
+                       href="javascript:" rel="/portal?command=rectRatingUser&rating=-1&company_id=${company_id}">
+                        <i class="material-icons">thumb_down</i>
+                    </a>
+
                 </div>
             </div>
 
@@ -242,6 +266,63 @@
         $('#response-info-collection').html(html);
     };
 
+    var like = function (placeholder) {
+        $.ajax({
+            url: $(placeholder).attr('rel'),
+            type: "GET",
+            success:dissable(placeholder),
+            error:function (){
+                alert("testing error");
+            }
+        });
+        return false;
+    };
+
+    var none = function (placeholder) {
+        $.ajax({
+            url: $(placeholder).attr('rel'),
+            type: "GET",
+            success:dissable(placeholder),
+            error:function (){
+                alert("testing error");
+            }
+        });
+        return false;
+    };
+
+    var dislike = function (placeholder) {
+        $.ajax({
+            url: $(placeholder).attr('rel'),
+            type: "GET",
+            success:dissable(placeholder),
+            error:function (){
+                alert("testing error");
+            }
+        });
+        return false;
+    };
+
+    var dissable = function (placeholder) {
+        $("#up").removeClass('disabled');
+        $("#none").removeClass('disabled');
+        $("#down").removeClass('disabled');
+        $(placeholder).addClass('disabled');
+    };
+
+    var disabled = function () {
+            var up_i = $("#up");
+            var rating = up_i.data('rating');
+            if (rating == '1') {
+                $("#up").addClass('disabled');
+            }
+            if (rating == '0') {
+                $("#none").addClass('disabled');
+            }
+            if (rating == '-1') {
+                $("#down").addClass('disabled');
+            }
+    };
+
     $('#image-send-comment').on('submit', function (e) {
         e.preventDefault();
         e.stopImmediatePropagation();
@@ -297,6 +378,9 @@
             }
     );
 
+    $(function () {
+        disabled();
+    });
 </script>
 
 <script id="response-info-template" type="text/x-handlebars-template">

@@ -23,6 +23,7 @@
             <%--<a class="btn modal-action modal-close modal-trigger waves-effect waves-light cyan darken-2" data-target="name-way">Ok--%>
             <%--</a>--%>
               <button class="btn waves-effect waves-light cyan darken-2" type="submit" name="ok" value="ok">OK</button>
+              <a class="btn modal-action modal-close  waves-effect waves-light cyan darken-2">Cancel</a>
 
           </div>
         </div>

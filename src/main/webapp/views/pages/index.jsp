@@ -25,7 +25,8 @@
         <div class="row">
             <div class="col l4 m6 s12">
                 <div class="section z-depth-2 center-align">
-                    <a href="portal?command=place&category=architecture">
+                    <%--<a href="portal?command=place&category=architecture">--%>
+                        <a href="#" onclick="redirectPlace('architecture')">
                         <div class="hover-image">
                             <img class="responsive-img" src="${pageContext.request.contextPath}/images/places_architecture.jpg">
                         </div>
@@ -40,7 +41,8 @@
 
             <div class="col l4 m6 s12">
                 <div class="section z-depth-2 center-align">
-                    <a href="portal?command=place&category=churches">
+                    <%--<a href="portal?command=place&category=churches">--%>
+                        <a href="#" onclick="redirectPlace('churches')">
                         <div class="hover-image">
                             <img class="responsive-img" src="${pageContext.request.contextPath}/images/places_churches.jpg">
                         </div>
@@ -55,7 +57,8 @@
 
             <div class="col l4 m6 s12">
                 <div class="section z-depth-2 center-align">
-                    <a href="portal?command=place&category=theatres">
+                    <%--<a href="portal?command=place&category=theatres">--%>
+                        <a href="#" onclick="redirectPlace('theatres')">
                         <div class="hover-image">
                             <img class="responsive-img" src="${pageContext.request.contextPath}/images/places_theatres.jpg">
                         </div>
@@ -70,7 +73,8 @@
 
             <div class="col l4 m6 s12">
                 <div class="section z-depth-2 center-align">
-                    <a href="portal?command=place&category=restaurants">
+                    <%--<a href="portal?command=place&category=restaurants">--%>
+                        <a href="#" onclick="redirectPlace('restaurants')">
                         <div class="hover-image">
                             <img class="responsive-img" src="${pageContext.request.contextPath}/images/places_restaurants.jpg">
                         </div>
@@ -85,7 +89,8 @@
 
             <div class="col l4 m6 s12">
                 <div class="section z-depth-2 center-align">
-                    <a href="portal?command=place&category=hotels">
+                    <%--<a href="portal?command=place&category=hotels">--%>
+                        <a href="#" onclick="redirectPlace('hotels')">
                         <div class="hover-image">
                             <img class="responsive-img" src="${pageContext.request.contextPath}/images/places_hotels.jpg">
                         </div>

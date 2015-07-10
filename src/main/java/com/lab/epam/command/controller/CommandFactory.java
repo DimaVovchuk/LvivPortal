@@ -33,6 +33,7 @@ import com.lab.epam.command.page.user.admin.EditPlaceCommand;
 import com.lab.epam.command.page.user.admin.ShowAdminCabinetCommand;
 import com.lab.epam.command.page.user.admin.ShowAllUserCommand;
 import com.lab.epam.command.page.user.company.OrderWaySendMail;
+import com.lab.epam.command.page.user.company.RectUserRatingCommand;
 import com.lab.epam.command.save.*;
 
 import javax.servlet.ServletException;
@@ -128,6 +129,7 @@ public class CommandFactory {
         commands.put("orderWaySendMail", new OrderWaySendMail());
         commands.put("imageResponseJSON", new CommercialImageCommentCommand());
         commands.put("addImageResponse", new AddImageResponseCommand());
+        commands.put("rectRatingUser", new RectUserRatingCommand());
     }
 
     public static void createCommand(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

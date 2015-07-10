@@ -17,10 +17,8 @@
       <label for="name"><cdg:l18n key="plan.name"/></label>
     <div class="ok-footer">
       <div class="modal-footer">
-
-
-
           <button class="btn waves-effect waves-light cyan darken-2" type="submit" name="ok" value="ok">OK</button>
+        <a class="btn modal-action modal-close  waves-effect waves-light cyan darken-2">Cancel</a>
       </div>
     </div>
     </form>

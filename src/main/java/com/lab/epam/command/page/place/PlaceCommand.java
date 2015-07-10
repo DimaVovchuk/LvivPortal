@@ -25,9 +25,10 @@ public class PlaceCommand implements Command {
                         HttpServletResponse response) throws ServletException, IOException {
 
 
-        //String category = request.getParameter("category");
+        String category = request.getParameter("category");
         loger.info("Place Loader.");
-        //request.setAttribute("category", category);
+        System.out.println("category " + category);
+        request.setAttribute("category", category);
         request.getRequestDispatcher("/views/pages/places.jsp").forward(request, response);
         }
 

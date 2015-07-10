@@ -1,4 +1,5 @@
 function loadCategory(category) {
+    //''window.location="/portal?command=placeJSON";
     $.ajax({
         url: window.location.origin + '/portal?command=placeJSON&category=' + category,
         success: updatePlaces,
@@ -13,6 +14,12 @@ function loadCategory(category) {
         $('#dropdown-' + category).html(html);
     }
 }
+
+function redirectPlace(category) {
+    document.location.href = '/portal?command=place&category=' + category;
+
+}
+
 
 $(function() {
     loadCategory('architecture');
