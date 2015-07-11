@@ -81,6 +81,7 @@ var activePageHeaderLink = function () {
 var checkReloadPages = function (data) {
     if (data == "success"){
         document.location.reload(true);
+        loadSignInWindow();
     }
     else{
     }
@@ -109,6 +110,6 @@ $(function () {
     initLoginForm();
     initNewRouteForm();
     activePageHeaderLink();
-    reloadPage();
     checkReloadPages();
+    reloadPage();
 });

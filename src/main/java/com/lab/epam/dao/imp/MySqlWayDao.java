@@ -33,9 +33,12 @@ public class MySqlWayDao extends AbstractJDBCDao<Way, Integer> {
     private static final String UPDATE_WAY_BEGIN_DATE = "UPDATE way SET date_begin = ? WHERE id = ?";
     private static final String UPDATE_WAY_END_DATE = "UPDATE way SET date_end = ? WHERE id = ?";
     private static final String UPDATE_WAY_RATING = "UPDATE way SET rating = ? WHERE id = ?";
+    private static final String UPDATE_WAY_ISRECOMENDED = "UPDATE way SET is_recommend = false WHERE id = ?";
+    private static final String UPDATE_CONFIRM_WAY_ISRECOMENDED = "UPDATE way SET is_recommend = false, recomended = true WHERE id = ?";
     private static final String GET_WAY_RECOMENDED = "SELECT * FROM way WHERE recomended=true AND deleted=false AND visible=true";
     private static final String SET_WAY_IS_RECOMMENDED = "UPDATE way SET is_recommend = true WHERE id = ?";
-    private static final String GET_ALL_CONFIRM_RECOMMENDED_WAY ="SELECT * FROM way AS w WHERE w.deleted=false AND w.visible=true AND w.recomended=false AND w.is_recommend=true";
+    private static final String GET_ALL_CONFIRM_RECOMMENDED_WAY = "SELECT * FROM way AS w WHERE w.deleted=false AND w.visible=true AND w.recomended=false AND w.is_recommend=true";
+
     private class PersistGroup extends Way {
         public void setId(int id) {
             super.setId(id);
@@ -49,6 +52,38 @@ public class MySqlWayDao extends AbstractJDBCDao<Way, Integer> {
         return Way.class;
     }
 
+    public void updateConfirmWayRecommended(Integer way_id) throws PersistException {
+        Connection conn = connection.retrieve();
+        try (PreparedStatement statement = conn.prepareStatement(UPDATE_CONFIRM_WAY_ISRECOMENDED)) {
+            statement.setInt(1, way_id);
+            int count = statement.executeUpdate();
+            if (count != 1) {
+                throw new PersistException("On persist modify more then 1 record: " + count);
+            } else {
+            }
+        } catch (Exception e) {
+            throw new PersistException(e);
+        } finally {
+            connection.putback(conn);
+        }
+    }
+
+    public void updateWayIsRecommended(Integer way_id) throws PersistException {
+        Connection conn = connection.retrieve();
+        try (PreparedStatement statement = conn.prepareStatement(UPDATE_WAY_ISRECOMENDED)) {
+            statement.setInt(1, way_id);
+            int count = statement.executeUpdate();
+            if (count != 1) {
+                throw new PersistException("On persist modify more then 1 record: " + count);
+            } else {
+            }
+        } catch (Exception e) {
+            throw new PersistException(e);
+        } finally {
+            connection.putback(conn);
+        }
+    }
+
     public List<Way> getWaysByUserId(Integer user_id) throws PersistException {
 
         List<Way> list;
@@ -59,7 +94,7 @@ public class MySqlWayDao extends AbstractJDBCDao<Way, Integer> {
             //loger.info("Get ways from user with id" + user_id + " is succesfull " + rs);
             list = parseResultSet(rs);
             //loger.info("Parse result with Transformer is succesfull list = " + list);
-            if (list.size() <= 0){
+            if (list.size() <= 0) {
                 loger.info("DB has any ways from user with " + user_id + " user_id");
                 return null;
             }
@@ -72,19 +107,20 @@ public class MySqlWayDao extends AbstractJDBCDao<Way, Integer> {
         return list;
 
     }
+
     public List<Way> getAllConfirmRecommendedWay() throws PersistException {
         List<Way> wayList = new ArrayList<>();
         Connection conn = connection.retrieve();
-         try (PreparedStatement statement = conn.prepareStatement(GET_ALL_CONFIRM_RECOMMENDED_WAY)) {
+        try (PreparedStatement statement = conn.prepareStatement(GET_ALL_CONFIRM_RECOMMENDED_WAY)) {
             ResultSet rs = statement.executeQuery();
             //  loger.info("Get last way is succesfull ");
-             wayList = parseResultSet(rs);
+            wayList = parseResultSet(rs);
             //loger.info("Parse result with Transformer is succesfull");
-            if (wayList.size() <= 0){
+            if (wayList.size() <= 0) {
                 loger.info("DB has any ways");
                 return null;
             }
-            if (wayList.size() > 1){
+            if (wayList.size() > 1) {
                 loger.info("DB has more than one last way");
             }
         } catch (Exception e) {
@@ -102,7 +138,7 @@ public class MySqlWayDao extends AbstractJDBCDao<Way, Integer> {
             statement.setInt(1, way_id);
             ResultSet rs = statement.executeQuery();
             list = parseResultSet(rs);
-            if (list.size() <= 0){
+            if (list.size() <= 0) {
                 loger.info("DB has any ways from way with " + way_id + " way_id");
                 return null;
             }
@@ -165,11 +201,11 @@ public class MySqlWayDao extends AbstractJDBCDao<Way, Integer> {
             loger.info("Get last way is succesfull ");
             list = parseResultSet(rs);
             loger.info("Parse result with Transformer is succesfull");
-            if (list.size() <= 0){
+            if (list.size() <= 0) {
                 loger.info("DB has any ways");
                 return null;
             }
-            if (list.size() > 1){
+            if (list.size() > 1) {
                 loger.info("DB has more than one last way");
             }
         } catch (Exception e) {
@@ -190,11 +226,11 @@ public class MySqlWayDao extends AbstractJDBCDao<Way, Integer> {
             //  loger.info("Get last way is succesfull ");
             list = parseResultSet(rs);
             //loger.info("Parse result with Transformer is succesfull");
-            if (list.size() <= 0){
+            if (list.size() <= 0) {
                 loger.info("DB has any ways");
                 return null;
             }
-            if (list.size() > 1){
+            if (list.size() > 1) {
                 loger.info("DB has more than one last way");
             }
         } catch (Exception e) {
@@ -309,7 +345,7 @@ public class MySqlWayDao extends AbstractJDBCDao<Way, Integer> {
         }
     }
 
-    public List<Way> getAllWayRecomended ()throws PersistException {
+    public List<Way> getAllWayRecomended() throws PersistException {
         List<Way> list;
         Connection conn = connection.retrieve();
         try (PreparedStatement statement = conn.prepareStatement(GET_WAY_RECOMENDED)) {

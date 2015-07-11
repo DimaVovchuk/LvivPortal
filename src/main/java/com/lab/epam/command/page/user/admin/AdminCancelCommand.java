@@ -13,6 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Date;
 
 /**
  * Created by Dima on 10-Jul-15.
@@ -43,18 +44,21 @@ public class AdminCancelCommand implements Command {
             }
 
             if (page.equals("confirmRecomWay")) {
+                System.out.println("param " + page);
                 Way way = wayService.getByPK(objectID);
+                Date startTime = way.getBegin();
+                Date endTime = way.getEnd();
+
+                System.out.println("startTime " + startTime.toString());
+                System.out.println("endTime " + endTime.toString());
                 way.setRecomended(true);
                 way.setIs_recommended(false);
                 System.out.println("confirmRecomWay " + way);
-                wayService.update(way);
+                wayService.updateConfirmWayRecommended(objectID);
             }
 
             if (page.equals("cancelRecomWay")) {
-                Way way = wayService.getByPK(objectID);
-                way.setIs_recommended(false);
-                System.out.println("cancelRecomWay " + way);
-                wayService.update(way);
+                wayService.updateWayIsRecommended(objectID);
             }
 
             if (page.equals("editPlace")) {

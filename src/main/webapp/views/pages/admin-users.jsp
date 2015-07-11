@@ -68,8 +68,8 @@
                             <td>${elem.value}</td>
                             <td class="right-align">
                                 <form id="change-status${elem.key.id}" action="#" method="post">
-                                    <input type="hidden" name="command" value="showAllUser">
                                     <input type="hidden" name="requestType" value="changeStatus">
+                                    <input type="hidden" name="command" value="showAllUser">
                                     <input type="hidden" name="servletUserId" value="${elem.key.id}">
                                     <c:if test="${elem.key.status == 1}">
                                         <input type="hidden" name="changeStatucID" value="3">
@@ -105,9 +105,9 @@
         <div class="modal-content">
             <h5 class="center-align">Change role</h5>
 
-            <form id="change_role" action="#" method="post">
+            <form id="change_role" action="#" method="get">
                 <input type="hidden" name="command" value="showAllUser">
-                <input type="hidden" name="requestType" value="changeRole">
+                <input type="hidden" name="requestType" id="changeRole">
                 <input type="hidden" name="servletUserId" id="user-id">
 
                 <p><input type="radio" name="changeRoleID" value="1" id="role1"/><label for="role1" class="black-text"><cdg:l18n key="role.admin"/></label>

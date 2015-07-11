@@ -91,11 +91,11 @@
     };
 
     var restorePlaceToast = function () {
-        Materialize.toast('Place was restored', 4000);
+        Materialize.toast('<cdg:l18n key="admin.confirm.recommended.way.was.add"/>', 4000);
     };
 
     var cancelPlaceToast = function () {
-        Materialize.toast('Place was canceled', 4000);
+        Materialize.toast('<cdg:l18n key="admin.confirm.recommended.way.was.cancel"/>', 4000);
     }
 </script>
 

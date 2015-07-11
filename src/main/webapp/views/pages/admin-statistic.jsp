@@ -59,7 +59,7 @@
 				}],
 				yAxis: {
 					title: {
-						text: "<cdg:l18n key="statistic.rating"/>"
+						text: '<cdg:l18n key="statistic.rating"/>'
 					}
 				}
 			});
@@ -100,7 +100,7 @@
 
 				series: [{
 					type: 'pie',
-					name: '',
+					name: '<cdg:l18n key="statistic.percentage"/>',
 					data: [
 						['<cdg:l18n key="role.admin"/>', ${usersMap[0]}],
 						['<cdg:l18n key="role.user"/>', ${usersMap[1]}],
@@ -151,7 +151,7 @@
 
 				series: [{
 					type: 'pie',
-					name: '',
+					name: '<cdg:l18n key="statistic.percentage"/>',
 					data: [
 						['<cdg:l18n key="admin.active"/>', ${statusList[0]}],
 						{

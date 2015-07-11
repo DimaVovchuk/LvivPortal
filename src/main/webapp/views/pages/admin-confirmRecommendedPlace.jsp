@@ -45,7 +45,7 @@
 
 <div id="confirmRecomPlaceCencel" class="modal" style="max-width: 400px">
     <div class="modal-content">
-        <h5><cdg:l18n key="admin.edit.places.deleteplace"/></h5>
+        <h5><cdg:l18n key="admin.reject.recomendation"/></h5>
         <div class="divider" style="margin-bottom: 20px"></div>
         <div id="place-id"></div>
         <a id="delPlace" onclick="cancelPlace();" href="javascript:"
@@ -67,7 +67,7 @@
     };
     var currentId;
     var cancelPlaceToast = function () {
-        Materialize.toast('Place was canceled', 4000);
+        Materialize.toast('<cdg:l18n key="admin.confirm.recommended.way.was.cancel"/>', 4000);
     };
 
     var cancelBtnAction = function (id) {

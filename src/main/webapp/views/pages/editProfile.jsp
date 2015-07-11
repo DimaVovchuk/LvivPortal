@@ -76,6 +76,7 @@
                                            name="surname">
                                 </div>
 
+                                <c:if test="${role != 1 and role != 2}">
                                 <div class="input-field">
                                     <i class="mdi-action-account-circle prefix black-text"></i>
                                     <label class="active" for="companyName"><cdg:l18n
@@ -84,6 +85,7 @@
                                     <input value="${userForEdit.companyName}" id="companyName" type="text"
                                            name="companyName">
                                 </div>
+                                </c:if>
 
                                 <div class="input-field">
                                     <i class="mdi-action-account-circle prefix black-text"></i>

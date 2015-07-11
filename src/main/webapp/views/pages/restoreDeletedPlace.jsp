@@ -26,15 +26,15 @@
 							<table id="admin-page-table" class="display" cellspacing="0" width="100%">
 								<thead>
 								<tr>
-									<th>Image</th>
-									<th>Info</th>
+									<th><cdg:l18n key="admin.edit.places.image"/></th>
+									<th><cdg:l18n key="admin.edit.places.info"/></th>
 									<th></th>
 								</tr>
 								</thead>
 								<tfoot>
 								<tr>
-									<th>Image</th>
-									<th>Info</th>
+									<th><cdg:l18n key="admin.edit.places.image"/></th>
+									<th><cdg:l18n key="admin.edit.places.info"/></th>
 									<th></th>
 								</tr>
 								</tfoot>
@@ -49,7 +49,7 @@
 
 <div id="adminPlaceRestore" class="modal">
 	<div class="modal-content">
-		<h4><cdg:l18n key="admin.edit.places.deleteplace"/></h4>
+		<h4><cdg:l18n key="admin.restore.place"/></h4>
 
 		<div id="place-id"></div>
 		<a id="delPlace" onclick="restorePlace();" href="javascript:"
@@ -71,7 +71,7 @@ var restorePlace = function () {
 };
 var currentId;
 var restorePlaceToast = function () {
-	Materialize.toast('Place was restored', 4000);
+	Materialize.toast('<cdg:l18n key="admin.was.restore.page.restore"/>', 4000);
 }
 
 var restoreBtnAction = function (id) {

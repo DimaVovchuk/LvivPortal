@@ -65,7 +65,7 @@ public class WayService {
             mySqlWayDao.update(object);
         } catch (PersistException e) {
             e.printStackTrace();
-            loger.warn("Cant update place rating");
+            loger.warn("Cant update place");
         }
     }
 
@@ -185,6 +185,26 @@ public class WayService {
     public void updateWayRating(Integer way_id, Integer rating) {
         try {
             mySqlWayDao.updateWayRating(way_id, rating);
+
+        } catch (PersistException e) {
+            e.printStackTrace();
+            loger.warn("Cant update endDate by" + " way_id " + way_id);
+        }
+    }
+
+    public void updateWayIsRecommended(Integer way_id) {
+        try {
+            mySqlWayDao.updateWayIsRecommended(way_id);
+
+        } catch (PersistException e) {
+            e.printStackTrace();
+            loger.warn("Cant update endDate by" + " way_id " + way_id);
+        }
+    }
+
+    public void updateConfirmWayRecommended(Integer way_id) {
+        try {
+            mySqlWayDao.updateConfirmWayRecommended(way_id);
 
         } catch (PersistException e) {
             e.printStackTrace();

@@ -37,9 +37,8 @@ public class ShowAllUserCommand implements Command{
         Integer changeStatus = null;
 
         String requestType = request.getParameter("requestType");
-
         String servletUserIdString = request.getParameter("servletUserId");
-        loger.info("servletUserIdString "  + servletUserIdString);
+        loger.info("requestType "  + requestType);
         if(servletUserIdString != null){
             servletUserId = Integer.valueOf(servletUserIdString);
             loger.info("User id is "  + servletUserId);
@@ -95,9 +94,7 @@ public class ShowAllUserCommand implements Command{
             List<User>userList = userService.getAll();
             for (int i = 0; i < userList.size(); i++) {
                 Integer roleID= userService.getRoleID(userList.get(i).getLogin());
-                loger.info("roleID " + roleID);
                 String roleName = roleService.getByPK(roleID).getRole();
-                loger.info("roleName " + roleName);
                 userRole.put(userList.get(i),roleName);
             }
             request.setAttribute("AllUsers",userRole);

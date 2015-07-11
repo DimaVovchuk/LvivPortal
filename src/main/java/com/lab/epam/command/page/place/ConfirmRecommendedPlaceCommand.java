@@ -18,6 +18,6 @@ public class ConfirmRecommendedPlaceCommand implements Command{
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         loger.info("ConfirmRecommendedPlaceCommand start.");
-        request.getRequestDispatcher("/views/pages/admin-admin-confirmRecommendedPlace.jsp").forward(request, response);
+        request.getRequestDispatcher("/views/pages/admin-confirmRecommendedPlace.jsp").forward(request, response);
     }
 }
