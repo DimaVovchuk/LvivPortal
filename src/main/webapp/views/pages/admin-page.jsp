@@ -85,13 +85,6 @@
                                         key="admin.addnewplace"/></b></span>
                             </div>
                         </a>
-                        <a class="collection-item avatar black-text" href="/portal?command=adminStatistic">
-                            <i class="material-icons circle cyan darken-2">equalizer</i>
-
-                            <div class="valign-wrapper">
-                                <span style="text-transform: uppercase"><b><cdg:l18n key="statistic.title"/></b></span>
-                            </div>
-                        </a>
                         <a class="collection-item avatar black-text" href="/portal?command=adminConfirmCustomPlace">
                             <i class="material-icons circle cyan darken-2">local_see</i>
 
@@ -127,6 +120,13 @@
                             <div class="valign-wrapper">
                             <span style="text-transform: uppercase"><b><cdg:l18n
                                     key="admin.restore.place"/></b></span>
+                            </div>
+                        </a>
+                        <a class="collection-item avatar black-text" href="/portal?command=adminStatistic">
+                            <i class="material-icons circle cyan darken-2">equalizer</i>
+
+                            <div class="valign-wrapper">
+                                <span style="text-transform: uppercase"><b><cdg:l18n key="statistic.title"/></b></span>
                             </div>
                         </a>
                     </div>

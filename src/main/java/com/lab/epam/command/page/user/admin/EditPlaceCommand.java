@@ -102,7 +102,7 @@ public class EditPlaceCommand implements Command {
         if (recomendetIDSring != null && recomendetIDSring != "") {
             session.setAttribute("recomendetIDSring", recomendetIDSring);
         }
-        request.getRequestDispatcher("/views/pages/edit_place.jsp").forward(request, response);
+        request.getRequestDispatcher("/views/pages/admin-editPlace.jsp").forward(request, response);
     }
 
     private Boolean isInFolder(String fileName, HttpServletRequest request) {

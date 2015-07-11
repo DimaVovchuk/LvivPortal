@@ -14,7 +14,7 @@
 
 <jsp:include page="/views/elements/header.jsp"/>
 
-<div id="company-page" class="full-height">
+<div class="full-height">
     <h3 class="center-align"><cdg:l18n key="admin.title"/></h3>
 
     <div class="row">
@@ -27,11 +27,11 @@
                                 <cdg:l18n key="company.routename"/>: <b>${mapelem.key.name}</b>
                             </div>
                             <div class="col s6 right-align">
-                                <button class="btn"
+                                <button class="btn cyan darken-2"
                                         onclick="confirm(${mapelem.key.id})"
                                         style="text-transform: uppercase"><cdg:l18n
                                         key="admin.edit.places.confirm"/></button>
-                                <button class="btn"
+                                <button class="btn cyan darken-2"
                                         onclick="cancel(${mapelem.key.id})"
                                         style="text-transform: uppercase"><cdg:l18n
                                         key="admin.edit.places.cancel"/></button>
@@ -74,28 +74,32 @@
         </div>
     </div>
 </div>
-<script>
 
+<script>
     var confirm = function (id) {
         $.ajax({
             url: window.location.origin + '/portal?command=adminCancelCommand&page=confirmRecomWay&id=' + id,
             success: restorePlaceToast()
         });
     };
+
     var cancel = function (id) {
         $.ajax({
             url: window.location.origin + '/portal?command=adminCancelCommand&page=cancelRecomWay&id=' + id,
             success: cancelPlaceToast()
         });
     };
+
     var restorePlaceToast = function () {
         Materialize.toast('Place was restored', 4000);
-    }
+    };
+
     var cancelPlaceToast = function () {
         Materialize.toast('Place was canceled', 4000);
     }
-
 </script>
+
 <jsp:include page="/views/elements/footer.jsp"/>
+
 </body>
 </html>

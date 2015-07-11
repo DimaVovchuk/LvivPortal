@@ -74,6 +74,6 @@ public class AdminStatisticCommand implements Command {
         request.setAttribute("statusList", usersQuantityStatusList);
 
         loger.info("Command AdminStatisticCommand ended");
-        request.getRequestDispatcher("/views/pages/statisticTest.jsp").forward(request, response);
+        request.getRequestDispatcher("/views/pages/admin-statistic.jsp").forward(request, response);
     }
 }

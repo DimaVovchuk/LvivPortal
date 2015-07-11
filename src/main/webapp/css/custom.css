@@ -452,6 +452,14 @@ header img.text-middle {
     padding: 10px;
 }
 
+#edit-place img.responsive-img {
+    max-height: 200px;
+}
+
+#edit-place img.responsive-img.active {
+    max-height: 1000px;
+}
+
 #edit-place .file-field .btn {
     position: relative;
 }

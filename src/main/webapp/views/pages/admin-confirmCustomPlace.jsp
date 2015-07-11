@@ -16,37 +16,45 @@
 
 <div id="admin-page">
     <div class="row">
-        <div class="col l8 offset-l2 m12 s12" style="padding: 20px">
-            <h3 class="center-align"><cdg:l18n key="admin.title"/></h3>
-            <table id="admin-page-table" class="display" cellspacing="0" width="100%">
-                <thead>
-                <tr>
-                    <th><cdg:l18n key="admin.edit.places.image"/></th>
-                    <th><cdg:l18n key="admin.edit.places.info"/></th>
-                    <th></th>
-                </tr>
-                </thead>
-                <tfoot>
-                <tr>
-                    <th><cdg:l18n key="admin.edit.places.image"/></th>
-                    <th><cdg:l18n key="admin.edit.places.info"/></th>
-                    <th></th>
-                </tr>
-                </tfoot>
-            </table>
+        <div class="col l8 offset-l2 m12 s12 z-depth-2" style="padding: 20px">
+            <div class="row">
+                <div class="section">
+                    <h3 class="center-align"><cdg:l18n key="admin.title"/></h3>
+
+                    <div class="row">
+                        <div class="col l10 offset-l1 m12 s12">
+                            <table id="admin-page-table" class="display" cellspacing="0" width="100%">
+                                <thead>
+                                <tr>
+                                    <th><cdg:l18n key="admin.edit.places.image"/></th>
+                                    <th><cdg:l18n key="admin.edit.places.info"/></th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tfoot>
+                                <tr>
+                                    <th><cdg:l18n key="admin.edit.places.image"/></th>
+                                    <th><cdg:l18n key="admin.edit.places.info"/></th>
+                                    <th></th>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 
-<div id="adminPlaceDelete" class="modal">
+<div id="confirmCustomPlaceCencel" class="modal" style="max-width: 400px">
     <div class="modal-content">
         <h5><cdg:l18n key="admin.edit.places.deleteplace"/></h5>
-
         <div class="divider" style="margin-bottom: 20px"></div>
-        <div id="place-id"></div>
-        <a id="delPlace" onclick="deletePlace();" href="javascript:"
-           rel="" class="btn waves-effect waves-light cyan darken-2 modal-action modal-close"> OK </a>
 
+        <div id="place-id"></div>
+        <a id="delPlace" onclick="cancelPlace();" href="javascript:"
+           rel="" class="btn waves-effect waves-light cyan darken-2 modal-action modal-close"> OK </a>
         <button type="reset" class="btn modal-close waves-effect waves-light cyan darken-2"><cdg:l18n
                 key="button.cancel"/></button>
     </div>
@@ -55,25 +63,26 @@
 <jsp:include page="/views/elements/footer.jsp"/>
 
 <script>
-    var deletePlace = function () {
+
+    var cancelPlace = function () {
         $.ajax({
-            url: window.location.origin + '/portal?command=adminCancelCommand&page=editPlace&id=' + currentId,
-            success: deletePlaceToast()
+            url: window.location.origin + '/portal?command=adminCancelCommand&page=custom&id=' + currentId,
+            success: cancelPlaceToast()
         });
     };
     var currentId;
-    var deletePlaceToast = function () {
-        Materialize.toast('Place was deleted', 4000);
+    var cancelPlaceToast = function () {
+        Materialize.toast('Place was canceled', 4000);
     };
 
-    var deleteBtnAction = function (id) {
+    var cancelBtnAction = function (id) {
         currentId = id;
-        $('#adminPlaceDelete').openModal();
+        $('#confirmCustomPlaceCencel').openModal();
     };
 
     var loadPlaces = function () {
         $.ajax({
-            url: window.location.origin + '/portal?command=placeJSON',
+            url: window.location.origin + '/portal?command=confirmCustomPlaceJSON',
             success: updatePlaces,
             error: updatePlaces
         })
@@ -105,8 +114,8 @@
             var image = '<div class="center-align"><img class="circle responsive-img" src="/upload/photo/' + data[i].imageReference + '" style="width: 50px; height: 50px"></div>';
             var info = data[i].name + '<br>' + data[i].adress;
             var buttons = '<div class="right-align">' +
-                    '<a href="/portal?command=editPlace&editPlaceID=' + data[i].id + '" class="btn cyan darken-2 waves-effect waves-light" style="margin-right: 5px"><cdg:l18n key="admin.edit.places.edit"/></a>' +
-                    '<button class="btn cyan darken-2 waves-effect waves-light delete-btn" style="margin-right: 5px" onclick="deleteBtnAction(' + data[i].id + ')"><cdg:l18n key="admin.edit.places.delete"/></button>' +
+                    '<a href="/portal?command=editPlace&editPlaceID=' + data[i].id + '&custom=confirm" class="btn cyan darken-2 waves-effect waves-light" style="margin-right: 5px"><cdg:l18n key="admin.edit.places.confirm"/></a>' +
+                    '<button class="btn cyan darken-2 waves-effect waves-light delete-btn" style="margin-right: 5px" onclick="cancelBtnAction(' + data[i].id + ')"><cdg:l18n key="admin.edit.places.cancel"/></button>' +
                     '</div>';
             var row = [image, info, buttons];
 

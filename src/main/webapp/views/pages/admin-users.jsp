@@ -134,9 +134,9 @@
 <jsp:include page="/views/elements/footer.jsp"/>
 
 <script>
-    $('#admin-page-table').dataTable({
-        "language": {
-            "lengthMenu": '<span style="color: #000; font-size: 15px"><cdg:l18n key="admin.tabledisplay"/></span>' +
+    $('#admin-page-table').DataTable({
+        language: {
+            lengthMenu: '<span style="color: #000; font-size: 15px"><cdg:l18n key="admin.tabledisplay"/></span>' +
             '<select id="table-display-number" class="browser-default">' +
             '   <option value="10">10</option>' +
             '   <option value="25">25</option>' +
@@ -144,10 +144,10 @@
             '   <option value="100">100</option>' +
             '</select>',
             search: '<span style="color: #000; font-size: 15px"><cdg:l18n key="button.search"/></span>',
-            "zeroRecords": "Nothing found - sorry",
-            "info": "Showing page _PAGE_ of _PAGES_",
-            "infoEmpty": "No records available",
-            "infoFiltered": "(filtered from _MAX_ total records)"
+            zeroRecords: "Nothing found - sorry",
+            info: "Showing page _PAGE_ of _PAGES_",
+            infoEmpty: "No records available",
+            infoFiltered: "(filtered from _MAX_ total records)"
         }
     });
 </script>

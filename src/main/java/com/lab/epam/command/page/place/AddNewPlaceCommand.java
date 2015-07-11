@@ -18,6 +18,6 @@ public class AddNewPlaceCommand implements Command{
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         loger.info("Command AddNewPlaceCommand.");
-        request.getRequestDispatcher("/views/pages/add_new_palce.jsp").forward(request, response);
+        request.getRequestDispatcher("/views/pages/admin-newPlace.jsp").forward(request, response);
     }
 }

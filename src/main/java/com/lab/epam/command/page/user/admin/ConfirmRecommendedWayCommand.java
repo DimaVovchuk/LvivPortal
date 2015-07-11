@@ -68,7 +68,7 @@ public class ConfirmRecommendedWayCommand implements Command {
         }
 
         request.setAttribute("allWayInfo", allWaysPlaseInfo);
-        request.getRequestDispatcher("/views/pages/confirmRecommendedWay.jsp").forward(request, response);
+        request.getRequestDispatcher("/views/pages/admin-admin-confirmRecommendedWay.jsp").forward(request, response);
     }
 
     private PlaceDescriptionAndPhoto getPlaceDescriptionAndPhotoList(Place place) {

@@ -2,11 +2,11 @@
 <%@ taglib prefix="cdg" uri="customtags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
+
+<jsp:include page="/views/elements/css.jsp"/>
+
 <head>
 	<title><cdg:l18n key="statistic.title"/></title>
-	<jsp:include page="/views/elements/css.jsp"/>
-	<jsp:include page="/views/elements/script.jsp"/>
-
 	<script src="http://code.highcharts.com/highcharts.js"></script>
 	<script src="http://code.highcharts.com/highcharts-3d.js"></script>
 	<script src="http://code.highcharts.com/modules/exporting.js"></script>
@@ -14,7 +14,6 @@
 		#container {
 			height: 450px;
 			min-width: 310px;
-			max-width: 800px;
 			margin: 0 auto;
 		}
 	</style>
@@ -66,6 +65,7 @@
 			});
 		});
 	</script>
+
 	<script>
 		$(function () {
 			$('#circle-quantity-container').highcharts({
@@ -110,7 +110,7 @@
 							sliced: true,
 							selected: true
 						},
-						['<cdg:l18n key="role.company"/>', ${usersMap[3]}],
+						['<cdg:l18n key="role.company"/>', ${usersMap[3]}]
 					]
 				}]
 			});
@@ -166,15 +166,18 @@
 			});
 		});
 	</script>
-
 </head>
+
 <body>
+
 <jsp:include page="/views/elements/header.jsp"/>
+
 <div class="full-height">
 	<div id="edit-place">
-		<h4 class="center-align"><cdg:l18n key="statistic.title"/></h4>
 		<div class="row">
 			<div class="col l8 offset-l2 m12 s12 z-depth-2" style="padding: 20px">
+				<h4 class="center-align"><cdg:l18n key="statistic.title"/></h4>
+				<div class="divider"></div>
 				<div id="container" style="height: 450px"></div>
 
 				<br>
@@ -188,6 +191,8 @@
 		</div>
 	</div>
 </div>
+
 <jsp:include page="/views/elements/footer.jsp"/>
+
 </body>
 </html>

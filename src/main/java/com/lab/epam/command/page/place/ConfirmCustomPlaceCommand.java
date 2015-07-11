@@ -18,6 +18,6 @@ public class ConfirmCustomPlaceCommand implements Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         loger.info("ConfirmCustomPlaceCommand start.");
-        request.getRequestDispatcher("/views/pages/confirmCustomPlace.jsp").forward(request, response);
+        request.getRequestDispatcher("/views/pages/admin-confirmCustomPlace.jsp").forward(request, response);
     }
 }
