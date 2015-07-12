@@ -37,6 +37,5 @@ public class ConfirmChangePassCommand implements Command {
             e.printStackTrace();
         }
         loger.info("Command ConfirmChangePassCommand");
-        request.getRequestDispatcher("/views/pages/index.jsp").forward(request, response);
     }
 }

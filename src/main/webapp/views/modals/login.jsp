@@ -115,7 +115,8 @@
 
 	var loadWindow = function (data) {
 		Materialize.toast('<cdg:l18n key="login.signup.tost"/>', 4000);
-	}
+	};
+
 	$(function () {
 		SignUp();
 	});
