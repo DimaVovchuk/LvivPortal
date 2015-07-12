@@ -157,6 +157,12 @@
 								<a href="#"><h5><c:out value="${response.login}"/></h5></a>
 
 								<p><c:out value="${response.description}"/></p>
+								<c:if test="${role == 1}">
+									<a class="waves-effect waves-light btn modal-trigger cyan darken-2"
+									   href="/portal?command=deletePlaceResponse&place_id=${response.place_id}&response_id=${response.response_id}">
+										<cdg:l18n key="usercab.delete"/>
+									</a>
+								</c:if>
 
 							</div>
 						</div>

@@ -19,6 +19,26 @@ public class UserImage implements Identified<Integer> {
     @Column("deleted")
     private Boolean deleted = false;
 
+    public UserImage(Integer id, Integer user_id, String reference, Boolean deleted, String description) {
+        this.id = id;
+        this.user_id = user_id;
+        this.reference = reference;
+        this.deleted = deleted;
+        this.description = description;
+    }
+
+    public String getDescription() {
+
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    @Column("description")
+    private String description;
+
     public UserImage(Integer user_id, String reference){
         this.reference = reference;
         this.user_id = user_id;

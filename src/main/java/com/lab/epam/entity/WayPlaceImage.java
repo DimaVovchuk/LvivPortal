@@ -2,6 +2,7 @@ package com.lab.epam.entity;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Admin on 23.06.2015.
@@ -19,7 +20,6 @@ public class WayPlaceImage {
         this.beginDate = beginDate;
         this.name = name;
         this.endDate = endDate;
-        this.place = place;
     }
 
     public String getName() {
@@ -48,17 +48,31 @@ public class WayPlaceImage {
     }
 
     private Date endDate;
-    private List<PlaceDescription> place;
+
+    public Map<Integer, List<PlaceDescription>> getPlace() {
+        return place;
+    }
+
+    public void setPlace(Map<Integer, List<PlaceDescription>> place) {
+        this.place = place;
+    }
+
+    public WayPlaceImage(Integer id, String imageReference, String name, Date beginDate, Date endDate, Map<Integer, List<PlaceDescription>> place) {
+
+        this.id = id;
+        this.imageReference = imageReference;
+        this.name = name;
+        this.beginDate = beginDate;
+        this.endDate = endDate;
+        this.place = place;
+    }
+
+    private Map<Integer, List<PlaceDescription>> place;
 
     public WayPlaceImage() {
     }
 
-    public WayPlaceImage(Integer id, String imageReference, List<PlaceDescription> place) {
 
-        this.id = id;
-        this.imageReference = imageReference;
-        this.place = place;
-    }
 
     @Override
     public String toString() {
@@ -85,11 +99,4 @@ public class WayPlaceImage {
         this.id = id;
     }
 
-    public List<PlaceDescription> getPlace() {
-        return place;
-    }
-
-    public void setPlace(List<PlaceDescription> place) {
-        this.place = place;
-    }
 }

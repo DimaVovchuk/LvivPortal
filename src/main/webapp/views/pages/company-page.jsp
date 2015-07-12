@@ -112,7 +112,7 @@
             <div class="card" style="padding: 10px">
                 <c:forEach items="${userGalery}" var="elem">
                     <a href="" class="modal-trigger company-gallery-trigger" data-id="${elem.id}"
-                       data-image="${elem.reference}">
+                       data-image="${elem.reference}" data-description="${elem.description}">
                         <img class="responsive-img" width="200"
                              src="${pageContext.request.contextPath}/upload/photo/${elem.reference}">
                     </a>
@@ -226,6 +226,11 @@
     <div class="section center-align">
         <img src="" id="company-gallery-modal-image" class="responsive-img" style="max-width: 80%; max-height: 70%">
 
+
+            <%--<textarea class="materialize-textarea" value=""><div id="place-description"></div></textarea>--%>
+            <div align="left" id="place-description"></div>
+
+
         <div align="center"></div>
     </div>
 
@@ -263,6 +268,8 @@
         })
         $('#company-gallery-modal-image').attr('src', image);
         $('#image_id').attr('value', $(this).data('id'));
+       // $('#place-description').attr('value', $(this).data('description'));
+        document.getElementById('place-description').innerHTML = $(this).data('description');
         $('#company-gallery-modal').openModal();
     });
 
@@ -284,6 +291,13 @@
             }
         });
         return false;
+    };
+
+
+    var matchColumn = function () {
+        $(".match-col").matchHeight({
+            property: 'height'
+        });
     };
 
     var none = function (placeholder) {
@@ -386,7 +400,27 @@
             }
     );
 
+    var deleteResponse = function (placeholder) {
+        $.ajax({
+            url: $(placeholder).attr('rel'),
+            success: tostDeleted
+        });
+    };
+
+    var tostDeleted = function (data) {
+        if (data == "1") {
+            Materialize.toast('<cdg:l18n key="response.deleted"/>', 4000);
+        }
+        else {
+            Materialize.toast('<cdg:l18n key="response.not.deleted"/>', 4000);
+        }
+    }
+
     $(function () {
+        setTimeout(function () {
+            matchColumn();
+            img();
+        }, 200);
         disabled();
     });
 </script>
@@ -401,7 +435,15 @@
         <div class="valign" style="margin-left: 20px">
             {{description}}
         </div>
+
     </div>
+    <c:if test="${role == 1}">
+            <a class="waves-effect waves-light btn modal-trigger cyan darken-2"
+               onClick="deleteResponse(this)" href="javascript:" rel="/portal?command=deleteImageResponse&response_id={{id}}">
+                <cdg:l18n key="usercab.delete"/>
+            </a>
+
+    </c:if>
     {{/each}}
 </script>
 

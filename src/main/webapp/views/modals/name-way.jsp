@@ -9,18 +9,18 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="cdg" uri="customtags" %>
 
-<div class="modal" id="name-way">
+<div class="modal" id="ololololololo">
   <div id="user-trip-save-singin" class="modal-content">
     <p><cdg:l18n key="name.route"/></p>
-    <form action="/portal?command=saveWay" method="post">
-      <input id="name" value="way" name="name" type="text"/>
-      <label for="name"><cdg:l18n key="plan.name"/></label>
-    <div class="ok-footer">
-      <div class="modal-footer">
-          <button class="btn waves-effect waves-light cyan darken-2" type="submit" name="ok" value="ok">OK</button>
-        <a class="btn modal-action modal-close  waves-effect waves-light cyan darken-2">Cancel</a>
+    <form id="save-route-after-json" action="#" method="post">
+      <input value="way" id="name1" name="name" type="text"/>
+      <label for="name1"><cdg:l18n key="plan.name"/></label>
+      <div class="ok-footer">
+        <div class="modal-footer">
+          <button class="btn modal-action modal-close waves-effect waves-light cyan darken-2" type="submit">OK</button>
+          <a class="btn modal-action modal-close waves-effect waves-light cyan darken-2">Cancel</a>
+        </div>
       </div>
-    </div>
     </form>
   </div>
 

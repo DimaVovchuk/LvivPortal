@@ -20,6 +20,7 @@ import com.lab.epam.command.page.createtrip.CreateUserDataCommand;
 import com.lab.epam.command.page.createtrip.CreateUserDataFromDBCommand;
 import com.lab.epam.command.page.delete.DeleteDayCommand;
 import com.lab.epam.command.page.delete.DeletePlaceFromTripCommand;
+import com.lab.epam.command.page.delete.DeletePlaceResponseCommand;
 import com.lab.epam.command.page.delete.DeleteWayCommand;
 import com.lab.epam.command.page.index.IndexCommand;
 import com.lab.epam.command.page.map.RoutesCommand;
@@ -131,6 +132,8 @@ public class CommandFactory {
         commands.put("restoreDeletedPlace", new RestoreDeletedPlaceCommand());
         commands.put("restoreDeletedPlaceJSON", new RestoreDeletedPlaceJSON());
         commands.put("adminCancelCommand", new AdminCancelCommand());
+        commands.put("deletePlaceResponse", new DeletePlaceResponseCommand());
+        commands.put("deleteImageResponse", new DeletImageResponseCommand());
     }
 
     public static void createCommand(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

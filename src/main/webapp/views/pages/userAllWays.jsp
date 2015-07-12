@@ -80,15 +80,14 @@
 
                                     <p>
                                         <c:forEach var="place" items="${waysPlaceImage[i].place}">
+                                            <b><cdg:l18n key="map.route.day"/> ${place.key}</b><br>
+                                            <c:forEach var="name" items="${place.value}">
 
-                                    <div class=" match-colum col l6 m9 s18">
-                                        <a href="portal?command=placeInformation&place_id=${place.place_id}"><c:out
-                                                value="${place.name}"/></a>
-                                    </div>
-                                    <div class="match-colum col l6 m9 s18">
-                                            <%--<a href="portal?command=placeInformation&place_id=${place_image.place_id}">--%>
-                                            <%--<c:out value="${place_image.name}"/></a>--%>
-                                    </div>
+                                        <a href="portal?command=placeInformation&place_id=${name.place_id}"><c:out
+                                                value="${name.name}"/></a>
+
+                                    </c:forEach>
+                                            <br>
                                     </c:forEach>
                                     </p>
                                 </div>
@@ -193,7 +192,6 @@
 
 <script>
     var recommendResultWay = function (data) {
-        alert(data);
         if (data == "1"){
             Materialize.toast('<cdg:l18n key="way.recommended"/>', 4000);
         }
@@ -209,7 +207,7 @@
 
 
 <script src="${pageContext.request.contextPath}/js/pages/places.js"></script>
-<script src="${pageContext.request.contextPath}/js/pages/userAllWay.js"></script>
+<%--<script src="${pageContext.request.contextPath}/js/pages/userAllWay.js"></script>--%>
 
 </body>
 </html>

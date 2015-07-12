@@ -75,13 +75,11 @@ public class AddPlaceUserDataTripCommand implements Command {
                     }
                 }
                 if (!isInWay) {
-                    if (timePlace != 0) {
                         onePlaceForWay.setPlace_time(timePlace);
                         placeForWay.add(onePlaceForWay);
                         userDataAboutTrip.setIsFull(true);
                         userDataAboutTrip.getSortFlag().put(Integer.parseInt(dayNumberString),true);
                         isAdded = 1;
-                    }
                 }
             }
             map.put(dayNumber, placeForWay);
