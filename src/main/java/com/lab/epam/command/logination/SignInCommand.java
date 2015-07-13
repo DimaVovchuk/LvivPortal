@@ -55,13 +55,16 @@ public class SignInCommand implements Command {
 
             if(avatarReference !=null) {
                 session.setAttribute("avatarReference", avatarReference);
+                loger.info("Set user avatar reference");
             } else{
                 session.setAttribute("avatarReference", "user.png");
+                loger.info("Set default avatar reference");
             }
 
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
             response.getWriter().write(new Gson().toJson("success"));
+            loger.info("Command SignInCommand");
         } else {
             session.setAttribute("loginError", 1);
             loger.info("login or password is incorrect");

@@ -63,6 +63,7 @@ public class CreateUserDataFromDBCommand implements Command {
         } else {
             loger.warn("Any way_id");
         }
+        loger.warn("Command CreateUserDataFromDBCommand");
         session.setAttribute("userDataTrip", userDataTrip);
 
         response.sendRedirect("portal?command=showMap");

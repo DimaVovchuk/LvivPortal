@@ -1,10 +1,13 @@
 package com.lab.epam.vk;
 
+import com.lab.epam.helper.ClassName;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -16,6 +19,8 @@ import java.io.IOException;
  * Created by Oleguk on 29.06.2015.
  */
 public class Authorization {
+    private static final Logger loger = LogManager.getLogger(ClassName.getCurrentClassName());
+
     private VkAppConfig vkAppConf;
 
     public Authorization() {
@@ -33,6 +38,7 @@ public class Authorization {
                  "&redirect_uri=" + "http://localhost:8080/portal?command=authorRespVK" +
                  "&v=3.4" + "&response_type=code";
         try {
+            loger.info("autorize method");
             response.sendRedirect(authURI);
         } catch (IOException e) {
             e.printStackTrace();
@@ -46,6 +52,7 @@ public class Authorization {
                 "&code=" + request.getParameter("code") +
                 "&redirect_uri=" + "http://localhost:8080/portal?command=authorRespVK";
         String con = getResponseContext(authURI);
+        loger.info("signIn method");
         return parserAccessToken(con);
     }
 
@@ -54,6 +61,7 @@ public class Authorization {
         HttpGet httpGet = new HttpGet(url);
         try {
             HttpEntity entity = client.execute(httpGet).getEntity();
+            loger.info("getResponseContext method");
             return EntityUtils.toString(entity);
         } catch (IOException e) {
             e.printStackTrace();
@@ -73,6 +81,7 @@ public class Authorization {
         } else {
             return null;
         }
+        loger.info("parserAccessToken method");
         return token;
     }
 }

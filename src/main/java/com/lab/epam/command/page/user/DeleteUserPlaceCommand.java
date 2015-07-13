@@ -23,6 +23,7 @@ public class DeleteUserPlaceCommand implements Command {
 
     public void execute(HttpServletRequest request,
                         HttpServletResponse response) throws ServletException, IOException {
+        loger.info("Command DeleteUserPlaceCommand");
 
         UserService userservice = new UserService();
         PlaceService placeService = new PlaceService();

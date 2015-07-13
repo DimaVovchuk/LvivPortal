@@ -52,6 +52,7 @@ public class VKResponseCommand implements Command {
         TokenAccess token = null;
         try {
             token = vkObj.getAuth().signIn(request);
+            loger.info("Get access token");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -106,6 +107,7 @@ public class VKResponseCommand implements Command {
             }
         } else {
             request.getRequestDispatcher("/portal?command=index").forward(request, response);
+            loger.info("User sign up with vk failed");
         }
     }
 

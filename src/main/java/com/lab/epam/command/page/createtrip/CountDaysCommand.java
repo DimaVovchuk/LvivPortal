@@ -20,7 +20,7 @@ public class CountDaysCommand implements Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        loger.info("Command PlanTripPage Cabinet.");
+        loger.info("Command CountDaysCommand");
         request.getRequestDispatcher("/views/pages/set_day_time.jsp").forward(request, response);
 
     }

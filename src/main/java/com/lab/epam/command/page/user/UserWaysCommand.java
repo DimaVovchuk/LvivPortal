@@ -78,7 +78,7 @@ public class UserWaysCommand implements Command {
         request.setAttribute("daysPlaceImage", daysPlaceImage);
         request.setAttribute("isFull", isFull);
 
-            loger.info("Command User Ways.");
+            loger.info("Command UserWaysCommand");
             request.getRequestDispatcher("/views/pages/userWay.jsp").forward(request, response);
         }
 

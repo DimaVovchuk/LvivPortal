@@ -29,25 +29,29 @@ public abstract class AbstractJDBCDao<T extends Identified<PK>, PK extends Integ
 
     public String getSelectQuery(){
         String tableName = transformer.getTableName();
+        loger.info("getSelectQuery method");
         return "SELECT * FROM `" + tableName + "` WHERE deleted= false;";
     }
 
     public String getSelectQueryWithOutDeleted(){
         String tableName = transformer.getTableName();
+        loger.info("getSelectQueryWithOutDeleted method");
         return "SELECT * FROM `" + tableName + "`";
     }
 
     public String getDeleteQuery() {
         String tableName = transformer.getTableName();
+        loger.info("getDeleteQuery method");
         return "UPDATE `" + tableName + "` SET deleted = true WHERE id= ?;";
     }
 
 
     protected List<T> parseResultSet(ResultSet rs) throws PersistException{
-            List<T> result = new ArrayList<>();
-            result = transformer.rowToObject(rs);
-            return result;
-        }
+        List<T> result = new ArrayList<>();
+        result = transformer.rowToObject(rs);
+        loger.info("parseResultSet method");
+        return result;
+    }
 
     /**
      * ������������� ��������� insert ������� � ������������ �� ��������� ����� ������� object.
@@ -64,6 +68,7 @@ public abstract class AbstractJDBCDao<T extends Identified<PK>, PK extends Integ
         } catch (Exception e) {
             throw new PersistException(e);
         }
+        loger.info("prepareStatementForInsert method");
         return query;
     }
 
@@ -93,6 +98,7 @@ public abstract class AbstractJDBCDao<T extends Identified<PK>, PK extends Integ
         String query = "UPDATE `" + tableName + "` SET " + field
                 + " WHERE id = " + object.getId();
 
+        loger.info("prepareStatementForUpdate method");
         return query;
 
     }
@@ -109,8 +115,9 @@ public abstract class AbstractJDBCDao<T extends Identified<PK>, PK extends Integ
             if (count != 1) {
                 throw new PersistException("On persist modify more then 1 record: " + count);
             } else {
-                loger.info("Create is succesfule");
+                loger.info("Create is successful");
             }
+            loger.info("create method");
         } catch (Exception e) {
             throw new PersistException(e);
         } finally {
@@ -141,6 +148,7 @@ public abstract class AbstractJDBCDao<T extends Identified<PK>, PK extends Integ
         if (list.size() > 1) {
             throw new PersistException("Received more than one record.");
         }
+        loger.info("getByPK method");
         return list.iterator().next();
     }
 
@@ -153,6 +161,7 @@ public abstract class AbstractJDBCDao<T extends Identified<PK>, PK extends Integ
             if (count != 1) {
                 throw new PersistException("On update modify more then 1 record: " + count);
             }
+            loger.info("update method");
         } catch (Exception e) {
             throw new PersistException(e);
         } finally {
@@ -176,6 +185,7 @@ public abstract class AbstractJDBCDao<T extends Identified<PK>, PK extends Integ
                 throw new PersistException("On delete modify more then 1 record: " + count);
             }
             statement.close();
+            loger.info("delete method");
         } catch (Exception e) {
             throw new PersistException(e);
         } finally {
@@ -197,6 +207,7 @@ public abstract class AbstractJDBCDao<T extends Identified<PK>, PK extends Integ
         } finally {
             connection.putback(conn);
         }
+        loger.info("getAllWithoutDeleted method");
         return list;
     }
 
@@ -213,6 +224,7 @@ public abstract class AbstractJDBCDao<T extends Identified<PK>, PK extends Integ
         } finally {
             connection.putback(conn);
         }
+        loger.info("getAll method");
         return list;
     }
 

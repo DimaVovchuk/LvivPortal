@@ -21,7 +21,7 @@ public class RecommendPlaceCommand  implements Command {
 
     public void execute(HttpServletRequest request,
                         HttpServletResponse response) throws ServletException, IOException {
-
+        loger.info("Command RecommendPlaceCommand");
         PlaceService servicePlace = new PlaceService();
         String place_idString = request.getParameter("place_id");
         Integer place_id = null;

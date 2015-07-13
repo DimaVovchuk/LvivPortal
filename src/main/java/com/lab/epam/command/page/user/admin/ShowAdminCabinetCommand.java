@@ -23,10 +23,10 @@ public class ShowAdminCabinetCommand implements Command {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        loger.info("Admin Logination Command");
         HttpSession session = request.getSession();
         Integer userID = (Integer) session.getAttribute("userID");
         loger.info("userID " + userID);
+        loger.info("Start ShowAdminCabinetCommand");
 
         if (userID != null) {
             UserService userService = new UserService();
@@ -38,7 +38,7 @@ public class ShowAdminCabinetCommand implements Command {
                 request.setAttribute("adminAvatar", avatarUserImage.getReference());
             }
             request.setAttribute("adminData", user);
-            loger.info("Admin Logination Command ended");
+            loger.info("End ShowAdminCabinetCommand");
             request.getRequestDispatcher("/views/pages/admin-page.jsp").forward(request, response);
         }
     }

@@ -3,7 +3,10 @@ package com.lab.epam.command.page.place;
 import com.google.gson.Gson;
 import com.lab.epam.command.controller.Command;
 import com.lab.epam.entity.*;
+import com.lab.epam.helper.ClassName;
 import com.lab.epam.service.*;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -14,9 +17,11 @@ import java.io.IOException;
 import java.util.*;
 
 public class PlaceJSONCommand implements Command {
+    private static final Logger loger = LogManager.getLogger(ClassName.getCurrentClassName());
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        loger.info("PlaceJSONCommand start");
         PlaceService servicePlace = new PlaceService();
 
         PlaceDescriptionService placeDescriptionService = new PlaceDescriptionService();

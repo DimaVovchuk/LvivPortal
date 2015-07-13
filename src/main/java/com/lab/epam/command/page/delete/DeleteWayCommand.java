@@ -53,6 +53,7 @@ public class DeleteWayCommand implements Command {
                     userDataTrip.setIsFull(true);
             }
         }
+        loger.info("Command DeleteWayCommand");
         sesion.setAttribute("userDataTrip", userDataTrip);
         response.sendRedirect("/portal?command=userAllWay");
 

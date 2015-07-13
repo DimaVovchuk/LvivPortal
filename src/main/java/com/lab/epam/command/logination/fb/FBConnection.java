@@ -1,5 +1,9 @@
 package com.lab.epam.command.logination.fb;
 
+import com.lab.epam.helper.ClassName;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -14,6 +18,8 @@ import java.net.URLEncoder;
  */
 public class FBConnection {
 
+    private static final Logger loger = LogManager.getLogger(ClassName.getCurrentClassName());
+
     public static final String FB_APP_ID = "1616018115311923";
     public static final String FB_APP_SECRET = "7ef4548354d3bd6509648ff6f262df86";
     public static final String REDIRECT_URI = "http://localhost:8080/portal?command=authorRespFB";
@@ -27,6 +33,7 @@ public class FBConnection {
                     + FBConnection.FB_APP_ID + "&redirect_uri="
                     + URLEncoder.encode(FBConnection.REDIRECT_URI, "UTF-8")
                     + "&scope=email";
+            loger.info("Get facebook authorization URL");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }

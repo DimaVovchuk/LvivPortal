@@ -87,6 +87,7 @@ public class FBResponseCommand implements Command {
             }
         } else {
             request.getRequestDispatcher("/portal?command=index").forward(request, response);
+            loger.info("User sign up with facebook failed");
         }
     }
 }

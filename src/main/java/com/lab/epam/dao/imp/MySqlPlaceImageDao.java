@@ -65,6 +65,7 @@ public class MySqlPlaceImageDao extends AbstractJDBCDao<PlaceImage, Integer> {
         } finally {
             connection.putback(conn);
         }
+        loger.info("getPlaceImageByPlaceId method");
         return referenceList.iterator().next();
     }
 
@@ -84,6 +85,8 @@ public class MySqlPlaceImageDao extends AbstractJDBCDao<PlaceImage, Integer> {
         } finally {
             connection.putback(conn);
         }
+        loger.info("getAllPlaceImageByPlaceId method");
+
         return list;
     }
 }

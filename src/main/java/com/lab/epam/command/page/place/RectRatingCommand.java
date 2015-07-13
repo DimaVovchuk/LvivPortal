@@ -25,6 +25,7 @@ public class RectRatingCommand implements Command {
 
     public void execute(HttpServletRequest request,
                         HttpServletResponse response) throws ServletException, IOException {
+        loger.info("Command RectRatingCommand");
 
         PlaceService servicePlace = new PlaceService();
         HttpSession session = request.getSession();

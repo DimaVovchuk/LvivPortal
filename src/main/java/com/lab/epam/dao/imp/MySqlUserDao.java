@@ -4,8 +4,12 @@ import com.lab.epam.dao.AbstractJDBCDao;
 import com.lab.epam.dao.PersistException;
 import com.lab.epam.entity.Category;
 import com.lab.epam.entity.User;
+import com.lab.epam.helper.ClassName;
 import com.lab.epam.persistant.ConnectionManager;
 import com.lab.epam.persistant.ConnectionPool;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,6 +21,8 @@ import java.util.List;
  * Created by Admin on 10.06.2015.
  */
 public class MySqlUserDao extends AbstractJDBCDao<User, Integer> {
+    private static final Logger loger = LogManager.getLogger(ClassName.getCurrentClassName());
+
     public static final String getUserByLoginAndPassSQL = "SELECT *FROM USER WHERE login=?";
     public static final String getUserByEmailSQL = "SELECT *FROM USER WHERE mail=?";
     public static final String getUserByPhoneSQL = "SELECT *FROM USER WHERE phone=?";
@@ -56,6 +62,8 @@ public class MySqlUserDao extends AbstractJDBCDao<User, Integer> {
         } finally {
             connection.putback(conn);
         }
+        loger.info("getQuantityOfAllUsers method");
+
         return quantity;
     }
 
@@ -72,6 +80,8 @@ public class MySqlUserDao extends AbstractJDBCDao<User, Integer> {
         } finally {
             connection.putback(conn);
         }
+        loger.info("getQuantityUsersByRoleId method");
+
         return quantity;
     }
 
@@ -88,6 +98,8 @@ public class MySqlUserDao extends AbstractJDBCDao<User, Integer> {
         } finally {
             connection.putback(conn);
         }
+        loger.info("getQuantityUsersByStatusId method");
+
         return quantity;
     }
 
@@ -102,6 +114,8 @@ public class MySqlUserDao extends AbstractJDBCDao<User, Integer> {
         } finally {
             connection.putback(conn);
         }
+        loger.info("getUserByRole method");
+
         return userList;
     }
 
@@ -117,6 +131,8 @@ public class MySqlUserDao extends AbstractJDBCDao<User, Integer> {
         } finally {
             connection.putback(conn);
         }
+        loger.info("getUserByLogin method");
+
         return user;
     }
 
@@ -131,6 +147,8 @@ public class MySqlUserDao extends AbstractJDBCDao<User, Integer> {
         } finally {
             connection.putback(conn);
         }
+        loger.info("getUserByEmail method");
+
         return user;
     }
 
@@ -145,6 +163,8 @@ public class MySqlUserDao extends AbstractJDBCDao<User, Integer> {
         } finally {
             connection.putback(conn);
         }
+        loger.info("getUserByVkId method");
+
         return user;
     }
 
@@ -159,6 +179,8 @@ public class MySqlUserDao extends AbstractJDBCDao<User, Integer> {
         } finally {
             connection.putback(conn);
         }
+        loger.info("getUserByVkId method");
+
         return user;
     }
 
@@ -173,6 +195,8 @@ public class MySqlUserDao extends AbstractJDBCDao<User, Integer> {
         } finally {
             connection.putback(conn);
         }
+        loger.info("getUserByPhone method");
+
         return user;
     }
 
@@ -184,6 +208,8 @@ public class MySqlUserDao extends AbstractJDBCDao<User, Integer> {
             if (email != "" && parseResultSet(rs).isEmpty()) {
                 return true;
             }
+            loger.info("checkEmail method");
+
         } catch (SQLException | PersistException e) {
             e.printStackTrace();
         } finally {
@@ -200,6 +226,8 @@ public class MySqlUserDao extends AbstractJDBCDao<User, Integer> {
             if (phone != "" && parseResultSet(rs).isEmpty()) {
                 return true;
             }
+            loger.info("checkPhone method");
+
         } catch (SQLException | PersistException e) {
             e.printStackTrace();
         } finally {
@@ -216,6 +244,8 @@ public class MySqlUserDao extends AbstractJDBCDao<User, Integer> {
             if (login != "" && parseResultSet(rs).isEmpty()) {
                 return true;
             }
+            loger.info("checkLogin method");
+
         } catch (SQLException | PersistException e) {
             e.printStackTrace();
         } finally {
@@ -233,6 +263,8 @@ public class MySqlUserDao extends AbstractJDBCDao<User, Integer> {
             if(rs.next()) {
                 roleID = rs.getInt("role_id");
             }
+            loger.info("getRoleID method");
+
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

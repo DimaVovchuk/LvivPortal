@@ -5,8 +5,11 @@ import com.lab.epam.entity.Place;
 import com.lab.epam.entity.PlaceDescription;
 import com.lab.epam.entity.User;
 import com.lab.epam.entity.Way;
+import com.lab.epam.helper.ClassName;
 import com.lab.epam.service.*;
 import com.lab.epam.smtp.SendEmail;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +23,8 @@ import java.util.Map;
  * Created by Dima on 08-Jul-15.
  */
 public class OrderWaySendMail implements Command {
+    private static final Logger loger = LogManager.getLogger(ClassName.getCurrentClassName());
+
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String wayIdString = request.getParameter("wayId");

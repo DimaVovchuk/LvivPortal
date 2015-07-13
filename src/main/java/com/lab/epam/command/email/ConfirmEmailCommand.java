@@ -54,6 +54,7 @@ private static final Logger loger = LogManager.getLogger(ClassName.getCurrentCla
             UserImageService userImageService = new UserImageService();
             UserImage userImagee = userImageService.getByPK(userAvatarID);
             avatarReference = userImagee.getReference();
+            loger.info("Get avatar reference");
         }
 
         if(avatarReference !=null) {

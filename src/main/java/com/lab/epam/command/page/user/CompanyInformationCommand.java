@@ -106,6 +106,8 @@ public class CompanyInformationCommand implements Command {
             request.setAttribute("companyRatingByUser", companyRatingByUser);
             request.setAttribute("company_id", company_id);
         }
+        loger.info("Command CompanyInformationCommand");
+
         request.getRequestDispatcher("/views/pages/company-page.jsp").forward(request, response);
     }
 

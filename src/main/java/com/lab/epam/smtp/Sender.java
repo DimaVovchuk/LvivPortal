@@ -1,5 +1,9 @@
 package com.lab.epam.smtp;
 
+import com.lab.epam.helper.ClassName;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
@@ -9,6 +13,7 @@ import java.util.Properties;
  * Created by Dima on 31-May-15.
  */
 public class Sender {
+    private static final Logger loger = LogManager.getLogger(ClassName.getCurrentClassName());
 
     private String username;
     private String password;
@@ -53,6 +58,7 @@ public class Sender {
                 }
             }
         });
+        loger.info("Send message on email (send method)");
         myThready.start();
 
     }

@@ -22,6 +22,7 @@ public class DeletImageResponseCommand implements Command {
     private static final Logger loger = LogManager.getLogger(ClassName.getCurrentClassName());
 
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        loger.info("Command DeletImageResponseCommand");
 
         String response_idString = request.getParameter("response_id");
         Integer response_id = 0;

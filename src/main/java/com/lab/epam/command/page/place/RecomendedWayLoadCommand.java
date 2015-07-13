@@ -21,7 +21,7 @@ public class RecomendedWayLoadCommand implements Command {
 
 
         //String category = request.getParameter("category");
-        loger.info("Way Loader.");
+        loger.info("Recomended Way Loader Command.");
         //request.setAttribute("category", category);
         request.getRequestDispatcher("/views/pages/recomended-way.jsp").forward(request, response);
     }

@@ -37,7 +37,7 @@ public class EditPlaceCommand implements Command {
         String recomendetIDSring = request.getParameter("recomended");
 
 
-        loger.info("start EditPlaceCommand");
+        loger.info("Start EditPlaceCommand");
 
         if (editPlaceIDSring != null) {
             Integer editPlaceID = Integer.valueOf(editPlaceIDSring);

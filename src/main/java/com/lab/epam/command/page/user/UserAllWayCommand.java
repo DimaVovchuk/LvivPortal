@@ -108,7 +108,7 @@ public class UserAllWayCommand implements Command {
         request.setAttribute("waysPlaceImage", wayPlaceImages);
         request.setAttribute("user", user);
 
-        loger.info("Command User All Ways.");
+        loger.info("Command UserAllWayCommand.");
         request.getRequestDispatcher("/views/pages/userAllWays.jsp").forward(request, response);
 
     }

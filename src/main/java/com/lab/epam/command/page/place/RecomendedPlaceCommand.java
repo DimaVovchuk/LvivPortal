@@ -119,7 +119,7 @@ public class RecomendedPlaceCommand  implements Command {
         //request.setAttribute("category", category);
         //request.setAttribute("places", placesPageInfo);
 
-        loger.info("Command Place.");
+        loger.info("Command RecomendedPlaceCommand.");
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write(new Gson().toJson(placesPageInfo));

@@ -4,8 +4,11 @@ import com.lab.epam.dao.DaoFactory;
 import com.lab.epam.dao.GenericDao;
 import com.lab.epam.dao.PersistException;
 import com.lab.epam.entity.*;
+import com.lab.epam.helper.ClassName;
 import com.lab.epam.persistant.ConnectionManager;
 import com.lab.epam.persistant.ConnectionPool;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,6 +18,7 @@ import java.util.Map;
  */
 public class MySqlDaoFactory implements DaoFactory<ConnectionPool> {
 
+    private static final Logger loger = LogManager.getLogger(ClassName.getCurrentClassName());
 
     private Map<Class, DaoCreator> creators;
 
@@ -30,6 +34,7 @@ public class MySqlDaoFactory implements DaoFactory<ConnectionPool> {
         if (creator == null) {
             throw new PersistException("Dao object for " + dtoClass + " not found.");
         }
+        loger.info("Get Dao");
         return creator.create(connection);
     }
 
