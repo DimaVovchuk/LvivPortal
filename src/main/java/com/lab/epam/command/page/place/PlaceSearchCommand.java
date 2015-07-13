@@ -1,11 +1,11 @@
 package com.lab.epam.command.page.place;
 
 import com.lab.epam.command.controller.Command;
-import com.lab.epam.entity.Decoder;
-import com.lab.epam.entity.PlaceDescription;
-import com.lab.epam.entity.PlaceImage;
+import com.lab.epam.entity.*;
 import com.lab.epam.service.PlaceDescriptionService;
 import com.lab.epam.service.PlaceImageService;
+import com.lab.epam.service.PlaceService;
+import com.lab.epam.service.UserService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -25,6 +25,8 @@ public class PlaceSearchCommand implements Command {
 
         PlaceDescriptionService placeDescriptionService = new PlaceDescriptionService();
         PlaceImageService placeImageService = new PlaceImageService();
+        UserService userService = new UserService();
+        PlaceService servicePlace = new PlaceService();
 
         HttpSession session = request.getSession();
 
@@ -32,6 +34,12 @@ public class PlaceSearchCommand implements Command {
         Locale locale = resourceBandle.getLocale();
         String language = locale.getLanguage();
         String searchResult = "";
+
+        String login = (String) session.getAttribute("login");
+        User user = null;
+        if (login != null) {
+            user = userService.getUserByLogin(login);
+        }
 
         String searchString = request.getParameter("search");
         searchString = Decoder.decodeStringUtf8(searchString);
@@ -43,7 +51,21 @@ public class PlaceSearchCommand implements Command {
             searchString = searchString.toLowerCase();
             String[] searchParth = searchString.split(" ");
             placeDescriptions = placeDescriptionService.getPlaceByLanguege(language);//getAllPlaceBySearch(searchString);
+
             if (placeDescriptions != null && !placeDescriptions.isEmpty()) {
+
+                if(user !=null){
+                    List<Place> custom = servicePlace.getAllVisbleUserCustomPlace(user.getId());
+                    if(custom != null && !custom.isEmpty()){
+                        for (Place plCustom: custom){
+                            PlaceDescription plDCustom = placeDescriptionService.getPlaceDescriptionByIdPlace(plCustom.getId(),language);
+                            if (plDCustom != null){
+                                placeDescriptions.add(plDCustom);
+                            }
+                        }
+                    }
+                }
+
                 for (PlaceDescription place : placeDescriptions) {
                     String name = place.getName().replaceAll("\"", "");
                     name = name.toLowerCase();

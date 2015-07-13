@@ -140,6 +140,7 @@ public class CreateUserDataCommand implements Command {
                 placeArrive = placeArrive.trim();
                 placeArrive = placeArrive.toLowerCase();
                 if (!placeArrive.equals("")) {
+                    placeArrive = Decoder.decodeStringUtf8(placeArrive);
                     List<PlaceDescription> plDesc = placeSesc.getAllPlaceBySearch(placeArrive);
                     PlaceService placeService = new PlaceService();
                     if (plDesc != null && !plDesc.isEmpty()) {
