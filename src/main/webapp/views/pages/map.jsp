@@ -49,7 +49,6 @@
         $(document).on('click', '.map-day-trigger', function (e) {
             e.preventDefault();
             var show = $(e.currentTarget).data('show');
-
             var day = $(e.currentTarget).data('day');
             if (show === 1 && count == 0) {
                 count++;
