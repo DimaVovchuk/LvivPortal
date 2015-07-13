@@ -103,24 +103,6 @@ public class RecomendedWayCommand  implements Command {
         }
 
 
-//        if (ways != null && !ways.isEmpty()) {
-//            way_place = getPlaceDescriptionByWay(ways);
-//        }
-//        if (user != null && ways != null){
-//            for (Way way: ways) {
-//                WayRating wayRating = wayRatingService.getWayRatingByWayAndUser(way.getId(), user.getId());
-//                if (wayRating == null){
-//                    wayRating = new WayRating(user.getId(),way.getId(),0);
-//                }
-//                wayRatings.add(wayRating);
-//            }
-//        }
-
-
-//        List<WayPlaceImageRating> waysPlaceImageRating = null;
-//        if(ways != null && !ways.isEmpty()){
-//            waysPlaceImageRating = getWayPlaceImageRatingList(ways, way_place, wayPlaceImages, wayRatings);
-//        }
 
         Comparator comparator = new WayPlaceImageRating.WayRatingComparator();
         Collections.sort(waysPlaceImageRating, comparator);
@@ -130,63 +112,9 @@ public class RecomendedWayCommand  implements Command {
 
     }
 
-//    private List<WayPlaceImageRating> getWayPlaceImageRatingList(List<Way> ways,  Map<Integer, List<PlaceDescription>> way_place, Map<Integer,PlaceImage> wayPlaceImages, List<WayRating> wayRating){
-//        List<WayPlaceImageRating> list = new ArrayList<>();
-//        int i = 0;
-//        if(ways != null && !ways.isEmpty()){
-//            for (Way way : ways) {
-//                WayPlaceImageRating item = new WayPlaceImageRating();
-//                item.setId(way.getId());
-//                item.setBeginDate(way.getBegin());
-//                item.setEndDate(way.getEnd());
-//                if (wayPlaceImages.size() <= ways.size()){
-//                    item.setImageReference(wayPlaceImages.get(way.getId()).getReference());
-//                }
-//                if (way_place.size() <= ways.size()){
-//                    item.setPlace(way_place.get(way.getId()));
-//                }
-//
-//                if (!wayRatings.isEmpty()){
-//                    for (WayRating wayR: wayRatings){
-//                        if (wayR.getWay_id() == way.getId()){
-//                            item.setRating(wayR.getRating());
-//                        }
-//                    }
-//                }
-//
-//
-//                item.setRating_way(way.getRating());
-//                if (way.getName() != null){
-//                    item.setName(way.getName());
-//                }
-//                list.add(item);
-//                i++;
-//            }
-//        }
-//        return list;
-//    }
 
-    private Map<Integer, List<PlaceDescription>> getPlaceDescriptionByWay (List < Way > ways) {
-        List<PlaceDescription> way_placeDescription_list = new ArrayList<>();
-        List<Place> way_place_list = new ArrayList<>();
-        Map<Integer, List<PlaceDescription>> way_place = new HashMap<>();
-        Integer way_id;
-        for (Way way : ways) {
-            way_id = way.getId();
-            way_place_list = placeService.getPlaceByWayId(way_id);
-            if (way_place_list != null && !way_place_list.isEmpty()) {
-                     // loger.info(" way_place_list are " + way_place_list + " way_id" + way_id);
-                way_placeDescription_list = getPlaceDescriptionByPlace(way_place_list);
-                        //loger.info(" way_placeDescription_list are " + way_placeDescription_list);
-                way_place.put(way_id, way_placeDescription_list);
-                wayPlaceImages.put(way_id, getPlaceImageByPlace(way_place_list));
-            }
 
-        }
-        //  loger.info(" way_place are " + way_place);
-        //    loger.info(" wayPlaceImages are " + wayPlaceImages);
-        return way_place;
-    }
+
 
     private List<PlaceImage> getPlaceImageListByPlace(List<Place> places) {
         List<PlaceImage> placeImages = new ArrayList<>();
