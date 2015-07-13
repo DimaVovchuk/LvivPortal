@@ -246,6 +246,15 @@ var loadPlacesData = function (data) {
         event.stopPropagation();
     });
 
+    var loadWindow = function (data) {
+        if (data == "1") {
+            Materialize.toast('<cdg:l18n key="place.added"/>', 4000);
+        }
+        else {
+            Materialize.toast('<cdg:l18n key="place.is.db"/>', 4000);
+        }
+    }
+
 </script>
 
 <script language="JavaScript" type="text/javascript"

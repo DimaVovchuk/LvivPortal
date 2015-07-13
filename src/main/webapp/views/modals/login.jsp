@@ -107,13 +107,13 @@
 				type: 'post',
 				url: window.location.origin + '/portal?command=signUp',
 				data: $('#sign-up-form').serialize(),
-				success: loadWindow,
-				error: loadWindow
+				success: loadSignUg,
+				error: loadSignUg
 			});
 		});
 	};
 
-	var loadWindow = function (data) {
+	var loadSignUg = function (data) {
 		Materialize.toast('<cdg:l18n key="login.signup.tost"/>', 4000);
 	};
 
