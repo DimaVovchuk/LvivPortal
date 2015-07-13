@@ -436,15 +436,17 @@
                 {{description}}
             </div>
         </div>
-        <div class="divider" style="margin-bottom: 20px"></div>
-        <c:if test="${role == 1}">
-            <a class="waves-effect waves-light btn modal-trigger cyan darken-2"
-               onClick="deleteResponse(this)" href="javascript:"
-               rel="/portal?command=deleteImageResponse&response_id={{id}}">
-                <cdg:l18n key="usercab.delete"/>
-            </a>
-        </c:if>
-    </div>
+             <div class="divider" style="margin-bottom: 20px"></div>
+                <c:if test="${role == 1}">
+<div align="right">
+        <a class="btn-floating btn-large waves-effect waves-light red"
+                           onClick="deleteResponse(this)" href="javascript:"
+                           rel="/portal?command=deleteImageResponse&response_id={{id}}">
+                <i class="material-icons">delete</i>
+        </a>
+                    </div>
+         </c:if>
+        </div>
     {{/each}}
 </script>
 

@@ -202,6 +202,16 @@ public class WayService {
         }
     }
 
+    public void deleteWayIsRecommended(Integer way_id) {
+        try {
+            mySqlWayDao.deleteWayIsRecommended(way_id);
+
+        } catch (PersistException e) {
+            e.printStackTrace();
+            loger.warn("Cant delete recommended" + " way_id " + way_id);
+        }
+    }
+
     public void updateConfirmWayRecommended(Integer way_id) {
         try {
             mySqlWayDao.updateConfirmWayRecommended(way_id);

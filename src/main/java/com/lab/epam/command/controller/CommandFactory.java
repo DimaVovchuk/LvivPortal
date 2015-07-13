@@ -134,6 +134,7 @@ public class CommandFactory {
         commands.put("adminCancelCommand", new AdminCancelCommand());
         commands.put("deletePlaceResponse", new DeletePlaceResponseCommand());
         commands.put("deleteImageResponse", new DeletImageResponseCommand());
+        commands.put("deleteRecommendedWay", new DeleteWayRecommendedCommand());
     }
 
     public static void createCommand(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

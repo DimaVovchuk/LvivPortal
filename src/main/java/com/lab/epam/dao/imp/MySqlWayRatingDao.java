@@ -61,4 +61,6 @@ public class MySqlWayRatingDao  extends AbstractJDBCDao<WayRating, Integer> {
         return list.iterator().next();
     }
 
+
+
 }
