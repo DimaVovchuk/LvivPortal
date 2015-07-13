@@ -29,6 +29,16 @@ public class ImageResponseService {
         }
     }
 
+    public void deleteResponseByUserIdImageId(Integer response_id) {
+        try {
+            mySqlImageResponseDao.deleteResponseByUserIdImageId(response_id);
+
+        } catch (PersistException e) {
+            e.printStackTrace();
+            loger.warn("Cant delet response by response_id = " + response_id);
+        }
+    }
+
     public ImageResponse getByPK(Integer key) throws PersistException{
         return mySqlImageResponseDao.getByPK(key);
     }

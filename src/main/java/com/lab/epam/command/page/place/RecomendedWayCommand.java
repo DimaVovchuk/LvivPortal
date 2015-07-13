@@ -100,12 +100,16 @@ public class RecomendedWayCommand  implements Command {
                 if (way_place.size() <= ways.size()){
                     item.setPlace(way_place.get(way.getId()));
                 }
+
                 if (!wayRatings.isEmpty()){
-                    item.setRating(wayRatings.get(i).getRating());
+                    for (WayRating wayR: wayRatings){
+                        if (wayR.getWay_id() == way.getId()){
+                            item.setRating(wayR.getRating());
+                        }
+                    }
                 }
-                else {
-                    item.setRating(0);
-                }
+
+
                 item.setRating_way(way.getRating());
                 if (way.getName() != null){
                     item.setName(way.getName());

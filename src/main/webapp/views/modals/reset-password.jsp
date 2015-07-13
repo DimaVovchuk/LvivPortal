@@ -9,7 +9,8 @@
         <div class="divider"></div>
         <div class="section">
             <div class="form">
-                <input id="reset-send-email-email" placeholder="<cdg:l18n key="login.email"/>" name="email" type="email"/>
+                <input id="reset-send-email-email" placeholder="<cdg:l18n key="login.email"/>" name="email"
+                       type="email"/>
             </div>
             <div class="section">
                 <button id="reset-send-email-submit" class="btn cyan darken-2">OK</button>
@@ -22,17 +23,15 @@
 
         <div class="divider"></div>
         <div class="section">
-            <form id="reset-confirm-form" action="portal?command=confirmReset" method="post">
+            <form id="reset-confirm-form">
                 <div class="form">
-                    <input id="resetpassword" placeholder="<cdg:l18n key="login.password"/>" name="password"
-                           type="password"/>
+                    <input id="resetpassword" placeholder="<cdg:l18n key="login.password"/>" name="password" type="password"/>
                 </div>
                 <div class="form">
-                    <input placeholder="<cdg:l18n key="login.confirm"/>" name="confirm"
-                           type="password"/>
+                    <input placeholder="<cdg:l18n key="login.confirm"/>" name="confirm" type="password"/>
                 </div>
                 <div class="section">
-                    <button class="btn cyan darken-2" type="submit">OK</button>
+                    <a id="reset-confirm-submit" class="btn cyan darken-2" type="submit">OK</a>
                 </div>
             </form>
         </div>
@@ -42,7 +41,7 @@
 <script>
     var sendResetPasswordEmail = function (email) {
         $('#reset-send-email').closeModal();
-        $('.login-form').closeModal();
+        $('#sign-in').closeModal();
         Materialize.toast('<cdg:l18n key="login.mailsent"/> ' + email, 5000);
     };
 
@@ -52,5 +51,18 @@
             url: "portal?command=sendEmail&email=" + email,
             success: sendResetPasswordEmail(email)
         });
+    });
+
+    $('#reset-confirm-submit').on('click', function () {
+        var form = $('#reset-confirm-form');
+        if (form.valid()) {
+            $.ajax({
+                type: 'post',
+                url: 'portal?command=confirmReset',
+                data: {password: $('#resetpassword').val()},
+                success:  Materialize.toast('<cdg:l18n key="login.passwordreset"/>', 5000)
+            });
+            $('#reset-confirm').closeModal();
+        }
     });
 </script>

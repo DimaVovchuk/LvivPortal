@@ -99,6 +99,17 @@ public class PlaceJSONCommand implements Command {
                 searchString = searchString.toLowerCase();
             String[] searchParth = searchString.split(" ");
             placeDs = placeDescriptionService.getPlaceByLanguege(language);//getAllPlaceBySearch(searchString);
+                if(user !=null){
+                    List<Place> custom = servicePlace.getAllVisbleUserCustomPlace(user.getId());
+                    if(custom != null && !custom.isEmpty()){
+                        for (Place plCustom: custom){
+                            PlaceDescription plDCustom = placeDescriptionService.getPlaceDescriptionByIdPlace(plCustom.getId(),language);
+                            if (plDCustom != null){
+                                placeDs.add(plDCustom);
+                            }
+                        }
+                    }
+                }
             if (placeDs != null && !placeDs.isEmpty()) {
                 for (PlaceDescription place : placeDs) {
                     String name = place.getName().replaceAll("\"", "");

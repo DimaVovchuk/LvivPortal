@@ -1,5 +1,6 @@
 package com.lab.epam.command.save;
 
+import com.google.gson.Gson;
 import com.lab.epam.command.controller.Command;
 import com.lab.epam.entity.Place;
 import com.lab.epam.entity.User;
@@ -33,6 +34,7 @@ public class UpdateWayCommand implements Command {
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         WayService wayService = new WayService();
+        Integer updateResult = 3;
         PlaceService placeService = new PlaceService();
         HttpSession session = request.getSession();
         UserDataAboutTrip userDataTrip = (UserDataAboutTrip)session.getAttribute("userDataTrip");
@@ -80,14 +82,17 @@ public class UpdateWayCommand implements Command {
         }
 
         if (userDataTrip != null && userDataTripOld != null && user != null){
-           if (userDataTrip.getDayCount() != userDataTripOld.getDayCount()){
+           if (!userDataTrip.getDayCount().equals(userDataTripOld.getDayCount())){
                wayService.updateWayDay(user.getId(), way_id, userDataTrip.getDayCount());
+               updateResult = 4;
            }
-            if (userDataTrip.getBeginTrip() != userDataTripOld.getBeginTrip()){
+            if (userDataTrip.getBeginTrip() != null && !userDataTrip.getBeginTrip().equals(userDataTripOld.getBeginTrip())){
                 wayService.updateWayBeginDate(way_id, userDataTrip.getBeginTrip());
+                updateResult = 4;
             }
-            if (userDataTrip.getEndTrip() != userDataTripOld.getEndTrip()) {
+            if (userDataTrip.getBeginTrip() != null && !userDataTrip.getEndTrip().equals(userDataTripOld.getEndTrip())) {
                 wayService.updateWayEndDate(way_id, userDataTrip.getEndTrip());
+                updateResult = 4;
             }
 
             Map<Integer, List<Place>> placesOld = userDataTripOld.getPlaceDay();
@@ -125,15 +130,20 @@ public class UpdateWayCommand implements Command {
                         }
                     }
                 }
+                updateResult = 4;
             }
             if (userDataTrip.getDayCount() < userDataTripOld.getDayCount()) {
                 Integer daySubst = userDataTripOld.getDayCount() - userDataTrip.getDayCount();
                 for (int i = 1; i <= daySubst; i++) {
                     servicePlace.deletePlaceByWayIdDayNumber(way_id, i);
                 }
+                updateResult = 4;
             }
         }
-        response.sendRedirect("portal?command=userWays");
+        //response.sendRedirect("portal?command=userWays");
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write(new Gson().toJson(updateResult));
 
     }
 

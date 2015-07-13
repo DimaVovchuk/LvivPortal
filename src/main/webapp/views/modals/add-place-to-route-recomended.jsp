@@ -27,7 +27,7 @@
       <p><cdg:l18n key="select.place.time"/></p>
 
       <p class="range-field">
-        <input type="range" name="timePlace" id="timePlace" min="15" value="15" step="15" max="240"/>
+        <input type="range" name="timePlace" id="timePlace" min="0" value="0" step="15" max="240"/>
         <span><span id="timeValue"></span> <cdg:l18n key="map.route.minutes"/></span>
       </p>
       <br>

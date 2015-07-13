@@ -60,6 +60,7 @@ public class CommercialImageCommentCommand implements Command {
                 if (item.getAvaterReference() == null){
                     item.setAvaterReference("user.png");
                 }
+                item.setId(imRes.getId());
                 imageResponsesAvatar.add(item);
             }
         }

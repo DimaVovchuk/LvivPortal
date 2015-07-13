@@ -141,24 +141,3 @@ $('#reset-confirm-form').validate({
         }
     }
 });
-
-$('#reset-confirm-form').validate({
-    rules: {
-        password: {
-            required: true
-        },
-        confirm: {
-            required: true,
-            equalTo: "#resetpassword"
-        }
-    },
-    messages: {
-        password: {
-            required: "Please enter password"
-        },
-        confirm: {
-            required: "Please confirm your password",
-            equalTo: "Password and confirmation do not match"
-        }
-    }
-});

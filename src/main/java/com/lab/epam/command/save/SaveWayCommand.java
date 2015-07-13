@@ -1,5 +1,6 @@
 package com.lab.epam.command.save;
 
+import com.google.gson.Gson;
 import com.lab.epam.command.controller.Command;
 import com.lab.epam.entity.*;
 import com.lab.epam.helper.ClassName;
@@ -36,6 +37,8 @@ public class SaveWayCommand implements Command {
         UserDataAboutTrip placeForWay;
         Boolean isFull = false;
         Boolean isEquals = false;
+        Boolean onePlace = false;
+        Integer indicatorSaved = 0;
         placeForWay = (UserDataAboutTrip)session.getAttribute("userDataTrip");
         String login = (String)session.getAttribute("login");
         String name = request.getParameter("name");
@@ -46,6 +49,9 @@ public class SaveWayCommand implements Command {
         }
         List <Way> userWaysCountDay = new ArrayList<>();
         Integer placeCount = 0;
+
+
+
         //loger.info("placeForWay " + placeForWay);
         if (placeForWay != null){
             if (user != null){
@@ -66,8 +72,16 @@ public class SaveWayCommand implements Command {
 
             List <Way> userWaysCountPlace = new ArrayList<>();
             Map<Integer,List<Place>> placesDayCountPlace = placeForWay.getPlaceDay();
+
+            if (placesDayCountPlace.size() == 1 && placesDayCountPlace.get(1).size() == 1){
+                onePlace = true;
+                indicatorSaved = 1;
+                isFull = true;
+            }
+
             Integer placesDayCurrent = 0;
             if (!userWaysCountDay.isEmpty() && !placesDayCountPlace.isEmpty()){
+                isFull = true;
                 for (Way userWay: userWaysCountDay){
                     placeCount = 0;
                     placesDayCurrent = 0;
@@ -108,6 +122,7 @@ public class SaveWayCommand implements Command {
                     }
                     if (equelsDay == placeForWay.getDayCount()){
                         isEquals = true;
+                        indicatorSaved = 2;
                         loger.info("You have equels way in DB");
                     }
                     equelsDay = 0;
@@ -116,7 +131,7 @@ public class SaveWayCommand implements Command {
 
 
 
-            if (!isEquals) {
+            if (!isEquals && !onePlace) {
                 Date beginTrip = placeForWay.getBeginTrip();
                 Date endTrip = placeForWay.getEndTrip();
                 Map<Integer, List<Place>> placesDay = placeForWay.getPlaceDay();
@@ -144,6 +159,7 @@ public class SaveWayCommand implements Command {
                         if (way_id != null) {
                             placeForWay.setWay_id(way_id);
                             placeForWay.setIsSaved(true);
+                            indicatorSaved = 0;
                             loger.info("You create new way in DB");
                         }
                     }
@@ -154,7 +170,10 @@ public class SaveWayCommand implements Command {
         }
         placeForWay.setIsFull(isFull);
         session.setAttribute("userDataTrip", placeForWay);
-        response.sendRedirect("portal?command=userWays");
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write(new Gson().toJson(indicatorSaved));
+        //response.sendRedirect("portal?command=userWays");
 
 
     }
