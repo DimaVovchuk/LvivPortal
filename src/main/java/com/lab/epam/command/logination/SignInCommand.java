@@ -38,7 +38,7 @@ public class SignInCommand implements Command {
         User user = serviceUser.getUserByLogin(login);
         session = request.getSession();
         Integer userStatus = user.getStatus();
-        if (userStatus !=2 && user.getPassword() != null && user.getPassword().equals(MD5Creator.getMD5(password + login))) {
+        if (userStatus != 2 && user.getPassword() != null && user.getPassword().equals(MD5Creator.getMD5(password + login))) {
             Integer userID = user.getId();
             session.setAttribute("login", login);
             session.setAttribute("userID", userID);
@@ -47,15 +47,15 @@ public class SignInCommand implements Command {
             String avatarReference = null;
             Integer userAvatarID = user.getAvatar();
 
-            if (userAvatarID != null && userAvatarID!=0) {
+            if (userAvatarID != null && userAvatarID != 0) {
                 UserImageService userImageService = new UserImageService();
                 UserImage userImagee = userImageService.getByPK(userAvatarID);
                 avatarReference = userImagee.getReference();
             }
 
-            if(avatarReference !=null) {
+            if (avatarReference != null) {
                 session.setAttribute("avatarReference", avatarReference);
-            } else{
+            } else {
                 session.setAttribute("avatarReference", "user.png");
             }
 

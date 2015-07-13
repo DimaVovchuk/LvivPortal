@@ -166,6 +166,7 @@ function setSearchMap(value) {
          document.getElementById('search_suggest').innerHTML = '';
         //alert(val);
          searchPlace();
+        //document.location.href = window.location.origin + '/portal?command=placeInformation&txtSearch=' + val;
     }
 }
 
