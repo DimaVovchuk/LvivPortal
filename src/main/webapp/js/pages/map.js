@@ -98,32 +98,7 @@ var initDayTrigger = function () {
     })
 };
 var count = 0;
-var initMapDayTrigger = function () {
-    $(document).on('click', '.map-day-trigger', function (e) {
-        e.preventDefault();
-        var show = $(e.currentTarget).data('show');
 
-        var day = $(e.currentTarget).data('day');
-        if (show === 1 && count == 0) {
-            count++;
-            $(e.currentTarget).data('show', 0);
-            $('#map-day' + day).html('Hide from map');
-            initDayMarkers(day - 1);
-            hideMarkers();
-            showRoutesMarkers(day - 1)
-        }
-        if (show === 0) {
-            count--;
-            $(e.currentTarget).data('show', 1);
-            $('#map-day' + day).html('Show on map');
-            for (var i = 0; i < directionsDisplays.length; i++) {
-                directionsDisplays[i].set('directions', null);
-            }
-            hideMarkers();
-            showMarkers();
-        }
-    })
-};
 var directionsDisplays = [];
 var getdirectionsDisplays = function (directionsDisplay) {
     directionsDisplays.push(directionsDisplay);

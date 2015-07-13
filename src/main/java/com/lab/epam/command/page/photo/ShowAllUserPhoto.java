@@ -18,10 +18,10 @@ public class ShowAllUserPhoto implements Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        Integer userID = (Integer)session.getAttribute("usedID");
+        Integer userID = (Integer)session.getAttribute("userID");
         UserImageService userImageService = new UserImageService();
         List<UserImage> userImageList = userImageService.getUserImageByUserId(userID);
         request.setAttribute("AllUserPhoto",userImageList);
-        request.getRequestDispatcher("/views/pages/all_user_photo.jsp").forward(request, response);
+        request.getRequestDispatcher("/views/pages/gallery.jsp").forward(request, response);
     }
 }
