@@ -21,7 +21,6 @@
     <div class="row">
 
 
-
         <div class="col l8 offset-l2 m10 offset-m1 s12 z-depth-2">
             <c:choose>
                 <c:when test="${userInfo.role_id == 3}">
@@ -227,8 +226,8 @@
         <img src="" id="company-gallery-modal-image" class="responsive-img" style="max-width: 80%; max-height: 70%">
 
 
-            <%--<textarea class="materialize-textarea" value=""><div id="place-description"></div></textarea>--%>
-            <div align="left" id="place-description"></div>
+        <%--<textarea class="materialize-textarea" value=""><div id="place-description"></div></textarea>--%>
+        <div align="left" id="place-description"></div>
 
 
         <div align="center"></div>
@@ -265,10 +264,10 @@
             url: window.location.origin + '/portal?command=imageResponseJSON&image_id=' + $(this).data('id'),
             success: loadResponse,
             error: loadResponse
-        })
+        });
         $('#company-gallery-modal-image').attr('src', image);
         $('#image_id').attr('value', $(this).data('id'));
-       // $('#place-description').attr('value', $(this).data('description'));
+        // $('#place-description').attr('value', $(this).data('description'));
 //        document.getElementById('place-description').innerHTML = $(this).data('description');
         $('#company-gallery-modal').openModal();
     });
@@ -285,8 +284,8 @@
         $.ajax({
             url: $(placeholder).attr('rel'),
             type: "GET",
-            success:dissable(placeholder),
-            error:function (){
+            success: dissable(placeholder),
+            error: function () {
                 alert("testing error");
             }
         });
@@ -304,8 +303,8 @@
         $.ajax({
             url: $(placeholder).attr('rel'),
             type: "GET",
-            success:dissable(placeholder),
-            error:function (){
+            success: dissable(placeholder),
+            error: function () {
                 alert("testing error");
             }
         });
@@ -316,8 +315,8 @@
         $.ajax({
             url: $(placeholder).attr('rel'),
             type: "GET",
-            success:dissable(placeholder),
-            error:function (){
+            success: dissable(placeholder),
+            error: function () {
                 alert("testing error");
             }
         });
@@ -332,17 +331,17 @@
     };
 
     var disabled = function () {
-            var up_i = $("#up");
-            var rating = up_i.data('rating');
-            if (rating == '1') {
-                $("#up").addClass('disabled');
-            }
-            if (rating == '0') {
-                $("#none").addClass('disabled');
-            }
-            if (rating == '-1') {
-                $("#down").addClass('disabled');
-            }
+        var up_i = $("#up");
+        var rating = up_i.data('rating');
+        if (rating == '1') {
+            $("#up").addClass('disabled');
+        }
+        if (rating == '0') {
+            $("#none").addClass('disabled');
+        }
+        if (rating == '-1') {
+            $("#down").addClass('disabled');
+        }
     };
 
     $('#image-send-comment').on('submit', function (e) {
@@ -427,23 +426,25 @@
 
 <script id="response-info-template" type="text/x-handlebars-template">
     {{#each this}}
-    <div class="card valign-wrapper">
-        <div class="valign">
-            <a href="#"><img src="${pageContext.request.contextPath}/upload/photo/{{avaterReference}}"
-                             style="height:70px; weight:70px"/></a>
+    <div class="card">
+        <div class="valign-wrapper">
+            <div class="valign">
+                <a href="#"><img src="${pageContext.request.contextPath}/upload/photo/{{avaterReference}}"
+                                 style="height:70px; weight:70px"/></a>
+            </div>
+            <div class="valign" style="margin-left: 20px">
+                {{description}}
+            </div>
         </div>
-        <div class="valign" style="margin-left: 20px">
-            {{description}}
-        </div>
-
-    </div>
-    <c:if test="${role == 1}">
+        <div class="divider" style="margin-bottom: 20px"></div>
+        <c:if test="${role == 1}">
             <a class="waves-effect waves-light btn modal-trigger cyan darken-2"
-               onClick="deleteResponse(this)" href="javascript:" rel="/portal?command=deleteImageResponse&response_id={{id}}">
+               onClick="deleteResponse(this)" href="javascript:"
+               rel="/portal?command=deleteImageResponse&response_id={{id}}">
                 <cdg:l18n key="usercab.delete"/>
             </a>
-
-    </c:if>
+        </c:if>
+    </div>
     {{/each}}
 </script>
 

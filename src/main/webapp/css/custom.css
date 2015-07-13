@@ -890,6 +890,18 @@ footer.page-footer {
     margin-right: 10px;
 }
 
+/* *** GALLERY *** */
+
+#gallery .file-field .btn {
+    position: relative;
+}
+
+#gallery .image-thumbnail {
+    height: 100px;
+    margin: 10px;
+    float: left;
+}
+
 /* Olya CSS */
 
 .ok-footer .modal-footer .btn {
