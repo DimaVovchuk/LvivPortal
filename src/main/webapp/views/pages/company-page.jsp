@@ -269,7 +269,7 @@
         $('#company-gallery-modal-image').attr('src', image);
         $('#image_id').attr('value', $(this).data('id'));
        // $('#place-description').attr('value', $(this).data('description'));
-        document.getElementById('place-description').innerHTML = $(this).data('description');
+//        document.getElementById('place-description').innerHTML = $(this).data('description');
         $('#company-gallery-modal').openModal();
     });
 
