@@ -23,6 +23,7 @@ public class DeleteWayRecommendedCommand implements Command {
 
     public void execute(HttpServletRequest request,
                         HttpServletResponse response) throws ServletException, IOException {
+        loger.info("Command DeleteWayRecommendedCommand");
 
         UserService userservice = new UserService();
         WayService wayService = new WayService();

@@ -54,6 +54,7 @@ private static final Logger loger = LogManager.getLogger(ClassName.getCurrentCla
             UserImageService userImageService = new UserImageService();
             UserImage userImagee = userImageService.getByPK(userAvatarID);
             avatarReference = userImagee.getReference();
+            loger.info("Get avatar reference");
         }
 
         if(avatarReference !=null) {
@@ -61,11 +62,9 @@ private static final Logger loger = LogManager.getLogger(ClassName.getCurrentCla
         } else{
             session.setAttribute("avatarReference", "user.png");
         }
-
         session.setAttribute("login",login);
         session.setAttribute("userID", userByLogin.getId());
         session.setAttribute("role",userByLogin.getRoleID());
-        session.setAttribute("avatarReference",avatarReference);
         loger.info("User " +login+ " signing in ");
         response.sendRedirect("portal?command=index");
     }

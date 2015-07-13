@@ -18,6 +18,6 @@ public class RestoreDeletedPlaceCommand implements Command{
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         loger.info("RestoreDeletedPlaceCommand start.");
-        request.getRequestDispatcher("/views/pages/admin-admin-restoreDeletedPlace.jsp").forward(request, response);
+        request.getRequestDispatcher("/views/pages/admin-restoreDeletedPlace.jsp").forward(request, response);
     }
 }

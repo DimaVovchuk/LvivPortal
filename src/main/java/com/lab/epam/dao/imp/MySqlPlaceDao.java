@@ -107,6 +107,7 @@ public class MySqlPlaceDao extends AbstractJDBCDao<Place, Integer> {
         } finally {
             connection.putback(conn);
         }
+        loger.info("getAllDeletedPlace method");
         return list;
     }
 
@@ -125,6 +126,7 @@ public class MySqlPlaceDao extends AbstractJDBCDao<Place, Integer> {
         } finally {
             connection.putback(conn);
         }
+        loger.info("getCheckCustomEditID method");
         return id;
     }
 
@@ -139,6 +141,7 @@ public class MySqlPlaceDao extends AbstractJDBCDao<Place, Integer> {
         } finally {
             connection.putback(conn);
         }
+        loger.info("getAllConfirmRecommendedPlace method");
         return list;
     }
 
@@ -153,6 +156,7 @@ public class MySqlPlaceDao extends AbstractJDBCDao<Place, Integer> {
         } finally {
             connection.putback(conn);
         }
+        loger.info("getAllConfirmCustomPlace method");
         return list;
     }
 
@@ -168,6 +172,7 @@ public class MySqlPlaceDao extends AbstractJDBCDao<Place, Integer> {
         } finally {
             connection.putback(conn);
         }
+        loger.info("getAllVisibleUserCustomPlace method");
         return list;
     }
 
@@ -183,6 +188,7 @@ public class MySqlPlaceDao extends AbstractJDBCDao<Place, Integer> {
         } finally {
             connection.putback(conn);
         }
+        loger.info("getAllVisibleUserFavorPlace method");
         return list;
     }
 
@@ -261,6 +267,8 @@ public class MySqlPlaceDao extends AbstractJDBCDao<Place, Integer> {
         } finally {
             connection.putback(conn);
         }
+        loger.info("getAllPlaceRecomended method");
+
         return list;
     }
 
@@ -275,6 +283,7 @@ public class MySqlPlaceDao extends AbstractJDBCDao<Place, Integer> {
         } finally {
             connection.putback(conn);
         }
+        loger.info("getAllPlaceVisible method");
         return list;
 
 
@@ -292,6 +301,8 @@ public class MySqlPlaceDao extends AbstractJDBCDao<Place, Integer> {
         } finally {
             connection.putback(conn);
         }
+        loger.info("getPlaceByCategory method");
+
         return list;
 
 
@@ -309,6 +320,8 @@ public class MySqlPlaceDao extends AbstractJDBCDao<Place, Integer> {
         } finally {
             connection.putback(conn);
         }
+        loger.info("getPlaceByCategoryRecomended method");
+
         return list;
 
 
@@ -331,6 +344,8 @@ public class MySqlPlaceDao extends AbstractJDBCDao<Place, Integer> {
         } finally {
             connection.putback(conn);
         }
+        loger.info("getPlaceByUserId method");
+
         return list;
     }
 
@@ -353,6 +368,8 @@ public class MySqlPlaceDao extends AbstractJDBCDao<Place, Integer> {
         } finally {
             connection.putback(conn);
         }
+        loger.info("getPlaceByWayId method");
+
         return list;
     }
 
@@ -375,6 +392,8 @@ public class MySqlPlaceDao extends AbstractJDBCDao<Place, Integer> {
         } finally {
             connection.putback(conn);
         }
+        loger.info("getPlaceByWayIdDayNumber method");
+
         return list;
     }
 
@@ -392,6 +411,7 @@ public class MySqlPlaceDao extends AbstractJDBCDao<Place, Integer> {
             if (count != 1) {
                 throw new PersistException("On delete modify more then 1 record: " + count);
             }
+            loger.info("deletePlaceByUserIdPlaceId method");
         } catch (Exception e) {
             loger.warn("Cant delete way from user with " + user_id + " user_id and " + place_id + " place_id");
             throw new PersistException(e);
@@ -425,6 +445,8 @@ public class MySqlPlaceDao extends AbstractJDBCDao<Place, Integer> {
         } finally {
             connection.putback(conn);
         }
+        loger.info("getPlaceByLongitudeLatitude method");
+
         return list.iterator().next();
     }
 
@@ -449,6 +471,8 @@ public class MySqlPlaceDao extends AbstractJDBCDao<Place, Integer> {
             loger.warn("Cant get places with longitude " + longitude + " and latitude " + latitude);
             throw new PersistException(e);
         }
+        loger.info("getPlaceByLongitudeLatitude method");
+
         return list.iterator().next();
     }
 
@@ -465,6 +489,8 @@ public class MySqlPlaceDao extends AbstractJDBCDao<Place, Integer> {
             } else {
                 loger.info("Create is successful");
             }
+            loger.info("createPlaceWay method");
+
         } catch (Exception e) {
             throw new PersistException(e);
         } finally {
@@ -484,6 +510,8 @@ public class MySqlPlaceDao extends AbstractJDBCDao<Place, Integer> {
             } else {
                 loger.info("Create is successful");
             }
+            loger.info("createPlaceWay method");
+
         } catch (Exception e) {
             throw new PersistException(e);
         }
@@ -501,6 +529,8 @@ public class MySqlPlaceDao extends AbstractJDBCDao<Place, Integer> {
             } else {
                 loger.info("Create user_place is successful");
             }
+            loger.info("createPlaceUser method");
+
         } catch (Exception e) {
             throw new PersistException(e);
         } finally {
@@ -515,6 +545,8 @@ public class MySqlPlaceDao extends AbstractJDBCDao<Place, Integer> {
             statement.setInt(1, place_id);
             statement.setInt(2, user_id);
             ResultSet rs = statement.executeQuery();
+            loger.info("getPlaceByUserIdPlaceId method");
+
             if (rs.next()) {
                 return 1;
             } else {
@@ -542,6 +574,8 @@ public class MySqlPlaceDao extends AbstractJDBCDao<Place, Integer> {
             if (count != 1) {
                 throw new PersistException("On delete modify more then 1 record: " + count);
             }
+            loger.info("deletePlaceByWayIdPlaceId method");
+
         } catch (Exception e) {
             loger.warn("Cant delete place from place_way with " + way_id + " way_id and " + place_id + " place_id");
             throw new PersistException(e);
@@ -563,6 +597,7 @@ public class MySqlPlaceDao extends AbstractJDBCDao<Place, Integer> {
                 throw new PersistException(e);
             }
             int count = statement.executeUpdate();
+            loger.info("deletePlaceByWayIdDayNumber method");
 
         } catch (Exception e) {
             loger.warn("Cant delete place from place_way with " + way_id + " way_id and " + day_number + " day_number");
@@ -586,6 +621,8 @@ public class MySqlPlaceDao extends AbstractJDBCDao<Place, Integer> {
             if (count != 1) {
                 throw new PersistException("On insert modify more then 1 record: " + count);
             }
+            loger.info("setPlaceIsRecommended method");
+
         } catch (Exception e) {
             loger.warn("Cant set is recommended from " + place_id + " place_id");
             throw new PersistException(e);

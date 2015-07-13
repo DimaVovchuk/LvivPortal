@@ -62,6 +62,8 @@ public class MySqlWayDao extends AbstractJDBCDao<Way, Integer> {
                 throw new PersistException("On persist modify more then 1 record: " + count);
             } else {
             }
+            loger.info("updateConfirmWayRecommended method");
+
         } catch (Exception e) {
             throw new PersistException(e);
         } finally {
@@ -78,6 +80,8 @@ public class MySqlWayDao extends AbstractJDBCDao<Way, Integer> {
                 throw new PersistException("On persist modify more then 1 record: " + count);
             } else {
             }
+            loger.info("updateWayIsRecommended method");
+
         } catch (Exception e) {
             throw new PersistException(e);
         } finally {
@@ -94,6 +98,8 @@ public class MySqlWayDao extends AbstractJDBCDao<Way, Integer> {
                 throw new PersistException("On persist modify more then 1 record: " + count);
             } else {
             }
+            loger.info("deleteWayIsRecommended method");
+
         } catch (Exception e) {
             throw new PersistException(e);
         } finally {
@@ -121,6 +127,8 @@ public class MySqlWayDao extends AbstractJDBCDao<Way, Integer> {
         } finally {
             connection.putback(conn);
         }
+        loger.info("getWaysByUserId method");
+
         return list;
 
     }
@@ -144,6 +152,8 @@ public class MySqlWayDao extends AbstractJDBCDao<Way, Integer> {
             loger.warn("Can not get all confirm recommended way.");
             throw new PersistException(e);
         }
+        loger.info("getAllConfirmRecommendedWay method");
+
         return wayList;
     }
 
@@ -165,6 +175,8 @@ public class MySqlWayDao extends AbstractJDBCDao<Way, Integer> {
         } finally {
             connection.putback(conn);
         }
+        loger.info("getWaysByWayId method");
+
         return list;
 
     }
@@ -180,6 +192,8 @@ public class MySqlWayDao extends AbstractJDBCDao<Way, Integer> {
             } else {
                 loger.info("Create is succesfule");
             }
+            loger.info("create method");
+
         } catch (Exception e) {
             throw new PersistException(e);
         }
@@ -200,6 +214,8 @@ public class MySqlWayDao extends AbstractJDBCDao<Way, Integer> {
             if (count != 1) {
                 throw new PersistException("On delete modify more then 1 record: " + count);
             }
+            loger.info("deleteWaysByUserIdWayId method");
+
         } catch (Exception e) {
             loger.warn("Cant delete way from user with " + user_id + " user_id and " + way_id + " way_id");
             throw new PersistException(e);
@@ -231,6 +247,7 @@ public class MySqlWayDao extends AbstractJDBCDao<Way, Integer> {
         } finally {
             connection.putback(conn);
         }
+        loger.info("getLastAdded method");
         return list.iterator().next();
 
     }
@@ -254,6 +271,8 @@ public class MySqlWayDao extends AbstractJDBCDao<Way, Integer> {
             loger.warn("Cant last way");
             throw new PersistException(e);
         }
+        loger.info("getLastAdded method");
+
         return list.iterator().next();
 
     }
@@ -270,6 +289,8 @@ public class MySqlWayDao extends AbstractJDBCDao<Way, Integer> {
             } else {
                 loger.info("Create is successful");
             }
+            loger.info("createUserWay method");
+
         } catch (Exception e) {
             throw new PersistException(e);
         } finally {
@@ -288,6 +309,8 @@ public class MySqlWayDao extends AbstractJDBCDao<Way, Integer> {
             } else {
                 loger.info("Create is successful");
             }
+            loger.info("createUserWay method");
+
         } catch (Exception e) {
             throw new PersistException(e);
         }
@@ -304,6 +327,8 @@ public class MySqlWayDao extends AbstractJDBCDao<Way, Integer> {
                 throw new PersistException("On persist modify more then 1 record: " + count);
             } else {
             }
+            loger.info("updateWayDay method");
+
         } catch (Exception e) {
             throw new PersistException(e);
         } finally {
@@ -321,6 +346,8 @@ public class MySqlWayDao extends AbstractJDBCDao<Way, Integer> {
                 throw new PersistException("On persist modify more then 1 record: " + count);
             } else {
             }
+            loger.info("updateWayBeginDate method");
+
         } catch (Exception e) {
             throw new PersistException(e);
         } finally {
@@ -338,6 +365,8 @@ public class MySqlWayDao extends AbstractJDBCDao<Way, Integer> {
                 throw new PersistException("On persist modify more then 1 record: " + count);
             } else {
             }
+            loger.info("updateWayEndDate method");
+
         } catch (Exception e) {
             throw new PersistException(e);
         } finally {
@@ -355,6 +384,8 @@ public class MySqlWayDao extends AbstractJDBCDao<Way, Integer> {
                 throw new PersistException("On persist modify more then 1 record: " + count);
             } else {
             }
+            loger.info("updateWayRating method");
+
         } catch (Exception e) {
             throw new PersistException(e);
         } finally {
@@ -373,6 +404,8 @@ public class MySqlWayDao extends AbstractJDBCDao<Way, Integer> {
         } finally {
             connection.putback(conn);
         }
+        loger.info("getAllWayRecomended method");
+
         return list;
     }
 
@@ -388,6 +421,8 @@ public class MySqlWayDao extends AbstractJDBCDao<Way, Integer> {
             if (count != 1) {
                 throw new PersistException("On insert modify more then 1 record: " + count);
             }
+            loger.info("setWayIsRecommended method");
+
         } catch (Exception e) {
             loger.warn("Cant set is recommended from " + way_id + " way_id");
             throw new PersistException(e);

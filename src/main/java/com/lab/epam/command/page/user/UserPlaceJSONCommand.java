@@ -86,7 +86,7 @@ public class UserPlaceJSONCommand implements Command {
                 userPlacePageInfo = getPlaceDescriptionAndPhotoList(places, placeDescriptions, placeImage);
             }
         }
-
+        loger.info("Command UserPlaceJSONCommand");
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write(new Gson().toJson(userPlacePageInfo));

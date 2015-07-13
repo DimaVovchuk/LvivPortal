@@ -4,6 +4,9 @@ import com.google.api.client.util.Joiner;
 import com.google.api.client.util.Maps;
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
+import com.lab.epam.helper.ClassName;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -17,6 +20,8 @@ import java.util.Map;
  * Created by Dima on 23-Jun-15.
  */
 public class Distance {
+    private static final Logger loger = LogManager.getLogger(ClassName.getCurrentClassName());
+
 //    public static int iter = 0;
 
     private String encodeParams(final Map<String, String> params) {
@@ -36,6 +41,8 @@ public class Distance {
                         }
                     }
                 }));
+        loger.info("encodeParams method");
+
         return paramsUrl;
     }
 
@@ -76,6 +83,8 @@ public class Distance {
         Map<String,Double> map = new HashMap<>();
         map.put("time",Double.parseDouble(duration));
         map.put("distance",Double.parseDouble(distance));
+        loger.info("getDistanceAndTime method");
+
         return map;
     }
 

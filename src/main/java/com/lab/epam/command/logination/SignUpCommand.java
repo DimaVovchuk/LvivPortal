@@ -1,10 +1,11 @@
 package com.lab.epam.command.logination;
 
 import com.lab.epam.command.controller.Command;
-import com.lab.epam.entity.Decoder;
 import com.lab.epam.entity.User;
+import com.lab.epam.entity.UserImage;
 import com.lab.epam.helper.ClassName;
 import com.lab.epam.md5.MD5Creator;
+import com.lab.epam.service.UserImageService;
 import com.lab.epam.service.UserService;
 import com.lab.epam.smtp.SendEmail;
 import org.apache.log4j.LogManager;
@@ -44,22 +45,22 @@ public class SignUpCommand implements Command {
         HttpSession session = request.getSession();
         loger.info("Command SignUpCommand.");
         boolean errorFlag = false;
-        String name = Decoder.decodeStringUtf8(request.getParameter("first"));
-        String surname = Decoder.decodeStringUtf8(request.getParameter("last"));
-        String companyName = Decoder.decodeStringUtf8(request.getParameter("companyname"));
-        String login = Decoder.decodeStringUtf8(request.getParameter("login"));
-        String email = Decoder.decodeStringUtf8(request.getParameter("email"));
+        String name = request.getParameter("first");
+        String surname = request.getParameter("last");
+        String companyName = request.getParameter("companyname");
+        String login = request.getParameter("login");
+        String email = request.getParameter("email");
         String password = request.getParameter("password");
         String phone = request.getParameter("phone");
         Integer role = Integer.valueOf(request.getParameter("role"));
-        String vk_id = (String) session.getAttribute("vk_id");
+        String vk_id = request.getParameter("vkId");
 
         UserService userService = new UserService();
         boolean checkEmail = userService.checkEmail(email);
         boolean checkPhone = userService.checkPhone(phone);
         boolean checkLogin = userService.checkLogin(login);
 
-        if(!role.equals(4)) {
+        if (!role.equals(4)) {
             if (checkData(name, CHECK_NAME)) {
                 session.setAttribute("loginError", 1);
                 errorFlag = true;
@@ -170,14 +171,19 @@ public class SignUpCommand implements Command {
                 user.setVkId(vk_id);
 
                 userService.create(user);
-                session.setAttribute("ava", user.getAvatar());
+                UserImageService userImageService = new UserImageService();
+                UserImage userImage = userImageService.getByPK(user.getAvatar());
+                if (userImage != null) {
+                    session.setAttribute("avatarReference", userImage.getReference());
+                } else {
+                    session.setAttribute("avatarReference", "user.png");
+                }
                 session.setAttribute("statusID", 2);
                 ResourceBundle bundle = (ResourceBundle) session.getAttribute("bundle");
                 String md5phone = MD5Creator.getMD5(phone);
                 String s = new String(bundle.getString("confirm.message").getBytes("ISO-8859-1"), "windows-1251") + " -> <a href = 'http://localhost:8080/portal?command=confirm&user=" + login + "&param=" + md5phone + "'> http://localhost:8080/portal?command=confirm&user=" + login + "&param=" + md5phone + " <a>";
                 SendEmail.sender("Lviv Portal", s, email);
                 loger.info("New user was added");
-//                request.getRequestDispatcher("/views/pages/user-cabinet.jsp").forward(request, response);
             } catch (Exception e) {
                 loger.info("Adding new user was failed");
                 loger.error(e.getMessage());

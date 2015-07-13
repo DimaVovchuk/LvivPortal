@@ -80,7 +80,7 @@ public class RectUserRatingCommand implements Command {
             }
 
         }
-        loger.info("Command Rect rating user.");
+        loger.info("Command RectUserRatingCommand");
         //request.setAttribute("category", category);
         // response.sendRedirect("portal?command=place&category=" + category);
 

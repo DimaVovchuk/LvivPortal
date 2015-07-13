@@ -40,7 +40,7 @@ public class SaveProfileCommand implements Command {
     @Override
     public void execute(HttpServletRequest request,
                         HttpServletResponse response) throws ServletException, IOException {
-        loger.info("Command Update Profile.");
+        loger.info("Command SaveProfileCommand");
         HttpSession session = request.getSession();
         List files = new ArrayList();
         Map<String, String> params = new HashMap<String, String>();

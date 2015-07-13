@@ -77,7 +77,7 @@ public class RectRatingWayCommand implements Command {
             }
 
         }
-        loger.info("Command Rect rating way.");
+        loger.info("Command RectRatingWayCommand.");
        // request.setAttribute("category", category);
         // response.sendRedirect("portal?command=place&category=" + category);
 

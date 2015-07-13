@@ -90,7 +90,8 @@ public class AddPlaceUserDataTripCommand implements Command {
         session.setAttribute("userDataTrib", userDataAboutTrip);
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-          response.getWriter().write(new Gson().toJson(isAdded));
+        loger.info("Command AddPlaceUserDataTripCommand");
+        response.getWriter().write(new Gson().toJson(isAdded));
     }
 
 }

@@ -18,7 +18,7 @@ public class RecomendedPlaceLoaderCommand implements Command {
 
     public void execute(HttpServletRequest request,
                         HttpServletResponse response) throws ServletException, IOException {
-        loger.info("Recommended Place Loader.");
+        loger.info("Recommended Place Loader Command.");
         request.getRequestDispatcher("/views/pages/recomended-place.jsp").forward(request, response);
     }
 }

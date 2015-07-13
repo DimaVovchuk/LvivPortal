@@ -37,7 +37,7 @@ public class RecomendedWayCommand  implements Command {
 
     public void execute(HttpServletRequest request,
                         HttpServletResponse response) throws ServletException, IOException {
-
+        loger.info("RecomendedWayCommand start");
         UserService userservice = new UserService();
         WayService wayService = new WayService();
         WayRatingService wayRatingService = new WayRatingService();

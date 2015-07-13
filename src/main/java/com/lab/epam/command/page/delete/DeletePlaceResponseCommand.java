@@ -44,7 +44,7 @@ public class DeletePlaceResponseCommand implements Command {
         if (response_id != 0){
             placeResponseService.deleteResponseByUserIdPlaceId(response_id);
         }
-
+        loger.info("Command DeletePlaceResponseCommand");
 
         response.sendRedirect("/portal?command=placeInformation&place_id=" + place_id);
 

@@ -40,7 +40,7 @@ public class SaveNewPlaceCommand implements Command {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        loger.info("Command SaveNewPlace.");
+        loger.info("Command SaveNewPlaceCommand.");
         HttpSession session = request.getSession();
         List files = new ArrayList();
         Map<String, String> params = new HashMap<String, String>();

@@ -221,7 +221,7 @@
     </div>
 </div>
 
-<div id="company-gallery-modal" class="modal">
+<div id="company-gallery-modal" class="modal" style="max-height: 90%">
     <div class="section center-align">
         <img src="" id="company-gallery-modal-image" class="responsive-img" style="max-width: 80%; max-height: 70%">
 

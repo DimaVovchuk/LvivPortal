@@ -35,6 +35,7 @@ public class MySqlRoleDao extends AbstractJDBCDao<Role, Integer> {
     }
 
     public Class getClassModel() {
+        loger.info("getClassModel method");
         return Role.class;
     }
 

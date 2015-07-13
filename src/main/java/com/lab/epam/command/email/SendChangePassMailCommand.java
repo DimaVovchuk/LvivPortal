@@ -33,6 +33,7 @@ public class SendChangePassMailCommand implements Command {
         String s = new String(bundle.getString("reset.password").getBytes("ISO-8859-1"), "windows-1251") + " -> <a href = 'http://localhost:8080/portal?command=checkTime&user=" + email + "&param=" + timeMillis + "'> http://localhost:8080/portal?command=command=resetPass&user=" + email + "&param=" + timeMillis + "' <a>";
         if(user.getPassword() != null){
             SendEmail.sender("Change password",s,email);
+            loger.info("Change password reference sent on email");
         }
         loger.info("Command SendChangePassMailCommand");
         //response.sendRedirect("portal?command=index");

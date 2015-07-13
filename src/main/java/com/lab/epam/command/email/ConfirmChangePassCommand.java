@@ -33,6 +33,7 @@ public class ConfirmChangePassCommand implements Command {
         user.setPassword(md5);
         try {
             userService.update(user);
+            loger.info("User password is updated successfully");
         } catch (PersistException e) {
             e.printStackTrace();
         }

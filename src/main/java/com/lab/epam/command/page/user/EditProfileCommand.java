@@ -65,7 +65,7 @@ public class EditProfileCommand implements Command {
             request.setAttribute("errorMsg", "Data base error");
         }
 
-        loger.info("Command Edit Profile.");
+        loger.info("Command EditProfileCommand.");
         response.setCharacterEncoding("UTF-8");
         request.setCharacterEncoding("UTF-8");
         request.getRequestDispatcher("/views/pages/editProfile.jsp").forward(request, response);

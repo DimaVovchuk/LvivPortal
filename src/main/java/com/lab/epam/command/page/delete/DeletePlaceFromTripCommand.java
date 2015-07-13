@@ -50,6 +50,7 @@ public class DeletePlaceFromTripCommand implements Command {
                 }
             }
         }
+        loger.info("Command DeletePlaceFromTripCommand");
         response.sendRedirect("/portal?command=userWays");
 
     }

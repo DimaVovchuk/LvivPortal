@@ -44,6 +44,7 @@ public class DeletePlaceCommand implements Command {
             User user = null;
             if (login != null){
                 user = userService.getUserByLogin(login);
+                loger.info("User with login " + login + " is exist");
             }
 
             if (user != null && place_id != null){

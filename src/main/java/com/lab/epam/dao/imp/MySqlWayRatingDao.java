@@ -58,6 +58,7 @@ public class MySqlWayRatingDao  extends AbstractJDBCDao<WayRating, Integer> {
         } finally {
             connection.putback(conn);
         }
+        loger.info("getWayRatingByWayAndUser method");
         return list.iterator().next();
     }
 

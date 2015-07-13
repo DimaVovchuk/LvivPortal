@@ -32,7 +32,6 @@ public class UpdateWayCommand implements Command {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         WayService wayService = new WayService();
         Integer updateResult = 3;
         PlaceService placeService = new PlaceService();
@@ -108,7 +107,7 @@ public class UpdateWayCommand implements Command {
                                 if (!placeNew.getVisible()) {
                                     servicePlace.create(placeNew);
                                     placeNew = servicePlace.getPlaceByLongitudeLatitude(placeNew.getLongitude(), placeNew.getLatitude());
-                                    loger.info("Create castom place is successfull");
+                                    loger.info("Create castom place is successful");
                                 }
                                 servicePlace.createPlaceWay(placeNew.getId(), way_id, day, placeNew.getPlace_time());
                             }
@@ -124,7 +123,7 @@ public class UpdateWayCommand implements Command {
                             if (!place.getVisible()) {
                                 servicePlace.create(place);
                                 place = servicePlace.getPlaceByLongitudeLatitude(place.getLongitude(), place.getLatitude());
-                                loger.info("Create castom place is successfull");
+                                loger.info("Create castom place is successful");
                             }
                             servicePlace.createPlaceWay(place.getId(), way_id, day, place.getPlace_time());
                         }
@@ -141,6 +140,8 @@ public class UpdateWayCommand implements Command {
             }
         }
         //response.sendRedirect("portal?command=userWays");
+        loger.info("Command UpdateWayCommand");
+
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write(new Gson().toJson(updateResult));

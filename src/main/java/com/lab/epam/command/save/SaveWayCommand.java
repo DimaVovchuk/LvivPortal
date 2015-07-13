@@ -27,6 +27,7 @@ public class SaveWayCommand implements Command {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        loger.info("Command SaveWayCommand");
 
         HttpSession session = request.getSession();
 

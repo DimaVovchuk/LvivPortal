@@ -51,6 +51,8 @@ public class MySqlUserImageDao extends AbstractJDBCDao<UserImage, Integer> {
                 loger.info("DB has any user_images with " + user_id + " user_id");
                 return null;
             }
+            loger.info("getUserImageByUserId method");
+
         } catch (Exception e) {
             loger.warn("Cant get images from user_images with " + user_id + " user_id");
             throw new PersistException(e);
@@ -82,6 +84,8 @@ public class MySqlUserImageDao extends AbstractJDBCDao<UserImage, Integer> {
         } finally {
             connection.putback(conn);
         }
+        loger.info("getUserImageByUserIdOne method");
+
         return list.iterator().next();
 
 

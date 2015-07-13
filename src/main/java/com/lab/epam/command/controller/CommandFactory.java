@@ -105,16 +105,16 @@ public class CommandFactory {
         commands.put("showAllCustomPlace", new ShowAllCustomPlaceCommand());
         commands.put("recomendedWay", new RecomendedWayLoadCommand());
         commands.put("recomendedWayJSON", new RecomendedWayCommand());
-        commands.put("userPlaceJSONCommand", new  UserPlaceJSONCommand());
-        commands.put("rectRatingWay", new  RectRatingWayCommand());
-        commands.put("search", new  PlaceSearchCommand());
-        commands.put("signUpForm", new  SignUpForm());
+        commands.put("userPlaceJSONCommand", new UserPlaceJSONCommand());
+        commands.put("rectRatingWay", new RectRatingWayCommand());
+        commands.put("search", new PlaceSearchCommand());
+        commands.put("signUpForm", new SignUpForm());
         commands.put("about", new AboutCommand());
         commands.put("send", new SendContactUsMailCommand());
-        commands.put("recommendPlace", new  RecommendedPlaceCommand());
+        commands.put("recommendPlace", new RecommendedPlaceCommand());
         commands.put("adminStatistic", new AdminStatisticCommand());
-        commands.put("recommendPlace", new  RecommendPlaceCommand());
-        commands.put("recommendWay", new  RecommendWayCommand());
+        commands.put("recommendPlace", new RecommendPlaceCommand());
+        commands.put("recommendWay", new RecommendWayCommand());
         commands.put("adminCabinet", new ShowAdminCabinetCommand());
         commands.put("confirmCustomPlace", new ConfirmCustomPlaceCommand());
         commands.put("confirmRecommendedPlace", new ConfirmRecommendedPlaceCommand());
@@ -135,22 +135,32 @@ public class CommandFactory {
         commands.put("deletePlaceResponse", new DeletePlaceResponseCommand());
         commands.put("deleteImageResponse", new DeletImageResponseCommand());
         commands.put("deleteRecommendedWay", new DeleteWayRecommendedCommand());
+        commands.put("GoogleAuthCommand", new DeleteWayRecommendedCommand());
     }
 
     public static void createCommand(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String command = request.getParameter("command");
+        HttpSession session = request.getSession();
+        Integer role = (Integer) session.getAttribute("role");
 
-        if (request.getContentType() != null && request.getContentType().toLowerCase().indexOf("multipart/form-data") > -1 ){
-            HttpSession session = request.getSession();
-            command = (String)session.getAttribute("command");
+        if (request.getContentType() != null && request.getContentType().toLowerCase().indexOf("multipart/form-data") > -1) {
+            command = (String) session.getAttribute("command");
         }
-            if (commands.containsKey(command)) {
-                Command commamdExecute = commands.get(command);
-                commamdExecute.execute(request, response);
-            } else {
-               request.getRequestDispatcher("/views/pages/404.jsp").forward(request, response);
-            }
+        if ((role == null || role != 1) && (command.equals("showAllUser") || command.equals("adminCabinet")
+                || command.equals("editPlacesAdminPage") || command.equals("addNewPlace")
+                || command.equals("adminConfirmCustomPlace") || command.equals("adminConfirmRecommendedPlace")
+                || command.equals("adminConfirmRecommendedWay") || command.equals("restoreDeletedPlace")
+                || command.equals("adminStatistic"))) {
+            request.getRequestDispatcher("/views/pages/404.jsp").forward(request, response);
+        }
+
+        if (commands.containsKey(command)) {
+            Command commamdExecute = commands.get(command);
+            commamdExecute.execute(request, response);
+        } else {
+            request.getRequestDispatcher("/views/pages/404.jsp").forward(request, response);
+        }
 
     }
 }

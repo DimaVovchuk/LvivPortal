@@ -21,6 +21,14 @@ var linkProcess = function (id) {
     }
     if (id == 'itinerary') {
         loadRoutes();
+    } else {
+        hideMarkers();
+        showMarkers();
+        for (var i = 0; i < directionsDisplays.length; i++) {
+            directionsDisplays[i].set('directions', null);
+        }
+        $('.map-day-trigger').data('show', 1);
+        count = 0;
     }
     $(map).show();
     windowIDList.forEach(function (item) {
@@ -97,6 +105,7 @@ var initDayTrigger = function () {
         $('#places-day' + day).toggle();
     })
 };
+
 var count = 0;
 
 var directionsDisplays = [];

@@ -44,10 +44,9 @@ public class ShowAllUserCommand implements Command{
             loger.info("User id is "  + servletUserId);
         }
 
-
         String changeRoleIDString = request.getParameter("changeRoleID");
-        loger.info("changeRoleIDString " + changeRoleIDString);
         if(changeRoleIDString != null && requestType.equalsIgnoreCase("changeRole")){
+            loger.info("changeRoleIDString " + changeRoleIDString);
             User userChangeRole = userService.getByPK(servletUserId);
             changeRoleID = Integer.valueOf(changeRoleIDString);
             loger.info("changeRoleID " + changeRoleID);
@@ -55,7 +54,6 @@ public class ShowAllUserCommand implements Command{
             userChangeRole.setRoleID(changeRoleID);
             try {
                 userService.update(userChangeRole);
-                session.setAttribute("role", changeRoleID);
                 showAllUser(userRole,roleService,userService,request);
                 loger.info("user role is succesful changed ");
             } catch (PersistException e) {
@@ -63,9 +61,9 @@ public class ShowAllUserCommand implements Command{
             }
         }
 
-        String changeStatusIDString = request.getParameter("changeStatucID");
-        loger.info("changeStatusIDString " + changeStatusIDString);
+        String changeStatusIDString = request.getParameter("changeStatusID");
         if(changeStatusIDString != null && requestType.equalsIgnoreCase("changeStatus")){
+            loger.info("changeStatusIDString " + changeStatusIDString);
             changeStatus = Integer.valueOf(changeStatusIDString);
             loger.info("changeStatus " + changeStatus);
             User userChangeStatus = userService.getByPK(servletUserId);
@@ -74,12 +72,11 @@ public class ShowAllUserCommand implements Command{
                 userService.update(userChangeStatus);
                 session.setAttribute("statusID", changeStatus);
                 showAllUser(userRole, roleService, userService, request);
-                loger.info("user status is succesful changed ");
+                loger.info("user status is successful changed ");
             } catch (PersistException e) {
                 loger.warn(e.getMessage());
             }
         }
-
 
         if(requestType.equalsIgnoreCase("showAllUser")){
             showAllUser(userRole,roleService,userService,request);
@@ -92,10 +89,10 @@ public class ShowAllUserCommand implements Command{
     private void showAllUser(Map<User, String> userRole,RoleService roleService, UserService userService,HttpServletRequest request){
         try {
             List<User>userList = userService.getAll();
-            for (int i = 0; i < userList.size(); i++) {
-                Integer roleID= userService.getRoleID(userList.get(i).getLogin());
+            for (User anUserList : userList) {
+                Integer roleID = userService.getRoleID(anUserList.getLogin());
                 String roleName = roleService.getByPK(roleID).getRole();
-                userRole.put(userList.get(i),roleName);
+                userRole.put(anUserList, roleName);
             }
             request.setAttribute("AllUsers",userRole);
         } catch (PersistException e) {
