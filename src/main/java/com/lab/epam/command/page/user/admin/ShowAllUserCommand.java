@@ -54,7 +54,6 @@ public class ShowAllUserCommand implements Command{
             userChangeRole.setRoleID(changeRoleID);
             try {
                 userService.update(userChangeRole);
-                session.setAttribute("role", changeRoleID);
                 showAllUser(userRole,roleService,userService,request);
                 loger.info("user role is succesful changed ");
             } catch (PersistException e) {
