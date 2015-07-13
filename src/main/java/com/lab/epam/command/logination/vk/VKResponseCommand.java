@@ -90,7 +90,6 @@ public class VKResponseCommand implements Command {
                     String last_name = (String) json.get("last_name");
                     String email = token.getEmail();
                     User userByEmail = userServ.geUserByEmail(email);
-                    System.out.println(userByEmail);
                     if (userByEmail.getLogin() != null && userByEmail.getVkId() == null) {
                         userByEmail.setVkId(vk_id);
                         try {
@@ -107,7 +106,8 @@ public class VKResponseCommand implements Command {
                         if (userImage != null) {
                             session.setAttribute("avatarReference", userImage.getReference());
                         } else {
-                            session.setAttribute("avatarReference", "user.png");
+                            session.setAttribute("vk_ava",1);
+                            userImage = new UserImage(user.getId(), photo);
                         }
                         request.getRequestDispatcher("/portal?command=index").forward(request, response);
                     }

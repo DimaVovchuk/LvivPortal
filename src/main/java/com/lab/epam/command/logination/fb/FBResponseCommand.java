@@ -10,6 +10,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -50,44 +51,44 @@ public class FBResponseCommand implements Command {
                 json = new JSONObject(graph);
                 String photo = "http://graph.facebook.com/" + json.get("id") + "/picture?width=200&height=200";
                 userServ = new UserService();
-                if (userServ.getUserByVkId((String) json.get("id")).getVkId() != null) {
-                    user = userServ.getUserByVkId(json.getString("id"));
-                    session.setAttribute("login", user.getLogin());
-                    session.setAttribute("usedID", user.getId());
-                    session.setAttribute("vk_id", json.getString("id"));
-                    session.setAttribute("role", user.getRoleID());
-                    session.setAttribute("avatar_id", user.getAvatar());
-
+                user = userServ.geUserByEmail((String) json.get("email"));
+                if (user.getLogin() != null) {
+                    session.setAttribute("login", this.user.getLogin());
+                    session.setAttribute("userID", this.user.getId());
+                    session.setAttribute("role", this.user.getRoleID());
                     if (user.getAvatar() != null) {
                         userImage = userImageService.getByPK(user.getAvatar());
                     } else {
+                        session.setAttribute("vk_ava", 1);
                         userImage = new UserImage(user.getId(), photo);
                     }
-                    session.setAttribute("ava", userImage.getReference());
-
+                    session.setAttribute("avatarReference", userImage.getReference());
                     loger.info("User sign in with facebook");
-                    request.getRequestDispatcher("/views/pages/user-cabinet.jsp").forward(request, response);
+                    request.getRequestDispatcher("/portal?command=index").forward(request, response);
                 } else {
                     json = new JSONObject(graph);
-                    String id = (String) json.get("id");
                     String first_name = (String) json.get("first_name");
                     String last_name = (String) json.get("last_name");
                     String email = (String) json.get("email");
-                    session.setAttribute("vk_id", id);
-                    session.setAttribute("ava", photo);
-
-                    loger.info("User sign up with facebook");
-                    response.setCharacterEncoding("UTF-8");
-                    request.setCharacterEncoding("UTF-8");
-                    request.getRequestDispatcher("/portal?command=signUpForm&first=" + first_name + "&last=" + last_name + "&email=" + email).include(request, response);
+                    if (userImage != null) {
+                        session.setAttribute("avatarReference", userImage.getReference());
+                    } else {
+                        session.setAttribute("vk_ava", 1);
+                        userImage = new UserImage(user.getId(), photo);
+                    }
+                    request.setAttribute("first", first_name);
+                    request.setAttribute("last", last_name);
+                    request.setAttribute("email", email);
+                    request.setAttribute("modal", "signUpForm");
+                    request.getRequestDispatcher("/views/pages/index.jsp").forward(request, response);
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
                 throw new RuntimeException("ERROR: Didn't get code parameter in callback.");
             }
         } else {
-            request.getRequestDispatcher("/portal?command=index").forward(request, response);
-            loger.info("User sign up with facebook failed");
+            request.setAttribute("modal", "signUpForm");
+            request.getRequestDispatcher("/views/pages/index.jsp").forward(request, response);
         }
     }
 }
