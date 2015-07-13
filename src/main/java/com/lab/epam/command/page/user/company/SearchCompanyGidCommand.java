@@ -4,8 +4,11 @@ import com.lab.epam.command.controller.Command;
 import com.lab.epam.entity.Decoder;
 import com.lab.epam.entity.User;
 import com.lab.epam.entity.UserImage;
+import com.lab.epam.helper.ClassName;
 import com.lab.epam.service.UserImageService;
 import com.lab.epam.service.UserService;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +22,8 @@ import java.util.*;
  * Created by Admin on 12.07.2015.
  */
 public class SearchCompanyGidCommand implements Command {
+    private static final Logger loger = LogManager.getLogger(ClassName.getCurrentClassName());
+
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -129,6 +134,8 @@ public class SearchCompanyGidCommand implements Command {
             }
 
         }
+        loger.info("Command SearchCompanyGidCommand");
+
         response.setContentType("application/txt");
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write(searchResult);

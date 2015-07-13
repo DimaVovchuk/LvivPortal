@@ -54,6 +54,7 @@ public class VKResponseCommand implements Command {
         TokenAccess token = null;
         try {
             token = vkObj.getAuth().signIn(request);
+            loger.info("Get access token");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -62,7 +63,6 @@ public class VKResponseCommand implements Command {
             String url = executeGet(uri);
             url = url.substring(13, url.length() - 2);
             try {
-                System.out.println(uri);
                 json = new JSONObject(url);
                 vkObj.setAccessToken(token);
                 userServ = new UserService();

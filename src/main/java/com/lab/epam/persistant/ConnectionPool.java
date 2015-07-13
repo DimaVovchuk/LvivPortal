@@ -1,6 +1,10 @@
 package com.lab.epam.persistant;
 
 
+import com.lab.epam.helper.ClassName;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -11,6 +15,8 @@ import java.util.Properties;
 import java.util.Vector;
 
 public class ConnectionPool {
+    private static final Logger loger = LogManager.getLogger(ClassName.getCurrentClassName());
+
     private Vector<Connection> availableConns = new Vector<Connection>();
     private Vector<Connection> usedConns = new Vector<Connection>();
     private String url;
@@ -50,6 +56,8 @@ public class ConnectionPool {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        loger.info("getConnection method");
+
         return conn;
     }
 
@@ -62,12 +70,14 @@ public class ConnectionPool {
             availableConns.removeElement(newConn);
         }
         usedConns.addElement(newConn);
+        loger.info("retrieve method");
         return newConn;
     }
 
     public synchronized void putback(Connection c) throws NullPointerException {
         if (c != null) {
             if (usedConns.removeElement(c)) {
+                loger.info("putback method");
                 availableConns.addElement(c);
             } else {
                 throw new NullPointerException(

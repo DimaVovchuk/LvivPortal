@@ -53,6 +53,7 @@ public class SignOutCommand implements Command {
         User user = null;
         if (login != null){
             user = userService.getUserByLogin(login);
+            loger.info("Get user by login " + login);
         }
 
         if (placeForWay != null){
@@ -63,7 +64,7 @@ public class SignOutCommand implements Command {
             if (placesDay != null && !placesDay.isEmpty()){
                 wayDays = placeForWay.getDayCount();
                 wayService.create(new Way(0, beginTrip, endTrip, wayDays));
-                //loger.info("Create way is successfull");
+                loger.info("Create way is successful");
                 Way way = wayService.getLastAdded();
                 if (user != null && way != null && wayDays > 0){
                     placeForWay.setWay_id(way.getId());
@@ -80,11 +81,11 @@ public class SignOutCommand implements Command {
                                 loger.info("Create castom place is successfull");
                             }*/
                         servicePlace.createPlaceWay(place.getId(), way.getId(), key, place.getPlace_time());
-                        loger.info("Create place_way is successfull");
+                        loger.info("Create place_way is successful");
                     }
 
                 }
-                loger.info("Create new way is successfull");
+                loger.info("Create new way is successful");
                 placeForWay.setIsSaved(true);
             }
         }else {

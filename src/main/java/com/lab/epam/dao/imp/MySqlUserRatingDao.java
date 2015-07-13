@@ -57,6 +57,8 @@ public class MySqlUserRatingDao extends AbstractJDBCDao<UserRating, Integer> {
         } finally {
             connection.putback(conn);
         }
+        loger.info("getUseRatingByCompanyAndUser method");
+
         return list.iterator().next();
     }
 

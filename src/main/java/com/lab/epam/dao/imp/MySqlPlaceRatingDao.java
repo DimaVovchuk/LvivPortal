@@ -60,6 +60,8 @@ public class MySqlPlaceRatingDao extends AbstractJDBCDao<PlaceRating, Integer> {
         } finally {
             connection.putback(conn);
         }
+        loger.info("getPlaceRatingByPlaceAndUser method");
+
         return list.iterator().next();
     }
 

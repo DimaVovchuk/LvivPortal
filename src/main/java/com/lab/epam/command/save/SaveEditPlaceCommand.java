@@ -40,7 +40,7 @@ public class SaveEditPlaceCommand implements Command {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        loger.info("Command SaveNewPlace.");
+        loger.info("Command SaveEditPlaceCommand.");
         HttpSession session = request.getSession();
         savePlaceID = (Integer) session.getAttribute("editPlaceID");
 

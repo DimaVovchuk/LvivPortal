@@ -2,8 +2,14 @@ package com.lab.epam.command.page.place;
 
 import com.lab.epam.command.controller.Command;
 import com.lab.epam.entity.*;
+import com.lab.epam.entity.Decoder;
+import com.lab.epam.entity.PlaceDescription;
+import com.lab.epam.entity.PlaceImage;
+import com.lab.epam.helper.ClassName;
 import com.lab.epam.service.PlaceDescriptionService;
 import com.lab.epam.service.PlaceImageService;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import com.lab.epam.service.PlaceService;
 import com.lab.epam.service.UserService;
 
@@ -19,9 +25,11 @@ import java.util.*;
  * Created by Admin on 02.07.2015.
  */
 public class PlaceSearchCommand implements Command {
+    private static final Logger loger = LogManager.getLogger(ClassName.getCurrentClassName());
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        loger.info("PlaceSearchCommand start");
 
         PlaceDescriptionService placeDescriptionService = new PlaceDescriptionService();
         PlaceImageService placeImageService = new PlaceImageService();

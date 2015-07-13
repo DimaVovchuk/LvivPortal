@@ -35,7 +35,7 @@ public class ConfirmCustomPlaceJSON implements Command {
     private HttpServletRequest request;
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        loger.info("ConfirmRecommendedPlaceJSON start");
+        loger.info("ConfirmCustomPlaceJSON start");
         HttpSession session = request.getSession();
         ResourceBundle resourceBandle = (ResourceBundle) session.getAttribute("bundle");
         Locale locale = resourceBandle.getLocale();

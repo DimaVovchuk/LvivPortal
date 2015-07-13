@@ -57,6 +57,8 @@ public class MySqlPlaceResponseDao extends AbstractJDBCDao<PlaceResponse, Intege
         } finally {
             connection.putback(conn);
         }
+        loger.info("getPlaceResponseByPlace method");
+
         return list;
     }
 
@@ -73,6 +75,8 @@ public class MySqlPlaceResponseDao extends AbstractJDBCDao<PlaceResponse, Intege
             if (count != 1) {
                 throw new PersistException("On delete modify more then 1 record: " + count);
             }
+            loger.info("deleteResponseByUserIdPlaceId method");
+
         } catch (Exception e) {
             loger.warn("Cant delete response from user with " + response_id + " response_id");
             throw new PersistException(e);

@@ -17,7 +17,7 @@ public class UserPlaceCommand implements Command {
     private static final Logger loger = LogManager.getLogger(ClassName.getCurrentClassName());
     public void execute(HttpServletRequest request,
                         HttpServletResponse response) throws ServletException, IOException {
-        loger.info("Command User Place.");
+        loger.info("Command UserPlaceCommand.");
         request.getRequestDispatcher("/views/pages/userPlace.jsp").forward(request, response);
 
     }

@@ -285,6 +285,7 @@ public class PlaceInfortmationCommand implements Command {
         request.setAttribute("placeRatings", placeRatings);
 
         //loger.info("Command Place Info.");
+        loger.info("Command PlaceInfortmationCommand");
         request.getRequestDispatcher("/views/pages/info.jsp").forward(request, response);
 
     }

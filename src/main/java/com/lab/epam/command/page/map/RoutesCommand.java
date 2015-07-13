@@ -119,6 +119,7 @@ public class RoutesCommand implements Command {
         }
         Collection<Place> values = sorted.values();
         List<Place> list = new ArrayList<>(values);
+        loger.info("Places sorting");
         return list;
     }
 }

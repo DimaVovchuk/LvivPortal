@@ -49,7 +49,7 @@ public class DeleteImageCommand implements Command {
                     if (isInFolder(reference, request) && placeImageList.get(index).getDeleted() == false)
                         referenceList.add(placeImageList.get(index));
                 }
-                loger.info("All not deletet photo is succesful getting.");
+                loger.info("All not deleted photo is successful getting.");
             } else {
                 PlaceImage placeImage = new PlaceImage(editPlaceID, "default_building.jpg");
                 referenceList.add(placeImage);

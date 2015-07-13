@@ -50,6 +50,7 @@ public class SavePlaceCommand implements Command {
                 is_saved = 1;
             }
         }
+        loger.info("Command SavePlaceCommand.");
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write(new Gson().toJson(is_saved));

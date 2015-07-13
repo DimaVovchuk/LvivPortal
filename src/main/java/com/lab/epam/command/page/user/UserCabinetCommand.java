@@ -94,7 +94,7 @@ public class UserCabinetCommand implements Command {
 
         //loger.info("Page is " + page);
 
-        loger.info("Command User Cabinet.");
+        loger.info("Command UserCabinetCommand");
         request.getRequestDispatcher(page).forward(request, response);
     }
 

@@ -26,6 +26,8 @@ public class CommercialJSONCommand implements Command{
     private static final Logger loger = LogManager.getLogger(ClassName.getCurrentClassName());
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        loger.info("CommercialJSONCommand start.");
+
         UserService userService = new UserService();
         CompanyGuideImage companyGuideImage = new CompanyGuideImage();
         List<User> allCommercialUser = new ArrayList<>();

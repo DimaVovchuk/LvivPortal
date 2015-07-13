@@ -50,7 +50,7 @@ public class DeleteDayCommand implements Command {
         } else{
             userDataTrip = null;
         }
-
+        loger.info("Command DeleteDayCommand");
         session.setAttribute("userDataTrip", userDataTrip);
         response.sendRedirect("/portal?command=userWays");
 

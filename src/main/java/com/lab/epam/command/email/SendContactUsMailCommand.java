@@ -48,9 +48,11 @@ public class SendContactUsMailCommand implements Command {
                 if ("mail".equals(paramNames[2])) {
                     message = "Name: " + name + "  E-mail: " + email + "  Message: " + message;
                     SendEmail.sender(theme, message, "mail.for.blablabla@gmail.com");
+                    loger.info("Contact us message with " + theme + " theme sent on email");
                 } else {
                     message = "Ім'я: " + name + "  Електронна пошта: " + email + "  Повідомлення: " + message;
                     SendEmail.sender(theme, message, "mail.for.blablabla@gmail.com");
+                    loger.info("Contact us message with " + theme + " theme sent on email");
                 }
                 loger.info("Command SendContactUsMailCommand");
                 response.sendRedirect("portal?command=about");

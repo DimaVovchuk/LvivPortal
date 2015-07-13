@@ -63,6 +63,8 @@ public class AddImageResponseCommand implements Command {
             isCreated = 1;
         }
 
+        loger.info("Command AddImageResponseCommand");
+
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write(new Gson().toJson(isCreated));

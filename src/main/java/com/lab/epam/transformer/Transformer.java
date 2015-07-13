@@ -1,6 +1,9 @@
 package com.lab.epam.transformer;
 
+import com.lab.epam.helper.ClassName;
 import com.lab.epam.md5.MD5Creator;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
@@ -17,6 +20,7 @@ import java.util.Map.Entry;
 
 
 public class Transformer<T> {
+	private static final Logger loger = LogManager.getLogger(ClassName.getCurrentClassName());
 
 	private Class<T> clazz;
 	PreparedStatement ps;
@@ -36,6 +40,7 @@ public class Transformer<T> {
 				| NoSuchMethodException e) {
 			e.printStackTrace();
 		}
+		loger.info("getTableName method");
 		return tableName;
 	}
 
@@ -54,6 +59,7 @@ public class Transformer<T> {
 				e.printStackTrace();
 			}
 		}
+		loger.info("getObjectColumns method");
 		return columns;
 	}
 
@@ -83,7 +89,8 @@ public class Transformer<T> {
 		 List<String> list = new ArrayList<>(); 
 		 list.add(field);
 		 list.add(values);
-		 
+		loger.info("setRowInDB method");
+
 		return list;
 	}
 
@@ -117,6 +124,7 @@ public class Transformer<T> {
 		} catch (SecurityException | IllegalArgumentException | SQLException e) {
 			e.printStackTrace();
 		}
+		loger.info("rowToObject method");
 		return list;
 	}
 

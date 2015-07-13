@@ -25,6 +25,7 @@ public class AddDayCommand implements Command {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        loger.info("Command AddDayCommand");
 
         HttpSession session = request.getSession();
         UserDataAboutTrip userDataTrip = (UserDataAboutTrip)session.getAttribute("userDataTrip");

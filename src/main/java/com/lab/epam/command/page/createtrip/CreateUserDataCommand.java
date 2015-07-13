@@ -37,7 +37,7 @@ public class CreateUserDataCommand implements Command {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        loger.info("Command CreateUserDataCommand");
         UserDataAboutTrip userDataTrip = new UserDataAboutTrip();
         String stringDateFormat = "dd MMMM, yyyy";
         SimpleDateFormat format = new SimpleDateFormat(stringDateFormat, Locale.US);
