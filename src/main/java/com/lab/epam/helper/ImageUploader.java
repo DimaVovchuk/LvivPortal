@@ -144,7 +144,7 @@ public class ImageUploader {
         factory.setRepository(folder);
         ServletFileUpload upload = new ServletFileUpload(factory);
 
-          long imageSize = 1024000;
+          long imageSize = 2097152;
         upload.setSizeMax(imageSize);
 
         List items = upload.parseRequest(request);

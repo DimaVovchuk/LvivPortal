@@ -34,7 +34,6 @@
 
             <form action="portal/upload" enctype="multipart/form-data" method="post">
                 <c:set var="command" scope="session" value="upLoad"/>
-                <c:set var="typePhoto" scope="session" value="userFoto"/>
                 <div class="center-align">
                     <div class="file-field input-field" style="height: 45px">
                         <div class="btn cyan darken-2">
