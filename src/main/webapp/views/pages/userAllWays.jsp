@@ -29,11 +29,14 @@
 <div class="user-places" id="user-places">
     <div class="places">
         <div class="section">
-    <h3 class="center-align"><cdg:l18n key="way.head"/></h3>
+    <h3 class="center-align"><cdg:l18n key="get.all.route"/></h3>
 
     <div class="row">
         <div class="col l9 m8 s7">
+            <div id="place-page-container" class="row z-depth-2">
 
+                <div class="place-page-navigation z-depth-1"></div>
+                <div class="place-page-content">
             <c:choose>
                 <c:when test="${waysPlaceImage != null}">
 
@@ -64,8 +67,7 @@
 
                                 <div class="card-content">
                                     <span class="card-title activator grey-text text-darken-4"><div align="center">
-
-                                        <h6><cdg:l18n key="way.name"/> - ${waysPlaceImage[i].name}</h6>
+                                        <h4 style="color: #0097a7;"><cdg:l18n key="way.name"/> - ${waysPlaceImage[i].name}</h4>
                                         <c:if test="${waysPlaceImage[i].beginDate!=null}">
                                         <h6>${waysPlaceImage[i].beginDate} - ${waysPlaceImage[i].endDate}</h6>
                                         </c:if>
@@ -105,7 +107,8 @@
                 </c:otherwise>
             </c:choose>
         </div>
-
+</div>
+        </div>
 
         <div class="col l3 m4 s5">
 

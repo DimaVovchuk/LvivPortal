@@ -87,8 +87,12 @@ public class SaveWayCommand implements Command {
                     placesDayCurrent = 0;
                     for (int i = 1; i <= userWay.getWay_days(); i++) {
                         List<Place> place = servicePlace.getPlaceByWayIdDayNumber(userWay.getId(), i);
-                        placeCount += place.size();
-                        placesDayCurrent += placesDayCountPlace.get(i).size();
+                        if (place != null){
+                            placeCount += place.size();
+                        }
+                        if (placesDayCountPlace.get(i) != null && !placesDayCountPlace.get(i).isEmpty()){
+                            placesDayCurrent += placesDayCountPlace.get(i).size();
+                        }
                         if (placeCount != placesDayCurrent){
                             //loger.info("Plays in day are differend " + placeCount);
                             break;
@@ -101,26 +105,33 @@ public class SaveWayCommand implements Command {
                 }
             }
             Integer equelsDay = 0;
+            Integer countDayPlace = 0;
             if (!userWaysCountPlace.isEmpty()){
                 for (Way userWay: userWaysCountPlace){
                    // equelsDay = 0;
                     for (int i = 1; i <= userWay.getWay_days(); i++) {
                         List<Place> place = servicePlace.getPlaceByWayIdDayNumber(userWay.getId(), i);
                         List<Place> placesDay = placesDayCountPlace.get(i);
+                        if (placesDay != null && !placesDay.isEmpty()){
+                            //countDayPlace++;
+                        }
                         Integer countEquels = 0;
-                        for (Place pl: place){
-                            if (placesDay.contains(pl)){
-                                loger.info("You have equels place DB in " + pl.getId() + " in way " + userWay.getId());
-                                countEquels++;
+                        if (place != null) {
+                            for (Place pl : place) {
+                                if (placesDay.contains(pl)) {
+                                    loger.info("You have equels place DB in " + pl.getId() + " in way " + userWay.getId());
+                                    countEquels++;
+                                }
                             }
+
+                            if (countEquels == place.size()) {
+                                loger.info("You have equels day DB in " + userWay.getId());
+                                equelsDay++;
+                            }
+                            countEquels = 0;
                         }
-                        if (countEquels == place.size()){
-                            loger.info("You have equels day DB in " + userWay.getId());
-                            equelsDay++;
-                        }
-                        countEquels = 0;
                     }
-                    if (equelsDay == placeForWay.getDayCount()){
+                    if (equelsDay == placesDayCountPlace.size()){
                         isEquals = true;
                         indicatorSaved = 2;
                         loger.info("You have equels way in DB");
@@ -159,6 +170,7 @@ public class SaveWayCommand implements Command {
                         if (way_id != null) {
                             placeForWay.setWay_id(way_id);
                             placeForWay.setIsSaved(true);
+                            placeForWay.setRecommended(false);
                             indicatorSaved = 0;
                             loger.info("You create new way in DB");
                         }

@@ -33,8 +33,11 @@
 
         <div class="row">
           <div class="col l12 m18 s36">
-            <div id="recomended-way-info-collection">
+            <div id="place-page-container" class="row z-depth-2">
 
+              <div class="place-page-navigation z-depth-1"></div>
+            <div id="recomended-way-info-collection" class="place-page-content">>
+</div>
             </div>
           </div>
 
@@ -90,9 +93,10 @@
 
       </div>
       <div class="card-content">
-                                    <span class="card-title activator grey-text text-darken-4"><div align="center">
-                                      <p><h6><cdg:l18n key="way.name"/> - {{name}}</h6></p>
-                                      <p><h6><cdg:l18n key="way.rating"/> {{rating_way}}</h6></p>
+                                    <span class="card-title activator grey-text text-darken-4" style="padding-left: 0px;"><div align="center">
+                                      <h4 style="color: #0097a7;"><cdg:l18n key="way.name"/> - {{name}}</h4>
+                                        <cdg:l18n key="way.rating"/> {{rating_way}}
+
                                       <p><h6><a a class="btn modal-trigger waves-effect waves-light cyan darken-2" onclick="$('#way_id').val('{{id}}')"
                                                 href="#get-direction"><cdg:l18n key="get.directions"/></a></h6></p>
                                     </div></span>
@@ -126,18 +130,21 @@
       <div class="card-reveal">
         <span class="card-title grey-text text-darken-4"><cdg:l18n key="places.way"/></span>
         <p>
-          {{#each place}}
-
-
-          <p><a href="portal?command=placeInformation&place_id={{place_id}}"><c:out
-                  value="{{name}}"/></a></p>
-
-        {{/each}}
+          {{#eachInMap place}}
+            <b><cdg:l18n key="map.route.day"/> {{key}}</b><br>
+            {{#each value}}
+              <a href="portal?command=placeInformation&place_id={{id}}"><c:out
+                      value="{{name}}"/></a>
+            {{/each}}
+            <br>
+          {{/eachInMap}}
         </p>
       </div>
     </div>
   </div>
   {{/each}}
+
+
 </script>
 
 

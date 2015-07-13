@@ -42,7 +42,7 @@
                                                href="/portal?command=deleteDay&day=${daysPlaceImage[i].day}" >
                                                 <i class="material-icons">delete</i>
                                             </a>
-                                            <img class="activator"
+                                            <img class="activator responsive-img place-img"
                                                  src="${pageContext.request.contextPath}/upload/photo/${daysPlaceImage[i].imageReference}"
                                                  style="width: 100%">
                                         </div>
@@ -135,17 +135,6 @@
     <jsp:include page="/views/elements/footer.jsp"/>
     <jsp:include page="/views/modals/sure-save-way.jsp"/>
     <jsp:include page="/views/modals/name-way.jsp"/>
-    <script>
-        $(".match-col").matchHeight({
-            property: 'height'
-        });
-    </script>
-
-    <script>
-        $(".match-colum").matchHeight({
-            property: 'height'
-        });
-    </script>
 
     <script>
         $('.datepicker').pickadate({
@@ -160,6 +149,35 @@
             document.getElementById("demo").innerHTML = x;
         }
     </script>
+
+
+<script>
+    $(".match-colum").matchHeight({
+        property: 'height'
+    });
+</script>
+
+<script>
+    var matchColumn = function () {
+        $(".match-col").matchHeight({
+            property: 'height'
+        });
+    };
+
+    var imgHeight = function () {
+        var img = $('.place-img');
+        var width = img.width();
+        img.css({
+            'height': width + 'px'
+        });
+    };
+
+    $(function () {
+        imgHeight();
+        matchColumn();
+    });
+
+</script>
 
     <script src="${pageContext.request.contextPath}/js/pages/places.js"></script>
 

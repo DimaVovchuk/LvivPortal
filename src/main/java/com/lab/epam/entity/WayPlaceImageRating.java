@@ -3,6 +3,7 @@ package com.lab.epam.entity;
 import java.sql.Date;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Admin on 01.07.2015.
@@ -13,20 +14,12 @@ public class WayPlaceImageRating {
     private String imageReference;
     private Date beginDate;
     private Date endDate;
-    private List<PlaceDescription> place;
+    //private List<PlaceDescription> place;
     private Integer rating;
     private Integer rating_way;
+    public Map<Integer, List<PlaceDescription>> place;
 
-    public WayPlaceImageRating(Integer id, String imageReference, Date beginDate, Date endDate, List<PlaceDescription> place, Integer rating, Integer rating_way, String name) {
-        this.id = id;
-        this.imageReference = imageReference;
-        this.beginDate = beginDate;
-        this.endDate = endDate;
-        this.place = place;
-        this.rating = rating;
-        this.rating_way = rating_way;
-        this.name = name;
-    }
+
 
     public String getName() {
 
@@ -42,15 +35,24 @@ public class WayPlaceImageRating {
     public WayPlaceImageRating() {
     }
 
-    public WayPlaceImageRating(Integer id, String imageReference, Date beginDate, Date endDate, List<PlaceDescription> place, Integer rating, Integer rating_way) {
+    public Map<Integer, List<PlaceDescription>> getPlace() {
+        return place;
+    }
+
+    public void setPlace(Map<Integer, List<PlaceDescription>> place) {
+        this.place = place;
+    }
+
+    public WayPlaceImageRating(Integer id, String imageReference, Date beginDate, Date endDate, Integer rating, Integer rating_way, Map<Integer, List<PlaceDescription>> place, String name) {
 
         this.id = id;
         this.imageReference = imageReference;
         this.beginDate = beginDate;
         this.endDate = endDate;
-        this.place = place;
         this.rating = rating;
         this.rating_way = rating_way;
+        this.place = place;
+        this.name = name;
     }
 
     public Integer getId() {
@@ -84,14 +86,6 @@ public class WayPlaceImageRating {
 
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
-    }
-
-    public List<PlaceDescription> getPlace() {
-        return place;
-    }
-
-    public void setPlace(List<PlaceDescription> place) {
-        this.place = place;
     }
 
     public Integer getRating_way() {

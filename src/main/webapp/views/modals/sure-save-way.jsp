@@ -57,6 +57,24 @@
         </form>
       </c:when>
 
+      <c:when test="${userDataTrip.recommended == true}">
+        <%--<p><cdg:l18n key="sure.save"/></p>--%>
+        <p><cdg:l18n key="name.route"/></p>
+        <form id="save-route-json" action="#" method="post">
+          <input value="way" name="name" type="text"/>
+          <label for="name"><cdg:l18n key="plan.name"/></label>
+          <div class="ok-footer">
+            <div class="modal-footer">
+                <%--<a class="btn modal-action modal-close modal-trigger waves-effect waves-light cyan darken-2" data-target="name-way">Ok--%>
+                <%--</a>--%>
+              <button class="btn modal-action modal-close waves-effect waves-light cyan darken-2" type="submit" name="ok" value="ok">OK</button>
+              <a class="btn modal-action modal-close  waves-effect waves-light cyan darken-2">Cancel</a>
+
+            </div>
+          </div>
+        </form>
+      </c:when>
+
       <c:otherwise>
         <div class="ok-footer">
           <div class="modal-footer">
@@ -64,7 +82,7 @@
             <a onClick="updateWay(this);" class="btn modal-action modal-close modal-trigger waves-effect waves-light cyan darken-2" href="javascript:"  rel="portal?command=updateWay">
               <cdg:l18n key="update"/>
             </a>
-            <a onClick="saveWay(this);" class="btn modal-action modal-close modal-trigger waves-effect waves-light cyan darken-2" href="javascript:"  rel="portal?command=saveWay">
+            <a class="btn modal-trigger waves-effect waves-light cyan darken-2" data-target="ololololololo">
               <cdg:l18n key="save"/>
             </a>
             <a class="modal-action modal-close btn waves-effect waves-light cyan darken-2">
@@ -77,7 +95,22 @@
   </div>
 </div>
 
+<div class="modal" id="ololololololo">
+  <div id="user-trip-save-singin" class="modal-content">
+    <p><cdg:l18n key="name.route"/></p>
+    <form id="save-route-after-json" action="#" method="post">
+      <input value="way" id="name1" name="name" type="text"/>
+      <label for="name1"><cdg:l18n key="plan.name"/></label>
+      <div class="ok-footer">
+        <div class="modal-footer">
+          <button class="btn waves-effect waves-light cyan darken-2" type="submit" id="create-name-saved">OK</button>
+          <a class="btn waves-effect waves-light cyan darken-2" onclick="cancelSavePlace();">Cancel</a>
+        </div>
+      </div>
+    </form>
+  </div>
 
+</div>
 
 <script>
 
@@ -94,9 +127,15 @@
       });
     });
   };
+  var cancelSavePlace = function () {
+    $('#ololololololo').closeModal();
+    $('#sure-save').closeModal();
+  };
 
   var savePlaceafter = function () {
     $('#save-route-after-json').on('submit', function (e) {
+      $('#ololololololo').closeModal();
+      $('#sure-save').closeModal();
       e.preventDefault();
       e.stopImmediatePropagation();
       $.ajax({

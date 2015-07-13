@@ -131,6 +131,9 @@ public class CreateUserDataCommand implements Command {
             }
         } else {
             userDataTrip.setDontKnowDate(true);
+            Map<Integer, List<Place>> places = new HashMap<>();
+            places.put(1, new ArrayList<Place>());
+            userDataTrip.setPlaceDay(places);
         }
 
         if (placeArrive != null) {
