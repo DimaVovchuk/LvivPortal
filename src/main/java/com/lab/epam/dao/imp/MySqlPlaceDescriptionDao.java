@@ -22,8 +22,8 @@ public class MySqlPlaceDescriptionDao extends AbstractJDBCDao<PlaceDescription, 
     private static final Logger loger = LogManager.getLogger(ClassName.getCurrentClassName());
     private static final String GET_LOCALE_DESCRIPTIONS_BY_PLACE = "SELECT * FROM place_description WHERE place_id = ? AND locale = ? AND deleted = false";
     private static final String GET_ALL_INFORMATION_BY_PLACE = "SELECT * FROM place_description WHERE place_id = ?";
-    private static final String GET_ALL_INFORMATION_BY_LANGUAGE = "SELECT * FROM place_description WHERE locale = ?";
-    private static final String GET_PLACE_BY_SEARCH = "SELECT * FROM place_description WHERE name LIKE '";
+    private static final String GET_ALL_INFORMATION_BY_LANGUAGE = "SELECT * FROM place_description WHERE locale = ? AND deleted = false";
+    private static final String GET_PLACE_BY_SEARCH = "SELECT * FROM place_description WHERE deleted = false AND name LIKE '";
 
 
     ConnectionPool connection = ConnectionManager.getConnection();

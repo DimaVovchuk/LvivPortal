@@ -30,6 +30,16 @@ public class PlaceResponseService {
         }
     }
 
+    public void deleteResponseByUserIdPlaceId(Integer response_id) {
+        try {
+            mySqlPlaceResponseDao.deleteResponseByUserIdPlaceId(response_id);
+
+        } catch (PersistException e) {
+            e.printStackTrace();
+            loger.warn("Cant delet response by response_id = " + response_id);
+        }
+    }
+
     public PlaceResponse getByPK(Integer key) throws PersistException{
         return mySqlPlaceResponseDao.getByPK(key);
     }

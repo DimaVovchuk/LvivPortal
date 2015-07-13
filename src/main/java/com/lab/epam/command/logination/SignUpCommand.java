@@ -29,7 +29,7 @@ public class SignUpCommand implements Command {
     private static final String CHECK_LOGIN = "^[^<>/{}\\s?!;]+$";
     private static final String CHECK_EMAIL = "(\\w+@[a-zA-Z_]+?\\.[a-zA-Z]{2,6})";
     private static final String CHECK_PASSWORD = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,15})";
-    private static final String CHECK_PHONE = "([0-9]{6,15})";
+    private static final String CHECK_PHONE = "((^(8-?|\\+?7-?|\\+38-?|38-?|)?(\\(?\\d{3}\\)?)-?(\\d-?){6}\\d$)|^(\\d-?){6}\\d$)";
     private static final String CHECK_AGENCY_NAME = "^[^<>/{}]+$";
 
     private static boolean checkData(String testString, String pattern) {
@@ -108,6 +108,14 @@ public class SignUpCommand implements Command {
                 errorFlag = true;
                 loger.warn("Company Name is empty");
             }
+        }
+
+        User forChecPhone = userService.getUserByPhone(phone);
+        loger.warn("forChecPhone " + forChecPhone);
+        if (forChecPhone.getId() != null) {
+            session.setAttribute("phoneError", 1);
+            errorFlag = true;
+            loger.warn("Such phone is exist");
         }
 
         if (login == "") {

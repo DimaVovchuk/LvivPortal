@@ -140,6 +140,7 @@ public class SaveNewPlaceCommand implements Command {
         }
 
         if (errorFlag) {
+            response.sendRedirect("/portal?command=addNewPlace");
         } else {
             Place place = new Place();
             place.setLatitude(addPlaceLatitude);

@@ -154,19 +154,19 @@ public class UserWaysCommand implements Command {
         return placeImages;
     }
 
-    private List<WayPlaceImage> getWayPlaceImageList(List<Way> ways,  Map<Integer, List<PlaceDescription>> way_place, Map<Integer,PlaceImage> wayPlaceImages){
-        List<WayPlaceImage> list = new ArrayList<>();
-        if(ways != null && !ways.isEmpty()){
-            for (Way way : ways) {
-                WayPlaceImage item = new WayPlaceImage();
-                item.setId(way.getId());
-                item.setImageReference(wayPlaceImages.get(way.getId()).getReference());
-                item.setPlace(way_place.get(way.getId()));
-                list.add(item);
-            }
-        }
-        return list;
-    }
+//    private List<WayPlaceImage> getWayPlaceImageList(List<Way> ways,  Map<Integer, List<PlaceDescription>> way_place, Map<Integer,PlaceImage> wayPlaceImages){
+//        List<WayPlaceImage> list = new ArrayList<>();
+//        if(ways != null && !ways.isEmpty()){
+//            for (Way way : ways) {
+//                WayPlaceImage item = new WayPlaceImage();
+//                item.setId(way.getId());
+//                item.setImageReference(wayPlaceImages.get(way.getId()).getReference());
+//                item.setPlace(way_place.get(way.getId()));
+//                list.add(item);
+//            }
+//        }
+//        return list;
+  //  }
 
     private List<DayPlaceImage> getDayPlaceImageList(Map<Integer, List<PlaceDescription>> place, Map<Integer,List<PlaceImage>> placeImages){
         List<DayPlaceImage> list = new ArrayList<>();

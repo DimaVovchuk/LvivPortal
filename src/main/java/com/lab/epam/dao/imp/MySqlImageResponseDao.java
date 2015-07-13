@@ -24,7 +24,8 @@ public class MySqlImageResponseDao  extends AbstractJDBCDao<ImageResponse, Integ
     private static final Logger loger = LogManager.getLogger(ClassName.getCurrentClassName());
 
     ConnectionPool connection = ConnectionManager.getConnection();
-    private static final String GET_IMAGE_RESPONSE_BY_IMAGE_ID = "SELECT * FROM image_response WHERE image_id = ?";
+    private static final String GET_IMAGE_RESPONSE_BY_IMAGE_ID = "SELECT * FROM image_response WHERE deleted = false AND image_id = ?";
+    private static final String DELETE_RESPONSE_BY_USER_ID_IMAGE_ID = "UPDATE image_response SET deleted = true WHERE id = ?";
 
     private class PersistGroup extends ImageResponse {
         public void setId(int id) {
@@ -53,6 +54,29 @@ public class MySqlImageResponseDao  extends AbstractJDBCDao<ImageResponse, Integ
             connection.putback(conn);
         }
         return list;
+    }
+
+
+    public void deleteResponseByUserIdImageId(Integer response_id) throws PersistException {
+
+        Connection conn = connection.retrieve();
+        try (PreparedStatement statement = conn.prepareStatement(DELETE_RESPONSE_BY_USER_ID_IMAGE_ID)) {
+            try {
+                statement.setObject(1, response_id);
+            } catch (Exception e) {
+                throw new PersistException(e);
+            }
+            int count = statement.executeUpdate();
+            if (count != 1) {
+                throw new PersistException("On delete modify more then 1 record: " + count);
+            }
+        } catch (Exception e) {
+            loger.warn("Cant delete response from user with " + response_id + " response_id");
+            throw new PersistException(e);
+        } finally {
+            connection.putback(conn);
+        }
+
     }
 
     public Class getClassModel() {

@@ -24,7 +24,7 @@ public class MySqlUserDao extends AbstractJDBCDao<User, Integer> {
     public static final String checkPhoneSQL = "SELECT * FROM USER WHERE phone=?";
     public static final String checkLoginSQL = "SELECT * FROM USER WHERE login=?";
     public static final String getRoleID = "SELECT role_id FROM USER WHERE login=?";
-    public static final String getUserByRole = "SELECT * FROM USER WHERE role_id=?";
+    public static final String getUserByRole = "SELECT * FROM USER WHERE role_id=? AND deleted = false AND status_id = 1";
     public static final String getUserByVkId = "SELECT * FROM USER WHERE vk_id=?";
     public static final String getQuantityOfAllUsers = "SELECT COUNT(*) FROM user;";
     public static final String getQuantityUsersByRoleId = "SELECT COUNT(role_id) FROM user where role_id = ? GROUP BY role_id";

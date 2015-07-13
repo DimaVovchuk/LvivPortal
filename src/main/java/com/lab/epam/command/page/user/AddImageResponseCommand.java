@@ -2,6 +2,7 @@ package com.lab.epam.command.page.user;
 
 import com.google.gson.Gson;
 import com.lab.epam.command.controller.Command;
+import com.lab.epam.entity.Decoder;
 import com.lab.epam.entity.ImageResponse;
 import com.lab.epam.entity.ImageResponseAvatar;
 import com.lab.epam.entity.User;
@@ -53,6 +54,7 @@ public class AddImageResponseCommand implements Command {
 
 
         if (image_id != 0 && description != null && !description.equals("") && user_id != 0){
+            description = Decoder.decodeStringUtf8(description);
             ImageResponse imageResponse = new ImageResponse();
             imageResponse.setImage_id(image_id);
             imageResponse.setDescription(description);

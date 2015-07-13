@@ -148,7 +148,7 @@ public class PlaceInfortmationCommand implements Command {
             loger.info("User, who send comment has login " + login);
             Decoder decoder = new Decoder();
             message = decoder.decodeStringUtf8(message);
-            if (user != null) {
+            if (user != null && !message.equals("")) {
                 placeResponseService.create(new PlaceResponse(message, user.getId(), place_id));
                 place_rating = placeRatingService.getPlaceRatingByPlaceAndUser(place_id, user.getId());
                 if (place_rating != null) {
@@ -299,6 +299,8 @@ public class PlaceInfortmationCommand implements Command {
                         item.setLogin(user.getLogin());
                         item.setDescription(placeResponse.getDescription());
                         item.setReference(userImage.getReference());
+                        item.setPlace_id(placeResponse.getPlace_id());
+                        item.setResponse_id(placeResponse.getId());
                         list.add(item);
                     }
                 }
