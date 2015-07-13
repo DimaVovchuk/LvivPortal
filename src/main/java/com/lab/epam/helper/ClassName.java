@@ -13,7 +13,7 @@ public class ClassName {
         try {
             throw new RuntimeException();
         } catch (RuntimeException e) {
-            loger.info("Get class name: " + e.getStackTrace()[1].getClassName());
+//            loger.info("Get class name: " + e.getStackTrace()[1].getClassName());
             return e.getStackTrace()[1].getClassName();
         }
     }

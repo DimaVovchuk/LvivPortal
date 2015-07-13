@@ -1,9 +1,5 @@
 package com.lab.epam.filter;
 
-import com.lab.epam.helper.ClassName;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
-
 import javax.servlet.*;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -16,8 +12,6 @@ import java.util.ResourceBundle;
  * Created by Dima on 10-Jun-15.
  */
 public class I18NFilter implements Filter {
-    private static final Logger loger = LogManager.getLogger(ClassName.getCurrentClassName());
-
     public void destroy() {
     }
 
@@ -40,9 +34,7 @@ public class I18NFilter implements Filter {
             }
             bundle = ResourceBundle.getBundle("localization/bundle", locale);
             session.setAttribute("bundle", bundle);
-
         }
-        loger.info("getAllPlaceImageByPlaceId method");
         session.setAttribute("language", bundle.getLocale().toString());
         chain.doFilter(req, resp);
     }
