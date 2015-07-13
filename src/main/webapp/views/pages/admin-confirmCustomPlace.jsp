@@ -91,6 +91,10 @@
     var updatePlaces = function (data) {
         var table = $('#admin-page-table').DataTable({
             language: {
+                emptyTable: "<cdg:l18n key="datatables.emptytable"/>",
+                info: "<cdg:l18n key="datatables.info"/>",
+                infoEmpty: "<cdg:l18n key="datatables.infoempty"/>",
+                infoFiltered: "<cdg:l18n key="datatables.infofiltered"/>",
                 lengthMenu: '<span style="color: #000; font-size: 15px"><cdg:l18n key="admin.tabledisplay"/></span>' +
                 '<select id="table-display-number" class="browser-default">' +
                 '   <option value="10">10</option>' +
@@ -99,10 +103,13 @@
                 '   <option value="100">100</option>' +
                 '</select>',
                 search: '<span style="color: #000; font-size: 15px"><cdg:l18n key="button.search"/></span>',
-                zeroRecords: "Nothing found - sorry",
-                info: "Showing page _PAGE_ of _PAGES_",
-                infoEmpty: "No records available",
-                infoFiltered: "(filtered from _MAX_ total records)"
+                zeroRecords: '<cdg:l18n key="datatables.zerorecords"/>',
+                paginate: {
+                    first: '<cdg:l18n key="datatables.paginate.first"/>',
+                    last: '<cdg:l18n key="datatables.paginate.last"/>',
+                    next: '<cdg:l18n key="datatables.paginate.next"/>',
+                    previous: '<cdg:l18n key="datatables.paginate.previous"/>'
+                }
             },
             columns: [
                 {"width": "10%"},
