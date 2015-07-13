@@ -175,7 +175,7 @@
             key="map.route.minutes"/>
     </a>
     <a href="#" id="map-day${dayNumber}" data-day="${dayNumber}" data-show="1"
-       class="btn cyan darken-2 map-day-trigger">Show on map</a>
+       class="btn cyan darken-2 map-day-trigger"><cdg:l18n key="map.route.show"/></a>
     <div id="places-day{{dayNumber}}" class="collection animated fadeInLeft">
         {{#each places}}
         <a href="#" onclick="myclick('{{placeId}}')" class="collection-item black-text">
