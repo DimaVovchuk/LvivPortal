@@ -86,10 +86,10 @@
 <jsp:include page="/views/elements/footer.jsp"/>
 
 <jsp:include page="/views/modals/addPlaceToRoute.jsp"/>
-<jsp:include page="/views/modals/place-is-added.jsp"/>
-<jsp:include page="/views/modals/place-is-in-db.jsp"/>
+<%--<jsp:include page="/views/modals/place-is-added.jsp"/>--%>
+<%--<jsp:include page="/views/modals/place-is-in-db.jsp"/>--%>
 
-<script src="${pageContext.request.contextPath}/js/pages/places.js"></script>
+<%--<script src="${pageContext.request.contextPath}/js/pages/places.js"></script>--%>
 <script src="${pageContext.request.contextPath}/js/ajax_search.js"></script>
 <%--<jsp:include page="/views/modals/add-place-to-route.jsp"/>--%>
 

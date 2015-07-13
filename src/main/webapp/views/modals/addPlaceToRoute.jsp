@@ -28,7 +28,10 @@
 
       <p class="range-field">
         <input type="range" name="timePlace" id="timePlace" min="0" value="0" step="15" max="240"/>
-        <span><span id="timeValue"></span> <cdg:l18n key="map.route.minutes"/></span>
+        <span id="not-get-time-place"><span id="hoursValue"></span> <cdg:l18n key="map.route.hours"/>
+        <span id="timeValue"></span> <cdg:l18n key="map.route.minutes"/>
+        </span><br>
+        <label for="not-get-time-place"><cdg:l18n key="not.change.time.message"/></label>
       </p>
       <br>
       <button class="btn modal-action modal-close waves-effect waves-light cyan darken-2" name="submit" type="submit"

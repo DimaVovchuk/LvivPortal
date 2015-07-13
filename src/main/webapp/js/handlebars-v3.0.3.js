@@ -4069,6 +4069,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return new SourceNode(loc.start.line, loc.start.column, this.srcFile, chunk);
 	  },
 
+
 	  functionCall: function functionCall(fn, type, params) {
 	    params = this.generateList(params);
 	    return this.wrap([fn, type ? '.' + type + '(' : '(', params, ')']);
@@ -4128,4 +4129,13 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ }
 /******/ ])
 });
+
+Handlebars.registerHelper( 'eachInMap', function ( map, block ) {
+	var out = '';
+	Object.keys( map ).map(function( prop ) {
+		out += block.fn( {key: prop, value: map[ prop ]} );
+	});
+	return out;
+} );
+
 ;

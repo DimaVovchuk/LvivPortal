@@ -33,7 +33,7 @@
         <div class="col l8 offset-l2 m10 offset-m1 s12">
             <div class="card z-depth-2">
                 <div class="card-content">
-                    <form action="/portal?command=send" method="post">
+                    <form action="#" id="send-about" method="post">
                         <div class="row">
                             <div class="col l8 offset-l2 m10 offset-m1 s12">
                                 <h5 class="center-align"><cdg:l18n key="about.contactus"/></h5>
@@ -86,6 +86,30 @@
 </div>
 
 <jsp:include page="/views/elements/footer.jsp"/>
+
+<script>
+    $('#send-about').on('submit', function (e) {
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            $.ajax({
+                type: 'post',
+                url: window.location.origin + '/portal?command=send',
+                data: $('#send-about').serialize(),
+                success: loadTostSend
+            });
+        });
+    var loadTostSend = function (data) {
+        if (data == "1") {
+            Materialize.toast('<cdg:l18n key="message.about"/>', 4000);
+        }
+        if (data == "0") {
+            Materialize.toast('<cdg:l18n key="message.about.not.all"/>', 4000);
+        }
+        if (data == "2") {
+            Materialize.toast('<cdg:l18n key="message.about.fail"/>', 4000);
+        }
+    }
+</script>
 
 </body>
 </html>

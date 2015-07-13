@@ -127,10 +127,16 @@ var imgHeight = function () {
 var initRangeListeners = function () {
     var timePlace = $("#timePlace");
     timePlace.mousemove(function () {
-        $("#timeValue").html($(this).val());
+        var hours = parseInt(($(this).val()/60));
+        var minats = $(this).val() - hours*60;
+        $("#timeValue").html(minats);
+        $("#hoursValue").html(hours);
     });
     timePlace.change(function () {
-        $("#timeValue").html($(this).val());
+        var hours = parseInt(($(this).val()/60));
+        var minats = $(this).val() - hours*60;
+        $("#timeValue").html(minats);
+        $("#hoursValue").html(hours);
     });
 };
 

@@ -39,12 +39,17 @@ public class CreateUserDataFromDBCommand implements Command {
             way_id = Integer.parseInt(way_idString);
             userDataTrip.setWay_id(way_id);
             Way way = wayService.getByPK(way_id);
-            if (way.getBegin() != null) {
-                userDataTrip.setBeginTrip(way.getBegin());
+//            if (way.getBegin() != null) {
+//                userDataTrip.setBeginTrip(way.getBegin());
+//            }
+//            if (way.getEnd() != null) {
+//                userDataTrip.setEndTrip(way.getEnd());
+//            }
+
+            if (way.getRecomended()) {
+                userDataTrip.setRecommended(true);
             }
-            if (way.getEnd() != null) {
-                userDataTrip.setEndTrip(way.getEnd());
-            }
+
             userDataTrip.setIsSaved(true);
             userDataTrip.setIsFull(true);
             userDataTrip.setDayCount(way.getWay_days());

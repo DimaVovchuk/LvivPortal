@@ -27,6 +27,40 @@ public class UserDataAboutTrip {
     private Date endTrip;
     private Boolean dontKnowDate = false;
     private Boolean withOutBegin = false;
+
+    public Boolean getRecommended() {
+        return recommended;
+    }
+
+    public void setRecommended(Boolean recommended) {
+        this.recommended = recommended;
+    }
+
+    public UserDataAboutTrip(Integer dayCount, Integer way_id, Integer beginPlace, Integer endPlace, Date beginTrip, Date endTrip, Boolean dontKnowDate, Boolean recommended, Boolean withOutBegin, List<Category> category, Boolean isCaffees, Map<Integer, List<Place>> placeDay, double routeTime, Boolean isAutomatic, Double timePerDay, Double timeForLunch, String name, Map<Integer, Boolean> sortFlag, Boolean isFull, Boolean isSaved) {
+
+        this.dayCount = dayCount;
+        this.way_id = way_id;
+        this.beginPlace = beginPlace;
+        this.endPlace = endPlace;
+        this.beginTrip = beginTrip;
+        this.endTrip = endTrip;
+        this.dontKnowDate = dontKnowDate;
+        this.recommended = recommended;
+        this.withOutBegin = withOutBegin;
+        this.category = category;
+        this.isCaffees = isCaffees;
+        this.placeDay = placeDay;
+        this.routeTime = routeTime;
+        this.isAutomatic = isAutomatic;
+        this.timePerDay = timePerDay;
+        this.timeForLunch = timeForLunch;
+        this.name = name;
+        this.sortFlag = sortFlag;
+        this.isFull = isFull;
+        this.isSaved = isSaved;
+    }
+
+    private Boolean recommended = false;
     private List<Category> category;
     private Boolean isCaffees = false;
     private Map<Integer,List<Place>> placeDay = new HashMap<>();

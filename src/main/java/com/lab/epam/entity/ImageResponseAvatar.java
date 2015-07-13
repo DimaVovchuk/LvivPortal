@@ -7,6 +7,24 @@ public class ImageResponseAvatar {
 
     private String avaterReference;
     private String description;
+    private String login;
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public ImageResponseAvatar(String login, Integer id, String description, String avaterReference) {
+
+        this.login = login;
+        this.id = id;
+        this.description = description;
+        this.avaterReference = avaterReference;
+    }
+
     private Integer id;
 
     public String getAvaterReference() {

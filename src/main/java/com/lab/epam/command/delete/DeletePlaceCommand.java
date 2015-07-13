@@ -1,6 +1,7 @@
 package com.lab.epam.command.delete;
 
 import com.lab.epam.command.controller.Command;
+import com.lab.epam.entity.Place;
 import com.lab.epam.entity.User;
 import com.lab.epam.helper.ClassName;
 import com.lab.epam.service.PlaceService;
@@ -49,6 +50,10 @@ public class DeletePlaceCommand implements Command {
             if (user != null && place_id != null){
                 placeService.deletePlaceByUserIdPlaceId(user.getId(), place_id);
                 loger.info("Place is deleted");
+                Place place = placeService.getByPK(place_id);
+                if (place != null && place.getCustom()){
+                    placeService.delete(place);
+                }
             }
         }
         request.getRequestDispatcher("portal?command=userPlace").forward(request, response);

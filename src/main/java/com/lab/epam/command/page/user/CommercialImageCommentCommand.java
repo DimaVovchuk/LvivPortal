@@ -50,7 +50,10 @@ public class CommercialImageCommentCommand implements Command {
                 if (imRes.getUser_id() != null && imRes.getUser_id() > 0) {
                     User user = userService.getByPK(imRes.getUser_id());
                     UserImage userImage = null;
-                    if (user.getAvatar() != null){
+                    if (user != null){
+                        item.setLogin(user.getLogin());
+                    }
+                    if (user != null && user.getAvatar() != null){
                         userImage = userImageService.getByPK(user.getAvatar());
                     }
                     if (userImage != null){

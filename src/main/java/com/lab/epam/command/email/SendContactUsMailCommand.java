@@ -1,5 +1,6 @@
 package com.lab.epam.command.email;
 
+import com.google.gson.Gson;
 import com.lab.epam.command.controller.Command;
 import com.lab.epam.entity.Decoder;
 import com.lab.epam.helper.ClassName;
@@ -55,15 +56,24 @@ public class SendContactUsMailCommand implements Command {
                     loger.info("Contact us message with " + theme + " theme sent on email");
                 }
                 loger.info("Command SendContactUsMailCommand");
-                response.sendRedirect("portal?command=about");
+                //response.sendRedirect("portal?command=about");
+                response.setContentType("application/json");
+                response.setCharacterEncoding("UTF-8");
+                response.getWriter().write(new Gson().toJson(1));
             } else {
                 loger.info("Not all fields was filled");
-                response.sendRedirect("portal?command=about");
+                response.setContentType("application/json");
+                response.setCharacterEncoding("UTF-8");
+                response.getWriter().write(new Gson().toJson(0));
+                //response.sendRedirect("portal?command=about");
             }
         }catch(Exception e){
             loger.info("Command SendContactUsMailCommand failed");
             e.printStackTrace();
-            response.sendRedirect("portal?command=about");
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write(new Gson().toJson(2));
+            //response.sendRedirect("portal?command=about");
         }
     }
 }
