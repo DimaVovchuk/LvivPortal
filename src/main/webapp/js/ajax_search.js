@@ -164,6 +164,7 @@ function setSearchMap(value) {
     if (val != ''){
          document.getElementById('txtSearch').value = val;
          document.getElementById('search_suggest').innerHTML = '';
+        //alert(val);
          searchPlace();
     }
 }

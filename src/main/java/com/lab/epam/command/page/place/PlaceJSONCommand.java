@@ -91,6 +91,7 @@ public class PlaceJSONCommand implements Command {
         Integer countPlace = 0;
         Map<Integer, List<PlaceDescription>> results = new HashMap<>();
         if(searchString != null && !searchString.equals("")){
+            searchString = Decoder.decodeStringUtf8(searchString);
             searchString = searchString.trim();
             searchString = searchString.toLowerCase();
             placeDesc = placeDescriptionService.getAllPlaceBySearch(searchString);
