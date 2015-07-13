@@ -42,7 +42,7 @@
 </div>
 
 <jsp:include page="/views/pages/geotag.jsp"/>
-<jsp:include page="/views/modals/add-place-to-route-recomended.jsp"/>
+<jsp:include page="/views/modals/addPlaceToRoute.jsp"/>
 <script src="${pageContext.request.contextPath}/js/pages/map.js"></script>
 
 </body>

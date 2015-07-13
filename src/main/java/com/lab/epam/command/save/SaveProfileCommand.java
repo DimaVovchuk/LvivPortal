@@ -33,7 +33,7 @@ public class SaveProfileCommand implements Command {
     private static final Logger loger = LogManager.getLogger(ClassName.getCurrentClassName());
     private static final String CHECK_NAME = "^[^<>/{}\\s?!;]+$";
     private static final String CHECK_SURNAME = "^[^<>/{}\\s?!;]+$";
-    private static final String CHECK_PHONE = "([0-9]{6,15})";
+    private static final String CHECK_PHONE = "((^(8-?|\\+?7-?|\\+38-?|38-?|)?(\\(?\\d{3}\\)?)-?(\\d-?){6}\\d$)|^(\\d-?){6}\\d$)";
     private static final String CHECK_ABOUT = "^[^<>/{}]+$";
     private static final String CHECK_AGENCY_NAME = "^[^<>/{}]+$";
     private UserImageService userImageService = new UserImageService();
@@ -112,13 +112,15 @@ public class SaveProfileCommand implements Command {
 
         }
         User forChecPhone = userService.getUserByPhone(phone);
-        if (user.getId() != forChecPhone.getId()) {
+        loger.warn("forChecPhone " + forChecPhone);
+        if (user.getId() == forChecPhone.getId()) {
             session.setAttribute("phoneError", 1);
             errorFlag = true;
             loger.warn("Such phone is exist");
         }
 
         if (errorFlag) {
+            response.sendRedirect("/portal?command=edit");
         } else {
 
             user.setName(Decoder.decodeStringUtf8(name));
@@ -155,7 +157,7 @@ public class SaveProfileCommand implements Command {
         factory.setRepository(folder);
         ServletFileUpload upload = new ServletFileUpload(factory);
 
-        long imageSize = 1024000;
+        long imageSize = 2097152;
         upload.setSizeMax(imageSize);
 
         List items = upload.parseRequest(request);

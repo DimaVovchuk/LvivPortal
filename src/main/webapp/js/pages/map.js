@@ -19,6 +19,9 @@ var linkProcess = function (id) {
     } else {
         customMarkerUnvisible();
     }
+    if (id == 'itinerary') {
+        loadRoutes();
+    }
     $(map).show();
     windowIDList.forEach(function (item) {
         if (item !== map) {

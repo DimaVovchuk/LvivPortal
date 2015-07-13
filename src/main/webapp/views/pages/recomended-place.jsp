@@ -68,7 +68,7 @@
 </div>
 
 <jsp:include page="/views/elements/footer.jsp"/>
-<jsp:include page="/views/modals/add-place-to-route-recomended.jsp"/>
+<jsp:include page="/views/modals/addPlaceToRoute.jsp"/>
 <%--<jsp:include page="/views/modals/add-place-to-route.jsp"/>--%>
 
 

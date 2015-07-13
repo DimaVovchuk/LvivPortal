@@ -52,7 +52,7 @@
 	</div>
 	</div>
 			<jsp:include page="/views/elements/footer.jsp"/>
-			<jsp:include page="/views/modals/add-place-to-route-recomended.jsp"/>
+			<jsp:include page="/views/modals/addPlaceToRoute.jsp"/>
 
 	<script src="${pageContext.request.contextPath}/js/pages/userFavorPlacePage.js"></script>
 	<script id="userPlace-info-template" type="text/x-handlebars-template">

@@ -154,6 +154,7 @@ public class SaveEditPlaceCommand implements Command {
         }
 
         if (errorFlag) {
+            response.sendRedirect("/portal?command=editPlace&editPlaceID=" + savePlaceID);
         } else {
             Place place = placeService.getByPK(savePlaceID);
             place.setLatitude(newPlaceLatitude);
