@@ -435,6 +435,14 @@
         <div class="valign" style="margin-left: 20px">
             {{description}}
         </div>
+        <c:if test="${role == 1}">
+        <div class="valign" style="position: absolute; margin-left: 200px">
+            <a class="waves-effect waves-light btn modal-trigger cyan darken-2"
+               onClick="deleteResponse(this)" href="javascript:" rel="/portal?command=deleteImageResponse&response_id={{id}}">
+                <cdg:l18n key="usercab.delete"/>
+            </a>
+</div>
+        </c:if>
 
     </div>
     <c:if test="${role == 1}">

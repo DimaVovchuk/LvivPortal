@@ -75,6 +75,13 @@
   {{#each this}}
   <div class="match-col col l3 m4 s9">
     <div class="card z-depth-2" style="padding:10px; height:95%">
+<%--<c:if test="${role == 1}">--%>
+      <%--<button class="btn modal-trigger btn-floating btn-large waves-effect waves-light red darken-2"--%>
+              <%--type="button" data-target="delete-way"--%>
+              <%--onclick="$('#way_id_delete').val('{{id}}')">--%>
+        <%--<i class="material-icons">delete</i>--%>
+      <%--</button>--%>
+<%--</c:if>--%>
       <div class="card-image waves-effect waves-block waves-light">
 
         <img class="activator responsive-img place-img"
@@ -86,7 +93,7 @@
                                     <span class="card-title activator grey-text text-darken-4"><div align="center">
                                       <p><h6><cdg:l18n key="way.name"/> - {{name}}</h6></p>
                                       <p><h6><cdg:l18n key="way.rating"/> {{rating_way}}</h6></p>
-                                      <p><h6><a a class="modal-trigger" onclick="$('#way_id').val('{{id}}')"
+                                      <p><h6><a a class="btn modal-trigger waves-effect waves-light cyan darken-2" onclick="$('#way_id').val('{{id}}')"
                                                 href="#get-direction"><cdg:l18n key="get.directions"/></a></h6></p>
                                     </div></span>
         <div>
@@ -147,6 +154,25 @@
 </script>
 
 <script src="${pageContext.request.contextPath}/js/pages/recomended-way.js"></script>
+
+<div id="delete-way" class="modal">
+  <div class="modal-content">
+    <p><cdg:l18n key="sure.delete.way.recommended"/></p>
+    <form action="/portal/deleteRecommendedWay" method="post">
+      <input type="hidden" name="command" value="deleteRecommendedWay">
+      <input id="way_id_delete" name="way_id" type="hidden">
+      <div class="ok-footer">
+        <div class="modal-footer">
+          <button class="btn waves-effect waves-light cyan darken-2" type="submit" value="true"
+                  name="yes">Ok
+          </button>
+          <a class="modal-action modal-close btn waves-effect waves-light cyan darken-2">Cancel
+          </a>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
 
 </body>
 </html>

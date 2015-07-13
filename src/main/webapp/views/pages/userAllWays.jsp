@@ -207,7 +207,7 @@
 
 
 <script src="${pageContext.request.contextPath}/js/pages/places.js"></script>
-<%--<script src="${pageContext.request.contextPath}/js/pages/userAllWay.js"></script>--%>
+<script src="${pageContext.request.contextPath}/js/pages/userAllWay.js"></script>
 
 </body>
 </html>

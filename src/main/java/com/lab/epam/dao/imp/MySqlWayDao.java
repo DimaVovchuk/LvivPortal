@@ -24,8 +24,8 @@ public class MySqlWayDao extends AbstractJDBCDao<Way, Integer> {
     ConnectionPool connection = ConnectionManager.getConnection();
     private static final Logger loger = LogManager.getLogger(ClassName.getCurrentClassName());
 
-    private static final String GET_WAY_BY_USER_ID = "SELECT w.id, w.rating, w.name, w.visible, w.way_days, w.way_time, w.date_begin, w.date_end, w.deleted, w.recomended FROM way AS w JOIN user_way AS uw JOIN user AS u WHERE uw.user_id = u.id AND uw.way_id = w.id AND uw.deleted='false' AND u.id = ?";
-    private static final String GET_WAY_BY_WAY_ID = "SELECT w.id, w.rating, w.name, w.visible, w.way_days, w.way_time, w.date_begin, w.date_end, w.deleted, w.recomended FROM way AS w JOIN user_way AS uw JOIN user AS u WHERE uw.user_id = u.id AND uw.way_id = w.id AND uw.deleted='false' AND uw.way_id = ?";
+    private static final String GET_WAY_BY_USER_ID = "SELECT w.id, w.rating, w.name, w.visible, w.way_days, w.way_time, w.date_begin, w.date_end, w.deleted, w.recomended, w.is_recommend FROM way AS w JOIN user_way AS uw JOIN user AS u WHERE uw.user_id = u.id AND uw.way_id = w.id AND uw.deleted='false' AND u.id = ?";
+    private static final String GET_WAY_BY_WAY_ID = "SELECT w.id, w.rating, w.name, w.visible, w.way_days, w.way_time, w.date_begin, w.date_end, w.deleted, w.recomended, w.is_recommend FROM way AS w JOIN user_way AS uw JOIN user AS u WHERE uw.user_id = u.id AND uw.way_id = w.id AND uw.deleted='false' AND uw.way_id = ?";
     private static final String DELETE_WAY_BY_USER_ID_WAY_ID = "UPDATE user_way SET deleted = true WHERE user_id = ? AND way_id = ?";
     private static final String GET_LAST_ADDED = "SELECT * FROM way ORDER BY id DESC LIMIT 0,1";
     private static final String CREATE_USER_WAY = "INSERT INTO user_way (user_id, way_id, way_days) VALUES (?,?,?);";
@@ -34,6 +34,7 @@ public class MySqlWayDao extends AbstractJDBCDao<Way, Integer> {
     private static final String UPDATE_WAY_END_DATE = "UPDATE way SET date_end = ? WHERE id = ?";
     private static final String UPDATE_WAY_RATING = "UPDATE way SET rating = ? WHERE id = ?";
     private static final String UPDATE_WAY_ISRECOMENDED = "UPDATE way SET is_recommend = false WHERE id = ?";
+    private static final String DELETE_WAY_ISRECOMENDED = "UPDATE way SET recomended = false WHERE id = ?";
     private static final String UPDATE_CONFIRM_WAY_ISRECOMENDED = "UPDATE way SET is_recommend = false, recomended = true WHERE id = ?";
     private static final String GET_WAY_RECOMENDED = "SELECT * FROM way WHERE recomended=true AND deleted=false AND visible=true";
     private static final String SET_WAY_IS_RECOMMENDED = "UPDATE way SET is_recommend = true WHERE id = ?";
@@ -71,6 +72,22 @@ public class MySqlWayDao extends AbstractJDBCDao<Way, Integer> {
     public void updateWayIsRecommended(Integer way_id) throws PersistException {
         Connection conn = connection.retrieve();
         try (PreparedStatement statement = conn.prepareStatement(UPDATE_WAY_ISRECOMENDED)) {
+            statement.setInt(1, way_id);
+            int count = statement.executeUpdate();
+            if (count != 1) {
+                throw new PersistException("On persist modify more then 1 record: " + count);
+            } else {
+            }
+        } catch (Exception e) {
+            throw new PersistException(e);
+        } finally {
+            connection.putback(conn);
+        }
+    }
+
+    public void deleteWayIsRecommended(Integer way_id) throws PersistException {
+        Connection conn = connection.retrieve();
+        try (PreparedStatement statement = conn.prepareStatement(DELETE_WAY_ISRECOMENDED)) {
             statement.setInt(1, way_id);
             int count = statement.executeUpdate();
             if (count != 1) {
