@@ -817,6 +817,13 @@ footer.page-footer {
     height: 42px;
 }
 
+@media (max-width: 1500px) {
+    #admin-page .btn {
+        width: 100%;
+        max-width: 130px;
+    }
+}
+
 @media (max-width: 600px) {
     #admin-page {
         min-height: calc(100% - 56px - 50px);

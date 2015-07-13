@@ -61,6 +61,10 @@ var initStartModalWindow = function () {
     if (startModal == 'resetConfirm') {
         $('#reset-confirm').openModal();
     }
+    if (startModal == 'signUpForm') {
+        $('.switch').click();
+        $('#sign-in').openModal();
+    }
 };
 
 $(document).ready(function () {
