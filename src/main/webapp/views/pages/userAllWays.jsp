@@ -85,8 +85,8 @@
                                             <b><cdg:l18n key="map.route.day"/> ${place.key}</b><br>
                                             <c:forEach var="name" items="${place.value}">
 
-                                        <a href="portal?command=placeInformation&place_id=${name.place_id}"><c:out
-                                                value="${name.name}"/></a>
+                                        <p><a href="portal?command=placeInformation&place_id=${name.place_id}"><c:out
+                                                value="${name.name}"/></a></p>
 
                                     </c:forEach>
                                             <br>
