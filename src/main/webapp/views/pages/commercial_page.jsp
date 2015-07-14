@@ -53,9 +53,9 @@
 <script id="commertial-info-template" type="text/x-handlebars-template">
 	{{#each this}}
 	<div class="match-col col l4 m6 s12">
-		<div class="card z-depth-2" style="padding:10px; height:95%">
+		<div class="card z-depth-2 center-align" style="padding:10px; height:95%">
 			<a href="/portal?command=companyInformation&id={{id}}"><img
-					class="responsive-img place-img" src="${pageContext.request.contextPath}/upload/photo/{{reference}}"></a>
+					class="responsive-img" src="${pageContext.request.contextPath}/upload/photo/{{reference}}"></a>
 			<a href="/portal?command=companyInformation&id={{id}}">
 				<h5><c:out value="{{name}}"/></h5></a>
 		</div>
