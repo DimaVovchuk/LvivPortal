@@ -154,7 +154,6 @@ public class CreateUserDataCommand implements Command {
                             List<Place> list = new ArrayList<>();
                             list.add(firstPlace);
                             map.put(1, list);
-//                            userDataTrip.getPlaceDay().get(1).set(0,firstPlace);
                             userDataTrip.setPlaceDay(map);
                         }
                     }

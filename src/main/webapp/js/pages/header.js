@@ -42,10 +42,19 @@ var changeRoleToggle = function (role) {
 
 var initNewRouteForm = function () {
     /* Checkbox toggle */
-    $('#dontKnowDate').change(function () {
+    var dateCheckbox = $('#dontKnowDate');
+    if (dateCheckbox.is(':checked')) {
+        $('#days').hide();
+    }
+    dateCheckbox.change(function () {
         $('#days').animate({height: "toggle", opacity: "toggle"});
     });
-    $('#automatic').change(function () {
+    var automaticCheckbox = $('#automatic');
+    if (automaticCheckbox.is(':checked')) {
+        $('#dateMenu').hide();
+        $('#places').show();
+    }
+    automaticCheckbox.change(function () {
         $('#places').animate({height: "toggle", opacity: "toggle"});
         $('#dateMenu').animate({height: "toggle", opacity: "toggle"});
     });
@@ -75,19 +84,22 @@ var activePageHeaderLink = function () {
         if (/^.*(portal\?command=about).*$/.test(location) && link === 'about') {
             $(this).addClass('active');
         }
+        if (/^.*(portal\?command=recomendedWay).*$/.test(location) && link === 'recommended') {
+            $(this).addClass('active');
+        }
     })
 };
 
 var checkReloadPages = function (data) {
-    if (data == "success"){
+    if (data == "success") {
         document.location.reload(true);
     }
-    else{
+    else {
     }
 };
 
 //var loadSignInWindow = function (data) {
-//    Materialize.toast('You are loggined', 4000);
+//    Materialize.toast('You are loggined', 1600);
 //}
 
 var reloadPage = function () {
@@ -97,9 +109,8 @@ var reloadPage = function () {
         $.ajax({
             type: 'post',
             url: window.location.origin + '/portal?command=signIn',
-            data: $('form').serialize(),
+            data: $('#sign-in-form').serialize(),
             success: checkReloadPages,
-            error: checkReloadPages
         });
     });
 };

@@ -76,11 +76,13 @@
                             $('#image-clear, #image-submit, #image-preview').show();
                             picReader.readAsDataURL(file);
                         } else {
-                            alert('Image Size is too big. Maximum size is 2MB.');
+                            //alert('Image Size is too big. Maximum size is 2MB.');
+                            Materialize.toast('<cdg:l18n key="image.size.big"/>', 4000);
                             $(this).val('');
                         }
                     } else {
-                        alert('You can only upload image.');
+                        //alert('You can only upload image.');
+                        Materialize.toast('<cdg:l18n key="load.image.only"/>', 4000);
                         $(this).val('');
                     }
                 }

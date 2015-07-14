@@ -87,7 +87,7 @@
 					<label class="radio-label" for="company"><cdg:l18n key="role.company"/></label>
 				</div>
 				<div class="form">
-					<button class="btn modal-action modal-close waves-effect waves-light cyan darken-2" type="submit">OK
+					<button class="btn modal-action waves-effect waves-light cyan darken-2" type="submit">OK
 					</button>
 				</div>
 			</form>
@@ -107,14 +107,15 @@
 				type: 'post',
 				url: window.location.origin + '/portal?command=signUp',
 				data: $('#sign-up-form').serialize(),
-				success: loadSignUg,
-				error: loadSignUg
+				success: loadSignUg
 			});
 		});
 	};
 
 	var loadSignUg = function (data) {
-		Materialize.toast('<cdg:l18n key="login.signup.tost"/>', 4000);
+		if (data != '') {
+			Materialize.toast('<cdg:l18n key="login.signup.tost"/>', 4000);
+		}
 	};
 
 	$(function () {

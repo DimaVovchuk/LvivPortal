@@ -72,13 +72,15 @@
                         <cdg:l18n key="company.about"/>: ${userInfo.about}<br><br>
                         <cdg:l18n key="company.rating"/>: ${userInfo.rating}
                     </p>
-
+                    <c:if test="${userInfo.id != userID}">
                     <p>
                         <a class="btn waves-effect waves-light cyan darken-2 modal-trigger" href="#orderWayModel"
                            onclick="$('#sendOrderOnMail').attr('rel','/portal?command=orderWaySendMail&wayId=0&gidId=${pageContext.request.getParameter('id')}&type=message');"
                            style="text-transform: uppercase"><cdg:l18n key="company.response"/></a>
                     </p>
+                    </c:if>
                 </div>
+                <c:if test="${userInfo.id != userID}">
                 <div class="bottom-right-btn" align="right">
                     <a onClick="like(this);" data-rating="${companyRatingByUser}" id="up"
                        class="up btn-floating btn-floating btn-small" onload="disabled();"
@@ -100,6 +102,7 @@
                     </a>
 
                 </div>
+                </c:if>
             </div>
 
             <div class="section">
@@ -185,9 +188,11 @@
                     <div class="match-col col l4 m6 s12">
                         <div class="card z-depth-2" style="padding:10px; height:95%">
                             <div class="center-align">
-                                <a href="/portal?command=placeInformation&place_id=${place.id}"><img class="responsive-img place-img"
-                                                 src="${pageContext.request.contextPath}/upload/photo/${place.imageReference}"></a>
-                                <a href="portal?command=placeInformation&place_id=${place.id}"><h5><c:out value="${place.name}"/></h5></a>
+                                <a href="/portal?command=placeInformation&place_id=${place.id}"><img
+                                        class="responsive-img place-img"
+                                        src="${pageContext.request.contextPath}/upload/photo/${place.imageReference}"></a>
+                                <a href="portal?command=placeInformation&place_id=${place.id}"><h5><c:out
+                                        value="${place.name}"/></h5></a>
                                 <c:out value="${place.adress}"/><br>
                                 <cdg:l18n key="company.rating"/>: ${place.rating}
                             </div>
@@ -432,27 +437,23 @@
                 <a href="#"><img src="${pageContext.request.contextPath}/upload/photo/{{avaterReference}}"
                                  style="height:70px; weight:70px"/></a>
             </div>
-
             <div class="valign" style="margin-left: 20px">
-
-
                 <h6>{{login}} </h6>
+
                 <p>{{description}}</p>
 
                 <p><c:out value="${response.description}"/></p>
             </div>
+            <c:if test="${role == 1}">
+                <a class="btn-floating btn-large waves-effect waves-light red"
+                   onclick="deleteResponse(this)" href="javascript:"
+                   rel="/portal?command=deleteImageResponse&response_id={{id}}"
+                   style="position:absolute; right: 20px">
+                    <i class="material-icons">delete</i>
+                </a>
+            </c:if>
         </div>
-             <div class="divider" style="margin-bottom: 20px"></div>
-                <c:if test="${role == 1}">
-<div align="right">
-        <a class="btn-floating btn-large waves-effect waves-light red"
-                           onClick="deleteResponse(this)" href="javascript:"
-                           rel="/portal?command=deleteImageResponse&response_id={{id}}">
-                <i class="material-icons">delete</i>
-        </a>
-                    </div>
-         </c:if>
-        </div>
+    </div>
     {{/each}}
 </script>
 

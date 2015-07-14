@@ -94,8 +94,8 @@
       </div>
       <div class="card-content">
                                     <span class="card-title activator grey-text text-darken-4" style="padding-left: 0px;"><div align="center">
-                                      <h4 style="color: #0097a7;"><cdg:l18n key="way.name"/> - {{name}}</h4>
-                                        <cdg:l18n key="way.rating"/> {{rating_way}}
+                                      <h6 style="color: #0097a7;"><cdg:l18n key="way.name"/> - {{name}}</h6>
+                                        <h6><cdg:l18n key="way.rating"/> {{rating_way}}</h6>
 
                                       <p><h6><a a class="btn modal-trigger waves-effect waves-light cyan darken-2" onclick="$('#way_id').val('{{id}}')"
                                                 href="#get-direction"><cdg:l18n key="get.directions"/></a></h6></p>
@@ -133,8 +133,8 @@
           {{#eachInMap place}}
             <b><cdg:l18n key="map.route.day"/> {{key}}</b><br>
             {{#each value}}
-              <a href="portal?command=placeInformation&place_id={{id}}"><c:out
-                      value="{{name}}"/></a>
+              <p><a href="portal?command=placeInformation&place_id={{id}}"><c:out
+                      value="{{name}}"/></a></p>
             {{/each}}
             <br>
           {{/eachInMap}}

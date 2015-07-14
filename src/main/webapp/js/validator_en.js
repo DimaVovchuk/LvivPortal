@@ -35,17 +35,17 @@ $("#sign-in-form").validate({
 $("#sign-up-form").validate({
     rules: {
         first: {
-            regex: /^[^<>$\(\)]*$/
+            regex: /^[^<>\/{}\s?!;]+$/
         },
         last: {
-            regex: /^[^<>$\(\)]*$/
+            regex: /^[^<>\/{}\s?!;]+$/
         },
         companyname: {
-            regex: /^[^<>$\(\)]*$/
+            regex: /^[^<>\/{}\s?!;]+$/
         },
         login: {
             required: true,
-            regex: /^[A-Za-z0-9_-]+$/,
+            regex: /^[^<>\/{}\s?!;]+$/,
             remote: {
                 url: window.location.origin + '/portal?command=signUpFormCheck',
                 type: 'post'
@@ -60,7 +60,8 @@ $("#sign-up-form").validate({
             }
         },
         password: {
-            required: true
+            required: true,
+            regex: /((?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15})/
         },
         confirm: {
             required: true,
@@ -68,7 +69,7 @@ $("#sign-up-form").validate({
         },
         phone: {
             required: true,
-            regex: /^[0-9\+\s\(\)]+$/,
+            regex: /((^(8-?|\+?7-?|\+38-?|38-?|)?(\(?\d{3}\)?)-?(\d-?){6}\d$)|^(\d-?){6}\d$)/,
             remote: {
                 url: window.location.origin + '/portal?command=signUpFormCheck',
                 type: 'post'
@@ -96,7 +97,8 @@ $("#sign-up-form").validate({
             remote: "This E-mail address is already in use"
         },
         password: {
-            required: "Please enter password"
+            required: "Please enter password",
+            regex: "Password should be minimum 8 symbols with letters and numbers"
         },
         confirm: {
             required: "Please confirm your password",
