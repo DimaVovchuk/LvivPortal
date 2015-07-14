@@ -5,7 +5,10 @@
 <footer class="page-footer cyan darken-2">
     <div class="footer-copyright">
         <div class="container">
-            © 2015 Design by JavaNoobs
+            © 2015 Design by Bugbusters Team
+            <a class="modal-trigger white-text right" href="#help"><cdg:l18n key="footer.help"/></a>
         </div>
     </div>
 </footer>
+
+<jsp:include page="/views/modals/help.jsp"/>
