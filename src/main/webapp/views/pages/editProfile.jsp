@@ -51,7 +51,7 @@
 
                                 <div class="btn cyan darken-2 waves-effect waves-light">
                                     <span><cdg:l18n key="button.photo"/></span>
-                                    <input id="fileupload" type="file" name="sendfile"/>
+                                    <input id="fileupload" type="file" name="sendfile" accept="image/*"/>
                                 </div>
                             </div>
                         </div>

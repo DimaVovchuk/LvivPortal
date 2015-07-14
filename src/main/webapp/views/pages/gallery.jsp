@@ -64,7 +64,7 @@
                 var output = document.getElementById('image-preview');
                 for (var i = 0; i < files.length; i++) {
                     var file = files[i];
-                    if (file.type.match('image.*')) {
+                    if (file.type.match(/^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png|.bmp)$/)) {
                         if (files[0].size < 2097152) {
                             var picReader = new FileReader();
                             picReader.addEventListener('load', function (event) {
