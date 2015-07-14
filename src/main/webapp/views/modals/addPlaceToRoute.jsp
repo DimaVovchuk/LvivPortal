@@ -3,7 +3,7 @@
 <%@ taglib prefix="cdg" uri="customtags" %>
 <!DOCTYPE HTML>
 
-<div id="chooseDayRecomended" class="modal" style="width: 400px">
+<div id="chooseDayRecomended" class="modal" style="width: 400px; max-height: 100%;">
   <div class="modal-content">
     <c:set var="category" scope="request" value="${requestScope.category}"/>
     <h5><cdg:l18n key="places.addtoroute"/></h5>

@@ -150,8 +150,11 @@
     $('#fileupload').change(function () {
         var fileName = $(this).val();
         var ext = fileName.split(".")[1].toUpperCase();
-        if (ext !== "JPG" || ext !== "JPEG" || ext !== "GIF" || ext !== "PNG") {
-            Materialize.toast('<cdg:l18n key="load.image.only"/>');
+        console.log(ext);
+        if (ext == 'JPG' || ext == 'JPEG' || ext == 'GIF' || ext == 'PNG') {
+
+        } else {
+            Materialize.toast('<cdg:l18n key="load.image.only"/>', 4000);
             $(this).val('');
         }
     })
