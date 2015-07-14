@@ -1,5 +1,6 @@
 <%@ taglib prefix="cdg" uri="customtags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title><cdg:l18n key="index.title"/></title>
@@ -19,17 +20,21 @@
     <div class="z-depth-2" id="map-side">
         <nav class="side-icon blue-grey darken-2 z-depth-5">
             <ul class="center-align">
-                <li id="li-itinerary" class="link-process active" data-type="itinerary"><a href="#"><i class="small mdi-notification-event-note white-text"></i>
+                <li id="li-itinerary" class="link-process active" data-type="itinerary"><a href="#"><i
+                        class="small mdi-notification-event-note white-text"></i>
                     <span class="nav-text white-text"><cdg:l18n key="map.itinerary"/></span>
                 </a>
                 </li>
-                <li id="li-places" class="link-process" data-type="places"><a href="#"><i class="small mdi-action-account-balance white-text"></i>
+                <li id="li-places" class="link-process" data-type="places"><a href="#"><i
+                        class="small mdi-action-account-balance white-text"></i>
                     <span class="nav-text white-text"><cdg:l18n key="map.places"/></span>
                 </a>
+                    <c:if test="${login!=null}">
                 <li id="li-custom" class="link-process" data-type="custom"><a href="#"><i class="small material-icons">local_see</i>
                     <span class="nav-text white-text"><cdg:l18n key="map.custom"/></span>
                 </a>
                 </li>
+                </c:if>
             </ul>
         </nav>
 
