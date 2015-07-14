@@ -677,15 +677,21 @@ header img.text-middle {
     }
 }
 
+@media (max-width: 760px) {
+    #map-info #route-info-collection .collection-item {
+        height: 70px;
+    }
+}
+
 @media (max-width: 600px) {
     #map-canvas {
-        width: 60%;
-        left: 40%;
+        width: 50%;
+        left: 50%;
         padding-top: 56px
     }
 
     #map-side {
-        width: 40%;
+        width: 50%;
         padding-top: 56px;
     }
 
@@ -815,13 +821,6 @@ footer.page-footer {
 
 #admin-page .collection .valign-wrapper {
     height: 42px;
-}
-
-@media (max-width: 1500px) {
-    #admin-page .btn {
-        width: 100%;
-        max-width: 130px;
-    }
 }
 
 @media (max-width: 600px) {
@@ -1058,8 +1057,7 @@ footer.page-footer {
 .form-wrapper #cmdSearch:hover,
 .form-wrapper #cmdSearch:focus {
     background-color: #008B8B;
-   }
-
+}
 
 .form-wrapper #cmdSearch::-moz-focus-inner {
     border: 0;
@@ -1073,6 +1071,7 @@ footer.page-footer {
     background-color: #ffffff;
     margin-top: 0;
 }
+
 .form-wrapper-map #txtSearch {
     width: 180px;
     height: 10px;
@@ -1089,6 +1088,7 @@ footer.page-footer {
     outline: 0;
     border-color: #aaa;
 }
+
 .form-wrapper-map #txtSearch::-webkit-input-placeholder {
     color: #999;
     font-weight: normal;
@@ -1098,6 +1098,7 @@ footer.page-footer {
     color: #999;
     font-weight: normal;
 }
+
 .form-wrapper-map #txtSearch:-ms-input-placeholder {
     color: #999;
     font-weight: normal;
@@ -1118,11 +1119,11 @@ footer.page-footer {
     -webkit-border-radius: 5px;
     border-radius: 5px;
 }
+
 .form-wrapper-map #cmdSearch:hover,
 .form-wrapper-map #cmdSearch:focus {
     background-color: #008B8B;
 }
-
 
 .form-wrapper-map #cmdSearch::-moz-focus-inner {
     border: 0;
@@ -1165,8 +1166,8 @@ footer.page-footer {
 }
 
 #admin-place-recommended img {
-    width: 50px;
-    height: 50px;
+    width: 70px;
+    height: 70px;
     float: left;
     margin-right: 20%;
 }

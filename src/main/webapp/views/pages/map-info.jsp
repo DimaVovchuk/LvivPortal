@@ -14,7 +14,8 @@
                     <form id="frmSearch" style="padding: 0 10px">
                         <div class="input-field">
                             <input id="txtSearch" type="search" name="txtSearch" alt="Search Criteria"
-                                   onfocus="searchSuggestMap()" onkeyup="searchSuggestMap()" autocomplete="off" required>
+                                   onfocus="searchSuggestMap()" onkeyup="searchSuggestMap()" autocomplete="off"
+                                   required>
                             <label for="txtSearch"><i class="material-icons">search</i></label>
                         </div>
                     </form>
@@ -60,10 +61,10 @@
         <div class="divider"></div>
         <form method=post enctype=multipart/form-data>
             <c:set var="command" scope="session" value="saveCustomPlace"/>
-            <div class="file-field input-field">
+            <div class="file-field input-field row map-row">
                 <div class="btn cyan darken-2 waves-effect waves-light">
                     <span><cdg:l18n key="editplace.addphoto"/></span>
-                    <input id="image-input" type="file" multiple name="sendfile" accept="image/*"/>
+                    <input id="image-input" type="file" multiple name="sendfile"/>
                 </div>
             </div>
             <div class="section">
@@ -72,19 +73,20 @@
             <a id="image-clear" class="btn cyan darken-2 waves-effect waves-light" style="display: none"><cdg:l18n
                     key="editplace.clearimage"/></a>
 
-            <div class="input-field">
-                <input id="customPlaceName" type="text" name="customPlaceName">
+            <div class="input-field row map-row">
+                <input id="customPlaceName" type="text" name="customPlaceName" pattern="^[^<>/{}]+$">
                 <label for="customPlaceName"><cdg:l18n key="addnewcustomplace.name"/></label>
             </div>
 
-            <p>
-                <input type="checkbox" id="custom-additional-check" />
-                <label for="custom-additional-check" class="black-text"><cdg:l18n key="addnewcustomplace.additional"/></label>
-            </p>
+            <div class="input-field row map-row">
+                <input type="checkbox" id="custom-additional-check"/>
+                <label for="custom-additional-check" class="black-text truncate"><cdg:l18n
+                        key="addnewcustomplace.additional"/></label>
+            </div>
 
             <div id="custom-additional" style="display: none">
-                <div class="input-field">
-                    <input id="customPlaceDesc" type="text" name="customPlaceDesc">
+                <div class="input-field row map-row">
+                    <input id="customPlaceDesc" type="text" name="customPlaceDesc" pattern="^[^<>/{}]+$">
                     <label for="customPlaceDesc"><cdg:l18n key="addnewcustomplace.description"/></label>
                 </div>
 
@@ -98,29 +100,30 @@
                     <option value="5"><cdg:l18n key="editplace.restaurants"/></option>
                 </select>
 
-                <div class="input-field">
-                    <input id="customPlacePrice" type="text" name="customPlacePrice">
+                <div class="input-field row map-row">
+                    <input id="customPlacePrice" type="text" name="customPlacePrice" pattern="^[^<>/{}]+$">
                     <label for="customPlacePrice"><cdg:l18n key="addnewcustomplace.price"/></label>
                 </div>
 
-                <div class="input-field">
-                    <input id="customPlacePhone" type="text" name="customPlacePhone">
+                <div class="input-field row map-row">
+                    <input id="customPlacePhone" type="text" name="customPlacePhone"
+                           pattern="((^(8-?|\+?7-?|\+38-?|38-?|)?(\(?\d{3}\)?)-?(\d-?){6}\d$)|^(\d-?){6}\d$)">
                     <label for="customPlacePhone"><cdg:l18n key="editplace.placephone"/></label>
                 </div>
 
-                <div class="input-field" style="margin-top: 0">
+                <div class="input-field row map-row" style="margin-top: 0">
                     <cdg:l18n key="editplace.placetime"/>
                     <input id="place_time" type="number" name="place_time" min="0">
                 </div>
             </div>
 
-            <div class="input-field">
+            <div class="input-field row map-row">
                 <input value=" " id="customPlaceAdrress" type="text" name="customPlaceAdrress">
                 <input id="customPlaceAdrressHid" type="hidden" name="customPlaceAdrressHid">
                 <label for="customPlaceAdrress"><cdg:l18n key="addnewcustomplace.adrress"/></label>
             </div>
 
-            <div class="row">
+            <div class="row map-row">
                 <div class="col s6" style="padding-right: 10px">
                     <div class="input-field">
                         <input value=" " id="latitude" type="text" name="latitude" disabled>
@@ -194,7 +197,8 @@
 </script>
 
 <script id="route-empty-template" type="text/x-handlebars-template">
-    <h5 id="map-route-addroute" name="map-route-addroute" style="padding: 10px"><cdg:l18n key="map.route.addroute"/></h5>
+    <h5 id="map-route-addroute" name="map-route-addroute" style="padding: 10px"><cdg:l18n
+            key="map.route.addroute"/></h5>
     <label for="map-route-addroute"><cdg:l18n key="first.place.route"/></label>
 </script>
 
@@ -232,18 +236,18 @@
         });
     });
 
-var loadPlacesData = function (data) {
-    if (!data) return false;
-    var source = $("#place-info-template").html();
-    var template = Handlebars.compile(source);
-    var html = template(data);
-    $('#place-info-collection').html(html);
-    notActive();
-};
-    $(document).click(function() {
+    var loadPlacesData = function (data) {
+        if (!data) return false;
+        var source = $("#place-info-template").html();
+        var template = Handlebars.compile(source);
+        var html = template(data);
+        $('#place-info-collection').html(html);
+        notActive();
+    };
+    $(document).click(function () {
         notActive();
     });
-    $("#search-place").click(function(event) {
+    $("#search-place").click(function (event) {
         event.stopPropagation();
     });
 

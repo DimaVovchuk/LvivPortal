@@ -33,7 +33,7 @@ import java.util.regex.Pattern;
 public class SaveCustomPlaceCommand implements Command {
     private static final Logger loger = LogManager.getLogger(ClassName.getCurrentClassName());
     private static final String CHECK_DATA = "^[^<>/{}]+$";
-    private static final String CHECK_PHONE = "([0-9]{6,15})";
+    private static final String CHECK_PHONE = "((^(8-?|\\+?7-?|\\+38-?|38-?|)?(\\(?\\d{3}\\)?)-?(\\d-?){6}\\d$)|^(\\d-?){6}\\d$)";
     private static final String CHECK_PLACE_TIME = "([0-9]*)";
     private static Integer lastAddedPlace = null;
 
