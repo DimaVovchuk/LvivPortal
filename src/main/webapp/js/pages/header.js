@@ -99,7 +99,7 @@ var checkReloadPages = function (data) {
 };
 
 //var loadSignInWindow = function (data) {
-//    Materialize.toast('You are loggined', 4000);
+//    Materialize.toast('You are loggined', 1600);
 //}
 
 var reloadPage = function () {
@@ -109,9 +109,8 @@ var reloadPage = function () {
         $.ajax({
             type: 'post',
             url: window.location.origin + '/portal?command=signIn',
-            data: $('form').serialize(),
+            data: $('#sign-in-form').serialize(),
             success: checkReloadPages,
-            error: checkReloadPages
         });
     });
 };

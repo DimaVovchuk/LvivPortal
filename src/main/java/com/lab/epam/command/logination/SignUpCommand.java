@@ -172,12 +172,16 @@ public class SignUpCommand implements Command {
 
                 userService.create(user);
                 UserImageService userImageService = new UserImageService();
-                UserImage userImage = userImageService.getByPK(user.getAvatar());
+                UserImage userImage=null;
+                if(user.getAvatar()!=null) {
+                    userImage = userImageService.getByPK(user.getAvatar());
+                }
                 if (userImage != null) {
                     session.setAttribute("avatarReference", userImage.getReference());
                 } else {
                     session.setAttribute("avatarReference", "user.png");
                 }
+
                 session.setAttribute("statusID", 2);
                 ResourceBundle bundle = (ResourceBundle) session.getAttribute("bundle");
                 String md5phone = MD5Creator.getMD5(phone);

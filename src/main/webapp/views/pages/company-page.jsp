@@ -72,13 +72,15 @@
                         <cdg:l18n key="company.about"/>: ${userInfo.about}<br><br>
                         <cdg:l18n key="company.rating"/>: ${userInfo.rating}
                     </p>
-
+                    <c:if test="${userInfo.id != userID}">
                     <p>
                         <a class="btn waves-effect waves-light cyan darken-2 modal-trigger" href="#orderWayModel"
                            onclick="$('#sendOrderOnMail').attr('rel','/portal?command=orderWaySendMail&wayId=0&gidId=${pageContext.request.getParameter('id')}&type=message');"
                            style="text-transform: uppercase"><cdg:l18n key="company.response"/></a>
                     </p>
+                    </c:if>
                 </div>
+                <c:if test="${userInfo.id != userID}">
                 <div class="bottom-right-btn" align="right">
                     <a onClick="like(this);" data-rating="${companyRatingByUser}" id="up"
                        class="up btn-floating btn-floating btn-small" onload="disabled();"
@@ -100,6 +102,7 @@
                     </a>
 
                 </div>
+                </c:if>
             </div>
 
             <div class="section">

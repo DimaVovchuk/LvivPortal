@@ -133,8 +133,8 @@
           {{#eachInMap place}}
             <b><cdg:l18n key="map.route.day"/> {{key}}</b><br>
             {{#each value}}
-              <a href="portal?command=placeInformation&place_id={{id}}"><c:out
-                      value="{{name}}"/></a>
+              <p><a href="portal?command=placeInformation&place_id={{id}}"><c:out
+                      value="{{name}}"/></a></p>
             {{/each}}
             <br>
           {{/eachInMap}}

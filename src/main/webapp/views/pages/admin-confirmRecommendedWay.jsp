@@ -46,7 +46,7 @@
                                             <b><cdg:l18n key="map.route.day"/> ${MapPlaceElem.key}</b>
                                         </div>
                                         <div class="collapsible-body">
-                                            <div class="collection">
+                                            <div class="collection" id="admin-place-recommended">
                                                 <c:forEach var="listWayPlace" items="${MapPlaceElem.value}">
                                                     <a href="#" class="collection-item black-text">
                                                         <img class="circle responsive-img"
