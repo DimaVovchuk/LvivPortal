@@ -51,7 +51,7 @@
 
                                 <div class="btn cyan darken-2 waves-effect waves-light">
                                     <span><cdg:l18n key="button.photo"/></span>
-                                    <input id="fileupload" type="file" name="sendfile" accept="image/*"/>
+                                    <input id="fileupload" type="file" name="sendfile"/>
                                 </div>
                             </div>
                         </div>
@@ -146,6 +146,15 @@
             success: sendResetPasswordEmail(email)
         });
     });
+
+    $('#fileupload').change(function () {
+        var fileName = $(this).val();
+        var ext = fileName.split(".")[1].toUpperCase();
+        if (ext !== "JPG" || ext !== "JPEG" || ext !== "GIF" || ext !== "PNG") {
+            Materialize.toast('<cdg:l18n key="load.image.only"/>');
+            $(this).val('');
+        }
+    })
 </script>
 
 <jsp:include page="/views/elements/footer.jsp"/>

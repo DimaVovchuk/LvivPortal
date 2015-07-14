@@ -15,7 +15,6 @@ import java.util.Properties;
 import java.util.Vector;
 
 public class ConnectionPool {
-    private static final Logger loger = LogManager.getLogger(ClassName.getCurrentClassName());
 
     private Vector<Connection> availableConns = new Vector<Connection>();
     private Vector<Connection> usedConns = new Vector<Connection>();
@@ -56,7 +55,6 @@ public class ConnectionPool {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        loger.info("getConnection method");
 
         return conn;
     }
@@ -70,14 +68,12 @@ public class ConnectionPool {
             availableConns.removeElement(newConn);
         }
         usedConns.addElement(newConn);
-        loger.info("retrieve method");
         return newConn;
     }
 
     public synchronized void putback(Connection c) throws NullPointerException {
         if (c != null) {
             if (usedConns.removeElement(c)) {
-                loger.info("putback method");
                 availableConns.addElement(c);
             } else {
                 throw new NullPointerException(
