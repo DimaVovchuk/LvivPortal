@@ -80,16 +80,22 @@ public class UserAllWayCommand implements Command {
                        }
                    } else {
                        List <Place> placeList = placeService.getPlaceByWayIdDayNumber(way.getId(), 1);
-                       List <PlaceDescription> placeDecsription = getPlaceDescriptionByPlace(placeList);
-                       PlaceImage plIm = getPlaceImageByPlace(placeList);
-                       itemWayPlaceImage.setImageReference(plIm.getReference());
-                       item.put(1, placeDecsription);
+                       if (placeList != null && !placeList.isEmpty()){
+                           List <PlaceDescription> placeDecsription = getPlaceDescriptionByPlace(placeList);
+                           PlaceImage plIm = getPlaceImageByPlace(placeList);
+                           itemWayPlaceImage.setImageReference(plIm.getReference());
+                           item.put(1, placeDecsription);
+                       }
                    }
                     itemWayPlaceImage.setPlace(item);
                     itemWayPlaceImage.setId(way.getId());
                     itemWayPlaceImage.setBeginDate(way.getBegin());
                     itemWayPlaceImage.setEndDate(way.getEnd());
-                    itemWayPlaceImage.setName(way.getName());
+                    if (way.getName() == null){
+                        itemWayPlaceImage.setName("way" + way.getId());
+                    }else {
+                        itemWayPlaceImage.setName(way.getName());
+                    }
                     wayPlaceImages.add(itemWayPlaceImage);
                 }
 

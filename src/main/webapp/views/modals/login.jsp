@@ -108,7 +108,6 @@
 				url: window.location.origin + '/portal?command=signUp',
 				data: $('#sign-up-form').serialize(),
 				success: loadSignUg,
-				error: loadSignUg
 			});
 		});
 	};

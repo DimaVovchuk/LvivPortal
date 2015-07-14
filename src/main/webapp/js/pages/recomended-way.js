@@ -80,7 +80,6 @@ var none = function (placeholder) {
 
 
 var dislike = function (placeholder) {
-    alert($(placeholder).attr('rel') + dislike);
     $.ajax({
         url: $(placeholder).attr('rel'),
         type: "GET",

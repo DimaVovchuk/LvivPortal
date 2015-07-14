@@ -194,7 +194,8 @@
 </script>
 
 <script id="route-empty-template" type="text/x-handlebars-template">
-    <h5 style="padding: 10px"><cdg:l18n key="map.route.addroute"/></h5>
+    <h5 id="map-route-addroute" name="map-route-addroute" style="padding: 10px"><cdg:l18n key="map.route.addroute"/></h5>
+    <label for="map-route-addroute"><cdg:l18n key="first.place.route"/></label>
 </script>
 
 <script>

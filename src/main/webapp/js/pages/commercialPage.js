@@ -62,7 +62,6 @@ var initCategoriesEventsPlace = function () {
     $('#category-place').on('click', function (e) {
         e.preventDefault();
         e.stopImmediatePropagation();
-        // alert(window.location.origin + '/' + $(e.target).attr('href'));
         $.ajax({
             url: window.location.origin + '/' + $(e.target).attr('href'),
             success: loadPlacesData,

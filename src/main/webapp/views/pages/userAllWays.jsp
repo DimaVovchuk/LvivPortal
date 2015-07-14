@@ -67,7 +67,7 @@
 
                                 <div class="card-content">
                                     <span class="card-title activator grey-text text-darken-4"><div align="center">
-                                        <h4 style="color: #0097a7;"><cdg:l18n key="way.name"/> - ${waysPlaceImage[i].name}</h4>
+                                        <h6 style="color: #0097a7;"><cdg:l18n key="way.name"/> - ${waysPlaceImage[i].name}</h6>
                                         <c:if test="${waysPlaceImage[i].beginDate!=null}">
                                         <h6>${waysPlaceImage[i].beginDate} - ${waysPlaceImage[i].endDate}</h6>
                                         </c:if>

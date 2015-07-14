@@ -43,7 +43,6 @@ public class SaveWayCommand implements Command {
         placeForWay = (UserDataAboutTrip)session.getAttribute("userDataTrip");
         String login = (String)session.getAttribute("login");
         String name = request.getParameter("name");
-        name = Decoder.decodeStringUtf8(name);
         User user = null;
         if (login != null){
             user = userService.getUserByLogin(login);
@@ -154,7 +153,9 @@ public class SaveWayCommand implements Command {
                     if (name != null) {
                         wayNew.setName(name);
                     } else {
-                        name = "way";
+                        Way wayForName = wayService.getLastAdded();
+                        Integer nameId = wayForName.getId() + 1;
+                        name = "way" + nameId;
                         wayNew.setName(name);
                     }
                     Set<Integer> keys = placesDay.keySet();

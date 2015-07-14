@@ -65,7 +65,8 @@ public class CreateUserDataCommand implements Command {
         String timePerDay = request.getParameter("dayTime");
         //String name = request.getParameter("name");
         userDataTrip.getSortFlag().put(1,true);
-        placeArrive = Decoder.decodeStringUtf8(placeArrive);
+        //placeArrive = Decoder.decodeStringUtf8(placeArrive);
+        //System.out.println("placeArrive " + placeArrive);
 
 
         if (dontKnowDate == null) {
@@ -143,7 +144,7 @@ public class CreateUserDataCommand implements Command {
                 placeArrive = placeArrive.trim();
                 placeArrive = placeArrive.toLowerCase();
                 if (!placeArrive.equals("")) {
-                    placeArrive = Decoder.decodeStringUtf8(placeArrive);
+                    //placeArrive = Decoder.decodeStringUtf8(placeArrive);
                     List<PlaceDescription> plDesc = placeSesc.getAllPlaceBySearch(placeArrive);
                     PlaceService placeService = new PlaceService();
                     if (plDesc != null && !plDesc.isEmpty()) {
