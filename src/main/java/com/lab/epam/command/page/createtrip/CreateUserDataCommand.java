@@ -64,9 +64,8 @@ public class CreateUserDataCommand implements Command {
         String placeArrive = request.getParameter("txtSearch");
         String timePerDay = request.getParameter("dayTime");
         //String name = request.getParameter("name");
-        userDataTrip.getSortFlag().put(1,true);
+        userDataTrip.getSortFlag().put(1, true);
         placeArrive = Decoder.decodeStringUtf8(placeArrive);
-
 
         if (dontKnowDate == null) {
             if (beginTrip != null && !beginTrip.equalsIgnoreCase("")) {
@@ -143,7 +142,6 @@ public class CreateUserDataCommand implements Command {
                 placeArrive = placeArrive.trim();
                 placeArrive = placeArrive.toLowerCase();
                 if (!placeArrive.equals("")) {
-                    placeArrive = Decoder.decodeStringUtf8(placeArrive);
                     List<PlaceDescription> plDesc = placeSesc.getAllPlaceBySearch(placeArrive);
                     PlaceService placeService = new PlaceService();
                     if (plDesc != null && !plDesc.isEmpty()) {
@@ -156,8 +154,8 @@ public class CreateUserDataCommand implements Command {
                             List<Place> list = new ArrayList<>();
                             list.add(firstPlace);
                             map.put(1, list);
+//                            userDataTrip.getPlaceDay().get(1).set(0,firstPlace);
                             userDataTrip.setPlaceDay(map);
-                            // userDataTrip.getPlaceDay().get(1).set(0,firstPlace);
                         }
                     }
                 }
@@ -217,8 +215,8 @@ public class CreateUserDataCommand implements Command {
         List<Place> result = new ArrayList<>();
         PlaceService placeService = new PlaceService();
         time = time * 3600; // перевести час в секунди
-        for (int i = 0; i < listCategory.size(); i++) {
-            places.addAll(placeService.getPlaceByCategory(listCategory.get(i).getId()));
+        for (Category aListCategory : listCategory) {
+            places.addAll(placeService.getPlaceByCategory(aListCategory.getId()));
         }
         places.sort(new Comparator<Place>() {
             @Override
@@ -228,11 +226,11 @@ public class CreateUserDataCommand implements Command {
         });
         result.add(places.get(0));
         places.remove(0);
-        Integer tempTime = places.get(0).getRecom_time()*60;
+        Integer tempTime = places.get(0).getRecom_time() * 60;
         int j = 0;
         Distance distance = new Distance();
         while (true) {
-            if (places.size()-1 == j) {
+            if (places.isEmpty()) {
                 break;
             }
             String o1 = "" + result.get(j).getLatitude() + " " + result.get(j).getLongitude() + "";
@@ -243,7 +241,7 @@ public class CreateUserDataCommand implements Command {
             } catch (IOException | JSONException e) {
                 e.printStackTrace();
             }
-            if (((time - tempTime) > 900) && (time - (tempTime + (places.get(0).getRecom_time()*60) + t) < 0)) {
+            if (((time - tempTime) > 900) && (time - (tempTime + (places.get(0).getRecom_time() * 60) + t) < 0)) {
                 places.remove(0);
                 continue;
             }
@@ -251,7 +249,7 @@ public class CreateUserDataCommand implements Command {
                 break;
             }
             result.add(places.get(0));
-            tempTime = tempTime + (places.get(0).getRecom_time()*60) + t.intValue();
+            tempTime = tempTime + (places.get(0).getRecom_time() * 60) + t.intValue();
             places.remove(0);
             j++;
         }

@@ -45,7 +45,7 @@ public class SendContactUsMailCommand implements Command {
             theme = Decoder.decodeStringUtf8(request.getParameter("theme"));
             message = Decoder.decodeStringUtf8(request.getParameter(Decoder.decodeStringUtf8(paramNames[4])));
 
-            if (name != "" && email != "" && theme != "" && message != "") {
+            if (name != null && email != null && theme != null && message != null) {
                 if ("mail".equals(paramNames[2])) {
                     message = "Name: " + name + "  E-mail: " + email + "  Message: " + message;
                     SendEmail.sender(theme, message, "mail.for.blablabla@gmail.com");
