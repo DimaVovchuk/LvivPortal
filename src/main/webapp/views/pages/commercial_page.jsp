@@ -57,7 +57,15 @@
 			<a href="/portal?command=companyInformation&id={{id}}"><img
 					class="responsive-img" src="${pageContext.request.contextPath}/upload/photo/{{reference}}"></a>
 			<a href="/portal?command=companyInformation&id={{id}}">
-				<h5><c:out value="{{name}}"/></h5></a>
+				<c:set var="salary" scope="request" value="{{name}}"/>
+				<c:choose>
+				<c:when test="${salary != null}">
+					<h5><c:out value="{{name}}"/></h5></a>
+				</c:when>
+				<c:otherwise>
+					<h5><c:out value="{{companyName}}"/></h5></a>
+				</c:otherwise>
+				</c:choose>
 		</div>
 	</div>
 	{{/each}}
