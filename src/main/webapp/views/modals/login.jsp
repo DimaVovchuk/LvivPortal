@@ -7,8 +7,8 @@
 <div class="modal" id="sign-in">
 	<div class='login-form'>
 		<div class='switch'>
-			<div class="sign"><cdg:l18n key="login.signup"/></div>
-			<div class="sign" style="display: none"><cdg:l18n key="login.signin"/></div>
+			<div id="sign-up-switch" class="sign"><cdg:l18n key="login.signup"/></div>
+			<div id="sign-in-switch" class="sign" style="display: none"><cdg:l18n key="login.signin"/></div>
 		</div>
 
 		<div class='login'>

@@ -62,7 +62,10 @@ var initStartModalWindow = function () {
         $('#reset-confirm').openModal();
     }
     if (startModal == 'signUpForm') {
-        $('.switch').click();
+        $('.login').hide();
+        $('.register').show();
+        $('#sign-up-switch').hide();
+        $('#sign-in-switch').show();
         $('#sign-in').openModal();
     }
 };
