@@ -63,7 +63,7 @@
             <div class="file-field input-field">
                 <div class="btn cyan darken-2 waves-effect waves-light">
                     <span><cdg:l18n key="editplace.addphoto"/></span>
-                    <input id="image-input" type="file" multiple name="sendfile"/>
+                    <input id="image-input" type="file" multiple name="sendfile" accept="image/*"/>
                 </div>
             </div>
             <div class="section">
