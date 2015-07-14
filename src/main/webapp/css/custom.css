@@ -1171,3 +1171,17 @@ footer.page-footer {
     float: left;
     margin-right: 20%;
 }
+
+#help.modal p {
+    text-indent: 20px;
+}
+
+#help.modal ul {
+    text-indent: 30px;
+    margin-bottom: 20px;
+}
+
+#help.modal li {
+    list-style-type: disc;
+    list-style-position: inside;
+}
