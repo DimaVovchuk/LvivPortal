@@ -15,7 +15,7 @@
                 <c:choose>
                     <c:when test="${login!=null}">
                         <ul class="right">
-                            <li><a href="#" data-activates="user-navbar" class="button-menu"><i
+                            <li><a href="#" data-activates="user-navbar" class="button-menu" id="user-navbar-trigger"><i
                                     class="mdi-action-account-circle left"></i></a></li>
                         </ul>
 
@@ -129,14 +129,14 @@
                         <li class="center-align" style="padding-top: 10px"><img class="circle responsive-img"
                                                                                 src="${avatarReference}"
                                                                                 width="160"
-                                                                                onclick="$('#user-navbar').sideNav('hide')">
+                                                                                onclick="$('#user-navbar-trigger').sideNav('hide')">
                         </li>
                     </c:if>
                     <c:if test="${vk_ava != 1}">
                         <li class="center-align" style="padding-top: 10px"><img class="circle responsive-img"
                                                                                 src="${pageContext.request.contextPath}/upload/photo/${avatarReference}"
                                                                                 width="160"
-                                                                                onclick="$('#user-navbar').sideNav('hide')">
+                                                                                onclick="$('#user-navbar-trigger').sideNav('hide')">
                         </li>
                     </c:if>
 
