@@ -63,6 +63,7 @@ var updatePlaces = function (data) {
     var template = Handlebars.compile(source);
     var html = template(data);
     $('#place-info-collection').html(html);
+    initModalWindows();
 };
 
 var initCategoriesEvents = function () {
