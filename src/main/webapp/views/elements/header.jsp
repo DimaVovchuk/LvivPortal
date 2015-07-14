@@ -128,12 +128,16 @@
                     <c:if test="${vk_ava == 1}">
                         <li class="center-align" style="padding-top: 10px"><img class="circle responsive-img"
                                                                                 src="${avatarReference}"
-                                                                                width="160"></li>
+                                                                                width="160"
+                                                                                onclick="$('#user-navbar').sideNav('hide')">
+                        </li>
                     </c:if>
                     <c:if test="${vk_ava != 1}">
                         <li class="center-align" style="padding-top: 10px"><img class="circle responsive-img"
                                                                                 src="${pageContext.request.contextPath}/upload/photo/${avatarReference}"
-                                                                                width="160"></li>
+                                                                                width="160"
+                                                                                onclick="$('#user-navbar').sideNav('hide')">
+                        </li>
                     </c:if>
 
                     <c:choose>
