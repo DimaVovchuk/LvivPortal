@@ -2,9 +2,7 @@ package com.lab.epam.command.page.user;
 
 import com.google.gson.Gson;
 import com.lab.epam.command.controller.Command;
-import com.lab.epam.entity.Decoder;
 import com.lab.epam.entity.ImageResponse;
-import com.lab.epam.entity.ImageResponseAvatar;
 import com.lab.epam.entity.User;
 import com.lab.epam.helper.ClassName;
 import com.lab.epam.service.ImageResponseService;
@@ -18,8 +16,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Admin on 08.07.2015.
@@ -54,7 +50,6 @@ public class AddImageResponseCommand implements Command {
 
 
         if (image_id != 0 && description != null && !description.equals("") && user_id != 0){
-            description = Decoder.decodeStringUtf8(description);
             ImageResponse imageResponse = new ImageResponse();
             imageResponse.setImage_id(image_id);
             imageResponse.setDescription(description);

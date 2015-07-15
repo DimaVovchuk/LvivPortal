@@ -112,16 +112,12 @@ public class UpLoadPictureCommand implements Command {
         factory.setRepository(folder);
         ServletFileUpload upload = new ServletFileUpload(factory);
 
-        long imageSize = 2097152;
-        upload.setSizeMax(imageSize);
-
         List items = upload.parseRequest(request);
-        for (Iterator i = items.iterator(); i.hasNext();) {
-            FileItem item = (FileItem) i.next();
+        for (Object item1 : items) {
+            FileItem item = (FileItem) item1;
             if (item.isFormField()) {
                 params.put(item.getFieldName(), item.getString());
-            }
-            else {
+            } else {
                 if (item.getSize() <= 0) continue;
                 files.add(item);
             }

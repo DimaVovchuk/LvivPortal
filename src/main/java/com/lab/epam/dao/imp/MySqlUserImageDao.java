@@ -2,7 +2,6 @@ package com.lab.epam.dao.imp;
 
 import com.lab.epam.dao.AbstractJDBCDao;
 import com.lab.epam.dao.PersistException;
-import com.lab.epam.entity.PlaceImage;
 import com.lab.epam.entity.UserImage;
 import com.lab.epam.helper.ClassName;
 import com.lab.epam.persistant.ConnectionManager;
@@ -20,7 +19,7 @@ import java.util.List;
  */
 public class MySqlUserImageDao extends AbstractJDBCDao<UserImage, Integer> {
 
-    private static final String GET_IMAGE_BY_USER_ID = "SELECT * FROM user_image WHERE user_id = ?";
+    private static final String GET_IMAGE_BY_USER_ID = "SELECT * FROM user_image WHERE deleted = false AND user_id = ?";
 
     ConnectionPool connection = ConnectionManager.getConnection();
     private static final Logger loger = LogManager.getLogger(ClassName.getCurrentClassName());

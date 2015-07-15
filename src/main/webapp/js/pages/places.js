@@ -24,7 +24,7 @@ var loadPlacesData = function (data) {
         imgHeight();
         matchColumn();
         paginate();
-    }, 200);
+    }, 500);
     disabled(data);
 };
 
@@ -210,7 +210,6 @@ $(function () {
     initRangeListeners();
     loadPlaceAboutData();
     initCategoriesEventsPlace();
-
     searchPlaceEnter();
     addPlace();
 });

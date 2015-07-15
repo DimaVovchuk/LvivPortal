@@ -152,7 +152,7 @@
                                         <div class="collapsible-body">
                                             <div class="collection">
                                                 <c:forEach var="listWayPlace" items="${MapPlaceElem.value}">
-                                                    <a href="#" class="collection-item black-text">
+                                                    <a href="/portal?command=placeInformation&place_id=${listWayPlace.id}" class="collection-item black-text">
                                                         <img class="circle responsive-img"
                                                              src="${pageContext.request.contextPath}/upload/photo/${listWayPlace.imageReference}">
 
@@ -191,7 +191,7 @@
                                 <a href="/portal?command=placeInformation&place_id=${place.id}"><img
                                         class="responsive-img place-img"
                                         src="${pageContext.request.contextPath}/upload/photo/${place.imageReference}"></a>
-                                <a href="portal?command=placeInformation&place_id=${place.id}"><h5><c:out
+                                <a href="/portal?command=placeInformation&place_id=${place.id}"><h5><c:out
                                         value="${place.name}"/></h5></a>
                                 <c:out value="${place.adress}"/><br>
                                 <cdg:l18n key="company.rating"/>: ${place.rating}

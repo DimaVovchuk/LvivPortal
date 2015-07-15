@@ -60,13 +60,14 @@ public class UpdateWayCommand implements Command {
         if (way_id != 0){
             Way way = wayService.getByPK(way_id);
             userDataTripOld.setWay_id(way_id);
-            if (way.getBegin() != null){
-                userDataTripOld.setBeginTrip(way.getBegin());
-            }
-            if (way.getEnd() != null){
-                userDataTripOld.setEndTrip(way.getEnd());
-            }
+//            if (way.getBegin() != null){
+//                userDataTripOld.setBeginTrip(way.getBegin());
+//            }
+//            if (way.getEnd() != null){
+//                userDataTripOld.setEndTrip(way.getEnd());
+//            }
             userDataTripOld.setIsSaved(true);
+            userDataTripOld.setDayCount(way.getWay_days());
 
             for (int i = 1; i <= userDataTripOld.getDayCount(); i++){
                 List<Place> place = placeService.getPlaceByWayIdDayNumber(way_id, i);
@@ -79,36 +80,37 @@ public class UpdateWayCommand implements Command {
         } else{
             loger.warn("Any way_id");
         }
-
+System.out.println("***************************************userDataTripOld " + userDataTripOld);
         if (userDataTrip != null && userDataTripOld != null && user != null){
            if (!userDataTrip.getDayCount().equals(userDataTripOld.getDayCount())){
                wayService.updateWayDay(user.getId(), way_id, userDataTrip.getDayCount());
                updateResult = 4;
            }
-            if (userDataTrip.getBeginTrip() != null && !userDataTrip.getBeginTrip().equals(userDataTripOld.getBeginTrip())){
-                wayService.updateWayBeginDate(way_id, userDataTrip.getBeginTrip());
-                updateResult = 4;
-            }
-            if (userDataTrip.getBeginTrip() != null && !userDataTrip.getEndTrip().equals(userDataTripOld.getEndTrip())) {
-                wayService.updateWayEndDate(way_id, userDataTrip.getEndTrip());
-                updateResult = 4;
-            }
+//            if (userDataTrip.getBeginTrip() != null && !userDataTrip.getBeginTrip().equals(userDataTripOld.getBeginTrip())){
+//                wayService.updateWayBeginDate(way_id, userDataTrip.getBeginTrip());
+//                updateResult = 4;
+//            }
+//            if (userDataTrip.getBeginTrip() != null && !userDataTrip.getEndTrip().equals(userDataTripOld.getEndTrip())) {
+//                wayService.updateWayEndDate(way_id, userDataTrip.getEndTrip());
+//                updateResult = 4;
+//            }
 
             Map<Integer, List<Place>> placesOld = userDataTripOld.getPlaceDay();
             Map<Integer, List<Place>> places = userDataTrip.getPlaceDay();
             if (placesOld != null && !placesOld.isEmpty() && places != null && !places.isEmpty()){
                 Set<Integer> keys = places.keySet();
+                System.out.println("*********************************************************"+keys);
                 for (Integer day: keys){
                     if (placesOld.get(day) != null){
                         List<Place> pNew = places.get(day);
                         List<Place> pOld = placesOld.get(day);
                         for (Place placeNew: pNew){
                             if(!pOld.contains(placeNew)){
-                                if (!placeNew.getVisible()) {
-                                    servicePlace.create(placeNew);
-                                    placeNew = servicePlace.getPlaceByLongitudeLatitude(placeNew.getLongitude(), placeNew.getLatitude());
-                                    loger.info("Create castom place is successful");
-                                }
+//                                if (!placeNew.getVisible()) {
+//                                    servicePlace.create(placeNew);
+//                                    placeNew = servicePlace.getPlaceByLongitudeLatitude(placeNew.getLongitude(), placeNew.getLatitude());
+//                                    loger.info("Create castom place is successful");
+//                                }
                                 servicePlace.createPlaceWay(placeNew.getId(), way_id, day, placeNew.getPlace_time());
                             }
                         }
@@ -120,11 +122,11 @@ public class UpdateWayCommand implements Command {
                     }else{
                         List<Place> p = places.get(day);
                         for (Place place: p){
-                            if (!place.getVisible()) {
-                                servicePlace.create(place);
-                                place = servicePlace.getPlaceByLongitudeLatitude(place.getLongitude(), place.getLatitude());
-                                loger.info("Create castom place is successful");
-                            }
+//                            if (!place.getVisible()) {
+//                                servicePlace.create(place);
+//                                place = servicePlace.getPlaceByLongitudeLatitude(place.getLongitude(), place.getLatitude());
+//                                loger.info("Create castom place is successful");
+//                            }
                             servicePlace.createPlaceWay(place.getId(), way_id, day, place.getPlace_time());
                         }
                     }

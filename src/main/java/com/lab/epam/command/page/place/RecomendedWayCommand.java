@@ -112,7 +112,9 @@ public class RecomendedWayCommand implements Command {
 
 
         Comparator comparator = new WayPlaceImageRating.WayRatingComparator();
-        Collections.sort(waysPlaceImageRating, comparator);
+        if (waysPlaceImageRating != null){
+            Collections.sort(waysPlaceImageRating, comparator);
+        }
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write(new Gson().toJson(waysPlaceImageRating));

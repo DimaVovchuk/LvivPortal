@@ -39,12 +39,12 @@ public class CreateUserDataFromDBCommand implements Command {
             way_id = Integer.parseInt(way_idString);
             userDataTrip.setWay_id(way_id);
             Way way = wayService.getByPK(way_id);
-//            if (way.getBegin() != null) {
-//                userDataTrip.setBeginTrip(way.getBegin());
-//            }
-//            if (way.getEnd() != null) {
-//                userDataTrip.setEndTrip(way.getEnd());
-//            }
+            if (way.getBegin() != null) {
+                userDataTrip.setBeginTrip(way.getBegin());
+            }
+            if (way.getEnd() != null) {
+                userDataTrip.setEndTrip(way.getEnd());
+            }
 
             if (way.getRecomended()) {
                 userDataTrip.setRecommended(true);
@@ -62,12 +62,13 @@ public class CreateUserDataFromDBCommand implements Command {
             }
             userDataTrip.setPlaceDay(placesMap);
             for (int i = 1; i <= userDataTrip.getPlaceDay().size(); i++) {
-                userDataTrip.getSortFlag().put(i, false);
+                userDataTrip.getSortFlag().put(i, true);
             }
             loger.info("userDataTrip is created");
         } else {
             loger.warn("Any way_id");
         }
+        System.out.println("userDataTrip " + userDataTrip);
         loger.warn("Command CreateUserDataFromDBCommand");
         session.setAttribute("userDataTrip", userDataTrip);
 
