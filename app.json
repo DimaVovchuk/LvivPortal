@@ -1,0 +1,7 @@
+{
+  "name": "django-project-template",
+  "description": "Empty project template for Django Framework",
+  "repository": "https://github.com/wowkin2/django-project-template",
+  "logo": "http://i.imgur.com/ijGWVin.png",
+  "keywords": ["django", "framework", "empty", "project", "template", "sample"]
+}

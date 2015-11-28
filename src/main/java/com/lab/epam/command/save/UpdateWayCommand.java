@@ -60,12 +60,7 @@ public class UpdateWayCommand implements Command {
         if (way_id != 0){
             Way way = wayService.getByPK(way_id);
             userDataTripOld.setWay_id(way_id);
-//            if (way.getBegin() != null){
-//                userDataTripOld.setBeginTrip(way.getBegin());
-//            }
-//            if (way.getEnd() != null){
-//                userDataTripOld.setEndTrip(way.getEnd());
-//            }
+
             userDataTripOld.setIsSaved(true);
             userDataTripOld.setDayCount(way.getWay_days());
 

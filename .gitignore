@@ -1,4 +1,6 @@
-/LvivPortal.iml
-/.idea
-/.settings
-/src/main/resources/persistent.xml
+.git
+.idea
+*.pyc
+__pycache__
+local_settings.py
+db.sqlite3
