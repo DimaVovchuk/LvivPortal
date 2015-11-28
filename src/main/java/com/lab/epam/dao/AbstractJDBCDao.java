@@ -16,9 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by Admin on 10.06.2015.
- */
 public abstract class AbstractJDBCDao<T extends Identified<PK>, PK extends Integer> implements GenericDao<T, PK>, ClassNameInterface {
     private static final Logger loger = LogManager.getLogger(ClassName.getCurrentClassName());
     private ConnectionPool connection;
