@@ -1,4 +1,4 @@
-package com.lab.epam.dao;
+﻿package com.lab.epam.dao;
 
 import com.lab.epam.dao.imp.MySqlDaoFactory;
 import com.lab.epam.entity.Decoder;
@@ -52,10 +52,6 @@ public abstract class AbstractJDBCDao<T extends Identified<PK>, PK extends Integ
         loger.info("parseResultSet method");
         return result;
     }
-
-    /**
-     * ������������� ��������� insert ������� � ������������ �� ��������� ����� ������� object.
-     */
     protected String prepareStatementForInsert(T object) throws PersistException{
         List<String> setRow = new ArrayList<>();
         String query = new String();
@@ -71,10 +67,6 @@ public abstract class AbstractJDBCDao<T extends Identified<PK>, PK extends Integ
         loger.info("prepareStatementForInsert method");
         return query;
     }
-
-    /**
-     * ������������� ��������� update ������� � ������������ �� ��������� ����� ������� object.
-     */
     protected String prepareStatementForUpdate(T object) throws PersistException{
         Map<String, Object> objectColumns = transformer.getObjectColumns(object);
         String field = "";
@@ -106,7 +98,6 @@ public abstract class AbstractJDBCDao<T extends Identified<PK>, PK extends Integ
     @Override
     public void create(T object) throws PersistException {
         T persistInstance;
-        // ��������� ������
         String sql = prepareStatementForInsert(object);//getCreateQuery();
         Connection conn = connection.retrieve();
         try (PreparedStatement statement = conn.prepareStatement(sql)) {
