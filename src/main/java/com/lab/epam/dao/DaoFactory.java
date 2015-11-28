@@ -13,9 +13,7 @@ public interface DaoFactory<Context> {
         public GenericDao create(Context context);
     }
 
-    /** Возвращает подключение к базе данных */
     public ConnectionPool getContext() throws PersistException;
 
-    /** Возвращает объект для управления персистентным состоянием объекта */
     public GenericDao getDao(ConnectionPool connection, Class dtoClass) throws PersistException;
 }
