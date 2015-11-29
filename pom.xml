@@ -146,7 +146,7 @@
                 <executions>
                     <execution>
                         <phase>package</phase>
-                        <configuration><dependentWarExcludesdependentWarExcludes></dependentWarExcludesdependentWarExcludes>
+                        <configuration>
                             <webXml>/WEB-INF/web.xml</webXml>
                         </configuration>
                     </execution>
