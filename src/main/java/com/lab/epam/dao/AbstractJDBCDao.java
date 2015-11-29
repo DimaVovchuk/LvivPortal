@@ -1,5 +1,4 @@
-﻿package com.lab.epam.dao;
-
+package com.lab.epam.dao;
 import com.lab.epam.dao.imp.MySqlDaoFactory;
 import com.lab.epam.entity.Decoder;
 import com.lab.epam.helper.ClassName;
