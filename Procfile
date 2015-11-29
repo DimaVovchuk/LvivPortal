@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -cp target/classes:target/dependency/* LvivPortal
+web: java $JAVA_OPTS -jar target/*.war
