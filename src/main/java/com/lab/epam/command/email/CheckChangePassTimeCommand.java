@@ -19,7 +19,7 @@ public class CheckChangePassTimeCommand implements Command {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String email = request.getParameter("user");
+        String email = request.getParameter("userr");
         UserService userService = new UserService();
         User user = userService.geUserByEmail(email);
         HttpSession session = request.getSession();
